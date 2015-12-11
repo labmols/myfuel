@@ -1,0 +1,59 @@
+package myfuel.client;
+
+import java.util.Observable;
+
+import myfuel.gui.ChangePasswordGUI;
+import myfuel.server.Response;
+import myfuel.server.UserLoginResponse;
+import myfuel.server.booleanResponse;
+
+public class ChangePassActions extends GUIActions {
+	
+	Customer user;
+	ChangePasswordGUI gui;
+	public ChangePassActions(MyFuelClient client, Customer user) {
+		super(client);
+		this.user=user;
+		gui = new ChangePasswordGUI(this);
+		gui.setVisible(true);
+	}
+	
+	public void changePassword(char [] origPass, char [] newPass1, char [] newPass2)
+	{
+		String nPass1 = new String (newPass1);
+		String nPass2 = new String(newPass2);
+		if(!nPass1.equals(nPass2)){
+			try{
+				gui.displayMessage(false);
+			}
+			catch (NullPointerException e){
+				e.printStackTrace();
+			}
+		}
+		else {
+		ChangePassRequest request = new ChangePassRequest(nPass1,user.userid);
+		client.handleMessageFromGUI(request);
+		}
+	}
+	
+	public void returnToMain(){
+		UserOptionsActions actions = new UserOptionsActions(client, user);
+		changeFrame(gui, actions);
+	}
+
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(gui.isActive()){
+		booleanResponse res = (booleanResponse) arg;
+			if(res.success){
+				gui.displayMessage(true);
+		}
+		else gui.displayMessage(false);
+		
+		}
+	}
+	
+
+}
