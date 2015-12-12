@@ -120,14 +120,11 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 	@Override
 	public void getInput(ActionEvent e) 
 	{
-		DateFormat format = new SimpleDateFormat("HH:mm:ss");
+		DateFormat format = new SimpleDateFormat("HH:mm");
 		Date date = new Date();
 		
 		Date start = (Date) startHour.getValue();
 		Date end = (Date) EndHour.getValue();
-		
-		
-		System.out.println(start);
 		p = new Promotion(name.getText(),Float.parseFloat(discount.getText()),start,end,typeOfCustomer.getSelectedIndex());
 	}
 	
@@ -138,7 +135,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		public void actionPerformed(ActionEvent e) {
 			
 			getInput(e);
-			actions.PromotionTemplate(p);
+			actions.verifyDetails(p);
 		}
 		
 	}
