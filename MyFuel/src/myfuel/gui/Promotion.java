@@ -2,6 +2,7 @@ package myfuel.gui;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Promotion implements Serializable{

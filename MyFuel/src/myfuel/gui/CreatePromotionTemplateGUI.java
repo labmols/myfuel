@@ -20,6 +20,8 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 
 import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -119,10 +121,13 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 	public void getInput(ActionEvent e) 
 	{
 		DateFormat format = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date();
 		
-		String start = format.format((Date) startHour.getValue());
-		String end = format.format((Date) EndHour.getValue());
+		Date start = (Date) startHour.getValue();
+		Date end = (Date) EndHour.getValue();
 		
+		
+		System.out.println(start);
 		p = new Promotion(name.getText(),Float.parseFloat(discount.getText()),start,end,typeOfCustomer.getSelectedIndex());
 	}
 	

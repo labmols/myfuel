@@ -1,5 +1,6 @@
 package myfuel.server;
 
+import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Observable;
@@ -27,20 +28,25 @@ public class CreatePromotionTemplateDBHandler implements Observer {
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		Promotion promotion = request.p;
-		
+		 GregorianCalendar gc = new GregorianCalendar();
+	        gc.setTime(request.p.startTime);
+	       GregorianCalendar gc2 = new GregorianCalendar();
+	       
+	       java.sql.Time stime = new java.sql.Time (request.p.startTime.getTime());
+	       java.sql.Time etime = new java.sql.Time (request.p.startTime.getTime());
+	        gc.setTime(request.p.endTime); 
 		try {
-			ps=con.prepareStatement("insert into prom_temp values(?,?,?,?,?)");
-		
-		ps.setString(1, promotion.name);
-		ps.setFloat(2, promotion.discount);
-		ps.setDate(3, promotion.startTime);
-		ps.setString(4, promotion.endTime);
-		ps.setInt(5, promotion.typeOfCustomer);
+			ps=con.prepareStatement("insert into prom_temp values(?,?,?,?,?,?)");
+		ps.setInt(1, 0);
+		ps.setString(2, promotion.name);
+		ps.setFloat(3, promotion.discount);
+		ps.setTime(4, stime);
+		ps.setTime(5, etime);
+		ps.setInt(6, promotion.typeOfCustomer);
 		
 		ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Error");
+		
 			e.printStackTrace();
 		}
 	}
