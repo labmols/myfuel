@@ -53,35 +53,57 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		lblTitle.setText("Create Promotion Template");
 	
 		
+
 		JLabel lblPromotionName = new JLabel("Promotion Template Name:");
 		lblPromotionName.setBounds(101, 82, 200, 14);
+
+		JLabel lblPromotionName = new JLabel("Promotion Name:");
+		lblPromotionName.setBounds(59, 116, 165, 14);
 		panel.add(lblPromotionName);
 		
+
 		 name = new JTextField();
 		name.setBounds(280, 79, 135, 20);
 		panel.add(name);
 		name.setColumns(10);
 		
+
+
 		JLabel lblDiscountPercentage = new JLabel("Discount Percentage:");
+
 		lblDiscountPercentage.setBounds(101, 108, 167, 14);
+
+		lblDiscountPercentage.setBounds(60, 154, 164, 14);
+
 		panel.add(lblDiscountPercentage);
 		
+
 		discount = new JTextField();
 		discount.setBounds(280, 108, 32, 20);
 		panel.add(discount);
 		discount.setColumns(10);
 		
+
 		JLabel lblStartDate = new JLabel("Start Time:");
+
 		lblStartDate.setBounds(101, 135, 117, 14);
+
+		lblStartDate.setBounds(60, 190, 100, 14);
+
 		panel.add(lblStartDate);
 		
 		JLabel lblEndTime = new JLabel("End Time:");
+
 		lblEndTime.setBounds(101, 167, 63, 14);
+
+		lblEndTime.setBounds(60, 223, 117, 14);
+
 		panel.add(lblEndTime);
 		
 	    /* Setting the Jspinner StartHour for HH:mm 24h */
 	    Date date = new Date();
 	    SpinnerDateModel dateModel = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
+
 		startHour = new JSpinner(dateModel);
 		JSpinner.DateEditor de_startHour = new JSpinner.DateEditor(startHour, "HH:mm");
 		de_startHour.getTextField().setEditable( false );
@@ -92,35 +114,80 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		
 		startHour.setBounds(280, 132, 115, 20);
 		panel.add(startHour);
+
 		
 		/* Setting the Jspinner EndHour for HH:mm 24h */
 		Date date2 = new Date();
 	    SpinnerDateModel dateModel2 = new SpinnerDateModel(date2, null, null, Calendar.MINUTE);
+
 		EndHour = new JSpinner(dateModel2);
 		JSpinner.DateEditor de_EndHour = new JSpinner.DateEditor(EndHour, "HH:mm");
 		de_EndHour.getTextField().setEditable( false );
 		EndHour.setEditor(de_EndHour);
 		EndHour.setBounds(280, 164, 115, 20);
 		panel.add(EndHour);
+
+
 		
 		JLabel lblTypeOfCustomer = new JLabel("Type Of Customer:");
+
 		lblTypeOfCustomer.setBounds(101, 203, 149, 14);
+
+		lblTypeOfCustomer.setBounds(60, 264, 164, 14);
+
 		panel.add(lblTypeOfCustomer);
+
 		
 		typeOfCustomer = new JComboBox();
 		typeOfCustomer.setModel(new DefaultComboBoxModel(new String[] {"Private", "Company"}));
 		typeOfCustomer.setBounds(280, 201, 118, 20);
 		panel.add(typeOfCustomer);
+
+
 		
 		btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new btnHandler());
+
 		btnCreate.setBounds(211, 277, 118, 37);
+
+		btnCreate.setBounds(217, 344, 127, 37);
+
 		panel.add(btnCreate);
 		
+
 		JLabel lblNewLabel = new JLabel("%");
 		lblNewLabel.setBounds(313, 111, 41, 16);
 		panel.add(lblNewLabel);
-		
+
+		 name = new JTextField();
+		 name.setBounds(271, 112, 135, 20);
+		 panel.add(name);
+		 name.setColumns(10);
+		 
+		 discount = new JTextField();
+		 discount.setBounds(320, 148, 86, 20);
+		 panel.add(discount);
+		 
+		 discount.setColumns(10);
+		 startHour = new JSpinner(dateModel);
+		 startHour.setBounds(346, 190, 60, 20);
+		 panel.add(startHour);
+		 JSpinner.DateEditor de_startHour = new JSpinner.DateEditor(startHour, "HH:mm");
+		 de_startHour.getTextField().setEditable( false );
+		 startHour.setEditor(de_startHour);
+		 
+		 EndHour = new JSpinner(dateModel2);
+		 EndHour.setBounds(346, 221, 60, 20);
+		 panel.add(EndHour);
+		 JSpinner.DateEditor de_EndHour = new JSpinner.DateEditor(EndHour, "HH:mm");
+		 de_EndHour.getTextField().setEditable( false );
+		 EndHour.setEditor(de_EndHour);
+		 
+		 typeOfCustomer = new JComboBox();
+		 typeOfCustomer.setBounds(306, 262, 100, 20);
+		 panel.add(typeOfCustomer);
+		 typeOfCustomer.setModel(new DefaultComboBoxModel(new String[] {"Private", "Company"}));
+
 	}
 
 	@Override
