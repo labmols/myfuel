@@ -109,7 +109,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		 EndHour.setEditor(de_EndHour);
 		 
 		 typeOfCustomer = new JComboBox();
-		 typeOfCustomer.setBounds(336, 262, 70, 20);
+		 typeOfCustomer.setBounds(306, 262, 100, 20);
 		 panel.add(typeOfCustomer);
 		 typeOfCustomer.setModel(new DefaultComboBoxModel(new String[] {"Private", "Company"}));
 		
