@@ -80,11 +80,11 @@ public class LogInGUI extends SuperGUI {
 		
 		fastButton = new JButton("Fast Fuel");
 		fastButton.setIcon(new ImageIcon("images/fast.png"));
-		fastButton.setBounds(435, 51, 130, 46);
+		fastButton.setBounds(424, 51, 141, 46);
 		panel.add(fastButton);
 		
 		JLabel nfcLabel = new JLabel("Do you have NFC?");
-		nfcLabel.setBounds(320, 64, 117, 16);
+		nfcLabel.setBounds(302, 66, 117, 16);
 		panel.add(nfcLabel);
 		
 		JLabel registerLabel = new JLabel("Don't have an account? ");

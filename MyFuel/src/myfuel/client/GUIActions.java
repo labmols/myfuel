@@ -17,6 +17,10 @@ public abstract class GUIActions implements Observer {
 		this.client = client;
 	}
 	
+	public MyFuelClient getClient()
+	{
+		return client;
+	}
 	
 	public void changeFrame(SuperGUI g, GUIActions actions){
 		g.setVisible(false);
