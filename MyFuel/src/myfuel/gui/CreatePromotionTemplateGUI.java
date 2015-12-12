@@ -48,7 +48,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 	public CreatePromotionTemplateGUI(CPromotionTemplateActions actions) {
 		this.actions = actions;
 		setContentPane(contentPane);
-		lblTitle.setBounds(164, 6, 308, 16);
+		lblTitle.setBounds(176, 6, 308, 16);
 	
 		lblTitle.setText("Create Promotion Template");
 	
