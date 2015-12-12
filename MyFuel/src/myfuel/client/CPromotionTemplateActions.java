@@ -56,7 +56,7 @@ public class CPromotionTemplateActions extends GUIActions{
 		
 		if(p.discount <= 0 || p.discount > 100)
 			result = false;
-		if(p.startTime.before(p.endTime))
+		if(p.endTime.before(p.startTime))
 			result = false;
 		
 		if(result)
