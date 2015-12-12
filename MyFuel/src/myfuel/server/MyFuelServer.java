@@ -26,7 +26,7 @@ public class MyFuelServer extends ObservableServer{
 		hmap = new HandlerMap(con);
 		new LoginDBHandler(this,con);
 		new RegisterDBHandler(this,con);
-		new CreatePromotionTemplateDBHandler(this,con);
+		new CPromotionTemplateDBHandler(this,con);
 		// TODO Auto-generated constructor stub
 	}
 

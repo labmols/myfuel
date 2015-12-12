@@ -55,14 +55,17 @@ public class CPromotionTemplateActions extends GUIActions{
 		boolean result = true;
 		
 		if(p.discount <= 0 || p.discount > 100)
+		{
+			gui.showMessage("Input Error! Discount values is between 1-99.");
 			result = false;
+		}
 		if(p.endTime.before(p.startTime))
+		{
+			gui.showMessage("Input Error! End time is eariler then the Start time.");
 			result = false;
+		}
 		
 		if(result)
 			PromotionTemplate(p);
-		else
-			gui.showMessage("Illegal input");
-	}
-
+}
 }

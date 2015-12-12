@@ -10,7 +10,7 @@ import java.sql.*;
 import myfuel.client.PromotionTemplateRequest;
 import myfuel.gui.Promotion;
 
-public class CreatePromotionTemplateDBHandler implements Observer {
+public class CPromotionTemplateDBHandler implements Observer {
 
 	Connection con;
 	MyFuelServer server;
@@ -21,7 +21,7 @@ public class CreatePromotionTemplateDBHandler implements Observer {
 	 * @param server  - MyFuelServer
 	 * @param con - Connection to client
 	 */
-	public CreatePromotionTemplateDBHandler(MyFuelServer server,Connection con)
+	public CPromotionTemplateDBHandler(MyFuelServer server,Connection con)
 	{
 		this.server = server;
 		this.con = con;
@@ -58,7 +58,6 @@ public class CreatePromotionTemplateDBHandler implements Observer {
 	   		
 	   		if(!exist.next())
 	   		{
-	   			System.out.println(exist.next());
 	   			insert_Query();
 	   		}
 	   		else
