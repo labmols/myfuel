@@ -109,7 +109,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		
 		typeOfCustomer = new JComboBox();
 		typeOfCustomer.setModel(new DefaultComboBoxModel(new String[] {"Private", "Company"}));
-		typeOfCustomer.setBounds(277, 201, 118, 20);
+		typeOfCustomer.setBounds(280, 201, 118, 20);
 		panel.add(typeOfCustomer);
 		
 		btnCreate = new JButton("Create");
