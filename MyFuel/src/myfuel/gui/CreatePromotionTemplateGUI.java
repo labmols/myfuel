@@ -90,7 +90,8 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		panel.add(startHour);
 		
 		//set end time spinner
-		SpinnerDateModel sm2 =new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
+		Date date2 = new Date();
+		SpinnerDateModel sm2 =new SpinnerDateModel(date2, null, null, Calendar.HOUR_OF_DAY);
 		EndHour = new JSpinner(sm2);
 		JSpinner.DateEditor de2 = new JSpinner.DateEditor(EndHour, "HH:mm");
 		EndHour.setEditor(de2);
