@@ -1,12 +1,17 @@
-package myfuel.client;
+package myfuel.GUIActions;
 
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.Car;
+import myfuel.client.Customer;
+import myfuel.client.MyFuelClient;
+import myfuel.client.Station;
 import myfuel.gui.RegisterGUI;
-import myfuel.server.RegisterResponse;
-import myfuel.server.Response;
-import myfuel.server.booleanResponse;
+import myfuel.request.registerRequest;
+import myfuel.response.RegisterResponse;
+import myfuel.response.Response;
+import myfuel.response.booleanResponse;
 
 public class RegisterActions extends GUIActions {
 	private RegisterGUI gui;

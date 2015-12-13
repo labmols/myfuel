@@ -15,7 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
-import myfuel.client.RegisterActions;
+import myfuel.GUIActions.RegisterActions;
 
 public class RegisterGUI extends SuperGUI {
 	private JTextField idTextField;

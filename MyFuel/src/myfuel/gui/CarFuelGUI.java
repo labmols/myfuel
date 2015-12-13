@@ -12,9 +12,11 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import myfuel.client.CarFuelActions;
+import myfuel.GUIActions.CarFuelActions;
+
 import javax.swing.JProgressBar;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.event.ActionListener;
 
 

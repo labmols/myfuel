@@ -10,7 +10,9 @@ import java.sql.*;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Station;
-import myfuel.client.registerRequest;
+import myfuel.request.registerRequest;
+import myfuel.response.RegisterResponse;
+import myfuel.response.booleanResponse;
 
 
 public class RegisterDBHandler implements Observer {

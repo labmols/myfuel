@@ -1,4 +1,4 @@
-package myfuel.client;
+package myfuel.request;
 
 import java.io.Serializable;
 

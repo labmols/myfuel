@@ -3,8 +3,8 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import myfuel.client.CPromotionTemplateActions;
-import myfuel.client.MDActions;
+import myfuel.GUIActions.CPromotionTemplateActions;
+import myfuel.GUIActions.MDActions;
 
 import javax.swing.JButton;
 

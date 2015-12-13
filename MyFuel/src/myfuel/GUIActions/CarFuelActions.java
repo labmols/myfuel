@@ -1,8 +1,9 @@
-package myfuel.client;
+package myfuel.GUIActions;
 
 import java.util.Observable;
 
-import myfuel.server.Response;
+import myfuel.client.MyFuelClient;
+import myfuel.response.Response;
 
 public class CarFuelActions extends GUIActions {
 

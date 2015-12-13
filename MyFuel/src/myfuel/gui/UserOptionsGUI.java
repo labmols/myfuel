@@ -16,7 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import myfuel.client.UserOptionsActions;
+import myfuel.GUIActions.UserOptionsActions;
 
 
 @SuppressWarnings("serial")

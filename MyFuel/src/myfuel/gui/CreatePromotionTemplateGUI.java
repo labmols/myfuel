@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import myfuel.client.CPromotionTemplateActions;
-import myfuel.client.MDActions;
+import myfuel.GUIActions.CPromotionTemplateActions;
+import myfuel.GUIActions.MDActions;
 import myfuel.client.Promotion;
 
 import javax.swing.JLabel;

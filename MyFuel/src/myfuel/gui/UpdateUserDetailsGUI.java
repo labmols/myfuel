@@ -15,8 +15,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import myfuel.GUIActions.UpdateDetailsActions;
 import myfuel.client.Customer;
-import myfuel.client.UpdateDetailsActions;
 
 
 public class UpdateUserDetailsGUI extends SuperGUI {

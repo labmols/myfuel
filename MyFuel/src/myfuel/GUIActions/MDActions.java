@@ -1,7 +1,8 @@
-package myfuel.client;
+package myfuel.GUIActions;
 
 import java.util.Observable;
 
+import myfuel.client.MyFuelClient;
 import myfuel.gui.MDGUI;
 
 public class MDActions extends GUIActions{

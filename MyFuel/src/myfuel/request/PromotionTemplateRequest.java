@@ -1,6 +1,8 @@
-package myfuel.client;
+package myfuel.request;
 
 import java.io.Serializable;
+
+import myfuel.client.Promotion;
 @SuppressWarnings("serial")
 
 /***
@@ -12,7 +14,7 @@ import java.io.Serializable;
 public class PromotionTemplateRequest implements Serializable{
 	public Promotion p;
 	
-	PromotionTemplateRequest(Promotion p )
+	public PromotionTemplateRequest(Promotion p )
 	{
 		this.p = p;
 	}

@@ -1,6 +1,8 @@
-package myfuel.client;
+package myfuel.request;
 
 import java.io.Serializable;
+
+import myfuel.client.Customer;
 
 public class registerRequest implements Serializable {
 	private Customer customer;

@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import myfuel.response.Response;
+import myfuel.response.booleanResponse;
+
 
 
 

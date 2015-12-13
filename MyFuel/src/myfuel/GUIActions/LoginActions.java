@@ -1,12 +1,14 @@
-package myfuel.client;
+package myfuel.GUIActions;
 
 import java.util.Observable;
 import java.util.Observer;
 
+import myfuel.client.MyFuelClient;
 import myfuel.gui.LogInGUI;
-import myfuel.server.Response;
-import myfuel.server.UserLoginResponse;
-import myfuel.server.WorkerLoginResponse;
+import myfuel.request.LoginRequest;
+import myfuel.response.Response;
+import myfuel.response.UserLoginResponse;
+import myfuel.response.WorkerLoginResponse;
 
 public class LoginActions extends GUIActions {
 	private LoginRequest lr;

@@ -8,7 +8,8 @@ import java.util.Observer;
 import java.sql.*;
 
 import myfuel.client.Promotion;
-import myfuel.client.PromotionTemplateRequest;
+import myfuel.request.PromotionTemplateRequest;
+import myfuel.response.booleanResponse;
 
 public class CPromotionTemplateDBHandler implements Observer {
 

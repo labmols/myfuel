@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.HashMap;
 
 import myfuel.client.*;
+import myfuel.response.ChangePassRequest;
 
 
 public class HandlerMap {

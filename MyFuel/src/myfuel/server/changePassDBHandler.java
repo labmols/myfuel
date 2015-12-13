@@ -3,7 +3,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import myfuel.client.ChangePassRequest;
+import myfuel.response.ChangePassRequest;
+import myfuel.response.Response;
+import myfuel.response.booleanResponse;
 
 public class changePassDBHandler implements RequestHandler {
 	Connection con = null;

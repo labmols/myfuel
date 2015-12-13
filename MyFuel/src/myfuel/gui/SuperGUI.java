@@ -13,7 +13,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import myfuel.client.GUIActions;
+import myfuel.GUIActions.GUIActions;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;

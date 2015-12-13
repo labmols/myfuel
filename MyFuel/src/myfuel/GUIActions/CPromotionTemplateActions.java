@@ -1,9 +1,12 @@
-package myfuel.client;
+package myfuel.GUIActions;
 
 import java.util.Observable;
 
+import myfuel.client.MyFuelClient;
+import myfuel.client.Promotion;
 import myfuel.gui.*;
-import myfuel.server.booleanResponse;
+import myfuel.request.PromotionTemplateRequest;
+import myfuel.response.booleanResponse;
 
 /***
  *  this class will has the actions for the CreatePromotionTemplateGUI class

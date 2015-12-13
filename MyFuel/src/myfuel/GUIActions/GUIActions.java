@@ -1,15 +1,16 @@
-package myfuel.client;
+package myfuel.GUIActions;
 
 
 import java.util.Observer;
 
+import myfuel.client.MyFuelClient;
 import myfuel.gui.SuperGUI;
-import myfuel.server.Response;
+import myfuel.response.Response;
 
 
 
 public abstract class GUIActions implements Observer {
-	MyFuelClient client;
+	protected MyFuelClient client;
 	
 	public GUIActions(MyFuelClient client)
 	{

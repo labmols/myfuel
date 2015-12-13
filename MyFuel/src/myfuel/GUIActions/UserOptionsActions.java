@@ -1,12 +1,14 @@
-package myfuel.client;
+package myfuel.GUIActions;
 
 import java.util.Observable;
 
+import myfuel.client.Customer;
+import myfuel.client.MyFuelClient;
 import myfuel.gui.ChangePasswordGUI;
 import myfuel.gui.UpdateUserDetailsGUI;
 import myfuel.gui.UserOptionsGUI;
-import myfuel.server.Response;
-import myfuel.server.UserLoginResponse;
+import myfuel.response.Response;
+import myfuel.response.UserLoginResponse;
 
 public class UserOptionsActions extends GUIActions {
 	

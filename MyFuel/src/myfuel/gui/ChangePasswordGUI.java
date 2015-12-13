@@ -14,7 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import myfuel.client.ChangePassActions;
+import myfuel.GUIActions.ChangePassActions;
+
 import java.awt.Font;
 
 

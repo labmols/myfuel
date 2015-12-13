@@ -6,7 +6,10 @@ import java.sql.SQLException;
 import java.util.Observable;
 import java.util.Observer;
 
-import myfuel.client.LoginRequest;
+import myfuel.request.LoginRequest;
+import myfuel.response.Response;
+import myfuel.response.UserLoginResponse;
+import myfuel.response.WorkerLoginResponse;
 
 public class LoginDBHandler implements Observer {
 	Connection con = null;

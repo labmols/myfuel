@@ -16,8 +16,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 
-import myfuel.client.GUIActions;
-import myfuel.client.LoginActions;
+import myfuel.GUIActions.GUIActions;
+import myfuel.GUIActions.LoginActions;
 import myfuel.client.MyFuelClient;
 
 import java.awt.Font;
