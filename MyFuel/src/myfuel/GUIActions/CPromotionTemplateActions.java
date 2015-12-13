@@ -1,5 +1,7 @@
 package myfuel.GUIActions;
 
+
+import java.util.Date;
 import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
@@ -56,12 +58,15 @@ public class CPromotionTemplateActions extends GUIActions{
 	public void verifyDetails(Promotion p)
 	{
 		boolean result = true;
-		
 		if(p.discount <= 0 || p.discount > 100)
 		{
 			gui.showMessage("Input Error! Discount values is between 1-99.");
 			result = false;
 		}
+		
+		System.out.println(p.startTime);
+		System.out.println(p.endTime);
+		
 		if(p.endTime.before(p.startTime))
 		{
 			gui.showMessage("Input Error! End time is eariler then the Start time.");
@@ -71,4 +76,5 @@ public class CPromotionTemplateActions extends GUIActions{
 		if(result)
 			PromotionTemplate(p);
 }
+	
 }

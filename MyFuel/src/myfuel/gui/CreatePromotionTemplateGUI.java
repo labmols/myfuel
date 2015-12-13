@@ -80,27 +80,26 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		lblEndTime.setBounds(101, 167, 63, 14);
 		panel.add(lblEndTime);
 		
-	    /* Setting the Jspinner StartHour for HH:mm 24h */
-	    Date date = new Date();
-	    SpinnerDateModel dateModel = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
-		startHour = new JSpinner(dateModel);
-		JSpinner.DateEditor de_startHour = new JSpinner.DateEditor(startHour, "HH:mm");
-		de_startHour.getTextField().setEditable( false );
-		startHour.setEditor(de_startHour);
-	/*	DateFormat format = new SimpleDateFormat("HH:mm:ss");
-		Date start = (Date) startHour.getValue();
-		String s = format.format(start);*/
-		
+		//set start time spinner
+		Date date = new Date();
+		SpinnerDateModel sm = new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
+		startHour = new JSpinner(sm);
+		JSpinner.DateEditor de = new JSpinner.DateEditor(startHour, "HH:mm:ss");
+		startHour.setEditor(de);
 		startHour.setBounds(280, 132, 115, 20);
 		panel.add(startHour);
 		
-		/* Setting the Jspinner EndHour for HH:mm 24h */
-		Date date2 = new Date();
-	    SpinnerDateModel dateModel2 = new SpinnerDateModel(date2, null, null, Calendar.MINUTE);
-		EndHour = new JSpinner(dateModel2);
-		JSpinner.DateEditor de_EndHour = new JSpinner.DateEditor(EndHour, "HH:mm");
-		de_EndHour.getTextField().setEditable( false );
-		EndHour.setEditor(de_EndHour);
+		//set end time spinner
+		SpinnerDateModel sm2 =new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
+		EndHour = new JSpinner(sm2);
+		JSpinner.DateEditor de2 = new JSpinner.DateEditor(EndHour, "HH:mm:ss");
+		EndHour.setEditor(de2);
+		EndHour.setBounds(280, 132, 115, 20);
+		panel.add(EndHour);
+		
+		EndHour.setBounds(280, 132, 115, 20);
+		panel.add(EndHour);
+		
 		EndHour.setBounds(280, 164, 115, 20);
 		panel.add(EndHour);
 		
