@@ -1,4 +1,4 @@
-package myfuel.gui;
+package myfuel.client;
 
 import java.io.Serializable;
 import java.sql.Time;

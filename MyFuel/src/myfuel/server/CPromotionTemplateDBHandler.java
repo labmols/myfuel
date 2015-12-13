@@ -7,8 +7,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.sql.*;
 
+import myfuel.client.Promotion;
 import myfuel.client.PromotionTemplateRequest;
-import myfuel.gui.Promotion;
 
 public class CPromotionTemplateDBHandler implements Observer {
 

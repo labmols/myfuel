@@ -1,8 +1,6 @@
 package myfuel.client;
 
 import java.io.Serializable;
-
-import myfuel.gui.Promotion;
 @SuppressWarnings("serial")
 
 /***

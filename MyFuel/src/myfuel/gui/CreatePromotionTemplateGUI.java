@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import myfuel.client.CPromotionTemplateActions;
 import myfuel.client.MDActions;
+import myfuel.client.Promotion;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
