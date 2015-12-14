@@ -18,8 +18,8 @@ public class RegisterActions extends GUIActions {
 	private ArrayList <Station> stations;
 	private ArrayList <Integer> cstations;
 	private ArrayList <Car> cars;
-	Customer customer;
-	registerRequest request;
+	private Customer customer;
+	private registerRequest request;
 	
 	/**
 	 * new register gui controller
