@@ -1,4 +1,4 @@
-package myfuel.client;
+package myfuel.response;
 	public enum ErrorEnum {
 	   AlreadyLoggedIn,UserNotExist, NoError,SQLError;
 	}

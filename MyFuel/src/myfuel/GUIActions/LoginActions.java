@@ -6,10 +6,10 @@ import myfuel.response.*;
 
 import java.util.Observer;
 
-import myfuel.client.ErrorEnum;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.LogInGUI;
 import myfuel.request.LoginRequest;
+import myfuel.response.ErrorEnum;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 import myfuel.response.WorkerLoginResponse;

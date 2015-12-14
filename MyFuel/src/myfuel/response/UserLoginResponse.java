@@ -3,7 +3,6 @@ package myfuel.response;
 import java.io.Serializable;
 
 import myfuel.client.Customer;
-import myfuel.client.ErrorEnum;
 
 @SuppressWarnings("serial")
 public class UserLoginResponse extends Response {

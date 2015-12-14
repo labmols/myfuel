@@ -3,7 +3,6 @@ package myfuel.response;
 import java.io.Serializable;
 
 import myfuel.client.Customer;
-import myfuel.client.ErrorEnum;
 import myfuel.client.RoleEnum;
 
 @SuppressWarnings("serial")

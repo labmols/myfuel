@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.util.Observable;
 import java.util.Observer;
 
-import myfuel.client.ErrorEnum;
 import myfuel.request.LoginRequest;
+import myfuel.response.ErrorEnum;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 import myfuel.response.WorkerLoginResponse;
