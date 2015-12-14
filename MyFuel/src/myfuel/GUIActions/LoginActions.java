@@ -60,9 +60,9 @@ public class LoginActions extends GUIActions {
 	 */
 	private void workerResponse(Object response){
 		WorkerLoginResponse res = (WorkerLoginResponse) response;
-		if(res.workerExist) {
+		if(res.getWorkerExist()) {
 			 gui.showMessage("Welcome!"); 
-			 switch(res.role){
+			 switch(res.getRole()){
 			 case 4: changeFrame(gui, new MDActions(client));
 			 }
 		}
