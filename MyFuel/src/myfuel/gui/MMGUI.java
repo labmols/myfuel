@@ -3,6 +3,7 @@ package myfuel.gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,7 +13,9 @@ import javax.swing.JButton;
 import myfuel.GUIActions.MMActions;
 
 public class MMGUI extends SuperGUI {
-
+	JButton btnMakeAPromotion;
+	JButton btnShowReports;
+	JButton btnSetNewRates;
 	MMActions actions;
 	/**
 	 * Create the frame.
@@ -23,18 +26,50 @@ public class MMGUI extends SuperGUI {
 		lblTitle.setBounds(160, 6, 250, 22);
 		lblTitle.setText("Marketing Manager Menu");
 		
-		JButton btnMakeAPromotion = new JButton("Make a Promotion");
-		btnMakeAPromotion.setBounds(201, 115, 127, 48);
+		 btnMakeAPromotion = new JButton("Make a Promotion");
+		btnMakeAPromotion.setBounds(175, 115, 189, 48);
 		panel.add(btnMakeAPromotion);
+		btnMakeAPromotion.addActionListener(new btnHandler());
 		
-		JButton btnShowReports = new JButton("Show Reports");
-		btnShowReports.setBounds(201, 197, 127, 48);
+		 btnShowReports = new JButton("Show Reports");
+		btnShowReports.setBounds(175, 197, 189, 48);
 		panel.add(btnShowReports);
+		btnShowReports.addActionListener(new btnHandler());
+		
+		 btnSetNewRates = new JButton("Set New Rates");
+		btnSetNewRates.setBounds(175, 292, 189, 48);
+		panel.add(btnSetNewRates);
+		btnSetNewRates.addActionListener(new btnHandler());
 	}
 
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+	/***
+	 * ActionListener for the buttong of this JFrame
+	 * The MMActions method will be accessed due to the button pressed
+	 * 
+	 *
+	 */
+	private class btnHandler implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if(e.getSource() == btnMakeAPromotion)
+				actions.createMakeaPromotionWindow();
+			
+			else if(e.getSource() == btnShowReports)
+				actions.createShowReportsWindow();
+			
+			else if(e.getSource() == btnSetNewRates)
+				actions.createSetNewRatesWindow();
+			
+			
+		}
 		
 	}
 }

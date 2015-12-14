@@ -19,5 +19,20 @@ public class MMActions extends GUIActions{
 		
 		
 	}
+	
+	public void createSetNewRatesWindow()
+	{
+		this.changeFrame(gui, new SetNewRatesActions(client));
+	}
+	
+	public void createMakeaPromotionWindow()
+	{
+		
+	}
+	
+	public void createShowReportsWindow()
+	{
+		
+	}
 
 }

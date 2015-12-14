@@ -64,7 +64,18 @@ public class LoginActions extends GUIActions {
 		if(res.getWorkerExist()) {
 			 gui.showMessage("Welcome!"); 
 			 switch(res.getRole()){
-			 case MarketingDelegate: changeFrame(gui, new MDActions(client));
+			 case MarketingManager: 
+				 			changeFrame(gui,new MMActions(client));
+				 			break;
+			 case MarketingDelegate: 
+							 changeFrame(gui, new MDActions(client)); 
+							 break;
+			case CompanyManager:
+				break;
+			case StationManager:
+				break;
+			case StationWorker:
+				break;
 			 }
 		}
 		else gui.showMessage("UserID or Password incorrect!");
