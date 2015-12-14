@@ -7,13 +7,13 @@ import java.util.Date;
 
 public class Promotion implements Serializable{
 	
-	public String name;
-	public float discount;
-	public Date startTime;
-	public Date endTime;
-	public Date startDate;
-	public Date endDate;
-	public int typeOfCustomer;
+	private String name;
+	private float discount;
+	private Date startTime;
+	private Date endTime;
+	private Date startDate;
+	private Date endDate;
+	private int typeOfCustomer;
 	/***
 	 * this constructor will be used for Promotion Template
 	 * @param name of the promotion
@@ -50,5 +50,37 @@ public class Promotion implements Serializable{
 		this.endDate = endDate;
 		this.typeOfCustomer = typeOfCustomer;
 	}
-
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public float getDiscount()
+	{
+		return discount;
+	}
+	
+	public Date getStartTime()
+	{
+		return startTime;
+	}
+	public Date getEndTime()
+	{
+		return endDate;
+	}
+	public Date getStartDate()
+	{
+		return startTime;
+	}
+	public Date getEndDate()
+	{
+		return endDate;
+	}
+	
+	public int getTypeOfCustomer()
+	{
+		return typeOfCustomer;
+	}
+	
 }

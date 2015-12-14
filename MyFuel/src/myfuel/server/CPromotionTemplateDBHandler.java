@@ -40,19 +40,20 @@ public class CPromotionTemplateDBHandler implements Observer {
 		PreparedStatement ps = null;
 		Promotion promotion = request.getP();
 		
-	       
-	       java.sql.Time stime = new java.sql.Time (request.getP().startTime.getTime());
-	       java.sql.Time etime = new java.sql.Time (request.getP().endTime.getTime());
+
+	       java.sql.Time stime = new java.sql.Time (request.getP().getStartTime().getTime());
+	       java.sql.Time etime = new java.sql.Time (request.getP().getEndTime().getTime());
+
 	       try {
 	   		ps=con.prepareStatement("select p.tid from prom_temp p "
 	   				+ "where p.pname = ? and p.shour=? and p.fhour=? and p.discount =?"
 	   				+ "and ctype=? ");
 	   		
-	   		ps.setString(1, promotion.name);
+	   		ps.setString(1, promotion.getName());
 	   		ps.setTime(2, stime);
 	   		ps.setTime(3, etime);
-	   		ps.setFloat(4, promotion.discount);
-	   		ps.setInt(5, promotion.typeOfCustomer);
+	   		ps.setFloat(4, promotion.getDiscount());
+	   		ps.setInt(5, promotion.getTypeOfCustomer());
 	   		
 	   		exist =  ps.executeQuery();
 	   		
@@ -79,17 +80,19 @@ public class CPromotionTemplateDBHandler implements Observer {
 	{
 		
 		PreparedStatement ps = null;
-		Promotion promotion = request.getP();
-		java.sql.Time stime = new java.sql.Time (request.getP().startTime.getTime());
-	    java.sql.Time etime = new java.sql.Time (request.getP().endTime.getTime());
+
+		Promotion promotion = request.p;
+		java.sql.Time stime = new java.sql.Time (request.getP().getStartTime().getTime());
+	       java.sql.Time etime = new java.sql.Time (request.getP().getEndTime().getTime());
+
 		try {
 			ps=con.prepareStatement("insert into prom_temp values(?,?,?,?,?,?)");
 			ps.setInt(1, 0);
-			ps.setString(2, promotion.name);
+			ps.setString(2, promotion.getName());
 			ps.setTime(3, stime);
 			ps.setTime(4, etime);
-			ps.setFloat(5, promotion.discount);
-			ps.setInt(6, promotion.typeOfCustomer);
+			ps.setFloat(5, promotion.getDiscount());
+			ps.setInt(6, promotion.getTypeOfCustomer());
 			
 			ps.executeUpdate();
 			answer = true;

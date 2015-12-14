@@ -84,7 +84,7 @@ public class RegisterActions extends GUIActions {
 		}
 		else {
 			booleanResponse res2 = (booleanResponse) arg;
-			if(res2.success) {
+			if(res2.getSuccess()) {
 				gui.showMessage("Register success! \n"
 						+ "your login details is: \n"
 						+ "UserID: " + customer.getUserid() 
