@@ -50,7 +50,7 @@ public class ChangePassActions extends GUIActions {
 	public void update(Observable o, Object arg) {
 		if(gui.isActive()){
 		booleanResponse res = (booleanResponse) arg;
-			if(res.success){
+			if(res.getSuccess()){
 				gui.displayMessage(true);
 		}
 		else gui.displayMessage(false);

@@ -13,7 +13,9 @@ public class MDGUI extends SuperGUI {
 	JButton btnCreatePromotionTemplate;
 	JButton analystic;
 	JButton btnConfirmNewCustomers;
+	
 	public MDGUI(MDActions actions){
+		setContentPane(contentPane);
 		lblTitle.setBounds(160, 6, 250, 22);
 		lblTitle.setText("Marketing Delegate Menu");
 		
@@ -30,7 +32,7 @@ public class MDGUI extends SuperGUI {
 		btnConfirmNewCustomers.setBounds(182, 269, 199, 61);
 		panel.add(btnConfirmNewCustomers);
 		this.actions=actions;
-		setContentPane(contentPane);
+	
 	}
 
 	/***
