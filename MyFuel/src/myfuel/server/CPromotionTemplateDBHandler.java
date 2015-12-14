@@ -38,11 +38,11 @@ public class CPromotionTemplateDBHandler implements Observer {
 	{
 		ResultSet exist ;
 		PreparedStatement ps = null;
-		Promotion promotion = request.p;
+		Promotion promotion = request.getP();
 		
 	       
-	       java.sql.Time stime = new java.sql.Time (request.p.startTime.getTime());
-	       java.sql.Time etime = new java.sql.Time (request.p.endTime.getTime());
+	       java.sql.Time stime = new java.sql.Time (request.getP().startTime.getTime());
+	       java.sql.Time etime = new java.sql.Time (request.getP().endTime.getTime());
 	       try {
 	   		ps=con.prepareStatement("select p.tid from prom_temp p "
 	   				+ "where p.pname = ? and p.shour=? and p.fhour=? and p.discount =?"
@@ -79,9 +79,9 @@ public class CPromotionTemplateDBHandler implements Observer {
 	{
 		
 		PreparedStatement ps = null;
-		Promotion promotion = request.p;
-		java.sql.Time stime = new java.sql.Time (request.p.startTime.getTime());
-	    java.sql.Time etime = new java.sql.Time (request.p.endTime.getTime());
+		Promotion promotion = request.getP();
+		java.sql.Time stime = new java.sql.Time (request.getP().startTime.getTime());
+	    java.sql.Time etime = new java.sql.Time (request.getP().endTime.getTime());
 		try {
 			ps=con.prepareStatement("insert into prom_temp values(?,?,?,?,?,?)");
 			ps.setInt(1, 0);

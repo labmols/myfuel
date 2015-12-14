@@ -29,9 +29,9 @@ public class LoginDBHandler implements Observer {
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement("select * from worker where wid=? and pass =?");
-			ps.setInt(1, request.userid);
-			ps.setString(2, request.password);
-			System.out.println(""+request.userid + " " +request.password);
+			ps.setInt(1, request.getUserid());
+			ps.setString(2, request.getPassword());
+			System.out.println(""+request.getUserid() + " " +request.getPassword());
 			rs = ps.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -67,8 +67,8 @@ public class LoginDBHandler implements Observer {
 		try {
 		
 			ps = con.prepareStatement("select * from customer where uid=? and pass =?");
-			ps.setInt(1, request.userid);
-			ps.setString(2, request.password);
+			ps.setInt(1, request.getUserid());
+			ps.setString(2, request.getPassword());
 			//System.out.println(""+request.userid + " " +request.password);
 			rs = ps.executeQuery();
 		} catch (SQLException e) {
@@ -107,7 +107,7 @@ public class LoginDBHandler implements Observer {
 		
 		if(arg instanceof LoginRequest){
 			LoginRequest request =(LoginRequest)arg;
-			if(request.type==0) server.setResponse(userLogin(request));
+			if(request.getType()==0) server.setResponse(userLogin(request));
 			else server.setResponse(workerLogin(request));
 		}
 		

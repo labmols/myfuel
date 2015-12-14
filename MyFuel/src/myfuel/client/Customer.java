@@ -5,32 +5,128 @@ import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class Customer implements Serializable{
-	public int userid;
-	public String fname;
-	public String lname;
-	public String pass;
-	public String email;
-	public String cnumber;
-	public int toc;
-	public int atype;
-	public int smodel;
-	public ArrayList<Car> cars;
-	public ArrayList<Integer> stations;
-	public int LoggedIn;
+	private int userid;
+	private String fname;
+	private String lname;
+	private String pass;
+	private String email;
+	private String cnumber;
+	private int toc;
+	private int atype;
+	private int smodel;
+	private ArrayList<Car> cars;
+	private ArrayList<Integer> stations;
+	private int LoggedIn;
 	
 	public Customer(int userid, String fname, String lname, String pass, String email, String cnumber, int toc, int 
 			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations){
+		this.setUserid(userid);
+		this.setFname(fname);
+		this.setLname(lname);
+		this.setPass(pass);
+		this.setCnumber(cnumber);
+		this.setEmail(email);
+		this.setToc(toc);
+		this.setAtype(atype);
+		this.setSmodel(smodel);
+		this.setCars(cars);
+		this.setStations(stations);;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
 		this.fname = fname;
+	}
+
+	public String getLname() {
+		return lname;
+	}
+
+	public void setLname(String lname) {
 		this.lname = lname;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
 		this.pass = pass;
-		this.cnumber = cnumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
 		this.email = email;
-		this.toc=toc;
-		this.atype=atype;
-		this.smodel=smodel;
-		this.cars=cars;
-		this.stations=stations;;
+	}
+
+	public String getCnumber() {
+		return cnumber;
+	}
+
+	public void setCnumber(String cnumber) {
+		this.cnumber = cnumber;
+	}
+
+	public int getToc() {
+		return toc;
+	}
+
+	public void setToc(int toc) {
+		this.toc = toc;
+	}
+
+	public int getAtype() {
+		return atype;
+	}
+
+	public void setAtype(int atype) {
+		this.atype = atype;
+	}
+
+	public int getSmodel() {
+		return smodel;
+	}
+
+	public void setSmodel(int smodel) {
+		this.smodel = smodel;
+	}
+
+	public ArrayList<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(ArrayList<Car> cars) {
+		this.cars = cars;
+	}
+
+	public ArrayList<Integer> getStations() {
+		return stations;
+	}
+
+	public void setStations(ArrayList<Integer> stations) {
+		this.stations = stations;
+	}
+
+	public int getLoggedIn() {
+		return LoggedIn;
+	}
+
+	public void setLoggedIn(int loggedIn) {
+		LoggedIn = loggedIn;
 	}
 
 }

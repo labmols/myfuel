@@ -9,13 +9,13 @@ public class Station implements Serializable {
 	private ArrayList<Fuel> fuels;
 	public Station(int sid,String sname, ArrayList<Fuel> fuels ){
 		this.sid = sid;
-		this.fuels = fuels;
+		this.setFuels(fuels);
 		this.sname = sname;
 	}
 	
 	public Station(int sid,String sname ){
 		this.sid = sid;
-		fuels= null;
+		setFuels(null);
 		this.sname = sname;
 	}
 	
@@ -25,6 +25,14 @@ public class Station implements Serializable {
 	
 	public int getsid(){
 		return this.sid;
+	}
+
+	public ArrayList<Fuel> getFuels() {
+		return fuels;
+	}
+
+	public void setFuels(ArrayList<Fuel> fuels) {
+		this.fuels = fuels;
 	}
 }
 

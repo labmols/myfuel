@@ -48,7 +48,7 @@ public class CPromotionTemplateActions extends GUIActions{
 		{
 			booleanResponse response = (booleanResponse)arg1;
 			if(response.success == true)
-				gui.showMessage("Promotion Template " +"\""+rq.p.name+"\""+" Created!");
+				gui.showMessage("Promotion Template " +"\""+rq.getP().name+"\""+" Created!");
 			else
 				gui.showMessage("Creation failed");
 		}

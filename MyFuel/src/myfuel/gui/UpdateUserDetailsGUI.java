@@ -96,9 +96,9 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 	}
 	
 	public void showUserDetails(Customer user){
-		fnamelbl.setText(user.fname);
-		lnamelbl.setText(user.lname);
-		emaillbl.setText(user.email);
+		fnamelbl.setText(user.getFname());
+		lnamelbl.setText(user.getLname());
+		emaillbl.setText(user.getEmail());
 	}
 
 	@Override

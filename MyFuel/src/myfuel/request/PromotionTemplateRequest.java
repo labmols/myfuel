@@ -12,10 +12,18 @@ import myfuel.client.Promotion;
  *
  */
 public class PromotionTemplateRequest implements Serializable{
-	public Promotion p;
+	private Promotion p;
 	
 	public PromotionTemplateRequest(Promotion p )
 	{
+		this.setP(p);
+	}
+
+	public Promotion getP() {
+		return p;
+	}
+
+	public void setP(Promotion p) {
 		this.p = p;
 	}
 }

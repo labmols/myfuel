@@ -7,7 +7,23 @@ public class Fuel implements Serializable {
 	private float fprice;
 	
 	public Fuel(int fid, float fprice){
-		this.fid=fid;
+		this.setFid(fid);
+		this.setFprice(fprice);
+	}
+
+	public int getFid() {
+		return fid;
+	}
+
+	public void setFid(int fid) {
+		this.fid = fid;
+	}
+
+	public float getFprice() {
+		return fprice;
+	}
+
+	public void setFprice(float fprice) {
 		this.fprice = fprice;
 	}
 	

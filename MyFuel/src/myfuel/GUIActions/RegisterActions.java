@@ -75,7 +75,7 @@ public class RegisterActions extends GUIActions {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		if(gui.isActive()){
-		if(request.type==1){
+		if(request.getType()==1){
 		RegisterResponse res = (RegisterResponse)arg;
 		this.stations = res.stations;
 		for(Station st : stations){
@@ -87,8 +87,8 @@ public class RegisterActions extends GUIActions {
 			if(res2.success) {
 				gui.showMessage("Register success! \n"
 						+ "your login details is: \n"
-						+ "UserID: " + customer.userid 
-						+"\nPassword: " + customer.pass
+						+ "UserID: " + customer.getUserid() 
+						+"\nPassword: " + customer.getPass()
 						+"\nNow you need to wait for the Marketing Delegate confirmation.");
 				changeFrame(gui,new LoginActions(client));
 

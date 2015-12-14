@@ -57,31 +57,31 @@ public class RegisterDBHandler implements Observer {
 	
 			try {
 				ps=con.prepareStatement("insert into customer values(?,?,?,?,?,?,?,?,?,?,?)");
-				ps.setInt(1, customer.userid);
-				ps.setString(2, customer.fname);
-				ps.setString(3, customer.lname);
-				ps.setString(4, customer.pass);
-				ps.setString(5, customer.email);
-				ps.setString(6, customer.cnumber);
-				ps.setInt(7, customer.atype);
-				ps.setInt(8, customer.toc);
-				ps.setInt(9, customer.smodel);
+				ps.setInt(1, customer.getUserid());
+				ps.setString(2, customer.getFname());
+				ps.setString(3, customer.getLname());
+				ps.setString(4, customer.getPass());
+				ps.setString(5, customer.getEmail());
+				ps.setString(6, customer.getCnumber());
+				ps.setInt(7, customer.getAtype());
+				ps.setInt(8, customer.getToc());
+				ps.setInt(9, customer.getSmodel());
 				ps.setInt(10, 0);
 				ps.setInt(11, 0);
 			ps.executeUpdate();
 			
-			for(Car car: customer.cars){
+			for(Car car: customer.getCars()){
 				ps=con.prepareStatement("insert into customer_car values(?,?,?)");
-				ps.setInt(1,customer.userid);
+				ps.setInt(1,customer.getUserid());
 				ps.setInt(2,car.getcid());
 				ps.setInt(3, car.getfid());
 				ps.executeUpdate();
 				}
 			
-			for(int sid: customer.stations)
+			for(int sid: customer.getStations())
 			{
 			ps=con.prepareStatement("insert into customer_station values(?,?)");
-			ps.setInt(1,customer.userid);
+			ps.setInt(1,customer.getUserid());
 			ps.setInt(2,sid);
 			ps.executeUpdate();
 			}
@@ -105,7 +105,7 @@ public class RegisterDBHandler implements Observer {
 		
 		if(arg instanceof registerRequest){
 		registerRequest request = (registerRequest)arg;
-		if(request.type == 1) showStations(request);
+		if(request.getType() == 1) showStations(request);
 		else insertCustomer(request);
 	}
 }

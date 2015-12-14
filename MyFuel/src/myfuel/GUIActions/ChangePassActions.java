@@ -34,7 +34,7 @@ public class ChangePassActions extends GUIActions {
 			}
 		}
 		else {
-		ChangePassRequest request = new ChangePassRequest(nPass1,user.userid);
+		ChangePassRequest request = new ChangePassRequest(nPass1,user.getUserid());
 		client.handleMessageFromGUI(request);
 		}
 	}
