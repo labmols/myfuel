@@ -1,6 +1,7 @@
 package myfuel.GUIActions;
 
 import java.util.Observable;
+import myfuel.response.*;
 import java.util.Observer;
 
 import myfuel.client.MyFuelClient;
@@ -63,7 +64,7 @@ public class LoginActions extends GUIActions {
 		if(res.getWorkerExist()) {
 			 gui.showMessage("Welcome!"); 
 			 switch(res.getRole()){
-			 case 4: changeFrame(gui, new MDActions(client));
+			 case MarketingDelegate: changeFrame(gui, new MDActions(client));
 			 }
 		}
 		else gui.showMessage("UserID or Password incorrect!");
