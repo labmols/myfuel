@@ -1,9 +1,12 @@
 package myfuel.GUIActions;
 
 import java.util.Observable;
+
 import myfuel.response.*;
+
 import java.util.Observer;
 
+import myfuel.client.ErrorEnum;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.LogInGUI;
 import myfuel.request.LoginRequest;
@@ -31,7 +34,7 @@ public class LoginActions extends GUIActions {
 	
 	private void userResponse(Object response){
 		UserLoginResponse res = (UserLoginResponse) response;
-		if(res.getErrorCode()==-1)
+		if(res.getError()== ErrorEnum.NoError)
 		{
 			gui.showMessage("Welcome to MyFuel!");
 			changeFrame(gui,new UserOptionsActions (client,res.getUser()));
@@ -39,11 +42,12 @@ public class LoginActions extends GUIActions {
 		}
 		else
 		{
-			switch(res.getErrorCode())
+			switch(res.getError())
 			{
-			case 1: gui.showMessage("UserID or Password incorrect!");
+			case UserNotExist: gui.showMessage("UserID or Password incorrect!");
 			break;
-			case 2: gui.showMessage("This user is already connected to System!");
+			case AlreadyLoggedIn: gui.showMessage("This user is already connected to System!");
+			break;
 			}
 			
 		}
@@ -61,8 +65,8 @@ public class LoginActions extends GUIActions {
 	 */
 	private void workerResponse(Object response){
 		WorkerLoginResponse res = (WorkerLoginResponse) response;
-		if(res.getWorkerExist()) {
-			 gui.showMessage("Welcome!"); 
+		if(res.getError()==ErrorEnum.NoError) {
+			 gui.showMessage("Welcome to MyFuel!"); 
 			 switch(res.getRole()){
 			 case MarketingManager: 
 				 			changeFrame(gui,new MMActions(client));
@@ -78,7 +82,13 @@ public class LoginActions extends GUIActions {
 				break;
 			 }
 		}
-		else gui.showMessage("UserID or Password incorrect!");
+		else switch(res.getError())
+		{
+		case UserNotExist: gui.showMessage("UserID or Password incorrect!");
+		break;
+		case AlreadyLoggedIn: gui.showMessage("This user is already connected to System!");
+		break;
+		}
 	
 		
 	}

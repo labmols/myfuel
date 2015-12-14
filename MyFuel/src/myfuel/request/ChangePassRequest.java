@@ -1,4 +1,4 @@
-package myfuel.response;
+package myfuel.request;
 
 import java.io.Serializable;
 

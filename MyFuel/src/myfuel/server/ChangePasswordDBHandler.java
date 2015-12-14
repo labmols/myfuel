@@ -2,22 +2,25 @@ package myfuel.server;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Observable;
 
-import myfuel.response.ChangePassRequest;
+import myfuel.request.ChangePassRequest;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
-public class changePassDBHandler implements RequestHandler {
+public class ChangePasswordDBHandler extends DBHandler {
 	Connection con = null;
-	public changePassDBHandler(Connection con){
-		this.con = con;
+	public ChangePasswordDBHandler(MyFuelServer server, Connection con){
+		super(server,con);
 	}
 	
+
+
 	@Override
-	public Response handleRequest(Object msg) {
-		
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
 		boolean b;
-		ChangePassRequest request = (ChangePassRequest)msg;
+		ChangePassRequest request = (ChangePassRequest)arg;
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement("update users SET pass=? where uid = ?");
@@ -32,7 +35,7 @@ public class changePassDBHandler implements RequestHandler {
 			
 		}
 		
-		return new booleanResponse(b);
+		new booleanResponse(b);
 		
 	}
 	

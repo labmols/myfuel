@@ -5,7 +5,7 @@ import java.util.Observable;
 import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.ChangePasswordGUI;
-import myfuel.response.ChangePassRequest;
+import myfuel.request.ChangePassRequest;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 import myfuel.response.booleanResponse;

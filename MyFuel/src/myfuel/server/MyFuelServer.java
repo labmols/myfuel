@@ -5,16 +5,19 @@ import java.sql.*;
 import java.util.Observable;
 import java.util.Observer;
 
+import myfuel.client.ErrorEnum;
 import myfuel.ocsf.server.AbstractServer;
 import myfuel.ocsf.server.ConnectionToClient;
 import myfuel.ocsf.server.ObservableServer;
+import myfuel.request.LoginRequest;
+import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
+import myfuel.response.WorkerLoginResponse;
 
 
 public class MyFuelServer extends ObservableServer{
 	private Connection con;
-	HandlerMap hmap;
-	Object response;
+	Response response;
 	public MyFuelServer(int port) {
 		super(port);
 		try {
@@ -24,32 +27,18 @@ public class MyFuelServer extends ObservableServer{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		hmap = new HandlerMap(con);
 		new LoginDBHandler(this,con);
 		new RegisterDBHandler(this,con);
 		new CPromotionTemplateDBHandler(this,con);
-		new ChangeStatusDBHandler(this,con);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		// TODO Auto-generated method stub
-
-		//RequestHandler handler= hmap.handlerByType.get(msg.getClass());
-		//Response response = handler.handleRequest(msg);
-		
-		//}
-	
 		setChanged();
 		notifyObservers(msg);
 		try {
-			if(response instanceof UserLoginResponse ){
-				UserLoginResponse res = (UserLoginResponse) response;
-				if(res.getErrorCode()==-1) client.setInfo("UserID", res.getUser().getUserid());
-			}
 			client.sendToClient(response);
-			
+			setClientInfo(client,msg);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +46,6 @@ public class MyFuelServer extends ObservableServer{
 		
 		
 	}
-	
 	@Override
 	 protected synchronized void clientConnected(ConnectionToClient client) 
 	  {
@@ -70,13 +58,30 @@ public class MyFuelServer extends ObservableServer{
 	protected synchronized void clientDisconnected(ConnectionToClient client) 
 	  {
 	    setChanged();
-	    notifyObservers(client.getInfo("UserID"));
-	    if(client.getInetAddress()!=null)System.out.println(client + " Disconnected!");
+	    LoginRequest l = (LoginRequest)(client.getInfo("Info"));
+	    notifyObservers(l);
+	    if(client.getInetAddress()!=null)System.out.println("Client with ID: " + l.getUserid() +" " + client+ " Disconnected!");
 	  }
 	
-	 synchronized public void setResponse(Object response){
+	 synchronized public void setResponse(Response response){
 		 this.response=response;
 	 }
+	 
+	 private void setClientInfo(ConnectionToClient client, Object msg) {
+			// TODO Auto-generated method stub
+			if(msg instanceof LoginRequest ){
+				LoginRequest req = (LoginRequest) msg;
+				req.setChangeStatus(1);
+				if(response instanceof UserLoginResponse){
+					UserLoginResponse res = (UserLoginResponse) response;
+					if(res.getError()==ErrorEnum.NoError) client.setInfo("Info", req);
+				}
+				if(response instanceof WorkerLoginResponse){
+					WorkerLoginResponse res = (WorkerLoginResponse) response;
+					if(res.getError()==ErrorEnum.NoError) client.setInfo("Info", req);
+				}
+			}
+	}
 
 
 
