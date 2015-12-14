@@ -6,6 +6,7 @@ import myfuel.client.Customer;
 
 @SuppressWarnings("serial")
 public class WorkerLoginResponse extends Response{
+	private int wid;
 	private boolean workerExist;
 	private Role role;
 	/** new Worker login response
@@ -17,8 +18,9 @@ public class WorkerLoginResponse extends Response{
 	 * @param workerExist
 	 * @param role
 	 */
-	public WorkerLoginResponse(boolean workerExist,int roleid){
+	public WorkerLoginResponse(boolean workerExist,int roleid,int wid){
 		this.workerExist = workerExist;
+		this.wid=wid;
 		switch(roleid){
 		case 1: role = Role.CompanyManager;
 		break;
@@ -33,12 +35,25 @@ public class WorkerLoginResponse extends Response{
 		}
 	}
 	
+	public WorkerLoginResponse(boolean workerExist){
+		this.workerExist = workerExist;
+	
+	}
+	
 	public Role getRole(){
 		return this.role;
 	}
 	
 	public boolean getWorkerExist(){
 		return this.workerExist;
+	}
+
+	public int getWid() {
+		return wid;
+	}
+
+	public void setWid(int wid) {
+		this.wid = wid;
 	}
 	
 	

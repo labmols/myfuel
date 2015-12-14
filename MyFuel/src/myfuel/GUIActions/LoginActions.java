@@ -31,15 +31,15 @@ public class LoginActions extends GUIActions {
 	
 	private void userResponse(Object response){
 		UserLoginResponse res = (UserLoginResponse) response;
-		if(res.errorCode==-1)
+		if(res.getErrorCode()==-1)
 		{
 			gui.showMessage("Welcome to MyFuel!");
-			changeFrame(gui,new UserOptionsActions (client,res.user));
+			changeFrame(gui,new UserOptionsActions (client,res.getUser()));
 			
 		}
 		else
 		{
-			switch(res.errorCode)
+			switch(res.getErrorCode())
 			{
 			case 1: gui.showMessage("UserID or Password incorrect!");
 			break;
