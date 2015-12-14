@@ -133,7 +133,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		
 		Date start = (Date) startHour.getValue();
 		Date end = (Date) EndHour.getValue();
-		p = new Promotion(name.getText(),Float.parseFloat(discount.getText()),start,end,typeOfCustomer.getSelectedIndex());
+		p = new Promotion(0,name.getText(),Float.parseFloat(discount.getText()),start,end,typeOfCustomer.getSelectedIndex());
 	}
 	
 	private class btnHandler implements ActionListener

@@ -1,6 +1,7 @@
 package myfuel.request;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import myfuel.client.Promotion;
 
@@ -10,6 +11,9 @@ public class MakeaPromotionRequest implements Serializable{
 	
 	private int type;
 	private Promotion p;
+	private int tid;
+	private Date start;
+	private Date end;
 	/***
 	 * The request represented by this constructor will only bring the template
 	 * from the DB
@@ -31,6 +35,22 @@ public class MakeaPromotionRequest implements Serializable{
 		this.setType(type);
 	}
 	
+	/***
+	 * when creating a new promotion from an existing template we need only the 
+	 * next parameters:
+	 * @param type  - type of request
+	 * @param tid  - template id
+	 * @param start  - start date
+	 * @param end   - end date
+	 */
+	public MakeaPromotionRequest(int type,int tid,Date start,Date end)
+	{
+		this.type = type;
+		this.setTid(tid);
+		this.setStart(start);
+		this.setEnd(end);
+	}
+	
 	
 	public int getType() {
 		return type;
@@ -45,6 +65,24 @@ public class MakeaPromotionRequest implements Serializable{
 
 	public void setP(Promotion p) {
 		this.p = p;
+	}
+	public int getTid() {
+		return tid;
+	}
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
+	public Date getStart() {
+		return start;
+	}
+	public void setStart(Date start) {
+		this.start = start;
+	}
+	public Date getEnd() {
+		return end;
+	}
+	public void setEnd(Date end) {
+		this.end = end;
 	}
 
 }
