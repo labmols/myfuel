@@ -5,11 +5,11 @@ import java.sql.*;
 import java.util.Observable;
 import java.util.Observer;
 
-import myfuel.client.ErrorEnum;
 import myfuel.ocsf.server.AbstractServer;
 import myfuel.ocsf.server.ConnectionToClient;
 import myfuel.ocsf.server.ObservableServer;
 import myfuel.request.LoginRequest;
+import myfuel.response.ErrorEnum;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 import myfuel.response.WorkerLoginResponse;

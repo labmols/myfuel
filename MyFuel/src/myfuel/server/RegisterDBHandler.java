@@ -10,6 +10,7 @@ import java.sql.*;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Station;
+import myfuel.request.RequestEnum;
 import myfuel.request.registerRequest;
 import myfuel.response.RegisterResponse;
 import myfuel.response.booleanResponse;
@@ -105,8 +106,8 @@ public class RegisterDBHandler implements Observer {
 		
 		if(arg instanceof registerRequest){
 		registerRequest request = (registerRequest)arg;
-		if(request.getType() == 1) showStations(request);
-		else insertCustomer(request);
+		if(request.getType() == RequestEnum.Select) showStations(request);
+		else if(request.getType() == RequestEnum.Insert) insertCustomer(request);
 	}
 }
 }

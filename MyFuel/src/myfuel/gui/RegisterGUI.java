@@ -153,6 +153,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		accessCB = new JComboBox();
 		accessCB.setModel(new DefaultComboBoxModel(new String[] {"One Station", "Few Stations"}));
+		accessCB.addActionListener(new ButtonListener());
 		accessCB.setBounds(104, 16, 141, 27);
 		panel4.add(accessCB);
 		
@@ -207,7 +208,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		stationModel= new DefaultComboBoxModel<String>();
 		stationsCB.setModel(stationModel);
-		actions.showStations();
+		
 		
 		mainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -225,24 +226,7 @@ public class RegisterGUI extends SuperGUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			if(e.getSource() == btnAddStation){
-				actions.addStation((String)stationModel.getSelectedItem());
-			}
-			
-			if(e.getSource() == btnAddCar){
-				actions.addCar(Integer.parseInt(cidTextField.getText()), fuelCB.getSelectedIndex()+1);
-			}
-			
-			if(e.getSource()==btnRegister ){
-				try{
-				actions.registerRequest(Integer.parseInt(idTextField.getText()), fnameTextField.getText().toString(), lnameTextField.getText().toString()
-						, passTextField.getPassword(), emailTextField.getText().toString(), CCTextField.getText().toString(), typeCB.getSelectedIndex(), accessCB.getSelectedIndex(),
-						saleModelCB.getSelectedIndex());
-				}
-				catch(Exception e1){
-					showMessage("illegal input!");
-				}
-			}
+			getInput(e);
 		}
 		
 	}
@@ -250,7 +234,22 @@ public class RegisterGUI extends SuperGUI {
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource()== accessCB)
+			actions.resetStations();
 		
+		if(e.getSource() == btnAddStation){
+			actions.addStation((String)stationModel.getSelectedItem(), accessCB.getSelectedIndex());
+		}
+		
+		if(e.getSource() == btnAddCar){
+			actions.addCar(cidTextField.getText().toString(), fuelCB.getSelectedIndex()+1);
+		}
+		
+		if(e.getSource()==btnRegister ){
+			actions.verifyDetails(idTextField.getText().toString(), fnameTextField.getText().toString(), lnameTextField.getText().toString(), 
+					passTextField.getPassword(),rePassTextField.getPassword(), emailTextField.getText().toString(), 
+					CCTextField.getText().toString(),typeCB.getSelectedIndex(), accessCB.getSelectedIndex(),saleModelCB.getSelectedIndex());
+		}
 	}
 	
 	public void addStation(String st){
