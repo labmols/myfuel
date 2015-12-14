@@ -81,7 +81,7 @@ public class CPromotionTemplateDBHandler implements Observer {
 		
 		PreparedStatement ps = null;
 
-		Promotion promotion = request.p;
+		Promotion promotion = request.getP();
 		java.sql.Time stime = new java.sql.Time (request.getP().getStartTime().getTime());
 	       java.sql.Time etime = new java.sql.Time (request.getP().getEndTime().getTime());
 
