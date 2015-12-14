@@ -72,9 +72,7 @@ public class LoginActions extends GUIActions {
 	}
 	
 	public void Register(){
-		RegisterActions actions = new RegisterActions(client);
-		gui.setVisible(false);
-		gui.dispose();
+		changeFrame(gui,new RegisterActions(client));
 	
 	}
 
