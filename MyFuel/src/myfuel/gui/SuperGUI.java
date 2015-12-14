@@ -38,6 +38,7 @@ public abstract class SuperGUI extends JFrame {
 	 */
 	public SuperGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setBounds(100, 100, 596, 486);
 		setLocationRelativeTo(null);
 		menuBar = new JMenuBar();

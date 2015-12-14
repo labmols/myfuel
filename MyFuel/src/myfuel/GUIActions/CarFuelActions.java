@@ -2,13 +2,20 @@ package myfuel.GUIActions;
 
 import java.util.Observable;
 
+import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
+import myfuel.gui.CarFuelGUI;
 import myfuel.response.Response;
 
 public class CarFuelActions extends GUIActions {
-
-	public CarFuelActions(MyFuelClient client) {
+	CarFuelGUI gui;
+	Customer customer;
+	
+	public CarFuelActions(MyFuelClient client,Customer customer) {
 		super(client);
+		gui = new CarFuelGUI(this);
+		this.customer = customer;
+		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
 	}
 

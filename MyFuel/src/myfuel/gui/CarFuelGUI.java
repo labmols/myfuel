@@ -27,13 +27,6 @@ public class CarFuelGUI extends SuperGUI {
 	private JTextField cashTextField;
 	private JTextField changeTextField;
 	CarFuelActions actions;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		CarFuelGUI frame = new CarFuelGUI(null);
-		frame.setVisible(true);
-	}
 
 	/**
 	 * Create the frame.

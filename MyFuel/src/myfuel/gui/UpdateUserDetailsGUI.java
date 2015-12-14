@@ -22,7 +22,7 @@ import myfuel.client.Customer;
 public class UpdateUserDetailsGUI extends SuperGUI {
 	
 	
-	UpdateDetailsActions actions;
+	private UpdateDetailsActions actions;
 	private JLabel fnamelbl;
 	private JLabel lnamelbl;
 	private JLabel addlbl;

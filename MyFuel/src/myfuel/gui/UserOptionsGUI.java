@@ -23,9 +23,10 @@ import myfuel.GUIActions.UserOptionsActions;
 public class UserOptionsGUI extends SuperGUI {
 
 	
-	UserOptionsActions actions;
-	JButton btnChangePassword ;
-	JButton btnUpdateDetails;
+	private UserOptionsActions actions;
+	private JButton btnChangePassword ;
+	private JButton btnUpdateDetails;
+	private JButton btnCarFuel;
 	/**
 	 * Create the frame.
 	 */
@@ -34,15 +35,9 @@ public class UserOptionsGUI extends SuperGUI {
 		lblTitle.setBounds(211, 6, 138, 19);
 		lblTitle.setText("User Options");
 		this.actions = actions;
-		setResizable(false);
 		
-		
-		
-	
 		
 		setContentPane(contentPane);
-
-		
 		JPanel MenuPanel = new JPanel();
 		MenuPanel.setBackground(Color.ORANGE);
 		MenuPanel.setBounds(96, 61, 475, 337);
@@ -50,8 +45,9 @@ public class UserOptionsGUI extends SuperGUI {
 		panel.add(MenuPanel);
 		MenuPanel.setLayout(null);
 		
-		JButton btnCarFuel = new JButton("Car Fuel");
+		btnCarFuel = new JButton("Car Fuel");
 		btnCarFuel.setBounds(103, 22, 180, 50);
+		btnCarFuel.addActionListener(new ButtonListener());
 		MenuPanel.add(btnCarFuel);
 		
 		JButton btnHomeFuel = new JButton("Home Fuel");
@@ -89,5 +85,6 @@ public class UserOptionsGUI extends SuperGUI {
 		// TODO Auto-generated method stub
 		if(e.getSource() == btnChangePassword) actions.changePasswordScreen();
 		else if (e.getSource() ==btnUpdateDetails )actions.updateDetailsScreen();
+		else if(e.getSource()==btnCarFuel) actions.carFuelScreen();
 	}
 }
