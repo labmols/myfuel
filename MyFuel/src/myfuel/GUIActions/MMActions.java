@@ -27,7 +27,7 @@ public class MMActions extends GUIActions{
 	
 	public void createMakeaPromotionWindow()
 	{
-		
+		this.changeFrame(gui, new MakeAPromotionActions(client));
 	}
 	
 	public void createShowReportsWindow()
