@@ -8,6 +8,7 @@ import java.util.Observer;
 import myfuel.ocsf.server.AbstractServer;
 import myfuel.ocsf.server.ConnectionToClient;
 import myfuel.ocsf.server.ObservableServer;
+import myfuel.response.UserLoginResponse;
 
 
 public class MyFuelServer extends ObservableServer{
@@ -27,6 +28,7 @@ public class MyFuelServer extends ObservableServer{
 		new LoginDBHandler(this,con);
 		new RegisterDBHandler(this,con);
 		new CPromotionTemplateDBHandler(this,con);
+		new ChangeStatusDBHandler(this,con);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,15 +38,18 @@ public class MyFuelServer extends ObservableServer{
 
 		//RequestHandler handler= hmap.handlerByType.get(msg.getClass());
 		//Response response = handler.handleRequest(msg);
-		//if(response instanceof UserLoginResponse){
-			//UserLoginResponse res = (UserLoginResponse) response;
-			//if(res.errorCode==-1) client.setInfo("UserID", res.user.userid);
+		
 		//}
+	
 		setChanged();
 		notifyObservers(msg);
 		try {
-			
+			if(response instanceof UserLoginResponse ){
+				UserLoginResponse res = (UserLoginResponse) response;
+				if(res.getErrorCode()==-1) client.setInfo("UserID", res.getUser().getUserid());
+			}
 			client.sendToClient(response);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,7 +70,7 @@ public class MyFuelServer extends ObservableServer{
 	protected synchronized void clientDisconnected(ConnectionToClient client) 
 	  {
 	    setChanged();
-	    notifyObservers(CLIENT_DISCONNECTED);
+	    notifyObservers(client.getInfo("UserID"));
 	    if(client.getInetAddress()!=null)System.out.println(client + " Disconnected!");
 	  }
 	

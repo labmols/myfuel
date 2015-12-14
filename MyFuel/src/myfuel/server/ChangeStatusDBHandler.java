@@ -3,39 +3,36 @@ package myfuel.server;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import myfuel.response.Response;
-import myfuel.response.booleanResponse;
+import java.util.Observable;
 
 
 
-
-
-
-public class changeUserStatusDBHandler implements RequestHandler {
-	Connection con;
-	public changeUserStatusDBHandler(Connection con){
-		this.con = con;
-	}
-	@Override
-	public Response handleRequest(Object msg) {
-		// TODO Auto-generated method stub
+public class ChangeStatusDBHandler extends DBHandler{
+	
+	public ChangeStatusDBHandler(MyFuelServer server, Connection con){
+		super(server,con);
 		
-		int userid = (int)msg;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		if(arg instanceof Integer){
+		int userid = (int)arg;
 		System.out.print(userid);
 			// TODO Auto-generated method stub
 			PreparedStatement ps = null;
 			try {
-				ps = con.prepareStatement("update users SET status=? where uid =?");
+				ps = con.prepareStatement("update customer SET status=? where uid =?");
 				ps.setInt(1, 0);
 				ps.setInt(2, userid);
 				ps.executeUpdate();
-				return new booleanResponse(true);
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return new booleanResponse(false);
+		}
 	}
 
 }

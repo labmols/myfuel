@@ -36,20 +36,20 @@ public class LoginDBHandler implements Observer {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new WorkerLoginResponse(false,-1);
+			return new WorkerLoginResponse(false);
 		
 		}
 		try {
 			if(rs.next()){
-				return new WorkerLoginResponse(true,rs.getInt(6));
+				return new WorkerLoginResponse(true,rs.getInt(6),rs.getInt(1));
 			}
 		}
 			
 			catch(SQLException e){
-				return new WorkerLoginResponse(false,-1);
+				return new WorkerLoginResponse(false);
 			}
 		
-		return new WorkerLoginResponse(false,-1);
+		return new WorkerLoginResponse(false);
 	}
 
 	private Response userLogin(LoginRequest request){
