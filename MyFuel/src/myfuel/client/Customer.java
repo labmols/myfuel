@@ -16,10 +16,11 @@ public class Customer implements Serializable{
 	private int smodel;
 	private ArrayList<Car> cars;
 	private ArrayList<Integer> stations;
+	private ArrayList<Station> stationsDetails;
 	private int LoggedIn;
 	
 	public Customer(int userid, String fname, String lname, String pass, String email, String cnumber, int toc, int 
-			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations){
+			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations, ArrayList<Station> stationsD){
 		this.setUserid(userid);
 		this.setFname(fname);
 		this.setLname(lname);
@@ -30,8 +31,10 @@ public class Customer implements Serializable{
 		this.setAtype(atype);
 		this.setSmodel(smodel);
 		this.setCars(cars);
-		this.setStations(stations);;
+		this.setStations(stations);
+		this.setStationsDetails(stationsD);
 	}
+	
 
 	public int getUserid() {
 		return userid;
@@ -127,6 +130,14 @@ public class Customer implements Serializable{
 
 	public void setLoggedIn(int loggedIn) {
 		LoggedIn = loggedIn;
+	}
+
+	public ArrayList<Station> getStationsDetails() {
+		return stationsDetails;
+	}
+
+	public void setStationsDetails(ArrayList<Station> stationsDetails) {
+		this.stationsDetails = stationsDetails;
 	}
 
 }

@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class Station implements Serializable {
 	private int sid;
 	private String sname;
-	private ArrayList<Fuel> fuels;
+    private ArrayList<Fuel> fuels;
+	private int minqty;
 	public Station(int sid,String sname, ArrayList<Fuel> fuels ){
 		this.sid = sid;
 		this.setFuels(fuels);
@@ -19,6 +20,13 @@ public class Station implements Serializable {
 		this.sname = sname;
 	}
 	
+	public Station(int sid, String sname, int minqty) {
+		// TODO Auto-generated constructor stub
+		this.sid = sid;
+		this.sname = sname;
+		this.minqty= minqty;
+	}
+
 	public String getName(){
 		return this.sname;
 	}
@@ -33,6 +41,14 @@ public class Station implements Serializable {
 
 	public void setFuels(ArrayList<Fuel> fuels) {
 		this.fuels = fuels;
+	}
+
+	public int getMinqty() {
+		return minqty;
+	}
+
+	public void setMinqty(int minqty) {
+		this.minqty = minqty;
 	}
 }
 

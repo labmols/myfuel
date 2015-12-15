@@ -3,9 +3,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import myfuel.client.Car;
+import myfuel.client.Station;
 import myfuel.request.LoginRequest;
 import myfuel.response.ErrorEnum;
 import myfuel.response.Response;
@@ -23,7 +26,11 @@ public class LoginDBHandler implements Observer {
 		
 	}
 	
-
+/**
+ * 
+ * @param request
+ * @return
+ */
 	private Response workerLogin(LoginRequest request) {
 		// TODO Auto-generated method stub
 		ResultSet rs = null;
@@ -60,16 +67,17 @@ public class LoginDBHandler implements Observer {
 		return new WorkerLoginResponse(ErrorEnum.UserNotExist);
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
 	private Response userLogin(LoginRequest request){
 		
-		int userid;
-		String fname;
-		String lname;
-		String pass;
-		String email;
-		String cnumber;
-		int status;
-		
+		String fname,lname,pass,email,cnumber;
+		int userid,status,atype,smodel,toc;
+		ArrayList<Station> stations=new ArrayList<Station>();
+		ArrayList<Car> cars = new ArrayList<Car>();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		try {
@@ -92,12 +100,31 @@ public class LoginDBHandler implements Observer {
 				pass = rs.getString(4);
 				email = rs.getString(5);
 				cnumber = rs.getString(6);
+				atype = rs.getInt(7);
+				toc = rs.getInt(8);
+				smodel = rs.getInt(9);
 				ps = con.prepareStatement("update customer SET status=? where uid = ?");
 				ps.setInt(1, 1);
 				ps.setInt(2, userid);
 				ps.executeUpdate();
 				
-				return new UserLoginResponse(userid,fname,lname,pass,email,cnumber);
+				ps = con.prepareStatement("select s.sid,s.sname,s.minqty from customer_station c, station s where c.sid = s.sid and c.uid = ?");
+				ps.setInt(1, userid);
+				rs = ps.executeQuery();
+				while(rs.next()){
+					stations.add(new Station(rs.getInt(1),rs.getString(2),rs.getInt(3)));
+				}
+				
+				ps = con.prepareStatement("select cid,fuelid from customer_car where uid=?");
+				ps.setInt(1, userid);
+				rs = ps.executeQuery();
+				
+				while(rs.next()){
+					cars.add(new Car(rs.getInt(1), rs.getInt(2)));
+				}
+				
+				return new UserLoginResponse(userid,fname,lname,pass,email
+						,cnumber,toc,atype,smodel,cars,stations);
 			}
 			
 			
@@ -108,6 +135,10 @@ public class LoginDBHandler implements Observer {
 		return new UserLoginResponse(ErrorEnum.UserNotExist); // User not Found
 	}
 	
+	/**
+	 * 
+	 * @param request
+	 */
 	private void changeStatus(LoginRequest request) {
 		// TODO Auto-generated method stub
 		PreparedStatement ps = null;

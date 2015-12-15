@@ -18,12 +18,22 @@ public class LoginActions extends GUIActions {
 	private LoginRequest lr;
 	private LogInGUI gui;
 	
+	/**
+	 * create new LoginGUI Controller.
+	 * @param client - the client object.
+	 */
 	public LoginActions(MyFuelClient client){
 		super(client);
 		gui = new LogInGUI(this);
 		gui.setVisible(true);
 	}
 	
+	/**
+	 * send login request to the server.
+	 * @param type - type of user (0-customer,1-worker)
+	 * @param userid - user id
+	 * @param password - user password
+	 */
 	public void sendRequest(int type, int userid, String password) 
 	{
 		lr = new LoginRequest(type,userid,password);
@@ -31,7 +41,10 @@ public class LoginActions extends GUIActions {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param response
+	 */
 	private void userResponse(Object response){
 		UserLoginResponse res = (UserLoginResponse) response;
 		if(res.getError()== ErrorEnum.NoError)
@@ -93,7 +106,10 @@ public class LoginActions extends GUIActions {
 		
 	}
 	
-	public void Register(){
+	/**
+	 * change to register JFrame 
+	 */
+	public void RegisterScreen(){
 		changeFrame(gui,new RegisterActions(client));
 	
 	}
