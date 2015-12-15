@@ -56,7 +56,9 @@ public class MakeaPromotionGUI extends SuperGUI{
 		UtilDateModel model2 = new UtilDateModel();
 	
 		JDatePanelImpl datePanel = new JDatePanelImpl(model1,p);
+		
 		 datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());	 
+		 datePicker.setOpaque(false);
 		datePicker.setSize(114, 29);
 		datePicker.setLocation(271, 235);
 		panel.add(datePicker);
@@ -64,6 +66,7 @@ public class MakeaPromotionGUI extends SuperGUI{
 		JDatePanelImpl datePanel2 = new JDatePanelImpl(model2,p);
 		 datePicker2 = new JDatePickerImpl(datePanel2, new DateLabelFormatter());	 
 		 datePicker2.setSize(114, 29);
+		 datePicker2.setOpaque(false);
 		 datePicker2.setLocation(271, 287);
 		panel.add(datePicker2);
 		

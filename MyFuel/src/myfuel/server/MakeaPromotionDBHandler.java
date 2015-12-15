@@ -45,6 +45,40 @@ public class MakeaPromotionDBHandler extends DBHandler{
 		
 	 }
 	 
+	 void checkExist()
+	 {
+		 	ResultSet exist = null ;
+			PreparedStatement ps = null;
+			
+
+		       try {
+		   		ps=con.prepareStatement("select p.pid from promotion p where p.tid = ? and p.sdate = ? and p.fdate = ? ");
+		   		
+		   		ps.setInt(1,request.getTid());
+		   		ps.setDate(2, new java.sql.Date(request.getStart().getTime()));
+				ps.setDate(3, new java.sql.Date(request.getEnd().getTime())); 
+		   		
+		   		exist =  ps.executeQuery();
+		   		
+		   		
+		   		
+		   		if(!exist.next())
+		   		{
+		   			//System.out.println(exist.next());
+		   			insertNewPromotion();
+		   			answer = true;
+		   		}
+		   		else
+		   		{
+		   			answer = false;
+		   		}
+		   		
+		       } catch (SQLException e) {
+		   			answer = false;
+		   			e.printStackTrace();
+		   		}  
+	 }
+	 
 	 void insertNewPromotion()
 	 {
 		 PreparedStatement ps = null;
@@ -60,7 +94,7 @@ public class MakeaPromotionDBHandler extends DBHandler{
 			ps.setDate(4, new java.sql.Date(request.getEnd().getTime()));
 			
 			ps.executeUpdate();
-			System.out.println("check");
+			
 			
 		} catch (SQLException e) {
 			answer = false;
@@ -88,7 +122,7 @@ public class MakeaPromotionDBHandler extends DBHandler{
 			 }
 			 else if(request.getType() == 1)
 			 {
-				 insertNewPromotion();
+				 checkExist();
 				 server.setResponse(new booleanResponse(answer));
 			 }
 		}
