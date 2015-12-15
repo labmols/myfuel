@@ -15,15 +15,12 @@ import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 import myfuel.response.WorkerLoginResponse;
 
-public class LoginDBHandler implements Observer {
+public class LoginDBHandler extends DBHandler {
 	Connection con = null;
 	MyFuelServer server;
 	Object response;
 	public LoginDBHandler(MyFuelServer server,Connection con){
-		this.con = con;
-		this.server=server;
-		server.addObserver(this);
-		
+		super(server,con);	
 	}
 	
 /**
