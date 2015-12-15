@@ -19,8 +19,8 @@ public class UserLoginResponse extends Response {
 	}
 	
 	public UserLoginResponse(int userid, String fname, String lname, String pass, String email, String cnumber, int toc, int 
-			atype, int smodel,ArrayList<Car> cars,ArrayList<Station> stations){
-			setUser(new Customer(userid,fname,lname,pass,email,cnumber,toc,atype,smodel,cars,null,stations));
+			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations){
+			setUser(new Customer(userid,fname,lname,pass,email,cnumber,toc,atype,smodel,cars,stations));
 			setError(ErrorEnum.NoError);
 	}
 

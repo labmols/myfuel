@@ -73,7 +73,7 @@ public class LoginDBHandler extends DBHandler {
 		
 		String fname,lname,pass,email,cnumber;
 		int userid,status,atype,smodel,toc;
-		ArrayList<Station> stations=new ArrayList<Station>();
+		ArrayList<Integer> stations=new ArrayList<Integer>();
 		ArrayList<Car> cars = new ArrayList<Car>();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
@@ -105,11 +105,11 @@ public class LoginDBHandler extends DBHandler {
 				ps.setInt(2, userid);
 				ps.executeUpdate();
 				
-				ps = con.prepareStatement("select s.sid,s.sname,s.minqty from customer_station c, station s where c.sid = s.sid and c.uid = ?");
+				ps = con.prepareStatement("select sid from customer_station where uid = ?");
 				ps.setInt(1, userid);
 				rs = ps.executeQuery();
 				while(rs.next()){
-					stations.add(new Station(rs.getInt(1),rs.getString(2),rs.getInt(3)));
+					stations.add(rs.getInt(1));
 				}
 				
 				ps = con.prepareStatement("select cid,fuelid from customer_car where uid=?");

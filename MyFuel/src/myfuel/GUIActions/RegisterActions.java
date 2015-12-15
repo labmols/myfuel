@@ -53,7 +53,7 @@ public class RegisterActions extends GUIActions {
 	public void registerRequest(int userid, String fname, String lname, char [] pass, String email, String cnumber, int toc, int 
 			atype, int smodel){
 		String password= new String(pass);
-		customer = new Customer(userid,fname,lname,password,email,cnumber,toc,atype,smodel,cars,cstations,null);
+		customer = new Customer(userid,fname,lname,password,email,cnumber,toc,atype,smodel,cars,cstations);
 		request = new registerRequest(RequestEnum.Insert,customer);
 		client.handleMessageFromGUI(request);
 	}
