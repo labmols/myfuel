@@ -35,13 +35,14 @@ import javax.swing.JSpinner;
 public class CreatePromotionTemplateGUI extends SuperGUI {
 
 	
-	CPromotionTemplateActions actions;
-	JTextField name;
-	JTextField discount;
+	private CPromotionTemplateActions actions;
+	private JTextField name;
+	private JTextField discount;
 	private JSpinner startHour;
 	private JSpinner EndHour;
 	private JComboBox typeOfCustomer;
 	private JButton btnCreate;
+	private JComboBox fuel;
 	Promotion p ;
 	/**
 	 * Create the frame.
@@ -122,6 +123,15 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		JLabel lblNewLabel = new JLabel("%");
 		lblNewLabel.setBounds(313, 111, 41, 16);
 		panel.add(lblNewLabel);
+		
+		JLabel lblTypeOfFuel = new JLabel("Type of Fuel:");
+		lblTypeOfFuel.setBounds(101, 242, 117, 14);
+		
+		panel.add(lblTypeOfFuel);
+		
+		 fuel = new JComboBox();
+		fuel.setBounds(280, 239, 115, 20);
+		panel.add(fuel);
 		
 	}
 
