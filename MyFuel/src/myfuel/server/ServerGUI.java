@@ -1,22 +1,32 @@
 package myfuel.server;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 
 import myfuel.gui.SuperGUI;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.event.ActionListener;
 
 public class ServerGUI extends SuperGUI{
 	private JTextField textField;
 	private JButton btnStartServer;
 	private JButton btnStopServer;
 	private JTextArea textArea;
+
 	
 	ServerGUI(){
 		lblTitle.setBounds(207, 6, 163, 22);
@@ -24,6 +34,11 @@ public class ServerGUI extends SuperGUI{
 		setContentPane(contentPane);
 		
 		btnStartServer = new JButton("Start Server");
+		btnStartServer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getInput(e);
+			}
+		});
 		btnStartServer.setBounds(266, 63, 104, 34);
 		panel.add(btnStartServer);
 		
@@ -40,18 +55,32 @@ public class ServerGUI extends SuperGUI{
 		btnStopServer.setBounds(382, 63, 104, 34);
 		panel.add(btnStopServer);
 		
-		 textArea = new JTextArea(5, 20);
-	      textArea.setBackground(Color.darkGray);
-	        textArea.setForeground(Color.WHITE);
-	        textArea.setEditable(false);
-	        JScrollPane scrollPane = new JScrollPane(textArea);
-		panel.add(textArea);
+		JPanel panel2 = new JPanel();
+		panel2.setOpaque(false);
+		panel2.setLocation(48, 113);
+		panel2.setSize(476, 293);
+		panel.add(panel2);
+		textArea = new JTextArea(20, 40);
+		textArea.setBackground(Color.WHITE);
+		
+		JScrollPane scrollPane = new JScrollPane(textArea); 
+		textArea.setEditable(false);
+		panel2.add(scrollPane);
+		
 		
 	}
 
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
+		textArea.append("a" +"\n");
+		
+	}
+	
+	public static void main(String [] args){
+		JFrame f = new ServerGUI();
+		f.setVisible(true);
+		
 		
 	}
 }

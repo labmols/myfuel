@@ -114,7 +114,7 @@ public class RegisterActions extends GUIActions {
 			changeFrame(gui,new LoginActions(client));
 
 		}
-		else gui.showMessage("Register failed. This userid is already in use!");
+		else gui.showMessage("Register failed. userid or carid is already in use!");
 	}
 	
 	/** 
