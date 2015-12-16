@@ -57,28 +57,15 @@ public class MakeaPromotionGUI extends SuperGUI{
 		UtilDateModel model2 = new UtilDateModel();
 	
 		JDatePanelImpl datePanel = new JDatePanelImpl(model1,p);
-		
 		 datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());	 
-<<<<<<< HEAD
-		 datePicker.setOpaque(false);
-		datePicker.setSize(114, 29);
-		datePicker.setLocation(271, 235);
-=======
 		datePicker.setSize(159, 29);
 		datePicker.setLocation(226, 215);
->>>>>>> branch 'master' of https://github.com/labmols/myfuel.git 
 		panel.add(datePicker);
 		
 		JDatePanelImpl datePanel2 = new JDatePanelImpl(model2,p);
 		 datePicker2 = new JDatePickerImpl(datePanel2, new DateLabelFormatter());	 
-<<<<<<< HEAD
-		 datePicker2.setSize(114, 29);
-		 datePicker2.setOpaque(false);
-		 datePicker2.setLocation(271, 287);
-=======
 		 datePicker2.setSize(159, 29);
 		 datePicker2.setLocation(226, 256);
->>>>>>> branch 'master' of https://github.com/labmols/myfuel.git
 		panel.add(datePicker2);
 		
 		JLabel lblNewLabel = new JLabel("Select a Template:");
