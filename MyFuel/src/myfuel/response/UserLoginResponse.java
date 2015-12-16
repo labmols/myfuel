@@ -1,8 +1,11 @@
 package myfuel.response;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import myfuel.client.Car;
 import myfuel.client.Customer;
+import myfuel.client.Station;
 
 @SuppressWarnings("serial")
 public class UserLoginResponse extends Response {
@@ -15,8 +18,9 @@ public class UserLoginResponse extends Response {
 		setUser(null);
 	}
 	
-	public UserLoginResponse(int userid,String fname,String lname, String pass,String email,String cnumber){
-			setUser(new Customer(userid,fname,lname,pass,email,cnumber,0,0,0,null,null));
+	public UserLoginResponse(int userid, String fname, String lname, String pass, String email, String cnumber, int toc, int 
+			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations){
+			setUser(new Customer(userid,fname,lname,pass,email,cnumber,toc,atype,smodel,cars,stations));
 			setError(ErrorEnum.NoError);
 	}
 

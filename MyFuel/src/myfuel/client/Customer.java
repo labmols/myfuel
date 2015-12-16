@@ -30,8 +30,9 @@ public class Customer implements Serializable{
 		this.setAtype(atype);
 		this.setSmodel(smodel);
 		this.setCars(cars);
-		this.setStations(stations);;
+		this.setStations(stations);
 	}
+	
 
 	public int getUserid() {
 		return userid;
@@ -129,4 +130,5 @@ public class Customer implements Serializable{
 		LoggedIn = loggedIn;
 	}
 
+	
 }

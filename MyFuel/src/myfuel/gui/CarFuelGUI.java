@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
@@ -19,6 +20,13 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.SwingConstants;
+
+import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.Cursor;
+import java.awt.FlowLayout;
+
 
 public class CarFuelGUI extends SuperGUI {
 
@@ -27,7 +35,7 @@ public class CarFuelGUI extends SuperGUI {
 	private JTextField cashTextField;
 	private JTextField changeTextField;
 	CarFuelActions actions;
-
+	JProgressBar progressBar;
 	/**
 	 * Create the frame.
 	 */
@@ -80,9 +88,27 @@ public class CarFuelGUI extends SuperGUI {
 		btnStartFuel.setBounds(99, 230, 117, 29);
 		panel.add(btnStartFuel);
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(116, 28, 347, 39);
-		panel.add(progressBar);
+		
+		JPanel p = new JPanel();
+		p.setOpaque(false);
+		p.setLocation(183, 293);
+		p.setSize(200, 69);
+		p.setLayout(new FlowLayout());
+		
+
+		JLabel label = new JLabel("Progress: ");
+		progressBar = new JProgressBar();
+		progressBar.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		progressBar.setForeground(Color.BLACK);
+		
+		p.add(label);
+		p.add(progressBar, BorderLayout.CENTER);
+	
+		ProgressBarThread ju = new ProgressBarThread(this);
+		progressBar.setBounds(159, 316, 272, 16);
+		
+		
+		panel.add(p);
 		
 		JPanel panel2 = new JPanel();
 		panel2.setVisible(false);
@@ -136,6 +162,10 @@ public class CarFuelGUI extends SuperGUI {
 		btnStartFuel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel2.setVisible(true);
+				
+				
+			
+				new Thread(ju).start();
 			}
 		});
 		
@@ -147,5 +177,10 @@ public class CarFuelGUI extends SuperGUI {
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void setProgress(int value) {
+		// TODO Auto-generated method stub
+		progressBar.setValue(value);
 	}
 }

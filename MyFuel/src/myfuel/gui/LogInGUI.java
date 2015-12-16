@@ -118,7 +118,7 @@ public class LogInGUI extends SuperGUI {
 	String pass =new String(passwordField.getPassword());
 	actions.sendRequest(comboBox.getSelectedIndex(),Integer.parseInt(useridField.getText().toString()), pass);}
 	if(e.getSource()==registerButton){
-		actions.Register();
+		actions.RegisterScreen();
 	}
 	}
 
