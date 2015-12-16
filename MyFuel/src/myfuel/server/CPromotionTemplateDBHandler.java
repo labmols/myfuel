@@ -11,7 +11,7 @@ import myfuel.client.Promotion;
 import myfuel.request.PromotionTemplateRequest;
 import myfuel.response.booleanResponse;
 
-public class CPromotionTemplateDBHandler implements Observer {
+public class CPromotionTemplateDBHandler extends DBHandler {
 
 	Connection con;
 	MyFuelServer server;
@@ -24,9 +24,7 @@ public class CPromotionTemplateDBHandler implements Observer {
 	 */
 	public CPromotionTemplateDBHandler(MyFuelServer server,Connection con)
 	{
-		this.server = server;
-		this.con = con;
-		server.addObserver(this);
+		super(server,con);
 	}
 	/***
 	 * First this method will check if there is an existing promotion template with 

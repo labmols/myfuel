@@ -16,9 +16,7 @@ import myfuel.response.UserLoginResponse;
 import myfuel.response.WorkerLoginResponse;
 
 public class LoginDBHandler extends DBHandler {
-	Connection con = null;
-	MyFuelServer server;
-	Object response;
+	
 	public LoginDBHandler(MyFuelServer server,Connection con){
 		super(server,con);	
 	}
@@ -171,7 +169,7 @@ public class LoginDBHandler extends DBHandler {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
+		System.out.printf("test");
 		if(arg instanceof LoginRequest){
 			LoginRequest request =(LoginRequest)arg;
 			if(request.getChangeStatus()==1) changeStatus(request);

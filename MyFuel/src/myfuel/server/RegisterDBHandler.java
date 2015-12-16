@@ -16,13 +16,9 @@ import myfuel.response.RegisterResponse;
 import myfuel.response.booleanResponse;
 
 
-public class RegisterDBHandler implements Observer {
-	Connection con;
-	MyFuelServer server;
+public class RegisterDBHandler extends DBHandler {
 	RegisterDBHandler(MyFuelServer server,Connection con){
-		this.con = con;
-		this.server=server;
-		server.addObserver(this);
+		super(server,con);
 	}
 	
 	private void showStations(registerRequest request)

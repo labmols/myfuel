@@ -116,7 +116,7 @@ public class LoginActions extends GUIActions {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(gui.isActive()){
+		if(gui.isActive() && arg instanceof UserLoginResponse || arg instanceof WorkerLoginResponse){
 		// TODO Auto-generated method stub
 				if(lr.getType() ==0) userResponse(arg);
 				else workerResponse(arg);	

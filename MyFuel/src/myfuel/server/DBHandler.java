@@ -7,7 +7,7 @@ import java.util.Observer;
 public abstract class DBHandler implements Observer{
 	Connection con;
 	MyFuelServer server;
-		DBHandler(MyFuelServer server, Connection con){
+	public DBHandler(MyFuelServer server, Connection con){
 			this.con = con;
 			this.server = server;
 			server.addObserver(this);
