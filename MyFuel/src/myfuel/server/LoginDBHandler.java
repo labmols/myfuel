@@ -169,7 +169,7 @@ public class LoginDBHandler extends DBHandler {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		System.out.printf("test");
+		
 		if(arg instanceof LoginRequest){
 			LoginRequest request =(LoginRequest)arg;
 			if(request.getChangeStatus()==1) changeStatus(request);
