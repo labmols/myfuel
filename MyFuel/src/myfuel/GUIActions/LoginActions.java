@@ -86,6 +86,7 @@ public class LoginActions extends GUIActions {
 							 changeFrame(gui, new MDActions(client),this); 
 							 break;
 			case CompanyManager:
+				changeFrame(gui,new CMActions(client),this);
 				break;
 			case StationManager:
 				break;

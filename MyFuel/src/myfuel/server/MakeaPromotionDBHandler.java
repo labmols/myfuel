@@ -18,11 +18,14 @@ public class MakeaPromotionDBHandler extends DBHandler{
 	private ArrayList<PromotionTemplate> templates;
 	private MakeaPromotionRequest request;
 	private boolean answer =true;
+	private String str;
 	MakeaPromotionDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 		
 	}
-
+/***
+ * Get promotion templates from the DB
+ */
 	 void selectPTemplates()
 	 {
 		 	ResultSet rs = null ;
@@ -41,17 +44,21 @@ public class MakeaPromotionDBHandler extends DBHandler{
 			
 			} catch (SQLException e) {
 				
+				str = "An error with the server connection";
 				e.printStackTrace();
 			}
 		
 	 }
-	 
+	 /***
+	  * Checks if there is already a promotion with those details
+	  */
 	 void checkExist()
 	 {
 		 	ResultSet exist = null ;
 			PreparedStatement ps = null;
 			
-
+				
+ 
 		       try {
 		   		ps=con.prepareStatement("select p.pid from promotion p where p.tid = ? and p.sdate = ? and p.fdate = ? ");
 		   		
@@ -72,14 +79,18 @@ public class MakeaPromotionDBHandler extends DBHandler{
 		   		else
 		   		{
 		   			answer = false;
+		   			str = "Promotion already exist!";
 		   		}
 		   		
 		       } catch (SQLException e) {
 		   			answer = false;
+		   			str = "An error with the server connection";
 		   			e.printStackTrace();
 		   		}  
 	 }
-	 
+	 /***
+	  * Insert the promotion details to the DB
+	  */
 	 void insertNewPromotion()
 	 {
 		 PreparedStatement ps = null;
@@ -98,6 +109,7 @@ public class MakeaPromotionDBHandler extends DBHandler{
 			
 			
 		} catch (SQLException e) {
+			str = "An error with the server connection";
 			answer = false;
 			e.printStackTrace();
 		}
@@ -106,7 +118,11 @@ public class MakeaPromotionDBHandler extends DBHandler{
 	 
 	 
 	 
-	 
+	/***
+	 * Gets the response from the server 
+	 * Processing the message due to the functions in this class
+	 * Send appropriate response to the Client 
+	 */
 	 
 	 
 	@Override
@@ -124,32 +140,50 @@ public class MakeaPromotionDBHandler extends DBHandler{
 			 else if(request.getType() == 1)
 			 {
 				 checkExist();
-				 server.setResponse(new booleanResponse(answer));
+				 server.setResponse(new booleanResponse(answer,str));
 			 }
 		}
 		
 	}
-
+/***
+ * 
+ * @return Promotion templates arraylist
+ */
 	public ArrayList<PromotionTemplate> getTemplates() {
 		return templates;
 	}
-
+/**
+ *  sets promotion templates arraylist
+ * @param templates
+ */
 	public void setTemplates(ArrayList<PromotionTemplate> templates) {
 		this.templates = templates;
 	}
-
+/***
+ * getting the request
+ * @return
+ */
 	public MakeaPromotionRequest getRequest() {
 		return request;
 	}
-
+/***
+ * setting the request
+ * @param request
+ */
 	public void setRequest(MakeaPromotionRequest request) {
 		this.request = request;
 	}
-
+/***
+ * 
+ * @return answer
+ */
 	public boolean isAnswer() {
 		return answer;
 	}
-
+/***
+ * set answer
+ * @param answer
+ */
 	public void setAnswer(boolean answer) {
 		this.answer = answer;
 	}

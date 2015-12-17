@@ -13,7 +13,7 @@ public class MDActions extends GUIActions{
 		gui = new MDGUI(this);
 		gui.setVisible(true);
 		
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 
