@@ -35,52 +35,83 @@ public class PromotionTemplate implements Serializable{
 		this.setTypeOfFuel(typeOfFuel);
 	}
 
-
+/***
+ * set template id
+ * @param tid2
+ */
 	public void setTid(int tid2) {
 		this.tid = tid2;
 		
 	}
-	
+	/***
+	 * 
+	 * @return tid
+	 */
 	public int getTid() {
 		return this.tid;
 		
 	}
 	
+	/***
+	 * 
+	 * @return name
+	 */
 
 	public String getName() {
 		return name;
 	}
 
-
+	/***
+	 * set name of the promotion
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
+/***
+ * 
+ * @return discount amount
+ */
 
 	public float getDiscount() {
 		return discount;
 	}
 
-
+/***
+ *  set discount amount
+ * @param discount
+ */
 	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
 
-
+/***
+ *  return start time
+ * @return
+ */
 	public Date getStartTime() {
 		return startTime;
 	}
-
+/***
+ * 
+ * @param startTime
+ */
 
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-
+/***
+ * 
+ * @return endTime
+ */
 
 	public Date getEndTime() {
 		return endTime;
 	}
-
+/***
+ * 
+ * @param endTime
+ */
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
