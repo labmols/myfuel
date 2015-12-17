@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import myfuel.GUIActions.CPromotionTemplateActions;
 import myfuel.GUIActions.MDActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.Promotion;
 import myfuel.client.PromotionTemplate;
 
@@ -53,9 +54,13 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		this.actions = actions;
 		setContentPane(contentPane);
 		lblTitle.setBounds(176, 6, 308, 16);
-	
+		
+		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setText("Create Promotion Template");
 	
+		this.mnMenu.addActionListener(new menuListener());
+		
 		
 		JLabel lblPromotionName = new JLabel("Promotion Template Name:");
 		lblPromotionName.setBounds(101, 82, 200, 14);
@@ -135,6 +140,18 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		 fuel.setModel(new DefaultComboBoxModel(new String[] {"95", "Diesel", "Scooter", "Home Fuel"}));
 		fuel.setBounds(280, 239, 115, 20);
 		panel.add(fuel);
+		
+	}
+	
+	private class menuListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			actions.backToMenu();
+			
+		}
 		
 	}
 

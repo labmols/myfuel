@@ -33,6 +33,7 @@ public class MyFuelServer extends ObservableServer{
 		new MakeaPromotionDBHandler(this,con);
 		new ConfirmNewRatesDBHandler(this,con);
 		new SetNewRatesDBHandler(this,con);
+		new SWDBHandler(this,con);
 
 	}
 

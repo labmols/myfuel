@@ -46,6 +46,13 @@ public class UserOptionsActions extends GUIActions {
 		// TODO Auto-generated method stub
 		changeFrame(gui, new CarFuelActions(client,customer),this);
 	}
+
+
+	@Override
+	public void backToMenu() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 

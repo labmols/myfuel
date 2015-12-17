@@ -52,7 +52,7 @@ public class LoginDBHandler extends DBHandler {
 				ps.setInt(1, 1);
 				ps.setInt(2, request.getUserid());
 				ps.executeUpdate();
-				return new WorkerLoginResponse(rs.getInt(6),rs.getInt(1));
+				return new WorkerLoginResponse(rs.getInt(6),rs.getInt(1),rs.getInt(8));
 			}
 		}
 			

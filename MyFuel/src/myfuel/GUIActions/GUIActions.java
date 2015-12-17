@@ -49,6 +49,7 @@ public abstract class GUIActions implements Observer {
 		g.dispose();
 		client.deleteObserver(currentActions);
 	}
+	public abstract void backToMenu(); 
 	
 
 	

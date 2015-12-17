@@ -35,4 +35,10 @@ public class MMActions extends GUIActions{
 		
 	}
 
+	@Override
+	public void backToMenu() {
+		
+		
+	}
+
 }

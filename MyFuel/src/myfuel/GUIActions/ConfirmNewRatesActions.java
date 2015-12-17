@@ -66,5 +66,11 @@ public class ConfirmNewRatesActions extends GUIActions{
 		}
 		
 	}
+	@Override
+	public void backToMenu() {
+
+					changeFrame(gui,new CMActions(client),this);
+		
+	}
 
 }

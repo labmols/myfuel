@@ -63,4 +63,10 @@ public class SetNewRatesActions extends GUIActions {
 		}
 	}
 
+	@Override
+	public void backToMenu() {
+		changeFrame(gui,new MMActions(client),this);
+		
+	}
+
 }

@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import myfuel.GUIActions.UpdateDetailsActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.Customer;
 
 
@@ -33,7 +34,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 	 * Create the frame.
 	 */
 	public UpdateUserDetailsGUI(UpdateDetailsActions actions) {
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setBounds(220, 6, 144, 23);
 		lblTitle.setText("Update Details");
 		this.actions = actions;

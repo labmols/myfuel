@@ -56,6 +56,12 @@ public class ChangePassActions extends GUIActions {
 		else gui.displayMessage(false);
 		
 		}
+
+	@Override
+	public void backToMenu() {
+		changeFrame(gui,new UserOptionsActions(client,user),this);
+		
+	}
 	
 	
 

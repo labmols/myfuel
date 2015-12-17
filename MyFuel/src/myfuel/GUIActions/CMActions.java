@@ -24,4 +24,10 @@ public class CMActions extends GUIActions {
 		changeFrame(gui,new ConfirmNewRatesActions(client),this);	
 	}
 
+	@Override
+	public void backToMenu() {
+		
+		
+	}
+
 }
