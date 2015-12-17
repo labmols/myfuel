@@ -21,10 +21,7 @@ public class UpdateDetailsActions extends GUIActions {
 	}
 
 	
-	public void setGUI(UpdateUserDetailsGUI gui){
-		this.gui = gui;
-	}
-	
+
 	public Customer getUserDetails(){
 		return user;
 	}
