@@ -50,10 +50,10 @@ public class RegisterActions extends GUIActions {
 	 * @param atype - access type (one station or more)
 	 * @param smodel - sale model (monthly,etc)
 	 */
-	public void registerRequest(int userid, String fname, String lname, char [] pass, String email, String cnumber, int toc, int 
+	public void registerRequest(int userid, String fname, String lname, char [] pass, String email,String address, String cnumber, int toc, int 
 			atype, int smodel){
 		String password= new String(pass);
-		customer = new Customer(userid,fname,lname,password,email,cnumber,toc,atype,smodel,cars,cstations);
+		customer = new Customer(userid,fname,lname,password,email,address,cnumber,toc,atype,smodel,cars,cstations);
 		request = new registerRequest(RequestEnum.Insert,customer);
 		client.handleMessageFromGUI(request);
 	}
@@ -113,15 +113,11 @@ public class RegisterActions extends GUIActions {
 	 */
 	public void checkRegister(booleanResponse res){
 		if(res.getSuccess()) {
-			gui.showMessage("Register success! \n"
-					+ "your login details is: \n"
-					+ "UserID: " + customer.getUserid() 
-					+"\nPassword: " + customer.getPass()
-					+"\nNow you need to wait for the Marketing Delegate confirmation.");
+			gui.showMessage(res.getMsg());
 			changeFrame(gui,new LoginActions(client),this);
 
 		}
-		else gui.showMessage("Register failed. This userid is already in use!");
+		else gui.showMessage(res.getMsg());
 	}
 	
 	/** 
@@ -174,7 +170,7 @@ public class RegisterActions extends GUIActions {
 	 * @param smodel - sale model value
 	 */
 	
-	public void verifyDetails(String userid, String fname, String lname, char [] pass,char [] repass, String email, String cnumber,int toc, int 
+	public void verifyDetails(String userid, String fname, String lname, char [] pass,char [] repass, String email,String address, String cnumber,int toc, int 
 			atype, int smodel)
 	{
 		String errors="";
@@ -185,6 +181,16 @@ public class RegisterActions extends GUIActions {
 		if(userid.length()>9 || userid.equals("")){ 
 			success = false;
 			errors+="ID length > 9 or Empty.\n";
+		}
+		if(address.equals("")){
+			success=false;
+			errors+="address field empty.\n";
+		}
+		
+		if(cnumber.equals(""))
+		{
+			success=false;
+			errors+="illegal Credit Card value.\n";
 		}
 		
 		if(fname.equals("") || !isAlpha(fname)){ 
@@ -221,7 +227,7 @@ public class RegisterActions extends GUIActions {
 			errors+= "Please add your Stations. \n";
 		}
 		if(!success) gui.showMessage(errors);
-		else registerRequest(Integer.parseInt(userid), fname, lname, pass, email, cnumber,toc, atype, smodel);
+		else registerRequest(Integer.parseInt(userid), fname, lname, pass, email,address,cnumber,toc, atype, smodel);
 	}
 	
 	/** 

@@ -1,6 +1,7 @@
 package myfuel.GUIActions;
 
 
+import java.awt.Frame;
 import java.util.Observer;
 
 import myfuel.client.MyFuelClient;

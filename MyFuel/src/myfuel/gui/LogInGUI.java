@@ -35,13 +35,12 @@ public class LogInGUI extends SuperGUI {
 	private JButton fastButton;
 	private JButton loginButton;
 	private JButton registerButton;
-	LoginActions actions;
+	private LoginActions actions;
 
 	/**
 	 * Create the frame.
 	 */
 	public LogInGUI(LoginActions actions) {
-		
 		this.actions=actions;
 		lblTitle.setBounds(271, 6, 61, 26);
 		lblTitle.setText("Log In");
@@ -96,6 +95,7 @@ public class LogInGUI extends SuperGUI {
 		registerButton.addActionListener(new ButtonListener());
 		panel.add(registerButton);
 		
+		
 
 	
 	}
@@ -106,9 +106,8 @@ public class LogInGUI extends SuperGUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
 			getInput(e);
-			
+
 		}
 		
 	}
@@ -121,5 +120,7 @@ public class LogInGUI extends SuperGUI {
 		actions.RegisterScreen();
 	}
 	}
+
+	
 
 }

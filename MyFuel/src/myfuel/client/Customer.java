@@ -11,6 +11,7 @@ public class Customer implements Serializable{
 	private String pass;
 	private String email;
 	private String cnumber;
+	private String address;
 	private int toc;
 	private int atype;
 	private int smodel;
@@ -18,7 +19,7 @@ public class Customer implements Serializable{
 	private ArrayList<Integer> stations;
 	private int LoggedIn;
 	
-	public Customer(int userid, String fname, String lname, String pass, String email, String cnumber, int toc, int 
+	public Customer(int userid, String fname, String lname, String pass, String email,String address, String cnumber, int toc, int 
 			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations){
 		this.setUserid(userid);
 		this.setFname(fname);
@@ -31,6 +32,7 @@ public class Customer implements Serializable{
 		this.setSmodel(smodel);
 		this.setCars(cars);
 		this.setStations(stations);
+		this.setAddress(address);
 	}
 	
 
@@ -128,6 +130,16 @@ public class Customer implements Serializable{
 
 	public void setLoggedIn(int loggedIn) {
 		LoggedIn = loggedIn;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	

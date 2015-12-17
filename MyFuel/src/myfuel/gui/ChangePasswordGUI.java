@@ -91,18 +91,12 @@ public class ChangePasswordGUI extends SuperGUI {
 		
 	}
 	
-	public void displayMessage(boolean b) {
-		if(b)
-			JOptionPane.showMessageDialog(null, "Update Succeed!");
-		else
-			JOptionPane.showMessageDialog(null, "Error - Please Enter Again!");
-	}
 
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == (JButton)btnConfirm)
-			actions.changePassword(origPass.getPassword(), newPass1.getPassword(), newPass2.getPassword());
+			actions.verifyDetails(origPass.getPassword(), newPass1.getPassword(), newPass2.getPassword());
 			//System.out.print(passwordField_1.getPassword());
 	}
 }

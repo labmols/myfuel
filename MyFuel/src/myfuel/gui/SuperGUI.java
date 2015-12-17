@@ -37,6 +37,7 @@ public abstract class SuperGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public SuperGUI() {
+		super("MyFuel System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
