@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import myfuel.GUIActions.CarFuelActions;
+import myfuel.client.BackMainMenu;
 
 import javax.swing.JProgressBar;
 import javax.swing.DefaultComboBoxModel;
@@ -46,6 +47,7 @@ public class CarFuelGUI extends SuperGUI {
 		lblTitle.setText("Car Fueling");
 		setContentPane(contentPane);
 		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		
 		JLabel lblChooseStation = new JLabel("Choose Station:");
 		lblChooseStation.setBackground(Color.RED);

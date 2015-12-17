@@ -85,6 +85,12 @@ public class MakeAPromotionActions extends GUIActions {
 		}
 		
 	}
+
+	@Override
+	public void backToMenu() {
+		changeFrame(gui,new MMActions(client),this);
+		
+	}
 	
 
 }

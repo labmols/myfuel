@@ -4,7 +4,9 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 
 
+
 import myfuel.GUIActions.SetNewRatesActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.Fuel;
 
 import javax.swing.JLabel;
@@ -14,8 +16,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.Font;
+
 import javax.swing.JSeparator;
+
 import java.awt.Color;
+
 import javax.swing.SwingConstants;
 
 public class SetNewRatesGUI extends SuperGUI {
@@ -42,7 +47,7 @@ public class SetNewRatesGUI extends SuperGUI {
 		this.actions = actions;
 		lblTitle.setBounds(203, 11, 162, 16);
 		lblTitle.setText("Set New Rates");
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		JLabel lblNewLabel = new JLabel("95");
 		lblNewLabel.setBounds(32, 122, 46, 14);
 		panel.add(lblNewLabel);

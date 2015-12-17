@@ -9,6 +9,7 @@ import myfuel.client.RoleEnum;
 public class WorkerLoginResponse extends Response{
 	private int wid;
 	private RoleEnum role;
+	private int sid;
 	/** new Worker login response
 	 * role 1 - Station Worker
 	 * role 2- Station Manager
@@ -18,10 +19,11 @@ public class WorkerLoginResponse extends Response{
 	 * @param workerExist
 	 * @param role
 	 */
-	public WorkerLoginResponse(int roleid,int wid){
+	public WorkerLoginResponse(int roleid,int wid,int sid){
 		this.wid=wid;
+		this.sid = sid;
 		switch(roleid){
-		case 1: role = RoleEnum.CompanyManager;
+		case 1: role = RoleEnum.StationWorker;
 		break;
 		case 2: role=RoleEnum.StationManager;
 		break;
@@ -46,6 +48,16 @@ public class WorkerLoginResponse extends Response{
 
 	public void setWid(int wid) {
 		this.wid = wid;
+	}
+
+
+	public int getSid() {
+		return sid;
+	}
+
+
+	public void setSid(int sid) {
+		this.sid = sid;
 	}
 
 	

@@ -56,6 +56,7 @@ public class CPromotionTemplateActions extends GUIActions{
 		
 	}
 	
+	
 	public void verifyDetails(PromotionTemplate p)
 	{
 		boolean result = true;
@@ -77,5 +78,11 @@ public class CPromotionTemplateActions extends GUIActions{
 		if(result)
 			PromotionTemplate(p);
 }
+	@Override
+	public void backToMenu() {
+
+				changeFrame(gui,new MDActions(client),this);
+		
+	}
 	
 }

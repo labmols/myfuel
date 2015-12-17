@@ -156,4 +156,11 @@ public class UpdateDetailsActions extends GUIActions {
 	
 
 
+	@Override
+	public void backToMenu() {
+		changeFrame(gui,new UserOptionsActions(client,user),this);
+		
+	}
+
+
 }

@@ -84,4 +84,5 @@ public abstract class SuperGUI extends JFrame {
 	public abstract void getInput(ActionEvent e);
 	
 	
+	
 }

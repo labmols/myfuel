@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import myfuel.GUIActions.CPromotionTemplateActions;
 import myfuel.GUIActions.MDActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.Promotion;
 import myfuel.client.PromotionTemplate;
 
@@ -53,9 +54,13 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		this.actions = actions;
 		setContentPane(contentPane);
 		lblTitle.setBounds(176, 6, 308, 16);
-	
+		
+		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setText("Create Promotion Template");
 	
+		this.mnMenu.addActionListener(new menuListener());
+		
 		
 		JLabel lblPromotionName = new JLabel("Promotion Template Name:");
 		lblPromotionName.setBounds(101, 82, 200, 14);
@@ -137,6 +142,18 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		panel.add(fuel);
 		
 	}
+	
+	private class menuListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			actions.backToMenu();
+			
+		}
+		
+	}
 
 	@Override
 	public void getInput(ActionEvent e) 
@@ -149,7 +166,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		try{
 		 n = name.getText();
 		 d = Float.parseFloat(discount.getText());
-		}catch(Exception ex){this.showMessage("Illegal Input"); legal = false;}
+		}catch(Exception ex){this.showMessage("Input must be a number!"); legal = false;}
 		
 		Date start = (Date) startHour.getValue();
 		Date end = (Date) EndHour.getValue();

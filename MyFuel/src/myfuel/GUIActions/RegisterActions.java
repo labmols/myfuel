@@ -271,6 +271,12 @@ public class RegisterActions extends GUIActions {
 		cstations.removeAll(cstations);
 		
 	}
+
+	@Override
+	public void backToMenu() {
+		changeFrame(gui,new UserOptionsActions(client,customer),this);
+		
+	}
 		
 	}
 	

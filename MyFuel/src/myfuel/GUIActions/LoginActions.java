@@ -78,6 +78,7 @@ public class LoginActions extends GUIActions {
 		if(response instanceof WorkerLoginResponse)
 		{
 		WorkerLoginResponse res = (WorkerLoginResponse) response;
+		
 			 gui.showMessage("Welcome to MyFuel!"); 
 			 switch(res.getRole()){
 			 case MarketingManager: 
@@ -90,8 +91,10 @@ public class LoginActions extends GUIActions {
 				changeFrame(gui,new CMActions(client),this);
 				break;
 			case StationManager:
+				changeFrame(gui,new SMActions(client,((WorkerLoginResponse) response).getSid()),this);
 				break;
 			case StationWorker:
+				changeFrame(gui,new SWActions(client,((WorkerLoginResponse) response).getSid()),this);
 				break;
 			 }
 		}
@@ -121,6 +124,12 @@ public class LoginActions extends GUIActions {
 				if(lr.getType() ==0) userResponse(arg);
 				else workerResponse(arg);	
 		}
+	}
+
+	@Override
+	public void backToMenu() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

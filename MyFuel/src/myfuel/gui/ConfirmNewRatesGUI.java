@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.*;
+import myfuel.client.BackMainMenu;
 import myfuel.client.Fuel;
 
 import javax.swing.JButton;
@@ -46,7 +47,7 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 	{
 		lblTitle.setBounds(211, 0, 176, 25);
 		lblTitle.setText("Confirm New Rates");
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		 btnConfirm = new JButton("Confirm");
 		 btnConfirm.addActionListener(new btnHandler());
 		btnConfirm.setBounds(126, 333, 117, 46);

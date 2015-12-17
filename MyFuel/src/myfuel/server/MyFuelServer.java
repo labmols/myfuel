@@ -35,6 +35,8 @@ public class MyFuelServer extends ObservableServer{
 		new SetNewRatesDBHandler(this,con);
 		new ChangePasswordDBHandler(this,con);
 		new UpdateDetailsDBHandler(this,con);
+		new SWDBHandler(this,con);
+
 
 	}
 

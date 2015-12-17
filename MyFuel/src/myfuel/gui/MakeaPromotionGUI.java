@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Properties;
 
 import myfuel.GUIActions.MakeAPromotionActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.Promotion;
 import myfuel.client.PromotionTemplate;
 
@@ -45,7 +46,7 @@ public class MakeaPromotionGUI extends SuperGUI{
 		model = new DefaultComboBoxModel(  );
 		
 		
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setBounds(201, 6, 206, 20);
 		lblTitle.setText("Make a Promotion");
 		this.actions = actions;
