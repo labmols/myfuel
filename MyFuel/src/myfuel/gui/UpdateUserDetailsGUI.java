@@ -41,6 +41,11 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 	private JComboBox<String> accessCB;
 	private JPanel panel3;
 	private JComboBox<String> typeCB;
+	private JButton sAdd;
+	private JButton btnRemove;
+	private JButton btnConfirmUpdate;
+	private JComboBox<String> fuelCB;
+	private JButton carAdd;
 	/**
 	 * Create the frame.
 	 */
@@ -51,8 +56,9 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		this.actions = actions;
 		setContentPane(contentPane);
 		
-		JButton btnConfirmUpdate = new JButton("Confirm Update");
+		btnConfirmUpdate = new JButton("Confirm Update");
 		btnConfirmUpdate.setBounds(68, 395, 130, 29);
+		btnConfirmUpdate.addActionListener(new eventListener());
 		panel.add(btnConfirmUpdate);
 		
 		JPanel panel2 = new JPanel();
@@ -132,13 +138,13 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		panel2.add(lblNewLabel);
 		
 		JLabel lblCars = new JLabel("Cars: ");
-		lblCars.setBounds(264, 259, 48, 16);
+		lblCars.setBounds(259, 274, 48, 16);
 		panel2.add(lblCars);
 		
 		carsCB = new JComboBox<Integer>();
 		carModel= new DefaultComboBoxModel<Integer>();
 		carsCB.setModel(carModel);
-		carsCB.setBounds(313, 255, 132, 27);
+		carsCB.setBounds(301, 270, 132, 27);
 		panel2.add(carsCB);
 		
 		JLabel lblYourCars = new JLabel("Add Car:");
@@ -150,14 +156,14 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		lblFuelType.setBounds(259, 208, 86, 16);
 		panel2.add(lblFuelType);
 		
-		JComboBox<String> fuelCB = new JComboBox<String>();
+		fuelCB = new JComboBox<String>();
 		fuelCB.setModel(new DefaultComboBoxModel<String>(new String[] {"95\t", "Diesel", "Scooter"}));
 		fuelCB.setBounds(357, 204, 132, 27);
 		panel2.add(fuelCB);
 		
-		JButton btnRemove = new JButton("Remove");
+		btnRemove = new JButton("Remove");
 		btnRemove.setToolTipText("Remove this Car");
-		btnRemove.setBounds(447, 254, 91, 29);
+		btnRemove.setBounds(439, 269, 91, 29);
 		panel2.add(btnRemove);
 		
 		JLabel lblType = new JLabel("Type:");
@@ -192,21 +198,22 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		lblStation.setBounds(54, 10, 86, 16);
 		panel3.add(lblStation);
 		
-		JButton btnAdd = new JButton("Add");
-		btnAdd.setBounds(178, 35, 86, 29);
-		panel3.add(btnAdd);
-		btnAdd.setToolTipText("Add New Station");
+		sAdd = new JButton("Add");
+		sAdd.setBounds(223, 33, 86, 29);
+		panel3.add(sAdd);
+		sAdd.setToolTipText("Add New Station");
+		
+		carAdd = new JButton("Add");
+		carAdd.setToolTipText("Add New Station");
+		carAdd.addActionListener(new eventListener());
+		carAdd.setBounds(439, 235, 86, 29);
+		panel2.add(carAdd);
 		
 		
 	
 		showUserDetails(actions.getUserDetails());
 		
-		mainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actions.returnToMain();
-			}
-			
-		});
+		
 		
 	}
 	
@@ -233,17 +240,28 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			if(e.getSource()== accessCB)
-				if(accessCB.getSelectedIndex()==1) {
-					panel3.setVisible(true);
-				}
-		}
+			getInput(e);
 		
+	}
 	}
 
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource()== accessCB)
+			if(accessCB.getSelectedIndex()==1) {
+				panel3.setVisible(true);
+			}
 		
+		if(e.getSource()==carAdd){
+			actions.verifyCar(cidText.getText().toString(),fuelCB.getSelectedIndex());
+		}
+		
+		if(e.getSource() == btnConfirmUpdate)
+		{
+			actions.verifyDetails(fnameText.getText(), lnameText.getText(), emailText.getText(),
+					addText.getText(), CCText.getText(), typeCB.getSelectedIndex(), saleCB.getSelectedIndex(), accessCB.getSelectedIndex());
+		}
 	}
+	
 }
