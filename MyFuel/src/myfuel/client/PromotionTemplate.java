@@ -117,21 +117,33 @@ public class PromotionTemplate implements Serializable{
 		this.endTime = endTime;
 	}
 
-
+/***
+ * 
+ * @return type of customer
+ */
 	public int getTypeOfCustomer() {
 		return typeOfCustomer;
 	}
-
+/***
+ * set type of customer
+ * @param typeOfCustomer
+ */
 
 	public void setTypeOfCustomer(int typeOfCustomer) {
 		this.typeOfCustomer = typeOfCustomer;
 	}
-
+/***
+ * 
+ * @return type of fuel
+ */
 
 	public int getTypeOfFuel() {
 		return typeOfFuel;
 	}
-
+/***
+ * set type of fuel
+ * @param typeOfFuel
+ */
 
 	public void setTypeOfFuel(int typeOfFuel) {
 		this.typeOfFuel = typeOfFuel;
