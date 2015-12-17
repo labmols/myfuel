@@ -58,6 +58,12 @@ public class ChangePassActions extends GUIActions {
 		gui.showMessage(res.getMsg());
 			
 	}
+
+	@Override
+	public void backToMenu() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

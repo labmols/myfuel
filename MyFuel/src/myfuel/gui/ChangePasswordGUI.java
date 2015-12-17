@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
 import myfuel.GUIActions.ChangePassActions;
+import myfuel.client.BackMainMenu;
 
 import java.awt.Font;
 
@@ -48,7 +49,7 @@ public class ChangePasswordGUI extends SuperGUI {
 		lblTitle.setText("Change Password");
 		panel.setBounds(0, 0, 596, 458);
 		
-	
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		setContentPane(contentPane);
 		
 		JLabel lblCurrentPassword = new JLabel("Current Password: ");

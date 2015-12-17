@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
 import myfuel.GUIActions.RegisterActions;
+import myfuel.client.BackMainMenu;
 
 public class RegisterGUI extends SuperGUI {
 	private JTextField idTextField;
@@ -50,7 +51,7 @@ public class RegisterGUI extends SuperGUI {
 		panel.setLocation(0, 0);
 		lblTitle.setBounds(238, 6, 94, 22);
 		lblTitle.setText("Register");
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		JPanel panel2 = new JPanel();
 		panel2.setBounds(52, 40, 232, 205);
 		panel.add(panel2);

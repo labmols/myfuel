@@ -13,7 +13,7 @@ public class MDActions extends GUIActions{
 		gui = new MDGUI(this);
 		gui.setVisible(true);
 		
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 
@@ -24,6 +24,14 @@ public class MDActions extends GUIActions{
 	}
 	@Override
 	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void backToMenu() {
 		// TODO Auto-generated method stub
 		
 	}

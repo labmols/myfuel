@@ -31,9 +31,11 @@ public class MyFuelServer extends ObservableServer{
 		new RegisterDBHandler(this,con);
 		new CPromotionTemplateDBHandler(this,con);
 		new MakeaPromotionDBHandler(this,con);
+		new ConfirmNewRatesDBHandler(this,con);
 		new SetNewRatesDBHandler(this,con);
 		new ChangePasswordDBHandler(this,con);
 		new UpdateDetailsDBHandler(this,con);
+		new SWDBHandler(this,con);
 	}
 
 	@Override

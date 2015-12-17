@@ -56,11 +56,17 @@ public class SetNewRatesActions extends GUIActions {
 			booleanResponse resp = (booleanResponse)arg1;
 			
 			if(resp.getSuccess())
-				gui.showMessage("The Suggestion send to the Company Manger ");
+				gui.showMessage("The Suggestion has been sent to the Company Manger ");
 			else
 				gui.showMessage("The send is failed");
 			
 		}
+	}
+
+	@Override
+	public void backToMenu() {
+		changeFrame(gui,new MMActions(client),this);
+		
 	}
 
 }

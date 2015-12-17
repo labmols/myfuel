@@ -23,9 +23,7 @@ public class MakeAPromotionActions extends GUIActions {
 	public MakeAPromotionActions(MyFuelClient client) {
 		super(client);
 		gui = new MakeaPromotionGUI(this);
-		/****
-		 * getting the Templates from the DB
-		 */
+	
 		request = new MakeaPromotionRequest(0);
 		client.handleMessageFromGUI(request);
 		gui.setVisible(true);
@@ -55,7 +53,7 @@ public class MakeAPromotionActions extends GUIActions {
 			if(resp.getSuccess())
 				gui.showMessage("Promotion has been created!");
 			else
-				gui.showMessage("Creation has failed");
+				gui.showMessage(resp.getMsg());
 			
 		}
 
@@ -85,6 +83,12 @@ public class MakeAPromotionActions extends GUIActions {
 			client.handleMessageFromGUI(request);
 			
 		}
+		
+	}
+
+	@Override
+	public void backToMenu() {
+		changeFrame(gui,new MMActions(client),this);
 		
 	}
 	

@@ -51,10 +51,11 @@ public class CPromotionTemplateActions extends GUIActions{
 			if(response.getSuccess() == true)
 				gui.showMessage("Promotion Template " +"\""+rq.getP().getName()+"\""+" Created!");
 			else
-				gui.showMessage("Creation failed");
+				gui.showMessage(response.getMsg());
 		}
 		
 	}
+	
 	
 	public void verifyDetails(PromotionTemplate p)
 	{
@@ -77,5 +78,11 @@ public class CPromotionTemplateActions extends GUIActions{
 		if(result)
 			PromotionTemplate(p);
 }
+	@Override
+	public void backToMenu() {
+
+				changeFrame(gui,new MDActions(client),this);
+		
+	}
 	
 }

@@ -19,9 +19,9 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	PromotionTemplate promotion;
 	java.sql.Time stime;
 	 java.sql.Time etime ;
-	
+	private String str ;
 	/***
-	 *  add the handler as an observable to MyFuelServer
+	 *  Create Promotion Template DB Handler
 	 * @param server  - MyFuelServer
 	 * @param con - Connection to client
 	 */
@@ -43,9 +43,7 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	        stime = new java.sql.Time (promotion.getStartTime().getTime());
 	       etime = new java.sql.Time (promotion.getEndTime().getTime());
 	       
-	       try {
-	    	  
-	   		ps=con.prepareStatement("select p.tid from prom_temp p "
+	       /*	ps=con.prepareStatement("select p.tid from prom_temp p "
 	   				+ "where p.pname = ? and p.shour=? and p.fhour=? and p.discount =?"
 	   				+ "and ctype=?  and fid=?");
 	
@@ -55,6 +53,15 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	   		ps.setFloat(4, promotion.getDiscount());
 	   		ps.setInt(5, promotion.getTypeOfCustomer());
 	   		ps.setInt(6,promotion.getTypeOfFuel());
+	   		*/
+	       
+	       try {
+	    	  
+	   		ps=con.prepareStatement("select p.tid from prom_temp p "
+	   				+ "where p.pname = ? ");
+	
+	   		ps.setString(1, promotion.getName());
+	   	
 	   		
 	   		exist =  ps.executeQuery();
 	   		
@@ -65,11 +72,13 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	   		}
 	   		else
 	   		{
+	   			str = "Name already exist";
 	   			answer = false;
 	   		}
 	   		
 	       } catch (Exception e) {
 	   			answer = false;
+	   			str = "An error with the server connection";
 	   			e.printStackTrace();
 	   		}  
 	       
@@ -96,6 +105,7 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 			
 			} catch (Exception e) {
 				answer = false;
+				str = "An error with the server connection";
 				e.printStackTrace();
 			}
 	}
@@ -114,7 +124,7 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 			  this.promotion = request.getP();
 			insert_promotionTemplate();
 			
-			server.setResponse(new booleanResponse(answer));
+			server.setResponse(new booleanResponse(answer,str));
 		}
 		
 	}
