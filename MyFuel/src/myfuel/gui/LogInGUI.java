@@ -78,7 +78,8 @@ public class LogInGUI extends SuperGUI {
 		panel.add(loginButton);
 		
 		fastButton = new JButton("Fast Fuel");
-		fastButton.setIcon(new ImageIcon("images/fast.png"));
+		java.net.URL url = getClass().getResource("/fast.png");
+		fastButton.setIcon(new ImageIcon(url));
 		fastButton.setBounds(424, 51, 141, 46);
 		panel.add(fastButton);
 		

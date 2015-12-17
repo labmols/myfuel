@@ -66,12 +66,6 @@ public class RegisterActions extends GUIActions {
 		client.handleMessageFromGUI(request);
 	}
 	
-	public void returnToMain(){
-		LoginActions actions = new LoginActions(client);
-		changeFrame(gui, actions,this);
-	}
-
-
 	/**
 	 * 
 	 */
@@ -274,7 +268,7 @@ public class RegisterActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,new UserOptionsActions(client,customer),this);
+		changeFrame(gui,new LoginActions(client),this);
 		
 	}
 		
