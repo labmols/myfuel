@@ -31,7 +31,7 @@ public class UpdateDetailsActions extends GUIActions {
 	
 	public void returnToMain(){
 		UserOptionsActions actions = new UserOptionsActions(client, user);
-		changeFrame(gui, actions);
+		changeFrame(gui, actions,this);
 	}
 
 

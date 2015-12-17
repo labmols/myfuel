@@ -46,25 +46,22 @@ public class LoginActions extends GUIActions {
 	 * @param response
 	 */
 	private void userResponse(Object response){
-		UserLoginResponse res = (UserLoginResponse) response;
-		if(res.getError()== ErrorEnum.NoError)
+		if(response instanceof UserLoginResponse)
 		{
+		UserLoginResponse res = (UserLoginResponse) response;
+
 			gui.showMessage("Welcome to MyFuel!");
-			changeFrame(gui,new UserOptionsActions (client,res.getUser()));
+			changeFrame(gui,new UserOptionsActions (client,res.getUser()),this);
 			
 		}
 		else
 		{
-			switch(res.getError())
-			{
-			case UserNotExist: gui.showMessage("UserID or Password incorrect!");
-			break;
-			case AlreadyLoggedIn: gui.showMessage("This user is already connected to System!");
-			break;
+		booleanResponse res = (booleanResponse) response;
+		 gui.showMessage(res.getMsg());
 			}
 			
 		}
-	}
+	
 	
 	
 	/** 
@@ -77,15 +74,16 @@ public class LoginActions extends GUIActions {
 	 * @param response
 	 */
 	private void workerResponse(Object response){
+		if(response instanceof WorkerLoginResponse)
+		{
 		WorkerLoginResponse res = (WorkerLoginResponse) response;
-		if(res.getError()==ErrorEnum.NoError) {
 			 gui.showMessage("Welcome to MyFuel!"); 
 			 switch(res.getRole()){
 			 case MarketingManager: 
-				 			changeFrame(gui,new MMActions(client));
+				 			changeFrame(gui,new MMActions(client),this);
 				 			break;
 			 case MarketingDelegate: 
-							 changeFrame(gui, new MDActions(client)); 
+							 changeFrame(gui, new MDActions(client),this); 
 							 break;
 			case CompanyManager:
 				break;
@@ -95,12 +93,11 @@ public class LoginActions extends GUIActions {
 				break;
 			 }
 		}
-		else switch(res.getError())
+		
+		else 
 		{
-		case UserNotExist: gui.showMessage("UserID or Password incorrect!");
-		break;
-		case AlreadyLoggedIn: gui.showMessage("This user is already connected to System!");
-		break;
+			booleanResponse res = (booleanResponse) response;
+			 gui.showMessage(res.getMsg());
 		}
 	
 		
@@ -110,13 +107,14 @@ public class LoginActions extends GUIActions {
 	 * change to register JFrame 
 	 */
 	public void RegisterScreen(){
-		changeFrame(gui,new RegisterActions(client));
+		changeFrame(gui,new RegisterActions(client),this);
+	
 	
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(gui.isActive() && arg instanceof UserLoginResponse || arg instanceof WorkerLoginResponse){
+		if(arg instanceof UserLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse){
 		// TODO Auto-generated method stub
 				if(lr.getType() ==0) userResponse(arg);
 				else workerResponse(arg);	

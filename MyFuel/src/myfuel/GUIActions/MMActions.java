@@ -22,12 +22,12 @@ public class MMActions extends GUIActions{
 	
 	public void createSetNewRatesWindow()
 	{
-		this.changeFrame(gui, new SetNewRatesActions(client));
+		this.changeFrame(gui, new SetNewRatesActions(client),this);
 	}
 	
 	public void createMakeaPromotionWindow()
 	{
-		this.changeFrame(gui, new MakeAPromotionActions(client));
+		this.changeFrame(gui, new MakeAPromotionActions(client),this);
 	}
 	
 	public void createShowReportsWindow()

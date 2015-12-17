@@ -73,13 +73,8 @@ public class MyFuelServer extends ObservableServer{
 			if(msg instanceof LoginRequest ){
 				LoginRequest req = (LoginRequest) msg;
 				req.setChangeStatus(1);
-				if(response instanceof UserLoginResponse){
-					UserLoginResponse res = (UserLoginResponse) response;
-					if(res.getError()==ErrorEnum.NoError) client.setInfo("Info", req);
-				}
-				if(response instanceof WorkerLoginResponse){
-					WorkerLoginResponse res = (WorkerLoginResponse) response;
-					if(res.getError()==ErrorEnum.NoError) client.setInfo("Info", req);
+				if(response instanceof UserLoginResponse || response instanceof WorkerLoginResponse){
+					client.setInfo("Info", req);
 				}
 			}
 	}

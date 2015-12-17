@@ -8,7 +8,6 @@ import myfuel.client.RoleEnum;
 @SuppressWarnings("serial")
 public class WorkerLoginResponse extends Response{
 	private int wid;
-	private ErrorEnum error;
 	private RoleEnum role;
 	/** new Worker login response
 	 * role 1 - Station Worker
@@ -20,7 +19,6 @@ public class WorkerLoginResponse extends Response{
 	 * @param role
 	 */
 	public WorkerLoginResponse(int roleid,int wid){
-		this.error = ErrorEnum.NoError;
 		this.wid=wid;
 		switch(roleid){
 		case 1: role = RoleEnum.CompanyManager;
@@ -36,9 +34,6 @@ public class WorkerLoginResponse extends Response{
 		}
 	}
 	
-	public WorkerLoginResponse(ErrorEnum error){
-		setError(error);
-	}
 	
 	public RoleEnum getRole(){
 		return this.role;
@@ -53,13 +48,6 @@ public class WorkerLoginResponse extends Response{
 		this.wid = wid;
 	}
 
-	public ErrorEnum getError() {
-		return error;
-	}
-
-	public void setError(ErrorEnum error) {
-		this.error = error;
-	}
 	
 	
 	

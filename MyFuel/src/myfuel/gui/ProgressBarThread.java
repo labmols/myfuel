@@ -7,14 +7,14 @@ class ProgressBarThread implements Runnable {
     /**
      * Progress bar that shows the current status
      */
-    private CarFuelGUI gui;
+    private FuelDialog gui;
     private int value=0;
 
     /**
      * Constructor
      * @param jpb The progress bar this has to update
      */
-    public ProgressBarThread(CarFuelGUI gui) {
+    public ProgressBarThread(FuelDialog gui) {
         this.gui = gui;
     }
 
@@ -24,14 +24,14 @@ class ProgressBarThread implements Runnable {
      */
     public void run() {
         do {
-        		value++;
+        		value+=1;
         		gui.setProgress(value);
             
             try {
-                java.lang.Thread.sleep(200);
+                java.lang.Thread.sleep(400);
             } catch (java.lang.InterruptedException ex) {
                 ex.printStackTrace();
             }
-        } while (value < 100);
+        } while (value < 200);
     }
 }

@@ -96,19 +96,7 @@ public class CarFuelGUI extends SuperGUI {
 		p.setLayout(new FlowLayout());
 		
 
-		JLabel label = new JLabel("Progress: ");
-		progressBar = new JProgressBar();
-		progressBar.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		progressBar.setForeground(Color.BLACK);
-		
-		p.add(label);
-		p.add(progressBar, BorderLayout.CENTER);
-	
-		ProgressBarThread ju = new ProgressBarThread(this);
-		progressBar.setBounds(159, 316, 272, 16);
-		
-		
-		panel.add(p);
+		FuelDialog dialog = new FuelDialog(40,(float)5.8);
 		
 		JPanel panel2 = new JPanel();
 		panel2.setVisible(false);
@@ -164,8 +152,8 @@ public class CarFuelGUI extends SuperGUI {
 				panel2.setVisible(true);
 				
 				
-			
-				new Thread(ju).start();
+				dialog.setVisible(true);
+				//new Thread(ju).start();
 			}
 		});
 		
@@ -179,8 +167,5 @@ public class CarFuelGUI extends SuperGUI {
 		
 	}
 
-	public void setProgress(int value) {
-		// TODO Auto-generated method stub
-		progressBar.setValue(value);
-	}
+	
 }

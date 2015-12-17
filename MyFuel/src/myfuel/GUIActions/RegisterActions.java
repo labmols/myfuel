@@ -68,7 +68,7 @@ public class RegisterActions extends GUIActions {
 	
 	public void returnToMain(){
 		LoginActions actions = new LoginActions(client);
-		changeFrame(gui, actions);
+		changeFrame(gui, actions,this);
 	}
 
 
@@ -78,10 +78,17 @@ public class RegisterActions extends GUIActions {
 	@Override
 	public void update(Observable o, Object arg) {
 	
-		if(gui.isActive()){
+		if(arg instanceof RegisterResponse || arg instanceof booleanResponse){
 		if(request.getType()== RequestEnum.Select){
+		if(arg instanceof RegisterResponse){
 		RegisterResponse res = (RegisterResponse)arg;
 		addStations(res);
+		
+		}
+		else {
+			booleanResponse res2 = (booleanResponse) arg;
+			gui.showMessage(res2.getMsg());
+		}
 		}
 		else if(request.getType()== RequestEnum.Insert){
 			booleanResponse res2 = (booleanResponse) arg;
@@ -111,7 +118,7 @@ public class RegisterActions extends GUIActions {
 					+ "UserID: " + customer.getUserid() 
 					+"\nPassword: " + customer.getPass()
 					+"\nNow you need to wait for the Marketing Delegate confirmation.");
-			changeFrame(gui,new LoginActions(client));
+			changeFrame(gui,new LoginActions(client),this);
 
 		}
 		else gui.showMessage("Register failed. This userid is already in use!");

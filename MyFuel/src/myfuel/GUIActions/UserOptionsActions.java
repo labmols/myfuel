@@ -26,13 +26,13 @@ public class UserOptionsActions extends GUIActions {
 	
 	public void changePasswordScreen()
 	{
-		changeFrame(gui,new ChangePassActions(client,customer));
+		changeFrame(gui,new ChangePassActions(client,customer),this);
 		
 	}
 	
 	public void updateDetailsScreen()
 	{
-		changeFrame(gui, new UpdateDetailsActions(client,customer));
+		changeFrame(gui, new UpdateDetailsActions(client,customer),this);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class UserOptionsActions extends GUIActions {
 
 	public void carFuelScreen() {
 		// TODO Auto-generated method stub
-		changeFrame(gui, new CarFuelActions(client,customer));
+		changeFrame(gui, new CarFuelActions(client,customer),this);
 	}
 	
 

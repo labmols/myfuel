@@ -23,9 +23,10 @@ public abstract class GUIActions implements Observer {
 		return client;
 	}
 	
-	public void changeFrame(SuperGUI g, GUIActions actions){
+	public void changeFrame(SuperGUI g, GUIActions actions,GUIActions currentActions){
 		g.setVisible(false);
 		g.dispose();
+		client.deleteObserver(currentActions);
 	}
 	
 

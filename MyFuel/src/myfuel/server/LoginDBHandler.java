@@ -14,6 +14,7 @@ import myfuel.response.ErrorEnum;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 import myfuel.response.WorkerLoginResponse;
+import myfuel.response.booleanResponse;
 
 public class LoginDBHandler extends DBHandler {
 	
@@ -40,13 +41,13 @@ public class LoginDBHandler extends DBHandler {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new WorkerLoginResponse(ErrorEnum.SQLError);
+			return new booleanResponse(false, "WorkerID or Password not correct!");
 		
 		}
 		try {
 			if(rs.next()){
 				status = rs.getInt(7);
-				if(status == 1) return new WorkerLoginResponse(ErrorEnum.AlreadyLoggedIn);
+				if(status == 1) return new booleanResponse(false, "This Worker already logged in!");
 				ps = con.prepareStatement("update worker SET status=? where wid = ?");
 				ps.setInt(1, 1);
 				ps.setInt(2, request.getUserid());
@@ -56,10 +57,12 @@ public class LoginDBHandler extends DBHandler {
 		}
 			
 			catch(SQLException e){
-				return new WorkerLoginResponse(ErrorEnum.UserNotExist);
+				e.printStackTrace();
+				return new booleanResponse(false, "SQL Error!");
 			}
+		return new booleanResponse(false, "SQL Error!");
 		
-		return new WorkerLoginResponse(ErrorEnum.UserNotExist);
+		
 	}
 
 	/**
@@ -88,7 +91,7 @@ public class LoginDBHandler extends DBHandler {
 		try {
 			if(rs.next()){
 				status = rs.getInt(10);
-				if(status == 1) return new UserLoginResponse(ErrorEnum.AlreadyLoggedIn);
+				if(status == 1) return new booleanResponse(false, "This Customer is already logged in!");
 				userid = rs.getInt(1);
 				fname = rs.getString(2);
 				lname = rs.getString(3);
@@ -127,7 +130,7 @@ public class LoginDBHandler extends DBHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new UserLoginResponse(ErrorEnum.UserNotExist); // User not Found
+		return new booleanResponse(false, "UserID or password not correct!"); // User not Found
 	}
 	
 	/**

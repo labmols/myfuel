@@ -19,7 +19,6 @@ public class ChangePasswordDBHandler extends DBHandler {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		boolean b;
 		ChangePassRequest request = (ChangePassRequest)arg;
 		PreparedStatement ps = null;
 		try {
@@ -27,15 +26,17 @@ public class ChangePasswordDBHandler extends DBHandler {
 			ps.setString(1, request.newPass);
 			ps.setInt(2, request.userid);
 			ps.executeUpdate();
-			b= true;
+		    
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			b=false;
 			e.printStackTrace();
+			server.setResponse(new booleanResponse(false,"SQL Error!"));
 			
 		}
 		
-		new booleanResponse(b);
+		server.setResponse(new booleanResponse(true,"Change Password Success!"));
+		
+		
 		
 	}
 	

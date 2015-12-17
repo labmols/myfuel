@@ -48,7 +48,7 @@ public class MakeAPromotionActions extends GUIActions {
 
 		}
 		
-		else if(gui.isActive() && arg1 instanceof booleanResponse)
+		else if(arg1 instanceof booleanResponse)
 		{
 			booleanResponse resp = (booleanResponse)arg1;
 			

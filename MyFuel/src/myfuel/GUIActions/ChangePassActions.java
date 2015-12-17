@@ -41,14 +41,14 @@ public class ChangePassActions extends GUIActions {
 	
 	public void returnToMain(){
 		UserOptionsActions actions = new UserOptionsActions(client, user);
-		changeFrame(gui, actions);
+		changeFrame(gui, actions,this);
 	}
 
 
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(gui.isActive()){
+		
 		booleanResponse res = (booleanResponse) arg;
 			if(res.getSuccess()){
 				gui.displayMessage(true);
@@ -56,7 +56,7 @@ public class ChangePassActions extends GUIActions {
 		else gui.displayMessage(false);
 		
 		}
-	}
+	
 	
 
 }

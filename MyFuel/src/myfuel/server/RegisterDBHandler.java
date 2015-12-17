@@ -13,6 +13,7 @@ import myfuel.client.Station;
 import myfuel.request.RequestEnum;
 import myfuel.request.registerRequest;
 import myfuel.response.RegisterResponse;
+import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
 
@@ -21,7 +22,7 @@ public class RegisterDBHandler extends DBHandler {
 		super(server,con);
 	}
 	
-	private void showStations(registerRequest request)
+	private Response showStations(registerRequest request)
 	{
 		ResultSet rs = null;
 		Statement st = null;
@@ -41,12 +42,13 @@ public class RegisterDBHandler extends DBHandler {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return new booleanResponse(false,"SQL Error");
 			}
 
-			server.setResponse(new RegisterResponse(stations));
+			return new RegisterResponse(stations);
 		}
 	
-	private void insertCustomer(registerRequest request)
+	private Response insertCustomer(registerRequest request)
 	{
 		ResultSet rs = null;
 		PreparedStatement ps = null;
@@ -65,8 +67,14 @@ public class RegisterDBHandler extends DBHandler {
 				ps.setInt(9, customer.getSmodel());
 				ps.setInt(10, 0);
 				ps.setInt(11, 0);
-			ps.executeUpdate();
+				ps.executeUpdate();
 			
+			}catch (SQLException e){
+				e.printStackTrace();
+				return new booleanResponse(false, "this Customer ID already registered!");
+			}
+			
+			try{
 			for(Car car: customer.getCars()){
 				ps=con.prepareStatement("insert into customer_car values(?,?,?)");
 				ps.setInt(1,customer.getUserid());
@@ -74,7 +82,12 @@ public class RegisterDBHandler extends DBHandler {
 				ps.setInt(3, car.getfid());
 				ps.executeUpdate();
 				}
+			}catch (SQLException e){
+				e.printStackTrace();
+				return new booleanResponse(false, "this Car ID already exist!");
+			}
 			
+			try{
 			for(int sid: customer.getStations())
 			{
 			ps=con.prepareStatement("insert into customer_station values(?,?)");
@@ -82,19 +95,18 @@ public class RegisterDBHandler extends DBHandler {
 			ps.setInt(2,sid);
 			ps.executeUpdate();
 			}
-			
-		
-			
-			server.setResponse(new booleanResponse(true));
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				server.setResponse(new booleanResponse(false));
+			}catch (SQLException e){
 				e.printStackTrace();
-			}	
+			}
+		
+			return new booleanResponse(true, "Register success! \n"
+					+ "your login details is: \n"
+					+ "UserID: " + customer.getUserid() 
+					+"\nPassword: " + customer.getPass()
+					+"\nNow you need to wait for the Marketing Delegate confirmation.");
+					
 	}
 	
-
-
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -102,8 +114,8 @@ public class RegisterDBHandler extends DBHandler {
 		
 		if(arg instanceof registerRequest){
 		registerRequest request = (registerRequest)arg;
-		if(request.getType() == RequestEnum.Select) showStations(request);
-		else if(request.getType() == RequestEnum.Insert) insertCustomer(request);
+		if(request.getType() == RequestEnum.Select) server.setResponse(showStations(request));
+		else if(request.getType() == RequestEnum.Insert) server.setResponse(insertCustomer(request));
 	}
 }
 }

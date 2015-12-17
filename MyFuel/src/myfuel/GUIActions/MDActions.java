@@ -20,7 +20,7 @@ public class MDActions extends GUIActions{
 
 	public void createPromotionTemplate()
 	{
-		changeFrame(gui,new CPromotionTemplateActions(client));
+		changeFrame(gui,new CPromotionTemplateActions(client),this);
 	}
 	@Override
 	public void update(Observable o, Object arg) {
