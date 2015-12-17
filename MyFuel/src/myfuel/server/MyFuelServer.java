@@ -31,6 +31,7 @@ public class MyFuelServer extends ObservableServer{
 		new RegisterDBHandler(this,con);
 		new CPromotionTemplateDBHandler(this,con);
 		new MakeaPromotionDBHandler(this,con);
+		new SetNewRatesDBHandler(this,con);
 	}
 
 	@Override
