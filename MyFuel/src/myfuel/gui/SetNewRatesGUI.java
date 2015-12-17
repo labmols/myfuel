@@ -13,6 +13,10 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.Font;
+import javax.swing.JSeparator;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class SetNewRatesGUI extends SuperGUI {
 
@@ -36,7 +40,7 @@ public class SetNewRatesGUI extends SuperGUI {
 	public SetNewRatesGUI(SetNewRatesActions actions) {
 		panel.setLocation(0, 0);
 		this.actions = actions;
-		lblTitle.setBounds(173, 11, 162, 16);
+		lblTitle.setBounds(203, 11, 162, 16);
 		lblTitle.setText("Set New Rates");
 		
 		JLabel lblNewLabel = new JLabel("95");
@@ -52,55 +56,31 @@ public class SetNewRatesGUI extends SuperGUI {
 		panel.add(lblScooter);
 		
 		Sugg_F95 = new JTextField();
-		Sugg_F95.setBounds(88, 119, 86, 20);
+		Sugg_F95.setBounds(169, 119, 86, 20);
 		panel.add(Sugg_F95);
 		Sugg_F95.setColumns(10);
 		
 		Sugg_FDiesel = new JTextField();
-		Sugg_FDiesel.setBounds(88, 155, 86, 20);
+		Sugg_FDiesel.setBounds(169, 155, 86, 20);
 		panel.add(Sugg_FDiesel);
 		Sugg_FDiesel.setColumns(10);
 		
 		Sugg_FScooter = new JTextField();
-		Sugg_FScooter.setBounds(88, 189, 86, 20);
+		Sugg_FScooter.setBounds(169, 189, 86, 20);
 		panel.add(Sugg_FScooter);
 		Sugg_FScooter.setColumns(10);
 		
-		JLabel lblCurrentPrice = new JLabel("Current Price");
-		lblCurrentPrice.setBounds(209, 122, 72, 14);
-		panel.add(lblCurrentPrice);
-		
-		JLabel lblCurrentPrice_1 = new JLabel("Current Price");
-		lblCurrentPrice_1.setBounds(209, 158, 72, 14);
-		panel.add(lblCurrentPrice_1);
-		
-		JLabel lblCurrentPrice_2 = new JLabel("Current Price");
-		lblCurrentPrice_2.setBounds(209, 192, 72, 14);
-		panel.add(lblCurrentPrice_2);
-		
 		Current_F95 = new JLabel("New label");
-		Current_F95.setBounds(304, 122, 46, 14);
+		Current_F95.setBounds(331, 122, 46, 14);
 		panel.add(Current_F95);
 		
 		Current_FDiesel = new JLabel("New label");
-		Current_FDiesel.setBounds(304, 158, 46, 14);
+		Current_FDiesel.setBounds(331, 158, 46, 14);
 		panel.add(Current_FDiesel);
 		
 		Current_FScooter = new JLabel("New label");
-		Current_FScooter.setBounds(304, 192, 46, 14);
+		Current_FScooter.setBounds(331, 192, 46, 14);
 		panel.add(Current_FScooter);
-		
-		JLabel lblMaxPrice = new JLabel("Max Price");
-		lblMaxPrice.setBounds(389, 122, 46, 14);
-		panel.add(lblMaxPrice);
-		
-		JLabel lblNewLabel_4 = new JLabel("Max price");
-		lblNewLabel_4.setBounds(387, 158, 46, 14);
-		panel.add(lblNewLabel_4);
-		
-		JLabel lblMaxPrice_1 = new JLabel("Max price");
-		lblMaxPrice_1.setBounds(387, 192, 46, 14);
-		panel.add(lblMaxPrice_1);
 		
 		Max_F95 = new JLabel("New label");
 		Max_F95.setBounds(463, 122, 46, 14);
@@ -121,7 +101,7 @@ public class SetNewRatesGUI extends SuperGUI {
 						Float.parseFloat(Sugg_FScooter.getText()),Float.parseFloat(Sugg_FHomeFuel.getText()));
 			}
 		});
-		UpdateBut.setBounds(206, 281, 144, 54);
+		UpdateBut.setBounds(206, 333, 144, 54);
 		panel.add(UpdateBut);
 		
 		JLabel lblHomeFuel = new JLabel("Home Fuel");
@@ -129,25 +109,88 @@ public class SetNewRatesGUI extends SuperGUI {
 		panel.add(lblHomeFuel);
 		
 		Sugg_FHomeFuel = new JTextField();
-		Sugg_FHomeFuel.setBounds(88, 220, 86, 20);
+		Sugg_FHomeFuel.setBounds(169, 221, 86, 20);
 		panel.add(Sugg_FHomeFuel);
 		Sugg_FHomeFuel.setColumns(10);
 		
-		JLabel lblCurrentPrice_3 = new JLabel("Current Price");
-		lblCurrentPrice_3.setBounds(209, 224, 72, 14);
-		panel.add(lblCurrentPrice_3);
-		
 		Current_HomeFuel = new JLabel("New label");
-		Current_HomeFuel.setBounds(304, 224, 46, 14);
+		Current_HomeFuel.setBounds(331, 224, 46, 14);
 		panel.add(Current_HomeFuel);
-		
-		JLabel lblMaxPrice_2 = new JLabel("Max Price");
-		lblMaxPrice_2.setBounds(387, 224, 46, 14);
-		panel.add(lblMaxPrice_2);
 		
 		Max_FHomeFuel = new JLabel("New label");
 		Max_FHomeFuel.setBounds(463, 224, 46, 14);
 		panel.add(Max_FHomeFuel);
+		
+		JLabel lblTypeOfFuel = new JLabel("Type of Fuel");
+		lblTypeOfFuel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTypeOfFuel.setBounds(7, 84, 124, 23);
+		panel.add(lblTypeOfFuel);
+		
+		JLabel lblSuggested = new JLabel("Suggested");
+		lblSuggested.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSuggested.setBounds(159, 80, 104, 31);
+		panel.add(lblSuggested);
+		
+		JLabel lblCurrent = new JLabel("Current");
+		lblCurrent.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblCurrent.setBounds(321, 85, 92, 21);
+		panel.add(lblCurrent);
+		
+		JLabel lblMaximal = new JLabel("Maximal");
+		lblMaximal.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblMaximal.setBounds(443, 85, 97, 20);
+		panel.add(lblMaximal);
+		
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setBackground(Color.BLACK);
+		separator_3.setForeground(Color.BLACK);
+		separator_3.setBounds(8, 107, 530, 3);
+		panel.add(separator_3);
+		
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setForeground(Color.BLACK);
+		separator_4.setBackground(Color.BLACK);
+		separator_4.setBounds(8, 145, 530, 3);
+		panel.add(separator_4);
+		
+		JSeparator separator_5 = new JSeparator();
+		separator_5.setForeground(Color.BLACK);
+		separator_5.setBackground(Color.BLACK);
+		separator_5.setBounds(7, 179, 530, 3);
+		panel.add(separator_5);
+		
+		JSeparator separator_6 = new JSeparator();
+		separator_6.setForeground(Color.BLACK);
+		separator_6.setBackground(Color.BLACK);
+		separator_6.setBounds(7, 215, 530, 3);
+		panel.add(separator_6);
+		
+		JSeparator separator_7 = new JSeparator();
+		separator_7.setForeground(Color.BLACK);
+		separator_7.setBackground(Color.BLACK);
+		separator_7.setBounds(8, 251, 530, 3);
+		panel.add(separator_7);
+		
+		JSeparator separator_8 = new JSeparator();
+		separator_8.setOrientation(SwingConstants.VERTICAL);
+		separator_8.setForeground(Color.BLACK);
+		separator_8.setBackground(Color.BLACK);
+		separator_8.setBounds(141, 91, 2, 180);
+		panel.add(separator_8);
+		
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setForeground(Color.BLACK);
+		separator.setBackground(Color.BLACK);
+		separator.setBounds(280, 84, 16, 180);
+		panel.add(separator);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		separator_1.setForeground(Color.BLACK);
+		separator_1.setBackground(Color.BLACK);
+		separator_1.setBounds(419, 93, 2, 180);
+		panel.add(separator_1);
 		setContentPane(contentPane);
 	}
 
