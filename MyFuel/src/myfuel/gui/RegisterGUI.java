@@ -36,6 +36,7 @@ public class RegisterGUI extends SuperGUI {
 	private JButton btnAddCar;
 	private JButton btnRegister;
 	private JComboBox typeCB;
+	private JTextField addressTextField;
 
 	/**
 	 * Launch the application.
@@ -51,7 +52,7 @@ public class RegisterGUI extends SuperGUI {
 		lblTitle.setText("Register");
 		
 		JPanel panel2 = new JPanel();
-		panel2.setBounds(68, 40, 216, 177);
+		panel2.setBounds(52, 40, 232, 205);
 		panel.add(panel2);
 		panel2.setOpaque(false);
 		panel2.setLayout(null);
@@ -61,7 +62,7 @@ public class RegisterGUI extends SuperGUI {
 		panel2.add(lblId);
 		
 		idTextField = new JTextField();
-		idTextField.setBounds(92, 22, 94, 26);
+		idTextField.setBounds(92, 22, 110, 26);
 		panel2.add(idTextField);
 		idTextField.setColumns(10);
 		
@@ -71,7 +72,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		fnameTextField = new JTextField();
 		fnameTextField.setColumns(10);
-		fnameTextField.setBounds(92, 55, 94, 26);
+		fnameTextField.setBounds(92, 55, 110, 26);
 		panel2.add(fnameTextField);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
@@ -80,7 +81,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		lnameTextField = new JTextField();
 		lnameTextField.setColumns(10);
-		lnameTextField.setBounds(92, 93, 94, 26);
+		lnameTextField.setBounds(92, 93, 110, 26);
 		panel2.add(lnameTextField);
 		
 		JLabel label_3 = new JLabel("E-mail:");
@@ -88,9 +89,18 @@ public class RegisterGUI extends SuperGUI {
 		panel2.add(label_3);
 		
 		emailTextField = new JTextField();
-		emailTextField.setBounds(92, 126, 94, 26);
+		emailTextField.setBounds(92, 126, 110, 26);
 		panel2.add(emailTextField);
 		emailTextField.setColumns(10);
+		
+		addressTextField = new JTextField();
+		addressTextField.setColumns(10);
+		addressTextField.setBounds(92, 159, 110, 26);
+		panel2.add(addressTextField);
+		
+		JLabel lblAddress = new JLabel("Address:");
+		lblAddress.setBounds(33, 164, 66, 16);
+		panel2.add(lblAddress);
 		
 		JPanel panel3 = new JPanel();
 		panel3.setLayout(null);
@@ -247,7 +257,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		if(e.getSource()==btnRegister ){
 			actions.verifyDetails(idTextField.getText().toString(), fnameTextField.getText().toString(), lnameTextField.getText().toString(), 
-					passTextField.getPassword(),rePassTextField.getPassword(), emailTextField.getText().toString(), 
+					passTextField.getPassword(),rePassTextField.getPassword(), emailTextField.getText().toString(),addressTextField.getText().toString(),
 					CCTextField.getText().toString(),typeCB.getSelectedIndex(), accessCB.getSelectedIndex(),saleModelCB.getSelectedIndex());
 		}
 	}

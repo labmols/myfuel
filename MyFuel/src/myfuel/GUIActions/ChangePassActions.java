@@ -12,8 +12,8 @@ import myfuel.response.booleanResponse;
 
 public class ChangePassActions extends GUIActions {
 	
-	Customer user;
-	ChangePasswordGUI gui;
+	private Customer user;
+	private ChangePasswordGUI gui;
 	public ChangePassActions(MyFuelClient client, Customer user) {
 		super(client);
 		this.user=user;
@@ -21,22 +21,27 @@ public class ChangePassActions extends GUIActions {
 		gui.setVisible(true);
 	}
 	
-	public void changePassword(char [] origPass, char [] newPass1, char [] newPass2)
-	{
+	public void verifyDetails(char [] oldPass, char [] newPass1, char [] newPass2){
+		
+		String old = new String(oldPass);
 		String nPass1 = new String (newPass1);
 		String nPass2 = new String(newPass2);
-		if(!nPass1.equals(nPass2)){
-			try{
-				gui.displayMessage(false);
-			}
-			catch (NullPointerException e){
-				e.printStackTrace();
-			}
+		
+		if(old.equals("") || nPass1.equals("") || nPass2.equals(""))
+			gui.showMessage("One or more fields are missing!");
+		else if(nPass1.equals(nPass2)){
+			changePassword(old,nPass1);
 		}
-		else {
-		ChangePassRequest request = new ChangePassRequest(nPass1,user.getUserid());
+		else{
+			gui.showMessage("Passwords are not Equal!");
+		}
+	}
+	
+	public void changePassword(String oldPass, String newPass)
+	{
+		ChangePassRequest request = new ChangePassRequest(newPass,user.getUserid(), oldPass);
 		client.handleMessageFromGUI(request);
-		}
+		
 	}
 	
 	public void returnToMain(){
@@ -50,12 +55,9 @@ public class ChangePassActions extends GUIActions {
 	public void update(Observable o, Object arg) {
 		
 		booleanResponse res = (booleanResponse) arg;
-			if(res.getSuccess()){
-				gui.displayMessage(true);
-		}
-		else gui.displayMessage(false);
-		
-		}
+		gui.showMessage(res.getMsg());
+			
+	}
 	
 	
 

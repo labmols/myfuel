@@ -72,7 +72,7 @@ public class LoginDBHandler extends DBHandler {
 	 */
 	private Response userLogin(LoginRequest request){
 		
-		String fname,lname,pass,email,cnumber;
+		String fname,lname,pass,email,cnumber,address;
 		int userid,status,atype,smodel,toc;
 		ArrayList<Integer> stations=new ArrayList<Integer>();
 		ArrayList<Car> cars = new ArrayList<Car>();
@@ -97,10 +97,11 @@ public class LoginDBHandler extends DBHandler {
 				lname = rs.getString(3);
 				pass = rs.getString(4);
 				email = rs.getString(5);
-				cnumber = rs.getString(6);
-				atype = rs.getInt(7);
-				toc = rs.getInt(8);
-				smodel = rs.getInt(9);
+				address = rs.getString(6);
+				cnumber = rs.getString(7);
+				atype = rs.getInt(8);
+				toc = rs.getInt(9);
+				smodel = rs.getInt(10);
 				ps = con.prepareStatement("update customer SET status=? where uid = ?");
 				ps.setInt(1, 1);
 				ps.setInt(2, userid);
@@ -121,7 +122,7 @@ public class LoginDBHandler extends DBHandler {
 					cars.add(new Car(rs.getInt(1), rs.getInt(2)));
 				}
 				
-				return new UserLoginResponse(userid,fname,lname,pass,email
+				return new UserLoginResponse(userid,fname,lname,pass,email,address
 						,cnumber,toc,atype,smodel,cars,stations);
 			}
 			

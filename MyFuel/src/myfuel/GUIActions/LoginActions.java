@@ -58,6 +58,7 @@ public class LoginActions extends GUIActions {
 		{
 		booleanResponse res = (booleanResponse) response;
 		 gui.showMessage(res.getMsg());
+		
 			}
 			
 		}
