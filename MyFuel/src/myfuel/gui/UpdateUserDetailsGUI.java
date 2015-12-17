@@ -162,6 +162,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		panel2.add(fuelCB);
 		
 		btnRemove = new JButton("Remove");
+		btnRemove.addActionListener(new eventListener());
 		btnRemove.setToolTipText("Remove this Car");
 		btnRemove.setBounds(439, 269, 91, 29);
 		panel2.add(btnRemove);
@@ -254,13 +255,18 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 			}
 		
 		if(e.getSource()==carAdd){
-			actions.verifyCar(cidText.getText().toString(),fuelCB.getSelectedIndex());
+			actions.verifyCar(cidText.getText().toString(),fuelCB.getSelectedIndex()+1);
 		}
 		
 		if(e.getSource() == btnConfirmUpdate)
 		{
 			actions.verifyDetails(fnameText.getText(), lnameText.getText(), emailText.getText(),
 					addText.getText(), CCText.getText(), typeCB.getSelectedIndex(), saleCB.getSelectedIndex(), accessCB.getSelectedIndex());
+		}
+		
+		if(e.getSource()==btnRemove)
+		{
+			actions.removeCar((Integer)carsCB.getSelectedItem(),carsCB.getSelectedIndex());
 		}
 	}
 	

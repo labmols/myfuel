@@ -1,5 +1,6 @@
 package myfuel.GUIActions;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,6 +8,7 @@ import java.util.regex.Pattern;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
+import myfuel.client.Station;
 import myfuel.gui.LogInGUI;
 import myfuel.gui.UpdateUserDetailsGUI;
 import myfuel.request.UpdateRequest;
@@ -17,9 +19,13 @@ import myfuel.response.booleanResponse;
 public class UpdateDetailsActions extends GUIActions {
 	Customer user;
 	UpdateUserDetailsGUI gui;
+	ArrayList <Car> origCars;
+	ArrayList <Station> stations;
+	
 	public UpdateDetailsActions(MyFuelClient client,Customer user) {
 		super(client);
 		this.user=user;
+		origCars = new ArrayList<Car>(user.getCars());
 		gui = new UpdateUserDetailsGUI(this);
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
@@ -46,6 +52,9 @@ public class UpdateDetailsActions extends GUIActions {
 		{
 			booleanResponse res= (booleanResponse) arg;
 			gui.showMessage(res.getMsg());
+			if(!res.getSuccess()) {
+				user.setCars(origCars);
+			}
 		}
 	}
 
@@ -57,6 +66,12 @@ public class UpdateDetailsActions extends GUIActions {
 		user.getCars().add(new Car(Integer.parseInt(cid),fid));
 		gui.showMessage("Car "+cid+" "+ "added!");
 		}
+	}
+	
+	public void removeCar(int cid, int index)
+	{
+		user.getCars().remove(index);
+		gui.showMessage("Car "+cid+" "+ "removed!");
 	}
 	
 	
@@ -116,6 +131,7 @@ public class UpdateDetailsActions extends GUIActions {
 			user.setFname(fname);
 			user.setLname(lname);
 			user.setAddress(address);
+			user.setCnumber(cnumber);
 			user.setEmail(email);
 			user.setAtype(atype);
 			user.setSmodel(smodel);

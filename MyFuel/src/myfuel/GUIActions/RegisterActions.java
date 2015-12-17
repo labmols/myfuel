@@ -250,7 +250,7 @@ public class RegisterActions extends GUIActions {
 	/**
 	 * check if the string contains only digits
 	 * @param name - the string value
-	 * @return
+	 * @return boolean
 	 */
 	private boolean isAllDigits(String name) {
 	    char[] chars = name.toCharArray();

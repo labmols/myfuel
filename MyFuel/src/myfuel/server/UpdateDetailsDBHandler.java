@@ -22,6 +22,19 @@ public class UpdateDetailsDBHandler extends DBHandler{
 	private Response checkAndUpdate(Customer customer){
 		PreparedStatement ps = null;
 		ResultSet rs=null;
+		try {
+			for(Car car : customer.getCars()){
+			ps=con.prepareStatement("select * from customer_car where cid=? and uid!=?");
+			ps.setInt(1, car.getcid());
+			ps.setInt(2, customer.getUserid());
+			rs = ps.executeQuery();
+			if(rs.next()) return new booleanResponse(false, "Car ID already exist!");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new booleanResponse(false, "SQL Error!");
+		}
 		try{
 			ps= con.prepareStatement("delete from customer where uid=? limit 1");
 			ps.setInt(1, customer.getUserid());
@@ -31,26 +44,12 @@ public class UpdateDetailsDBHandler extends DBHandler{
 			return new booleanResponse(false, "SQL Error!");
 		}
 		
-		try {
-			for(Car car : customer.getCars()){
-			ps=con.prepareStatement("select * from customer_car where cid=?");
-			ps.setInt(1, car.getcid());
-			rs = ps.executeQuery();
-			if(rs.next()) return new booleanResponse(false, "Car ID already exist!");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return new booleanResponse(false, "SQL Error!");
-		}
-		
-		updateDetails(customer);
-		return new booleanResponse(true, "Update details Successful!");
+		return updateDetails(customer);
 		
 		
 		
 	}
-	private void updateDetails(Customer customer){
+	private Response updateDetails(Customer customer){
 		PreparedStatement ps = null;
 		
 		try {
@@ -71,6 +70,7 @@ public class UpdateDetailsDBHandler extends DBHandler{
 		
 		}catch (SQLException e){
 			e.printStackTrace();
+			return new booleanResponse (false, "SQL Error!");
 		}
 		
 		try{
@@ -83,7 +83,7 @@ public class UpdateDetailsDBHandler extends DBHandler{
 				}
 			}catch (SQLException e){
 				e.printStackTrace();
-				
+				return new booleanResponse (false, "SQL Error!");
 			}
 		
 			
@@ -97,7 +97,10 @@ public class UpdateDetailsDBHandler extends DBHandler{
 			}
 			}catch (SQLException e){
 				e.printStackTrace();
+				return new booleanResponse (false, "SQL Error!");
 			}
+			
+			return new booleanResponse (true, "Update details successful!");
 			
 	}
 	
