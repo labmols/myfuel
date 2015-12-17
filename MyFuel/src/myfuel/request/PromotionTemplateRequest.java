@@ -3,6 +3,7 @@ package myfuel.request;
 import java.io.Serializable;
 
 import myfuel.client.Promotion;
+import myfuel.client.PromotionTemplate;
 @SuppressWarnings("serial")
 
 /***
@@ -12,18 +13,18 @@ import myfuel.client.Promotion;
  *
  */
 public class PromotionTemplateRequest implements Serializable{
-	private Promotion p;
+	private PromotionTemplate p;
 	
-	public PromotionTemplateRequest(Promotion p )
+	public PromotionTemplateRequest(PromotionTemplate p2 )
 	{
-		this.setP(p);
+		this.setP(p2);
 	}
 
-	public Promotion getP() {
+	public PromotionTemplate getP() {
 		return p;
 	}
 
-	public void setP(Promotion p) {
-		this.p = p;
+	public void setP(PromotionTemplate p2) {
+		this.p = p2;
 	}
 }

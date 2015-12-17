@@ -8,6 +8,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import myfuel.client.MyFuelClient;
 import myfuel.client.Promotion;
+import myfuel.client.PromotionTemplate;
 import myfuel.gui.MakeaPromotionGUI;
 import myfuel.request.MakeaPromotionRequest;
 import myfuel.request.PromotionTemplateRequest;
@@ -40,7 +41,7 @@ public class MakeAPromotionActions extends GUIActions {
 			
 			
 			
-			for(Promotion p: ((MakeaPromotionResponse)response).getTemplates())
+			for(PromotionTemplate p: ((MakeaPromotionResponse)response).getTemplates())
 			{
 				gui.addElementToModel(p.getName());
 			}
@@ -60,7 +61,7 @@ public class MakeAPromotionActions extends GUIActions {
 
 	}
 	
-	public Promotion getPromotion(int index)
+	public PromotionTemplate getPromotion(int index)
 	{
 		return ((MakeaPromotionResponse)response).getTemplates().get(index);
 	}
@@ -79,7 +80,7 @@ public class MakeAPromotionActions extends GUIActions {
 		
 		else
 		{
-			Promotion p = gui.getP();
+			PromotionTemplate p =  gui.getP();
 			request = new MakeaPromotionRequest(1,p.getTid(),start,end);
 			client.handleMessageFromGUI(request);
 			

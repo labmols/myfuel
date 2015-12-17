@@ -9,12 +9,13 @@ import java.util.Date;
 import java.util.Observable;
 
 import myfuel.client.Promotion;
+import myfuel.client.PromotionTemplate;
 import myfuel.request.MakeaPromotionRequest;
 import myfuel.response.MakeaPromotionResponse;
 import myfuel.response.booleanResponse;
 
 public class MakeaPromotionDBHandler extends DBHandler{
-	private ArrayList<Promotion> templates;
+	private ArrayList<PromotionTemplate> templates;
 	private MakeaPromotionRequest request;
 	private boolean answer =true;
 	MakeaPromotionDBHandler(MyFuelServer server, Connection con) {
@@ -26,7 +27,7 @@ public class MakeaPromotionDBHandler extends DBHandler{
 	 {
 		 	ResultSet rs = null ;
 			PreparedStatement ps = null;
-			templates = new ArrayList<Promotion>();
+			templates = new ArrayList<PromotionTemplate>();
 			try {
 				ps = con.prepareStatement("select * from prom_temp");
 				
@@ -34,7 +35,7 @@ public class MakeaPromotionDBHandler extends DBHandler{
 				
 				while(rs.next())
 				{
-					templates.add(new Promotion(rs.getInt(1),rs.getString(2),rs.getFloat(5),rs.getTime(3),rs.getTime(4),rs.getInt(6)));
+					templates.add(new PromotionTemplate(rs.getInt(1),rs.getString(2),rs.getFloat(5),rs.getTime(3),rs.getTime(4),rs.getInt(6),rs.getInt(7)));
 					
 				}
 			
@@ -129,11 +130,11 @@ public class MakeaPromotionDBHandler extends DBHandler{
 		
 	}
 
-	public ArrayList<Promotion> getTemplates() {
+	public ArrayList<PromotionTemplate> getTemplates() {
 		return templates;
 	}
 
-	public void setTemplates(ArrayList<Promotion> templates) {
+	public void setTemplates(ArrayList<PromotionTemplate> templates) {
 		this.templates = templates;
 	}
 

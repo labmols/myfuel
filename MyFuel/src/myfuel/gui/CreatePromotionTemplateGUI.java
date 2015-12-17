@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import myfuel.GUIActions.CPromotionTemplateActions;
 import myfuel.GUIActions.MDActions;
 import myfuel.client.Promotion;
+import myfuel.client.PromotionTemplate;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -43,7 +44,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 	private JComboBox typeOfCustomer;
 	private JButton btnCreate;
 	private JComboBox fuel;
-	Promotion p ;
+	private PromotionTemplate p ;
 	/**
 	 * Create the frame.
 	 */
@@ -130,6 +131,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		panel.add(lblTypeOfFuel);
 		
 		 fuel = new JComboBox();
+		 fuel.setModel(new DefaultComboBoxModel(new String[] {"95", "Diesel", "Scooter", "Home Fuel"}));
 		fuel.setBounds(280, 239, 115, 20);
 		panel.add(fuel);
 		
@@ -141,9 +143,15 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		DateFormat format = new SimpleDateFormat("HH:mm");
 		Date date = new Date();
 		
+		String n = name.getText();
+		float d = Float.parseFloat(discount.getText());
 		Date start = (Date) startHour.getValue();
 		Date end = (Date) EndHour.getValue();
-		p = new Promotion(0,name.getText(),Float.parseFloat(discount.getText()),start,end,typeOfCustomer.getSelectedIndex());
+		p = new PromotionTemplate(0,n,d,start,end,typeOfCustomer.getSelectedIndex(),fuel.getSelectedIndex()+1);
+		
+	
+		
+		
 	}
 	
 	private class btnHandler implements ActionListener

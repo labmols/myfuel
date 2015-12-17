@@ -4,8 +4,8 @@ package myfuel.GUIActions;
 import java.util.Date;
 import java.util.Observable;
 
-import myfuel.client.MyFuelClient;
-import myfuel.client.Promotion;
+
+import myfuel.client.*;
 import myfuel.gui.*;
 import myfuel.request.PromotionTemplateRequest;
 import myfuel.response.booleanResponse;
@@ -31,7 +31,7 @@ public class CPromotionTemplateActions extends GUIActions{
 	 * and send it to the server via the client's socket
 	 * @param p - contains the deatils of the new promotion template
 	 */
-	public void PromotionTemplate(Promotion p)
+	public void PromotionTemplate(PromotionTemplate p)
 	{
 		 rq  = new PromotionTemplateRequest(p);
 		client.handleMessageFromGUI(rq);
@@ -44,9 +44,10 @@ public class CPromotionTemplateActions extends GUIActions{
 	@Override
 	public void update(Observable arg0, Object arg1) 
 	{
-		if(gui.isActive())
+		if(gui.isActive() && arg1 instanceof booleanResponse)
 		{
 			booleanResponse response = (booleanResponse)arg1;
+			
 			if(response.getSuccess() == true)
 				gui.showMessage("Promotion Template " +"\""+rq.getP().getName()+"\""+" Created!");
 			else
@@ -55,7 +56,7 @@ public class CPromotionTemplateActions extends GUIActions{
 		
 	}
 	
-	public void verifyDetails(Promotion p)
+	public void verifyDetails(PromotionTemplate p)
 	{
 		boolean result = true;
 		if(p.getDiscount() <= 0 || p.getDiscount() > 100)
@@ -64,8 +65,8 @@ public class CPromotionTemplateActions extends GUIActions{
 			result = false;
 		}
 		
-		System.out.println(p.getStartTime());
-		System.out.println(p.getEndTime());
+	//	System.out.println(p.getStartTime());
+	//	System.out.println(p.getEndTime());
 		
 		if(p.getEndTime().before(p.getStartTime()))
 		{

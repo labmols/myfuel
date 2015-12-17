@@ -8,15 +8,18 @@ import java.util.Observer;
 import java.sql.*;
 
 import myfuel.client.Promotion;
+import myfuel.client.PromotionTemplate;
 import myfuel.request.PromotionTemplateRequest;
 import myfuel.response.booleanResponse;
 
 public class CPromotionTemplateDBHandler extends DBHandler {
 
-	Connection con;
-	MyFuelServer server;
 	boolean answer;
 	PromotionTemplateRequest request;
+	PromotionTemplate promotion;
+	java.sql.Time stime;
+	 java.sql.Time etime ;
+	
 	/***
 	 *  add the handler as an observable to MyFuelServer
 	 * @param server  - MyFuelServer
@@ -36,22 +39,22 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	{
 		ResultSet exist ;
 		PreparedStatement ps = null;
-		Promotion promotion = request.getP();
-		
-
-	       java.sql.Time stime = new java.sql.Time (request.getP().getStartTime().getTime());
-	       java.sql.Time etime = new java.sql.Time (request.getP().getEndTime().getTime());
-
+	 
+	        stime = new java.sql.Time (promotion.getStartTime().getTime());
+	       etime = new java.sql.Time (promotion.getEndTime().getTime());
+	       
 	       try {
+	    	  
 	   		ps=con.prepareStatement("select p.tid from prom_temp p "
 	   				+ "where p.pname = ? and p.shour=? and p.fhour=? and p.discount =?"
-	   				+ "and ctype=? ");
-	   		
+	   				+ "and ctype=?  and fid=?");
+	
 	   		ps.setString(1, promotion.getName());
 	   		ps.setTime(2, stime);
 	   		ps.setTime(3, etime);
 	   		ps.setFloat(4, promotion.getDiscount());
 	   		ps.setInt(5, promotion.getTypeOfCustomer());
+	   		ps.setInt(6,promotion.getTypeOfFuel());
 	   		
 	   		exist =  ps.executeQuery();
 	   		
@@ -65,7 +68,7 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	   			answer = false;
 	   		}
 	   		
-	       } catch (SQLException e) {
+	       } catch (Exception e) {
 	   			answer = false;
 	   			e.printStackTrace();
 	   		}  
@@ -78,24 +81,20 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	{
 		
 		PreparedStatement ps = null;
-
-		Promotion promotion = request.getP();
-		java.sql.Time stime = new java.sql.Time (request.getP().getStartTime().getTime());
-	       java.sql.Time etime = new java.sql.Time (request.getP().getEndTime().getTime());
-
+	      
 		try {
-			ps=con.prepareStatement("insert into prom_temp values(?,?,?,?,?,?)");
+			ps=con.prepareStatement("insert into prom_temp values(?,?,?,?,?,?,?)");
 			ps.setInt(1, 0);
 			ps.setString(2, promotion.getName());
 			ps.setTime(3, stime);
 			ps.setTime(4, etime);
 			ps.setFloat(5, promotion.getDiscount());
 			ps.setInt(6, promotion.getTypeOfCustomer());
-			
+			ps.setInt(7,promotion.getTypeOfFuel());
 			ps.executeUpdate();
 			answer = true;
 			
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				answer = false;
 				e.printStackTrace();
 			}
@@ -112,7 +111,9 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 		if( arg1 instanceof  PromotionTemplateRequest)
 		{
 			 request = (PromotionTemplateRequest)arg1;
+			  this.promotion = request.getP();
 			insert_promotionTemplate();
+			
 			server.setResponse(new booleanResponse(answer));
 		}
 		

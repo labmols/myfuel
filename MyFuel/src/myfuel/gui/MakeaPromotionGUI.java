@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import myfuel.GUIActions.MakeAPromotionActions;
 import myfuel.client.Promotion;
+import myfuel.client.PromotionTemplate;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -20,6 +21,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.JButton;
+
 import java.awt.Color;
 
 
@@ -31,10 +33,10 @@ public class MakeaPromotionGUI extends SuperGUI{
 	private JLabel end; // end time 
 	private JLabel start; // start time
 	private JComboBox<?> templates;
-	private Promotion p ;
+	private PromotionTemplate p ;
 	private Date endDate;
 	private Date startDate;
-	
+	private JLabel fuel;
 	DefaultComboBoxModel model;
 	JDatePickerImpl datePicker;
 	JDatePickerImpl datePicker2;
@@ -59,13 +61,13 @@ public class MakeaPromotionGUI extends SuperGUI{
 		JDatePanelImpl datePanel = new JDatePanelImpl(model1,p);
 		 datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());	 
 		datePicker.setSize(159, 29);
-		datePicker.setLocation(226, 215);
+		datePicker.setLocation(238, 239);
 		panel.add(datePicker);
 		
 		JDatePanelImpl datePanel2 = new JDatePanelImpl(model2,p);
 		 datePicker2 = new JDatePickerImpl(datePanel2, new DateLabelFormatter());	 
 		 datePicker2.setSize(159, 29);
-		 datePicker2.setLocation(226, 256);
+		 datePicker2.setLocation(238, 279);
 		panel.add(datePicker2);
 		
 		JLabel lblNewLabel = new JLabel("Select a Template:");
@@ -127,12 +129,21 @@ public class MakeaPromotionGUI extends SuperGUI{
 		panel.add(btnCreate);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
-		lblStartDate.setBounds(157, 219, 91, 14);
+		lblStartDate.setBounds(150, 239, 91, 14);
 		panel.add(lblStartDate);
 		
 		JLabel lblEndDate = new JLabel("End Date:");
-		lblEndDate.setBounds(158, 259, 90, 14);
+		lblEndDate.setBounds(150, 279, 90, 14);
 		panel.add(lblEndDate);
+		
+		JLabel lblTypeOfFuel = new JLabel("Type of Fuel:");
+		lblTypeOfFuel.setBounds(112, 182, 117, 14);
+		panel.add(lblTypeOfFuel);
+		
+		 fuel = new JLabel("New label");
+		fuel.setForeground(Color.WHITE);
+		fuel.setBounds(226, 182, 81, 14);
+		panel.add(fuel);
 	}
 
 	@Override
@@ -151,6 +162,23 @@ public class MakeaPromotionGUI extends SuperGUI{
 		{
 			p = actions.getPromotion(templates.getSelectedIndex());
 			dis.setText(""+p.getDiscount());
+			
+			switch(p.getTypeOfFuel())
+			{
+			case 1:
+				fuel.setText("95");
+				break;
+				
+			case 2:
+				fuel.setText("Diesel");
+				break;
+			case 3:
+				fuel.setText("Scooter");
+				break;
+			case 4:
+				fuel.setText("Home Fuel");
+				break;
+			}
 			
 			if(p.getTypeOfCustomer() == 0)
 				type.setText("Private");
@@ -177,7 +205,7 @@ public class MakeaPromotionGUI extends SuperGUI{
 		
 	}
 	
-	public Promotion getP()
+	public PromotionTemplate getP()
 	{
 		return this.p;
 	}
