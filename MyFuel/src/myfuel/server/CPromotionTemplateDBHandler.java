@@ -21,7 +21,7 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	 java.sql.Time etime ;
 	private String str ;
 	/***
-	 *  add the handler as an observable to MyFuelServer
+	 *  Create Promotion Template DB Handler
 	 * @param server  - MyFuelServer
 	 * @param con - Connection to client
 	 */

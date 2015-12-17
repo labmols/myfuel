@@ -1,13 +1,21 @@
 package myfuel.gui;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.*;
+import myfuel.client.Fuel;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JSeparator;
+
 import java.awt.Color;
+import java.util.ArrayList;
+
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
@@ -32,16 +40,20 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 	private JLabel max_scooter;
 	private JLabel max_home;
 	
+	private ArrayList<Fuel>fuels;
+	
 	public ConfirmNewRatesGUI(ConfirmNewRatesActions actions)
 	{
 		lblTitle.setBounds(211, 0, 176, 25);
 		lblTitle.setText("Confirm New Rates");
 		
 		 btnConfirm = new JButton("Confirm");
+		 btnConfirm.addActionListener(new btnHandler());
 		btnConfirm.setBounds(126, 333, 117, 46);
 		panel.add(btnConfirm);
 		
 		 btnDeny = new JButton("Deny");
+		 btnDeny.addActionListener(new btnHandler());
 		btnDeny.setBounds(343, 333, 117, 46);
 		panel.add(btnDeny);
 		
@@ -183,9 +195,81 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 		this.actions = actions;
 	}
 	
+	/***
+	 * set the fuel prices to the labels
+	 * @param fuels - arraylist with the fuel prices
+	 */
+	public void setLabels(ArrayList<Fuel> fuels)
+	{
+		this.fuels = fuels;
+		Fuel f = null;
+		
+		f = fuels.get(0);
+		sug_95.setText(""+f.getFprice());
+		cur_95.setText(""+ f.getCurrPrice());
+		max_95.setText(""+f.getMaxPrice());
+		
+		f = fuels.get(1);
+		sug_diesel.setText(""+f.getFprice());
+		cur_diesel.setText(""+ f.getCurrPrice());
+		max_diesel.setText(""+f.getMaxPrice());
+		
+		f = fuels.get(2);
+		sug_scooter.setText(""+f.getFprice());
+		cur_scooter.setText(""+ f.getCurrPrice());
+		max_scooter.setText(""+f.getMaxPrice());
+		
+		f = fuels.get(3);
+		sug_home.setText(""+f.getFprice());
+		cur_home.setText(""+ f.getCurrPrice());
+		max_home.setText(""+f.getMaxPrice());
+		
+		
+	}
+	
+	/***
+	 * 
+	 * ActionListener for the buttons
+	 *
+	 */
+	private class btnHandler implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			getInput(e);
+		}
+		
+	}
+	
+	/***
+	 * handling the action event
+	 */
+	
 	@Override
-	public void getInput(ActionEvent e) {
+	public void getInput(ActionEvent e) 
+	{
+		if(e.getSource() == this.btnConfirm)
+			actions.confirmRates();
 		
+		else if(e.getSource() == this.btnDeny)
+			actions.denyRates();
 		
+	}
+	/***
+	 * 
+	 * @return arrayList with fuel prices
+	 */
+
+	public ArrayList<Fuel> getFuels() {
+		return fuels;
+	}
+	
+	/***
+	 *  set the arraylost with the fuel prices
+	 * @param fuels
+	 */
+	public void setFuels(ArrayList<Fuel> fuels) {
+		this.fuels = fuels;
 	}
 }
