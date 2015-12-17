@@ -45,6 +45,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 	private JButton btnCreate;
 	private JComboBox fuel;
 	private PromotionTemplate p ;
+	private boolean legal;
 	/**
 	 * Create the frame.
 	 */
@@ -140,14 +141,20 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 	@Override
 	public void getInput(ActionEvent e) 
 	{
+		float d = 0;
+		String n = null;
+		 legal = true;
 		DateFormat format = new SimpleDateFormat("HH:mm");
 		Date date = new Date();
+		try{
+		 n = name.getText();
+		 d = Float.parseFloat(discount.getText());
+		}catch(Exception ex){this.showMessage("Illegal Input"); legal = false;}
 		
-		String n = name.getText();
-		float d = Float.parseFloat(discount.getText());
 		Date start = (Date) startHour.getValue();
 		Date end = (Date) EndHour.getValue();
-		p = new PromotionTemplate(0,n,d,start,end,typeOfCustomer.getSelectedIndex(),fuel.getSelectedIndex()+1);
+		if(legal)
+			p = new PromotionTemplate(0,n,d,start,end,typeOfCustomer.getSelectedIndex(),fuel.getSelectedIndex()+1);
 		
 	
 		
@@ -161,7 +168,8 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		public void actionPerformed(ActionEvent e) {
 			
 			getInput(e);
-			actions.verifyDetails(p);
+			if(legal)
+				actions.verifyDetails(p);
 		}
 		
 	}

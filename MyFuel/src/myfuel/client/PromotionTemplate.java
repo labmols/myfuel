@@ -13,7 +13,17 @@ public class PromotionTemplate implements Serializable{
 	private Date endTime;
 	private int typeOfCustomer;
 	private int typeOfFuel;
-	
+	/***
+	 * 
+	 * Promotion Template Constructor
+	 * @param tid   - template ID
+	 * @param name  - name of the promotion 
+	 * @param discount  -  discount amount 
+	 * @param startTime -   start time of the promotion
+	 * @param endTime   -   end time of the promotion
+	 * @param typeOfCustomer - Type of Customer {Private,Company}
+	 * @param typeOfFuel - Type of Fuel (1-4)
+	 */
 	public PromotionTemplate(int tid,String name,float discount,Date startTime,Date endTime,int typeOfCustomer,int typeOfFuel)
 	{
 		this.setTid(tid);
