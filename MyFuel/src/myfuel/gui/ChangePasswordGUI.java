@@ -28,7 +28,7 @@ public class ChangePasswordGUI extends SuperGUI {
 	private JPasswordField origPass;
 	private JPasswordField newPass1;
 	private JPasswordField newPass2;
-	ChangePassActions actions;
+	private ChangePassActions actions;
 	/**
 	 * Launch the application.
 	 */
@@ -39,12 +39,7 @@ public class ChangePasswordGUI extends SuperGUI {
 	public ChangePasswordGUI(ChangePassActions actions) {
 	
 		this.actions= actions;
-		mainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actions.returnToMain();
-			}
-			
-		});
+
 		lblTitle.setBounds(230, 6, 174, 29);
 		lblTitle.setText("Change Password");
 		panel.setBounds(0, 0, 596, 458);
@@ -98,6 +93,5 @@ public class ChangePasswordGUI extends SuperGUI {
 		// TODO Auto-generated method stub
 		if(e.getSource() == (JButton)btnConfirm)
 			actions.verifyDetails(origPass.getPassword(), newPass1.getPassword(), newPass2.getPassword());
-			//System.out.print(passwordField_1.getPassword());
 	}
 }

@@ -1,9 +1,11 @@
 package myfuel.GUIActions;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
+import myfuel.client.Station;
 import myfuel.gui.ChangePasswordGUI;
 import myfuel.gui.UpdateUserDetailsGUI;
 import myfuel.gui.UserOptionsGUI;
@@ -12,12 +14,14 @@ import myfuel.response.UserLoginResponse;
 
 public class UserOptionsActions extends GUIActions {
 	
-	Customer customer;
-	UserOptionsGUI gui;
+	private Customer customer;
+	private UserOptionsGUI gui;
+	private ArrayList<Station> stations;
 	
-	public UserOptionsActions(MyFuelClient client , Customer customer)
+	public UserOptionsActions(MyFuelClient client , Customer customer,ArrayList<Station> stations)
 	{	
 		super(client);
+		this.stations = new ArrayList<Station>(stations);
 		gui =new UserOptionsGUI(this);
 		gui.setVisible(true);
 		this.customer = customer;
@@ -32,7 +36,7 @@ public class UserOptionsActions extends GUIActions {
 	
 	public void updateDetailsScreen()
 	{
-		changeFrame(gui, new UpdateDetailsActions(client,customer),this);
+		changeFrame(gui, new UpdateDetailsActions(client,customer,stations),this);
 	}
 
 	@Override
