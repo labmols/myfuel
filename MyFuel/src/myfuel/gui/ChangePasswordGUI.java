@@ -39,12 +39,7 @@ public class ChangePasswordGUI extends SuperGUI {
 	public ChangePasswordGUI(ChangePassActions actions) {
 	
 		this.actions= actions;
-		mainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actions.returnToMain();
-			}
-			
-		});
+
 		lblTitle.setBounds(230, 6, 174, 29);
 		lblTitle.setText("Change Password");
 		panel.setBounds(0, 0, 596, 458);

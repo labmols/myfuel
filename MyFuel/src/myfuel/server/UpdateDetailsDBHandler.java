@@ -4,11 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.Car;
 import myfuel.client.Customer;
+import myfuel.client.Station;
+import myfuel.request.RequestEnum;
 import myfuel.request.UpdateRequest;
+import myfuel.request.registerRequest;
+import myfuel.response.RegisterResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
@@ -110,6 +116,7 @@ public class UpdateDetailsDBHandler extends DBHandler{
 		{
 			UpdateRequest request = (UpdateRequest) arg;
 			server.setResponse(checkAndUpdate(request.getCustomer()));
+			
 		}
 		
 	}

@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -10,7 +11,9 @@ import java.util.Observer;
 import myfuel.client.Car;
 import myfuel.client.Station;
 import myfuel.request.LoginRequest;
+import myfuel.request.registerRequest;
 import myfuel.response.ErrorEnum;
+import myfuel.response.RegisterResponse;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 import myfuel.response.WorkerLoginResponse;
@@ -122,8 +125,9 @@ public class LoginDBHandler extends DBHandler {
 					cars.add(new Car(rs.getInt(1), rs.getInt(2)));
 				}
 				
+				ArrayList<Station> Allstations = getStations();
 				return new UserLoginResponse(userid,fname,lname,pass,email,address
-						,cnumber,toc,atype,smodel,cars,stations);
+						,cnumber,toc,atype,smodel,cars,stations,Allstations);
 			}
 			
 			
@@ -133,6 +137,32 @@ public class LoginDBHandler extends DBHandler {
 		}
 		return new booleanResponse(false, "UserID or password not correct!"); // User not Found
 	}
+	
+	private ArrayList<Station> getStations()
+	{
+		ResultSet rs = null;
+		Statement st = null;
+		ArrayList<Station> stations = new ArrayList<Station>();
+		int id;
+		String name;
+	
+			try {
+				st = con.createStatement();
+				String query = "select * from station";
+				rs = st.executeQuery(query);
+				while(rs.next()){
+					id = rs.getInt(1);
+					name = rs.getString(2);
+					stations.add(new Station(id,name));
+					}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return stations;
+			
+		}
 	
 	/**
 	 * 

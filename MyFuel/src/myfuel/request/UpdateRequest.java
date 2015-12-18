@@ -10,6 +10,8 @@ public class UpdateRequest implements Serializable {
 	public UpdateRequest(Customer customer){
 		setCustomer(customer);
 	}
+	
+
 
 	public Customer getCustomer() {
 		return customer;
@@ -18,6 +20,6 @@ public class UpdateRequest implements Serializable {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
+
 
 }

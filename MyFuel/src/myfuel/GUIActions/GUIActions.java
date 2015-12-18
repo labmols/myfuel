@@ -54,8 +54,4 @@ public abstract class GUIActions implements Observer {
 	
 
 	
-	
-	
-	
-	
 }

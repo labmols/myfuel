@@ -11,6 +11,7 @@ import myfuel.client.MyFuelClient;
 import myfuel.client.Station;
 import myfuel.gui.LogInGUI;
 import myfuel.gui.UpdateUserDetailsGUI;
+import myfuel.request.RequestEnum;
 import myfuel.request.UpdateRequest;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
@@ -22,9 +23,10 @@ public class UpdateDetailsActions extends GUIActions {
 	ArrayList <Car> origCars;
 	ArrayList <Station> stations;
 	
-	public UpdateDetailsActions(MyFuelClient client,Customer user) {
+	public UpdateDetailsActions(MyFuelClient client,Customer user,ArrayList <Station> stations) {
 		super(client);
 		this.user=user;
+		this.stations = new ArrayList<Station>(stations);
 		origCars = new ArrayList<Car>(user.getCars());
 		gui = new UpdateUserDetailsGUI(this);
 		gui.setVisible(true);
@@ -37,11 +39,10 @@ public class UpdateDetailsActions extends GUIActions {
 		return user;
 	}
 	
-	public void returnToMain(){
-		UserOptionsActions actions = new UserOptionsActions(client, user);
-		changeFrame(gui, actions,this);
+	public ArrayList<Station> getStations(){
+		return stations;
 	}
-
+	
 
 
 
@@ -147,7 +148,7 @@ public class UpdateDetailsActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,new UserOptionsActions(client,user),this);
+		changeFrame(gui,new UserOptionsActions(client,user,stations),this);
 
 		
 	}
@@ -163,7 +164,7 @@ public class UpdateDetailsActions extends GUIActions {
 
 	    return true;
 	}
-	
+
 
 
 }

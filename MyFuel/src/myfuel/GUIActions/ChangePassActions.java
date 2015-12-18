@@ -44,11 +44,6 @@ public class ChangePassActions extends GUIActions {
 		
 	}
 	
-	public void returnToMain(){
-		UserOptionsActions actions = new UserOptionsActions(client, user);
-		changeFrame(gui, actions,this);
-	}
-
 
 
 	@Override
