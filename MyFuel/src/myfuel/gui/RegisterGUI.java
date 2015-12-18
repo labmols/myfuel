@@ -219,14 +219,6 @@ public class RegisterGUI extends SuperGUI {
 		
 		stationModel= new DefaultComboBoxModel<String>();
 		stationsCB.setModel(stationModel);
-		
-		
-		mainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actions.returnToMain();
-			}
-			
-		});
 
 			
 		}

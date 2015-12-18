@@ -270,4 +270,8 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		}
 	}
 	
+
 }
+
+
+
