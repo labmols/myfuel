@@ -188,22 +188,22 @@ public class RegisterGUI extends SuperGUI {
 		panel.add(panel5);
 		
 		JLabel lblCarId = new JLabel("Car ID:");
-		lblCarId.setBounds(44, 23, 53, 16);
+		lblCarId.setBounds(37, 18, 53, 16);
 		panel5.add(lblCarId);
 		
 		fuelCB = new JComboBox();
 		fuelCB.setModel(new DefaultComboBoxModel(new String[] {"95", "Diesel", "Scooter"}));
-		fuelCB.setBounds(91, 51, 94, 27);
+		fuelCB.setBounds(101, 51, 94, 27);
 		panel5.add(fuelCB);
 		
 		btnAddCar = new JButton("Add Car");
 		btnAddCar.addActionListener(new ButtonListener());
-		btnAddCar.setBounds(68, 78, 117, 29);
+		btnAddCar.setBounds(94, 78, 117, 29);
 		panel5.add(btnAddCar);
 		
 		cidTextField = new JTextField();
 		cidTextField.setColumns(10);
-		cidTextField.setBounds(91, 18, 94, 26);
+		cidTextField.setBounds(102, 13, 94, 26);
 		panel5.add(cidTextField);
 		
 		JLabel lblFuelType = new JLabel("Fuel Type:");
