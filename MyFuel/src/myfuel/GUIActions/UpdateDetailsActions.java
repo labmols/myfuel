@@ -139,6 +139,16 @@ public class UpdateDetailsActions extends GUIActions {
 			UpdateRequest request = new UpdateRequest(user);
 			client.handleMessageFromGUI(request);
 		}
+
+		
+	}
+	
+
+
+	@Override
+	public void backToMenu() {
+		changeFrame(gui,new UserOptionsActions(client,user),this);
+
 		
 	}
 	
@@ -154,13 +164,6 @@ public class UpdateDetailsActions extends GUIActions {
 	    return true;
 	}
 	
-
-
-	@Override
-	public void backToMenu() {
-		changeFrame(gui,new UserOptionsActions(client,user),this);
-		
-	}
 
 
 }

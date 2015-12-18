@@ -2,6 +2,7 @@ package myfuel.gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.print.DocFlavor.URL;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -74,7 +75,8 @@ public abstract class SuperGUI extends JFrame {
 		
 		 background = new JLabel("");
 		 background.setBounds(0, 0, 596, 481);
-		 background.setIcon(new ImageIcon("images/BackGround.png"));
+		 java.net.URL url = getClass().getResource("/BackGround.png");
+		 background.setIcon(new ImageIcon(url));
 		contentPane.add( background);
 	}
 	

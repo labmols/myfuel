@@ -41,6 +41,26 @@ public class LoginActions extends GUIActions {
 		
 	}
 	
+	public void verifyDetails(int type, String userid, String pass)
+	{
+		boolean error = false;
+		int id=0;
+		try {
+			id = Integer.parseInt(userid);
+		}
+		catch(NumberFormatException e) {
+			gui.showMessage("illegal UserID value!");
+			error = true;
+		}
+		
+		if(pass.equals("")) {
+			error=true;
+			gui.showMessage("Password field is empty!");
+		}
+		if(!error) sendRequest(type,id,pass);
+		
+	}
+	
 	/**
 	 * 
 	 * @param response
