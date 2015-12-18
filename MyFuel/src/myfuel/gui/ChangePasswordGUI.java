@@ -93,6 +93,5 @@ public class ChangePasswordGUI extends SuperGUI {
 		// TODO Auto-generated method stub
 		if(e.getSource() == (JButton)btnConfirm)
 			actions.verifyDetails(origPass.getPassword(), newPass1.getPassword(), newPass2.getPassword());
-			//System.out.print(passwordField_1.getPassword());
 	}
 }
