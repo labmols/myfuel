@@ -28,7 +28,7 @@ public class ChangePasswordGUI extends SuperGUI {
 	private JPasswordField origPass;
 	private JPasswordField newPass1;
 	private JPasswordField newPass2;
-	ChangePassActions actions;
+	private ChangePassActions actions;
 	/**
 	 * Launch the application.
 	 */
