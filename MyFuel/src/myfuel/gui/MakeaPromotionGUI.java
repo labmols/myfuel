@@ -150,8 +150,11 @@ public class MakeaPromotionGUI extends SuperGUI{
 	@Override
 	public void getInput(ActionEvent e)
 	{
+	
+		
 		setStartDate((Date) datePicker.getModel().getValue());
 		setEndDate((Date) datePicker2.getModel().getValue());
+		actions.verifyDetails(startDate, endDate);
 		
 	}
 	
@@ -199,7 +202,7 @@ public class MakeaPromotionGUI extends SuperGUI{
 		public void actionPerformed(ActionEvent e) {
 			 
 			getInput(e);
-			actions.verifyDetails(startDate, endDate);
+			
 			
 			
 		}
