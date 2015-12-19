@@ -19,6 +19,11 @@ import myfuel.response.booleanResponse;
  *
  */
 public class RegisterDBHandler extends DBHandler {
+	/**
+	 * new RegisterDBHandler object 
+	 * @param server - MyFuel Server
+	 * @param con - JDBC driver connection
+	 */
 	RegisterDBHandler(MyFuelServer server,Connection con){
 		super(server,con);
 	}

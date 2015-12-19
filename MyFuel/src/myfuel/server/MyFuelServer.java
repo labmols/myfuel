@@ -16,8 +16,16 @@ import myfuel.response.WorkerLoginResponse;
 
 
 public class MyFuelServer extends ObservableServer{
+	/**
+	 * 
+	 */
 	private Connection con;
 	Response response;
+	
+	/**
+	 * 
+	 * @param port
+	 */
 	public MyFuelServer(int port) {
 		super(port);
 		try {
@@ -52,6 +60,7 @@ public class MyFuelServer extends ObservableServer{
 		
 		
 	}
+	
 	@Override
 	 protected synchronized void clientConnected(ConnectionToClient client) 
 	  {

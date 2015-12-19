@@ -19,7 +19,7 @@ public class ChangePasswordDBHandler extends DBHandler {
 	/**
 	 * new Change Password DB Controller.
 	 * @param server - MyFuel Server
-	 * @param con - MySQL driver Connection
+	 * @param con - JDBC driver Connection
 	 */
 	public ChangePasswordDBHandler(MyFuelServer server, Connection con){
 		super(server,con);

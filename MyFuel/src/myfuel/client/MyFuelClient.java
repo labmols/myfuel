@@ -6,6 +6,13 @@ import myfuel.GUIActions.LoginActions;
 import myfuel.ocsf.client.ObservableClient;
 
 public class MyFuelClient extends ObservableClient {
+	
+	/**
+	 * 
+	 * @param host
+	 * @param port
+	 * @throws IOException
+	 */
 	public MyFuelClient(String host, int port) throws IOException {
 		super(host, port);
 		openConnection();
@@ -17,6 +24,10 @@ public class MyFuelClient extends ObservableClient {
 		notifyObservers(msg);
 	}
 	
+	/**
+	 * 
+	 * @param msg
+	 */
 	public void handleMessageFromGUI(Object msg) {
 		try {
 			sendToServer(msg);
