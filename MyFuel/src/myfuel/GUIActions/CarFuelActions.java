@@ -6,15 +6,16 @@ import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.CarFuelGUI;
 import myfuel.response.Response;
+import myfuel.response.UserLoginResponse;
 
 public class CarFuelActions extends GUIActions {
 	CarFuelGUI gui;
-	Customer customer;
+	UserLoginResponse res;
 	
-	public CarFuelActions(MyFuelClient client,Customer customer) {
+	public CarFuelActions(MyFuelClient client,UserLoginResponse res) {
 		super(client);
 		gui = new CarFuelGUI(this);
-		this.customer = customer;
+		this.res = res;
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
 	}

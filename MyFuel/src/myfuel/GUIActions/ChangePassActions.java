@@ -12,11 +12,11 @@ import myfuel.response.booleanResponse;
 
 public class ChangePassActions extends GUIActions {
 	
-	private Customer user;
+	private UserLoginResponse res;
 	private ChangePasswordGUI gui;
-	public ChangePassActions(MyFuelClient client, Customer user) {
+	public ChangePassActions(MyFuelClient client, UserLoginResponse res) {
 		super(client);
-		this.user=user;
+		this.res = res;
 		gui = new ChangePasswordGUI(this);
 		gui.setVisible(true);
 	}
@@ -39,7 +39,7 @@ public class ChangePassActions extends GUIActions {
 	
 	public void changePassword(String oldPass, String newPass)
 	{
-		ChangePassRequest request = new ChangePassRequest(newPass,user.getUserid(), oldPass);
+		ChangePassRequest request = new ChangePassRequest(newPass,res.getUser().getUserid(), oldPass);
 		client.handleMessageFromGUI(request);
 		
 	}
@@ -57,7 +57,7 @@ public class ChangePassActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		
+		changeFrame(gui, new UserOptionsActions(client, res), this);
 	}
 	
 	

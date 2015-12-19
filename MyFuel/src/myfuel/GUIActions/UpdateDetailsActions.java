@@ -23,34 +23,26 @@ import myfuel.response.booleanResponse;
  *
  */
 public class UpdateDetailsActions extends GUIActions {
-	/**
-	 * this object contains all customer details
-	 */
-	Customer user;
+	private UserLoginResponse res;
 	/**
 	 * this object contains the user interface
 	 */
-	UpdateUserDetailsGUI gui;
+	private UpdateUserDetailsGUI gui;
 	/**
 	 * this object saves the list of customer cars before the changes.
 	 */
-	ArrayList <Car> origCars;
-	/**
-	 * this object contains all the current stations available 
-	 */
-	ArrayList <Station> stations;
+	private ArrayList <Car> origCars;
 	
 	/**
 	 * list of the customer original stations , before update.
 	 */
-	ArrayList <Integer> origStations;
+	private ArrayList <Integer> origStations;
 	
-	public UpdateDetailsActions(MyFuelClient client,Customer user,ArrayList <Station> stations) {
+	public UpdateDetailsActions(MyFuelClient client,UserLoginResponse res) {
 		super(client);
-		this.user=user;
-		this.stations = new ArrayList<Station>(stations);
-		origCars = new ArrayList<Car>(user.getCars());
-		origStations = new ArrayList<Integer> (user.getStations());
+		this.res = res;
+		origCars = new ArrayList<Car>(res.getUser().getCars());
+		origStations = new ArrayList<Integer> (res.getUser().getStations());
 		gui = new UpdateUserDetailsGUI(this);
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
@@ -59,19 +51,17 @@ public class UpdateDetailsActions extends GUIActions {
 	
 
 	public Customer getUserDetails(){
-		return user;
+		return res.getUser();
 	}
 	
 	public ArrayList<Station> getStations(){
-		return stations;
+		return res.getStations();
 	}
-	
-
-
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		Customer user = res.getUser();
 		if(arg instanceof booleanResponse)
 		{
 			booleanResponse res= (booleanResponse) arg;
@@ -91,6 +81,7 @@ public class UpdateDetailsActions extends GUIActions {
 	public void verifyCar(String cid, int fid) {
 		// TODO Auto-generated method stub
 		Car c = null;
+		Customer user = res.getUser();
 		if(!cid.equals("") && cid.length()==7){
 		try {
 		c = new Car(Integer.parseInt(cid),fid);
@@ -110,14 +101,17 @@ public class UpdateDetailsActions extends GUIActions {
 	
 	public boolean checkCar(int cid)
 	{
+		Customer user = res.getUser();
 		for(Car c: user.getCars())
 			if(c.getcid() == cid) return true;
 		return false;
 	}
 	
 	public void addStation(String sname, int access){
+		Customer user = res.getUser();
+		
 		if(access == 1){
-		for(Station s: stations){
+		for(Station s: res.getStations()){
 			if(s.getName().equals(sname)){
 				if(!user.getStations().contains(s.getsid())) {
 					user.getStations().add(s.getsid());
@@ -129,7 +123,7 @@ public class UpdateDetailsActions extends GUIActions {
 		}
 		else if(access == 0)
 		{
-			for(Station s: stations){
+			for(Station s: res.getStations()){
 				if(s.getName().equals(sname)){
 						user.getStations().clear();
 						user.getStations().add(s.getsid());
@@ -142,7 +136,7 @@ public class UpdateDetailsActions extends GUIActions {
 	
 	public void removeCar(int cid, int index)
 	{
-		user.getCars().remove(index);
+		res.getUser().getCars().remove(index);
 		gui.showMessage("Car "+cid+" "+ "removed!");
 	}
 	
@@ -164,6 +158,7 @@ public class UpdateDetailsActions extends GUIActions {
 	public void verifyDetails(String fname, String lname, String email,String address, String cnumber,
 			int toc,int smodel,int atype)
 	{
+		Customer user = res.getUser();
 		String errors="";
 		errors += "Input Errors \n\n";
 		Pattern pattern = Pattern.compile("^.+@.+\\..+$");
@@ -219,7 +214,7 @@ public class UpdateDetailsActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,new UserOptionsActions(client,user,stations),this);
+		changeFrame(gui,new UserOptionsActions(client,res),this);
 
 		
 	}
