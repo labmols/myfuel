@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import myfuel.GUIActions.UpdateDetailsActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Station;
@@ -220,7 +221,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		panel2.add(carAdd);
 		
 		
-	
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		showUserDetails(actions.getUserDetails(),actions.getStations());
 		
 		
