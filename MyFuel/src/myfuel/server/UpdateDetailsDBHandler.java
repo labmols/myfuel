@@ -34,12 +34,12 @@ public class UpdateDetailsDBHandler extends DBHandler{
 			ps.setInt(1, car.getcid());
 			ps.setInt(2, customer.getUserid());
 			rs = ps.executeQuery();
-			if(rs.next()) return new booleanResponse(false, "Car ID already exist!");
+			if(rs.next()) return new booleanResponse(false, "Update Failed! Car ID already exist!");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new booleanResponse(false, "SQL Error!");
+			return new booleanResponse(false, "Update Failed! SQL Error!");
 		}
 		try{
 			ps= con.prepareStatement("delete from customer where uid=? limit 1");
@@ -47,7 +47,7 @@ public class UpdateDetailsDBHandler extends DBHandler{
 			ps.executeUpdate();
 		} catch(SQLException e){
 			e.printStackTrace();
-			return new booleanResponse(false, "SQL Error!");
+			return new booleanResponse(false, "Update Failed! SQL Error!");
 		}
 		
 		return updateDetails(customer);
@@ -76,7 +76,7 @@ public class UpdateDetailsDBHandler extends DBHandler{
 		
 		}catch (SQLException e){
 			e.printStackTrace();
-			return new booleanResponse (false, "SQL Error!");
+			return new booleanResponse (false, "Update Failed! SQL Error!");
 		}
 		
 		try{
@@ -89,7 +89,7 @@ public class UpdateDetailsDBHandler extends DBHandler{
 				}
 			}catch (SQLException e){
 				e.printStackTrace();
-				return new booleanResponse (false, "SQL Error!");
+				return new booleanResponse (false, "Update Failed! SQL Error!");
 			}
 		
 			
@@ -103,7 +103,7 @@ public class UpdateDetailsDBHandler extends DBHandler{
 			}
 			}catch (SQLException e){
 				e.printStackTrace();
-				return new booleanResponse (false, "SQL Error!");
+				return new booleanResponse (false, "Update Failed! SQL Error!");
 			}
 			
 			return new booleanResponse (true, "Update details successful!");

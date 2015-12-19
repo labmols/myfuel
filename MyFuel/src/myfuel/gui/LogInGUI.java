@@ -116,7 +116,8 @@ public class LogInGUI extends SuperGUI {
 	public void getInput(ActionEvent e){
 	if(e.getSource()==loginButton){
 	String pass =new String(passwordField.getPassword());
-	actions.sendRequest(comboBox.getSelectedIndex(),Integer.parseInt(useridField.getText().toString()), pass);}
+	actions.verifyDetails(comboBox.getSelectedIndex(),useridField.getText(), pass);
+	}
 	if(e.getSource()==registerButton){
 		actions.RegisterScreen();
 	}

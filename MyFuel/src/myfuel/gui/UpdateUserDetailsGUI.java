@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import myfuel.GUIActions.UpdateDetailsActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Station;
@@ -204,11 +205,12 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		panel3.add(stationCB);
 		
 		lblStation = new JLabel("Add Station:");
-		lblStation.setBounds(35, 10, 115, 16);
+		lblStation.setBounds(39, 10, 115, 16);
 		panel3.add(lblStation);
 		
 		sAdd = new JButton("Add");
 		sAdd.setBounds(223, 33, 86, 29);
+		sAdd.addActionListener(new eventListener());
 		panel3.add(sAdd);
 		sAdd.setToolTipText("Add New Station");
 		
@@ -219,7 +221,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		panel2.add(carAdd);
 		
 		
-	
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		showUserDetails(actions.getUserDetails(),actions.getStations());
 		
 		
@@ -282,6 +284,11 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 				sAdd.setText("Add");
 			}
 		
+		if(e.getSource() == sAdd)
+		{
+			actions.addStation((String)stationCB.getSelectedItem(), access);
+		}
+		
 		if(e.getSource()==carAdd){
 			actions.verifyCar(cidText.getText().toString(),fuelCB.getSelectedIndex()+1);
 		}
@@ -294,8 +301,32 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		
 		if(e.getSource()==btnRemove)
 		{
+			if(carsCB.getItemCount() > 1){
 			actions.removeCar((Integer)carsCB.getSelectedItem(),carsCB.getSelectedIndex());
+			carModel.removeElementAt(carsCB.getSelectedIndex());
+			}
+			else  showMessage("You must have at least one car!");
 		}
+	}
+
+	public void clearAll(Customer user) {
+		cidText.setText("");
+		fnameText.setText(user.getFname());
+		lnameText.setText(user.getLname());
+		addText.setText(user.getAddress());
+		emailText.setText(user.getEmail());
+		CCText.setText(user.getCnumber());
+		carModel.removeAllElements();
+		for(Car car: user.getCars())
+		{
+			carModel.addElement(car.getcid());
+		}
+		
+		accessCB.setSelectedIndex(user.getAtype());
+		saleCB.setSelectedItem(user.getSmodel());
+		typeCB.setSelectedItem(user.getToc());
+		
+	
 	}
 }
 

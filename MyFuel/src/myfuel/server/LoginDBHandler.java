@@ -93,7 +93,7 @@ public class LoginDBHandler extends DBHandler {
 		}
 		try {
 			if(rs.next()){
-				status = rs.getInt(10);
+				status = rs.getInt(11);
 				if(status == 1) return new booleanResponse(false, "This Customer is already logged in!");
 				userid = rs.getInt(1);
 				fname = rs.getString(2);
