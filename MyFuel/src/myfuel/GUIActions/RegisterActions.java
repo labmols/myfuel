@@ -264,13 +264,23 @@ public class RegisterActions extends GUIActions {
 	 * remove all cstations array contents, because the user replace the access.
 	 */
 	public void resetStations() {
-		cstations.removeAll(cstations);
+		cstations.clear();
 		
 	}
 
 	@Override
 	public void backToMenu() {
 		changeFrame(gui,new LoginActions(client),this);
+		
+	}
+	
+	/**
+	 * reset all user lists.
+	 */
+	public void resetAll() {
+		// TODO Auto-generated method stub
+		cstations.clear();
+		cars.clear();
 		
 	}
 		

@@ -22,7 +22,7 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 	/***
 	 *  Create Confirm New Rates  DB Handler
 	 * @param server  - MyFuelServer
-	 * @param con - Connection to client
+	 * @param con - MySQL driver Connection
 	 */
 	public ConfirmNewRatesDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
