@@ -17,17 +17,40 @@ import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 import myfuel.response.booleanResponse;
 
+/**
+ * Update details Controller
+ * @author Maor
+ *
+ */
 public class UpdateDetailsActions extends GUIActions {
+	/**
+	 * this object contains all customer details
+	 */
 	Customer user;
+	/**
+	 * this object contains the user interface
+	 */
 	UpdateUserDetailsGUI gui;
+	/**
+	 * this object saves the list of customer cars before the changes.
+	 */
 	ArrayList <Car> origCars;
+	/**
+	 * this object contains all the current stations available 
+	 */
 	ArrayList <Station> stations;
+	
+	/**
+	 * list of the customer original stations , before update.
+	 */
+	ArrayList <Integer> origStations;
 	
 	public UpdateDetailsActions(MyFuelClient client,Customer user,ArrayList <Station> stations) {
 		super(client);
 		this.user=user;
 		this.stations = new ArrayList<Station>(stations);
 		origCars = new ArrayList<Car>(user.getCars());
+		origStations = new ArrayList<Integer> (user.getStations());
 		gui = new UpdateUserDetailsGUI(this);
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
@@ -54,7 +77,10 @@ public class UpdateDetailsActions extends GUIActions {
 			booleanResponse res= (booleanResponse) arg;
 			gui.showMessage(res.getMsg());
 			if(!res.getSuccess()) {
-				user.setCars(origCars);
+				user.getCars().clear();
+				user.setCars(new ArrayList<Car>(origCars));
+				user.getStations().clear();
+				user.setStations(new ArrayList<Integer>(origStations));
 			}
 		}
 	}
@@ -63,11 +89,54 @@ public class UpdateDetailsActions extends GUIActions {
 
 	public void verifyCar(String cid, int fid) {
 		// TODO Auto-generated method stub
+		Car c = null;
 		if(!cid.equals("") && cid.length()==7){
-		user.getCars().add(new Car(Integer.parseInt(cid),fid));
-		gui.showMessage("Car "+cid+" "+ "added!");
+		try {
+		c = new Car(Integer.parseInt(cid),fid);
+		if(!checkCar(Integer.parseInt(cid))){
+			user.getCars().add(c);
+			gui.showMessage("Car "+cid+" "+ "added!");
 		}
+		else gui.showMessage("You already have this car!");
+		}
+		catch (NumberFormatException e){
+			gui.showMessage("illegal Car id value!");
+		}
+	
+		}
+		else gui.showMessage("illegal Car id value!");
 	}
+	
+	public boolean checkCar(int cid)
+	{
+		for(Car c: user.getCars())
+			if(c.getcid() == cid) return true;
+		return false;
+	}
+	
+	public void addStation(String sname, int access){
+		if(access == 1 || user.getStations().isEmpty()){
+		for(Station s: stations){
+			if(s.getName().equals(sname)){
+				if(!user.getStations().contains(s.getsid())) {
+					user.getStations().add(s.getsid());
+					gui.showMessage("Station "+sname + " is added!");
+				}
+				}
+			}
+		}
+		else if(access == 0)
+		{
+			for(Station s: stations){
+				if(s.getName().equals(sname)){
+						user.getStations().clear();
+						user.getStations().add(s.getsid());
+						gui.showMessage("Your Station changed to "+sname );
+					
+					}
+				}
+		}
+		}
 	
 	public void removeCar(int cid, int index)
 	{

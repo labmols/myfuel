@@ -209,6 +209,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		
 		sAdd = new JButton("Add");
 		sAdd.setBounds(223, 33, 86, 29);
+		sAdd.addActionListener(new eventListener());
 		panel3.add(sAdd);
 		sAdd.setToolTipText("Add New Station");
 		
@@ -282,6 +283,11 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 				sAdd.setText("Add");
 			}
 		
+		if(e.getSource() == sAdd)
+		{
+			actions.addStation((String)stationCB.getSelectedItem(), access);
+		}
+		
 		if(e.getSource()==carAdd){
 			actions.verifyCar(cidText.getText().toString(),fuelCB.getSelectedIndex()+1);
 		}
@@ -296,6 +302,10 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		{
 			actions.removeCar((Integer)carsCB.getSelectedItem(),carsCB.getSelectedIndex());
 		}
+	}
+
+	public void clearAll() {
+		cidText.setText("");
 	}
 }
 
