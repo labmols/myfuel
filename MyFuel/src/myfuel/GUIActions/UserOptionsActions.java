@@ -14,29 +14,28 @@ import myfuel.response.UserLoginResponse;
 
 public class UserOptionsActions extends GUIActions {
 	
-	private Customer customer;
-	private UserOptionsGUI gui;
-	private ArrayList<Station> stations;
 	
-	public UserOptionsActions(MyFuelClient client , Customer customer,ArrayList<Station> stations)
+	private UserOptionsGUI gui;
+	private UserLoginResponse res;
+	
+	public UserOptionsActions(MyFuelClient client , UserLoginResponse res)
 	{	
 		super(client);
-		this.stations = new ArrayList<Station>(stations);
 		gui =new UserOptionsGUI(this);
 		gui.setVisible(true);
-		this.customer = customer;
+		this.res = res;
 	}
 	
 	
 	public void changePasswordScreen()
 	{
-		changeFrame(gui,new ChangePassActions(client,customer),this);
+		changeFrame(gui,new ChangePassActions(client,res),this);
 		
 	}
 	
 	public void updateDetailsScreen()
 	{
-		changeFrame(gui, new UpdateDetailsActions(client,customer,stations),this);
+		changeFrame(gui, new UpdateDetailsActions(client,res),this);
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class UserOptionsActions extends GUIActions {
 
 	public void carFuelScreen() {
 		// TODO Auto-generated method stub
-		changeFrame(gui, new CarFuelActions(client,customer),this);
+		changeFrame(gui, new CarFuelActions(client,res),this);
 	}
 
 
