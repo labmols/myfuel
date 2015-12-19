@@ -82,6 +82,7 @@ public class UpdateDetailsActions extends GUIActions {
 				user.getStations().clear();
 				user.setStations(new ArrayList<Integer>(origStations));
 			}
+		  gui.clearAll(user);
 		}
 	}
 
@@ -115,13 +116,14 @@ public class UpdateDetailsActions extends GUIActions {
 	}
 	
 	public void addStation(String sname, int access){
-		if(access == 1 || user.getStations().isEmpty()){
+		if(access == 1){
 		for(Station s: stations){
 			if(s.getName().equals(sname)){
 				if(!user.getStations().contains(s.getsid())) {
 					user.getStations().add(s.getsid());
 					gui.showMessage("Station "+sname + " is added!");
 				}
+				else gui.showMessage("You already have this station!");
 				}
 			}
 		}

@@ -204,7 +204,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		panel3.add(stationCB);
 		
 		lblStation = new JLabel("Add Station:");
-		lblStation.setBounds(35, 10, 115, 16);
+		lblStation.setBounds(39, 10, 115, 16);
 		panel3.add(lblStation);
 		
 		sAdd = new JButton("Add");
@@ -300,12 +300,32 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		
 		if(e.getSource()==btnRemove)
 		{
+			if(carsCB.getItemCount() > 1){
 			actions.removeCar((Integer)carsCB.getSelectedItem(),carsCB.getSelectedIndex());
+			carModel.removeElementAt(carsCB.getSelectedIndex());
+			}
+			else  showMessage("You must have at least one car!");
 		}
 	}
 
-	public void clearAll() {
+	public void clearAll(Customer user) {
 		cidText.setText("");
+		fnameText.setText(user.getFname());
+		lnameText.setText(user.getLname());
+		addText.setText(user.getAddress());
+		emailText.setText(user.getEmail());
+		CCText.setText(user.getCnumber());
+		carModel.removeAllElements();
+		for(Car car: user.getCars())
+		{
+			carModel.addElement(car.getcid());
+		}
+		
+		accessCB.setSelectedIndex(user.getAtype());
+		saleCB.setSelectedItem(user.getSmodel());
+		typeCB.setSelectedItem(user.getToc());
+		
+	
 	}
 }
 

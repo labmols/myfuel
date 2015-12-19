@@ -127,6 +127,7 @@ public class RegisterActions extends GUIActions {
 			cars.add(car);
 			gui.showMessage("Car "+cid + " is added!");
 			}
+			else gui.showMessage("You already have this car!");
 		}
 		else gui.showMessage("Car number value is illegal!");
 		
@@ -144,6 +145,7 @@ public class RegisterActions extends GUIActions {
 					cstations.add(s.getsid());
 					gui.showMessage("Station "+sname + " is added!");
 				}
+				else gui.showMessage("You already have this station!");
 				}
 			}
 		}
