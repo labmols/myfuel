@@ -71,7 +71,7 @@ public class LoginActions extends GUIActions {
 		UserLoginResponse res = (UserLoginResponse) response;
 
 			gui.showMessage("Welcome to MyFuel!");
-			changeFrame(gui,new UserOptionsActions (client,res.getUser()),this);
+			changeFrame(gui,new UserOptionsActions (client,res.getUser(),res.getStations()),this);
 			
 		}
 		else

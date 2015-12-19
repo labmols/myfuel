@@ -18,11 +18,13 @@ import javax.swing.JButton;
 import myfuel.GUIActions.UpdateDetailsActions;
 import myfuel.client.Car;
 import myfuel.client.Customer;
+import myfuel.client.Station;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
 
 public class UpdateUserDetailsGUI extends SuperGUI {
@@ -37,6 +39,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 	private JTextField cidText;
 	private JComboBox<String> saleCB;
 	private DefaultComboBoxModel<Integer> carModel;
+	private DefaultComboBoxModel<String> stationModel;
 	private JComboBox<Integer> carsCB;
 	private JComboBox<String> accessCB;
 	private JPanel panel3;
@@ -46,6 +49,9 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 	private JButton btnConfirmUpdate;
 	private JComboBox<String> fuelCB;
 	private JButton carAdd;
+	private JLabel lblStation;
+	int access;
+	private JComboBox<String> stationCB;
 	/**
 	 * Create the frame.
 	 */
@@ -191,12 +197,14 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		panel2.add(panel3);
 		panel3.setLayout(null);
 		
-		JComboBox<String> stationCB = new JComboBox<String>();
+		stationCB = new JComboBox<String>();
+		stationModel= new DefaultComboBoxModel<String>();
+		stationCB.setModel(stationModel);
 		stationCB.setBounds(140, 6, 132, 27);
 		panel3.add(stationCB);
 		
-		JLabel lblStation = new JLabel("Add Station:");
-		lblStation.setBounds(54, 10, 86, 16);
+		lblStation = new JLabel("Add Station:");
+		lblStation.setBounds(35, 10, 115, 16);
 		panel3.add(lblStation);
 		
 		sAdd = new JButton("Add");
@@ -212,13 +220,14 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		
 		
 	
-		showUserDetails(actions.getUserDetails());
+		showUserDetails(actions.getUserDetails(),actions.getStations());
+		
 		
 		
 		
 	}
 	
-	public void showUserDetails(Customer user){
+	public void showUserDetails(Customer user, ArrayList<Station> stations){
 		fnameText.setText(user.getFname());
 		lnameText.setText(user.getLname());
 		addText.setText(user.getAddress());
@@ -232,7 +241,19 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		accessCB.setSelectedIndex(user.getAtype());
 		saleCB.setSelectedItem(user.getSmodel());
 		typeCB.setSelectedItem(user.getToc());
-		if(accessCB.getSelectedIndex()==1) panel3.setVisible(true);
+		if(accessCB.getSelectedIndex()==0) {
+			access=0;
+			lblStation.setText("Change Station: ");
+			sAdd.setText("Change");
+		}
+		else{
+			access=1;
+			lblStation.setText("Add Station: ");
+			sAdd.setText("Add");
+		}
+		for(Station s: stations){
+			stationModel.addElement(s.getName());
+		}
 		
 	}
 	
@@ -250,8 +271,15 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()== accessCB)
-			if(accessCB.getSelectedIndex()==1) {
-				panel3.setVisible(true);
+			if(accessCB.getSelectedIndex()==0) {
+				access=0;
+				lblStation.setText("Change Station: ");
+				sAdd.setText("Change");
+			}
+			else{
+				access=1;
+				lblStation.setText("Add Station: ");
+				sAdd.setText("Add");
 			}
 		
 		if(e.getSource()==carAdd){
@@ -269,8 +297,6 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 			actions.removeCar((Integer)carsCB.getSelectedItem(),carsCB.getSelectedIndex());
 		}
 	}
-	
-
 }
 
 
