@@ -23,6 +23,9 @@ import myfuel.response.booleanResponse;
  *
  */
 public class UpdateDetailsActions extends GUIActions {
+	/**
+	 * Contains all the user login details(including his personal details ,etc)
+	 */
 	private UserLoginResponse res;
 	/**
 	 * this object contains the user interface
@@ -38,6 +41,11 @@ public class UpdateDetailsActions extends GUIActions {
 	 */
 	private ArrayList <Integer> origStations;
 	
+	/**
+	 * create new UpdateDetails controller , which working with the UpdateDetailsGUI.
+	 * @param client - the client object for the communication.
+	 * @param res - the UserLoginResponse object which contains all the required details.
+	 */
 	public UpdateDetailsActions(MyFuelClient client,UserLoginResponse res) {
 		super(client);
 		this.res = res;
@@ -58,6 +66,9 @@ public class UpdateDetailsActions extends GUIActions {
 		return res.getStations();
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -77,7 +88,11 @@ public class UpdateDetailsActions extends GUIActions {
 	}
 
 
-
+	/**
+	 * Verify add car input and add new car to the user list.
+	 * @param cid - car id number
+	 * @param fid - fuel id number
+	 */
 	public void verifyCar(String cid, int fid) {
 		// TODO Auto-generated method stub
 		Car c = null;
@@ -99,6 +114,11 @@ public class UpdateDetailsActions extends GUIActions {
 		else gui.showMessage("illegal Car id value!");
 	}
 	
+	/**
+	 * check if this car already in the list.
+	 * @param cid - the car id number.
+	 * @return true if exist , otherwise false.
+	 */
 	public boolean checkCar(int cid)
 	{
 		Customer user = res.getUser();
@@ -134,6 +154,11 @@ public class UpdateDetailsActions extends GUIActions {
 		}
 		}
 	
+	/**
+	 * remove selected car from the user car list.
+	 * @param cid - the car id number.
+	 * @param index - index of this car in the list.
+	 */
 	public void removeCar(int cid, int index)
 	{
 		res.getUser().getCars().remove(index);
@@ -142,7 +167,7 @@ public class UpdateDetailsActions extends GUIActions {
 	
 	
 	/**
-	 * verify all input textfields values and if all ok send register request to the server.
+	 * verify all input textfields values and if all ok send update details request to the server.
 	 * @param userid - userid value
 	 * @param fname - first name value
 	 * @param lname - last name value
@@ -211,7 +236,7 @@ public class UpdateDetailsActions extends GUIActions {
 	}
 	
 
-
+	
 	@Override
 	public void backToMenu() {
 		changeFrame(gui,new UserOptionsActions(client,res),this);
@@ -219,6 +244,11 @@ public class UpdateDetailsActions extends GUIActions {
 		
 	}
 	
+	 /**
+	  * check if the string contains only letters 'a-z'
+	  * @param name
+	  * @return true if the input OK, otherwise false.
+	  */
 	private boolean isAlpha(String name) {
 	    char[] chars = name.toCharArray();
 

@@ -10,8 +10,8 @@ import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
 /**
- * 
- * 
+ * This DB Controller responsible for changing password request.
+ * @author Maor
  *
  */
 public class ChangePasswordDBHandler extends DBHandler {
@@ -20,11 +20,11 @@ public class ChangePasswordDBHandler extends DBHandler {
 	}
 	
 	/**
-	 * 
-	 * @param id
-	 * @param oldPass
-	 * @param newPass
-	 * @return
+	 * check if oldPass is correct with DB and use updatePassword method to update the password.
+	 * @param id - userid number
+	 * @param oldPass - the old password value for identify the user
+	 * @param newPass - the new password value
+	 * @return booleanResponse (true/false and a message for the user).
 	 */
 	public Response changePassword(int id, String oldPass, String newPass){
 		PreparedStatement ps = null;
@@ -48,9 +48,9 @@ public class ChangePasswordDBHandler extends DBHandler {
 	
 
 /**
- * 
- * @param id
- * @param newPass
+ * update password via DB Query. 
+ * @param id - the userid number.
+ * @param newPass - new Password value.
  */
 	private void updatePassword(int id, String newPass) {
 		PreparedStatement ps = null;
@@ -67,6 +67,9 @@ public class ChangePasswordDBHandler extends DBHandler {
 		
 	}
 
+	/**
+	 * this method notified by the server when the appropriate request received.  
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
