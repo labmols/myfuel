@@ -36,4 +36,15 @@ public class SMActions extends GUIActions {
 		this.sid = sid;
 	}
 
+	public void CreateCheckInventoryWindow() 
+	{
+		changeFrame(gui,new CheckInventoryActions(client,sid),this);
+		
+	}
+	
+	public void CreateLowInventoryWindow()
+	{
+		changeFrame(gui,new LowInventoryActions(client,sid),this);
+	}
+
 }
