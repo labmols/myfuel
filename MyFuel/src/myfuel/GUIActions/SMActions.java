@@ -41,5 +41,10 @@ public class SMActions extends GUIActions {
 		changeFrame(gui,new CheckInventoryActions(client,sid),this);
 		
 	}
+	
+	public void CreateLowInventoryWindow()
+	{
+		changeFrame(gui,new LowInventoryActions(client,sid),this);
+	}
 
 }
