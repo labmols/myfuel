@@ -23,7 +23,7 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	/***
 	 *  Create Promotion Template DB Handler
 	 * @param server  - MyFuelServer
-	 * @param con - Connection to client
+	 * @param con - MySQL driver Connection
 	 */
 	public CPromotionTemplateDBHandler(MyFuelServer server,Connection con)
 	{

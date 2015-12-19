@@ -38,6 +38,7 @@ public class RegisterGUI extends SuperGUI {
 	private JButton btnRegister;
 	private JComboBox typeCB;
 	private JTextField addressTextField;
+	private JButton btnClear;
 
 	/**
 	 * Launch the application.
@@ -211,7 +212,8 @@ public class RegisterGUI extends SuperGUI {
 		panel5.add(lblFuelType);
 		
 		btnRegister = new JButton("Register");
-		btnRegister.setBounds(238, 389, 117, 29);
+		btnRegister.setToolTipText("Confirm register");
+		btnRegister.setBounds(241, 389, 117, 29);
 		btnRegister.addActionListener(new ButtonListener());
 		panel.add(btnRegister);
 		setContentPane(contentPane);
@@ -219,6 +221,12 @@ public class RegisterGUI extends SuperGUI {
 		
 		stationModel= new DefaultComboBoxModel<String>();
 		stationsCB.setModel(stationModel);
+		
+		btnClear = new JButton("Clear");
+		btnClear.setToolTipText("Clear all input include all added cars");
+		btnClear.setBounds(52, 389, 117, 29);
+		btnClear.addActionListener(new ButtonListener());
+		panel.add(btnClear);
 
 			
 		}
@@ -253,9 +261,28 @@ public class RegisterGUI extends SuperGUI {
 					passTextField.getPassword(),rePassTextField.getPassword(), emailTextField.getText().toString(),addressTextField.getText().toString(),
 					CCTextField.getText().toString(),typeCB.getSelectedIndex(), accessCB.getSelectedIndex(),saleModelCB.getSelectedIndex());
 		}
+		
+		if(e.getSource() == btnClear){
+			clearAll();
+			actions.resetAll();
+		}
 	}
 	
-	public void addStation(String st){
+	public void addStation(String st)
+	{
 		stationModel.addElement(st);
+	}
+	
+	public void clearAll()
+	{
+		idTextField.setText("");
+		fnameTextField.setText("");
+		lnameTextField.setText("");
+		CCTextField.setText("");
+		emailTextField.setText("");
+		passTextField.setText("");
+		rePassTextField.setText("");
+		cidTextField.setText("");
+		addressTextField.setText("");
 	}
 }
