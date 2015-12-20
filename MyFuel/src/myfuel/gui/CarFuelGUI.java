@@ -116,8 +116,8 @@ public class CarFuelGUI extends SuperGUI {
 		lblPaymentMethod.setBounds(6, 29, 130, 16);
 		panel2.add(lblPaymentMethod);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Credit Card", "Cash"}));
+		JComboBox< String> comboBox_1 = new JComboBox<String>();
+		comboBox_1.setModel(new DefaultComboBoxModel<String>(new String[] {"Credit Card", "Cash"}));
 		comboBox_1.setBounds(115, 25, 139, 27);
 		panel2.add(comboBox_1);
 		
