@@ -6,20 +6,25 @@ import java.util.Observable;
 import myfuel.client.*;
 import myfuel.gui.ConfirmationGUI;
 import myfuel.request.ConfirmationRequest;
+import myfuel.request.RequestEnum;
 import myfuel.response.ConfirmationResponse;
+import myfuel.response.booleanResponse;
 
 public class ConfirmationActions extends GUIActions {
 
 	private ConfirmationGUI gui ; 
-	private ConfirmationRequest request;
+	
 	private ArrayList<Customer> customers;
+
+	private ArrayList<Integer> approved;
 	public ConfirmationActions(MyFuelClient client)
 	{
 		super(client);
 		gui = new ConfirmationGUI(this);
-		 request = new ConfirmationRequest(1);
+		ConfirmationRequest request = new ConfirmationRequest(RequestEnum.Select);
 		 client.handleMessageFromGUI(request);
 		gui.setVisible(true);
+		approved =new ArrayList<Integer>();
 		
 	}
 	
@@ -33,13 +38,31 @@ public class ConfirmationActions extends GUIActions {
 		if(arg1 instanceof ConfirmationResponse)
 		{
 				customers = ((ConfirmationResponse)arg1).getCustomers();
-				gui.setDetails(customers.size(), customers);
-			/*	for(Customer c : customers)
+				if(customers.isEmpty())
 				{
-					System.out.println(c.getUserid() +" "+ c.getFname());
-				}*/
+					gui.showMessage("There are no customers waiting for confirmation!");
+					this.backToMenu();
+				}
+				else
+					gui.setDetails(customers.size(), customers);
+		
+		}
+		
+		else if(arg1 instanceof booleanResponse)
+		{
+		    booleanResponse res  = ((booleanResponse)arg1);
+			gui.showMessage(res.getMsg());
+			if(res.getSuccess())
+			gui.updateTable(approved);
 		}
 
+	}
+	
+	public void sendApproved(ArrayList<Integer> approved)
+	{
+		this.approved = approved;
+		ConfirmationRequest request = new ConfirmationRequest(RequestEnum.Insert,approved);
+		client.handleMessageFromGUI(request);
 	}
 
 	

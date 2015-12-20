@@ -1,34 +1,48 @@
 package myfuel.request;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class ConfirmationRequest implements Serializable{
-	
-	private int type;
+	private ArrayList<Integer> approved;
+	private RequestEnum type;
 	/***
 	 *  Create a request object 
-	 * @param type - 1 for getting unapproved customers from the DB
+	 * @param type - Select for getting unapproved customers from the DB
 	 */
-	public ConfirmationRequest (int type)
+	public ConfirmationRequest (RequestEnum type)
 	{
 		this.setType(type);
+		this.setApproved(null);
 	}
 	
 	/***
 	 * 
-	 * @return type of reuqest
+	 * @param type - Insert , updating the approved customers in the DB
+	 * @param approved - The id's of the approved customers
 	 */
-	public int getType() {
-		return type;
-	}
-	
-	/***
-	 *  set type 
-	 * @param type
-	 */
-	public void setType(int type) {
+	public ConfirmationRequest (RequestEnum type,ArrayList<Integer> approved)
+	{
+		this.approved = new ArrayList<Integer>(approved);
 		this.type = type;
 	}
+	
+	public RequestEnum getType() {
+		return type;
+	}
+	public void setType(RequestEnum type) {
+		this.type = type;
+	}
+
+	public ArrayList<Integer> getApproved() {
+		return approved;
+	}
+
+	public void setApproved(ArrayList<Integer> approved) {
+		this.approved = approved;
+	}
+	
+	
 
 }

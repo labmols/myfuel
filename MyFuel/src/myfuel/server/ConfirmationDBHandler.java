@@ -9,6 +9,7 @@ import java.util.Observable;
 
 import myfuel.client.*;
 import myfuel.request.ConfirmationRequest;
+import myfuel.request.RequestEnum;
 import myfuel.response.ConfirmationResponse;
 import myfuel.response.booleanResponse;
 
@@ -38,13 +39,35 @@ public class ConfirmationDBHandler extends DBHandler{
 				customers.add(new Customer(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4)));
 			}
 			
-		
+			answer = true;
 		} catch (SQLException e) {
 			
 			str = "An error with the server connection";
-			server.setResponse(new booleanResponse(false,str));
+			answer = false;
 			e.printStackTrace();
 		}
+	}
+	
+	private void updateApproved(ArrayList<Integer> approved) 
+	{
+		PreparedStatement ps = null;
+		try {
+			for(int id : approved)
+			{
+			ps = con.prepareStatement("update customer SET app = 1 where uid = ?");
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			}
+			answer = true;
+			str = "Customers approved successfully!";
+		} catch (SQLException e) {
+			
+			str = "An error with the server connection";
+			answer = false;
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	
@@ -57,13 +80,25 @@ public class ConfirmationDBHandler extends DBHandler{
 		if(arg1 instanceof ConfirmationRequest)
 		{
 			ConfirmationRequest rq = (ConfirmationRequest)arg1;
-			if(rq.getType() == 1)
+			
+			if(rq.getType() == RequestEnum.Select)
 			{
 				getCustomersFromDB();
-				server.setResponse(new ConfirmationResponse(customers));
+				if(answer)
+					server.setResponse(new ConfirmationResponse(customers));
+				else
+					server.setResponse(new booleanResponse(answer,str));
+			}
+			
+			else if(rq.getType() == RequestEnum.Insert)
+			{
+				
+				updateApproved(rq.getApproved());
+				server.setResponse(new booleanResponse(answer,str));
 			}
 		}
 		
 	}
+
 
 }
