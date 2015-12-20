@@ -144,10 +144,8 @@ public class LoginDBHandler extends DBHandler {
 		ResultSet rs = null;
 		Statement st = null;
 		ArrayList<Station> stations = new ArrayList<Station>();
-		ArrayList <Fuel> fuels = new ArrayList<Fuel>();
 		int id;
 		String name;
-		int minqty;
 		
 			try {
 				st = con.createStatement();
@@ -156,7 +154,6 @@ public class LoginDBHandler extends DBHandler {
 				while(rs.next()){
 					id = rs.getInt(1);
 					name = rs.getString(2);
-					minqty = rs.getInt(3);
 					stations.add(new Station(id,name));
 					}
 			} catch (SQLException e) {
