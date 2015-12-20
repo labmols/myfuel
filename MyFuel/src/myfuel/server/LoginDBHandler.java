@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import myfuel.client.Car;
+import myfuel.client.Fuel;
 import myfuel.client.Station;
 import myfuel.request.LoginRequest;
 import myfuel.request.registerRequest;
@@ -143,9 +144,11 @@ public class LoginDBHandler extends DBHandler {
 		ResultSet rs = null;
 		Statement st = null;
 		ArrayList<Station> stations = new ArrayList<Station>();
+		ArrayList <Fuel> fuels = new ArrayList<Fuel>();
 		int id;
 		String name;
-	
+		int minqty;
+		
 			try {
 				st = con.createStatement();
 				String query = "select * from station";
@@ -153,6 +156,7 @@ public class LoginDBHandler extends DBHandler {
 				while(rs.next()){
 					id = rs.getInt(1);
 					name = rs.getString(2);
+					minqty = rs.getInt(3);
 					stations.add(new Station(id,name));
 					}
 			} catch (SQLException e) {

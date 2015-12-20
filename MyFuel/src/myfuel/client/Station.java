@@ -8,20 +8,14 @@ public class Station implements Serializable {
 	private String sname;
     private ArrayList<Fuel> fuels;
 	private int minqty;
-	public Station(int sid,String sname, ArrayList<Fuel> fuels ){
-		this.sid = sid;
-		this.setFuels(fuels);
-		this.sname = sname;
-	}
-	
+
 	public Station(int sid,String sname ){
 		this.sid = sid;
 		setFuels(null);
 		this.sname = sname;
 	}
 	
-	public Station(int sid, String sname, int minqty) {
-		// TODO Auto-generated constructor stub
+	public Station(int sid, String sname, int minqty, ArrayList<Fuel> fuels) {
 		this.sid = sid;
 		this.sname = sname;
 		this.minqty= minqty;
