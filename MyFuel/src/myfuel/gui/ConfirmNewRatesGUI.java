@@ -206,22 +206,22 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 		Fuel f = null;
 		
 		f = fuels.get(0);
-		sug_95.setText(""+f.getFprice());
+		sug_95.setText(""+f.getSuggPrice());
 		cur_95.setText(""+ f.getCurrPrice());
 		max_95.setText(""+f.getMaxPrice());
 		
 		f = fuels.get(1);
-		sug_diesel.setText(""+f.getFprice());
+		sug_diesel.setText(""+f.getSuggPrice());
 		cur_diesel.setText(""+ f.getCurrPrice());
 		max_diesel.setText(""+f.getMaxPrice());
 		
 		f = fuels.get(2);
-		sug_scooter.setText(""+f.getFprice());
+		sug_scooter.setText(""+f.getSuggPrice());
 		cur_scooter.setText(""+ f.getCurrPrice());
 		max_scooter.setText(""+f.getMaxPrice());
 		
 		f = fuels.get(3);
-		sug_home.setText(""+f.getFprice());
+		sug_home.setText(""+f.getSuggPrice());
 		cur_home.setText(""+ f.getCurrPrice());
 		max_home.setText(""+f.getMaxPrice());
 		

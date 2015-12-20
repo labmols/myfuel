@@ -4,26 +4,25 @@ import java.io.Serializable;
 
 public class Fuel implements Serializable {
 	private int fid;
-	private float fprice;
+	private float suggPrice;
 	private float maxPrice;
 	private float currPrice;
-	private int qty;
+
 	public Fuel(int fid, float fprice){
 		this.setFid(fid);
-		this.setFprice(fprice);
+		this.setSuggPrice(fprice);
 	}
 	/***
-	 *  This constructor will create the fuel type with its charetaristics
+	 *  This constructor will create the fuel type with its values
 	 * @param fid  - fuel id 
-	 * @param fprice - fuel price 
+	 * @param suggPrice - fuel price 
 	 * @param maxPrice - maximal price
 	 * @param qty - quantity
 	 */
-	public Fuel(int fid, float fprice,float maxPrice, int qty){
+	public Fuel(int fid, float suggPrice,float maxPrice){
 		this.setFid(fid);
-		this.setFprice(fprice);
+		this.setSuggPrice(suggPrice);
 		this.setMaxPrice(maxPrice);
-		this.setQty(qty);
 	}
 	/***
 	 * This constructor will be used for bringing suggested rates from the DB
@@ -34,7 +33,7 @@ public class Fuel implements Serializable {
 	
 	public Fuel(float fprice,float currPrice,float maxPrice)
 	{
-		this.fprice = fprice;
+		this.suggPrice = fprice;
 		this.currPrice = currPrice;
 		this.maxPrice = maxPrice;
 	}
@@ -60,8 +59,8 @@ public class Fuel implements Serializable {
 	 * @return
 	 */
 
-	public float getFprice() {
-		return fprice;
+	public float getSuggPrice() {
+		return suggPrice;
 	}
 	
 	/***
@@ -69,25 +68,11 @@ public class Fuel implements Serializable {
 	 * @param fprice
 	 */
 
-	public void setFprice(float fprice) {
-		this.fprice = fprice;
+	public void setSuggPrice(float fprice) {
+		this.suggPrice = fprice;
 	}
 
-	/**
-	 * 
-	 * @return quantity
-	 */
-	public int getQty() {
-		return qty;
-	}
 
-	/***
-	 * set quantity
-	 * @param qty
-	 */
-	public void setQty(int qty) {
-		this.qty = qty;
-	}
 
 	/***
 	 * 
@@ -120,5 +105,6 @@ public class Fuel implements Serializable {
 	public void setCurrPrice(float currPrice) {
 		this.currPrice = currPrice;
 	}
+
 	
 }

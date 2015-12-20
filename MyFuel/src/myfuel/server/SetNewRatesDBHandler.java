@@ -34,7 +34,7 @@ public class SetNewRatesDBHandler extends DBHandler{
 			rs = ps.executeQuery();
 			while(rs.next())
 			{
-				OldRates.add(new Fuel(rs.getInt(1),rs.getFloat(3),rs.getFloat(4),-1));
+				OldRates.add(new Fuel(rs.getInt(1),rs.getFloat(3),rs.getFloat(4)));
 			}
 		
 		} catch (SQLException e) {
@@ -60,7 +60,7 @@ public class SetNewRatesDBHandler extends DBHandler{
 					for(Fuel f: request.getNewRates()){
 						ps= con.prepareStatement("insert into suggest_fuel values(?,?)");
 						ps.setInt(1,f.getFid());
-						ps.setFloat(2,f.getFprice());
+						ps.setFloat(2,f.getSuggPrice());
 						ps.executeUpdate();
 					}
 				}

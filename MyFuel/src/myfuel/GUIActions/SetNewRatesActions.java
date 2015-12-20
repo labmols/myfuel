@@ -29,13 +29,13 @@ public class SetNewRatesActions extends GUIActions {
 	public void verifyDetails(float F95,float FDiesel,float FScooter,float FHomeFuel){
 		Fuel f;
 		f=NewRates.get(0);
-		f.setFprice(F95);
+		f.setSuggPrice(F95);
 		f=NewRates.get(1);
-		f.setFprice(FDiesel);
+		f.setSuggPrice(FDiesel);
 		f=NewRates.get(2);
-		f.setFprice(FScooter);
+		f.setSuggPrice(FScooter);
 		f=NewRates.get(3);
-		f.setFprice(FHomeFuel);
+		f.setSuggPrice(FHomeFuel);
 		request = new SetNewRatesRequest(1,NewRates);
 		client.handleMessageFromGUI(request);
 	}

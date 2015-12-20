@@ -209,16 +209,16 @@ public class SetNewRatesGUI extends SuperGUI {
 	{
 		Fuel f;
 		f=newdetails.get(0);
-		Current_F95.setText(""+f.getFprice());
+		Current_F95.setText(""+f.getSuggPrice());
 		Max_F95.setText(""+f.getMaxPrice());
 		f=newdetails.get(1);
-		Current_FDiesel.setText(""+f.getFprice());
+		Current_FDiesel.setText(""+f.getSuggPrice());
 		Max_FDiesel.setText(""+f.getMaxPrice());
 		f=newdetails.get(2);
-		Current_FScooter.setText(""+f.getFprice());
+		Current_FScooter.setText(""+f.getSuggPrice());
 		Max_FScooter.setText(""+f.getMaxPrice());
 		f=newdetails.get(3);
-		Current_HomeFuel.setText(""+f.getFprice());
+		Current_HomeFuel.setText(""+f.getSuggPrice());
 		Max_FHomeFuel.setText(""+f.getMaxPrice());
 	}
 }

@@ -9,6 +9,11 @@ public class CarFuelDBHandler extends DBHandler{
 		super(server, con);
 		// TODO Auto-generated constructor stub
 	}
+	
+	private void getInventory()
+	{
+		
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
