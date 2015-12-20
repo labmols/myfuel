@@ -29,6 +29,7 @@ public class MDGUI extends SuperGUI {
 		panel.add(btnCreatePromotionTemplate);
 		
 		 btnConfirmNewCustomers = new JButton("Confirm New Customers");
+		 btnConfirmNewCustomers.addActionListener(new btnHandler());
 		btnConfirmNewCustomers.setBounds(182, 269, 199, 61);
 		panel.add(btnConfirmNewCustomers);
 		this.actions=actions;
@@ -46,17 +47,24 @@ public class MDGUI extends SuperGUI {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == btnCreatePromotionTemplate )
-			{
-				actions.createPromotionTemplate();
-			}
+			getInput(e);
 			
 		}
 		
 	}
 	@Override
 	public void getInput(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		if(e.getSource() == btnCreatePromotionTemplate )
+		{
+			actions.createPromotionTemplate();
+		}
+		
+		else if(e.getSource() == btnConfirmNewCustomers)
+		{
+			actions.createConfirmationWindow();
+		}
+		
 		
 	}
 }
