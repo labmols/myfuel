@@ -35,6 +35,22 @@ public class Customer implements Serializable{
 		this.setAddress(address);
 	}
 	
+		/***
+		 *  This constructor will be used to build a Customer object to show 
+		 *  unapproved customers to the Marketing Delegate
+		 * @param userid  - user id 
+		 * @param fname  - first name
+		 * @param lname  - last name
+		 * @param toc  - type of customer
+		 */
+	public Customer(int userid, String fname, String lname, int toc) 
+	{
+		this.userid = userid;
+		this.fname = fname;
+		this.lname = lname;
+		this.toc = toc;
+	}
+
 
 	public int getUserid() {
 		return userid;

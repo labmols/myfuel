@@ -17,14 +17,16 @@ public class MDActions extends GUIActions{
 	}
 	
 
-
+	/***
+	 * Creates Promotion template window for the marketing delegate
+	 */
 	public void createPromotionTemplate()
 	{
 		changeFrame(gui,new CPromotionTemplateActions(client),this);
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -33,6 +35,16 @@ public class MDActions extends GUIActions{
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	/***
+	 * Creates customer's confirmation  window for the marketing delegate
+	 */
+
+	public void createConfirmationWindow() 
+	{
+		changeFrame(gui,new ConfirmationActions(client),this);
 		
 	}
 

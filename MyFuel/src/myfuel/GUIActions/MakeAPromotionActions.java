@@ -70,19 +70,24 @@ public class MakeAPromotionActions extends GUIActions {
 		
 		Date date = new Date();
 		
-		if(end.before(start))
-			gui.showMessage("End time can't be before Start time");
-		
-		else if(start.before(date))
-			gui.showMessage("Illegal Start Time!");
-		
+		if(start == null || end == null)
+			gui.showMessage("You have to pick start date and end date");
 		else
 		{
-			PromotionTemplate p =  gui.getP();
-			request = new MakeaPromotionRequest(1,p.getTid(),start,end);
-			client.handleMessageFromGUI(request);
+			if(end.before(start))
+				gui.showMessage("End time can't be before Start time");
 			
+			else if(start.before(date))
+				gui.showMessage("Illegal Start Time!");
+			
+			else
+			{
+				PromotionTemplate p =  gui.getP();
+				request = new MakeaPromotionRequest(1,p.getTid(),start,end);
+				client.handleMessageFromGUI(request);
+			}
 		}
+		
 		
 	}
 

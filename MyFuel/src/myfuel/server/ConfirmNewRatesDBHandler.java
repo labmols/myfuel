@@ -47,6 +47,7 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 				answer = false;
 				str = "There are no suggested rates";
 			}
+			
 			else
 			{
 				
