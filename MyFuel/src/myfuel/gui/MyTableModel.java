@@ -23,4 +23,12 @@ public class MyTableModel extends DefaultTableModel {
 			return Boolean.class;
 		}
 	}
+	
+	@Override
+	public boolean isCellEditable(int row, int column) {
+	       //all cells false
+			if(column < 4)
+	       return false;
+			return true;
+	    }
 }
