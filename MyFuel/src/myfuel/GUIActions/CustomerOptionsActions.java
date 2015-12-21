@@ -12,13 +12,13 @@ import myfuel.gui.CustomerOptionsGUI;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 
-public class UserOptionsActions extends GUIActions {
+public class CustomerOptionsActions extends GUIActions {
 	
 	
 	private CustomerOptionsGUI gui;
 	private UserLoginResponse res;
 	
-	public UserOptionsActions(MyFuelClient client , UserLoginResponse res)
+	public CustomerOptionsActions(MyFuelClient client , UserLoginResponse res)
 	{	
 		super(client);
 		gui =new CustomerOptionsGUI(this);

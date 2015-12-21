@@ -69,7 +69,7 @@ public class CarFuelActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,new UserOptionsActions(client,res),this);
+		changeFrame(gui,new CustomerOptionsActions(client,res),this);
 		
 	}
 

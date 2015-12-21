@@ -16,21 +16,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import myfuel.GUIActions.UserOptionsActions;
+import myfuel.GUIActions.CustomerOptionsActions;
 
 
 @SuppressWarnings("serial")
 public class CustomerOptionsGUI extends SuperGUI {
 
 	
-	private UserOptionsActions actions;
+	private CustomerOptionsActions actions;
 	private JButton btnChangePassword ;
 	private JButton btnUpdateDetails;
 	private JButton btnCarFuel;
 	/**
 	 * Create the frame.
 	 */
-	public CustomerOptionsGUI(UserOptionsActions actions) {
+	public CustomerOptionsGUI(CustomerOptionsActions actions) {
 	
 		lblTitle.setBounds(211, 6, 207, 19);
 		lblTitle.setText("Customer Options");
