@@ -46,16 +46,15 @@ public class CarFuelDBHandler extends DBHandler{
 				
 			for(Station s : stations)
 			{
+			fQty = new ArrayList<Float>();
+			mQty = new ArrayList<Float>();
 			ps= con.prepareStatement("select fqty,mqty from station_inventory where sid=?");
 			ps.setInt(1, s.getsid());
 			rs= ps.executeQuery();
 			while(rs.next()) // all the sid fuel qty
 			{
-				fQty = new ArrayList<Float>();
-				mQty = new ArrayList<Float>();
 				fQty.add(rs.getFloat(1));
 				mQty.add(rs.getFloat(2));
-				
 			}
 			
 			StationInventory si = new StationInventory(s,fQty,mQty);
