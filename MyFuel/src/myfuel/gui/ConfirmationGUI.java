@@ -33,7 +33,6 @@ public class ConfirmationGUI extends SuperGUI{
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(57, 72, 501, 264);
 		panel.add(scrollPane);
-		scrollPane.setOpaque(false);
 		model = new MyTableModel();
 		String[] columns = new String[] {"ID", "First Name", "Last Name", "Type", "Approve/Deny"};
 	 c2 = new JCheckBox();
