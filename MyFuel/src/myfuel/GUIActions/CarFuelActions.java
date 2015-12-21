@@ -43,7 +43,7 @@ public class CarFuelActions extends GUIActions {
 		if(arg instanceof CarFuelResponse)
 		{
 			CarFuelResponse res = (CarFuelResponse) arg;
-			sInventory = new ArrayList<StationInventory>(res.getSi());
+			sInventory = new ArrayList <StationInventory>(res.getSi());
 		}
 	}
 

@@ -1,8 +1,10 @@
 package myfuel.client;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StationInventory {
+@SuppressWarnings("serial")
+public class StationInventory implements Serializable {
 	private Station s;
 	private ArrayList <Float> fQty;
 	private ArrayList <Float> mQty;
