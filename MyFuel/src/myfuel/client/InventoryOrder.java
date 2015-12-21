@@ -8,28 +8,20 @@ import java.util.ArrayList;
 public class InventoryOrder implements Serializable{
 	
 	private Station station; 
-	private ArrayList<Float> qty ;
-	private ArrayList<String> fnames;
+	private ArrayList<FuelQty> fQty;
 	/***
 	 * 
 	 * @param station  - stations id and name
 	 * @param qty   - fuel quantities
 	 * @param fnames - fuel name
 	 */
-	public InventoryOrder(Station station, ArrayList<Float> qty, ArrayList<String> fnames )
+	public InventoryOrder(Station station, ArrayList<FuelQty>fQty )
 	{
-		this.setFnames(fnames);
+		this.setfQty(fQty);
 		this.setStation(station);
-		this.setQty(qty) ; 
+		 
 	}
 
-	public ArrayList<Float> getQty() {
-		return qty;
-	}
-
-	public void setQty(ArrayList<Float> qty) {
-		this.qty = qty;
-	}
 
 	public Station getStation() {
 		return station;
@@ -39,13 +31,18 @@ public class InventoryOrder implements Serializable{
 		this.station = station;
 	}
 
-	public ArrayList<String> getFnames() {
-		return fnames;
+
+	public ArrayList<FuelQty> getfQty() {
+		return fQty;
 	}
 
-	public void setFnames(ArrayList<String> fnames) {
-		this.fnames = fnames;
+
+	public void setfQty(ArrayList<FuelQty> fQty) {
+		this.fQty = fQty;
 	}
-	
+
+
+
+
 
 }

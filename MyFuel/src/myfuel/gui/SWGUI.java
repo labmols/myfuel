@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.SWActions;
+import myfuel.client.FuelQty;
 import myfuel.client.InventoryOrder;
 
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 
@@ -32,8 +34,8 @@ public class SWGUI extends SuperGUI{
 	private String str;
 	private JTable table;
 	private DefaultTableModel model;
-	private ArrayList<Float> q = null;
-	private ArrayList<String> s = null;
+	private InventoryOrder qty = null;
+	
 	
 	
 	public SWGUI(SWActions actions)
@@ -57,7 +59,7 @@ public class SWGUI extends SuperGUI{
 
 		scrollPane.setViewportView(table);
 		table.setModel(model);
-		String[] names = {"Type of Fuel","Quantity"};
+		String[] names = {"Fuel ID","Type of Fuel","Quantity"};
 		
 		for(int i=0 ; i<names.length; i++)
 			model.addColumn(names[i]);
@@ -71,11 +73,9 @@ public class SWGUI extends SuperGUI{
 	{
 		str = "Inventory Orders for"+" "+ order.getStation().getName();
 		lblTitle.setText(str);
-		 q = order.getQty();
-		 s = order.getFnames();
-		
-		for(int i = 0 ; i < s.size() ; i ++ )
-			model.insertRow(model.getRowCount(), new Object[] {s.get(i),q.get(i)});
+		this.qty = order;
+		 for(FuelQty q : order.getfQty())
+			model.insertRow(model.getRowCount(), new Object[] {q.getFid(),q.getFname(),q.getQty()});
 		
 	
 	}
@@ -93,7 +93,7 @@ public class SWGUI extends SuperGUI{
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			if( q != null && s!= null)
+			if( qty != null )
 				getInput(e);
 			
 			

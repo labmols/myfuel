@@ -13,7 +13,6 @@ import myfuel.response.inventoryResponse;
 
 public class SWDBHandler extends DBHandler{
 	private int sid;
-	private int[] q;
 	private boolean answer;
 	private String str;
 	private InventoryOrder order;
@@ -57,6 +56,9 @@ public class SWDBHandler extends DBHandler{
 		
 	}
 
+	/***
+	 * add fuel supply to the inventory of the station
+	 */
 	private void addInventoryOrder()
 	{
 		PreparedStatement ps = null;
@@ -106,14 +108,15 @@ public class SWDBHandler extends DBHandler{
 	}
 
 
-
+/***
+ * get new orders from the DB
+ */
 	private void getNewOrders() 
 	{
-		ResultSet rs ,check;
+		ResultSet rs ;
 		PreparedStatement ps = null;
 		Station s = null ;
-		ArrayList<Float> qty = new ArrayList<Float>();
-		ArrayList<String> fnames = new ArrayList<String>();
+		ArrayList<FuelQty> qty = new ArrayList<FuelQty>();
 		try{
 			
 			ps = con.prepareStatement("select sname from station where sid = ?");
@@ -126,7 +129,7 @@ public class SWDBHandler extends DBHandler{
 				s = new Station(this.sid,rs.getString(1));
 			}
 			
-			ps = con.prepareStatement("select f.fname,i.qty"
+			ps = con.prepareStatement("select f.fname,i.qty,i.fuelid"
 									+ " from inventory_order as i ,fuel_price as f "
 											+ "where i.sid = ? and i.status = 1 "
 												+ "and f.fuelid = i.fuelid");
@@ -134,20 +137,21 @@ public class SWDBHandler extends DBHandler{
 			
 			rs = ps.executeQuery();
 			
-			if(!rs.first())
+		if(!rs.next())
 			{
 				answer = false;
 				str = "There are no new Inventory Orders!";
 				return;
-			}
+			} 
+		
+			rs.previous();
 			
 			while(rs.next())
 			{
-				fnames.add(rs.getString(1));
-				qty.add(rs.getFloat(2));
+				qty.add(new FuelQty(rs.getString(1),rs.getInt(3),rs.getInt(2)));
 			}
 			
-			 order = new InventoryOrder(s,qty,fnames);
+			 order = new InventoryOrder(s,qty);
 			 answer = true;
 			
 		}catch(SQLException e)

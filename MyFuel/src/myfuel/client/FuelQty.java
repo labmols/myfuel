@@ -1,6 +1,9 @@
 package myfuel.client;
 
-public class FuelQty {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class FuelQty implements Serializable{
 	private int fid;
 	private String fname;
 	private float qty;
@@ -11,6 +14,13 @@ public class FuelQty {
 		setFid(fid);
 		setQty(qty);
 		setMqty(mqty);
+	}
+	
+	public FuelQty(String fname,int fid , float qty )
+	{
+		this.fname = fname;
+		this.fid = fid;
+		this.qty = qty;
 	}
 	
 	public int getFid() {
