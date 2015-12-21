@@ -1,41 +1,25 @@
 package myfuel.client;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StationInventory {
+@SuppressWarnings("serial")
+public class StationInventory implements Serializable {
 	private Station s;
-	private ArrayList <Float> fQty;
-	private ArrayList <Float> mQty;
-	
+	private ArrayList <FuelQty> fQty;
 	/**
 	 * 
 	 * @param s
 	 * @param fQty
 	 * @param mQty
 	 */
-		public StationInventory(Station s, ArrayList <Float> fQty, ArrayList <Float> mQty)
+		public StationInventory(Station s, ArrayList <FuelQty> fQty)
 		{
-			fQty = new ArrayList<Float>(fQty);
-			mQty = new ArrayList<Float>(mQty);
+			this.setfQty(new ArrayList<FuelQty>(fQty));
 			this.s = s;
 		}
 
-	public ArrayList <Float> getfQty() {
-		return fQty;
-	}
-
-	public void setfQty(ArrayList <Float> fQty) {
-		this.fQty = fQty;
-	}
-
-	public ArrayList <Float> getmQty() {
-		return mQty;
-	}
-
-	public void setmQty(ArrayList <Float> mQty) {
-		this.mQty = mQty;
-	}
-
+	
 	public Station getS() {
 		return s;
 	}
@@ -43,6 +27,18 @@ public class StationInventory {
 	public void setS(Station s) {
 		this.s = s;
 	}
+
+
+	public ArrayList <FuelQty> getfQty() {
+		return fQty;
+	}
+
+
+	public void setfQty(ArrayList <FuelQty> fQty) {
+		this.fQty = fQty;
+	}
+
+
 
 	
 }

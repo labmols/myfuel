@@ -27,14 +27,14 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 
 public class CarFuelGUI extends SuperGUI {
 
 	
 	private JTextField qtyText;
-	private JTextField cashTextField;
-	private JTextField changeTextField;
 	CarFuelActions actions;
 	JProgressBar progressBar;
 	/**
@@ -49,47 +49,6 @@ public class CarFuelGUI extends SuperGUI {
 		
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		
-		JLabel lblChooseStation = new JLabel("Choose Station:");
-		lblChooseStation.setBackground(Color.RED);
-		lblChooseStation.setBounds(43, 93, 99, 16);
-		panel.add(lblChooseStation);
-		
-		JLabel lblChooseFuelPump = new JLabel("Choose Fuel Pump:");
-		lblChooseFuelPump.setBounds(28, 121, 130, 16);
-		panel.add(lblChooseFuelPump);
-		
-		JRadioButton rbdiesel = new JRadioButton("Diesel");
-		rbdiesel.setBackground(Color.ORANGE);
-		rbdiesel.setBounds(159, 160, 141, 23);
-		panel.add(rbdiesel);
-		
-		JRadioButton rb95 = new JRadioButton("95");
-		rb95.setBackground(Color.ORANGE);
-		rb95.setBounds(159, 117, 141, 23);
-		panel.add(rb95);
-		
-		JRadioButton rbscooter = new JRadioButton("Scooter");
-		rbscooter.setBackground(Color.ORANGE);
-		rbscooter.setBounds(159, 138, 141, 23);
-		panel.add(rbscooter);
-		
-		JComboBox stationCombo = new JComboBox();
-		stationCombo.setBounds(153, 89, 84, 27);
-		panel.add(stationCombo);
-		
-		JLabel lblQuantity = new JLabel("Quantity:");
-		lblQuantity.setBounds(89, 200, 61, 16);
-		panel.add(lblQuantity);
-		
-		qtyText = new JTextField();
-		qtyText.setBounds(161, 195, 76, 26);
-		panel.add(qtyText);
-		qtyText.setColumns(10);
-		
-		JButton btnStartFuel = new JButton("Start Fueling");
-		btnStartFuel.setBounds(99, 230, 117, 29);
-		panel.add(btnStartFuel);
-		
 		
 		JPanel p = new JPanel();
 		p.setOpaque(false);
@@ -101,65 +60,87 @@ public class CarFuelGUI extends SuperGUI {
 		FuelDialog dialog = new FuelDialog(40,(float)5.8);
 		
 		JPanel panel2 = new JPanel();
-		panel2.setVisible(false);
-		panel2.setBackground(Color.WHITE);
-		panel2.setBounds(312, 87, 278, 182);
-		panel.add(panel2);
+		panel2.setBounds(49, 58, 521, 366);
 		panel2.setOpaque(false);
+		panel.add(panel2);
 		panel2.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Price:");
-		lblNewLabel.setBounds(6, 6, 61, 16);
-		panel2.add(lblNewLabel);
+		JLabel lblChooseStation = new JLabel("Choose Station:");
+		lblChooseStation.setBounds(40, 9, 99, 16);
+		panel2.add(lblChooseStation);
+		lblChooseStation.setBackground(Color.RED);
 		
-		JLabel lblPaymentMethod = new JLabel("Payment Method:");
-		lblPaymentMethod.setBounds(6, 29, 130, 16);
-		panel2.add(lblPaymentMethod);
+		JComboBox stationCombo = new JComboBox();
+		stationCombo.setBounds(161, 5, 94, 27);
+		panel2.add(stationCombo);
 		
-		JComboBox< String> comboBox_1 = new JComboBox<String>();
-		comboBox_1.setModel(new DefaultComboBoxModel<String>(new String[] {"Credit Card", "Cash"}));
-		comboBox_1.setBounds(115, 25, 139, 27);
-		panel2.add(comboBox_1);
+		JLabel lblChooseFuelPump = new JLabel("Choose Fuel Pump:");
+		lblChooseFuelPump.setBounds(19, 47, 130, 16);
+		panel2.add(lblChooseFuelPump);
 		
-		JButton btnPay = new JButton("Pay");
-		btnPay.setBounds(62, 141, 117, 29);
-		panel2.add(btnPay);
 		
-		JPanel panel3 = new JPanel();
-		panel3.setBounds(6, 57, 248, 77);
-		panel2.add(panel3);
-		panel3.setLayout(null);
 		
-		JLabel lblInsertCash = new JLabel("Insert Cash:");
-		lblInsertCash.setBounds(6, 11, 76, 16);
-		panel3.add(lblInsertCash);
 		
-		cashTextField = new JTextField();
-		cashTextField.setColumns(10);
-		cashTextField.setBounds(78, 6, 76, 26);
-		panel3.add(cashTextField);
+		 java.net.URL url = getClass().getResource("/fuel.png");
+
+		XRadioButton rb95 = new XRadioButton();
+		rb95.getLabel().setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		rb95.getLabel().setBounds(34, 0, 179, 62);
+		rb95.getRadioButton().setBounds(6, 0, 28, 23);
+		rb95.setOpaque(false);
+		rb95.setBounds(161, 44, 241, 62);
+		rb95.setText("95");
+	
+		rb95.setIcon(new ImageIcon(url));
+		panel2.add(rb95);
+		rb95.setLayout(null);
+
 		
-		JLabel lblChange = new JLabel("Change:");
-		lblChange.setBounds(6, 44, 61, 16);
-		panel3.add(lblChange);
+		XRadioButton rbdiesel = new XRadioButton();
+		rbdiesel.getLabel().setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		rbdiesel.getLabel().setBounds(39, 0, 202, 62);
+		rbdiesel.getRadioButton().setBounds(6, 0, 28, 23);
+		rbdiesel.setOpaque(false);
+		rbdiesel.setBounds(161, 188, 241, 62);
+		rbdiesel.setText("Diesel");
+		rbdiesel.setIcon(new ImageIcon(url));
+		panel2.add(rbdiesel);
+		rbdiesel.setLayout(null);
 		
-		changeTextField = new JTextField();
-		changeTextField.setColumns(10);
-		changeTextField.setBounds(78, 39, 76, 26);
-		panel3.add(changeTextField);
-		panel3.setOpaque(false);
+		
+		
+		XRadioButton rbscooter = new XRadioButton();
+		rbscooter.getLabel().setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		rbscooter.getLabel().setBounds(36, 0, 199, 62);
+		rbscooter.getRadioButton().setBounds(6, 0, 28, 23);
+		rbscooter.setOpaque(false);
+		rbscooter.setBounds(161, 114, 241, 62);
+		rbscooter.setText("Scooter");
+		rbscooter.setIcon(new ImageIcon(url));
+		panel2.add(rbscooter);
+		rbscooter.setLayout(null);
+		
+		
+		
+		JLabel lblQuantity = new JLabel("Quantity:");
+		lblQuantity.setBounds(99, 274, 61, 16);
+		panel2.add(lblQuantity);
+		
+		qtyText = new JTextField();
+		qtyText.setBounds(171, 269, 76, 26);
+		panel2.add(qtyText);
+		qtyText.setColumns(10);
+		
+		JButton btnStartFuel = new JButton("Start Fueling");
+		btnStartFuel.setBounds(196, 331, 117, 29);
+		panel2.add(btnStartFuel);
+		
 		
 		btnStartFuel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel2.setVisible(true);
-				
-				
 				dialog.setVisible(true);
-				//new Thread(ju).start();
 			}
 		});
-		
-		
 		
 	}
 
@@ -168,6 +149,4 @@ public class CarFuelGUI extends SuperGUI {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
 }

@@ -10,12 +10,12 @@ public class CarFuelResponse extends Response {
 	
 	public CarFuelResponse(ArrayList <StationInventory> si)
 	{
-		si = new ArrayList<StationInventory>(si);
+		this.si = new ArrayList<StationInventory>(si);
 	}
 
 
 	public ArrayList <StationInventory> getSi() {
-		return si;
+		return this.si;
 	}
 
 
