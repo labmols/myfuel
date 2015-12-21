@@ -8,10 +8,6 @@ public class Fuel implements Serializable {
 	private float maxPrice;
 	private float currPrice;
 
-	public Fuel(int fid, float fprice){
-		this.setFid(fid);
-		this.setSuggPrice(fprice);
-	}
 	/***
 	 *  This constructor will create the fuel type with its values
 	 * @param fid  - fuel id 
@@ -26,14 +22,14 @@ public class Fuel implements Serializable {
 	}
 	/***
 	 * This constructor will be used for bringing suggested rates from the DB
-	 * @param fprice - suggested price
+	 * @param suggPrice - suggested price
 	 * @param currPrice - current price
 	 * @param maxPrice - maximal price
 	 */
 	
-	public Fuel(float fprice,float currPrice,float maxPrice)
+	public Fuel(float suggPrice,float currPrice,float maxPrice)
 	{
-		this.suggPrice = fprice;
+		this.suggPrice = suggPrice;
 		this.currPrice = currPrice;
 		this.maxPrice = maxPrice;
 	}
