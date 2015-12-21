@@ -25,24 +25,37 @@ public class CarFuelDBHandler extends DBHandler{
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private ArrayList <Fuel> getFuels()
 	{
+		ArrayList<Fuel> fuels = new ArrayList<Fuel>();
 		ResultSet rs = null;
 		Statement st = null;
 		String sql;
 		
 		try {
 			st= con.createStatement();
-			sql = "select fuelid,fname,price from station";
+			sql = "select fuelid,price from fuel_price";
 			rs = st.executeQuery(sql);
+			
+			while(rs.next())
+				fuels.add(new Fuel (rs.getInt(1), rs.getFloat(2)));
+			return fuels;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-		return null;
+	
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private ArrayList <StationInventory> getInventory()
 	{
 		ArrayList <StationInventory> sInventory = new ArrayList<StationInventory>();
@@ -69,9 +82,10 @@ public class CarFuelDBHandler extends DBHandler{
 			ps= con.prepareStatement("select fuelid,fqty,mqty from station_inventory where sid=?");
 			ps.setInt(1, s.getsid());
 			rs= ps.executeQuery();
-			while(rs.next()) // all the sid fuel qty
+			while(rs.next())
 			{
-				FuelQty fqty = new FuelQty(rs.getInt(1), rs.getFloat(2), rs.getFloat(3));
+				FuelQty fq = new FuelQty(rs.getInt(1), rs.getFloat(2), rs.getFloat(3));
+				fQty.add(fq);
 			}
 			
 			StationInventory si = new StationInventory(s,fQty);
@@ -97,7 +111,10 @@ public class CarFuelDBHandler extends DBHandler{
 			CarFuelRequest req = (CarFuelRequest) arg;
 			if(req.getType() == RequestEnum.Select)
 			{
-				//server.setResponse(getInventory());
+				ArrayList <Fuel> fuels = getFuels();
+				ArrayList <StationInventory> si = getInventory();
+				CarFuelResponse res = new CarFuelResponse (si,fuels);
+				server.setResponse(res);
 			}
 			
 		}

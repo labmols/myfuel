@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.Customer;
+import myfuel.client.Fuel;
 import myfuel.client.MyFuelClient;
 import myfuel.client.StationInventory;
 import myfuel.gui.CarFuelGUI;
@@ -17,11 +18,14 @@ public class CarFuelActions extends GUIActions {
 	private CarFuelGUI gui;
 	private UserLoginResponse res;
 	private ArrayList <StationInventory> sInventory;
+	private ArrayList <Fuel> fuels;
+	
 	public CarFuelActions(MyFuelClient client,UserLoginResponse res) {
 		super(client);
 		gui = new CarFuelGUI(this);
 		this.res = res;
 		sInventory = null;
+		fuels = null;
 		getInventoryRequest();
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
@@ -46,6 +50,7 @@ public class CarFuelActions extends GUIActions {
 		{
 			CarFuelResponse res = (CarFuelResponse) arg;
 			sInventory = new ArrayList <StationInventory>(res.getSi());
+			fuels = new ArrayList<Fuel>(res.getFuels());
 		}
 	}
 
