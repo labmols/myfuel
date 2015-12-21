@@ -8,20 +8,20 @@ import myfuel.client.MyFuelClient;
 import myfuel.client.Station;
 import myfuel.gui.ChangePasswordGUI;
 import myfuel.gui.UpdateUserDetailsGUI;
-import myfuel.gui.UserOptionsGUI;
+import myfuel.gui.CustomerOptionsGUI;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;
 
 public class UserOptionsActions extends GUIActions {
 	
 	
-	private UserOptionsGUI gui;
+	private CustomerOptionsGUI gui;
 	private UserLoginResponse res;
 	
 	public UserOptionsActions(MyFuelClient client , UserLoginResponse res)
 	{	
 		super(client);
-		gui =new UserOptionsGUI(this);
+		gui =new CustomerOptionsGUI(this);
 		gui.setVisible(true);
 		this.res = res;
 	}

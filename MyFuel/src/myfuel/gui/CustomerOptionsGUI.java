@@ -20,7 +20,7 @@ import myfuel.GUIActions.UserOptionsActions;
 
 
 @SuppressWarnings("serial")
-public class UserOptionsGUI extends SuperGUI {
+public class CustomerOptionsGUI extends SuperGUI {
 
 	
 	private UserOptionsActions actions;
@@ -30,10 +30,10 @@ public class UserOptionsGUI extends SuperGUI {
 	/**
 	 * Create the frame.
 	 */
-	public UserOptionsGUI(UserOptionsActions actions) {
+	public CustomerOptionsGUI(UserOptionsActions actions) {
 	
-		lblTitle.setBounds(211, 6, 138, 19);
-		lblTitle.setText("User Options");
+		lblTitle.setBounds(211, 6, 207, 19);
+		lblTitle.setText("Customer Options");
 		this.actions = actions;
 		
 		
