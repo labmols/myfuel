@@ -42,8 +42,7 @@ public class CarFuelDBHandler extends DBHandler{
 			rs = st.executeQuery(sql);
 			while(rs.next())
 			{
-				Fuel f = new Fuel (rs.getInt(1), rs.g))
-				fuels.add(e)
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
