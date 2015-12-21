@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.Fuel;
+import myfuel.client.FuelQty;
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
 import myfuel.request.CarFuelRequest;
@@ -23,11 +25,28 @@ public class CarFuelDBHandler extends DBHandler{
 		// TODO Auto-generated constructor stub
 	}
 	
-	private Response getInventory()
+	private ArrayList <Fuel> getFuels()
+	{
+		ResultSet rs = null;
+		Statement st = null;
+		String sql;
+		
+		try {
+			st= con.createStatement();
+			sql = "select fuelid,fname,price from station";
+			rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
+	
+	private ArrayList <StationInventory> getInventory()
 	{
 		ArrayList <StationInventory> sInventory = new ArrayList<StationInventory>();
-		ArrayList <Float> fQty =null;
-		ArrayList <Float> mQty =null;
+		ArrayList <FuelQty> fQty =null;
 		ArrayList <Station> stations = new ArrayList<Station>();
 		
 		ResultSet rs = null;
@@ -46,28 +65,27 @@ public class CarFuelDBHandler extends DBHandler{
 				
 			for(Station s : stations)
 			{
-			fQty = new ArrayList<Float>();
-			mQty = new ArrayList<Float>();
-			ps= con.prepareStatement("select fqty,mqty from station_inventory where sid=?");
+			fQty = new ArrayList<FuelQty>();
+			ps= con.prepareStatement("select fuelid,fqty,mqty from station_inventory where sid=?");
 			ps.setInt(1, s.getsid());
 			rs= ps.executeQuery();
 			while(rs.next()) // all the sid fuel qty
 			{
-				fQty.add(rs.getFloat(1));
-				mQty.add(rs.getFloat(2));
+				FuelQty fqty = new FuelQty(rs.getInt(1), rs.getFloat(2), rs.getFloat(3));
 			}
 			
-			StationInventory si = new StationInventory(s,fQty,mQty);
+			StationInventory si = new StationInventory(s,fQty);
 			sInventory.add(si);
 			}
 			
-			return new CarFuelResponse(sInventory);
+			return sInventory;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new booleanResponse(false, "SQL Error!");
+			return null;
 		}
+		
 		
 	}
 
@@ -79,7 +97,7 @@ public class CarFuelDBHandler extends DBHandler{
 			CarFuelRequest req = (CarFuelRequest) arg;
 			if(req.getType() == RequestEnum.Select)
 			{
-				server.setResponse(getInventory());
+				//server.setResponse(getInventory());
 			}
 			
 		}
