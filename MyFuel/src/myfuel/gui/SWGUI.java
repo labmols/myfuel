@@ -51,10 +51,8 @@ public class SWGUI extends SuperGUI{
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(148, 95, 280, 190);
 		panel.add(scrollPane);
-		model = new MyTableModel();
+		model = new DefaultTableModel();
 		table = new JTable(model);
-		table.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		table.setAlignmentX(Component.LEFT_ALIGNMENT);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
 		scrollPane.setViewportView(table);
@@ -82,7 +80,7 @@ public class SWGUI extends SuperGUI{
 	@Override
 	public void getInput(ActionEvent e)
 	{
-		
+		qty = null;
 		actions.ConfirmOrder();
 
 	}
@@ -99,6 +97,12 @@ public class SWGUI extends SuperGUI{
 			
 		}
 		
+	}
+	
+	public void deleteTable()
+	{
+			while(model.getRowCount()!=0)
+				model.removeRow(0);
 	}
 	public SWActions getActions() {
 		return actions;
