@@ -27,7 +27,7 @@ public class LowInventoryDBHandler  extends DBHandler {
 			for(int i=0; i < 3 ;i++)
 			{
 				ps = con.prepareStatement("update station_inventory SET mqty = ? WHERE sid = ? and fuelid = ?");
-				ps.setInt(1,request.getNewLowInventory());
+				ps.setInt(1,request.getNewLowInventory().get(i));
 				ps.setInt(2,request.getSid());
 				ps.setInt(3, i+1);
 				ps.executeUpdate();

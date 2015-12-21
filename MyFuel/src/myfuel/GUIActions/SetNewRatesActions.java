@@ -13,10 +13,10 @@ import myfuel.response.booleanResponse;
 
 
 public class SetNewRatesActions extends GUIActions {
-	SetNewRatesGUI gui;
-	SetNewRatesRequest request;
-	SetNewRatesResponse response;
-	ArrayList<Fuel> NewRates ;
+	private SetNewRatesGUI gui;
+	private SetNewRatesRequest request;
+	private SetNewRatesResponse response;
+	private ArrayList<Fuel> NewRates ;
 	
 	public SetNewRatesActions(MyFuelClient client) {
 		super(client);
@@ -26,18 +26,49 @@ public class SetNewRatesActions extends GUIActions {
 		gui.setVisible(true);	
 	}
 	
-	public void verifyDetails(float F95,float FDiesel,float FScooter,float FHomeFuel){
+	public void verifyDetails(String F95,String FDiesel,String FScooter,String FHomeFuel){
+		float nF95=0,nFDiesel=0,nFScooter=0,nFHomeFuel=0;
+		boolean success = true;
+		String error="";
+		error += "Input Errors \n\n";
+		if(F95.equals("")||FDiesel.equals("")||FScooter.equals("")||FHomeFuel.equals(""))
+		{
+			success=false;
+			error+="The filed is Empty\n";
+		}
+		else
+		{
+			nF95=Float.parseFloat(F95);
+			nFDiesel=Float.parseFloat(FDiesel);
+			nFScooter=Float.parseFloat(FScooter);
+			nFHomeFuel=Float.parseFloat(FHomeFuel);
+			if(nF95<=0||nFDiesel<=0||nFScooter<=0||nFHomeFuel<=0)
+			{
+				success=false;
+				error+="Some of the fileds are Negative\n";
+			}
+			if((nF95>NewRates.get(0).getMaxPrice()||nFDiesel>NewRates.get(0).getMaxPrice()
+					||nFScooter>NewRates.get(0).getMaxPrice()||nFHomeFuel>NewRates.get(0).getMaxPrice()))
+			{
+				success=false;
+				error+="Some of the prices are bigger then the Maximal price\n";
+			}	
+		}
+		if(!success) gui.showMessage(error);
+		else
+		{
 		Fuel f;
 		f=NewRates.get(0);
-		f.setSuggPrice(F95);
+		f.setSuggPrice(nF95);
 		f=NewRates.get(1);
-		f.setSuggPrice(FDiesel);
+		f.setSuggPrice(nFDiesel);
 		f=NewRates.get(2);
-		f.setSuggPrice(FScooter);
+		f.setSuggPrice(nFScooter);
 		f=NewRates.get(3);
-		f.setSuggPrice(FHomeFuel);
+		f.setSuggPrice(nFHomeFuel);
 		request = new SetNewRatesRequest(1,NewRates);
 		client.handleMessageFromGUI(request);
+		}
 	}
 	@Override
 	public void update(Observable arg0, Object arg1) {
