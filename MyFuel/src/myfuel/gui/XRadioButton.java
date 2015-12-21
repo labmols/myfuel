@@ -14,7 +14,7 @@ public class XRadioButton extends JPanel {
     private JLabel label;
 
     public XRadioButton() {
-        setLayout(new GridBagLayout());
+        setLayout(null);
         add(getRadioButton());
         add(getLabel());
     }
@@ -28,6 +28,7 @@ public class XRadioButton extends JPanel {
     protected JRadioButton getRadioButton() {
         if (radioButton == null) {
             radioButton = new JRadioButton();
+            radioButton.setOpaque(false);
         }
         return radioButton;
     }
