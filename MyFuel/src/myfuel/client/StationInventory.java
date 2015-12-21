@@ -1,46 +1,48 @@
 package myfuel.client;
 
+import java.util.ArrayList;
+
 public class StationInventory {
-	private final int fuelN = 3;
 	private Station s;
-	private float [] fuelQty;
-	private float [] minQty;
+	private ArrayList <Float> fQty;
+	private ArrayList <Float> mQty;
 	
 	/**
 	 * 
 	 * @param s
-	 * @param fuelQty
-	 * @param minQty
+	 * @param fQty
+	 * @param mQty
 	 */
-		public StationInventory(Station s, float [] fuelQty, float [] minQty)
+		public StationInventory(Station s, ArrayList <Float> fQty, ArrayList <Float> mQty)
 		{
-			this.setFuelQty(fuelQty);
-			this.setMinQty(minQty);
-			this.setS(s);
-		}
-
-		public Station getS() {
-			return s;
-		}
-
-		public void setS(Station s) {
+			fQty = new ArrayList<Float>(fQty);
+			mQty = new ArrayList<Float>(mQty);
 			this.s = s;
 		}
 
-		public float [] getFuelQty() {
-			return fuelQty;
-		}
+	public ArrayList <Float> getfQty() {
+		return fQty;
+	}
 
-		public void setFuelQty(float [] fuelQty) {
-			this.fuelQty = fuelQty;
-		}
+	public void setfQty(ArrayList <Float> fQty) {
+		this.fQty = fQty;
+	}
 
-		public float [] getMinQty() {
-			return minQty;
-		}
+	public ArrayList <Float> getmQty() {
+		return mQty;
+	}
 
-		public void setMinQty(float [] minQty) {
-			this.minQty = minQty;
-		}
+	public void setmQty(ArrayList <Float> mQty) {
+		this.mQty = mQty;
+	}
+
+	public Station getS() {
+		return s;
+	}
+
+	public void setS(Station s) {
+		this.s = s;
+	}
+
 	
 }
