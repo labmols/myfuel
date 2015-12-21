@@ -102,8 +102,8 @@ public class SetNewRatesGUI extends SuperGUI {
 		JButton UpdateBut = new JButton("Update");
 		UpdateBut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				actions.verifyDetails(Float.parseFloat(Sugg_F95.getText()),Float.parseFloat(Sugg_FDiesel.getText()),
-						Float.parseFloat(Sugg_FScooter.getText()),Float.parseFloat(Sugg_FHomeFuel.getText()));
+				actions.verifyDetails(Sugg_F95.getText(),Sugg_FDiesel.getText(),
+						Sugg_FScooter.getText(),Sugg_FHomeFuel.getText());
 			}
 		});
 		UpdateBut.setBounds(206, 333, 144, 54);

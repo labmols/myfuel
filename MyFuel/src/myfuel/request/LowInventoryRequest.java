@@ -1,13 +1,14 @@
 package myfuel.request;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class LowInventoryRequest implements Serializable {
 	private int sid;
-	private int NewLowInventory;
+	private ArrayList<Integer> NewLowInventory ;
 	
-	public LowInventoryRequest(int sid,int NewLowInventory)
+	public LowInventoryRequest(int sid,ArrayList<Integer> NewLowInventory)
 	{
 		setSid(sid);
 		setNewLowInventory(NewLowInventory);
@@ -19,11 +20,13 @@ public class LowInventoryRequest implements Serializable {
 	public void setSid(int sid) {
 		this.sid = sid;
 	}
-	public int getNewLowInventory() {
-		return NewLowInventory;
+	public ArrayList<Integer> getNewLowInventory()
+	{
+		return this.NewLowInventory;
 	}
-	public void setNewLowInventory(int newLowInventory) {
-		NewLowInventory = newLowInventory;
+	public void setNewLowInventory(ArrayList<Integer> NewLowInventory)
+	{
+		this.NewLowInventory=NewLowInventory;
 	}
 
 }
