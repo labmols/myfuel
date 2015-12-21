@@ -15,8 +15,8 @@ public class StationInventory {
 	 */
 		public StationInventory(Station s, ArrayList <Float> fQty, ArrayList <Float> mQty)
 		{
-			fQty = new ArrayList<Float>(fQty);
-			mQty = new ArrayList<Float>(mQty);
+			this.fQty = new ArrayList<Float>(fQty);
+			this.mQty = new ArrayList<Float>(mQty);
 			this.s = s;
 		}
 

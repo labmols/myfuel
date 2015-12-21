@@ -10,6 +10,8 @@ import java.util.Observable;
 
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
+import myfuel.request.CarFuelRequest;
+import myfuel.request.RequestEnum;
 import myfuel.response.CarFuelResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
@@ -24,8 +26,8 @@ public class CarFuelDBHandler extends DBHandler{
 	private Response getInventory()
 	{
 		ArrayList <StationInventory> sInventory = new ArrayList<StationInventory>();
-		ArrayList <Float> fQty = new ArrayList<Float>();
-		ArrayList <Float> mQty = new ArrayList<Float>();
+		ArrayList <Float> fQty =null;
+		ArrayList <Float> mQty =null;
 		ArrayList <Station> stations = new ArrayList<Station>();
 		
 		ResultSet rs = null;
@@ -49,6 +51,8 @@ public class CarFuelDBHandler extends DBHandler{
 			rs= ps.executeQuery();
 			while(rs.next()) // all the sid fuel qty
 			{
+				fQty = new ArrayList<Float>();
+				mQty = new ArrayList<Float>();
 				fQty.add(rs.getFloat(1));
 				mQty.add(rs.getFloat(2));
 				
@@ -63,14 +67,23 @@ public class CarFuelDBHandler extends DBHandler{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return new booleanResponse(false, "SQL Error!");
 		}
-		return null;
+		
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
+		if(arg instanceof CarFuelRequest)
+		{
+			CarFuelRequest req = (CarFuelRequest) arg;
+			if(req.getType() == RequestEnum.Select)
+			{
+				server.setResponse(getInventory());
+			}
+			
+		}
 	}
 
 }
