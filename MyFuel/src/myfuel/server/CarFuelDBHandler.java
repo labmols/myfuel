@@ -38,18 +38,18 @@ public class CarFuelDBHandler extends DBHandler{
 		
 		try {
 			st= con.createStatement();
-			sql = "select fuelid,fname,price,maxprice from fuels";
+			sql = "select fuelid,price from fuel_price";
 			rs = st.executeQuery(sql);
+			
 			while(rs.next())
-			{
-				
-			}
+				fuels.add(new Fuel (rs.getInt(1), rs.getFloat(2)));
+			return fuels;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-		return null;
+	
 	}
 	
 	/**
@@ -111,7 +111,10 @@ public class CarFuelDBHandler extends DBHandler{
 			CarFuelRequest req = (CarFuelRequest) arg;
 			if(req.getType() == RequestEnum.Select)
 			{
-				//server.setResponse(getInventory());
+				ArrayList <Fuel> fuels = getFuels();
+				ArrayList <StationInventory> si = getInventory();
+				CarFuelResponse res = new CarFuelResponse (si,fuels);
+				server.setResponse(res);
 			}
 			
 		}

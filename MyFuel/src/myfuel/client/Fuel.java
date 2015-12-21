@@ -7,7 +7,17 @@ public class Fuel implements Serializable {
 	private float suggPrice;
 	private float maxPrice;
 	private float currPrice;
-
+	
+	/**
+	 * this constructor will create fuel with his id and currprice.
+	 * @param fid - the id of the fuel.
+	 * @param currPrice - current price (for liter) of the fuel.
+	 */
+	public Fuel(int fid, float currPrice){
+		this.setFid(fid);
+		this.setCurrPrice(currPrice);
+	}
+	
 	/***
 	 *  This constructor will create the fuel type with its values
 	 * @param fid  - fuel id 

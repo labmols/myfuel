@@ -45,7 +45,6 @@ public class LoginDBHandler extends DBHandler {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new booleanResponse(false, "WorkerID or Password not correct!");
 		
 		}
 		try {
@@ -58,14 +57,13 @@ public class LoginDBHandler extends DBHandler {
 				ps.executeUpdate();
 				return new WorkerLoginResponse(rs.getInt(6),rs.getInt(1),rs.getInt(8));
 			}
+			else return new booleanResponse(false, "WorkerID or Password not correct!");
 		}
 			
 			catch(SQLException e){
 				e.printStackTrace();
 				return new booleanResponse(false, "SQL Error!");
 			}
-		return new booleanResponse(false, "SQL Error!");
-		
 		
 	}
 

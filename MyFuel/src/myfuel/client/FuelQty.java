@@ -1,6 +1,8 @@
 package myfuel.client;
 
-public class FuelQty {
+import java.io.Serializable;
+
+public class FuelQty implements Serializable{
 	private int fid;
 	private String fname;
 	private float qty;
