@@ -10,7 +10,7 @@ import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
 import myfuel.client.Station;
 import myfuel.gui.LogInGUI;
-import myfuel.gui.UpdateUserDetailsGUI;
+import myfuel.gui.UpdateCustomerDetailsGUI;
 import myfuel.request.RequestEnum;
 import myfuel.request.UpdateRequest;
 import myfuel.response.Response;
@@ -30,7 +30,7 @@ public class UpdateDetailsActions extends GUIActions {
 	/**
 	 * this object contains the user interface
 	 */
-	private UpdateUserDetailsGUI gui;
+	private UpdateCustomerDetailsGUI gui;
 	/**
 	 * this object saves the list of customer cars before the changes.
 	 */
@@ -51,7 +51,7 @@ public class UpdateDetailsActions extends GUIActions {
 		this.res = res;
 		origCars = new ArrayList<Car>(res.getUser().getCars());
 		origStations = new ArrayList<Integer> (res.getUser().getStations());
-		gui = new UpdateUserDetailsGUI(this);
+		gui = new UpdateCustomerDetailsGUI(this);
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
 	}

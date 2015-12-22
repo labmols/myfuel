@@ -7,7 +7,7 @@ import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
 import myfuel.client.Station;
 import myfuel.gui.ChangePasswordGUI;
-import myfuel.gui.UpdateUserDetailsGUI;
+import myfuel.gui.UpdateCustomerDetailsGUI;
 import myfuel.gui.CustomerOptionsGUI;
 import myfuel.response.Response;
 import myfuel.response.UserLoginResponse;

@@ -71,6 +71,7 @@ public class CarFuelGUI extends SuperGUI {
 		panel.add(panel2);
 		panel2.setLayout(null);
 		
+		
 		JLabel lblChooseStation = new JLabel("Choose Station:");
 		lblChooseStation.setBounds(35, 9, 99, 16);
 		panel2.add(lblChooseStation);
