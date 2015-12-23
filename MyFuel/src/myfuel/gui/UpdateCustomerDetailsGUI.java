@@ -28,7 +28,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 
-public class UpdateUserDetailsGUI extends SuperGUI {
+public class UpdateCustomerDetailsGUI extends SuperGUI {
 	
 	
 	private UpdateDetailsActions actions;
@@ -41,6 +41,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 	private JComboBox<String> saleCB;
 	private DefaultComboBoxModel<Integer> carModel;
 	private DefaultComboBoxModel<String> stationModel;
+	private DefaultComboBoxModel<String> stationModel2;
 	private JComboBox<Integer> carsCB;
 	private JComboBox<String> accessCB;
 	private JPanel panel3;
@@ -56,7 +57,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 	/**
 	 * Create the frame.
 	 */
-	public UpdateUserDetailsGUI(UpdateDetailsActions actions) {
+	public UpdateCustomerDetailsGUI(UpdateDetailsActions actions) {
 		
 		lblTitle.setBounds(220, 6, 144, 23);
 		lblTitle.setText("Update Details");
@@ -156,7 +157,7 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		
 		JLabel lblYourCars = new JLabel("Add Car:");
 		lblYourCars.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 14));
-		lblYourCars.setBounds(259, 152, 76, 21);
+		lblYourCars.setBounds(247, 152, 76, 21);
 		panel2.add(lblYourCars);
 		
 		JLabel lblFuelType = new JLabel("Fuel Type:");
@@ -194,31 +195,47 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		
 		panel3 = new JPanel();
 		panel3.setOpaque(false);
-		panel3.setBounds(210, 92, 315, 62);
+		panel3.setBounds(210, 92, 344, 62);
 		panel2.add(panel3);
 		panel3.setLayout(null);
 		
 		stationCB = new JComboBox<String>();
 		stationModel= new DefaultComboBoxModel<String>();
 		stationCB.setModel(stationModel);
-		stationCB.setBounds(140, 6, 132, 27);
+		stationCB.setBounds(140, 0, 132, 27);
 		panel3.add(stationCB);
 		
-		lblStation = new JLabel("Add Station:");
-		lblStation.setBounds(39, 10, 115, 16);
+		lblStation = new JLabel("Choose Station:");
+		lblStation.setBounds(37, 4, 115, 16);
 		panel3.add(lblStation);
 		
-		sAdd = new JButton("Add");
-		sAdd.setBounds(223, 33, 86, 29);
-		sAdd.addActionListener(new eventListener());
-		panel3.add(sAdd);
-		sAdd.setToolTipText("Add New Station");
+		JComboBox<String> stationCB2 = new JComboBox<String>();
+		stationModel2= new DefaultComboBoxModel<String>();
+		stationCB2.setModel(stationModel2);
+		stationCB2.addActionListener(new eventListener());
+		stationCB2.setBounds(140, 32, 132, 27);
+		panel3.add(stationCB2);
+		
+		JLabel lblChangeTo = new JLabel("Change/Add:");
+		lblChangeTo.setBounds(51, 36, 101, 16);
+		panel3.add(lblChangeTo);
 		
 		carAdd = new JButton("Add");
 		carAdd.setToolTipText("Add New Station");
 		carAdd.addActionListener(new eventListener());
 		carAdd.setBounds(439, 235, 86, 29);
 		panel2.add(carAdd);
+		
+		sAdd = new JButton("Add");
+		sAdd.setBounds(418, 147, 71, 29);
+		panel2.add(sAdd);
+		sAdd.addActionListener(new eventListener());
+		sAdd.setToolTipText("Add New Station");
+		
+		JButton btnChange = new JButton("Change");
+		btnChange.setBounds(348, 147, 71, 29);
+		panel2.add(btnChange);
+		btnChange.setToolTipText("Add New Station");
 		
 		
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
@@ -245,17 +262,21 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		typeCB.setSelectedItem(user.getToc());
 		if(accessCB.getSelectedIndex()==0) {
 			access=0;
-			lblStation.setText("Change Station: ");
-			sAdd.setText("Change");
+			sAdd.setEnabled(false);
 		}
 		else{
 			access=1;
-			lblStation.setText("Add Station: ");
-			sAdd.setText("Add");
+			sAdd.setEnabled(true);
 		}
+		
 		for(Station s: stations){
+			if(user.getStations().contains(s.getsid()))
 			stationModel.addElement(s.getName());
+			stationModel2.addElement(s.getName());
+			
 		}
+		
+		
 		
 	}
 	
@@ -275,13 +296,11 @@ public class UpdateUserDetailsGUI extends SuperGUI {
 		if(e.getSource()== accessCB)
 			if(accessCB.getSelectedIndex()==0) {
 				access=0;
-				lblStation.setText("Change Station: ");
-				sAdd.setText("Change");
+				sAdd.setEnabled(false);
 			}
 			else{
 				access=1;
-				lblStation.setText("Add Station: ");
-				sAdd.setText("Add");
+				sAdd.setEnabled(true);
 			}
 		
 		if(e.getSource() == sAdd)
