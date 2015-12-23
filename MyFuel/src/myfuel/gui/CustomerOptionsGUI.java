@@ -27,6 +27,7 @@ public class CustomerOptionsGUI extends SuperGUI {
 	private JButton btnChangePassword ;
 	private JButton btnUpdateDetails;
 	private JButton btnCarFuel;
+	private JButton btnHomeFuel;
 	/**
 	 * Create the frame.
 	 */
@@ -50,8 +51,9 @@ public class CustomerOptionsGUI extends SuperGUI {
 		btnCarFuel.addActionListener(new ButtonListener());
 		MenuPanel.add(btnCarFuel);
 		
-		JButton btnHomeFuel = new JButton("Home Fuel");
+		btnHomeFuel = new JButton("Home Fuel");
 		btnHomeFuel.setBounds(103, 84, 180, 50);
+		btnHomeFuel.addActionListener(new ButtonListener());
 		MenuPanel.add(btnHomeFuel);
 		
 		btnUpdateDetails = new JButton("Update Details");
@@ -86,5 +88,6 @@ public class CustomerOptionsGUI extends SuperGUI {
 		if(e.getSource() == btnChangePassword) actions.changePasswordScreen();
 		else if (e.getSource() ==btnUpdateDetails )actions.updateDetailsScreen();
 		else if(e.getSource()==btnCarFuel) actions.carFuelScreen();
+		else if(e.getSource() == btnHomeFuel ) actions.HomeFuelScreen();
 	}
 }

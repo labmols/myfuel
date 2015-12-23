@@ -56,6 +56,12 @@ public class CustomerOptionsActions extends GUIActions {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	public void HomeFuelScreen() {
+		// TODO Auto-generated method stub
+		changeFrame(gui, new HomeFuelActions(client,res.getUser()),this);
+	}
 	
 
 
