@@ -6,6 +6,7 @@ import java.util.Observable;
 import myfuel.client.Customer;
 import myfuel.client.Fuel;
 import myfuel.client.MyFuelClient;
+import myfuel.client.Station;
 import myfuel.client.StationInventory;
 import myfuel.gui.CarFuelGUI;
 import myfuel.request.CarFuelRequest;
@@ -27,6 +28,7 @@ public class CarFuelActions extends GUIActions {
 		sInventory = null;
 		fuels = null;
 		getInventoryRequest();
+		showStations();
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
 	}
@@ -39,6 +41,15 @@ public class CarFuelActions extends GUIActions {
 		// TODO Auto-generated method stub
 		CarFuelRequest req = new CarFuelRequest (RequestEnum.Select);
 		client.handleMessageFromGUI(req);
+	}
+	
+	private void showStations()
+	{
+		ArrayList<Station> stations = res.getStations();
+		for(Station s: stations)
+		{
+			gui.addStation(s.getName());
+		}
 	}
 
 
@@ -58,7 +69,15 @@ public class CarFuelActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,new UserOptionsActions(client,res),this);
+		changeFrame(gui,new CustomerOptionsActions(client,res),this);
+		
+	}
+
+
+	public String getFuelPrice(int fuelSelected) {
+		if(fuels == null) return "wait...";
+		String price = "" + fuels.get(fuelSelected-1).getCurrPrice();
+		return price;
 		
 	}
 
