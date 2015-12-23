@@ -1,6 +1,7 @@
 package myfuel.gui;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.HomeFuelActions;
 
@@ -14,11 +15,15 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import java.awt.Color;
+import java.util.Date;
 import java.util.Properties;
+
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+
 import java.awt.GridBagLayout;
 import java.awt.Font;
+
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
@@ -29,9 +34,13 @@ public class HomeFuelGUI extends SuperGUI {
 	private JCheckBox urgentCB;
 	private JTextField shipAddrText;
 	private JDatePickerImpl datePicker;
+	private JButton btnMakeOrder;
 	
 	public HomeFuelGUI(HomeFuelActions actions)
 	{
+		lblTitle.setSize(128, 26);
+		lblTitle.setLocation(244, 6);
+		lblTitle.setText("Home Fuel");
 		this.actions = actions;
 		setContentPane(contentPane);
 		
@@ -105,17 +114,34 @@ public class HomeFuelGUI extends SuperGUI {
 		txtPane.setOpaque(false);
 		panel2.add(txtPane);
 		
-		JButton btnNewButton = new JButton("Make Order");
-		btnNewButton.setBounds(255, 371, 117, 29);
-		panel.add(btnNewButton);
+		btnMakeOrder = new JButton("Make Order");
+		btnMakeOrder.setBounds(255, 371, 117, 29);
+		btnMakeOrder.addActionListener(new eventHandler());
+		panel.add(btnMakeOrder);
+		
+		shipAddrText.setText(actions.getAddress());
 		
 		
+	}
+	
+	
+	private class eventHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			getInput(e);
+		}
 		
 	}
 
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource() == btnMakeOrder)
+		{	
+			Date shipDate = (Date) datePicker.getModel().getValue();
+			actions.verifyDetails(shipDate, qtyText.getText(), shipAddrText.getText(),urgentCB.isSelected());
+		}
 		
 	}
 }
