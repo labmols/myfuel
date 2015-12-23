@@ -78,10 +78,7 @@ public class UpdateDetailsActions extends GUIActions {
 			booleanResponse res= (booleanResponse) arg;
 			gui.showMessage(res.getMsg());
 			if(!res.getSuccess()) {
-				user.getCars().clear();
-				user.setCars(new ArrayList<Car>(origCars));
-				user.getStations().clear();
-				user.setStations(new ArrayList<Integer>(origStations));
+				clearLists();
 			}
 		  gui.clearAll(user);
 		}
@@ -127,32 +124,65 @@ public class UpdateDetailsActions extends GUIActions {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param sname
+	 */
 	public void addStation(String sname, int access){
-		Customer user = res.getUser();
-		
-		if(access == 1){
+		ArrayList <Integer> userStations = res.getUser().getStations();
+		if(access == 1 || access==0 && userStations.isEmpty())
+		{
 		for(Station s: res.getStations()){
 			if(s.getName().equals(sname)){
-				if(!user.getStations().contains(s.getsid())) {
-					user.getStations().add(s.getsid());
+				if(!userStations.contains(s.getsid())) {
+					userStations.add(s.getsid());
 					gui.showMessage("Station "+sname + " is added!");
 				}
 				else gui.showMessage("You already have this station!");
 				}
 			}
 		}
-		else if(access == 0)
+		else gui.showMessage("You Can't add more then one stations in this access!");
+	
+		gui.updateCB(userStations,res.getStations());
+		}
+		
+	/**
+	 * 
+	 * @param oldS
+	 * @param newS
+	 */
+	public void changeStation(String oldS, String newS)
+	{
+		ArrayList <Integer> userStations = res.getUser().getStations();
+		int index = -1;
+		for(Station s: res.getStations())
 		{
-			for(Station s: res.getStations()){
-				if(s.getName().equals(sname)){
-						user.getStations().clear();
-						user.getStations().add(s.getsid());
-						gui.showMessage("Your Station changed to "+sname );
-					
+			if(s.getName().equals(oldS))
+			{
+					index =userStations.indexOf(s.getsid());
+			}
+		}
+		for(Station s: res.getStations())
+		{
+			if(s.getName().equals(newS))
+				{
+					if(index!=-1 && !userStations.contains(s.getsid()))
+					{
+						userStations.set(index, s.getsid());
+						gui.showMessage("Station "+oldS + " changed to " +newS);
 					}
+					else gui.showMessage("You already have this station!");
+					
 				}
+			
 		}
+		
+		gui.updateCB(userStations,res.getStations());
+			
 		}
+
+		
 	
 	/**
 	 * remove selected car from the user car list.
@@ -163,6 +193,13 @@ public class UpdateDetailsActions extends GUIActions {
 	{
 		res.getUser().getCars().remove(index);
 		gui.showMessage("Car "+cid+" "+ "removed!");
+	}
+	
+	public void resetAccess()
+	{
+			ArrayList <Integer> userStations = res.getUser().getStations();
+			userStations.clear();
+			gui.updateCB(userStations, res.getStations());
 	}
 	
 	
@@ -235,13 +272,21 @@ public class UpdateDetailsActions extends GUIActions {
 		
 	}
 	
+	private void clearLists()
+	{
+		Customer user = res.getUser();
+		user.getCars().clear();
+		user.setCars(new ArrayList<Car>(origCars));
+		user.getStations().clear();
+		user.setStations(new ArrayList<Integer>(origStations));
+	}
+	
 
 	
 	@Override
 	public void backToMenu() {
+		clearLists();
 		changeFrame(gui,new CustomerOptionsActions(client,res),this);
-
-		
 	}
 	
 	 /**
@@ -261,6 +306,9 @@ public class UpdateDetailsActions extends GUIActions {
 	    return true;
 	}
 
+
+
+	
 
 
 }
