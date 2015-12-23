@@ -51,7 +51,7 @@ public class SWGUI extends SuperGUI{
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(148, 95, 280, 190);
 		panel.add(scrollPane);
-		model = new MyTableModel();
+		model = new MyTableModel(3,-1);
 		table = new JTable(model);
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
