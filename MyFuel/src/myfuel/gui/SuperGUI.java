@@ -2,6 +2,7 @@ package myfuel.gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,6 +19,8 @@ import myfuel.GUIActions.GUIActions;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 
 public abstract class SuperGUI extends JFrame {
@@ -75,8 +78,16 @@ public abstract class SuperGUI extends JFrame {
 		
 		 background = new JLabel("");
 		 background.setBounds(0, 0, 596, 481);
-		 java.net.URL url = getClass().getResource("/BackGround.png");
-		 background.setIcon(new ImageIcon(url));
+		 BufferedImage image = null;
+		try {
+			image = ImageIO.read(getClass().getResource("/BackGround.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 ImageIcon icon = new ImageIcon(image);
+		// java.net.URL url = getClass().getResource("/BackGround.png");
+		 background.setIcon(icon);
 		contentPane.add( background);
 	}
 	
