@@ -78,15 +78,10 @@ public abstract class SuperGUI extends JFrame {
 		
 		 background = new JLabel("");
 		 background.setBounds(0, 0, 596, 481);
-		 BufferedImage image = null;
-		try {
-			image = ImageIO.read(getClass().getResource("/BackGround.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 ImageIcon icon = new ImageIcon(image);
-		// java.net.URL url = getClass().getResource("/BackGround.png");
+		 java.net.URL url = getClass().getResource("/BackGround.png");
+		
+		 ImageIcon icon = new ImageIcon(url);
+		
 		 background.setIcon(icon);
 		contentPane.add( background);
 	}

@@ -69,7 +69,8 @@ public class FuelDialog extends JDialog {
 			JLabel label = new JLabel("");
 			label.setBounds(0, 0, 450, 239);
 			contentPanel.add(label);
-			label.setIcon(new ImageIcon("/Users/Maor/Desktop/dialogBG.png"));
+			 java.net.URL url = getClass().getResource("/dialogBG.png");
+			label.setIcon(new ImageIcon(url));
 		}
 		{
 			JPanel buttonPane = new JPanel();
