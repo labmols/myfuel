@@ -52,7 +52,7 @@ public class ConfirmNewRatesActions extends GUIActions {
 	{
 		if(approved.isEmpty())
 		{
-			
+		//	client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.));
 		}
 		
 	}
