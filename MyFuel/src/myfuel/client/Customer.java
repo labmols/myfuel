@@ -43,12 +43,14 @@ public class Customer implements Serializable{
 		 * @param lname  - last name
 		 * @param toc  - type of customer
 		 */
-	public Customer(int userid, String fname, String lname, int toc) 
+	public Customer(int userid, String fname, String lname,String email,String pass, int toc) 
 	{
 		this.userid = userid;
 		this.fname = fname;
 		this.lname = lname;
 		this.toc = toc;
+		this.email = email;
+		this.pass = pass;
 	}
 
 

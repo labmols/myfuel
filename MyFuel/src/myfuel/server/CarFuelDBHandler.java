@@ -38,7 +38,7 @@ public class CarFuelDBHandler extends DBHandler{
 		
 		try {
 			st= con.createStatement();
-			sql = "select fuelid,price from fuel_price";
+			sql = "select fuelid,maxprice from fuel_price";
 			rs = st.executeQuery(sql);
 			
 			while(rs.next())

@@ -53,11 +53,29 @@ public class ConfirmationActions extends GUIActions {
 		    booleanResponse res  = ((booleanResponse)arg1);
 			gui.showMessage(res.getMsg());
 			if(res.getSuccess())
+			{
 			gui.updateTable(approved);
+			for(Customer c: customers)
+			{
+				if(approved.contains(c.getUserid()))
+					sendMail(c);
+			}
+			
+			}
 		}
 
 	}
 	
+	private void sendMail(Customer c) {
+		// TODO Auto-generated method stub
+		String subject = "Welcome to MyFuel!";
+		String content= "Now you can sign in with your login details: "
+				+ "\n" + "UserID: " + c.getUserid() + 
+				  "\n"   +"Password: " + c.getPass();
+		
+		SendMailTLS.sendMail(c.getEmail() , subject, content);
+	}
+
 	public void sendApproved(ArrayList<Integer> approved)
 	{
 		this.approved = approved;

@@ -82,6 +82,17 @@ public class RegisterDBHandler extends DBHandler {
 		}
 		
 		try {
+			
+			ps=con.prepareStatement("select email from customer where email=?");
+			ps.setString(1, customer.getEmail());
+			rs = ps.executeQuery();
+			if(rs.next()) return new booleanResponse(false, "This email already exist!");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
 			for(Car car : customer.getCars()){
 			ps=con.prepareStatement("select * from customer_car where cid=?");
 			ps.setInt(1, car.getcid());
@@ -98,7 +109,7 @@ public class RegisterDBHandler extends DBHandler {
 				+ "your login details is: \n"
 				+ "UserID: " + customer.getUserid() 
 				+"\nPassword: " + customer.getPass()
-				+"\nNow you need to wait for the Marketing Delegate confirmation.");
+				+"\nNow you need to wait for Email confirmation from the Marketing Delegate.");
 		
 	}
 	

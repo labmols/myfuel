@@ -75,7 +75,7 @@ public class LoginDBHandler extends DBHandler {
 	private Response userLogin(LoginRequest request){
 		
 		String fname,lname,pass,email,cnumber,address;
-		int userid,status,atype,smodel,toc;
+		int userid,status,atype,smodel,toc,approved;
 		ArrayList<Integer> stations=new ArrayList<Integer>();
 		ArrayList<Car> cars = new ArrayList<Car>();
 		ResultSet rs = null;
@@ -93,7 +93,9 @@ public class LoginDBHandler extends DBHandler {
 		try {
 			if(rs.next()){
 				status = rs.getInt(11);
+				approved = rs.getInt(12);
 				if(status == 1) return new booleanResponse(false, "This Customer is already logged in!");
+				else if(approved == 0) return new booleanResponse(false, "You are not approved yet!");
 				userid = rs.getInt(1);
 				fname = rs.getString(2);
 				lname = rs.getString(3);

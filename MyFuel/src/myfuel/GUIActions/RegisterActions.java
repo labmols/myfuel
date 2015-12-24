@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
+import myfuel.client.SendMailTLS;
 import myfuel.client.Station;
 import myfuel.gui.RegisterGUI;
 import myfuel.request.RequestEnum;
@@ -107,6 +108,7 @@ public class RegisterActions extends GUIActions {
 	 */
 	public void checkRegister(booleanResponse res){
 		if(res.getSuccess()) {
+			
 			gui.showMessage(res.getMsg());
 			changeFrame(gui,new LoginActions(client),this);
 
