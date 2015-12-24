@@ -171,7 +171,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new eventListener());
 		btnRemove.setToolTipText("Remove this Car");
-		btnRemove.setBounds(471, 249, 91, 29);
+		btnRemove.setBounds(481, 249, 91, 29);
 		panel2.add(btnRemove);
 		
 		JLabel lblType = new JLabel("Type:");
@@ -188,7 +188,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		panel2.add(lblCarId);
 		
 		cidText = new JTextField();
-		cidText.setBounds(346, 171, 127, 26);
+		cidText.setBounds(351, 175, 127, 26);
 		panel2.add(cidText);
 		cidText.setColumns(10);
 		stationModel= new DefaultComboBoxModel<String>();
@@ -197,7 +197,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		carAdd = new JButton("Add");
 		carAdd.setToolTipText("Add New Station");
 		carAdd.addActionListener(new eventListener());
-		carAdd.setBounds(471, 208, 91, 29);
+		carAdd.setBounds(481, 208, 91, 29);
 		panel2.add(carAdd);
 		
 		sAdd = new JButton("Add");

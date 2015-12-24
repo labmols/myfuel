@@ -30,13 +30,13 @@ public class ConfirmationDBHandler extends DBHandler{
 		PreparedStatement ps = null;
 		customers = new ArrayList<Customer>();
 		try {
-			ps = con.prepareStatement("select uid,fname,lname,toc from customer where app = 0");
+			ps = con.prepareStatement("select uid,fname,lname,email,pass,toc from customer where app = 0");
 	
 			rs = ps.executeQuery();
 			
 			while(rs.next())
 			{
-				customers.add(new Customer(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4)));
+				customers.add(new Customer(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6)));
 			}
 			
 			answer = true;
