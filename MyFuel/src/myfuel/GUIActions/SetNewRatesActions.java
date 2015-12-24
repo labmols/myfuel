@@ -6,6 +6,7 @@ import java.util.Observable;
 
 import myfuel.client.Fuel;
 import myfuel.client.MyFuelClient;
+import myfuel.client.saleModel;
 import myfuel.gui.SetNewRatesGUI;
 import myfuel.request.SetNewRatesRequest;
 import myfuel.response.SetNewRatesResponse;
@@ -16,7 +17,7 @@ public class SetNewRatesActions extends GUIActions {
 	private SetNewRatesGUI gui;
 	private SetNewRatesRequest request;
 	private SetNewRatesResponse response;
-	private ArrayList<Fuel> NewRates ;
+	private ArrayList<saleModel> NewRates ;
 	
 	public SetNewRatesActions(MyFuelClient client) {
 		super(client);
@@ -26,46 +27,38 @@ public class SetNewRatesActions extends GUIActions {
 		gui.setVisible(true);	
 	}
 	
-	public void verifyDetails(String F95,String FDiesel,String FScooter,String FHomeFuel){
-		float nF95=0,nFDiesel=0,nFScooter=0,nFHomeFuel=0;
+	public void verifyDetails(String SMRoneCar,String SMRfewCar,String SFMoneCar){
+		int nSMRoneCar=0,nSMRfewCar=0,nSFMoneCarr=0;
 		boolean success = true;
 		String error="";
 		error += "Input Errors \n\n";
-		if(F95.equals("")||FDiesel.equals("")||FScooter.equals("")||FHomeFuel.equals(""))
+		if(SMRoneCar.equals("")||SMRfewCar.equals("")||SFMoneCar.equals(""))
 		{
 			success=false;
 			error+="The filed is Empty\n";
 		}
 		else
 		{
-			nF95=Float.parseFloat(F95);
-			nFDiesel=Float.parseFloat(FDiesel);
-			nFScooter=Float.parseFloat(FScooter);
-			nFHomeFuel=Float.parseFloat(FHomeFuel);
-			if(nF95<=0||nFDiesel<=0||nFScooter<=0||nFHomeFuel<=0)
+			nSMRoneCar=Integer.parseInt(SMRoneCar);
+			nSMRfewCar=Integer.parseInt(SMRfewCar);
+			nSFMoneCarr=Integer.parseInt(SFMoneCar);
+			
+			if(nSMRoneCar<=0||nSMRoneCar<=0||nSMRoneCar<=0)
 			{
 				success=false;
 				error+="Some of the fileds are Negative\n";
 			}
-			if((nF95>NewRates.get(0).getMaxPrice()||nFDiesel>NewRates.get(0).getMaxPrice()
-					||nFScooter>NewRates.get(0).getMaxPrice()||nFHomeFuel>NewRates.get(0).getMaxPrice()))
-			{
-				success=false;
-				error+="Some of the prices are bigger then the Maximal price\n";
-			}	
 		}
 		if(!success) gui.showMessage(error);
 		else
 		{
-		Fuel f;
-		f=NewRates.get(0);
-		f.setSuggPrice(nF95);
+		saleModel f;
 		f=NewRates.get(1);
-		f.setSuggPrice(nFDiesel);
+		f.setDiscount(nSMRoneCar);
 		f=NewRates.get(2);
-		f.setSuggPrice(nFScooter);
+		f.setDiscount(nSMRfewCar);
 		f=NewRates.get(3);
-		f.setSuggPrice(nFHomeFuel);
+		f.setDiscount(nSFMoneCarr);
 		request = new SetNewRatesRequest(1,NewRates);
 		client.handleMessageFromGUI(request);
 		}
@@ -83,14 +76,9 @@ public class SetNewRatesActions extends GUIActions {
 		
 		else if(gui.isActive() && arg1 instanceof booleanResponse)
 		{
-	
 			booleanResponse resp = (booleanResponse)arg1;
-			
-			if(resp.getSuccess())
-				gui.showMessage("The Suggestion has been sent to the Company Manger ");
-			else
-				gui.showMessage("The send is failed");
-			
+			gui.showMessage(resp.getMsg());
+			backToMenu();
 		}
 	}
 
