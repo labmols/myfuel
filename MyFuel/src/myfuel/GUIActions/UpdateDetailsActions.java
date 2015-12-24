@@ -67,7 +67,8 @@ public class UpdateDetailsActions extends GUIActions {
 	}
 
 	/**
-	 * 
+	 * this method notified by the Observable client and receives the response.
+	 * the user notified according the response.
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
@@ -125,8 +126,9 @@ public class UpdateDetailsActions extends GUIActions {
 	}
 	
 	/**
-	 * 
-	 * @param sname
+	 * Add new station to the customer stations regardless he have it already or 
+	 * he have one station access type.
+	 * @param sname - the name of station that chosen in the ComboBox.
 	 */
 	public void addStation(String sname, int access){
 		ArrayList <Integer> userStations = res.getUser().getStations();
@@ -148,9 +150,9 @@ public class UpdateDetailsActions extends GUIActions {
 		}
 		
 	/**
-	 * 
-	 * @param oldS
-	 * @param newS
+	 * Change station to another in the customer station list.
+	 * @param oldS - Old Station name .
+	 * @param newS - New station name.
 	 */
 	public void changeStation(String oldS, String newS)
 	{
@@ -272,6 +274,9 @@ public class UpdateDetailsActions extends GUIActions {
 		
 	}
 	
+	/**
+	 * clear all customer temporary lists.
+	 */
 	private void clearLists()
 	{
 		Customer user = res.getUser();

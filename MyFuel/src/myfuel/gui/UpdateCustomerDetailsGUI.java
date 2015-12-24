@@ -151,27 +151,27 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		carsCB = new JComboBox<Integer>();
 		carModel= new DefaultComboBoxModel<Integer>();
 		carsCB.setModel(carModel);
-		carsCB.setBounds(363, 250, 132, 27);
+		carsCB.setBounds(346, 250, 132, 27);
 		panel2.add(carsCB);
 		
 		JLabel lblYourCars = new JLabel("Add/Remove Car:");
 		lblYourCars.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 14));
-		lblYourCars.setBounds(269, 160, 137, 21);
+		lblYourCars.setBounds(269, 154, 137, 21);
 		panel2.add(lblYourCars);
 		
 		JLabel lblFuelType = new JLabel("Fuel Type:");
-		lblFuelType.setBounds(286, 218, 86, 16);
+		lblFuelType.setBounds(269, 213, 86, 16);
 		panel2.add(lblFuelType);
 		
 		fuelCB = new JComboBox<String>();
 		fuelCB.setModel(new DefaultComboBoxModel<String>(new String[] {"95\t", "Diesel", "Scooter"}));
-		fuelCB.setBounds(363, 214, 132, 27);
+		fuelCB.setBounds(346, 209, 132, 27);
 		panel2.add(fuelCB);
 		
 		btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new eventListener());
 		btnRemove.setToolTipText("Remove this Car");
-		btnRemove.setBounds(501, 249, 78, 29);
+		btnRemove.setBounds(471, 249, 91, 29);
 		panel2.add(btnRemove);
 		
 		JLabel lblType = new JLabel("Type:");
@@ -188,7 +188,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		panel2.add(lblCarId);
 		
 		cidText = new JTextField();
-		cidText.setBounds(363, 176, 127, 26);
+		cidText.setBounds(346, 171, 127, 26);
 		panel2.add(cidText);
 		cidText.setColumns(10);
 		stationModel= new DefaultComboBoxModel<String>();
@@ -197,20 +197,20 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		carAdd = new JButton("Add");
 		carAdd.setToolTipText("Add New Station");
 		carAdd.addActionListener(new eventListener());
-		carAdd.setBounds(501, 213, 78, 29);
+		carAdd.setBounds(471, 208, 91, 29);
 		panel2.add(carAdd);
 		
 		sAdd = new JButton("Add");
-		sAdd.setBounds(403, 126, 71, 29);
+		sAdd.setBounds(403, 126, 87, 29);
 		panel2.add(sAdd);
 		sAdd.addActionListener(new eventListener());
 		sAdd.setToolTipText("Add New Station");
 		
 		btnChange = new JButton("Change");
-		btnChange.setBounds(301, 126, 71, 29);
+		btnChange.setBounds(286, 126, 86, 29);
 		btnChange.addActionListener(new eventListener());
 		panel2.add(btnChange);
-		btnChange.setToolTipText("Add New Station");
+		btnChange.setToolTipText("Change to another station");
 		
 		stationCB = new JComboBox<String>();
 		stationCB.setBounds(398, 62, 132, 27);
