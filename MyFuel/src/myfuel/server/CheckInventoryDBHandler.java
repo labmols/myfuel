@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import myfuel.client.Order;
+import myfuel.client.FuelQty;
 import myfuel.request.CheckInventoryRequest;
 import myfuel.response.CheckInventoryResponse;
 import myfuel.response.booleanResponse;
 
 public class CheckInventoryDBHandler  extends DBHandler {
 	private CheckInventoryRequest request;
-	private ArrayList<Order> NewOrder;
+	private ArrayList<FuelQty> NewOrder;
 	private String msg;
 	private boolean Answer;
 
@@ -24,7 +24,7 @@ public class CheckInventoryDBHandler  extends DBHandler {
 
 	public void getInventoryOrder()
 	{
-		NewOrder=new ArrayList<Order> ();
+		NewOrder=new ArrayList<FuelQty> ();
 		Answer=true;
 		ResultSet rs = null ;
 		PreparedStatement ps = null;
@@ -37,7 +37,7 @@ public class CheckInventoryDBHandler  extends DBHandler {
 			{
 				if(rs.getInt(5)==0)
 				{
-					NewOrder.add(new Order(rs.getInt(3),rs.getFloat(4)));
+					NewOrder.add(new FuelQty(rs.getInt(3),rs.getFloat(4),0));
 				}
 			}
 			if(NewOrder.isEmpty())

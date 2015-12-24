@@ -7,7 +7,7 @@ import myfuel.GUIActions.CheckInventoryActions;
 import myfuel.GUIActions.ConfirmationActions;
 import myfuel.client.BackMainMenu;
 import myfuel.client.Customer;
-import myfuel.client.Order;
+import myfuel.client.FuelQty;
 
 import javax.swing.JLabel;
 
@@ -70,18 +70,18 @@ public class CheckInventoryGUI extends SuperGUI{
 		table.getColumnModel().getColumn(2).setPreferredWidth(117);
 		table.getColumnModel().getColumn(3).setPreferredWidth(103);
 	}
-	public void setDetails(ArrayList<Order> NewOrder)
+	public void setDetails(ArrayList<FuelQty> NewOrder)
 	{
 		String type="";
-		for(Order c : NewOrder)
+		for(FuelQty c : NewOrder)
 		{
-			if(c.getFuelId() == 1 )
+			if(c.getFid() == 1 )
 				type = "95";
-			else if(c.getFuelId()==2)
+			else if(c.getFid()==2)
 				type = "Diesel";
-			else if(c.getFuelId()==3)
+			else if(c.getFid()==3)
 				type = "Scooter";
-			model.insertRow(model.getRowCount(),new Object[]{c.getFuelId(),type,c.getQtyFuel(),false});
+			model.insertRow(model.getRowCount(),new Object[]{c.getFid(),type,c.getQty(),false});
 		}
 	}
 	@Override
