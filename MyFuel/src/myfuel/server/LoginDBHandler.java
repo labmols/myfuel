@@ -149,7 +149,7 @@ public class LoginDBHandler extends DBHandler {
 		
 			try {
 				st = con.createStatement();
-				String query = "select * from station";
+				String query = "select * from station where sid!=4";
 				rs = st.executeQuery(query);
 				while(rs.next()){
 					id = rs.getInt(1);
