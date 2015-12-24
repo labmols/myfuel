@@ -69,7 +69,7 @@ public class CarFuelDBHandler extends DBHandler{
 		
 		try {
 			st= con.createStatement();
-			sql = "select sid,sname from station";
+			sql = "select sid,sname from station where sid!=4";
 			rs = st.executeQuery(sql);
 			while(rs.next()) //Add all stations
 			{
