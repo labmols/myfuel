@@ -1,16 +1,45 @@
 package myfuel.client;
 
-public class saleModel {
+
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+
+public class saleModel implements Serializable {
 	
-	public static float carOrder(int saleModel, float qty,float price){
-		float total=0;
+	private int discount;
+	private int type;
+	
+	/***
+	 * 
+	 * @param type - type of sale model 
+	 *   type = 1 -> occasional fueling
+	 *   type = 2 -> Monthly Regular - one car
+	 *   type = 3 -> Monthly Regular - Few Cars
+	 *   type = 4 -> Fully Monthly  - one car
+	 * @param discount
+	 */
+	public saleModel(int type , int discount)
+	{
+		this.setType(type);
+		this.setDiscount(discount);
 		
-		return total;
 	}
-	
-	public static float homeOrder(float price,int type, float qty){
-		float total=0;
-		return total;
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public int getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
 
 }

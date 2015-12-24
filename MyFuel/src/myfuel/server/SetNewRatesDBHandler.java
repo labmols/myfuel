@@ -8,33 +8,32 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.Fuel;
+import myfuel.client.saleModel;
 import myfuel.request.SetNewRatesRequest;
 import myfuel.response.SetNewRatesResponse;
 import myfuel.response.booleanResponse;
 
 
 public class SetNewRatesDBHandler extends DBHandler{
-	private ArrayList<Fuel> OldRates;
+	private ArrayList<saleModel> OldRates;
 	private SetNewRatesRequest request;
 	private boolean answer =true;
+	private String msg;
 	public SetNewRatesDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);	
 	}
-
-	
-	
 	void getRates()
 	{
 		ResultSet rs = null ;
 		PreparedStatement ps = null;
-		OldRates = new ArrayList<Fuel>();
+		OldRates = new ArrayList<saleModel>();
 		try {
 			
-			ps = con.prepareStatement("select * from fuel_price");
+			ps = con.prepareStatement("select * from price_to_type");
 			rs = ps.executeQuery();
 			while(rs.next())
 			{
-				OldRates.add(new Fuel(rs.getInt(1),rs.getFloat(3),rs.getFloat(4)));
+				OldRates.add(new saleModel(rs.getInt(1),rs.getInt(2)));
 			}
 		
 		} catch (SQLException e) {
@@ -45,27 +44,30 @@ public class SetNewRatesDBHandler extends DBHandler{
 	
 	void insertNewRates()
 	{
+		msg="";
 		 ResultSet rs = null ;
 		 PreparedStatement ps = null;
 	
 		 try {
-				ps = con.prepareStatement("select * from suggest_fuel");
+				ps = con.prepareStatement("select * from suggest_rates");
 				rs = ps.executeQuery();
 				if(rs.next())
 				{
-				
+					msg="There is One Suggested Rate wait";
 				}
 				else
 				{
-					for(Fuel f: request.getNewRates()){
-						ps= con.prepareStatement("insert into suggest_fuel values(?,?)");
-						ps.setInt(1,f.getFid());
-						ps.setFloat(2,f.getSuggPrice());
+					for(saleModel f: request.getNewRates()){
+						ps= con.prepareStatement("insert into suggest_rates values(?,?)");
+						ps.setInt(1,f.getType());
+						ps.setInt(2,f.getDiscount());
 						ps.executeUpdate();
 					}
+					msg="The Suggested Rates are Send to confirm";
 				}
 		} catch (SQLException e) {
 			answer = false;
+			msg="The Update faild";
 			e.printStackTrace();
 		}
 	}
@@ -84,16 +86,16 @@ public class SetNewRatesDBHandler extends DBHandler{
 			 else if(request.getType() == 1)
 			 {
 				 insertNewRates();
-				 server.setResponse(new booleanResponse(answer));
+				 server.setResponse(new booleanResponse(answer,msg));
 			 }
 		}
 		
 	}
-	public ArrayList<Fuel> getOldRates() {
+	public ArrayList<saleModel> getOldRates() {
 		return OldRates;
 	}
 
-	public void setOldRates(ArrayList<Fuel> OldRates) {
+	public void setOldRates(ArrayList<saleModel> OldRates) {
 		this.OldRates = OldRates;
 	}
 
