@@ -69,7 +69,8 @@ public class ConfirmationActions extends GUIActions {
 	private void sendMail(Customer c) {
 		// TODO Auto-generated method stub
 		String subject = "Welcome to MyFuel!";
-		String content= "Now you can sign in with your login details: "
+		String content= "Dear " + c.getFname() + ",\n"
+				+ "Now you can sign in with your login details: "
 				+ "\n" + "UserID: " + c.getUserid() + 
 				  "\n"   +"Password: " + c.getPass();
 		
