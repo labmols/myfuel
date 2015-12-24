@@ -61,16 +61,19 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 		getApproved();
 	}
 	
+	/***
+	 * Getting approved rates from table
+	 */
 	void getApproved()
 	{
-		ArrayList<Integer> approved = new ArrayList<Integer>();
+		ArrayList<saleModel> approved = new ArrayList<saleModel>();
 		boolean app;
 		
 		for(int i=0;i<model.getRowCount();i++)
 		{
 			app = (boolean) model.getValueAt(i, 4);
 			if(app)
-			approved.add((Integer)model.getValueAt(i,0))	;
+				approved.add(new saleModel((Integer)model.getValueAt(i,0),(Integer)model.getValueAt(i,3)))	;
 		}
 		
 		if (JOptionPane.showConfirmDialog(null, "Unpicked Rates Will be considered as denied and will be removed from the Suggestion \n "
@@ -84,7 +87,10 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 		} 
 		
 	}
-	
+	/***
+	 * Action Listener for JButton
+	 *
+	 */
 	private class btnHandler implements ActionListener
 	{
 
@@ -95,7 +101,11 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 		}
 		
 	}
-
+/***
+ * Setting the table info
+ * @param s - suggested discounts
+ * @param c - current discounts
+ */
 	public void setDetails(ArrayList<saleModel> s, ArrayList<saleModel> c)
 	{
 		String[] type = {"Monthly Regular - One Car","Monthly Regular - few Cars","Fully monthly"};
@@ -103,6 +113,15 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 		{
 			model.insertRow(i,new Object[]{s.get(i).getType(),type[i],c.get(i).getDiscount(),s.get(i).getDiscount(),false});
 		}
+		
+	}
+/***
+ * Empty the table
+ */
+	public void clearTable()
+	{
+		while(model.getRowCount() > 0)
+			model.removeRow(0);
 		
 	}
 }

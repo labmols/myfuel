@@ -18,12 +18,22 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 	private ArrayList<saleModel> sModes;
 	private ArrayList<saleModel> current;
 	private boolean answer ;
-	private String str;
+	private String str,nstr;
+	
+	/***
+	 *  ConfirmNewRates DB Handler
+	 * @param server  - MyFuelServer
+	 * @param con - JDBC driver Connection
+	 */
 	public ConfirmNewRatesDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 		
 	}
-
+/***
+ * Getting the current discounts for type 
+ * &
+ * Getting the suggested discounts 
+ */
 	private void getDetails()
 	{
 		ResultSet rs = null ;
@@ -67,7 +77,60 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 			e.printStackTrace();
 		}
 	}
-	
+
+/***
+ *  Delete the suggested prices	
+ */
+	private void deleteSuggest() 
+	{
+		PreparedStatement ps = null;
+		try{
+			ps = con.prepareStatement("TRUNCATE TABLE suggest_rates");
+			
+			ps.executeUpdate();
+			
+			answer = true; 
+			nstr = "Suggestion has been denied!";
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			answer = false;
+			str ="There was an error with the server";
+		}
+		
+	}
+	/***
+	 * Update Discounts for each sale model
+	 * @param a - approved discounts
+	 */
+	private void updatePrices(ArrayList<saleModel> a)
+	{
+		PreparedStatement ps = null;
+		
+		try{
+			
+			for(saleModel s : a)
+			{
+			ps = con.prepareStatement("update price_to_type SET discount = ? where modelid = ?");
+				ps.setInt(1,s.getDiscount());
+				ps.setInt(2, s.getType());
+				
+				ps.executeUpdate();
+			}
+			
+			answer = true;
+			str = "Rates has been updated!";
+			
+			deleteSuggest();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			answer = false;
+			str ="There was an error with the server";
+		}
+	}
 	
 	@Override
 	public void update(Observable o, Object arg) 
@@ -75,6 +138,7 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 		if(arg instanceof ConfirmNewRatesRequest)
 		{
 			ConfirmNewRatesRequest r = (ConfirmNewRatesRequest)arg;
+			
 			if(r.getType() == RequestEnum.Select)
 			{
 				getDetails();
@@ -83,8 +147,22 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 				else
 					server.setResponse(new ConfirmNewRatesResponse(sModes,current));
 			}
+			
+			else if(r.getType() == RequestEnum.Delete)
+			{
+				deleteSuggest();
+				server.setResponse(new booleanResponse(answer,nstr));
+			}
+			
+			else if(r.getType() == RequestEnum.Insert)
+			{
+				updatePrices(r.getApproved());
+				server.setResponse(new booleanResponse(answer,str));
+			}
 		}
 		
 	}
+
+
 
 }

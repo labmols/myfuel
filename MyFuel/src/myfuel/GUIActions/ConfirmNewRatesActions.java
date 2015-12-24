@@ -13,7 +13,10 @@ import myfuel.response.booleanResponse;
 
 public class ConfirmNewRatesActions extends GUIActions {
 	private ConfirmNewRatesGUI gui ; 
-	
+	/***
+	 *  Controller for ConfirmNewRatesGUI
+	 * @param client - MyFuelClient
+	 */
 	public ConfirmNewRatesActions(MyFuelClient client) {
 		super(client);
 		ConfirmNewRatesRequest request = new ConfirmNewRatesRequest(RequestEnum.Select);
@@ -23,7 +26,9 @@ public class ConfirmNewRatesActions extends GUIActions {
 		gui.setVisible(true);
 		
 	}
-
+/***
+ * Get a message from the server and handling it duw to its type
+ */
 	@Override
 	public void update(Observable arg0, Object arg1) 
 	{
@@ -38,22 +43,35 @@ public class ConfirmNewRatesActions extends GUIActions {
 		else if(arg1 instanceof booleanResponse)
 		{
 			gui.showMessage(((booleanResponse)arg1).getMsg());
+			if(((booleanResponse)arg1).getSuccess())
+			{
+				gui.clearTable();
+				
+			}
+			backToMenu() ;
 		}
 
 	}
-
+/***
+ * Return to Company manager menu
+ */
 	@Override
 	public void backToMenu() 
 	{
 		changeFrame(gui,new CMActions(client),this);
 	}
-
-	public void sendNewRates(ArrayList<Integer> approved)
+/***
+ *  Sending approved rates(if there is) to the DB
+ * @param approved - all approved Rates
+ */
+	public void sendNewRates(ArrayList<saleModel> approved)
 	{
 		if(approved.isEmpty())
 		{
-		//	client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.));
+			client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.Delete));
 		}
+		else 
+			client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.Insert,approved) );
 		
 	}
 
