@@ -6,11 +6,17 @@ import java.io.Serializable;
 public class SWRequest implements Serializable{
 	
 	private int sid;
-	private int[] q;
-	public SWRequest(int sid,int[] q)
+	private RequestEnum type;
+	
+	/***
+	 *  
+	 * @param sid - Station id 
+	 * @param type - type of request
+	 */
+	public SWRequest(int sid,RequestEnum type)
 	{
-		this.setSid(sid);
-		this.setQ(q);
+		this.sid = sid;
+		this.setType(type);
 	}
 
 	public int getSid() {
@@ -21,13 +27,15 @@ public class SWRequest implements Serializable{
 		this.sid = sid;
 	}
 
-	public int[] getQ() {
-		return q;
+	public RequestEnum getType() {
+		return type;
 	}
 
-	public void setQ(int[] q) {
-		this.q = q;
+	public void setType(RequestEnum type) {
+		this.type = type;
 	}
+
+
 
 
 

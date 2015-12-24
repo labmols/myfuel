@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Station;
+import myfuel.client.StationInventory;
 
 @SuppressWarnings("serial")
 public class UserLoginResponse extends Response {
@@ -18,6 +19,7 @@ public class UserLoginResponse extends Response {
 	 * Array of stations 
 	 */
 	private ArrayList <Station> stations;
+	
 	
 	public UserLoginResponse(int userid, String fname, String lname, String pass, String email, String address,String cnumber, int toc, int 
 			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations,ArrayList <Station> Allstations){

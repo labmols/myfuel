@@ -30,4 +30,10 @@ public class CMActions extends GUIActions {
 		
 	}
 
+	public void homeQuantity() 
+	{
+		changeFrame(gui,new homeQtyOrderActions(client),this);	
+		
+	}
+
 }

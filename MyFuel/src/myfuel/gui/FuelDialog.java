@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class FuelDialog extends JDialog {
 
@@ -36,28 +38,38 @@ public class FuelDialog extends JDialog {
 		this.p=p;
 		progressBar = new JProgressBar();
 		progressBar.setForeground(Color.ORANGE);
-		progressBar.setBounds(152, 22, 146, 20);
+		progressBar.setBounds(187, 22, 146, 20);
 		progressBar.setMaximum(value);
 		contentPanel.add(progressBar);
 		{
 			JLabel lblLiter = new JLabel("Liter: ");
-			lblLiter.setBounds(100, 62, 61, 16);
+			lblLiter.setBounds(100, 62, 36, 16);
 			contentPanel.add(lblLiter);
 		}
 		{
 			liter = new JLabel("");
-			liter.setBounds(145, 62, 61, 16);
+			liter.setBounds(137, 62, 61, 16);
 			contentPanel.add(liter);
 		}
 		{
 			JLabel lblPrice = new JLabel("Price: ");
-			lblPrice.setBounds(100, 88, 61, 16);
+			lblPrice.setBounds(100, 88, 46, 16);
 			contentPanel.add(lblPrice);
 		}
 		{
 			price = new JLabel("");
-			price.setBounds(173, 88, 61, 16);
+			price.setBounds(137, 88, 61, 16);
 			contentPanel.add(price);
+		}
+		
+		JLabel lblFuelProgress = new JLabel("Fuel Progress: ");
+		lblFuelProgress.setBounds(78, 22, 97, 16);
+		contentPanel.add(lblFuelProgress);
+		{
+			JLabel label = new JLabel("");
+			label.setBounds(0, 0, 450, 239);
+			contentPanel.add(label);
+			label.setIcon(new ImageIcon("/Users/Maor/Desktop/dialogBG.png"));
 		}
 		{
 			JPanel buttonPane = new JPanel();

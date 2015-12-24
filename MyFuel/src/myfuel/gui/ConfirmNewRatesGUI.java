@@ -145,51 +145,51 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 		lblHomeFuel.setBounds(20, 236, 70, 14);
 		panel.add(lblHomeFuel);
 		
-		 sug_95 = new JLabel("Suggested_95");
+		 sug_95 = new JLabel();
 		sug_95.setBounds(177, 105, 46, 14);
 		panel.add(sug_95);
 		
-		 sug_diesel = new JLabel("Suggested_Diesel");
+		 sug_diesel = new JLabel();
 		sug_diesel.setBounds(177, 151, 46, 14);
 		panel.add(sug_diesel);
 		
-		 sug_scooter = new JLabel("Suggested_Scooter");
+		 sug_scooter = new JLabel();
 		 sug_scooter.setBounds(177, 193, 46, 14);
 		 panel.add(sug_scooter);
 		
-		 sug_home = new JLabel("Suggested_Home_Fuel");
+		 sug_home = new JLabel();
 		 sug_home.setBounds(177, 236, 46, 14);
 		 panel.add(sug_home);
 		
-		 cur_95 = new JLabel("Current");
+		 cur_95 = new JLabel();
 		cur_95.setBounds(343, 105, 46, 14);
 		panel.add(cur_95);
 		
-		 cur_diesel = new JLabel("Current");
+		 cur_diesel = new JLabel();
 		cur_diesel.setBounds(343, 151, 46, 14);
 		panel.add(cur_diesel);
 		
-		 cur_scooter = new JLabel("Current");
+		 cur_scooter = new JLabel();
 		 cur_scooter.setBounds(341, 193, 46, 14);
 		panel.add(cur_scooter);
 		
-		 cur_home = new JLabel("Current");
+		 cur_home = new JLabel();
 		 cur_home.setBounds(341, 231, 46, 14);
 		panel.add(cur_home);
 		
-		 max_95 = new JLabel("maximal");
+		 max_95 = new JLabel();
 		max_95.setBounds(479, 105, 46, 14);
 		panel.add(max_95);
 		
-		 max_diesel = new JLabel("maximal");
+		 max_diesel = new JLabel();
 		max_diesel.setBounds(479, 151, 46, 14);
 		panel.add(max_diesel);
 		
-		 max_scooter = new JLabel("maximal");
+		 max_scooter = new JLabel();
 		max_scooter.setBounds(479, 193, 46, 14);
 		panel.add(max_scooter);
 		
-		 max_home = new JLabel("maximal");
+		 max_home = new JLabel();
 		max_home.setBounds(479, 236, 46, 14);
 		panel.add(max_home);
 		this.setContentPane(contentPane);
