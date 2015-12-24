@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
-import myfuel.client.Order;
 import myfuel.gui.CheckInventoryGUI;
 import myfuel.request.CheckInventoryRequest;
 import myfuel.response.CheckInventoryResponse;
