@@ -27,17 +27,17 @@ public class MMGUI extends SuperGUI {
 		lblTitle.setText("Marketing Manager Menu");
 		
 		 btnMakeAPromotion = new JButton("Make a Promotion");
-		btnMakeAPromotion.setBounds(175, 115, 189, 48);
+		btnMakeAPromotion.setBounds(193, 113, 189, 48);
 		panel.add(btnMakeAPromotion);
 		btnMakeAPromotion.addActionListener(new btnHandler());
 		
 		 btnShowReports = new JButton("Show Reports");
-		btnShowReports.setBounds(175, 197, 189, 48);
+		btnShowReports.setBounds(193, 185, 189, 48);
 		panel.add(btnShowReports);
 		btnShowReports.addActionListener(new btnHandler());
 		
 		 btnSetNewRates = new JButton("Set New Rates");
-		btnSetNewRates.setBounds(175, 292, 189, 48);
+		btnSetNewRates.setBounds(193, 260, 189, 48);
 		panel.add(btnSetNewRates);
 		btnSetNewRates.addActionListener(new btnHandler());
 	}

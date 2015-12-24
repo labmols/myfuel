@@ -23,13 +23,14 @@ public class CarFuelActions extends GUIActions {
 	
 	public CarFuelActions(MyFuelClient client,UserLoginResponse res) {
 		super(client);
-		gui = new CarFuelGUI(this);
 		this.res = res;
 		sInventory = null;
 		fuels = null;
-		getInventoryRequest();
+		gui = new CarFuelGUI(this);
 		showStations();
+		getInventoryRequest();
 		gui.setVisible(true);
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -62,6 +63,7 @@ public class CarFuelActions extends GUIActions {
 			CarFuelResponse res = (CarFuelResponse) arg;
 			sInventory = new ArrayList <StationInventory>(res.getSi());
 			fuels = new ArrayList<Fuel>(res.getFuels());
+			gui.setPrices(fuels);
 		}
 	}
 
@@ -74,11 +76,8 @@ public class CarFuelActions extends GUIActions {
 	}
 
 
-	public String getFuelPrice(int fuelSelected) {
-		if(fuels == null) return "wait...";
-		String price = "" + fuels.get(fuelSelected-1).getCurrPrice();
-		return price;
-		
+	public ArrayList <Fuel> getFuels() {
+		return this.fuels;
 	}
 
 }
