@@ -1,6 +1,7 @@
 package myfuel.gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.ItemSelectable;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JLabel;
 import javax.swing.JInternalFrame;
@@ -44,7 +47,6 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 	private DefaultComboBoxModel<String> stationModel2;
 	private JComboBox<Integer> carsCB;
 	private JComboBox<String> accessCB;
-	private JPanel panel3;
 	private JComboBox<String> typeCB;
 	private JButton sAdd;
 	private JButton btnRemove;
@@ -54,6 +56,8 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 	private JLabel lblStation;
 	int access;
 	private JComboBox<String> stationCB;
+	private JButton btnChange;
+	private JComboBox<String> stationCB2;
 	/**
 	 * Create the frame.
 	 */
@@ -64,178 +68,173 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		this.actions = actions;
 		setContentPane(contentPane);
 		
-		btnConfirmUpdate = new JButton("Confirm Update");
-		btnConfirmUpdate.setBounds(68, 395, 130, 29);
-		btnConfirmUpdate.addActionListener(new eventListener());
-		panel.add(btnConfirmUpdate);
-		
 		JPanel panel2 = new JPanel();
 		panel2.setBackground(Color.WHITE);
-		panel2.setBounds(30, 55, 560, 341);
+		panel2.setBounds(6, 55, 584, 355);
 		panel2.setOpaque(false);
 		panel.add(panel2);
 		panel2.setLayout(null);
 		
 		fnameText = new JTextField();
-		fnameText.setBounds(88, 36, 141, 26);
+		fnameText.setBounds(111, 22, 141, 26);
 		panel2.add(fnameText);
 		fnameText.setColumns(10);
 		
 		lnameText = new JTextField();
-		lnameText.setBounds(88, 71, 141, 26);
+		lnameText.setBounds(111, 57, 141, 26);
 		panel2.add(lnameText);
 		lnameText.setColumns(10);
 		
 		addText = new JTextField();
-		addText.setBounds(88, 109, 141, 26);
+		addText.setBounds(111, 95, 141, 26);
 		panel2.add(addText);
 		addText.setColumns(10);
 		
 		emailText = new JTextField();
-		emailText.setBounds(88, 185, 141, 26);
+		emailText.setBounds(111, 171, 141, 26);
 		panel2.add(emailText);
 		emailText.setColumns(10);
 		
 		CCText = new JTextField();
-		CCText.setBounds(88, 147, 141, 26);
+		CCText.setBounds(111, 133, 141, 26);
 		panel2.add(CCText);
 		CCText.setColumns(10);
 		
 		JLabel lblUserName = new JLabel("First Name:");
-		lblUserName.setBounds(6, 41, 78, 16);
+		lblUserName.setBounds(29, 27, 78, 16);
 		panel2.add(lblUserName);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
-		lblLastName.setBounds(6, 76, 78, 16);
+		lblLastName.setBounds(29, 62, 78, 16);
 		panel2.add(lblLastName);
 		
 		JLabel lblAddress = new JLabel("Address: ");
-		lblAddress.setBounds(6, 114, 78, 16);
+		lblAddress.setBounds(29, 100, 78, 16);
 		panel2.add(lblAddress);
 		
 		JLabel lblEmail = new JLabel("E-mail: ");
-		lblEmail.setBounds(6, 190, 78, 16);
+		lblEmail.setBounds(29, 176, 78, 16);
 		panel2.add(lblEmail);
 		
 		JLabel lblCreditCard = new JLabel("Credit Card: ");
-		lblCreditCard.setBounds(6, 152, 91, 16);
+		lblCreditCard.setBounds(29, 138, 91, 16);
 		panel2.add(lblCreditCard);
 		
 		JLabel lblAccesstype = new JLabel("Access Type:");
-		lblAccesstype.setBounds(259, 65, 91, 16);
+		lblAccesstype.setBounds(301, 31, 91, 16);
 		panel2.add(lblAccesstype);
 		
 		accessCB = new JComboBox<String>();
-		accessCB.addActionListener(new eventListener());
+		accessCB.addItemListener(new ItemLEvent());
 		accessCB.setModel(new DefaultComboBoxModel<String>(new String[] {"One Station", "Few Stations"}));
-		accessCB.setBounds(348, 61, 132, 27);
+		accessCB.setBounds(396, 27, 132, 27);
 		panel2.add(accessCB);
 		
 		JLabel lblSaleModel = new JLabel("Sale Model:");
-		lblSaleModel.setBounds(6, 227, 91, 16);
+		lblSaleModel.setBounds(29, 213, 91, 16);
 		panel2.add(lblSaleModel);
 		
 		saleCB = new JComboBox<String>();
 		saleCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Occassional", "Monthly"}));
-		saleCB.setBounds(88, 223, 149, 27);
+		saleCB.setBounds(103, 209, 149, 27);
 		panel2.add(saleCB);
 		
-		JLabel lblNewLabel = new JLabel("Your Stations: ");
+		JLabel lblNewLabel = new JLabel("Add/Remove Station:");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 14));
-		lblNewLabel.setBounds(241, 35, 113, 26);
+		lblNewLabel.setBounds(264, 6, 169, 26);
 		panel2.add(lblNewLabel);
 		
 		JLabel lblCars = new JLabel("Cars: ");
-		lblCars.setBounds(259, 274, 48, 16);
+		lblCars.setBounds(303, 254, 48, 16);
 		panel2.add(lblCars);
 		
 		carsCB = new JComboBox<Integer>();
 		carModel= new DefaultComboBoxModel<Integer>();
 		carsCB.setModel(carModel);
-		carsCB.setBounds(301, 270, 132, 27);
+		carsCB.setBounds(346, 250, 132, 27);
 		panel2.add(carsCB);
 		
-		JLabel lblYourCars = new JLabel("Add Car:");
+		JLabel lblYourCars = new JLabel("Add/Remove Car:");
 		lblYourCars.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 14));
-		lblYourCars.setBounds(247, 152, 76, 21);
+		lblYourCars.setBounds(269, 154, 137, 21);
 		panel2.add(lblYourCars);
 		
 		JLabel lblFuelType = new JLabel("Fuel Type:");
-		lblFuelType.setBounds(259, 208, 86, 16);
+		lblFuelType.setBounds(269, 213, 86, 16);
 		panel2.add(lblFuelType);
 		
 		fuelCB = new JComboBox<String>();
 		fuelCB.setModel(new DefaultComboBoxModel<String>(new String[] {"95\t", "Diesel", "Scooter"}));
-		fuelCB.setBounds(357, 204, 132, 27);
+		fuelCB.setBounds(346, 209, 132, 27);
 		panel2.add(fuelCB);
 		
 		btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new eventListener());
 		btnRemove.setToolTipText("Remove this Car");
-		btnRemove.setBounds(439, 269, 91, 29);
+		btnRemove.setBounds(471, 249, 91, 29);
 		panel2.add(btnRemove);
 		
 		JLabel lblType = new JLabel("Type:");
-		lblType.setBounds(6, 269, 91, 16);
+		lblType.setBounds(29, 255, 91, 16);
 		panel2.add(lblType);
 		
 		typeCB = new JComboBox<String>();
 		typeCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Private", "Company"}));
-		typeCB.setBounds(88, 265, 149, 27);
+		typeCB.setBounds(103, 251, 149, 27);
 		panel2.add(typeCB);
 		
 		JLabel lblCarId = new JLabel("Car ID:");
-		lblCarId.setBounds(266, 180, 57, 16);
+		lblCarId.setBounds(294, 181, 57, 16);
 		panel2.add(lblCarId);
 		
 		cidText = new JTextField();
-		cidText.setBounds(357, 175, 127, 26);
+		cidText.setBounds(346, 171, 127, 26);
 		panel2.add(cidText);
 		cidText.setColumns(10);
-		
-		panel3 = new JPanel();
-		panel3.setOpaque(false);
-		panel3.setBounds(210, 92, 344, 62);
-		panel2.add(panel3);
-		panel3.setLayout(null);
-		
-		stationCB = new JComboBox<String>();
 		stationModel= new DefaultComboBoxModel<String>();
-		stationCB.setModel(stationModel);
-		stationCB.setBounds(140, 0, 132, 27);
-		panel3.add(stationCB);
-		
-		lblStation = new JLabel("Choose Station:");
-		lblStation.setBounds(37, 4, 115, 16);
-		panel3.add(lblStation);
-		
-		JComboBox<String> stationCB2 = new JComboBox<String>();
 		stationModel2= new DefaultComboBoxModel<String>();
-		stationCB2.setModel(stationModel2);
-		stationCB2.addActionListener(new eventListener());
-		stationCB2.setBounds(140, 32, 132, 27);
-		panel3.add(stationCB2);
-		
-		JLabel lblChangeTo = new JLabel("Change/Add:");
-		lblChangeTo.setBounds(51, 36, 101, 16);
-		panel3.add(lblChangeTo);
 		
 		carAdd = new JButton("Add");
 		carAdd.setToolTipText("Add New Station");
 		carAdd.addActionListener(new eventListener());
-		carAdd.setBounds(439, 235, 86, 29);
+		carAdd.setBounds(471, 208, 91, 29);
 		panel2.add(carAdd);
 		
 		sAdd = new JButton("Add");
-		sAdd.setBounds(418, 147, 71, 29);
+		sAdd.setBounds(403, 126, 87, 29);
 		panel2.add(sAdd);
 		sAdd.addActionListener(new eventListener());
 		sAdd.setToolTipText("Add New Station");
 		
-		JButton btnChange = new JButton("Change");
-		btnChange.setBounds(348, 147, 71, 29);
+		btnChange = new JButton("Change");
+		btnChange.setBounds(286, 126, 86, 29);
+		btnChange.addActionListener(new eventListener());
 		panel2.add(btnChange);
-		btnChange.setToolTipText("Add New Station");
+		btnChange.setToolTipText("Change to another station");
+		
+		stationCB = new JComboBox<String>();
+		stationCB.setBounds(398, 62, 132, 27);
+		panel2.add(stationCB);
+		stationCB.setModel(stationModel);
+		
+		lblStation = new JLabel("Your Stations:");
+		lblStation.setBounds(291, 67, 115, 16);
+		panel2.add(lblStation);
+		
+		stationCB2 = new JComboBox<String>();
+		stationCB2.setBounds(398, 94, 132, 27);
+		panel2.add(stationCB2);
+		stationCB2.setModel(stationModel2);
+		
+		JLabel lblChangeTo = new JLabel("Change To/Add:");
+		lblChangeTo.setBounds(281, 101, 121, 16);
+		panel2.add(lblChangeTo);
+		
+		btnConfirmUpdate = new JButton("Confirm Update");
+		btnConfirmUpdate.setBounds(216, 320, 130, 29);
+		panel2.add(btnConfirmUpdate);
+		btnConfirmUpdate.addActionListener(new eventListener());
+		stationCB2.addActionListener(new eventListener());
 		
 		
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
@@ -289,23 +288,42 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		
 	}
 	}
+	
+	private class ItemLEvent implements ItemListener{
+
+		@Override
+		public void itemStateChanged(java.awt.event.ItemEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getStateChange()==ItemEvent.DESELECTED &&  e.getSource() == accessCB)
+			{
+				
+				if(accessCB.getSelectedIndex()==0) {
+					
+					access=0;
+					if(stationModel.getSize() > 1)
+					{
+					actions.resetAccess();
+					showMessage("Now you need to add one station!");
+					}
+					
+				}
+				else{
+					access=1;
+					sAdd.setEnabled(true);
+				}
+			}
+		}
+		
+	}
 
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()== accessCB)
-			if(accessCB.getSelectedIndex()==0) {
-				access=0;
-				sAdd.setEnabled(false);
-			}
-			else{
-				access=1;
-				sAdd.setEnabled(true);
-			}
+		
 		
 		if(e.getSource() == sAdd)
 		{
-			actions.addStation((String)stationCB.getSelectedItem(), access);
+			actions.addStation((String)stationCB2.getSelectedItem(),access);
 		}
 		
 		if(e.getSource()==carAdd){
@@ -315,7 +333,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		if(e.getSource() == btnConfirmUpdate)
 		{
 			actions.verifyDetails(fnameText.getText(), lnameText.getText(), emailText.getText(),
-					addText.getText(), CCText.getText(), typeCB.getSelectedIndex(), saleCB.getSelectedIndex(), accessCB.getSelectedIndex());
+					addText.getText(), CCText.getText(), typeCB.getSelectedIndex(), saleCB.getSelectedIndex(), access);
 		}
 		
 		if(e.getSource()==btnRemove)
@@ -325,6 +343,11 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 			carModel.removeElementAt(carsCB.getSelectedIndex());
 			}
 			else  showMessage("You must have at least one car!");
+		}
+		
+		if(e.getSource() == btnChange)
+		{
+			actions.changeStation((String)stationCB.getSelectedItem(), (String)stationCB2.getSelectedItem());
 		}
 	}
 
@@ -346,6 +369,15 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		typeCB.setSelectedItem(user.getToc());
 		
 	
+	}
+	
+	public void updateCB(ArrayList<Integer> userStations,ArrayList<Station> stations)
+	{
+		stationModel.removeAllElements();
+		for(Station s: stations){
+			if(userStations.contains(s.getsid()))
+			stationModel.addElement(s.getName());
+		}
 	}
 }
 
