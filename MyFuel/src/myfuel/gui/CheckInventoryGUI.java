@@ -1,38 +1,100 @@
 package myfuel.gui;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.CheckInventoryActions;
+import myfuel.GUIActions.ConfirmationActions;
+import myfuel.client.BackMainMenu;
+import myfuel.client.Customer;
+import myfuel.client.Order;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class CheckInventoryGUI extends SuperGUI{
 
-	CheckInventoryActions actions;
+	private CheckInventoryActions actions;
+	private DefaultTableModel model;
+	private JTable table;
+	private JButton Confirm ;
+	
 	public CheckInventoryGUI(CheckInventoryActions actions) {
-		lblTitle.setBounds(218, 0, 287, 25);
+		this.actions = actions;
+		this.setContentPane(contentPane);
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
+		lblTitle.setBounds(168, 0, 360, 25);
 		lblTitle.setText("Inventory Orders");
 		
-		JLabel lblTypeOfFuel = new JLabel("Type of Fuel");
-		lblTypeOfFuel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTypeOfFuel.setBounds(91, 84, 165, 40);
-		panel.add(lblTypeOfFuel);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(57, 72, 501, 156);
+		panel.add(scrollPane);
+		scrollPane.setOpaque(false);
+		model = new TableInventory();
+		String[] columns = new String[] {"Fuel ID", "Fuel Name", "Quantity","Approve/Deny"};
+		table = new JTable(model);
 		
-		JLabel lblQuantity = new JLabel("Quantity");
-		lblQuantity.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblQuantity.setBounds(351, 89, 143, 30);
-		panel.add(lblQuantity);
 		
-		this.setContentPane(contentPane);
-		this.actions = actions;
+		table.setColumnSelectionAllowed(true);
+		table.setCellSelectionEnabled(true);
+		for(int i=0; i< columns.length; i++)
+		{
+			model.addColumn(columns[i]);
+		}
+		
+		scrollPane.setViewportView(table);
+		table.setSurrendersFocusOnKeystroke(true);
+		table.setOpaque(false);
+		table.setModel(model);
+		
+		Confirm = new JButton("Confirm");
+		Confirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				getInput(arg0);
+			}
+		});
+		Confirm.setBounds(246, 272, 118, 41);
+		panel.add(Confirm);
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(110);
+		table.getColumnModel().getColumn(1).setPreferredWidth(112);
+		table.getColumnModel().getColumn(2).setPreferredWidth(117);
+		table.getColumnModel().getColumn(3).setPreferredWidth(103);
 	}
-	
-	
-	
+	public void setDetails(ArrayList<Order> NewOrder)
+	{
+		String type="";
+		for(Order c : NewOrder)
+		{
+			if(c.getFuelId() == 1 )
+				type = "95";
+			else if(c.getFuelId()==2)
+				type = "Diesel";
+			else if(c.getFuelId()==3)
+				type = "Scooter";
+			model.insertRow(model.getRowCount(),new Object[]{c.getFuelId(),type,c.getQtyFuel(),false});
+		}
+	}
 	@Override
 	public void getInput(ActionEvent e) {
 		
-		
+		ArrayList <Integer> FuelId=new ArrayList <Integer>();
+		boolean app;
+		for(int i=0;i<model.getRowCount();i++)
+		{
+			app = (boolean) model.getValueAt(i, 3);
+			if(app)
+				FuelId.add((Integer)model.getValueAt(i,0))	;
+		}
+		actions.UpdateInventory(FuelId);
 	}
 }

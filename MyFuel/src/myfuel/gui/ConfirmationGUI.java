@@ -36,7 +36,7 @@ public class ConfirmationGUI extends SuperGUI{
 		scrollPane.setOpaque(false);
 		model = new MyTableModel();
 		String[] columns = new String[] {"ID", "First Name", "Last Name", "Type", "Approve/Deny"};
-	 c2 = new JCheckBox();
+		c2 = new JCheckBox();
 		table = new JTable(model);
 		
 	
@@ -80,8 +80,7 @@ public class ConfirmationGUI extends SuperGUI{
 			model.insertRow(model.getRowCount(),new Object[]{c.getUserid(),c.getFname(),c.getLname(),type,false});
 			
 		}
-	
-		 
+	 
 	}
 	@Override
 	public void getInput(ActionEvent e) 

@@ -5,9 +5,11 @@ import java.awt.event.ActionEvent;
 
 
 
+
 import myfuel.GUIActions.SetNewRatesActions;
 import myfuel.client.BackMainMenu;
 import myfuel.client.Fuel;
+import myfuel.client.saleModel;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -26,18 +28,12 @@ import javax.swing.SwingConstants;
 public class SetNewRatesGUI extends SuperGUI {
 
 	SetNewRatesActions actions;
-	private JTextField Sugg_F95;
-	private JTextField Sugg_FDiesel;
-	private JTextField Sugg_FScooter;
-	private JTextField Sugg_FHomeFuel;
-	JLabel Current_F95;
-	JLabel Current_FDiesel;
-	JLabel Current_FScooter;
-	JLabel Current_HomeFuel;
-	JLabel Max_F95;
-	JLabel Max_FDiesel;
-	JLabel Max_FScooter;
-	JLabel Max_FHomeFuel;
+	private JTextField SMRoneCar;
+	private JTextField SMRfewCar;
+	private JTextField SFMoneCar;
+	private JLabel CMRoneCar;
+	private JLabel CMRfewCar;
+	private JLabel CFMoneCar;
 	
 	/**
 	 * Create the frame.
@@ -48,153 +44,89 @@ public class SetNewRatesGUI extends SuperGUI {
 		lblTitle.setBounds(203, 11, 162, 16);
 		lblTitle.setText("Set New Rates");
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
-		JLabel lblNewLabel = new JLabel("95");
-		lblNewLabel.setBounds(32, 122, 46, 14);
+		JLabel lblNewLabel = new JLabel("Monthly Regular-one Car");
+		lblNewLabel.setBounds(24, 122, 162, 14);
 		panel.add(lblNewLabel);
 		
-		JLabel lblDiesel = new JLabel("Diesel");
-		lblDiesel.setBounds(24, 158, 46, 14);
+		JLabel lblDiesel = new JLabel("Monthly Regular-Few Cars");
+		lblDiesel.setBounds(24, 158, 172, 14);
 		panel.add(lblDiesel);
 		
-		JLabel lblScooter = new JLabel("Scooter");
-		lblScooter.setBounds(24, 192, 46, 14);
+		JLabel lblScooter = new JLabel("Fully Monthly-one Car");
+		lblScooter.setBounds(24, 192, 125, 14);
 		panel.add(lblScooter);
 		
-		Sugg_F95 = new JTextField();
-		Sugg_F95.setBounds(169, 119, 86, 20);
-		panel.add(Sugg_F95);
-		Sugg_F95.setColumns(10);
+		SMRoneCar = new JTextField();
+		SMRoneCar.setBounds(203, 119, 86, 20);
+		panel.add(SMRoneCar);
+		SMRoneCar.setColumns(10);
 		
-		Sugg_FDiesel = new JTextField();
-		Sugg_FDiesel.setBounds(169, 155, 86, 20);
-		panel.add(Sugg_FDiesel);
-		Sugg_FDiesel.setColumns(10);
+		SMRfewCar = new JTextField();
+		SMRfewCar.setBounds(203, 155, 86, 20);
+		panel.add(SMRfewCar);
+		SMRfewCar.setColumns(10);
 		
-		Sugg_FScooter = new JTextField();
-		Sugg_FScooter.setBounds(169, 189, 86, 20);
-		panel.add(Sugg_FScooter);
-		Sugg_FScooter.setColumns(10);
+		SFMoneCar = new JTextField();
+		SFMoneCar.setBounds(203, 189, 86, 20);
+		panel.add(SFMoneCar);
+		SFMoneCar.setColumns(10);
 		
-		Current_F95 = new JLabel("New label");
-		Current_F95.setBounds(331, 122, 46, 14);
-		panel.add(Current_F95);
+		CMRoneCar = new JLabel("New label");
+		CMRoneCar.setBounds(365, 122, 46, 14);
+		panel.add(CMRoneCar);
 		
-		Current_FDiesel = new JLabel("New label");
-		Current_FDiesel.setBounds(331, 158, 46, 14);
-		panel.add(Current_FDiesel);
+		CMRfewCar = new JLabel("New label");
+		CMRfewCar.setBounds(365, 158, 46, 14);
+		panel.add(CMRfewCar);
 		
-		Current_FScooter = new JLabel("New label");
-		Current_FScooter.setBounds(331, 192, 46, 14);
-		panel.add(Current_FScooter);
-		
-		Max_F95 = new JLabel("New label");
-		Max_F95.setBounds(463, 122, 46, 14);
-		panel.add(Max_F95);
-		
-		Max_FDiesel = new JLabel("New label");
-		Max_FDiesel.setBounds(463, 158, 46, 14);
-		panel.add(Max_FDiesel);
-		
-		Max_FScooter = new JLabel("New label");
-		Max_FScooter.setBounds(463, 192, 46, 14);
-		panel.add(Max_FScooter);
+		CFMoneCar = new JLabel("New label");
+		CFMoneCar.setBounds(365, 192, 46, 14);
+		panel.add(CFMoneCar);
 		
 		JButton UpdateBut = new JButton("Update");
 		UpdateBut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				actions.verifyDetails(Sugg_F95.getText(),Sugg_FDiesel.getText(),
-						Sugg_FScooter.getText(),Sugg_FHomeFuel.getText());
+				actions.verifyDetails(SMRoneCar.getText(),SMRfewCar.getText(),
+						SFMoneCar.getText());
 			}
 		});
-		UpdateBut.setBounds(206, 333, 144, 54);
+		UpdateBut.setBounds(184, 303, 144, 54);
 		panel.add(UpdateBut);
 		
-		JLabel lblHomeFuel = new JLabel("Home Fuel");
-		lblHomeFuel.setBounds(24, 224, 66, 14);
-		panel.add(lblHomeFuel);
-		
-		Sugg_FHomeFuel = new JTextField();
-		Sugg_FHomeFuel.setBounds(169, 221, 86, 20);
-		panel.add(Sugg_FHomeFuel);
-		Sugg_FHomeFuel.setColumns(10);
-		
-		Current_HomeFuel = new JLabel("New label");
-		Current_HomeFuel.setBounds(331, 224, 46, 14);
-		panel.add(Current_HomeFuel);
-		
-		Max_FHomeFuel = new JLabel("New label");
-		Max_FHomeFuel.setBounds(463, 224, 46, 14);
-		panel.add(Max_FHomeFuel);
-		
-		JLabel lblTypeOfFuel = new JLabel("Type of Fuel");
+		JLabel lblTypeOfFuel = new JLabel("Sale Model");
 		lblTypeOfFuel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTypeOfFuel.setBounds(7, 84, 124, 23);
+		lblTypeOfFuel.setBounds(26, 84, 142, 23);
 		panel.add(lblTypeOfFuel);
 		
 		JLabel lblSuggested = new JLabel("Suggested");
 		lblSuggested.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblSuggested.setBounds(159, 80, 104, 31);
+		lblSuggested.setBounds(203, 77, 104, 31);
 		panel.add(lblSuggested);
 		
 		JLabel lblCurrent = new JLabel("Current");
 		lblCurrent.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblCurrent.setBounds(321, 85, 92, 21);
+		lblCurrent.setBounds(355, 85, 92, 21);
 		panel.add(lblCurrent);
-		
-		JLabel lblMaximal = new JLabel("Maximal");
-		lblMaximal.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblMaximal.setBounds(443, 85, 97, 20);
-		panel.add(lblMaximal);
-		
-		JSeparator separator_3 = new JSeparator();
-		separator_3.setBackground(Color.BLACK);
-		separator_3.setForeground(Color.BLACK);
-		separator_3.setBounds(8, 107, 530, 3);
-		panel.add(separator_3);
-		
-		JSeparator separator_4 = new JSeparator();
-		separator_4.setForeground(Color.BLACK);
-		separator_4.setBackground(Color.BLACK);
-		separator_4.setBounds(8, 145, 530, 3);
-		panel.add(separator_4);
-		
-		JSeparator separator_5 = new JSeparator();
-		separator_5.setForeground(Color.BLACK);
-		separator_5.setBackground(Color.BLACK);
-		separator_5.setBounds(7, 179, 530, 3);
-		panel.add(separator_5);
-		
-		JSeparator separator_6 = new JSeparator();
-		separator_6.setForeground(Color.BLACK);
-		separator_6.setBackground(Color.BLACK);
-		separator_6.setBounds(7, 215, 530, 3);
-		panel.add(separator_6);
-		
-		JSeparator separator_7 = new JSeparator();
-		separator_7.setForeground(Color.BLACK);
-		separator_7.setBackground(Color.BLACK);
-		separator_7.setBounds(8, 251, 530, 3);
-		panel.add(separator_7);
 		
 		JSeparator separator_8 = new JSeparator();
 		separator_8.setOrientation(SwingConstants.VERTICAL);
 		separator_8.setForeground(Color.BLACK);
 		separator_8.setBackground(Color.BLACK);
-		separator_8.setBounds(141, 91, 2, 180);
+		separator_8.setBounds(184, 84, 2, 180);
 		panel.add(separator_8);
 		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setForeground(Color.BLACK);
 		separator.setBackground(Color.BLACK);
-		separator.setBounds(280, 84, 16, 180);
+		separator.setBounds(317, 84, 16, 180);
 		panel.add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 		separator_1.setForeground(Color.BLACK);
 		separator_1.setBackground(Color.BLACK);
-		separator_1.setBounds(419, 93, 2, 180);
+		separator_1.setBounds(445, 84, 2, 180);
 		panel.add(separator_1);
 		setContentPane(contentPane);
 	}
@@ -205,20 +137,14 @@ public class SetNewRatesGUI extends SuperGUI {
 		
 	}
 	
-	public void SetNewDetails(ArrayList <Fuel> newdetails)
+	public void SetNewDetails(ArrayList<saleModel> newdetails)
 	{
-		Fuel f;
-		f=newdetails.get(0);
-		Current_F95.setText(""+f.getSuggPrice());
-		Max_F95.setText(""+f.getMaxPrice());
-		f=newdetails.get(1);
-		Current_FDiesel.setText(""+f.getSuggPrice());
-		Max_FDiesel.setText(""+f.getMaxPrice());
-		f=newdetails.get(2);
-		Current_FScooter.setText(""+f.getSuggPrice());
-		Max_FScooter.setText(""+f.getMaxPrice());
-		f=newdetails.get(3);
-		Current_HomeFuel.setText(""+f.getSuggPrice());
-		Max_FHomeFuel.setText(""+f.getMaxPrice());
+		saleModel s;
+		s=newdetails.get(1);
+		CMRoneCar.setText(""+s.getDiscount());
+		s=newdetails.get(2);
+		CMRfewCar.setText(""+s.getDiscount());
+		s=newdetails.get(3);
+		CFMoneCar.setText(""+s.getDiscount());
 	}
 }
