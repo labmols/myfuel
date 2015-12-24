@@ -1,75 +1,77 @@
 package myfuel.GUIActions;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
+import myfuel.client.saleModel;
 import myfuel.gui.ConfirmNewRatesGUI;
 import myfuel.request.ConfirmNewRatesRequest;
-import myfuel.response.ConfirmRatesResponse;
+import myfuel.request.RequestEnum;
+import myfuel.response.ConfirmNewRatesResponse;
 import myfuel.response.booleanResponse;
-import myfuel.server.ConfirmNewRatesDBHandler;
 
-public class ConfirmNewRatesActions extends GUIActions{
-
-	private ConfirmNewRatesGUI gui ;
-	private ConfirmRatesResponse response;
+public class ConfirmNewRatesActions extends GUIActions {
+	private ConfirmNewRatesGUI gui ; 
 	/***
-	 * Create actions class for the ConfirmNewRatesGUI
+	 *  Controller for ConfirmNewRatesGUI
 	 * @param client - MyFuelClient
 	 */
 	public ConfirmNewRatesActions(MyFuelClient client) {
 		super(client);
-		gui = new ConfirmNewRatesGUI(this);
-		ConfirmNewRatesRequest request = new ConfirmNewRatesRequest(1);
+		ConfirmNewRatesRequest request = new ConfirmNewRatesRequest(RequestEnum.Select);
 		client.handleMessageFromGUI(request);
+		
+		gui = new ConfirmNewRatesGUI(this);
 		gui.setVisible(true);
 		
 	}
-	/***
-	 * if the company manager wants to confirm the new rates
-	 */
-	public void confirmRates()
-	{
-		ConfirmNewRatesRequest request = new ConfirmNewRatesRequest(2);
-		client.handleMessageFromGUI(request);
-	}
-	
-	/***
-	 * if the company manager wants to deny the new rates
-	 */
-	public void denyRates()
-	{
-		ConfirmNewRatesRequest request = new ConfirmNewRatesRequest(3);
-		client.handleMessageFromGUI(request);
-	}
-	
-	/***
-	 * handling the response from the server
-	 */
-
+/***
+ * Get a message from the server and handling it duw to its type
+ */
 	@Override
-	public void update(Observable o, Object arg) {
-		
-		if(arg instanceof ConfirmRatesResponse)
+	public void update(Observable arg0, Object arg1) 
+	{
+		if(arg1 instanceof ConfirmNewRatesResponse)
 		{
-			response =(ConfirmRatesResponse)arg;
-			gui.setLabels(response.getFuels());
+			ArrayList<saleModel> s = (((ConfirmNewRatesResponse)arg1).getsModes());
+			ArrayList<saleModel> c = (((ConfirmNewRatesResponse)arg1).getCurrent());
+			
+			gui.setDetails(s,c);
 		}
 		
-		else if(arg instanceof booleanResponse)
+		else if(arg1 instanceof booleanResponse)
 		{
-			gui.showMessage(((booleanResponse)arg).getMsg());
-			if(((booleanResponse)arg).getMsg().equals("There are no suggested rates"));
+			gui.showMessage(((booleanResponse)arg1).getMsg());
+			if(((booleanResponse)arg1).getSuccess())
 			{
-				changeFrame(gui,new CMActions(client),this);
+				gui.clearTable();
+				
 			}
+			backToMenu() ;
 		}
-		
-	}
-	@Override
-	public void backToMenu() {
 
-					changeFrame(gui,new CMActions(client),this);
+	}
+/***
+ * Return to Company manager menu
+ */
+	@Override
+	public void backToMenu() 
+	{
+		changeFrame(gui,new CMActions(client),this);
+	}
+/***
+ *  Sending approved rates(if there is) to the DB
+ * @param approved - all approved Rates
+ */
+	public void sendNewRates(ArrayList<saleModel> approved)
+	{
+		if(approved.isEmpty())
+		{
+			client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.Delete));
+		}
+		else 
+			client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.Insert,approved) );
 		
 	}
 

@@ -1,5 +1,5 @@
 package myfuel.request;
 
 public enum RequestEnum {
-	Select, Insert , HomeGet,HomeSetLow,HomeSetOrder;
+	Select, Insert ,Delete, HomeGet,HomeSetLow,HomeSetOrder;
 }

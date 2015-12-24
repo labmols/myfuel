@@ -1,11 +1,9 @@
 package myfuel.client;
 
-
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-
-public class saleModel implements Serializable {
+public class saleModel implements Serializable{
 	
 	private int discount;
 	private int type;

@@ -15,8 +15,8 @@ public class HomeFuelActions extends GUIActions {
 	Customer customer;
 	public HomeFuelActions(MyFuelClient client, Customer customer) {
 		super(client);
-		this.customer= customer;
 		this.gui = new HomeFuelGUI(this);
+		this.customer= customer;
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
 	}
@@ -33,48 +33,19 @@ public class HomeFuelActions extends GUIActions {
 		
 	}
 	
-	public void verifyDetails(Date shipDate, String qty, String shipAddr, boolean isUrgent)
+	public void verifyDetails(Date shipDate)
 	{
-		String msg = "";
-		boolean success= true;
+		
 		Date date = new Date();
-		Float qtyF;
 		
-		
-		try {
-			qtyF = Float.parseFloat(qty);
-			
-			
-		} catch(NumberFormatException e)
-		{
-			success = false;
-			msg += "Quantity Value is illegal or Empty. \n";
-		}
-		
-		if(shipAddr.equals(""))
-		{
-			success = false;
-			msg += "Shipping Address is Empty.\n";
-		}
-		if(shipDate == null ){
-			msg+="You have to pick ship date.\n";
-			success = false;
-		}
-		else if(shipDate.before(date)){
-				msg+= "Illegal Date.\n";
-				success = false;
-		}
+		if(shipDate == null )
+			gui.showMessage("You have to pick ship date!");
+		else if(shipDate.before(date))
+				gui.showMessage("Illegal Date!");
 		else { // new request
 			
 		}
-		
-		if(!success) gui.showMessage(msg);
 			
-	}
-	
-	public String getAddress()
-	{
-		return customer.getAddress();
 	}
 
 

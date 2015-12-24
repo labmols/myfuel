@@ -1,37 +1,51 @@
 package myfuel.request;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import myfuel.client.saleModel;
 
 @SuppressWarnings("serial")
-public class ConfirmNewRatesRequest implements Serializable {
-	
-	private int type;
+public class ConfirmNewRatesRequest  implements Serializable
+{
+	private RequestEnum type;
+	private ArrayList<saleModel> approved;
 	/***
-	 * Create a request that will sent to the Server
-	 * @param type - type of the request 
-	 * 			type = 1 -> Check if there are any new prices waiting for confirmation 
-	 * 			type = 2 -> Confirm suggested rates and set it as the current rates
-	 * 			type = 3 -> Deny Suggested Rates
+	 * Will contain the request that will be sent to the Server
+	 * @param type - type of request 
 	 */
-	public ConfirmNewRatesRequest(int type)
+	public ConfirmNewRatesRequest(RequestEnum type) 
 	{
-		this.setType(type);
-	}
-	
-	/**
-	 * 
-	 * @return type
-	 */
-	public int getType() {
-		return type;
-	}
-	
-	/***
-	 * set type
-	 * @param type
-	 */
-	public void setType(int type) {
 		this.type = type;
 	}
+	/***
+	 *  Will contain the request that will be sent to the Server
+	 * @param type - type of request 
+	 * @param approved - approved rates
+	 */
+	public ConfirmNewRatesRequest(RequestEnum type,ArrayList<saleModel> approved) 
+	{
+		this.type = type;
+		this.setApproved(approved);
+	}
+	public RequestEnum getType() {
+		return type;
+	}
+	public void setType(RequestEnum type) {
+		this.type = type;
+	}
+
+	public ArrayList<saleModel> getApproved() {
+		return approved;
+	}
+
+	public void setApproved(ArrayList<saleModel> approved) {
+		this.approved = approved;
+	}
+
+
+
+	
+	
 
 }
