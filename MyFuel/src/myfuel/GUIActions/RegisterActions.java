@@ -17,16 +17,39 @@ import myfuel.response.RegisterResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
+/**
+ * Register GUI Controller.
+ * @author Maor
+ *
+ */
 public class RegisterActions extends GUIActions {
+	/**
+	 * The Register GUI object.
+	 */
 	private RegisterGUI gui;
+	/**
+	 * List of all stations in the company, received from Database.
+	 */
 	private ArrayList <Station> stations;
+	/**
+	 * List of all the new customer stations chosen.
+	 */
 	private ArrayList <Integer> cstations;
+	/**
+	 * List of all the new customer cars.
+	 */
 	private ArrayList <Car> cars;
+	/**
+	 * Will contain all customer details.
+	 */
 	private Customer customer;
+	/**
+	 * the registerRequest object that will be send to the server.
+	 */
 	private registerRequest request;
 	
 	/**
-	 * new register gui controller
+	 * Create new Register GUI Controller.
 	 * @param client - the client object for this controller
 	 */
 	public RegisterActions(MyFuelClient client) {
@@ -60,7 +83,7 @@ public class RegisterActions extends GUIActions {
 	}
 	
 	/**
-	 * request for the stations from DB.
+	 * Request for all the stations from DB.
 	 */
 	public void showStations(){
 		request = new registerRequest(RequestEnum.Select,null);
@@ -68,7 +91,8 @@ public class RegisterActions extends GUIActions {
 	}
 	
 	/**
-	 * 
+	 * notified by the Client when a new response received from the server and handle the request.
+	 * Show message to the customer if the register success or not according to this response.
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
@@ -277,7 +301,7 @@ public class RegisterActions extends GUIActions {
 	}
 	
 	/**
-	 * reset all user lists.
+	 * reset all new customer lists.
 	 */
 	public void resetAll() {
 		// TODO Auto-generated method stub
