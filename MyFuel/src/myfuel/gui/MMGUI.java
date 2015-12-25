@@ -48,7 +48,7 @@ public class MMGUI extends SuperGUI {
 		
 	}
 	/***
-	 * ActionListener for the buttong of this JFrame
+	 * ActionListener for the button of this JFrame
 	 * The MMActions method will be accessed due to the button pressed
 	 * 
 	 *

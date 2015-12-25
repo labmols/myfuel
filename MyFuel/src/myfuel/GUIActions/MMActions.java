@@ -32,7 +32,7 @@ public class MMActions extends GUIActions{
 	
 	public void createShowReportsWindow()
 	{
-		
+		this.changeFrame(gui, new MMReportsActions(client),this);
 	}
 
 	@Override
