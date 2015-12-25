@@ -16,7 +16,7 @@ public class MDGUI extends SuperGUI {
 	
 	public MDGUI(MDActions actions){
 		setContentPane(contentPane);
-		lblTitle.setBounds(160, 6, 250, 22);
+		lblTitle.setBounds(194, 6, 250, 22);
 		lblTitle.setText("Marketing Delegate Menu");
 		
 		 analystic = new JButton("Analystic System");

@@ -94,7 +94,7 @@ public class LogInGUI extends SuperGUI {
 		panel.add(nfcLabel);
 		
 		JLabel registerLabel = new JLabel("Don't have an account? ");
-		registerLabel.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
+		registerLabel.setFont(new Font("Lucida Grande", Font.ITALIC, 14));
 		registerLabel.setBounds(183, 266, 166, 16);
 		panel.add(registerLabel);
 		

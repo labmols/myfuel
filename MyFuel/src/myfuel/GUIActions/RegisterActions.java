@@ -294,6 +294,9 @@ public class RegisterActions extends GUIActions {
 		
 	}
 
+	/**
+	 * Back to the Login screen.
+	 */
 	@Override
 	public void backToMenu() {
 		changeFrame(gui,new LoginActions(client),this);

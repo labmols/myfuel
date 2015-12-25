@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class ClockPane extends JPanel {
@@ -26,8 +27,8 @@ public class ClockPane extends JPanel {
         public ClockPane() {
             setLayout(new BorderLayout());
             clock = new JLabel();
-            clock.setHorizontalAlignment(JLabel.CENTER);
-            clock.setFont(clock.getFont().deriveFont(clock.getFont().getStyle() | Font.BOLD, 12f));
+            clock.setHorizontalAlignment(SwingConstants.CENTER);
+            clock.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
             tickTock();
             add(clock);
 

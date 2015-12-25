@@ -60,6 +60,9 @@ public abstract class SuperGUI extends JFrame {
 		
 		JMenuItem Exit = new JMenuItem("Exit");
 		mnMenu.add(Exit);
+		clockPanel = new ClockPane();
+		menuBar.add(clockPanel);
+		clockPanel.setOpaque(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -84,11 +87,6 @@ public abstract class SuperGUI extends JFrame {
 		 ImageIcon icon = new ImageIcon(url);
 		
 		 background.setIcon(icon);
-		 clockPanel = new ClockPane();
-		 clockPanel.setOpaque(false);
-		 clockPanel.setLocation(431, 6);
-		 clockPanel.setSize(159, 20);
-		 panel.add(clockPanel);
 		contentPane.add( background);
 	}
 	
