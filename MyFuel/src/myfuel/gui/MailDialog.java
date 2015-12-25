@@ -29,7 +29,7 @@ public class MailDialog extends JDialog {
 
 	public MailDialog(int maxValue) {
 		setTitle("Sending Mails...");
-		setBounds(100, 100, 399, 143);
+		setBounds(100, 100, 399, 160);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,7 +65,7 @@ public class MailDialog extends JDialog {
 				getDialog().setVisible(false);
 			}
 		});
-		btnOk.setBounds(164, 86, 61, 29);
+		btnOk.setBounds(164, 87, 61, 29);
 		contentPanel.add(btnOk);
 		{
 			JLabel label = new JLabel("");
