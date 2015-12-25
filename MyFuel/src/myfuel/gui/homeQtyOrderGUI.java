@@ -115,7 +115,7 @@ public class homeQtyOrderGUI extends SuperGUI{
 	{
 		if(o == null)
 		{
-			this.showMessage("There are no new inventory orders for home fuel!");
+			this.showErrorMessage("There are no new inventory orders for home fuel!");
 			order = false;
 		}
 		else
@@ -162,7 +162,7 @@ public class homeQtyOrderGUI extends SuperGUI{
 			if(this.order)
 				actions.setOrder();
 			else
-				this.showMessage("There is no order to confirm!");
+				this.showErrorMessage("There is no order to confirm!");
 		}
 		
 		else if (e.getSource() == setLowLvl)

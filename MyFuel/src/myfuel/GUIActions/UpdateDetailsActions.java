@@ -77,10 +77,11 @@ public class UpdateDetailsActions extends GUIActions {
 		if(arg instanceof booleanResponse)
 		{
 			booleanResponse res= (booleanResponse) arg;
-			gui.showMessage(res.getMsg());
 			if(!res.getSuccess()) {
+				gui.showErrorMessage(res.getMsg());
 				clearLists();
 			}
+			else gui.showOKMessage(res.getMsg());
 		  gui.clearAll(user);
 		}
 	}
@@ -100,16 +101,16 @@ public class UpdateDetailsActions extends GUIActions {
 		c = new Car(Integer.parseInt(cid),fid);
 		if(!checkCar(Integer.parseInt(cid))){
 			user.getCars().add(c);
-			gui.showMessage("Car "+cid+" "+ "added!");
+			gui.showErrorMessage("Car "+cid+" "+ "added!");
 		}
-		else gui.showMessage("You already have this car!");
+		else gui.showErrorMessage("You already have this car!");
 		}
 		catch (NumberFormatException e){
-			gui.showMessage("illegal Car id value!");
+			gui.showErrorMessage("illegal Car id value!");
 		}
 	
 		}
-		else gui.showMessage("illegal Car id value!");
+		else gui.showErrorMessage("illegal Car id value!");
 	}
 	
 	/**
@@ -138,13 +139,13 @@ public class UpdateDetailsActions extends GUIActions {
 			if(s.getName().equals(sname)){
 				if(!userStations.contains(s.getsid())) {
 					userStations.add(s.getsid());
-					gui.showMessage("Station "+sname + " is added!");
+					gui.showErrorMessage("Station "+sname + " is added!");
 				}
-				else gui.showMessage("You already have this station!");
+				else gui.showErrorMessage("You already have this station!");
 				}
 			}
 		}
-		else gui.showMessage("You Can't add more then one stations in this access!");
+		else gui.showErrorMessage("You Can't add more then one stations in this access!");
 	
 		gui.updateCB(userStations,res.getStations());
 		}
@@ -172,9 +173,9 @@ public class UpdateDetailsActions extends GUIActions {
 					if(index!=-1 && !userStations.contains(s.getsid()))
 					{
 						userStations.set(index, s.getsid());
-						gui.showMessage("Station "+oldS + " changed to " +newS);
+						gui.showErrorMessage("Station "+oldS + " changed to " +newS);
 					}
-					else gui.showMessage("You already have this station!");
+					else gui.showErrorMessage("You already have this station!");
 					
 				}
 			
@@ -194,7 +195,7 @@ public class UpdateDetailsActions extends GUIActions {
 	public void removeCar(int cid, int index)
 	{
 		res.getUser().getCars().remove(index);
-		gui.showMessage("Car "+cid+" "+ "removed!");
+		gui.showErrorMessage("Car "+cid+" "+ "removed!");
 	}
 	
 	public void resetAccess()
@@ -256,7 +257,7 @@ public class UpdateDetailsActions extends GUIActions {
 			errors+= "illegal Email value. \n";
 		}
 		
-		if(!success) gui.showMessage(errors);
+		if(!success) gui.showErrorMessage(errors);
 		else  
 		{
 			user.setFname(fname);

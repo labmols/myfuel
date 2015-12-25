@@ -42,12 +42,13 @@ public class ConfirmNewRatesActions extends GUIActions {
 		
 		else if(arg1 instanceof booleanResponse)
 		{
-			gui.showMessage(((booleanResponse)arg1).getMsg());
 			if(((booleanResponse)arg1).getSuccess())
 			{
+				gui.showOKMessage(((booleanResponse)arg1).getMsg());
 				gui.clearTable();
 				
 			}
+			else gui.showErrorMessage(((booleanResponse)arg1).getMsg());
 			backToMenu() ;
 		}
 

@@ -38,9 +38,12 @@ public class SWActions extends GUIActions {
 		}
 		else if(arg instanceof booleanResponse)
 		{
-			gui.showMessage(((booleanResponse)arg).getMsg());
 			if(((booleanResponse)arg).getSuccess())
+			{
+				gui.showOKMessage(((booleanResponse)arg).getMsg());
 				gui.deleteTable();
+			}
+			else gui.showErrorMessage(((booleanResponse)arg).getMsg());
 		}
 
 	}

@@ -86,9 +86,16 @@ public abstract class SuperGUI extends JFrame {
 		contentPane.add( background);
 	}
 	
-	public void showMessage(String msg){
-		JOptionPane.showMessageDialog(null, msg);	
+	public void showErrorMessage(String msg){
+	
+		JOptionPane.showMessageDialog(this, msg,"Error",JOptionPane.ERROR_MESSAGE);	
 	}
+	
+	public void showOKMessage(String msg){
+		
+		JOptionPane.showMessageDialog(this, msg,"Message",JOptionPane.INFORMATION_MESSAGE);	
+	}
+	
 	public abstract void getInput(ActionEvent e);
 	
 	

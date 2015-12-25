@@ -33,15 +33,38 @@ public class HomeFuelActions extends GUIActions {
 		
 	}
 	
-	public void verifyDetails(Date shipDate)
+	public void verifyDetails(Date shipDate, String qty, String addr, boolean urgent)
 	{
-		
+		boolean success = true;
+		String msg = "";
 		Date date = new Date();
+		float qtyF;
+		try {
+			qtyF = Float.parseFloat(qty);
+		}
+		catch(NumberFormatException e)
+		{
+			success = false;
+			msg += "Illegal Quantity value!\n";
+		}
 		
+		if(addr.equals(""))
+		{
+			success = false;
+			msg += "Address field is Empty!\n";
+		}
 		if(shipDate == null )
-			gui.showMessage("You have to pick ship date!");
+		{
+			success = false;
+			msg += "You have to pick ship date!\n";
+		}
 		else if(shipDate.before(date))
-				gui.showMessage("Illegal Date!");
+		{
+			success = false;
+			 msg += "Illegal Date!\n";
+		}
+		
+		if(!success) gui.showErrorMessage(msg);
 		else { // new request
 			
 		}

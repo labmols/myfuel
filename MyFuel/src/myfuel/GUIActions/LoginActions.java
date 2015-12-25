@@ -59,7 +59,7 @@ public class LoginActions extends GUIActions {
 			msg += "Password field is empty!\n";
 		}
 		if(!error) sendRequest(type,id,pass);
-		else gui.showMessage(msg);
+		else gui.showErrorMessage(msg);
 		
 	}
 	
@@ -72,14 +72,14 @@ public class LoginActions extends GUIActions {
 		{
 		UserLoginResponse res = (UserLoginResponse) response;
 
-			gui.showMessage("Welcome to MyFuel!");
+			gui.showOKMessage("Welcome to MyFuel!");
 			changeFrame(gui,new CustomerOptionsActions (client,res),this);
 			
 		}
 		else
 		{
 		booleanResponse res = (booleanResponse) response;
-		 gui.showMessage(res.getMsg());
+		 gui.showErrorMessage(res.getMsg());
 		
 			}
 			
@@ -101,7 +101,7 @@ public class LoginActions extends GUIActions {
 		{
 		WorkerLoginResponse res = (WorkerLoginResponse) response;
 		
-			 gui.showMessage("Welcome to MyFuel!"); 
+			 gui.showOKMessage("Welcome to MyFuel!"); 
 			 switch(res.getRole()){
 			 case MarketingManager: 
 				 			changeFrame(gui,new MMActions(client),this);
@@ -124,7 +124,7 @@ public class LoginActions extends GUIActions {
 		else 
 		{
 			booleanResponse res = (booleanResponse) response;
-			 gui.showMessage(res.getMsg());
+			 gui.showErrorMessage(res.getMsg());
 		}
 	
 		

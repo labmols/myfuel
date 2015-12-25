@@ -44,7 +44,7 @@ public class homeQtyOrderActions extends GUIActions {
 			
 			else if(arg1 instanceof booleanResponse)
 			{
-				gui.showMessage(((booleanResponse)arg1).getMsg());
+			
 				
 				if(((booleanResponse)arg1).getMsg().equals("New level has been updated!"))
 					gui.setCurrMinQty(this.level);
@@ -85,7 +85,7 @@ public class homeQtyOrderActions extends GUIActions {
 
 		if(str.isEmpty())
 		{
-			gui.showMessage("Please enter a value to set new low level");
+			gui.showErrorMessage("Please enter a value to set new low level");
 			return;
 		}
 		
@@ -95,7 +95,7 @@ public class homeQtyOrderActions extends GUIActions {
 				low = Float.parseFloat(str);
 				if(low < 0 )
 				{
-					gui.showMessage("Low level can't be negative!");
+					gui.showErrorMessage("Low level can't be negative!");
 				}
 				
 				else
@@ -106,7 +106,7 @@ public class homeQtyOrderActions extends GUIActions {
 			
 			} catch(Exception e)
 			{
-				gui.showMessage("Low Level has to be a number!");
+				gui.showErrorMessage("Low Level has to be a number!");
 			}
 		}
 		

@@ -166,7 +166,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		try{
 		 n = name.getText();
 		 d = Float.parseFloat(discount.getText());
-		}catch(Exception ex){this.showMessage("Input must be a number!"); legal = false;}
+		}catch(Exception ex){this.showErrorMessage("Input must be a number!"); legal = false;}
 		
 		Date start = (Date) startHour.getValue();
 		Date end = (Date) EndHour.getValue();
