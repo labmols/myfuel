@@ -39,7 +39,7 @@ public class CheckInventoryGUI extends SuperGUI{
 		scrollPane.setBounds(57, 72, 501, 156);
 		panel.add(scrollPane);
 		scrollPane.setOpaque(false);
-		model = new TableInventory();
+		model = new MyTableModel(3,3);
 		String[] columns = new String[] {"Fuel ID", "Fuel Name", "Quantity","Approve/Deny"};
 		table = new JTable(model);
 		

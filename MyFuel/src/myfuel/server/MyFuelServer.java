@@ -48,6 +48,7 @@ public class MyFuelServer extends ObservableServer{
 		new LowInventoryDBHandler(this,con);
 		new CheckInventoryDBHandler(this,con);
 		new CarFuelDBHandler(this,con);
+		new HomeControlDBHandler(this,con);
 	}
 
 	@Override

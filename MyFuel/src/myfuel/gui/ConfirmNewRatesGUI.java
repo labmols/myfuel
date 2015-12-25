@@ -33,7 +33,7 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(47, 90, 498, 217);
 		panel.add(scrollPane);
-		String[] names = {"Type ID","Type Name","Current","Suggested","Approve/Deny"};
+		String[] names = {"Type ID","Type Name","Current (%)","Suggested (%)","Approve/Deny "};
 		this.model = new MyTableModel(4,4);
 		for(String str : names)
 			model.addColumn(str);
