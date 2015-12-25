@@ -43,6 +43,7 @@ public class CarFuelGUI extends SuperGUI {
 	private CarFuelActions actions;
 	private JProgressBar progressBar;
 	private DefaultComboBoxModel<String> stationModel;
+	private DefaultComboBoxModel<Integer> carModel;
 	private XRadioButton rb95;
 	private XRadioButton rbscooter;
 	private XRadioButton rbdiesel;
@@ -50,6 +51,7 @@ public class CarFuelGUI extends SuperGUI {
 	private JLabel lblp95;
 	private JLabel lblpdiesel;
 	private JLabel lblpscooter;
+	private JComboBox<Integer> carCB;
 	/**
 	 * Create the frame.
 	 */
@@ -88,7 +90,7 @@ public class CarFuelGUI extends SuperGUI {
 		panel2.add(stationCombo);
 		
 		JLabel lblChooseFuelPump = new JLabel("Choose Fuel Pump:");
-		lblChooseFuelPump.setBounds(35, 46, 130, 16);
+		lblChooseFuelPump.setBounds(35, 68, 130, 16);
 		panel2.add(lblChooseFuelPump);
 		
 		
@@ -102,7 +104,7 @@ public class CarFuelGUI extends SuperGUI {
 		rb95.getRadioButton().setBounds(6, 0, 28, 23);
 		
 		rb95.setOpaque(false);
-		rb95.setBounds(35, 74, 148, 125);
+		rb95.setBounds(35, 96, 148, 125);
 		rb95.setText("95");
 	
 		rb95.setIcon(new ImageIcon(url));
@@ -115,7 +117,7 @@ public class CarFuelGUI extends SuperGUI {
 		rbdiesel.getLabel().setBounds(39, 0, 145, 119);
 		rbdiesel.getRadioButton().setBounds(6, 0, 28, 23);
 		rbdiesel.setOpaque(false);
-		rbdiesel.setBounds(186, 74, 183, 125);
+		rbdiesel.setBounds(186, 96, 183, 125);
 		rbdiesel.setText("Diesel");
 		rbdiesel.setIcon(new ImageIcon(url));
 		panel2.add(rbdiesel);
@@ -157,7 +159,7 @@ public class CarFuelGUI extends SuperGUI {
 		
 		
 		rbscooter = new XRadioButton();
-		rbscooter.setBounds(362, 74, 164, 125);
+		rbscooter.setBounds(362, 96, 164, 125);
 		panel2.add(rbscooter);
 		rbscooter.getLabel().setFont(new Font("Lucida Grande", Font.BOLD, 14));
 		rbscooter.getLabel().setBounds(36, 0, 141, 125);
@@ -179,13 +181,24 @@ public class CarFuelGUI extends SuperGUI {
 		
 		lblp95 = new JLabel("");
 		lblp95.setForeground(Color.WHITE);
-		lblp95.setBounds(134, 183, 61, 16);
+		lblp95.setBounds(134, 205, 61, 16);
 		panel2.add(lblp95);
 		
 		lblpdiesel = new JLabel("");
 		lblpdiesel.setForeground(Color.WHITE);
-		lblpdiesel.setBounds(308, 183, 61, 16);
+		lblpdiesel.setBounds(308, 205, 61, 16);
 		panel2.add(lblpdiesel);
+		
+		JLabel lblChooseCar = new JLabel("Choose Car:");
+		lblChooseCar.setBackground(Color.RED);
+		lblChooseCar.setBounds(35, 41, 99, 16);
+		panel2.add(lblChooseCar);
+		
+		carCB = new JComboBox<Integer>();
+		carModel = new DefaultComboBoxModel<Integer>();
+		carCB.setModel(carModel);
+		carCB.setBounds(146, 37, 109, 27);
+		panel2.add(carCB);
 		rbscooter.addActionListener(new eventListener());
 		
 		rb95.addActionListener(new eventListener());
@@ -206,22 +219,14 @@ public class CarFuelGUI extends SuperGUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == rb95.getRadioButton())
-			{
 				fuelSelected = 1;
 				
-			}
-			
-			
 			if(e.getSource() == rbdiesel.getRadioButton())
-			{
 				fuelSelected = 2;
-			}
-			
 			
 			if(e.getSource() == rbscooter.getRadioButton())
-			{
 				fuelSelected = 3;
-			}
+			
 		}
 		
 	}
@@ -238,9 +243,15 @@ public class CarFuelGUI extends SuperGUI {
 				lblpdiesel.setText(fuels.get(2).getMaxPrice()+"₪");
 				lblpscooter.setText(fuels.get(3).getMaxPrice()+"₪");
 	}
+	
 
 	public void addStation(String st)
 	{
 		stationModel.addElement(st);
+	}
+
+	public void addCar(int cid) {
+		
+		carModel.addElement(cid);
 	}
 }

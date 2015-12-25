@@ -70,9 +70,10 @@ public class ConfirmationActions extends GUIActions {
 		// TODO Auto-generated method stub
 		String subject = "Welcome to MyFuel!";
 		String content= "Dear " + c.getFname() + ",\n"
-				+ "Now you can sign in with your login details: "
-				+ "\n" + "UserID: " + c.getUserid() + 
-				  "\n"   +"Password: " + c.getPass();
+				+ "Now you can sign in with the following login details: "
+				+ "\n\n" + "UserID: " + c.getUserid() + 
+				  "\n"   +"Password: " + c.getPass() 
+				+ "\n\n\n" +"Marketing Department , MyFuel.";
 		
 		SendMailTLS.sendMail(c.getEmail() , subject, content);
 	}

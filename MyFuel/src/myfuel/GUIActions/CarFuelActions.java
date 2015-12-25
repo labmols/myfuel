@@ -3,6 +3,7 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Fuel;
 import myfuel.client.MyFuelClient;
@@ -27,7 +28,7 @@ public class CarFuelActions extends GUIActions {
 		sInventory = null;
 		fuels = null;
 		gui = new CarFuelGUI(this);
-		showStations();
+		insertInfo();
 		getInventoryRequest();
 		gui.setVisible(true);
 		
@@ -44,13 +45,16 @@ public class CarFuelActions extends GUIActions {
 		client.handleMessageFromGUI(req);
 	}
 	
-	private void showStations()
+	private void insertInfo()
 	{
 		ArrayList<Station> stations = res.getStations();
+		ArrayList<Car> cars = res.getUser().getCars();
+		
 		for(Station s: stations)
-		{
 			gui.addStation(s.getName());
-		}
+		for(Car c: cars)
+			gui.addCar(c.getcid());
+		
 	}
 
 
