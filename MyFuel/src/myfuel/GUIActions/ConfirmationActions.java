@@ -40,7 +40,7 @@ public class ConfirmationActions extends GUIActions {
 				customers = ((ConfirmationResponse)arg1).getCustomers();
 				if(customers.isEmpty())
 				{
-					gui.showMessage("There are no customers waiting for confirmation!");
+					gui.showErrorMessage("There are no customers waiting for confirmation!");
 					this.backToMenu();
 				}
 				else
@@ -51,9 +51,9 @@ public class ConfirmationActions extends GUIActions {
 		else if(arg1 instanceof booleanResponse)
 		{
 		    booleanResponse res  = ((booleanResponse)arg1);
-			gui.showMessage(res.getMsg());
 			if(res.getSuccess())
 			{
+			gui.showOKMessage(res.getMsg());
 			gui.updateTable(approved);
 			for(Customer c: customers)
 			{
@@ -62,6 +62,7 @@ public class ConfirmationActions extends GUIActions {
 			}
 			
 			}
+			else gui.showErrorMessage(res.getMsg());
 		}
 
 	}

@@ -28,12 +28,12 @@ public class ChangePassActions extends GUIActions {
 		String nPass2 = new String(newPass2);
 		
 		if(old.equals("") || nPass1.equals("") || nPass2.equals(""))
-			gui.showMessage("One or more fields are missing!");
+			gui.showErrorMessage("One or more fields are missing!");
 		else if(nPass1.equals(nPass2)){
 			changePassword(old,nPass1);
 		}
 		else{
-			gui.showMessage("Passwords are not Equal!");
+			gui.showErrorMessage("Passwords are not Equal!");
 		}
 	}
 	
@@ -50,7 +50,9 @@ public class ChangePassActions extends GUIActions {
 	public void update(Observable o, Object arg) {
 		
 		booleanResponse res = (booleanResponse) arg;
-		gui.showMessage(res.getMsg());
+		if(!res.getSuccess())
+		gui.showErrorMessage(res.getMsg());
+		else gui.showOKMessage(res.getMsg());
 			
 	}
 

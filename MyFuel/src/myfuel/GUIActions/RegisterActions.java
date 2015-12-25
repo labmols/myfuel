@@ -82,7 +82,7 @@ public class RegisterActions extends GUIActions {
 		}
 		else {
 			booleanResponse res2 = (booleanResponse) arg;
-			gui.showMessage(res2.getMsg());
+			gui.showErrorMessage(res2.getMsg());
 		}
 		}
 		else if(request.getType()== RequestEnum.Insert){
@@ -109,11 +109,11 @@ public class RegisterActions extends GUIActions {
 	public void checkRegister(booleanResponse res){
 		if(res.getSuccess()) {
 			
-			gui.showMessage(res.getMsg());
+			gui.showOKMessage(res.getMsg());
 			changeFrame(gui,new LoginActions(client),this);
 
 		}
-		else gui.showMessage(res.getMsg());
+		else gui.showErrorMessage(res.getMsg());
 	}
 	
 	/** 
@@ -127,11 +127,11 @@ public class RegisterActions extends GUIActions {
 			if(!cars.contains(car))
 			{
 			cars.add(car);
-			gui.showMessage("Car "+cid + " is added!");
+			gui.showErrorMessage("Car "+cid + " is added!");
 			}
-			else gui.showMessage("You already have this car!");
+			else gui.showErrorMessage("You already have this car!");
 		}
-		else gui.showMessage("Car number value is illegal!");
+		else gui.showErrorMessage("Car number value is illegal!");
 		
 	}
 	
@@ -145,13 +145,13 @@ public class RegisterActions extends GUIActions {
 			if(s.getName().equals(sname)){
 				if(!cstations.contains(s.getsid())) {
 					cstations.add(s.getsid());
-					gui.showMessage("Station "+sname + " is added!");
+					gui.showErrorMessage("Station "+sname + " is added!");
 				}
-				else gui.showMessage("You already have this station!");
+				else gui.showErrorMessage("You already have this station!");
 				}
 			}
 		}
-		else gui.showMessage("You choose one station access type!");
+		else gui.showErrorMessage("You choose one station access type!");
 		}
 	
 	/**
@@ -224,7 +224,7 @@ public class RegisterActions extends GUIActions {
 			success= false;
 			errors+= "Please add your Stations. \n";
 		}
-		if(!success) gui.showMessage(errors);
+		if(!success) gui.showErrorMessage(errors);
 		else registerRequest(Integer.parseInt(userid), fname, lname, pass, email,address,cnumber,toc, atype, smodel);
 	}
 	

@@ -303,7 +303,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 					if(stationModel.getSize() > 1)
 					{
 					actions.resetAccess();
-					showMessage("Now you need to add one station!");
+					showErrorMessage("Now you need to add one station!");
 					}
 					
 				}
@@ -342,7 +342,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 			actions.removeCar((Integer)carsCB.getSelectedItem(),carsCB.getSelectedIndex());
 			carModel.removeElementAt(carsCB.getSelectedIndex());
 			}
-			else  showMessage("You must have at least one car!");
+			else  showErrorMessage("You must have at least one car!");
 		}
 		
 		if(e.getSource() == btnChange)

@@ -49,9 +49,9 @@ public class CPromotionTemplateActions extends GUIActions{
 			booleanResponse response = (booleanResponse)arg1;
 			
 			if(response.getSuccess() == true)
-				gui.showMessage("Promotion Template " +"\""+rq.getP().getName()+"\""+" Created!");
+				gui.showOKMessage("Promotion Template " +"\""+rq.getP().getName()+"\""+" Created!");
 			else
-				gui.showMessage(response.getMsg());
+				gui.showErrorMessage(response.getMsg());
 		}
 		
 	}
@@ -62,7 +62,7 @@ public class CPromotionTemplateActions extends GUIActions{
 		boolean result = true;
 		if(p.getDiscount() <= 0 || p.getDiscount() > 100)
 		{
-			gui.showMessage("Input Error! Discount values is between 1-99.");
+			gui.showErrorMessage("Input Error! Discount values is between 1-99.");
 			result = false;
 		}
 		
@@ -71,7 +71,7 @@ public class CPromotionTemplateActions extends GUIActions{
 		
 		if(p.getEndTime().before(p.getStartTime()))
 		{
-			gui.showMessage("Input Error! End time is eariler then the Start time.");
+			gui.showErrorMessage("Input Error! End time is eariler then the Start time.");
 			result = false;
 		}
 		

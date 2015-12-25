@@ -41,11 +41,13 @@ public class CheckInventoryActions extends GUIActions{
 			gui.setDetails(response.getNewOrder());
 		}
 		
-		else if(gui.isActive() && arg1 instanceof booleanResponse)
+		else if(arg1 instanceof booleanResponse)
 		{
 	
 			booleanResponse resp = (booleanResponse)arg1;
-			gui.showMessage(resp.getMsg());
+			if(!resp.getSuccess())
+			gui.showErrorMessage(resp.getMsg());
+			else gui.showOKMessage(resp.getMsg());
 			backToMenu();
 		}
 	}

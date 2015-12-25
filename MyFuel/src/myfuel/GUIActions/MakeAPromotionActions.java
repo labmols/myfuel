@@ -51,9 +51,9 @@ public class MakeAPromotionActions extends GUIActions {
 			booleanResponse resp = (booleanResponse)arg1;
 			
 			if(resp.getSuccess())
-				gui.showMessage("Promotion has been created!");
+				gui.showOKMessage("Promotion has been created!");
 			else
-				gui.showMessage(resp.getMsg());
+				gui.showErrorMessage(resp.getMsg());
 			
 		}
 
@@ -71,14 +71,14 @@ public class MakeAPromotionActions extends GUIActions {
 		Date date = new Date();
 		
 		if(start == null || end == null)
-			gui.showMessage("You have to pick start date and end date");
+			gui.showErrorMessage("You have to pick start date and end date");
 		else
 		{
 			if(end.before(start))
-				gui.showMessage("End time can't be before Start time");
+				gui.showErrorMessage("End time can't be before Start time");
 			
 			else if(start.before(date))
-				gui.showMessage("Illegal Start Time!");
+				gui.showErrorMessage("Illegal Start Time!");
 			
 			else
 			{

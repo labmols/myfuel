@@ -48,7 +48,7 @@ public class LowInventoryActions extends GUIActions {
 				error+="The input is Negative\n";
 			}
 		}
-		if(!success) gui.showMessage(error);
+		if(!success) gui.showErrorMessage(error);
 		else
 		{
 			NewLowInventory.add(nLowFuel95);
@@ -63,10 +63,12 @@ public class LowInventoryActions extends GUIActions {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		
-		if(gui.isActive() && arg1 instanceof booleanResponse)
+		if(arg1 instanceof booleanResponse)
 		{
 			booleanResponse resp = (booleanResponse)arg1;	
-			gui.showMessage(resp.getMsg());
+			if(!resp.getSuccess())
+			gui.showErrorMessage(resp.getMsg());
+			else gui.showOKMessage(resp.getMsg());
 		}
 	}
 

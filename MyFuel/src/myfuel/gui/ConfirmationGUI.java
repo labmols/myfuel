@@ -93,7 +93,7 @@ public class ConfirmationGUI extends SuperGUI{
 			approved.add((Integer)model.getValueAt(i,0))	;
 		}
 		if(approved.isEmpty())
-			showMessage("You have to pick a customer!");
+			showErrorMessage("You have to pick a customer!");
 		else
 		actions.sendApproved(approved);
 		
@@ -133,7 +133,7 @@ public class ConfirmationGUI extends SuperGUI{
 		
 		if(model.getRowCount() == 0)
 		{
-			this.showMessage("There are no customers waiting for confirmation!");
+			this.showErrorMessage("There are no customers waiting for confirmation!");
 			actions.backToMenu();
 		}
 		

@@ -49,7 +49,7 @@ public class SetNewRatesActions extends GUIActions {
 				error+="Some of the fileds are Negative\n";
 			}
 		}
-		if(!success) gui.showMessage(error);
+		if(!success) gui.showErrorMessage(error);
 		else
 		{
 		saleModel f;
@@ -74,10 +74,12 @@ public class SetNewRatesActions extends GUIActions {
 			gui.SetNewDetails(response.getoldRates());
 		}
 		
-		else if(gui.isActive() && arg1 instanceof booleanResponse)
+		else if(arg1 instanceof booleanResponse)
 		{
 			booleanResponse resp = (booleanResponse)arg1;
-			gui.showMessage(resp.getMsg());
+			if(resp.getSuccess())
+			gui.showOKMessage(resp.getMsg());
+			else gui.showErrorMessage(resp.getMsg());
 			backToMenu();
 		}
 	}
