@@ -4,11 +4,32 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class LoginRequest implements Serializable{
-	private int type; //0-user, 1-worker
+	/**
+	 * Type of User (0 - Customer, 1- Worker)
+	 */
+	private int type; 
+	
+	/**
+	 * User ID
+	 */
     private int userid;
+    
+    /**
+     * User Password
+     */
     private String password;
+    
+    /**
+     * changeStatus flag , used for change status query
+     */
     private int changeStatus;
     
+    /**
+     * Create new LoginRequest Object.
+     * @param type - Type of User (Customer -0 , Worker -1 )
+     * @param userid - User ID
+     * @param password - User Password
+     */
     public LoginRequest(int type,int userid, String password){
     	this.setType(type);
     	this.setUserid(userid);

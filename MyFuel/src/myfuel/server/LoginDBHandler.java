@@ -16,10 +16,15 @@ import myfuel.request.registerRequest;
 import myfuel.response.ErrorEnum;
 import myfuel.response.RegisterResponse;
 import myfuel.response.Response;
-import myfuel.response.UserLoginResponse;
+import myfuel.response.CustomerLoginResponse;
 import myfuel.response.WorkerLoginResponse;
 import myfuel.response.booleanResponse;
 
+/**
+ * Log In interface Database Controller, responsible for Log In queries.
+ * @author Maor
+ *
+ */
 public class LoginDBHandler extends DBHandler {
 	
 	public LoginDBHandler(MyFuelServer server,Connection con){
@@ -27,9 +32,10 @@ public class LoginDBHandler extends DBHandler {
 	}
 	
 /**
- * 
- * @param request
- * @return
+ * Verify worker login details, including UserID and Password, and his status.
+ * @param request - the Login request that contains the User ID and Password.
+ * @return - WorkerLoginResponse if current worker exist in DB and he not already connected,
+ * otherwise return booleanResponse(false).
  */
 	private Response workerLogin(LoginRequest request) {
 		// TODO Auto-generated method stub
@@ -68,11 +74,12 @@ public class LoginDBHandler extends DBHandler {
 	}
 
 	/**
-	 * 
-	 * @param request
-	 * @return
+	 * Verify Customer login details, including UserID and Password, and his status.
+	 * @param request - the Login request that contains the User ID and Password.
+	 * @return - CustomerLoginResponse if current customer exist in DB and he not already connected,
+	 * otherwise return booleanResponse(false).
 	 */
-	private Response userLogin(LoginRequest request){
+	private Response customerLogin(LoginRequest request){
 		
 		String fname,lname,pass,email,cnumber,address;
 		int userid,status,atype,smodel,toc,approved;
@@ -127,7 +134,7 @@ public class LoginDBHandler extends DBHandler {
 				}
 				
 				ArrayList<Station> Allstations = getStations();
-				return new UserLoginResponse(userid,fname,lname,pass,email,address
+				return new CustomerLoginResponse(userid,fname,lname,pass,email,address
 						,cnumber,toc,atype,smodel,cars,stations,Allstations);
 			}
 			
@@ -139,6 +146,10 @@ public class LoginDBHandler extends DBHandler {
 		return new booleanResponse(false, "UserID or password not correct!"); // User not Found
 	}
 	
+	/**
+	 * Get all stations details available from the Database.
+	 * @return - ArrayList<Station> that contains all the stations info.
+	 */
 	private ArrayList<Station> getStations()
 	{
 		ResultSet rs = null;
@@ -166,8 +177,8 @@ public class LoginDBHandler extends DBHandler {
 		}
 	
 	/**
-	 * 
-	 * @param request
+	 * Update user login status in the system in Login and Exit.
+	 * @param request - the Log in request that contains the User details.
 	 */
 	private void changeStatus(LoginRequest request) {
 		// TODO Auto-generated method stub
@@ -200,7 +211,11 @@ public class LoginDBHandler extends DBHandler {
 		}
 	}
 	
-
+	/**
+	 * this method notified by the server when a new client request received,
+	 * return CustomerLoginResponse (for Customer Login), WorkerLoginResponse(for Worker Login) or booleanResponse(in Error) according
+	 * to the SQL Errors and the request. 
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -208,7 +223,7 @@ public class LoginDBHandler extends DBHandler {
 		if(arg instanceof LoginRequest){
 			LoginRequest request =(LoginRequest)arg;
 			if(request.getChangeStatus()==1) changeStatus(request);
-			else if(request.getType()==0) server.setResponse(userLogin(request));
+			else if(request.getType()==0) server.setResponse(customerLogin(request));
 			else if(request.getType()==1) server.setResponse(workerLogin(request));	 
 		}
 		

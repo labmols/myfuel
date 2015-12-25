@@ -10,15 +10,20 @@ import myfuel.gui.ChangePasswordGUI;
 import myfuel.gui.UpdateCustomerDetailsGUI;
 import myfuel.gui.CustomerOptionsGUI;
 import myfuel.response.Response;
-import myfuel.response.UserLoginResponse;
+import myfuel.response.CustomerLoginResponse;
 
+/**
+ * Customer Options Main Menu Controller class.
+ * @author Maor
+ *
+ */
 public class CustomerOptionsActions extends GUIActions {
 	
 	
 	private CustomerOptionsGUI gui;
-	private UserLoginResponse res;
+	private CustomerLoginResponse res;
 	
-	public CustomerOptionsActions(MyFuelClient client , UserLoginResponse res)
+	public CustomerOptionsActions(MyFuelClient client , CustomerLoginResponse res)
 	{	
 		super(client);
 		gui =new CustomerOptionsGUI(this);

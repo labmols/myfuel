@@ -11,7 +11,7 @@ import myfuel.ocsf.server.ObservableServer;
 import myfuel.request.LoginRequest;
 import myfuel.response.ErrorEnum;
 import myfuel.response.Response;
-import myfuel.response.UserLoginResponse;
+import myfuel.response.CustomerLoginResponse;
 import myfuel.response.WorkerLoginResponse;
 
 
@@ -92,7 +92,7 @@ public class MyFuelServer extends ObservableServer{
 			if(msg instanceof LoginRequest ){
 				LoginRequest req = (LoginRequest) msg;
 				req.setChangeStatus(1);
-				if(response instanceof UserLoginResponse || response instanceof WorkerLoginResponse){
+				if(response instanceof CustomerLoginResponse || response instanceof WorkerLoginResponse){
 					client.setInfo("Info", req);
 				}
 			}

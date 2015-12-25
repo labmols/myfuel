@@ -11,7 +11,7 @@ import myfuel.gui.LogInGUI;
 import myfuel.request.LoginRequest;
 import myfuel.response.ErrorEnum;
 import myfuel.response.Response;
-import myfuel.response.UserLoginResponse;
+import myfuel.response.CustomerLoginResponse;
 import myfuel.response.WorkerLoginResponse;
 
 public class LoginActions extends GUIActions {
@@ -68,9 +68,9 @@ public class LoginActions extends GUIActions {
 	 * @param response
 	 */
 	private void userResponse(Object response){
-		if(response instanceof UserLoginResponse)
+		if(response instanceof CustomerLoginResponse)
 		{
-		UserLoginResponse res = (UserLoginResponse) response;
+		CustomerLoginResponse res = (CustomerLoginResponse) response;
 
 			gui.showOKMessage("Welcome to MyFuel!");
 			changeFrame(gui,new CustomerOptionsActions (client,res),this);
@@ -141,7 +141,7 @@ public class LoginActions extends GUIActions {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg instanceof UserLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse){
+		if(arg instanceof CustomerLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse){
 		// TODO Auto-generated method stub
 				if(lr.getType() ==0) userResponse(arg);
 				else workerResponse(arg);	
