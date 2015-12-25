@@ -1,10 +1,7 @@
 package myfuel.client;
-
-import java.io.Serializable;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Date;
 
+@SuppressWarnings("serial")
 public class Promotion extends PromotionTemplate{
 	
 	private Date startDate;

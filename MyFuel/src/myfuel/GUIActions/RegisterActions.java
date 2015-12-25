@@ -127,7 +127,7 @@ public class RegisterActions extends GUIActions {
 			if(!cars.contains(car))
 			{
 			cars.add(car);
-			gui.showErrorMessage("Car "+cid + " is added!");
+			gui.showOKMessage("Car "+cid + " is added!");
 			}
 			else gui.showErrorMessage("You already have this car!");
 		}
@@ -145,7 +145,7 @@ public class RegisterActions extends GUIActions {
 			if(s.getName().equals(sname)){
 				if(!cstations.contains(s.getsid())) {
 					cstations.add(s.getsid());
-					gui.showErrorMessage("Station "+sname + " is added!");
+					gui.showOKMessage("Station "+sname + " is added!");
 				}
 				else gui.showErrorMessage("You already have this station!");
 				}

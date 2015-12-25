@@ -32,6 +32,7 @@ public abstract class SuperGUI extends JFrame {
 	protected  JMenu mnMenu;
 	protected JMenuItem mainMenu;
 	protected JLabel lblTitle;
+	protected ClockPane clockPanel;
 
 	/**
 	 * Launch the application.
@@ -83,6 +84,11 @@ public abstract class SuperGUI extends JFrame {
 		 ImageIcon icon = new ImageIcon(url);
 		
 		 background.setIcon(icon);
+		 clockPanel = new ClockPane();
+		 clockPanel.setOpaque(false);
+		 clockPanel.setLocation(431, 6);
+		 clockPanel.setSize(159, 20);
+		 panel.add(clockPanel);
 		contentPane.add( background);
 	}
 	

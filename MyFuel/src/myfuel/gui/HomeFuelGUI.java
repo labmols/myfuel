@@ -38,6 +38,8 @@ public class HomeFuelGUI extends SuperGUI {
 	
 	public HomeFuelGUI(HomeFuelActions actions)
 	{
+		lblTitle.setBounds(208, 10, 174, 16);
+		lblTitle.setText("Home Fuel Order");
 		this.actions = actions;
 		setContentPane(contentPane);
 		
@@ -103,7 +105,7 @@ public class HomeFuelGUI extends SuperGUI {
 		panel2.setLayout(null);
 		
 		JTextPane txtPane = new JTextPane();
-		txtPane.setFont(new Font("Arial Hebrew", Font.BOLD | Font.ITALIC, 14));
+		txtPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtPane.setEditable(false);
 		
 		txtPane.setText("Prices:\n\nUrgent Order (in 6 hours from now) : Original price + 2%\n600 - 800 Liters: 3% Discount from Total order price.\nMore then 800 Liters: 4% Discount from Total order price. ");

@@ -38,9 +38,9 @@ public class MakeaPromotionGUI extends SuperGUI{
 	private Date endDate;
 	private Date startDate;
 	private JLabel fuel;
-	DefaultComboBoxModel model;
-	JDatePickerImpl datePicker;
-	JDatePickerImpl datePicker2;
+	private DefaultComboBoxModel model;
+	private JDatePickerImpl datePicker;
+	private JDatePickerImpl datePicker2;
 	public MakeaPromotionGUI(MakeAPromotionActions actions) 
 	{
 		model = new DefaultComboBoxModel(  );

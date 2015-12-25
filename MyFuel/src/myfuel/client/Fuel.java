@@ -2,6 +2,7 @@ package myfuel.client;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Fuel implements Serializable {
 	private int fid;
 	private float suggPrice;
