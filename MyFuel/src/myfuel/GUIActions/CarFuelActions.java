@@ -3,6 +3,7 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Fuel;
 import myfuel.client.MyFuelClient;
@@ -23,13 +24,14 @@ public class CarFuelActions extends GUIActions {
 	
 	public CarFuelActions(MyFuelClient client,UserLoginResponse res) {
 		super(client);
-		gui = new CarFuelGUI(this);
 		this.res = res;
 		sInventory = null;
 		fuels = null;
+		gui = new CarFuelGUI(this);
+		insertInfo();
 		getInventoryRequest();
-		showStations();
 		gui.setVisible(true);
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -43,13 +45,16 @@ public class CarFuelActions extends GUIActions {
 		client.handleMessageFromGUI(req);
 	}
 	
-	private void showStations()
+	private void insertInfo()
 	{
 		ArrayList<Station> stations = res.getStations();
+		ArrayList<Car> cars = res.getUser().getCars();
+		
 		for(Station s: stations)
-		{
 			gui.addStation(s.getName());
-		}
+		for(Car c: cars)
+			gui.addCar(c.getcid());
+		
 	}
 
 
@@ -62,6 +67,7 @@ public class CarFuelActions extends GUIActions {
 			CarFuelResponse res = (CarFuelResponse) arg;
 			sInventory = new ArrayList <StationInventory>(res.getSi());
 			fuels = new ArrayList<Fuel>(res.getFuels());
+			gui.setPrices(fuels);
 		}
 	}
 
@@ -74,11 +80,8 @@ public class CarFuelActions extends GUIActions {
 	}
 
 
-	public String getFuelPrice(int fuelSelected) {
-		if(fuels == null) return "wait...";
-		String price = "" + fuels.get(fuelSelected-1).getCurrPrice();
-		return price;
-		
+	public ArrayList <Fuel> getFuels() {
+		return this.fuels;
 	}
 
 }
