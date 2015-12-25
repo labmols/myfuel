@@ -101,7 +101,7 @@ public class UpdateDetailsActions extends GUIActions {
 		c = new Car(Integer.parseInt(cid),fid);
 		if(!checkCar(Integer.parseInt(cid))){
 			user.getCars().add(c);
-			gui.showErrorMessage("Car "+cid+" "+ "added!");
+			gui.showOKMessage("Car "+cid+" "+ "added!");
 		}
 		else gui.showErrorMessage("You already have this car!");
 		}
@@ -139,7 +139,7 @@ public class UpdateDetailsActions extends GUIActions {
 			if(s.getName().equals(sname)){
 				if(!userStations.contains(s.getsid())) {
 					userStations.add(s.getsid());
-					gui.showErrorMessage("Station "+sname + " is added!");
+					gui.showOKMessage("Station "+sname + " is added!");
 				}
 				else gui.showErrorMessage("You already have this station!");
 				}
@@ -173,7 +173,7 @@ public class UpdateDetailsActions extends GUIActions {
 					if(index!=-1 && !userStations.contains(s.getsid()))
 					{
 						userStations.set(index, s.getsid());
-						gui.showErrorMessage("Station "+oldS + " changed to " +newS);
+						gui.showOKMessage("Station "+oldS + " changed to " +newS);
 					}
 					else gui.showErrorMessage("You already have this station!");
 					

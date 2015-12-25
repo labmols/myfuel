@@ -77,7 +77,7 @@ public class RegisterDBHandler extends DBHandler {
 			ps=con.prepareStatement("select * from customer where uid=?");
 			ps.setInt(1, customer.getUserid());
 			rs = ps.executeQuery();
-			if(rs.next()) return new booleanResponse(false, "this Customer ID already registered!");
+			if(rs.next()) return new booleanResponse(false, "This Customer ID already registered!");
 			rs.close();
 			ps.close();
 		} catch (SQLException e) {

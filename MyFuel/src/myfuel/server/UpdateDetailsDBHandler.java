@@ -87,7 +87,7 @@ public class UpdateDetailsDBHandler extends DBHandler{
 			ps.setInt(9, customer.getToc());
 			ps.setInt(10, customer.getSmodel());
 			ps.setInt(11, 0);
-			ps.setInt(12, 0);
+			ps.setInt(12, 1);
 			ps.executeUpdate();
 		
 		}catch (SQLException e){
