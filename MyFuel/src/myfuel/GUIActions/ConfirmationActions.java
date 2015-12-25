@@ -3,6 +3,9 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import myfuel.client.*;
 import myfuel.gui.ConfirmationGUI;
 import myfuel.request.ConfirmationRequest;
@@ -53,14 +56,18 @@ public class ConfirmationActions extends GUIActions {
 		    booleanResponse res  = ((booleanResponse)arg1);
 			if(res.getSuccess())
 			{
-			gui.showOKMessage(res.getMsg());
 			gui.updateTable(approved);
+			gui.createProgressBar(approved.size());
+			int index =0;
 			for(Customer c: customers)
 			{
 				if(approved.contains(c.getUserid()))
-					sendMail(c);
+				sendMail(c);
+				index ++;
+				gui.setProgress(index);
 			}
 			
+			//backToMenu();
 			}
 			else gui.showErrorMessage(res.getMsg());
 		}

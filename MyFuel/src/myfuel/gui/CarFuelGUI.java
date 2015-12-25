@@ -41,7 +41,6 @@ public class CarFuelGUI extends SuperGUI {
 	
 	private JTextField qtyText;
 	private CarFuelActions actions;
-	private JProgressBar progressBar;
 	private DefaultComboBoxModel<String> stationModel;
 	private DefaultComboBoxModel<Integer> carModel;
 	private XRadioButton rb95;

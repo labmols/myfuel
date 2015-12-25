@@ -22,6 +22,8 @@ public class ConfirmationGUI extends SuperGUI{
 	private JTable table;
 	private ArrayList<Customer> c ; 
 	JCheckBox c2;
+	private MailDialog dialog;
+	
 	public ConfirmationGUI(ConfirmationActions actions)
 	{
 		this.actions = actions;
@@ -120,10 +122,12 @@ public class ConfirmationGUI extends SuperGUI{
 		
 		
 		int n = model.getRowCount();
+		System.out.println(n);
 		int index =0;
 		
 		for(int i=0; i<n; i++)
 		{
+			System.out.println(index);
 			 if(approved.contains((Integer)model.getValueAt(index, 0)))
 			 {
 				model.removeRow(index);
@@ -133,12 +137,22 @@ public class ConfirmationGUI extends SuperGUI{
 		
 		if(model.getRowCount() == 0)
 		{
-			this.showErrorMessage("There are no customers waiting for confirmation!");
-			actions.backToMenu();
+			//this.showErrorMessage("There are no customers waiting for confirmation!");
 		}
 		
 	
 		
+	}
+	
+	public void createProgressBar(int customers)
+	{
+		dialog = new MailDialog(customers);
+		dialog.setVisible(true);
+	}
+
+	public void setProgress(int value) {
+		// TODO Auto-generated method stub
+		dialog.setProgress(value);
 	}
 	
 	
