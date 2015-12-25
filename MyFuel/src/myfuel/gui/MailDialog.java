@@ -23,10 +23,9 @@ public class MailDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	JProgressBar progressBar;
-	private JLabel liter;
-	private JLabel price;
 	private JLabel lblNewLabel;
 	private JLabel lblCustomersApprovedSuccessfully;
+	private JButton btnOk;
 
 	public MailDialog(int maxValue) {
 		setTitle("Sending Mails...");
@@ -41,16 +40,6 @@ public class MailDialog extends JDialog {
 		progressBar.setBounds(164, 42, 146, 20);
 		progressBar.setMaximum(maxValue);
 		contentPanel.add(progressBar);
-		{
-			liter = new JLabel("");
-			liter.setBounds(137, 62, 61, 16);
-			contentPanel.add(liter);
-		}
-		{
-			price = new JLabel("");
-			price.setBounds(137, 88, 61, 16);
-			contentPanel.add(price);
-		}
 		
 		JLabel lblFuelProgress = new JLabel("Sending Mails...");
 		lblFuelProgress.setBounds(58, 42, 117, 16);
@@ -58,7 +47,7 @@ public class MailDialog extends JDialog {
 		{
 			lblNewLabel = new JLabel("Sending Complete!");
 			lblNewLabel.setForeground(Color.WHITE);
-			lblNewLabel.setBounds(137, 74, 126, 16);
+			lblNewLabel.setBounds(137, 62, 126, 16);
 			lblNewLabel.setVisible(false);
 			contentPanel.add(lblNewLabel);
 		}
@@ -67,6 +56,17 @@ public class MailDialog extends JDialog {
 			lblCustomersApprovedSuccessfully.setBounds(80, 14, 230, 16);
 			contentPanel.add(lblCustomersApprovedSuccessfully);
 		}
+		
+		btnOk = new JButton("OK");
+		btnOk.setEnabled(false);
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getDialog().dispose();
+				getDialog().setVisible(false);
+			}
+		});
+		btnOk.setBounds(164, 86, 61, 29);
+		contentPanel.add(btnOk);
 		{
 			JLabel label = new JLabel("");
 			label.setBounds(0, 0, 450, 239);
@@ -81,18 +81,12 @@ public class MailDialog extends JDialog {
 		// TODO Auto-generated method stub
 		progressBar.setValue(value);
 		if(progressBar.getMaximum() == value) 
-		{
-		lblNewLabel.setVisible(true);
-		
-		this.dispose();
-		this.setVisible(false);
-		}
+			btnOk.setEnabled(true);
+			
 	}
 	
 	public JDialog getDialog()
 	{
 		return this;
 	}
-	
-	
 }
