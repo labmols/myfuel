@@ -2,8 +2,10 @@ package myfuel.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import myfuel.GUIActions.MMReportsActions;
+import myfuel.client.PromotionReport;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -26,6 +28,9 @@ public class MMReportGUI extends SuperGUI{
 		comboBox.setBounds(193, 64, 191, 20);
 		panel.add(comboBox);
 		
+		reportPanel = new PromtionRPanel();
+		reportPanel.setBounds(10, 90, 576, 297);
+		panel.add(reportPanel);
 		
 		this.actions = actions;
 		this.setContentPane(contentPane);
@@ -55,6 +60,15 @@ public class MMReportGUI extends SuperGUI{
 		}
 		
 	}
+	
+	public void setReports(ArrayList<PromotionReport> pr )
+	{
+		
+		((PromtionRPanel) reportPanel).setCombo(pr);
+		
+	}
+	
+	
 	@Override
 	public void getInput(ActionEvent e) 
 	{
