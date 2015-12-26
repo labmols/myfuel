@@ -6,8 +6,10 @@ import java.util.ArrayList;
 
 import myfuel.GUIActions.MMReportsActions;
 import myfuel.client.BackMainMenu;
+import myfuel.client.CustomerReport;
 import myfuel.client.Promotion;
 import myfuel.client.PromotionReport;
+import myfuel.client.Station;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -15,8 +17,8 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class MMReportGUI extends SuperGUI{
-	private JPanel reportPanel;
-	private JPanel customerPanel;
+	private PromtionRPanel reportPanel;
+	private CustomerCReportPanel customerPanel;
 	private MMReportsActions actions;
 	private JComboBox comboBox;
 	
@@ -34,7 +36,6 @@ public class MMReportGUI extends SuperGUI{
 		reportPanel = new PromtionRPanel();
 		reportPanel.setBounds(10, 90, 576, 297);
 		panel.add(reportPanel);
-		reportPanel.setVisible(true);
 		
 		customerPanel = new CustomerCReportPanel();
 		customerPanel.setBounds(10, 90, 576, 297);
@@ -70,11 +71,18 @@ public class MMReportGUI extends SuperGUI{
 		}
 		
 	}
-	
-	public void setReports(ArrayList<PromotionReport> pr,ArrayList<Promotion> names )
+	/***
+	 * This method will send 
+	 * @param pr
+	 * @param names
+	 * @param stations
+	 * @param creport
+	 */
+	public void setReports(ArrayList<PromotionReport> pr,ArrayList<Promotion> names ,ArrayList<Station> stations,ArrayList<CustomerReport> creport)
 	{
 		
-		((PromtionRPanel) reportPanel).setCombo(pr,names);
+		 reportPanel.setCombo(pr,names);
+		 customerPanel.setElements(stations,creport);
 		
 	}
 	
