@@ -50,6 +50,7 @@ public class MyFuelServer extends ObservableServer{
 		new CarFuelDBHandler(this,con);
 		new HomeControlDBHandler(this,con);
 		new MMReportDBHandler(this,con);
+		new HomeOrderDBHandler(this,con);
 	}
 
 	@Override

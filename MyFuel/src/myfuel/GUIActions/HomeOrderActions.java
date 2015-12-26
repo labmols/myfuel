@@ -6,7 +6,8 @@ import java.util.Observable;
 import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
 import myfuel.client.PromotionTemplate;
-import myfuel.gui.HomeFuelGUI;
+import myfuel.client.Purchase;
+import myfuel.gui.HomeOrderGUI;
 import myfuel.request.MakeaPromotionRequest;
 
 /**
@@ -14,11 +15,11 @@ import myfuel.request.MakeaPromotionRequest;
  * @author Maor
  *
  */
-public class HomeFuelActions extends GUIActions {
+public class HomeOrderActions extends GUIActions {
 	/**
 	 * Home Fuel GUI object(JFrame).
 	 */
-	HomeFuelGUI gui;
+	HomeOrderGUI gui;
 	
 	/**
 	 * Customer details object.
@@ -30,9 +31,9 @@ public class HomeFuelActions extends GUIActions {
 	 * @param client - MyFuelClient object.
 	 * @param customer - Customer details object.
 	 */
-	public HomeFuelActions(MyFuelClient client, Customer customer) {
+	public HomeOrderActions(MyFuelClient client, Customer customer) {
 		super(client);
-		this.gui = new HomeFuelGUI(this);
+		this.gui = new HomeOrderGUI(this);
 		this.customer= customer;
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
@@ -41,6 +42,11 @@ public class HomeFuelActions extends GUIActions {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	private void MakeHomeFuelRequest(Purchase p)
+	{
 		
 	}
 

@@ -3,7 +3,7 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import myfuel.GUIActions.HomeFuelActions;
+import myfuel.GUIActions.HomeOrderActions;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -27,16 +27,16 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class HomeFuelGUI extends SuperGUI {
+public class HomeOrderGUI extends SuperGUI {
 	
-	HomeFuelActions actions;
+	HomeOrderActions actions;
 	private JTextField qtyText;
 	private JCheckBox urgentCB;
 	private JTextField shipAddrText;
 	private JDatePickerImpl datePicker;
 	private JButton btnMakeOrder;
 	
-	public HomeFuelGUI(HomeFuelActions actions)
+	public HomeOrderGUI(HomeOrderActions actions)
 	{
 		lblTitle.setBounds(208, 10, 174, 16);
 		lblTitle.setText("Home Fuel Order");
