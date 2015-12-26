@@ -16,9 +16,18 @@ import myfuel.response.booleanResponse;
  *
  */
 public class CPromotionTemplateActions extends GUIActions{
-	
-	CreatePromotionTemplateGUI gui ; 
-	PromotionTemplateRequest rq;
+	/***
+	 * The GUI the this controller will control
+	 */
+	private CreatePromotionTemplateGUI gui ; 
+	/***
+	 * This request will be sent to the Server
+	 */
+	private PromotionTemplateRequest rq;
+	/***
+	 * Constructor for CPromotionTemplateActions class
+	 * @param client - MyFuelClient
+	 */
 	public CPromotionTemplateActions(MyFuelClient client) {
 		super(client);
 		gui = new CreatePromotionTemplateGUI(this);
@@ -56,7 +65,10 @@ public class CPromotionTemplateActions extends GUIActions{
 		
 	}
 	
-	
+	/***
+	 * Verify the promotion template details
+	 * @param p - promotion template
+	 */
 	public void verifyDetails(PromotionTemplate p)
 	{
 		boolean result = true;
@@ -69,15 +81,26 @@ public class CPromotionTemplateActions extends GUIActions{
 	//	System.out.println(p.getStartTime());
 	//	System.out.println(p.getEndTime());
 		
-		if(p.getEndTime().before(p.getStartTime()))
+	
+		if(new DateIgnoreComparator().compare(p.getStartTime(), p.getEndTime()) > 0)
 		{
+			
 			gui.showErrorMessage("Input Error! End time is eariler then the Start time.");
+			result = false;
+		}
+		
+		else if(new DateIgnoreComparator().compare(p.getStartTime(), p.getEndTime()) == 0)
+		{
+			gui.showErrorMessage("Input Error! End time can't be equal to Start time.");
 			result = false;
 		}
 		
 		if(result)
 			PromotionTemplate(p);
 }
+	/***
+	 * Return to previous menu
+	 */
 	@Override
 	public void backToMenu() {
 

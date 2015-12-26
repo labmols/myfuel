@@ -95,7 +95,7 @@ public class Promotion extends PromotionTemplate{
 	@Override
 	public String toString()
 	{
-		return super.getName()+" "+" For:"+super.getNameOfFuel()+" "+"From:"+df.format(getStartDate())+" "+"To:"+df.format(getEndDate());
+		return super.getName()+" "+" For: "+super.getNameOfFuel()+" "+" From: "+df.format(getStartDate())+" "+" To: "+df.format(getEndDate());
 	}
 	
 

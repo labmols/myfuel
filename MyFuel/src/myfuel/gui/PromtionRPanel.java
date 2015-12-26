@@ -5,6 +5,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import myfuel.client.Promotion;
@@ -57,11 +59,18 @@ public class PromtionRPanel extends JPanel{
 		
 		for(String s : names)
 			model.addColumn(s);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
 		
 		table = new JTable(model);
 		table.setFont(new Font("Calibri", Font.PLAIN, 13));
 		table.setModel(model);
 		scrollPane.setViewportView(table);
+		
+		for (int x = 0; x < model.getColumnCount(); x ++)
+		{
+	         table. getColumnModel (). getColumn (x). setCellRenderer (centerRenderer);
+	     }
 		
 		JLabel lblBuyers = new JLabel("Buyers:");
 		lblBuyers.setBounds(44, 62, 46, 14);
@@ -74,12 +83,12 @@ public class PromtionRPanel extends JPanel{
 		 buyers = new JLabel("0");
 		buyers.setForeground(new Color(0, 0, 0));
 		buyers.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		buyers.setBounds(113, 62, 46, 14);
+		buyers.setBounds(92, 62, 46, 14);
 		add(buyers);
 		
 		 incomes = new JLabel("0");
 		incomes.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		incomes.setBounds(329, 62, 46, 14);
+		incomes.setBounds(301, 62, 46, 14);
 		add(incomes);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
@@ -92,12 +101,12 @@ public class PromtionRPanel extends JPanel{
 		
 		endDate = new JLabel("00");
 		endDate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		endDate.setBounds(271, 95, 104, 14);
+		endDate.setBounds(284, 95, 104, 14);
 		add(endDate);
 		
 		 startDate = new JLabel("00");
 		 startDate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		startDate.setBounds(105, 95, 136, 14);
+		startDate.setBounds(125, 95, 136, 14);
 		add(startDate);
 		
 		JLabel lblDiscount = new JLabel("Discount:");
