@@ -195,7 +195,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		stationModel2= new DefaultComboBoxModel<String>();
 		
 		carAdd = new JButton("Add");
-		carAdd.setToolTipText("Add New Station");
+		carAdd.setToolTipText("Add New Car");
 		carAdd.addActionListener(new eventListener());
 		carAdd.setBounds(481, 208, 91, 29);
 		panel2.add(carAdd);
