@@ -35,6 +35,7 @@ public class HomeOrderGUI extends SuperGUI {
 	private JTextField shipAddrText;
 	private JDatePickerImpl datePicker;
 	private JButton btnMakeOrder;
+	JLabel lblUrgent ;
 	
 	public HomeOrderGUI(HomeOrderActions actions)
 	{
@@ -58,6 +59,7 @@ public class HomeOrderGUI extends SuperGUI {
 		urgentCB.setHorizontalAlignment(SwingConstants.CENTER);
 		urgentCB.setBounds(268, 252, 128, 23);
 		urgentCB.setOpaque(false);
+		urgentCB.addActionListener(new eventListener());
 		panel.add(urgentCB);
 		
 		JLabel lblShipAddr = new JLabel("Shipping Address:");
@@ -81,6 +83,12 @@ public class HomeOrderGUI extends SuperGUI {
 		JLabel lblShipDate = new JLabel("Ship Date:");
 		lblShipDate.setBounds(141, 296, 76, 29);
 		panel.add(lblShipDate);
+		
+		lblUrgent = new JLabel("You will receieve your order within 6 hours from now!");
+		lblUrgent.setForeground(Color.RED);
+		lblUrgent.setBounds(230, 296, 345, 29);
+		lblUrgent.setVisible(false);
+		panel.add(lblUrgent);
 		
 		UtilDateModel model1 = new UtilDateModel();
 		Properties p = new Properties();
@@ -135,6 +143,18 @@ public class HomeOrderGUI extends SuperGUI {
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
-		actions.verifyDetails((Date)datePicker.getModel().getValue(), qtyText.getText(), shipAddrText.getText(), urgentCB.isSelected());
+		if(e.getSource() == urgentCB) 
+		{
+			if(urgentCB.isSelected())
+			{
+			datePicker.setVisible(false);
+			lblUrgent.setVisible(true);
+			}
+			else {
+				datePicker.setVisible(true);
+				lblUrgent.setVisible(false);
+			}
+		}
+		else actions.verifyDetails((Date)datePicker.getModel().getValue(), qtyText.getText(), shipAddrText.getText(), urgentCB.isSelected());
 	}
 }

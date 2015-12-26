@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.HomeOrder;
 import myfuel.client.PromotionTemplate;
 import myfuel.client.Purchase;
 import myfuel.request.HomeOrderRequest;
@@ -26,38 +27,103 @@ public class HomeOrderDBHandler extends DBHandler{
 		super(server, con);
 	}
 	
-	private Response insertPurchase(Purchase p)
+	private boolean insertHomeOrder(HomeOrder order)
 	{
 		ResultSet rs = null ;
 		PreparedStatement ps = null;
 		Statement stmt = null;
 		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("SHOW TABLE STATUS WHERE `Name` = 'home_order'");
+			rs.next();
+			int nextid = Integer.parseInt(rs.getString("Auto_increment"));
+			stmt.close();
+			rs.close();
+			
+			//Insert into purchase table
+			ps = con.prepareStatement("insert into home_order values(?,?,?,?,?,?)");
+			ps.setInt(1, nextid);
+			ps.setFloat(2, order.getQty());
+			ps.setString(3, order.getAddress());
+			if(!order.isUrgent())
+			ps.setDate(4, new java.sql.Date(order.getShipDate().getTime()));
+			else ps.setNull(4, java.sql.Types.DATE);
+			ps.setBoolean(5, order.isUrgent());
+			ps.setBoolean(6, order.getStatus());
+			ps.executeUpdate();
+			ps.close();
+			
+			//Insert into customer_purchase table
+			ps = con.prepareStatement("insert into customer_home_order values(?,?)");
+			ps.setInt(1, order.getCustomerid());
+			ps.setInt(2, nextid);
+			
+			ps.executeUpdate();
+			ps.close();
+			
 		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		 catch (Exception e) {
+				e.printStackTrace();
+				return false;
+				}
+		
+		return true;
+	}
+	
+	private boolean insertPurchase(Purchase p)
+	{
+		ResultSet rs = null ;
+		PreparedStatement ps = null;
+		Statement stmt = null;
 		
 		try {
+			stmt = con.createStatement();
 			rs = stmt.executeQuery("SHOW TABLE STATUS WHERE `Name` = 'purchase'");
 			rs.next();
-			String nextid = rs.getString("Auto_increment");
+			int nextid = Integer.parseInt(rs.getString("Auto_increment"));
+			stmt.close();
+			rs.close();
 			
-			/*/
+			//Insert into purchase table
 			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?)");
-			ps.setInt(1, 0);
+			ps.setInt(1, nextid);
 			ps.setInt(2, p.getSid());
 			ps.setInt(3, p.getFuelid());
+			if(p.getPromid() != -1)
 			ps.setInt(4, p.getPromid());
-			ps.setDate(5, (Date) p.getPdate());
+			else ps.setNull(4,java.sql.Types.INTEGER);
+			ps.setDate(5, new java.sql.Date(p.getPdate().getTime()));
 			ps.setFloat(6, p.getBill());
 			ps.setFloat(7, p.getQty());
 			
 			ps.executeUpdate();
-			/*/
-		
+			ps.close();
+			
+			//Insert into customer_purchase table
+			ps = con.prepareStatement("insert into customer_purchase values(?,?,?)");
+			ps.setInt(1, p.getCustomerid());
+			ps.setInt(2, nextid);
+			ps.setNull(3, java.sql.Types.INTEGER);
+			ps.executeUpdate();
+			ps.close();
+			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
-		return new booleanResponse(true, "f");
+		 catch (Exception e) {
+		e.printStackTrace();
+		return false;
+		}
+		
+		return true;
 	}
 
 	@Override
@@ -66,7 +132,9 @@ public class HomeOrderDBHandler extends DBHandler{
 		if(arg instanceof HomeOrderRequest)
 		{
 			HomeOrderRequest req = (HomeOrderRequest) arg;
-			insertPurchase(req.getPur());
+			if(insertPurchase(req.getPur()) && insertHomeOrder(req.getOrder()))
+					server.setResponse(new booleanResponse (true, "Success!"));	
+			else server.setResponse(new booleanResponse (false, "SQL Error!"));	
 		}
 	}
 

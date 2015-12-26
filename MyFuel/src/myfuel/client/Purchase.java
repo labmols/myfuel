@@ -54,8 +54,9 @@ public class Purchase implements Serializable {
 	 * @param bill - Total Bill value. 
 	 * @param qty -Quantity (Liter).
 	 */
-	public Purchase (int pid, int sid, int fuelid, int promid, Date pdate, float bill, float qty)
+	public Purchase (int customerid, int pid, int sid, int fuelid, int promid, Date pdate, float bill, float qty)
 	{
+		this.setCustomerid(customerid);
 		this.setPid(pid);
 		this.setSid(sid);
 		this.setFuelid(fuelid);
