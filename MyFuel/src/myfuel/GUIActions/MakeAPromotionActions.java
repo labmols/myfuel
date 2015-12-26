@@ -1,6 +1,7 @@
 package myfuel.GUIActions;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Observable;
 
@@ -9,6 +10,7 @@ import javax.swing.DefaultComboBoxModel;
 import myfuel.client.MyFuelClient;
 import myfuel.client.Promotion;
 import myfuel.client.PromotionTemplate;
+import myfuel.client.TimeIgnoringComparator;
 import myfuel.gui.MakeaPromotionGUI;
 import myfuel.request.MakeaPromotionRequest;
 import myfuel.request.PromotionTemplateRequest;
@@ -73,11 +75,11 @@ public class MakeAPromotionActions extends GUIActions {
 		if(start == null || end == null)
 			gui.showErrorMessage("You have to pick start date and end date");
 		else
-		{
+		{	
 			if(end.before(start))
 				gui.showErrorMessage("End time can't be before Start time");
 			
-			else if(start.before(date))
+			else if(new TimeIgnoringComparator().compare(start, date) < 0)
 				gui.showErrorMessage("Illegal Start Time!");
 			
 			else
@@ -96,6 +98,8 @@ public class MakeAPromotionActions extends GUIActions {
 		changeFrame(gui,new MMActions(client),this);
 		
 	}
+	
+
 	
 
 }

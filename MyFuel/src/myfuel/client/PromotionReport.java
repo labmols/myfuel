@@ -1,6 +1,7 @@
 package myfuel.client;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class PromotionReport implements Serializable {
@@ -12,8 +13,24 @@ public class PromotionReport implements Serializable {
 	private float qty ;
 	private int toc;
 	private float bill;
+	private String fuelType;
+	private Date pdate;
+	private int pid;
 	
-	public PromotionReport(String pname,int uid,String fname,String lname,float qty,int toc,float bill)
+	/***
+	 * Constructor of PromotionReport class
+	 * @param pname - promotion id
+	 * @param uid - user id
+	 * @param fname - first name
+	 * @param lname - last name
+	 * @param qty - Quantity
+	 * @param toc - Type of Customer
+	 * @param bill - Bill of the purchase
+	 * @param fuelType - Fuel Type (By name)
+	 * @param pdate - Purchase Date
+	 * @param pid - Promotion ID
+	 */
+	public PromotionReport(String pname,int uid,String fname,String lname,float qty,int toc,float bill, String fuelType,Date pdate,int pid)
 	{
 		this.pname = pname;
 		this.uid = uid;
@@ -22,6 +39,9 @@ public class PromotionReport implements Serializable {
 		this.qty = qty;
 		this.toc = toc;
 		this.bill = bill;
+		this.setFuelType(fuelType);
+		this.setPdate(pdate);
+		this.setPid(pid);
 		
 	}
 	
@@ -68,6 +88,30 @@ public class PromotionReport implements Serializable {
 
 	public void setUid(int uid) {
 		this.uid = uid;
+	}
+
+	public String getFuelType() {
+		return fuelType;
+	}
+
+	public void setFuelType(String fuelType) {
+		this.fuelType = fuelType;
+	}
+
+	public Date getPdate() {
+		return pdate;
+	}
+
+	public void setPdate(Date pdate) {
+		this.pdate = pdate;
+	}
+
+	public int getPid() {
+		return pid;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
 	}
 
 }

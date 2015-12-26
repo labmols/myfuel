@@ -13,6 +13,7 @@ public class PromotionTemplate implements Serializable{
 	private Date endTime;
 	private int typeOfCustomer;
 	private int typeOfFuel;
+	private String nameOfFuel;
 	/***
 	 * 
 	 * Promotion Template Constructor
@@ -33,6 +34,18 @@ public class PromotionTemplate implements Serializable{
 		this.setEndTime(endTime);
 		this.setTypeOfCustomer(typeOfCustomer);
 		this.setTypeOfFuel(typeOfFuel);
+	}
+	/***
+	 * Promotion Template Constructor
+	 * @param name - name of the promotion
+ 	 * @param nameOfFuel - name of the fuel
+	 * @param discount - discount amount
+	 */
+	public PromotionTemplate(String name, String nameOfFuel, Float discount)
+	{
+		this.name = name;
+		this.discount = discount;
+		this.setNameOfFuel(nameOfFuel);
 	}
 
 /***
@@ -148,5 +161,13 @@ public class PromotionTemplate implements Serializable{
 	public void setTypeOfFuel(int typeOfFuel) {
 		this.typeOfFuel = typeOfFuel;
 	}
+
+public String getNameOfFuel() {
+	return nameOfFuel;
+}
+
+public void setNameOfFuel(String nameOfFuel) {
+	this.nameOfFuel = nameOfFuel;
+}
 
 }

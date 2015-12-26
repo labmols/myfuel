@@ -3,6 +3,8 @@ package myfuel.client;
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Promotion extends PromotionTemplate{
@@ -10,6 +12,7 @@ public class Promotion extends PromotionTemplate{
 	private Date startDate;
 	private Date endDate;
 	private int pid;
+	private DateFormat df;
 /***
  *  Promotion Constructor
  * @param tid   - template ID
@@ -29,6 +32,25 @@ public class Promotion extends PromotionTemplate{
 		this.setPid(pid);
 		this.startDate = startDate;
 		this.endDate = endDate;
+		 df = new SimpleDateFormat("dd/MM/yyyy ");
+	}
+	/***
+	 * Promotion Constructor
+	 * @param name - Promotion name
+	 * @param startDate - start date of the promotion
+	 * @param endDate   - end date of the promotion
+	 * @param typeOfFuel  - name of the fuel that in the promotion
+	 * @param pid  - promotion id
+	 * @param discount  - discount 
+	 */ 
+	public Promotion(String name,Date startDate,Date endDate,String typeOfFuel, int pid,Float discount)
+	{
+		super(name,typeOfFuel,discount);
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.pid = pid;
+		df = new SimpleDateFormat("dd/MM/yyyy ");
+		
 	}
 	
 	
@@ -65,6 +87,12 @@ public class Promotion extends PromotionTemplate{
 
 	public void setPid(int pid) {
 		this.pid = pid;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return super.getName()+" "+" For:"+super.getNameOfFuel()+" "+"From:"+df.format(getStartDate())+" "+"To:"+df.format(getEndDate());
 	}
 	
 

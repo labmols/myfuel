@@ -7,13 +7,18 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+import myfuel.client.Promotion;
 import myfuel.client.PromotionReport;
+import myfuel.client.TimeIgnoringComparator;
 
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class PromtionRPanel extends JPanel{
@@ -21,27 +26,34 @@ public class PromtionRPanel extends JPanel{
 	private DefaultTableModel model ; 
 	private JComboBox<String> comboBox;
 	private ArrayList<PromotionReport> p;
+	private ArrayList<Promotion> pnames;
 	private JLabel buyers ;
 	private JLabel incomes;
-	
+	private JLabel endDate;
+	private JLabel startDate;
+	private JLabel fuelType;
+	private JLabel discount;
+	/***
+	 * Constructor for Promotion Report Panel
+	 */
 	public PromtionRPanel() {
 		setOpaque(false);
 		setLayout(null);
 		
 		 comboBox = new JComboBox();
 		 comboBox.addActionListener(new comboHandler());
-		comboBox.setBounds(293, 25, 143, 20);
+		comboBox.setBounds(162, 25, 373, 20);
 		add(comboBox);
 		
 		JLabel lblChoosePromotion = new JLabel("Choose Promotion:");
-		lblChoosePromotion.setBounds(116, 28, 136, 14);
+		lblChoosePromotion.setBounds(44, 28, 136, 14);
 		add(lblChoosePromotion);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 87, 540, 188);
+		scrollPane.setBounds(10, 120, 540, 188);
 		add(scrollPane);
 		model = new MyTableModel(5,-1);
-		String[] names = {"ID" ,"Name","Quantity","Customer Type","Fuel","Bill"};
+		String[] names = {"ID" ,"Name","Quantity","Customer Type","Date","Bill"};
 		
 		for(String s : names)
 			model.addColumn(s);
@@ -52,25 +64,66 @@ public class PromtionRPanel extends JPanel{
 		scrollPane.setViewportView(table);
 		
 		JLabel lblBuyers = new JLabel("Buyers:");
-		lblBuyers.setBounds(78, 62, 46, 14);
+		lblBuyers.setBounds(44, 62, 46, 14);
 		add(lblBuyers);
 		
 		JLabel lblNewLabel = new JLabel("Total Incomes:");
-		lblNewLabel.setBounds(256, 62, 94, 14);
+		lblNewLabel.setBounds(213, 62, 94, 14);
 		add(lblNewLabel);
 		
 		 buyers = new JLabel("0");
 		buyers.setForeground(new Color(0, 0, 0));
 		buyers.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		buyers.setBounds(147, 62, 46, 14);
+		buyers.setBounds(113, 62, 46, 14);
 		add(buyers);
 		
 		 incomes = new JLabel("0");
 		incomes.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		incomes.setBounds(360, 62, 46, 14);
+		incomes.setBounds(329, 62, 46, 14);
 		add(incomes);
+		
+		JLabel lblStartDate = new JLabel("Start Date:");
+		lblStartDate.setBounds(44, 95, 79, 14);
+		add(lblStartDate);
+		
+		JLabel lblEndDate = new JLabel("End Date:");
+		lblEndDate.setBounds(213, 95, 79, 14);
+		add(lblEndDate);
+		
+		endDate = new JLabel("00");
+		endDate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		endDate.setBounds(271, 95, 104, 14);
+		add(endDate);
+		
+		 startDate = new JLabel("00");
+		 startDate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		startDate.setBounds(105, 95, 136, 14);
+		add(startDate);
+		
+		JLabel lblDiscount = new JLabel("Discount:");
+		lblDiscount.setBounds(364, 62, 66, 14);
+		add(lblDiscount);
+		
+		JLabel lblFuelType = new JLabel("Fuel Type:");
+		lblFuelType.setBounds(364, 95, 66, 14);
+		add(lblFuelType);
+		
+		fuelType = new JLabel("0");
+		fuelType.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		fuelType.setBounds(435, 95, 46, 14);
+		add(fuelType);
+		
+		discount = new JLabel("0");
+		discount.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		discount.setBounds(435, 62, 46, 14);
+		add(discount);
 	}
 	
+	/***
+	 * Action Listener for Combobox
+	 * @author karmo
+	 *
+	 */
 	private class comboHandler implements ActionListener
 	{
 
@@ -81,39 +134,69 @@ public class PromtionRPanel extends JPanel{
 			float amount = 0;
 			int buy = 0 ;
 			clearTable();
+			
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy ");
 			for(PromotionReport pr : p)
 			{
-				if(((String)(comboBox.getSelectedItem())).equals(pr.getPname()))
+				
+				
+				if((pnames.get((comboBox.getSelectedIndex()))).getPid() == pr.getPid())
 				{
+
 					if(pr.getToc() == 0 )
 						str = "Private";
 					else
 						str = "Company";
 					
-					model.insertRow(model.getRowCount(),new Object[]{pr.getUid(),pr.getFname()+" "+pr.getLname(),pr.getQty(),str,pr.getBill()});
+					model.insertRow(model.getRowCount(),new Object[]{pr.getUid(),pr.getFname()+" "+pr.getLname(),pr.getQty(),str,df.format(pr.getPdate()),pr.getBill()});
 					amount += pr.getBill();
 					buy ++;
 				
 					
 				}
 			}
+			
 			incomes.setText(""+amount);
 			buyers.setText(""+buy);
 			
 			
+			startDate.setText(df.format(pnames.get(comboBox.getSelectedIndex()).getStartDate()));
+			endDate.setText(df.format(pnames.get(comboBox.getSelectedIndex()).getEndDate()));
+			fuelType.setText(pnames.get(comboBox.getSelectedIndex()).getNameOfFuel());
+			discount.setText(pnames.get(comboBox.getSelectedIndex()).getDiscount()+"%");
+		
+			
 		}
 		
 	}
+	
+	/***
+	 * Clears the table
+	 */
  void clearTable()
 {
 	while(model.getRowCount() > 0 )
 		model.removeRow(0);
 }
-public 	void setCombo(ArrayList<PromotionReport> p)
+ 
+ /***
+  *  Sets the combobox objects and sets the ArrayList of the report in this class
+  * @param p  - Details for the promotion reports
+  * @param pnames - Promotion that were activated at MyFuel
+  */
+public 	void setCombo(ArrayList<PromotionReport> p,ArrayList<Promotion> pnames)
 	{
 		this.p = p ;
+		this.pnames = pnames;
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy ");
 		
-		for(PromotionReport pr : p)
-			comboBox.addItem(pr.getPname());
+		this.startDate.setText(df.format(pnames.get(0).getStartDate()));
+		this.endDate.setText(df.format(pnames.get(0).getEndDate()));
+		this.fuelType.setText(pnames.get(0).getNameOfFuel());
+		this.discount.setText(pnames.get(0).getDiscount()+"%");
+		
+		for(Promotion s : pnames)
+			comboBox.addItem(s.toString());
+		
 	}
 }

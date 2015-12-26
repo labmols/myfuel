@@ -44,7 +44,10 @@ public class homeQtyOrderActions extends GUIActions {
 			
 			else if(arg1 instanceof booleanResponse)
 			{
-			
+					if(((booleanResponse)arg1).getSuccess())
+						gui.showOKMessage(((booleanResponse)arg1).getMsg());
+					else
+						gui.showErrorMessage(((booleanResponse)arg1).getMsg());
 				
 				if(((booleanResponse)arg1).getMsg().equals("New level has been updated!"))
 					gui.setCurrMinQty(this.level);
