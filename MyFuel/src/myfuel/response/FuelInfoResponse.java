@@ -10,7 +10,7 @@ import myfuel.client.StationInventory;
  * @author Maor
  *
  */
-public class CarFuelResponse extends Response {
+public class FuelInfoResponse extends Response {
 	
 	/**
 	 * List contains all the stations Inventory details.
@@ -27,7 +27,7 @@ public class CarFuelResponse extends Response {
 	 * @param si - the stations inventory list.
 	 * @param fuels - the fuels details list.
 	 */
-	public CarFuelResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels)
+	public FuelInfoResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels)
 	{
 		this.si = new ArrayList<StationInventory>(si);
 		this.fuels = new ArrayList<Fuel>(fuels);

@@ -134,9 +134,9 @@ public class LoginDBHandler extends DBHandler {
 				}
 				
 				ArrayList<Station> Allstations = getStations();
-				ArrayList<Fuel> fuels = getFuels();
+			
 				return new CustomerLoginResponse(userid,fname,lname,pass,email,address
-						,cnumber,toc,atype,smodel,cars,stations,Allstations,fuels);
+						,cnumber,toc,atype,smodel,cars,stations,Allstations);
 			}
 			
 			
@@ -212,30 +212,7 @@ public class LoginDBHandler extends DBHandler {
 		}
 	}
 	
-	private ArrayList <Fuel> getFuels()
-	{
-		ArrayList<Fuel> fuels = new ArrayList<Fuel>();
-		ResultSet rs = null;
-		Statement st = null;
-		String sql;
-		
-		try {
-			st= con.createStatement();
-			sql = "select fuelid,maxprice from fuel_price";
-			rs = st.executeQuery(sql);
-			
-			while(rs.next())
-				fuels.add(new Fuel (rs.getInt(1), rs.getFloat(2)));
-			return fuels;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-	
-	}
-	
-	
+
 	/**
 	 * this method notified by the server when a new client request received,
 	 * return CustomerLoginResponse (for Customer Login), WorkerLoginResponse(for Worker Login) or booleanResponse(in Error) according

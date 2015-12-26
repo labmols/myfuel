@@ -1,19 +1,27 @@
 package myfuel.GUIActions;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
+import javax.swing.JOptionPane;
+
 import myfuel.client.CalcPrice;
 import myfuel.client.Customer;
 import myfuel.client.Fuel;
+import myfuel.client.FuelQty;
 import myfuel.client.HomeOrder;
 import myfuel.client.MyFuelClient;
 import myfuel.client.PromotionTemplate;
 import myfuel.client.Purchase;
 import myfuel.gui.HomeOrderGUI;
+import myfuel.request.FuelInfoRequest;
 import myfuel.request.HomeOrderRequest;
 import myfuel.request.MakeaPromotionRequest;
+import myfuel.request.RequestEnum;
+import myfuel.response.FuelInfoResponse;
 import myfuel.response.booleanResponse;
 
 /**
@@ -34,17 +42,20 @@ public class HomeOrderActions extends GUIActions {
 	
 	private float homeFuelPrice;
 	
+	private FuelQty homeFuelQty;
+	
+	private HomeOrder order;
 	/**
 	 * Create new Home Fuel GUI Controller.
 	 * @param client - MyFuelClient object.
 	 * @param customer - Customer details object.
 	 * @param fuels 
 	 */
-	public HomeOrderActions(MyFuelClient client, Customer customer, float homeFuelPrice) {
+	public HomeOrderActions(MyFuelClient client, Customer customer) {
 		super(client);
 		this.gui = new HomeOrderGUI(this);
 		this.customer= customer;
-		this.homeFuelPrice = homeFuelPrice;
+		getInfo();
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
 	}
@@ -56,10 +67,23 @@ public class HomeOrderActions extends GUIActions {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		if(arg instanceof booleanResponse)
+		
+		if(arg instanceof FuelInfoResponse)
+		{
+			FuelInfoResponse res = (FuelInfoResponse) arg;
+			this.homeFuelPrice =  res.getFuels().get(3).getMaxPrice();
+			this.homeFuelQty = res.getSi().get(3).getfQty().get(0);
+		}
+		else if(arg instanceof booleanResponse)
 		{
 			booleanResponse res = (booleanResponse) arg;
-			if(res.getSuccess()) gui.showOKMessage(res.getMsg());
+			if(res.getSuccess()) 
+			{
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy"); 
+				gui.showOKMessage("Your order success! \n" +
+									"You will recieve your order in " + sdf.format(order.getShipDate())
+									+ "\n Thank you for choosing MyFuel!");
+			}
 			else gui.showErrorMessage(res.getMsg());
 		}
 	}
@@ -71,16 +95,24 @@ public class HomeOrderActions extends GUIActions {
 	 * @param addr
 	 * @param urgent
 	 */
+	
+	private void getInfo ()
+	{
+		FuelInfoRequest req = new FuelInfoRequest(RequestEnum.Select);
+		client.handleMessageFromGUI(req);
+		
+	}
 	private void MakeHomeFuelRequest(Date shipDate, float qty, String addr, boolean urgent)
 	{
 		
 		Date pdate = new Date();
 		if(urgent) shipDate = pdate;
-		float bill = CalcPrice.calcHomeOrder(urgent, qty,homeFuelPrice, null);
+		float bill = CalcPrice.calcTotalHomeOrder(urgent, qty,this.homeFuelPrice, null);
 		Purchase p = new Purchase (customer.getUserid(),0, 4, 4, -1,pdate , bill, qty);
-		HomeOrder order = new HomeOrder(customer.getUserid(), 0, qty , addr, shipDate, false, urgent);
+		order = new HomeOrder(customer.getUserid(), 0, qty , addr, shipDate, false, urgent);
 		
-		HomeOrderRequest req = new HomeOrderRequest(p, order);
+		HomeOrderRequest req = new HomeOrderRequest(p, order,RequestEnum.Insert);
+		
 		client.handleMessageFromGUI(req);
 	}
 
@@ -130,7 +162,19 @@ public class HomeOrderActions extends GUIActions {
 		
 		if(!success) gui.showErrorMessage(msg);
 		else { // new request
-			 MakeHomeFuelRequest(shipDate, qtyF, addr, urgent);
+			float totalPrice = CalcPrice.calcTotalHomeOrder(urgent,qtyF,4, null);
+			String total = new DecimalFormat("##.##").format(totalPrice);
+			String liter =new DecimalFormat("##.##").format(totalPrice/qtyF);
+			String message = "Price for liter : " + liter +" ₪"
+					+"\n\n Total Order Price : " + total+ " ₪"
+					+ "\n\n Charge Credit Card no : " + customer.getCnumber() +
+					 "\n\n Do you approve this order?";
+		    String title = "Confirm Order";
+		    // display the JOptionPane showConfirmDialog
+		    int reply = JOptionPane.showConfirmDialog(gui, message, title, JOptionPane.YES_NO_OPTION);
+		    
+		    if (reply == JOptionPane.YES_OPTION)
+		    	MakeHomeFuelRequest(shipDate, qtyF, addr, urgent);
 		}
 			
 	}

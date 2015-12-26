@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 /**
- * CarFuelRequest class, contains all the request details that will be send to the server.
+ * Fuel Request class, contains all the request details that will be send to the server.
  * @author Maor
  *
  */
-public class CarFuelRequest implements Serializable {
+public class FuelInfoRequest implements Serializable {
 	/**
 	 * Request Query Type (Insert, Select)
 	 */
 	private RequestEnum type;
 	
 	/**
-	 * Create new CarFuelRequest 
+	 * Create new Fuel Request 
 	 * @param type - the Query type.
 	 */
-	public CarFuelRequest (RequestEnum type)
+	public FuelInfoRequest (RequestEnum type)
 	{
 		setType(type);
 	}

@@ -12,9 +12,9 @@ import myfuel.client.Fuel;
 import myfuel.client.FuelQty;
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
-import myfuel.request.CarFuelRequest;
+import myfuel.request.FuelInfoRequest;
 import myfuel.request.RequestEnum;
-import myfuel.response.CarFuelResponse;
+import myfuel.response.FuelInfoResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
@@ -23,9 +23,9 @@ import myfuel.response.booleanResponse;
  * @author Maor
  *
  */
-public class CarFuelDBHandler extends DBHandler{
+public class FuelInfoDBHandler extends DBHandler{
 
-	CarFuelDBHandler(MyFuelServer server, Connection con) {
+	FuelInfoDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 		// TODO Auto-generated constructor stub
 	}
@@ -74,7 +74,7 @@ public class CarFuelDBHandler extends DBHandler{
 		
 		try {
 			st= con.createStatement();
-			sql = "select sid,sname from station where sid!=4";
+			sql = "select sid,sname from station";
 			rs = st.executeQuery(sql);
 			while(rs.next()) //Add all stations
 			{
@@ -116,14 +116,14 @@ public class CarFuelDBHandler extends DBHandler{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		if(arg instanceof CarFuelRequest)
+		if(arg instanceof FuelInfoRequest)
 		{
-			CarFuelRequest req = (CarFuelRequest) arg;
+			FuelInfoRequest req = (FuelInfoRequest) arg;
 			if(req.getType() == RequestEnum.Select)
 			{
 				ArrayList <Fuel> fuels = getFuels();
 				ArrayList <StationInventory> si = getInventory();
-				CarFuelResponse res = new CarFuelResponse (si,fuels);
+				FuelInfoResponse res = new FuelInfoResponse (si,fuels);
 				server.setResponse(res);
 			}
 			

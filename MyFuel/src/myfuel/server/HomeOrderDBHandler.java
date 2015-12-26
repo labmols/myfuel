@@ -9,10 +9,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.Fuel;
 import myfuel.client.HomeOrder;
 import myfuel.client.PromotionTemplate;
 import myfuel.client.Purchase;
 import myfuel.request.HomeOrderRequest;
+import myfuel.request.RequestEnum;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
@@ -125,6 +127,30 @@ public class HomeOrderDBHandler extends DBHandler{
 		
 		return true;
 	}
+	
+	private ArrayList <Fuel> getFuels()
+	{
+		ArrayList<Fuel> fuels = new ArrayList<Fuel>();
+		ResultSet rs = null;
+		Statement st = null;
+		String sql;
+		
+		try {
+			st= con.createStatement();
+			sql = "select fuelid,maxprice from fuel_price";
+			rs = st.executeQuery(sql);
+			
+			while(rs.next())
+				fuels.add(new Fuel (rs.getInt(1), rs.getFloat(2)));
+			return fuels;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	
+	}
+	
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -132,9 +158,16 @@ public class HomeOrderDBHandler extends DBHandler{
 		if(arg instanceof HomeOrderRequest)
 		{
 			HomeOrderRequest req = (HomeOrderRequest) arg;
+			if(req.getType() == RequestEnum.Insert)
+			{
 			if(insertPurchase(req.getPur()) && insertHomeOrder(req.getOrder()))
 					server.setResponse(new booleanResponse (true, "Success!"));	
 			else server.setResponse(new booleanResponse (false, "SQL Error!"));	
+			}
+			else 
+			{
+				
+			}
 		}
 	}
 

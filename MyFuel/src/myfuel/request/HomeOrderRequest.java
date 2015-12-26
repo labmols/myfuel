@@ -14,6 +14,7 @@ public class HomeOrderRequest implements Serializable{
 	/**
 	 * Contains all the Home Fuel purchase details.
 	 */
+	private RequestEnum type;
 	private Purchase pur;
 	private HomeOrder order;
 	
@@ -22,10 +23,11 @@ public class HomeOrderRequest implements Serializable{
 	 * @param pur - The Purchase details object.
 	 * @param order - the Order details object.
 	 */
-	public HomeOrderRequest(Purchase pur , HomeOrder order)
+	public HomeOrderRequest(Purchase pur , HomeOrder order, RequestEnum type)
 	{
 		this.setPur(pur);
 		this.setOrder(order);
+		this.setType(type);
 	}
 
 	public Purchase getPur() {
@@ -42,6 +44,14 @@ public class HomeOrderRequest implements Serializable{
 
 	public void setOrder(HomeOrder order) {
 		this.order = order;
+	}
+
+	public RequestEnum getType() {
+		return type;
+	}
+
+	public void setType(RequestEnum type) {
+		this.type = type;
 	}
 	
 }
