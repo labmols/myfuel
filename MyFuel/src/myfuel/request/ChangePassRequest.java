@@ -3,11 +3,34 @@ package myfuel.request;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
+/**
+ * ChangePassRequest class, contains all the request details that will be send to the server.
+ * @author Maor
+ *
+ */
 public class ChangePassRequest implements Serializable {
+	
+	/**
+	 * New Password
+	 */
 	private String newPass;
+	
+	/**
+	 * Old Password
+	 */
 	private String oldPass;
+	
+	/**
+	 * Customer ID
+	 */
 	private int userid;
 	
+	/**
+	 * Create new ChangePassRequest 
+	 * @param newPass - New Password
+	 * @param userid - User ID
+	 * @param oldPass - Old Password
+	 */
 	public ChangePassRequest(String newPass,int userid,String oldPass)
 	{
 		this.setNewPass(newPass);

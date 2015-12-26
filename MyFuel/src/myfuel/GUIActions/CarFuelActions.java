@@ -14,15 +14,15 @@ import myfuel.request.CarFuelRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.CarFuelResponse;
 import myfuel.response.Response;
-import myfuel.response.UserLoginResponse;
+import myfuel.response.CustomerLoginResponse;
 
 public class CarFuelActions extends GUIActions {
 	private CarFuelGUI gui;
-	private UserLoginResponse res;
+	private CustomerLoginResponse res;
 	private ArrayList <StationInventory> sInventory;
 	private ArrayList <Fuel> fuels;
 	
-	public CarFuelActions(MyFuelClient client,UserLoginResponse res) {
+	public CarFuelActions(MyFuelClient client,CustomerLoginResponse res) {
 		super(client);
 		this.res = res;
 		sInventory = null;

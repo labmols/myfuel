@@ -1,41 +1,24 @@
 package myfuel.gui;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
+import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-
 import javax.swing.ButtonGroup;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
 import myfuel.GUIActions.CarFuelActions;
 import myfuel.client.BackMainMenu;
 import myfuel.client.Fuel;
-
-import javax.swing.JProgressBar;
 import javax.swing.DefaultComboBoxModel;
-
 import java.awt.event.ActionListener;
-
-import javax.swing.SwingConstants;
-
-import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.awt.Cursor;
 import java.awt.FlowLayout;
-
 import javax.swing.ImageIcon;
-
 import java.awt.Font;
 import java.util.ArrayList;
 
-
+@SuppressWarnings("serial")
 public class CarFuelGUI extends SuperGUI {
 
 	

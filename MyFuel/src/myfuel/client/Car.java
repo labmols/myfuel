@@ -2,6 +2,7 @@ package myfuel.client;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Car implements Serializable{
 	private int cid;
 	private int fid;

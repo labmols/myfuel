@@ -1,12 +1,16 @@
 package myfuel.client;
+<<<<<<< HEAD
 
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+=======
+>>>>>>> branch 'master' of https://github.com/labmols/myfuel.git
 import java.util.Date;
 
+@SuppressWarnings("serial")
 public class Promotion extends PromotionTemplate{
 	
 	private Date startDate;

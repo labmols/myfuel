@@ -19,12 +19,22 @@ import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
 public class UpdateDetailsDBHandler extends DBHandler{
-
+	
+	/**
+	 * create new Update Details interface controller.
+	 * @param server - MyFuelServer object.
+	 * @param con - JDBC driver connection;
+	 */
 	public UpdateDetailsDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * check if the cars added not exist in the Database.
+	 * @param customer - the customer object with all his details.
+	 * @return booleanResponse (true if update succeed , otherwise false).
+	 */
 	private Response checkAndUpdate(Customer customer){
 		PreparedStatement ps = null;
 		ResultSet rs=null;
@@ -55,6 +65,12 @@ public class UpdateDetailsDBHandler extends DBHandler{
 		
 		
 	}
+	
+	/**
+	 * Update all customer details in the Database.
+	 * @param customer - the updated customer details object.
+	 * @return booleanResponse (true if update succeed , otherwise false).
+	 */
 	private Response updateDetails(Customer customer){
 		PreparedStatement ps = null;
 		
@@ -71,7 +87,7 @@ public class UpdateDetailsDBHandler extends DBHandler{
 			ps.setInt(9, customer.getToc());
 			ps.setInt(10, customer.getSmodel());
 			ps.setInt(11, 0);
-			ps.setInt(12, 0);
+			ps.setInt(12, 1);
 			ps.executeUpdate();
 		
 		}catch (SQLException e){
@@ -110,6 +126,10 @@ public class UpdateDetailsDBHandler extends DBHandler{
 			
 	}
 	
+	/**
+	 * notified by the server when a new client request received
+	 *  and set the server response to be booleanResponse.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if(arg instanceof UpdateRequest)

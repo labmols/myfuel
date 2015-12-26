@@ -1,8 +1,8 @@
 package myfuel.client;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Station implements Serializable {
 	private int sid;
 	private String sname;

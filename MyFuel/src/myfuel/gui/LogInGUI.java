@@ -49,57 +49,57 @@ public class LogInGUI extends SuperGUI {
 		JLabel uidLabel = new JLabel("UserID:");
 		uidLabel.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
 		uidLabel.setToolTipText("Your user id");
-		uidLabel.setBounds(193, 153, 61, 16);
+		uidLabel.setBounds(192, 170, 61, 16);
 		panel.add(uidLabel);
 		
 		JLabel passLabel = new JLabel("Password:");
 		passLabel.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
 		passLabel.setToolTipText("Your password");
-		passLabel.setBounds(183, 186, 73, 16);
+		passLabel.setBounds(182, 203, 73, 16);
 		panel.add(passLabel);
 		
 		useridField = new JTextField();
-		useridField.setBounds(254, 148, 130, 26);
+		useridField.setBounds(253, 165, 130, 26);
 		panel.add(useridField);
 		useridField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(254, 181, 130, 26);
+		passwordField.setBounds(253, 198, 130, 26);
 		panel.add(passwordField);
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Customer", "Worker"}));
-		comboBox.setBounds(254, 114, 130, 27);
+		comboBox.setBounds(253, 131, 130, 27);
 		panel.add(comboBox);
 		
 		JLabel typeLabel = new JLabel("Type:");
 		typeLabel.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
 		typeLabel.setToolTipText("Customer/Worker");
-		typeLabel.setBounds(206, 118, 61, 16);
+		typeLabel.setBounds(205, 135, 61, 16);
 		panel.add(typeLabel);
 		
 		loginButton = new JButton("Login");
-		loginButton.setBounds(254, 220, 117, 29);
+		loginButton.setBounds(253, 237, 117, 29);
 		loginButton.addActionListener(new ButtonListener());
 		panel.add(loginButton);
 		
 		fastButton = new JButton("Fast Fuel");
 		java.net.URL url = getClass().getResource("/fast.png");
 		fastButton.setIcon(new ImageIcon(url));
-		fastButton.setBounds(424, 51, 141, 46);
+		fastButton.setBounds(280, 56, 141, 46);
 		panel.add(fastButton);
 		
 		JLabel nfcLabel = new JLabel("Do you have NFC?");
-		nfcLabel.setBounds(302, 66, 117, 16);
+		nfcLabel.setBounds(158, 71, 117, 16);
 		panel.add(nfcLabel);
 		
 		JLabel registerLabel = new JLabel("Don't have an account? ");
-		registerLabel.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
-		registerLabel.setBounds(183, 266, 166, 16);
+		registerLabel.setFont(new Font("Lucida Grande", Font.ITALIC, 14));
+		registerLabel.setBounds(182, 283, 166, 16);
 		panel.add(registerLabel);
 		
 		registerButton = new JButton("Register");
-		registerButton.setBounds(339, 261, 117, 29);
+		registerButton.setBounds(338, 278, 117, 29);
 		registerButton.addActionListener(new ButtonListener());
 		panel.add(registerButton);
 		

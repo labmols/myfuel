@@ -29,9 +29,9 @@ public class RegisterDBHandler extends DBHandler {
 	}
 	
 	/**
-	 * 
-	 * @param request
-	 * @return
+	 * Get all stations details from the Database.
+	 * @param request - the request from the client.
+	 * @return RegisterResponse if there is not SQL Error, otherwise return booleanResponse(false).
 	 */
 	private Response showStations(registerRequest request)
 	{
@@ -50,6 +50,8 @@ public class RegisterDBHandler extends DBHandler {
 					name = rs.getString(2);
 					stations.add(new Station(id,name));
 					}
+				rs.close();
+				st.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -61,9 +63,9 @@ public class RegisterDBHandler extends DBHandler {
 	
 	
 	 /**
-	  * 
-	  * @param request
-	  * @return
+	  * Check if User ID , Car ID, or E-mail already exist in the Database.
+	  * @param request - the client request that contains the Customer object with all his register details.
+	  * @return - booleanResponse (false) if User ID, Car ID or E-mail exist or SQL Error, otherwise return booleanResponse(true).
 	  */
 	private Response CheckAndInsert(registerRequest request){
 		Customer customer = request.getCustomer();
@@ -75,7 +77,9 @@ public class RegisterDBHandler extends DBHandler {
 			ps=con.prepareStatement("select * from customer where uid=?");
 			ps.setInt(1, customer.getUserid());
 			rs = ps.executeQuery();
-			if(rs.next()) return new booleanResponse(false, "this Customer ID already registered!");
+			if(rs.next()) return new booleanResponse(false, "This Customer ID already registered!");
+			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,6 +91,8 @@ public class RegisterDBHandler extends DBHandler {
 			ps.setString(1, customer.getEmail());
 			rs = ps.executeQuery();
 			if(rs.next()) return new booleanResponse(false, "This email already exist!");
+			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,6 +105,8 @@ public class RegisterDBHandler extends DBHandler {
 			rs = ps.executeQuery();
 			if(rs.next()) return new booleanResponse(false, "this Car ID already exist!");
 			}
+			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,8 +122,8 @@ public class RegisterDBHandler extends DBHandler {
 	}
 	
 	/**
-	 * 
-	 * @param customer
+	 * Insert new Customer to the Database.
+	 * @param customer - the new Customer details object.
 	 */
 	private void insertCustomer(Customer customer)
 	{
@@ -136,6 +144,7 @@ public class RegisterDBHandler extends DBHandler {
 			ps.setInt(11, 0);
 			ps.setInt(12, 0);
 			ps.executeUpdate();
+			ps.close();
 		
 		}catch (SQLException e){
 			e.printStackTrace();
@@ -148,6 +157,7 @@ public class RegisterDBHandler extends DBHandler {
 				ps.setInt(2,car.getcid());
 				ps.setInt(3, car.getfid());
 				ps.executeUpdate();
+				ps.close();
 				}
 			}catch (SQLException e){
 				e.printStackTrace();
@@ -162,13 +172,18 @@ public class RegisterDBHandler extends DBHandler {
 			ps.setInt(1,customer.getUserid());
 			ps.setInt(2,sid);
 			ps.executeUpdate();
+			ps.close();
 			}
 			}catch (SQLException e){
 				e.printStackTrace();
 			}
 			
 		}
-		
+	
+	/**
+	 * notified by the server when a new client request received , return RegisterResponse
+	 *  or booleanResponse, according to the current request and errors.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub

@@ -18,6 +18,11 @@ import myfuel.response.CarFuelResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
+/**
+ * Car Fuel Database Handler, responsible for all the related Car fuel queries.
+ * @author Maor
+ *
+ */
 public class CarFuelDBHandler extends DBHandler{
 
 	CarFuelDBHandler(MyFuelServer server, Connection con) {
@@ -26,8 +31,8 @@ public class CarFuelDBHandler extends DBHandler{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get all fuels available in the Database.
+	 * @return ArrayList<Fuel> that contains all the fuels details.
 	 */
 	private ArrayList <Fuel> getFuels()
 	{
@@ -53,8 +58,8 @@ public class CarFuelDBHandler extends DBHandler{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get all stations inventory from the Database.
+	 * @return ArrayList<StationInventory> that contains all the stations Inventory details.
 	 */
 	private ArrayList <StationInventory> getInventory()
 	{
@@ -102,7 +107,12 @@ public class CarFuelDBHandler extends DBHandler{
 		
 		
 	}
-
+	
+	/**
+	 * This method notified by the server when a new client request received, 
+	 * Sets the server response to booleanResponse or CarFuelResponse , according to the
+	 * client request and SQL Errors.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub

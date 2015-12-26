@@ -7,9 +7,21 @@ import myfuel.client.RoleEnum;
 
 @SuppressWarnings("serial")
 public class WorkerLoginResponse extends Response{
+	/**
+	 * Worker ID
+	 */
 	private int wid;
+	
+	/**
+	 * Worker Role
+	 */
 	private RoleEnum role;
+	
+	/**
+	 * Worker station ( when needed)
+	 */
 	private int sid;
+	
 	/** new Worker login response
 	 * role 1 - Station Worker
 	 * role 2- Station Manager

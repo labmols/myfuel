@@ -14,7 +14,7 @@ import myfuel.gui.UpdateCustomerDetailsGUI;
 import myfuel.request.RequestEnum;
 import myfuel.request.UpdateRequest;
 import myfuel.response.Response;
-import myfuel.response.UserLoginResponse;
+import myfuel.response.CustomerLoginResponse;
 import myfuel.response.booleanResponse;
 
 /**
@@ -26,7 +26,7 @@ public class UpdateDetailsActions extends GUIActions {
 	/**
 	 * Contains all the user login details(including his personal details ,etc)
 	 */
-	private UserLoginResponse res;
+	private CustomerLoginResponse res;
 	/**
 	 * this object contains the user interface
 	 */
@@ -46,7 +46,7 @@ public class UpdateDetailsActions extends GUIActions {
 	 * @param client - the client object for the communication.
 	 * @param res - the UserLoginResponse object which contains all the required details.
 	 */
-	public UpdateDetailsActions(MyFuelClient client,UserLoginResponse res) {
+	public UpdateDetailsActions(MyFuelClient client,CustomerLoginResponse res) {
 		super(client);
 		this.res = res;
 		origCars = new ArrayList<Car>(res.getUser().getCars());
@@ -101,7 +101,7 @@ public class UpdateDetailsActions extends GUIActions {
 		c = new Car(Integer.parseInt(cid),fid);
 		if(!checkCar(Integer.parseInt(cid))){
 			user.getCars().add(c);
-			gui.showErrorMessage("Car "+cid+" "+ "added!");
+			gui.showOKMessage("Car "+cid+" "+ "added!");
 		}
 		else gui.showErrorMessage("You already have this car!");
 		}
@@ -139,7 +139,7 @@ public class UpdateDetailsActions extends GUIActions {
 			if(s.getName().equals(sname)){
 				if(!userStations.contains(s.getsid())) {
 					userStations.add(s.getsid());
-					gui.showErrorMessage("Station "+sname + " is added!");
+					gui.showOKMessage("Station "+sname + " is added!");
 				}
 				else gui.showErrorMessage("You already have this station!");
 				}
@@ -173,7 +173,7 @@ public class UpdateDetailsActions extends GUIActions {
 					if(index!=-1 && !userStations.contains(s.getsid()))
 					{
 						userStations.set(index, s.getsid());
-						gui.showErrorMessage("Station "+oldS + " changed to " +newS);
+						gui.showOKMessage("Station "+oldS + " changed to " +newS);
 					}
 					else gui.showErrorMessage("You already have this station!");
 					

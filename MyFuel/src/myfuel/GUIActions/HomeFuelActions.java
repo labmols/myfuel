@@ -9,10 +9,27 @@ import myfuel.client.PromotionTemplate;
 import myfuel.gui.HomeFuelGUI;
 import myfuel.request.MakeaPromotionRequest;
 
+/**
+ * Home Fuel GUI Controller.
+ * @author Maor
+ *
+ */
 public class HomeFuelActions extends GUIActions {
-	
+	/**
+	 * Home Fuel GUI object(JFrame).
+	 */
 	HomeFuelGUI gui;
+	
+	/**
+	 * Customer details object.
+	 */
 	Customer customer;
+	
+	/**
+	 * Create new Home Fuel GUI Controller.
+	 * @param client - MyFuelClient object.
+	 * @param customer - Customer details object.
+	 */
 	public HomeFuelActions(MyFuelClient client, Customer customer) {
 		super(client);
 		this.gui = new HomeFuelGUI(this);
@@ -33,6 +50,13 @@ public class HomeFuelActions extends GUIActions {
 		
 	}
 	
+	/**
+	 * Verify Home Fuel order user input.
+	 * @param shipDate - Shipping date.
+	 * @param qty - Fuel quantity (Liters)
+	 * @param addr - Customer address.
+	 * @param urgent - Is this order urgent or not.
+	 */
 	public void verifyDetails(Date shipDate, String qty, String addr, boolean urgent)
 	{
 		boolean success = true;

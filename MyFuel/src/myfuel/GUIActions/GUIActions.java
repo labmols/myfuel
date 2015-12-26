@@ -50,6 +50,10 @@ public abstract class GUIActions implements Observer {
 		g.dispose();
 		client.deleteObserver(currentActions);
 	}
+	
+	/**
+	 * Abstract method that replace the current JFrame with the Main Menu JFrame.
+	 */
 	public abstract void backToMenu(); 
 	
 

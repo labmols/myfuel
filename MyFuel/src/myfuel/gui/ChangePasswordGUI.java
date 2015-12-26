@@ -1,23 +1,15 @@
 package myfuel.gui;
 
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-
 import myfuel.GUIActions.ChangePassActions;
 import myfuel.client.BackMainMenu;
 
-import java.awt.Font;
 
 
 @SuppressWarnings("serial")

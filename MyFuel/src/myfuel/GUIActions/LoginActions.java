@@ -11,7 +11,7 @@ import myfuel.gui.LogInGUI;
 import myfuel.request.LoginRequest;
 import myfuel.response.ErrorEnum;
 import myfuel.response.Response;
-import myfuel.response.UserLoginResponse;
+import myfuel.response.CustomerLoginResponse;
 import myfuel.response.WorkerLoginResponse;
 
 public class LoginActions extends GUIActions {
@@ -41,6 +41,12 @@ public class LoginActions extends GUIActions {
 		
 	}
 	
+	/**
+	 * Verify Login details user input.
+	 * @param type - Type chosen (Customer/Worker).
+	 * @param userid - User ID String
+	 * @param pass - User Password String
+	 */
 	public void verifyDetails(int type, String userid, String pass)
 	{
 		boolean error = false;
@@ -64,13 +70,13 @@ public class LoginActions extends GUIActions {
 	}
 	
 	/**
-	 * 
-	 * @param response
+	 * Handle Customer login response.
+	 * @param response - The response object from server(CustomerLoginResponse or booleanResponse).
 	 */
-	private void userResponse(Object response){
-		if(response instanceof UserLoginResponse)
+	private void customerResponse(Object response){
+		if(response instanceof CustomerLoginResponse)
 		{
-		UserLoginResponse res = (UserLoginResponse) response;
+		CustomerLoginResponse res = (CustomerLoginResponse) response;
 
 			gui.showOKMessage("Welcome to MyFuel!");
 			changeFrame(gui,new CustomerOptionsActions (client,res),this);
@@ -87,7 +93,7 @@ public class LoginActions extends GUIActions {
 	
 	
 	
-	/** 
+	/** Handle Worker Login Response.
 	 * this function get the response from server and acting according to this response.
 	 * role 1 - Station Worker
 	 * role 2- Station Manager
@@ -130,20 +136,25 @@ public class LoginActions extends GUIActions {
 		
 	}
 	
-	/**
-	 * change to register JFrame 
+	/** 
+	 *  Open register option screen.
 	 */
 	public void RegisterScreen(){
 		changeFrame(gui,new RegisterActions(client),this);
 	
 	
 	}
-
+	
+	/**
+	 * notified by the Client when a response recieved from the server , 
+	 * handle this response according to the login type(Customer/Worker).
+	 * If there is an error, notify the user.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg instanceof UserLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse){
+		if(arg instanceof CustomerLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse){
 		// TODO Auto-generated method stub
-				if(lr.getType() ==0) userResponse(arg);
+				if(lr.getType() ==0) customerResponse(arg);
 				else workerResponse(arg);	
 		}
 	}
