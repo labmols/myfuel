@@ -26,7 +26,13 @@ public class FuelInfoRequest implements Serializable {
 	public FuelInfoRequest (RequestEnum type,  int promotionFuelID)
 	{
 		setType(type);
-		this.promotionFuelID = promotionFuelID;
+		setPromotionFuelID(promotionFuelID);
+	}
+	
+	public FuelInfoRequest (RequestEnum type,  FuelQty newInventory)
+	{
+		setType(type);
+		setNewInventory(newInventory);
 	}
 
 	public RequestEnum getType() {
@@ -43,6 +49,14 @@ public class FuelInfoRequest implements Serializable {
 
 	public void setPromotionFuelID(int promotionFuelID) {
 		this.promotionFuelID = promotionFuelID;
+	}
+
+	public FuelQty getNewInventory() {
+		return newInventory;
+	}
+
+	public void setNewInventory(FuelQty newInventory) {
+		this.newInventory = newInventory;
 	}
 	
 }

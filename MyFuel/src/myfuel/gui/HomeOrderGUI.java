@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.HomeOrderActions;
+import myfuel.client.BackMainMenu;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -43,6 +44,7 @@ public class HomeOrderGUI extends SuperGUI {
 		lblTitle.setBounds(208, 10, 174, 16);
 		lblTitle.setText("Home Fuel Order");
 		this.actions = actions;
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		setContentPane(contentPane);
 		
 		JLabel lblQuantity = new JLabel("Quantity (Liter):");

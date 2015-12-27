@@ -21,6 +21,7 @@ import myfuel.request.FuelInfoRequest;
 import myfuel.request.HomeOrderRequest;
 import myfuel.request.MakeaPromotionRequest;
 import myfuel.request.RequestEnum;
+import myfuel.response.CustomerLoginResponse;
 import myfuel.response.FuelInfoResponse;
 import myfuel.response.booleanResponse;
 
@@ -38,7 +39,7 @@ public class HomeOrderActions extends GUIActions {
 	/**
 	 * Customer details object.
 	 */
-	private Customer customer;
+	private CustomerLoginResponse res;
 	
 	private HomeOrder order;
 	private FuelInfoResponse response; 
@@ -49,10 +50,10 @@ public class HomeOrderActions extends GUIActions {
 	 * @param customer - Customer details object.
 	 * @param fuels 
 	 */
-	public HomeOrderActions(MyFuelClient client, Customer customer) {
+	public HomeOrderActions(MyFuelClient client, CustomerLoginResponse res) {
 		super(client);
 		this.gui = new HomeOrderGUI(this);
-		this.customer= customer;
+		this.res= res;
 		getInfo();
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
@@ -70,6 +71,7 @@ public class HomeOrderActions extends GUIActions {
 		{
 			FuelInfoResponse res = (FuelInfoResponse) arg;
 			this.response = res;
+			checkInventory();
 		}
 		else if(arg instanceof booleanResponse)
 		{
@@ -85,6 +87,16 @@ public class HomeOrderActions extends GUIActions {
 		}
 	}
 	
+	private void checkInventory() {
+		ArrayList<FuelQty> f= response.getSi().get(3).getfQty();
+		if(f.get(0).getQty() < f.get(0).getMqty())
+		{
+			gui.showErrorMessage("Fuel Quantity is lower then the minimal quantity!");
+			backToMenu();
+		}
+		
+	}
+
 	/**
 	 * 
 	 * @param shipDate
@@ -110,8 +122,8 @@ public class HomeOrderActions extends GUIActions {
 		if(urgent) shipDate = pdate;
 		float bill = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
 		
-		Purchase p = new Purchase (customer.getUserid(),0, 4, 4, pid ,pdate , bill, qty);
-		order = new HomeOrder(customer.getUserid(), 0, qty , addr, shipDate, false, urgent);
+		Purchase p = new Purchase (res.getUser().getUserid(),0, 4, 4, pid ,pdate , bill, qty);
+		order = new HomeOrder(res.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent);
 		
 		HomeOrderRequest req = new HomeOrderRequest(p, order,RequestEnum.Insert);
 		
@@ -121,7 +133,7 @@ public class HomeOrderActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		
+		changeFrame(gui, new CustomerOptionsActions(client, res), this);
 	}
 	
 	/**
@@ -175,7 +187,7 @@ public class HomeOrderActions extends GUIActions {
 			String message = "" + promotion 
 					+ "\n\nPrice for liter : " + liter +" ₪"
 					+"\n\n Total Order Price : " + total+ " ₪"
-					+ "\n\n Charge Credit Card no : " + customer.getCnumber() +
+					+ "\n\n Charge Credit Card no : " +res.getUser().getCnumber() +
 					 "\n\n Do you approve this order?";
 		    String title = "Confirm Order";
 		    // display the JOptionPane showConfirmDialog
