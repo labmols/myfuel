@@ -41,7 +41,7 @@ public class CarFuelActions extends GUIActions {
      */
 	private void getInventoryRequest() {
 		// TODO Auto-generated method stub
-		FuelInfoRequest req = new FuelInfoRequest (RequestEnum.Select);
+		FuelInfoRequest req = new FuelInfoRequest (RequestEnum.Select,1);
 		client.handleMessageFromGUI(req);
 	}
 	

@@ -40,11 +40,9 @@ public class HomeOrderActions extends GUIActions {
 	 */
 	private Customer customer;
 	
-	private float homeFuelPrice;
-	
-	private FuelQty homeFuelQty;
-	
 	private HomeOrder order;
+	private FuelInfoResponse response; 
+	
 	/**
 	 * Create new Home Fuel GUI Controller.
 	 * @param client - MyFuelClient object.
@@ -71,8 +69,7 @@ public class HomeOrderActions extends GUIActions {
 		if(arg instanceof FuelInfoResponse)
 		{
 			FuelInfoResponse res = (FuelInfoResponse) arg;
-			this.homeFuelPrice =  res.getFuels().get(3).getMaxPrice();
-			this.homeFuelQty = res.getSi().get(3).getfQty().get(0);
+			this.response = res;
 		}
 		else if(arg instanceof booleanResponse)
 		{
@@ -98,7 +95,7 @@ public class HomeOrderActions extends GUIActions {
 	
 	private void getInfo ()
 	{
-		FuelInfoRequest req = new FuelInfoRequest(RequestEnum.Select);
+		FuelInfoRequest req = new FuelInfoRequest(RequestEnum.Select, 4);
 		client.handleMessageFromGUI(req);
 		
 	}
@@ -107,7 +104,7 @@ public class HomeOrderActions extends GUIActions {
 		
 		Date pdate = new Date();
 		if(urgent) shipDate = pdate;
-		float bill = CalcPrice.calcTotalHomeOrder(urgent, qty,this.homeFuelPrice, null);
+		float bill = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
 		Purchase p = new Purchase (customer.getUserid(),0, 4, 4, -1,pdate , bill, qty);
 		order = new HomeOrder(customer.getUserid(), 0, qty , addr, shipDate, false, urgent);
 		
