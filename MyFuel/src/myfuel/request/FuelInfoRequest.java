@@ -2,6 +2,8 @@ package myfuel.request;
 
 import java.io.Serializable;
 
+import myfuel.client.FuelQty;
+
 @SuppressWarnings("serial")
 /**
  * Fuel Request class, contains all the request details that will be send to the server.
@@ -15,6 +17,8 @@ public class FuelInfoRequest implements Serializable {
 	private RequestEnum type;
 	
 	private int promotionFuelID;
+	
+	private FuelQty newInventory;
 	/**
 	 * Create new Fuel Request 
 	 * @param type - the Query type.

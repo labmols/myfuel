@@ -29,10 +29,10 @@ public class MyFuelServer extends ObservableServer{
 	public MyFuelServer(int port) {
 		super(port);
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://23.244.69.163:3306/myfuel","myfuel","labmols1"
-					+ "");
-		//	con = DriverManager.getConnection("jdbc:mysql://localhost/myfuel2","root",""
-			//	+ "");
+			//con = DriverManager.getConnection("jdbc:mysql://23.244.69.163:3306/myfuel","myfuel","labmols1"
+					//+ "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/myfuel2","root",""
+				+ "");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

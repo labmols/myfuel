@@ -3,6 +3,7 @@ package myfuel.response;
 import java.util.ArrayList;
 
 import myfuel.client.Fuel;
+import myfuel.client.FuelQty;
 import myfuel.client.Promotion;
 import myfuel.client.StationInventory;
 

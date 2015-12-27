@@ -103,9 +103,14 @@ public class HomeOrderActions extends GUIActions {
 	{
 		
 		Date pdate = new Date();
+		int pid ;
+		if(response.getProm() != null)
+		pid = response.getProm().getPid();
+		else pid = -1;
 		if(urgent) shipDate = pdate;
 		float bill = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
-		Purchase p = new Purchase (customer.getUserid(),0, 4, 4, -1,pdate , bill, qty);
+		
+		Purchase p = new Purchase (customer.getUserid(),0, 4, 4, pid ,pdate , bill, qty);
 		order = new HomeOrder(customer.getUserid(), 0, qty , addr, shipDate, false, urgent);
 		
 		HomeOrderRequest req = new HomeOrderRequest(p, order,RequestEnum.Insert);
@@ -158,11 +163,17 @@ public class HomeOrderActions extends GUIActions {
 		}
 		
 		if(!success) gui.showErrorMessage(msg);
-		else { // new request
-			float totalPrice = CalcPrice.calcTotalHomeOrder(urgent,qtyF,4, null);
+		else if(response != null){ // new request
+			float totalPrice = CalcPrice.calcTotalHomeOrder(urgent,qtyF,response.getFuels().get(3).getMaxPrice(), response.getProm());
 			String total = new DecimalFormat("##.##").format(totalPrice);
 			String liter =new DecimalFormat("##.##").format(totalPrice/qtyF);
-			String message = "Price for liter : " + liter +" ₪"
+			String promotion;
+			if(response.getProm() == null)
+			 promotion = "Promotion: no Promotion";
+			else
+			promotion = "Promotion : discount of " +response.getProm().getDiscount() +"% from total order";
+			String message = "" + promotion 
+					+ "\n\nPrice for liter : " + liter +" ₪"
 					+"\n\n Total Order Price : " + total+ " ₪"
 					+ "\n\n Charge Credit Card no : " + customer.getCnumber() +
 					 "\n\n Do you approve this order?";
