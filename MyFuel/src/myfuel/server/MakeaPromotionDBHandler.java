@@ -60,12 +60,25 @@ public class MakeaPromotionDBHandler extends DBHandler{
 				
  
 		       try {
-		   		ps=con.prepareStatement("select p.pid from promotion p where p.tid = ? and p.sdate = ? and p.fdate = ? ");
+		   		ps=con.prepareStatement("SELECT p.pid"+
+		   			"	FROM promotion as p"+
+		   			"	WHERE "+
+		   			"	( p.tid = ? AND(   (p.sdate <= ? AND p.fdate >= ?) "
+		   			+ "OR (p.sdate <=? AND p.fdate >= ? AND p.fdate <=?))"
+		   			+ "OR ((p.sdate <= ? AND p.fdate >= ? AND p.sdate >= ?))"
+		   			+ "OR (p.fdate <= ? AND p.sdate >= ?))");
 		   		
 		   		ps.setInt(1,request.getTid());
 		   		ps.setDate(2, new java.sql.Date(request.getStart().getTime()));
 				ps.setDate(3, new java.sql.Date(request.getEnd().getTime())); 
-		   		
+				ps.setDate(4, new java.sql.Date(request.getStart().getTime()));
+				ps.setDate(5, new java.sql.Date(request.getStart().getTime()));
+				ps.setDate(6, new java.sql.Date(request.getEnd().getTime())); 
+				ps.setDate(7, new java.sql.Date(request.getEnd().getTime())); 
+				ps.setDate(8, new java.sql.Date(request.getEnd().getTime())); 
+				ps.setDate(9, new java.sql.Date(request.getStart().getTime()));
+				ps.setDate(10, new java.sql.Date(request.getEnd().getTime())); 
+				ps.setDate(11, new java.sql.Date(request.getStart().getTime()));
 		   		exist =  ps.executeQuery();
 		   		
 		   		
