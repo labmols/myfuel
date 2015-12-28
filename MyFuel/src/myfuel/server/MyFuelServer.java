@@ -81,7 +81,8 @@ public class MyFuelServer extends ObservableServer{
 	    setChanged();
 	    LoginRequest l = (LoginRequest)(client.getInfo("Info"));
 	    notifyObservers(l);
-	    if(client.getInetAddress()!=null)System.out.println("Client with ID: " + l.getUserid() +" " + client+ " Disconnected!");
+	    if(client.getInetAddress()!=null)
+	    	System.out.println("Client with ID: " + l.getUserid() +" " + client+ " Disconnected!");
 	  }
 	
 	 synchronized public void setResponse(Response response){
