@@ -1,5 +1,7 @@
 package myfuel.GUIActions;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.Date;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 import myfuel.client.CalcPrice;
 import myfuel.client.Customer;
@@ -16,7 +19,7 @@ import myfuel.client.HomeOrder;
 import myfuel.client.MyFuelClient;
 import myfuel.client.PromotionTemplate;
 import myfuel.client.Purchase;
-import myfuel.gui.HomeOrderGUI;
+import myfuel.gui.HomeFuelGUI;
 import myfuel.request.FuelOrderRequest;
 import myfuel.request.MakeaPromotionRequest;
 import myfuel.request.RequestEnum;
@@ -33,7 +36,7 @@ public class HomeOrderActions extends GUIActions {
 	/**
 	 * Home Fuel GUI object(JFrame).
 	 */
-	private HomeOrderGUI gui;
+	private HomeFuelGUI gui;
 	
 	/**
 	 * Customer details object.
@@ -44,7 +47,7 @@ public class HomeOrderActions extends GUIActions {
 	 *Tthe home fuel order details
 	 */
 	private HomeOrder order;
-	
+	Timer timer;
 	/**
 	 * The response from server (include the fuel inventory and price).
 	 */
@@ -58,7 +61,7 @@ public class HomeOrderActions extends GUIActions {
 	 */
 	public HomeOrderActions(MyFuelClient client, CustomerLoginResponse res) {
 		super(client);
-		this.gui = new HomeOrderGUI(this);
+		this.gui = new HomeFuelGUI(this);
 		this.res= res;
 		getInfo();
 		gui.setVisible(true);
@@ -220,6 +223,11 @@ public class HomeOrderActions extends GUIActions {
 		    	MakeHomeFuelRequest(shipDate, qtyF, addr, urgent);
 		}
 			
+	}
+
+	public Timer getTimer() {
+		// TODO Auto-generated method stub
+		return this.timer;
 	}
 	
 	

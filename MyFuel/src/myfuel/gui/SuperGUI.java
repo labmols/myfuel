@@ -43,7 +43,7 @@ public abstract class SuperGUI extends JFrame {
 	 */
 	public SuperGUI() {
 		super("MyFuel System");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
 		setResizable(false);
 		
 		setBounds(100, 100, 596, 486);
@@ -88,6 +88,19 @@ public abstract class SuperGUI extends JFrame {
 		
 		 background.setIcon(icon);
 		contentPane.add( background);
+		
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        if (JOptionPane.showConfirmDialog(null, 
+		            "Are you sure to exit MyFuel?", "Really Closing?", 
+		            JOptionPane.YES_NO_OPTION,
+		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+		            System.exit(0);
+		           
+		        }
+		    }
+		});
 	}
 	
 	public void showErrorMessage(String msg){
