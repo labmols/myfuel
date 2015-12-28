@@ -2,7 +2,7 @@ package myfuel.client;
 
 public class CalcPrice {
 	
-	public static float calcHomeOrder(boolean urgent, float qty, float price, Promotion p)
+	public static float calcTotalHomeOrder(boolean urgent, float qty, float price, Promotion p)
 	{
 		float orderPrice;
 		

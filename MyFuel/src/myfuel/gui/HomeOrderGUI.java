@@ -3,9 +3,11 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import myfuel.GUIActions.HomeFuelActions;
+import myfuel.GUIActions.HomeOrderActions;
+import myfuel.client.BackMainMenu;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
@@ -27,28 +29,30 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class HomeFuelGUI extends SuperGUI {
+public class HomeOrderGUI extends SuperGUI {
 	
-	HomeFuelActions actions;
+	HomeOrderActions actions;
 	private JTextField qtyText;
 	private JCheckBox urgentCB;
 	private JTextField shipAddrText;
 	private JDatePickerImpl datePicker;
 	private JButton btnMakeOrder;
+	JLabel lblUrgent ;
 	
-	public HomeFuelGUI(HomeFuelActions actions)
+	public HomeOrderGUI(HomeOrderActions actions)
 	{
 		lblTitle.setBounds(208, 10, 174, 16);
 		lblTitle.setText("Home Fuel Order");
 		this.actions = actions;
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		setContentPane(contentPane);
 		
 		JLabel lblQuantity = new JLabel("Quantity (Liter):");
-		lblQuantity.setBounds(141, 176, 115, 16);
+		lblQuantity.setBounds(116, 181, 115, 16);
 		panel.add(lblQuantity);
 		
 		qtyText = new JTextField();
-		qtyText.setBounds(268, 171, 128, 26);
+		qtyText.setBounds(243, 176, 128, 26);
 		panel.add(qtyText);
 		qtyText.setColumns(10);
 		
@@ -56,31 +60,38 @@ public class HomeFuelGUI extends SuperGUI {
 		urgentCB.setToolTipText("In 6 hours from now");
 		urgentCB.setHorizontalTextPosition(SwingConstants.LEFT);
 		urgentCB.setHorizontalAlignment(SwingConstants.CENTER);
-		urgentCB.setBounds(268, 252, 128, 23);
+		urgentCB.setBounds(243, 257, 128, 23);
 		urgentCB.setOpaque(false);
+		urgentCB.addActionListener(new eventListener());
 		panel.add(urgentCB);
 		
 		JLabel lblShipAddr = new JLabel("Shipping Address:");
-		lblShipAddr.setBounds(141, 216, 134, 16);
+		lblShipAddr.setBounds(116, 221, 134, 16);
 		panel.add(lblShipAddr);
 		
 		shipAddrText = new JTextField();
-		shipAddrText.setBounds(268, 211, 128, 26);
+		shipAddrText.setBounds(243, 216, 128, 26);
 		panel.add(shipAddrText);
 		shipAddrText.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Is it your correct Address?");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(401, 216, 174, 16);
+		lblNewLabel_1.setBounds(376, 221, 174, 16);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblIfNotEnter = new JLabel("if not, enter your address.");
-		lblIfNotEnter.setBounds(401, 236, 174, 16);
+		lblIfNotEnter.setBounds(376, 241, 174, 16);
 		panel.add(lblIfNotEnter);
 		
 		JLabel lblShipDate = new JLabel("Ship Date:");
-		lblShipDate.setBounds(141, 296, 76, 29);
+		lblShipDate.setBounds(116, 301, 76, 29);
 		panel.add(lblShipDate);
+		
+		lblUrgent = new JLabel("You will receieve your order within 6 hours from now!");
+		lblUrgent.setForeground(Color.RED);
+		lblUrgent.setBounds(205, 301, 345, 29);
+		lblUrgent.setVisible(false);
+		panel.add(lblUrgent);
 		
 		UtilDateModel model1 = new UtilDateModel();
 		Properties p = new Properties();
@@ -91,11 +102,11 @@ public class HomeFuelGUI extends SuperGUI {
 		JDatePanelImpl datePanel = new JDatePanelImpl(model1,p);
 		 datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());	 
 		datePicker.setSize(159, 29);
-		datePicker.setLocation(255, 296);
+		datePicker.setLocation(230, 301);
 		panel.add(datePicker);
 		
 		JLabel lblOrderType = new JLabel("Order Type:");
-		lblOrderType.setBounds(141, 256, 85, 16);
+		lblOrderType.setBounds(116, 261, 85, 16);
 		panel.add(lblOrderType);
 		
 		JPanel panel2 = new JPanel();
@@ -109,12 +120,12 @@ public class HomeFuelGUI extends SuperGUI {
 		txtPane.setEditable(false);
 		
 		txtPane.setText("Prices:\n\nUrgent Order (in 6 hours from now) : Original price + 2%\n600 - 800 Liters: 3% Discount from Total order price.\nMore then 800 Liters: 4% Discount from Total order price. ");
-		txtPane.setBounds(6, 6, 437, 104);
+		txtPane.setBounds(6, 6, 437, 91);
 		txtPane.setOpaque(false);
 		panel2.add(txtPane);
 		
 		btnMakeOrder = new JButton("Make Order");
-		btnMakeOrder.setBounds(255, 371, 117, 29);
+		btnMakeOrder.setBounds(237, 371, 117, 29);
 		btnMakeOrder.addActionListener(new eventListener());
 		panel.add(btnMakeOrder);
 		
@@ -135,6 +146,21 @@ public class HomeFuelGUI extends SuperGUI {
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
-		actions.verifyDetails((Date)datePicker.getModel().getValue(), qtyText.getText(), shipAddrText.getText(), urgentCB.isSelected());
+		if(e.getSource() == urgentCB) 
+		{
+			if(urgentCB.isSelected())
+			{
+			datePicker.setVisible(false);
+			lblUrgent.setVisible(true);
+			}
+			else {
+				datePicker.setVisible(true);
+				lblUrgent.setVisible(false);
+			}
+		}
+		else if(e.getSource() == btnMakeOrder)
+		{
+			actions.verifyDetails((Date)datePicker.getModel().getValue(), qtyText.getText(), shipAddrText.getText(), urgentCB.isSelected());
+		}
 	}
 }

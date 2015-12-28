@@ -1,6 +1,7 @@
 package myfuel.client;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 @SuppressWarnings("serial")
@@ -9,8 +10,8 @@ public class PromotionTemplate implements Serializable{
 	private int tid;
 	private String name;
 	private float discount;
-	private Date startTime;
-	private Date endTime;
+	private Time startTime;
+	private Time endTime;
 	private int typeOfCustomer;
 	private int typeOfFuel;
 	private String nameOfFuel;
@@ -25,7 +26,7 @@ public class PromotionTemplate implements Serializable{
 	 * @param typeOfCustomer - Type of Customer {Private,Company}
 	 * @param typeOfFuel - Type of Fuel (1-4)
 	 */
-	public PromotionTemplate(int tid,String name,float discount,Date startTime,Date endTime,int typeOfCustomer,int typeOfFuel)
+	public PromotionTemplate(int tid,String name,float discount,Time startTime,Time endTime,int typeOfCustomer,int typeOfFuel)
 	{
 		this.setTid(tid);
 		this.setName(name);
@@ -102,7 +103,7 @@ public class PromotionTemplate implements Serializable{
  *  return start time
  * @return
  */
-	public Date getStartTime() {
+	public Time getStartTime() {
 		return startTime;
 	}
 /***
@@ -110,7 +111,7 @@ public class PromotionTemplate implements Serializable{
  * @param startTime
  */
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Time startTime) {
 		this.startTime = startTime;
 	}
 /***
@@ -118,7 +119,7 @@ public class PromotionTemplate implements Serializable{
  * @return endTime
  */
 
-	public Date getEndTime() {
+	public Time getEndTime() {
 		return endTime;
 	}
 /***
@@ -126,7 +127,7 @@ public class PromotionTemplate implements Serializable{
  * @param endTime
  */
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Time endTime) {
 		this.endTime = endTime;
 	}
 

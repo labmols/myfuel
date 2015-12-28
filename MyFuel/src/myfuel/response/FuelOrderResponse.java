@@ -3,6 +3,8 @@ package myfuel.response;
 import java.util.ArrayList;
 
 import myfuel.client.Fuel;
+import myfuel.client.FuelQty;
+import myfuel.client.Promotion;
 import myfuel.client.StationInventory;
 
 /**
@@ -10,7 +12,7 @@ import myfuel.client.StationInventory;
  * @author Maor
  *
  */
-public class CarFuelResponse extends Response {
+public class FuelOrderResponse extends Response {
 	
 	/**
 	 * List contains all the stations Inventory details.
@@ -22,15 +24,17 @@ public class CarFuelResponse extends Response {
 	 */
 	private ArrayList <Fuel> fuels;
 	
+	private Promotion prom;
 	/**
 	 * create new Car Fuel response 
 	 * @param si - the stations inventory list.
 	 * @param fuels - the fuels details list.
 	 */
-	public CarFuelResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels)
+	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels, Promotion prom)
 	{
 		this.si = new ArrayList<StationInventory>(si);
 		this.fuels = new ArrayList<Fuel>(fuels);
+		this.prom = prom;
 	}
 
 
@@ -51,6 +55,16 @@ public class CarFuelResponse extends Response {
 
 	public void setFuels(ArrayList <Fuel> fuels) {
 		this.fuels = fuels;
+	}
+
+
+	public Promotion getProm() {
+		return prom;
+	}
+
+
+	public void setProm(Promotion prom) {
+		this.prom = prom;
 	}
 	
 

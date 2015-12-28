@@ -167,9 +167,14 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		 n = name.getText();
 		 d = Float.parseFloat(discount.getText());
 		}catch(Exception ex){this.showErrorMessage("Input must be a number!"); legal = false;}
-		
-		Date start = (Date) startHour.getValue();
-		Date end = (Date) EndHour.getValue();
+
+		Date startD =(Date) startHour.getValue();
+		Time start = new Time(startD.getTime());
+		System.out.println(start);
+		//Date start = (Date) startHour.getValue();
+		Date endD = (Date) EndHour.getValue();
+		Time end = new Time(endD.getTime());
+		System.out.println(end);
 		if(legal)
 			p = new PromotionTemplate(0,n,d,start,end,typeOfCustomer.getSelectedIndex(),fuel.getSelectedIndex()+1);
 		

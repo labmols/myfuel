@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import myfuel.client.Car;
 import myfuel.client.Customer;
+import myfuel.client.Fuel;
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
 
@@ -60,5 +61,6 @@ public class CustomerLoginResponse extends Response {
 	public void setStations(ArrayList <Station> stations) {
 		this.stations = stations;
 	}
+
 
 }

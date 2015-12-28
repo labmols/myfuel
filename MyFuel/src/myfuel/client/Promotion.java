@@ -29,7 +29,7 @@ public class Promotion extends PromotionTemplate{
  * @param typeOfFuel - Type of Fuel (1-4)
  * @param pid  - Promotion ID
  */
-	public Promotion(int tid,String name,float discount,Date startTime,Date endTime,Date startDate,Date endDate,int typeOfCustomer,int typeOfFuel,int pid)
+	public Promotion(int tid,String name,float discount,Time startTime,Time endTime,Date startDate,Date endDate,int typeOfCustomer,int typeOfFuel,int pid)
 	{
 		super(tid,name,discount,startTime,endTime,typeOfCustomer,typeOfFuel);
 		this.setPid(pid);

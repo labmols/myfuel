@@ -31,8 +31,6 @@ public class MyFuelServer extends ObservableServer{
 		try {
 			con = DriverManager.getConnection("jdbc:mysql://23.244.69.163:3306/myfuel","myfuel","labmols1"
 					+ "");
-			//con = DriverManager.getConnection("jdbc:mysql://localhost/myfuel2","root",""
-				//	+ "");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,7 +47,7 @@ public class MyFuelServer extends ObservableServer{
 		new ConfirmationDBHandler(this,con);
 		new LowInventoryDBHandler(this,con);
 		new CheckInventoryDBHandler(this,con);
-		new CarFuelDBHandler(this,con);
+		new FuelOrderDBHandler(this,con);
 		new HomeControlDBHandler(this,con);
 		new MMReportDBHandler(this,con);
 	}

@@ -134,6 +134,7 @@ public class LoginDBHandler extends DBHandler {
 				}
 				
 				ArrayList<Station> Allstations = getStations();
+			
 				return new CustomerLoginResponse(userid,fname,lname,pass,email,address
 						,cnumber,toc,atype,smodel,cars,stations,Allstations);
 			}
@@ -211,6 +212,7 @@ public class LoginDBHandler extends DBHandler {
 		}
 	}
 	
+
 	/**
 	 * this method notified by the server when a new client request received,
 	 * return CustomerLoginResponse (for Customer Login), WorkerLoginResponse(for Worker Login) or booleanResponse(in Error) according
