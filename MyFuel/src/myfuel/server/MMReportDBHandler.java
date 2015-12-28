@@ -124,6 +124,14 @@ private String str;
 			 while(rs.next())
 					 stations.add(new Station(rs.getInt(1),rs.getString(2)));
 			 
+			 try{
+			 ps = con.prepareStatement("DROP VIEW myview");
+			 ps.executeUpdate();
+			 ps.close();
+		 	} catch (SQLException e)
+		 	{	}
+		 		
+			 
 			 ps = con.prepareStatement("CREATE VIEW myview as (SELECT cp.uid as uid, p.sid as sid, COUNT( * ) AS c, SUM( p.bill ) as sum, SUM( p.qty ) as qty"
 					+" FROM purchase p, customer_purchase cp"
 					+" WHERE cp.pid = p.pid"
@@ -134,7 +142,8 @@ private String str;
 			 
 			 ps = con.prepareStatement(" SELECT v.uid, c.fname, c.lname, v.sid, v.c, v.sum ,v.qty"
 					+" from myview v, customer c"
-					+" where v.uid = c.uid");
+					+" where v.uid = c.uid"
+					+ " order by v.c DESC");
 			 rs = ps.executeQuery();
 
 					
@@ -142,9 +151,6 @@ private String str;
 			 while(rs.next())
 				 creport.add(new CustomerReport(rs.getInt(1),rs.getString(2)+" "+rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getFloat(6),rs.getFloat(7)));
 				
-			 
-			 ps = con.prepareStatement("DROP VIEW myview");
-			 ps.executeUpdate();
 			 
 			 answer = true;
 			 str = "";
