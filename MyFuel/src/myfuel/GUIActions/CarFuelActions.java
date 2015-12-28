@@ -10,9 +10,9 @@ import myfuel.client.MyFuelClient;
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
 import myfuel.gui.CarFuelGUI;
-import myfuel.request.FuelInfoRequest;
+import myfuel.request.FuelOrderRequest;
 import myfuel.request.RequestEnum;
-import myfuel.response.FuelInfoResponse;
+import myfuel.response.FuelOrderResponse;
 import myfuel.response.Response;
 import myfuel.response.CustomerLoginResponse;
 
@@ -41,7 +41,7 @@ public class CarFuelActions extends GUIActions {
      */
 	private void getInventoryRequest() {
 		// TODO Auto-generated method stub
-		FuelInfoRequest req = new FuelInfoRequest (RequestEnum.Select,1);
+		FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Select,1);
 		client.handleMessageFromGUI(req);
 	}
 	
@@ -62,9 +62,9 @@ public class CarFuelActions extends GUIActions {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		if(arg instanceof FuelInfoResponse)
+		if(arg instanceof FuelOrderResponse)
 		{
-			FuelInfoResponse res = (FuelInfoResponse) arg;
+			FuelOrderResponse res = (FuelOrderResponse) arg;
 			sInventory = new ArrayList <StationInventory>(res.getSi());
 			fuels = new ArrayList<Fuel>(res.getFuels());
 			gui.setPrices(fuels);
