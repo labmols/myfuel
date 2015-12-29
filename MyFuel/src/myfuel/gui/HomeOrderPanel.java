@@ -22,13 +22,13 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 public class HomeOrderPanel extends JPanel{
-	HomeOrderActions actions;
+	private HomeOrderActions actions;
 	private JTextField qtyText;
 	private JCheckBox urgentCB;
 	private JTextField shipAddrText;
 	private JDatePickerImpl datePicker;
 	private JButton btnMakeOrder;
-	JLabel lblUrgent ;
+	private JLabel lblUrgent ;
 	
 	public HomeOrderPanel(HomeOrderActions actions)
 	{
@@ -137,6 +137,11 @@ public class HomeOrderPanel extends JPanel{
 			}
 		}
 		}
+	
+	public void setAddress(String address)
+	{
+		shipAddrText.setText(address);
+	}
 		
 	}
 

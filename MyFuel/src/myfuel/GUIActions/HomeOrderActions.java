@@ -44,7 +44,7 @@ public class HomeOrderActions extends GUIActions {
 	private CustomerLoginResponse res;
 	
 	/**
-	 *Tthe home fuel order details
+	 *The home fuel order details
 	 */
 	private HomeOrder order;
 	Timer timer;
@@ -64,6 +64,21 @@ public class HomeOrderActions extends GUIActions {
 		this.gui = new HomeFuelGUI(this);
 		this.res= res;
 		getInfo();
+		
+		  timer = new Timer(10000, new ActionListener() { // Get info from DB every 10 seconds
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                if(client.isConnected())getInfo();
+                else timer.stop();
+                System.out.println("time");
+               
+              }
+          });
+          timer.setRepeats(true);
+          timer.setCoalesce(true);
+          timer.setInitialDelay(0);
+          timer.start();
+        gui.getOrderPanel().setAddress(res.getUser().getAddress());
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
 	}
@@ -115,7 +130,7 @@ public class HomeOrderActions extends GUIActions {
 	
 	private void getInfo ()
 	{
-		FuelOrderRequest req = new FuelOrderRequest(RequestEnum.Select, 4);
+		FuelOrderRequest req = new FuelOrderRequest(RequestEnum.Select, Fuel.HomeFuelID);
 		client.handleMessageFromGUI(req);
 		
 	}
@@ -133,7 +148,7 @@ public class HomeOrderActions extends GUIActions {
 				else pid = -1;
 				if(urgent) shipDate = pdate;
 				float bill = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
-				Purchase p = new Purchase (res.getUser().getUserid(),0, 4, 4, pid ,pdate , bill, qty);
+				Purchase p = new Purchase (res.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , bill, qty);
 				order = new HomeOrder(res.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent);
 
 				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert, qty,4,p,order);
@@ -175,6 +190,7 @@ public class HomeOrderActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
+		timer.stop();
 		changeFrame(gui, new CustomerOptionsActions(client, res), this);
 	}
 	

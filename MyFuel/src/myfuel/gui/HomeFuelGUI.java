@@ -106,4 +106,9 @@ public class HomeFuelGUI extends SuperGUI {
 			trackingPanel.setVisible(true);
 		}
 	}
+
+	public HomeOrderPanel getOrderPanel() {
+		// TODO Auto-generated method stub
+		return this.orderPanel;
+	}
 }
