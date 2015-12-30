@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import myfuel.client.Fuel;
 import myfuel.client.FuelQty;
+import myfuel.client.HomeOrder;
 import myfuel.client.Promotion;
 import myfuel.client.StationInventory;
 
@@ -25,16 +26,19 @@ public class FuelOrderResponse extends Response {
 	private ArrayList <Fuel> fuels;
 	
 	private Promotion prom;
+	
+	private ArrayList <HomeOrder> horders;
 	/**
 	 * create new Car Fuel response 
 	 * @param si - the stations inventory list.
 	 * @param fuels - the fuels details list.
 	 */
-	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels, Promotion prom)
+	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels, Promotion prom,ArrayList <HomeOrder> horders )
 	{
 		this.si = new ArrayList<StationInventory>(si);
 		this.fuels = new ArrayList<Fuel>(fuels);
 		this.prom = prom;
+		this.setHorders(horders);
 	}
 
 
@@ -65,6 +69,16 @@ public class FuelOrderResponse extends Response {
 
 	public void setProm(Promotion prom) {
 		this.prom = prom;
+	}
+
+
+	public ArrayList <HomeOrder> getHorders() {
+		return horders;
+	}
+
+
+	public void setHorders(ArrayList <HomeOrder> horders) {
+		this.horders = horders;
 	}
 	
 

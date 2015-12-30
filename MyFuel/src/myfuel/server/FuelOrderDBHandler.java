@@ -35,9 +35,42 @@ public class FuelOrderDBHandler extends DBHandler{
 	}
 	
 	/**
-	 * 
-	 * @param order
-	 * @return
+	 * Get all home fuel orders for a specific customer id.
+	 * @param customerID - The customer id number.
+	 * @return List of all the customer home orders.
+	 */
+	private ArrayList<HomeOrder> getHomeOrders(int customerID) {
+		// TODO Auto-generated method stub
+		ArrayList<HomeOrder> horders = new ArrayList<HomeOrder>();
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+
+			try {
+				ps= con.prepareStatement("select t2.uid, t1.orid, t1.qty, t1.adr, t1.sdate, t1.status,t1.urgent from home_order t1, customer_home_order t2 where t2.uid = ? and t1.orid = t2.orid");
+				ps.setInt(1, customerID);
+				rs = ps.executeQuery();
+			
+				while(rs.next())
+				horders.add(new HomeOrder (rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getString(4), rs.getDate(5), rs.getBoolean(6), rs.getBoolean(7)));
+				ps.close();
+				rs.close();
+				return horders;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * Insert new Home Fuel Order to the Database.
+	 * @param order - The new Order object.
+	 * @return - true if the insertion succeed and false otherwise(SQL Error, etc).
 	 */
 	private boolean insertHomeOrder(HomeOrder order)
 	{
@@ -88,10 +121,10 @@ public class FuelOrderDBHandler extends DBHandler{
 	}
 	
 	/**
-	 * 
-	 * @param p
-	 * @return
-	 */
+	 * Insert new Purchase to the Database.
+	 * @param p - The new purchase object that contains all the purchase details.
+	 * @return - true if the insertion succeed or false otherwise(SQL Error, etc).
+	 */ 
 	private boolean insertPurchase(Purchase p)
 	{
 		ResultSet rs = null ;
@@ -129,6 +162,8 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps.executeUpdate();
 			ps.close();
 			
+			updateInventory(p.getSid(), p.getFuelid(), p.getQty());
+			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -145,23 +180,21 @@ public class FuelOrderDBHandler extends DBHandler{
 
 	
 	/**
-	 * 
-	 * @param fuelid
-	 * @param newFuelQty
-	 * @param sid
+	 * Update specific station inventory after fuel purchase.
+	 * @param si
 	 */
-	private void updateInventory(int fuelid, float newFuelQty, int sid)
+	private void updateInventory(int sid, int FuelID, float qty)
 	{
 		
 		PreparedStatement ps = null;
 		
+		
 		try {
 			ps= con.prepareStatement("update station_inventory SET fqty=fqty-? where sid=? and fuelid=?");
-			ps.setFloat(1,newFuelQty);
+			ps.setFloat(1,qty);
 			ps.setInt(2, sid);
-			ps.setInt(3, fuelid);
+			ps.setInt(3, FuelID);
 			ps.executeUpdate();
-			
 			//if the current qty < minimal qty create new inventory order
 			
 			ps.close();
@@ -324,7 +357,10 @@ public class FuelOrderDBHandler extends DBHandler{
 				ArrayList <Fuel> fuels = getFuels();
 				ArrayList <StationInventory> si = getInventory();
 				Promotion p = getPromotion(req.getFuelID());
-				FuelOrderResponse res = new FuelOrderResponse (si,fuels, p);
+				ArrayList <HomeOrder> horders = null;
+				if(req.getFuelID() == Fuel.HomeFuelID) 
+				 horders = getHomeOrders(req.getCustomerID());
+				FuelOrderResponse res = new FuelOrderResponse (si,fuels, p,horders);
 				server.setResponse(res);
 			}
 			
@@ -338,17 +374,16 @@ public class FuelOrderDBHandler extends DBHandler{
 				else 
 					s = insertPurchase(p) && insertHomeOrder(horder);
 				if(s)
-				{
-				updateInventory(req.getFuelID(),req.getFuelQty(), req.getSid());
 				server.setResponse(new booleanResponse (true,"Success"));
-				}
 				else 
-					server.setResponse(new booleanResponse(false,"Falied"));
+				server.setResponse(new booleanResponse(false,"Falied"));
 				
 			}
 			
 			
 		}
 	}
+
+	
 
 }

@@ -47,16 +47,16 @@ public class HomeOrderPanel extends JPanel{
 		setLayout(null);
 		
 		JLabel lblQuantity = new JLabel("Quantity (Liter):");
-		lblQuantity.setBounds(110, 129, 115, 16);
+		lblQuantity.setBounds(97, 100, 115, 16);
 		add(lblQuantity);
 		
 		qtyText = new JTextField();
-		qtyText.setBounds(237, 124, 128, 26);
+		qtyText.setBounds(224, 95, 128, 26);
 		add(qtyText);
 		qtyText.setColumns(10);
 		
 		urgentCB = new JCheckBox("Urgent Order?");
-		urgentCB.setBounds(237, 198, 128, 23);
+		urgentCB.setBounds(224, 169, 128, 23);
 		add(urgentCB);
 		urgentCB.setToolTipText("In 6 hours from now");
 		urgentCB.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -64,50 +64,50 @@ public class HomeOrderPanel extends JPanel{
 		urgentCB.setOpaque(false);
 		
 		JLabel lblShipAddr = new JLabel("Shipping Address:");
-		lblShipAddr.setBounds(110, 162, 134, 16);
+		lblShipAddr.setBounds(97, 133, 134, 16);
 		add(lblShipAddr);
 		
 		shipAddrText = new JTextField();
-		shipAddrText.setBounds(237, 157, 128, 26);
+		shipAddrText.setBounds(224, 128, 128, 26);
 		add(shipAddrText);
 		shipAddrText.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Is it your correct Address?");
-		lblNewLabel_1.setBounds(370, 162, 174, 16);
+		lblNewLabel_1.setBounds(357, 133, 174, 16);
 		add(lblNewLabel_1);
 		lblNewLabel_1.setForeground(Color.WHITE);
 		
 		JLabel lblIfNotEnter = new JLabel("if not, enter your address.");
-		lblIfNotEnter.setBounds(370, 182, 174, 16);
+		lblIfNotEnter.setBounds(357, 153, 174, 16);
 		add(lblIfNotEnter);
 		
 		JLabel lblShipDate = new JLabel("Ship Date:");
-		lblShipDate.setBounds(110, 242, 76, 29);
+		lblShipDate.setBounds(97, 213, 76, 29);
 		add(lblShipDate);
 		
 		lblUrgent = new JLabel("You will receieve your order within 6 hours from now!");
-		lblUrgent.setBounds(199, 242, 345, 29);
+		lblUrgent.setBounds(186, 213, 345, 29);
 	    add(lblUrgent);
 		lblUrgent.setForeground(Color.RED);
 		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		datePicker.setBounds(224, 242, 159, 29);
+		datePicker.setBounds(211, 213, 159, 29);
 		add(datePicker);
 		
 		JLabel lblOrderType = new JLabel("Order Type:");
-		lblOrderType.setBounds(110, 202, 85, 16);
+		lblOrderType.setBounds(97, 173, 85, 16);
 		add(lblOrderType);
 		
 		btnMakeOrder = new JButton("Make Order");
-		btnMakeOrder.setBounds(240, 310, 117, 29);
+		btnMakeOrder.setBounds(217, 310, 117, 29);
 		add(btnMakeOrder);
 		
 		JTextPane txtPane = new JTextPane();
-		txtPane.setBounds(99, 6, 437, 91);
+		txtPane.setBounds(87, 26, 437, 57);
 		add(txtPane);
 		txtPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtPane.setEditable(false);
 		
-		txtPane.setText("Prices:\n\nUrgent Order (in 6 hours from now) : Original price + 2%\n600 - 800 Liters: 3% Discount from Total order price.\nMore then 800 Liters: 4% Discount from Total order price. ");
+		txtPane.setText("Urgent Order (in 6 hours from now) : Original price + 2%\n600 - 800 Liters: 3% Discount from Total order price.\nMore then 800 Liters: 4% Discount from Total order price. ");
 		txtPane.setOpaque(false);
 		btnMakeOrder.addActionListener(new eventListener());
 		lblUrgent.setVisible(false);

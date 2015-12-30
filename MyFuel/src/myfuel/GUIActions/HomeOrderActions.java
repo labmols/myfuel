@@ -19,6 +19,8 @@ import myfuel.client.HomeOrder;
 import myfuel.client.MyFuelClient;
 import myfuel.client.PromotionTemplate;
 import myfuel.client.Purchase;
+import myfuel.client.Station;
+import myfuel.client.StationInventory;
 import myfuel.gui.HomeFuelGUI;
 import myfuel.request.FuelOrderRequest;
 import myfuel.request.MakeaPromotionRequest;
@@ -41,7 +43,7 @@ public class HomeOrderActions extends GUIActions {
 	/**
 	 * Customer details object.
 	 */
-	private CustomerLoginResponse res;
+	private CustomerLoginResponse LoginRes;
 	
 	/**
 	 *The home fuel order details
@@ -62,7 +64,7 @@ public class HomeOrderActions extends GUIActions {
 	public HomeOrderActions(MyFuelClient client, CustomerLoginResponse res) {
 		super(client);
 		this.gui = new HomeFuelGUI(this);
-		this.res= res;
+		this.LoginRes= res;
 		getInfo();
 		
 		  timer = new Timer(10000, new ActionListener() { // Get info from DB every 10 seconds
@@ -70,8 +72,6 @@ public class HomeOrderActions extends GUIActions {
               public void actionPerformed(ActionEvent e) {
                 if(client.isConnected())getInfo();
                 else timer.stop();
-                System.out.println("time");
-               
               }
           });
           timer.setRepeats(true);
@@ -79,6 +79,7 @@ public class HomeOrderActions extends GUIActions {
           timer.setInitialDelay(0);
           timer.start();
         gui.getOrderPanel().setAddress(res.getUser().getAddress());
+       
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
 	}
@@ -95,6 +96,7 @@ public class HomeOrderActions extends GUIActions {
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.response = res;
+			 gui.getTrackingPanel().updateTable(response.getHorders());
 		}
 		else if(arg instanceof booleanResponse)
 		{
@@ -130,7 +132,7 @@ public class HomeOrderActions extends GUIActions {
 	
 	private void getInfo ()
 	{
-		FuelOrderRequest req = new FuelOrderRequest(RequestEnum.Select, Fuel.HomeFuelID);
+		FuelOrderRequest req = new FuelOrderRequest(RequestEnum.Select, Fuel.HomeFuelID, LoginRes.getUser().getUserid());
 		client.handleMessageFromGUI(req);
 		
 	}
@@ -148,10 +150,9 @@ public class HomeOrderActions extends GUIActions {
 				else pid = -1;
 				if(urgent) shipDate = pdate;
 				float bill = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
-				Purchase p = new Purchase (res.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , bill, qty);
-				order = new HomeOrder(res.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent);
-
-				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert, qty,4,p,order);
+				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , bill, qty);
+				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent);
+				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
 				client.handleMessageFromGUI(req);
 			
 		  }
@@ -177,7 +178,7 @@ public class HomeOrderActions extends GUIActions {
 		String message = "" + promotion 
 				+ "\n\nPrice for liter : " + liter +" NIS"
 				+"\n\n Total Order Price : " + total+ " NIS"
-				+ "\n\n Charge Credit Card no : " +res.getUser().getCnumber() +
+				+ "\n\n Charge Credit Card no : " +LoginRes.getUser().getCnumber() +
 				 "\n\n Do you approve this order?";
 	    String title = "Confirm Order";
 	    // display the JOptionPane showConfirmDialog
@@ -191,7 +192,7 @@ public class HomeOrderActions extends GUIActions {
 	public void backToMenu() {
 		// TODO Auto-generated method stub
 		timer.stop();
-		changeFrame(gui, new CustomerOptionsActions(client, res), this);
+		changeFrame(gui, new CustomerOptionsActions(client, LoginRes), this);
 	}
 	
 	

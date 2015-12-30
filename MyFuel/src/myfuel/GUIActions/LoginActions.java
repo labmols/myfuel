@@ -14,12 +14,24 @@ import myfuel.response.Response;
 import myfuel.response.CustomerLoginResponse;
 import myfuel.response.WorkerLoginResponse;
 
+/**
+ * 
+ * @author Maor
+ *
+ */
 public class LoginActions extends GUIActions {
+	/**
+	 * The Log In request , contains user id and password for identify.
+	 */
 	private LoginRequest lr;
+	
+	/**
+	 * Log In JFrame , this is the Login User interface.
+	 */
 	private LogInGUI gui;
 	
 	/**
-	 * create new LoginGUI Controller.
+	 * Create new LoginGUI Controller.
 	 * @param client - the client object.
 	 */
 	public LoginActions(MyFuelClient client){
@@ -29,7 +41,7 @@ public class LoginActions extends GUIActions {
 	}
 	
 	/**
-	 * send login request to the server.
+	 * Send login request to the server.
 	 * @param type - type of user (0-customer,1-worker)
 	 * @param userid - user id
 	 * @param password - user password
@@ -94,12 +106,8 @@ public class LoginActions extends GUIActions {
 	
 	
 	/** Handle Worker Login Response.
-	 * this function get the response from server and acting according to this response.
-	 * role 1 - Station Worker
-	 * role 2- Station Manager
-	 * role 3- Marketing Manager
-	 * role 4- Marketing Delegate
-	 * role 5- Company Manager
+	 * This function get the response from server and acting according to this response.
+	 * Setting next JFrame According to the worker rule.
 	 * @param response
 	 */
 	private void workerResponse(Object response){
@@ -146,7 +154,7 @@ public class LoginActions extends GUIActions {
 	}
 	
 	/**
-	 * notified by the Client when a response recieved from the server , 
+	 * Notified by the Client when a response recieved from the server , 
 	 * handle this response according to the login type(Customer/Worker).
 	 * If there is an error, notify the user.
 	 */

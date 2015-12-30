@@ -1,6 +1,7 @@
 package myfuel.request;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import myfuel.client.FuelQty;
 import myfuel.client.HomeOrder;
@@ -22,19 +23,9 @@ public class FuelOrderRequest implements Serializable {
 	 * Type of Fuel
 	 */
 	private int FuelID;
+
 	
-	/**
-	 * The fueling station 
-	 */
-	private int sid;
-	
-	/**
-	 * The fuel quantity ordered.
-	 */
-	private float FuelQty;
-	
-	/**
-	 * The Purchase details
+	/** The Purchase details
 	 */
 	private Purchase pur;
 	
@@ -44,38 +35,43 @@ public class FuelOrderRequest implements Serializable {
 	private HomeOrder order;
 	
 	/**
+	 * Used for Home Order purchase.
+	 */
+	private int customerID;
+	/**
 	 * Create new Fuel Request 
 	 * @param type - the Query type.
 	 */
-	public FuelOrderRequest (RequestEnum type,  int FuelID )
+	
+	/**
+	 * Create new get info request (Get all details from the Database).
+	 * @param type - in this case, type will be select query.
+	 * @param FuelID - the FuelID number (for checking available promotion).
+	 * @param customerID - get all home fuel orders for this specific customer.
+	 */
+	public FuelOrderRequest (RequestEnum type,  int FuelID, int customerID )
 	{
 		setType(type);
 		setFuelID(FuelID);
 		setPur(null);
 		setHOrder(null);
-		setSid(-1);
-		setFuelQty(-1);
+		setCustomerID(customerID);
 	}
 	
-	public FuelOrderRequest (RequestEnum type,  float FuelQty ,int sid, Purchase pur, HomeOrder order)
+	/**
+	 * Create new insert purchase request (insert new purchase to the DB)
+	 * @param type - In this case , type will be insert query.
+	 * @param pur - The purchase details object.
+	 * @param order - Home order details object (in case this purchase is home order
+	 *  , need to insert the details into the home order table).
+	 */
+	public FuelOrderRequest (RequestEnum type, Purchase pur, HomeOrder order)
 	{
 		setType(type);
-		setFuelID(pur.getFuelid());
-		setFuelQty(FuelQty);
 		setPur(pur);
 		setHOrder(order);
-		setSid(sid);
 	}
 	
-	public FuelOrderRequest (RequestEnum type,  float FuelQty , int sid, Purchase pur)
-	{
-		setType(type);
-		setFuelQty(FuelQty);
-		setFuelID(pur.getFuelid());
-		setSid(sid);
-		setPur(pur);
-		setHOrder(null);
-	}
 
 	public RequestEnum getType() {
 		return type;
@@ -93,16 +89,6 @@ public class FuelOrderRequest implements Serializable {
 		this.FuelID = FuelID;
 	}
 
-
-	public int getSid() {
-		return sid;
-	}
-
-	public void setSid(int sid) {
-		this.sid = sid;
-	}
-
-
 	public Purchase getPur() {
 		return pur;
 	}
@@ -119,12 +105,12 @@ public class FuelOrderRequest implements Serializable {
 		this.order = order;
 	}
 
-	public float getFuelQty() {
-		return FuelQty;
+	public int getCustomerID() {
+		return customerID;
 	}
 
-	public void setFuelQty(float fuelQty) {
-		FuelQty = fuelQty;
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
 	}
 
 

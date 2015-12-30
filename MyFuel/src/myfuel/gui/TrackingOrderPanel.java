@@ -7,6 +7,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+import myfuel.client.HomeOrder;
 import myfuel.client.Promotion;
 import myfuel.client.PromotionReport;
 import myfuel.client.TimeIgnoringComparator;
@@ -32,7 +33,7 @@ public class TrackingOrderPanel extends JPanel{
 		setBounds(6, 46, 584, 384);
 		setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 122, 540, 188);
+		scrollPane.setBounds(22, 75, 540, 188);
 		add(scrollPane);
 		model = new MyTableModel(4,-1);
 		String[] names = {"	Order ID" ,"Quantity","Ship Date","Urgent","Status"};
@@ -48,17 +49,24 @@ public class TrackingOrderPanel extends JPanel{
 		
 	}
 
-	
+public void updateTable(ArrayList <HomeOrder> horders)
+{
+	clearTable();
+	for(HomeOrder order: horders)
+	model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getQty(), order.getShipDate(), order.isUrgent(), order.getStatus()});
+}
 
 	
 	/***
 	 * Clears the table
 	 */
- void clearTable()
+ private void clearTable()
 {
 	while(model.getRowCount() > 0 )
 		model.removeRow(0);
 }
+ 
+ 
  
  
 }

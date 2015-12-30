@@ -45,8 +45,8 @@ public class HomeFuelGUI extends SuperGUI {
 	
 	public HomeFuelGUI(HomeOrderActions actions)
 	{
-		lblTitle.setBounds(208, 10, 174, 16);
-		lblTitle.setText("Home Fuel Order");
+		lblTitle.setBounds(248, 6, 115, 32);
+		lblTitle.setText("Home Fuel");
 		this.actions = actions;
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		setContentPane(contentPane);
@@ -62,20 +62,20 @@ public class HomeFuelGUI extends SuperGUI {
 		
 		JPanel optionPanel = new JPanel();
 		optionPanel.setOpaque(false);
-		optionPanel.setBorder(new TitledBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), "Options", TitledBorder.LEADING, TitledBorder.TOP, null, Color.WHITE));
-		optionPanel.setBounds(6, 50, 584, 40);
+		optionPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Options", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
+		optionPanel.setBounds(6, 43, 349, 45);
 		panel.add(optionPanel);
 		optionPanel.setLayout(null);
 		
 		btnNewOrder = new JButton("New Order");
 		btnNewOrder.addActionListener(new eventListener());
-		btnNewOrder.setBounds(143, 11, 117, 29);
+		btnNewOrder.setBounds(66, 11, 117, 29);
 		optionPanel.add(btnNewOrder);
 		btnNewOrder.setToolTipText("Make new Order");
 		
 		btnTracking = new JButton("Tracking");
 		btnTracking.addActionListener(new eventListener());
-		btnTracking.setBounds(305, 11, 117, 29);
+		btnTracking.setBounds(199, 11, 117, 29);
 		optionPanel.add(btnTracking);
 		btnTracking.setToolTipText("Tracking your orders ");
 		
@@ -110,5 +110,10 @@ public class HomeFuelGUI extends SuperGUI {
 	public HomeOrderPanel getOrderPanel() {
 		// TODO Auto-generated method stub
 		return this.orderPanel;
+	}
+	
+	public TrackingOrderPanel getTrackingPanel() {
+		// TODO Auto-generated method stub
+		return this.trackingPanel;
 	}
 }
