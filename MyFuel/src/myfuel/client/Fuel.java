@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Fuel implements Serializable {
+	
+	public static int HomeFuelID = 4;
+	public static int Fuel95ID = 1;
+	public static int FuelDiesel = 2;
+	public static int FuelScooter = 3;
 	private int fid;
 	private float suggPrice;
 	private float maxPrice;

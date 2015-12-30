@@ -18,7 +18,7 @@ public class StationInventory implements Serializable {
 			this.setfQty(new ArrayList<FuelQty>(fQty));
 			this.s = s;
 		}
-
+		
 	
 	public Station getS() {
 		return s;
@@ -38,7 +38,6 @@ public class StationInventory implements Serializable {
 		this.fQty = fQty;
 	}
 
-
-
+	
 	
 }

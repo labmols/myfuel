@@ -303,7 +303,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 					if(stationModel.getSize() > 1)
 					{
 					actions.resetAccess();
-					showErrorMessage("Now you need to add one station!");
+					showOKMessage("Now you need to add one station!");
 					}
 					
 				}

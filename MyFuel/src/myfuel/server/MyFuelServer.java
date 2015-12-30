@@ -31,6 +31,8 @@ public class MyFuelServer extends ObservableServer{
 		try {
 			con = DriverManager.getConnection("jdbc:mysql://23.244.69.163:3306/myfuel","myfuel","labmols1"
 					+ "");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost/myfuel2","root",""
+				//+ "");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,8 +83,7 @@ public class MyFuelServer extends ObservableServer{
 	    setChanged();
 	    LoginRequest l = (LoginRequest)(client.getInfo("Info"));
 	    notifyObservers(l);
-	    if(client.getInetAddress()!=null)
-	    	System.out.println("Client with ID: " + l.getUserid() +" " + client+ " Disconnected!");
+	    if(client.getInetAddress()!=null)System.out.println("Client with ID: " + l.getUserid() +" " + client+ " Disconnected!");
 	  }
 	
 	 synchronized public void setResponse(Response response){
