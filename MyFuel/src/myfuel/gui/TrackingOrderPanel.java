@@ -33,11 +33,10 @@ public class TrackingOrderPanel extends JPanel{
 		setBounds(6, 46, 584, 384);
 		setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 75, 540, 188);
+		scrollPane.setBounds(20, 34, 540, 279);
 		add(scrollPane);
-		model = new MyTableModel(4,-1);
-		String[] names = {"	Order ID" ,"Quantity","Ship Date","Urgent","Status"};
-		
+		model = new MyTableModel(6,-1);
+		String[] names = {"	Order ID" ,"Quantity(Liters)","Ship Date","Order Time","Urgent","Status"};
 		for(String s : names)
 			model.addColumn(s);
 		
@@ -46,14 +45,30 @@ public class TrackingOrderPanel extends JPanel{
 		table.setModel(model);
 		scrollPane.setViewportView(table);
 		
+		JLabel lblYourOrders = new JLabel("Your Orders ");
+		lblYourOrders.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 15));
+		lblYourOrders.setBounds(232, 6, 120, 16);
+		add(lblYourOrders);
+		
 		
 	}
 
 public void updateTable(ArrayList <HomeOrder> horders)
 {
 	clearTable();
+	String urgent;
+	String status;
 	for(HomeOrder order: horders)
-	model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getQty(), order.getShipDate(), order.isUrgent(), order.getStatus()});
+	{
+		Date date = order.getShipDate();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm");
+		if(order.isUrgent()) urgent = "Yes";
+		else urgent = "No";
+		if(order.getStatus()) status = "Delivered";
+		else status= "On delivery";
+		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getQty()+"L", format.format(date),format2.format(date), urgent, status});
+	}
 }
 
 	
@@ -65,8 +80,4 @@ public void updateTable(ArrayList <HomeOrder> horders)
 	while(model.getRowCount() > 0 )
 		model.removeRow(0);
 }
- 
- 
- 
- 
 }
