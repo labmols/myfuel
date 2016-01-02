@@ -170,7 +170,7 @@ public class CompanyReportsDBHandler extends DBHandler {
 					 ps = con.prepareStatement("select r.qid,s.sid,s.sname,c.uid,p.fuelid,p.bill,p.qty"
 					 		+ "					 from customer_purchase as c, purchase as p ,station as s,  company_report as r "
 						 		+ "					where p.sid = r.sid  and datediff(p.pdate,?) >=0 and datediff(p.pdate,?) <= 0 "
-						 		+ "							and p.pid = c.pid and r.rid = 1"
+						 		+ "							and p.pid = c.pid and r.rid = 2"
 						 		+ "							and s.sid = r.sid");
 					 
 						 
