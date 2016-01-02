@@ -128,8 +128,10 @@ public class SReportsDBHandler extends DBHandler{
 			 ps.close();
 			 answer = false;
 		 }
+		 else 
+			 answer = true;
 		 
-		 answer = true;
+		
 		 }
 		 catch(SQLException e)
 		 {
@@ -147,32 +149,32 @@ public class SReportsDBHandler extends DBHandler{
 	 		 
 			  cal = Calendar.getInstance();
 			 switch(q)
-			 {
+			  {
 			 	case 1:
 			 		cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY,1);
 			 		sdate = new java.sql.Timestamp( cal.getTime().getTime());
-			 		cal.set(cal.get(Calendar.YEAR),Calendar.APRIL,1);
+			 		cal.set(cal.get(Calendar.YEAR),Calendar.MARCH,31);
 			 		fdate =  new java.sql.Timestamp( cal.getTime().getTime());
 			 		break;
 			 	
 			 	case 2:
 			 		cal.set(cal.get(Calendar.YEAR),Calendar.APRIL,1);
 			 		sdate = new java.sql.Timestamp( cal.getTime().getTime());
-			 		cal.set(cal.get(Calendar.YEAR),Calendar.JULY,1);
+			 		cal.set(cal.get(Calendar.YEAR),Calendar.JUNE,31);
 			 		fdate =  new java.sql.Timestamp( cal.getTime().getTime());
 			 		break;
 			 	
 			 	case 3:
 			 		cal.set(cal.get(Calendar.YEAR),Calendar.JULY,1);
 			 		sdate = new java.sql.Timestamp( cal.getTime().getTime());
-			 		cal.set(cal.get(Calendar.YEAR),Calendar.OCTOBER,1);
+			 		cal.set(cal.get(Calendar.YEAR),Calendar.SEPTEMBER,31);
 			 		fdate =  new java.sql.Timestamp( cal.getTime().getTime());
 			 		break;
 			 	
 			 	case 4: 
 			 		cal.set(cal.get(Calendar.YEAR),Calendar.OCTOBER,1);
 			 		sdate = new java.sql.Timestamp( cal.getTime().getTime());
-			 		cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY,1);
+			 		cal.set(cal.get(Calendar.YEAR),Calendar.DECEMBER,31);
 			 		fdate =  new java.sql.Timestamp( cal.getTime().getTime());
 			 		break;
 			 			
@@ -194,7 +196,7 @@ public class SReportsDBHandler extends DBHandler{
 		 PreparedStatement ps = null;
 		 try{
 			 
-		 
+			 
 			 check_dates(q);
 			ps = con.prepareStatement("insert into company_report values (?,?,?) ");
 			ps.setInt(1,rid);

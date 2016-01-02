@@ -119,11 +119,13 @@ public class CompanyReportsDBHandler extends DBHandler {
 						 		+ "					where p.sid = r.sid  and datediff(p.pdate,?) >=0 and datediff(p.pdate,?) <= 0 "
 						 		+ "							and p.pid = c.pid and r.rid = 1"
 						 		+ "							and s.sid = r.sid"
-						 		+ "							and f.fuelid = p.fuelid");
+						 		+ "							and f.fuelid = p.fuelid"
+						 		+ "							and r.qid = ?");
 					 
 						 
 						 ps.setTimestamp(1, sdate);
 						 ps.setTimestamp(2, fdate);
+						 ps.setInt(3, q);
 						 
 						 rs = ps.executeQuery();
 						
@@ -171,12 +173,12 @@ public class CompanyReportsDBHandler extends DBHandler {
 					 		+ "					 from customer_purchase as c, purchase as p ,station as s,  company_report as r "
 						 		+ "					where p.sid = r.sid  and datediff(p.pdate,?) >=0 and datediff(p.pdate,?) <= 0 "
 						 		+ "							and p.pid = c.pid and r.rid = 2"
-						 		+ "							and s.sid = r.sid");
+						 		+ "							and s.sid = r.sid and r.qid = ?");
 					 
 						 
 						 ps.setTimestamp(1, sdate);
 						 ps.setTimestamp(2, fdate);
-						 
+						 ps.setInt(3, q);
 						 rs = ps.executeQuery();
 						 
 						 while(rs.next())
@@ -219,28 +221,28 @@ public class CompanyReportsDBHandler extends DBHandler {
 			 	case 1:
 			 		cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY,1);
 			 		sdate = new java.sql.Timestamp( cal.getTime().getTime());
-			 		cal.set(cal.get(Calendar.YEAR),Calendar.APRIL,1);
+			 		cal.set(cal.get(Calendar.YEAR),Calendar.MARCH,31);
 			 		fdate =  new java.sql.Timestamp( cal.getTime().getTime());
 			 		break;
 			 	
 			 	case 2:
 			 		cal.set(cal.get(Calendar.YEAR),Calendar.APRIL,1);
 			 		sdate = new java.sql.Timestamp( cal.getTime().getTime());
-			 		cal.set(cal.get(Calendar.YEAR),Calendar.JULY,1);
+			 		cal.set(cal.get(Calendar.YEAR),Calendar.JUNE,31);
 			 		fdate =  new java.sql.Timestamp( cal.getTime().getTime());
 			 		break;
 			 	
 			 	case 3:
 			 		cal.set(cal.get(Calendar.YEAR),Calendar.JULY,1);
 			 		sdate = new java.sql.Timestamp( cal.getTime().getTime());
-			 		cal.set(cal.get(Calendar.YEAR),Calendar.OCTOBER,1);
+			 		cal.set(cal.get(Calendar.YEAR),Calendar.SEPTEMBER,31);
 			 		fdate =  new java.sql.Timestamp( cal.getTime().getTime());
 			 		break;
 			 	
 			 	case 4: 
 			 		cal.set(cal.get(Calendar.YEAR),Calendar.OCTOBER,1);
 			 		sdate = new java.sql.Timestamp( cal.getTime().getTime());
-			 		cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY,1);
+			 		cal.set(cal.get(Calendar.YEAR),Calendar.DECEMBER,31);
 			 		fdate =  new java.sql.Timestamp( cal.getTime().getTime());
 			 		break;
 			 			
