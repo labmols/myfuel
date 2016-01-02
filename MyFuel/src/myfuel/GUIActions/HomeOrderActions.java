@@ -67,7 +67,7 @@ public class HomeOrderActions extends GUIActions {
 		this.LoginRes= res;
 		getInfo();
 		
-		  timer = new Timer(10000, new ActionListener() { // Get info from DB every 10 seconds
+		/*  timer = new Timer(10000, new ActionListener() { // Get info from DB every 10 seconds
               @Override
               public void actionPerformed(ActionEvent e) {
                 if(client.isConnected())getInfo();
@@ -77,7 +77,8 @@ public class HomeOrderActions extends GUIActions {
           timer.setRepeats(true);
           timer.setCoalesce(true);
           timer.setInitialDelay(0);
-          timer.start();
+          timer.start();/*/
+		
         gui.getOrderPanel().setAddress(res.getUser().getAddress());
        
 		gui.setVisible(true);
@@ -141,17 +142,19 @@ public class HomeOrderActions extends GUIActions {
 		
 		if(checkInventory(qty))
 		{
-			if(showConfirmOrder(qty, urgent))
+			float totalPrice = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
+			if(showConfirmOrder(qty, urgent,totalPrice))
 			{
 				Date pdate = new Date();
 				int pid ;
 				if(response.getProm() != null)
 					pid = response.getProm().getPid();
 				else pid = -1;
-				if(urgent) shipDate = pdate;
-				float bill = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
-				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , bill, qty);
-				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent);
+				if(urgent) 
+					shipDate = pdate;
+				
+				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty);
+				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent,p);
 				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
 				client.handleMessageFromGUI(req);
 			
@@ -163,21 +166,26 @@ public class HomeOrderActions extends GUIActions {
 			gui.showErrorMessage("Not enough fuel quantity!");
 		}
 	}
-
-	private boolean showConfirmOrder(float qty, boolean urgent)
+	
+	/**
+	 * Confirm Order JOptionPane message, Show total order details , including promotion info , total price and quantity.
+	 * @param qty - Quantity (Liter).
+	 * @param urgent - Is the order is urgent or not.
+	 * @return
+	 */
+	private boolean showConfirmOrder(float qty, boolean urgent, float totalPrice)
 	{
 		// TODO Auto-generated method stub
-		float totalPrice = CalcPrice.calcTotalHomeOrder(urgent,qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
 		String total = new DecimalFormat("##.##").format(totalPrice);
 		String liter =new DecimalFormat("##.##").format(totalPrice/qty);
 		String promotion;
 		if(response.getProm() == null)
-		 promotion = "Promotion: no Promotion";
+		 promotion = "Promotion: No Promotion";
 		else
 		promotion = "Promotion : Discount of " +response.getProm().getDiscount() +"% from total order";
 		String message = "" + promotion 
-				+ "\n\nPrice for liter : " + liter +" NIS"
 				+"\n\n Total Order Price : " + total+ " NIS"
+				+ "\n\nPrice for liter : " + liter +" NIS"
 				+ "\n\n Charge Credit Card no : " +LoginRes.getUser().getCnumber() +
 				 "\n\n Do you approve this order?";
 	    String title = "Confirm Order";
@@ -191,7 +199,6 @@ public class HomeOrderActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		timer.stop();
 		changeFrame(gui, new CustomerOptionsActions(client, LoginRes), this);
 	}
 	
