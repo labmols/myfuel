@@ -44,14 +44,19 @@ public class FuelOrderDBHandler extends DBHandler{
 		ArrayList<HomeOrder> horders = new ArrayList<HomeOrder>();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
+		Statement st;
 
 			try {
+				//Update order status query
+				st = con.createStatement();
+				st.executeUpdate("update home_order SET status=1 where datediff(curdate(),sdate) > 0 or (datediff(curdate(),sdate)=0 and TIMESTAMPDIFF(HOUR,sdate,NOW()) >=6)");
+				st.close();
+				//Get all home orders query after status update.
 				ps= con.prepareStatement("select t2.uid, t1.orid, t1.qty, t1.adr, t1.sdate, t1.status,t1.urgent from home_order t1, customer_home_order t2 where t2.uid = ? and t1.orid = t2.orid");
 				ps.setInt(1, customerID);
 				rs = ps.executeQuery();
-			
 				while(rs.next())
-				horders.add(new HomeOrder (rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getString(4), rs.getDate(5), rs.getBoolean(6), rs.getBoolean(7)));
+				horders.add(new HomeOrder (rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getString(4), rs.getTimestamp(5), rs.getBoolean(6), rs.getBoolean(7),null));
 				ps.close();
 				rs.close();
 				return horders;
@@ -82,6 +87,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			stmt = con.createStatement();
 			rs = stmt.executeQuery("SHOW TABLE STATUS WHERE `Name` = 'home_order'");
 			rs.next();
+			
 			int nextid = Integer.parseInt(rs.getString("Auto_increment"));
 			stmt.close();
 			rs.close();
@@ -91,9 +97,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps.setInt(1, nextid);
 			ps.setFloat(2, order.getQty());
 			ps.setString(3, order.getAddress());
-			if(!order.isUrgent())
-			ps.setDate(4, new java.sql.Date(order.getShipDate().getTime()));
-			else ps.setNull(4, java.sql.Types.DATE);
+			ps.setTimestamp(4, new java.sql.Timestamp(order.getShipDate().getTime()));
 			ps.setBoolean(5, order.isUrgent());
 			ps.setBoolean(6, order.getStatus());
 			ps.executeUpdate();
@@ -147,7 +151,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			if(p.getPromid() != -1)
 			ps.setInt(4, p.getPromid());
 			else ps.setNull(4,java.sql.Types.INTEGER);
-			ps.setDate(5, new java.sql.Date(p.getPdate().getTime()));
+			ps.setTimestamp(5, new java.sql.Timestamp(p.getPdate().getTime()));
 			ps.setFloat(6, p.getBill());
 			ps.setFloat(7, p.getQty());
 			
