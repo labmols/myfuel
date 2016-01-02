@@ -107,7 +107,7 @@ public class RegisterGUI extends SuperGUI {
 		JPanel panel3 = new JPanel();
 		panel3.setLayout(null);
 		panel3.setOpaque(false);
-		panel3.setBounds(284, 40, 269, 205);
+		panel3.setBounds(284, 40, 306, 205);
 		panel.add(panel3);
 		
 		JLabel lblPassword = new JLabel("Password:");
@@ -132,8 +132,8 @@ public class RegisterGUI extends SuperGUI {
 		panel3.add(lblSaleModel);
 		
 		saleModelCB = new JComboBox();
-		saleModelCB.setModel(new DefaultComboBoxModel(new String[] {"Occassional", "Monthly"}));
-		saleModelCB.setBounds(114, 126, 137, 27);
+		saleModelCB.setModel(new DefaultComboBoxModel(new String[] {"Occasional", "Monthly- One Car", "Monthly - Few Cars", "Fully Monthly - One Car"}));
+		saleModelCB.setBounds(114, 126, 186, 27);
 		panel3.add(saleModelCB);
 		
 		passTextField = new JPasswordField();
@@ -150,7 +150,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		typeCB = new JComboBox();
 		typeCB.setModel(new DefaultComboBoxModel(new String[] {"Private", "Company"}));
-		typeCB.setBounds(114, 158, 137, 27);
+		typeCB.setBounds(114, 158, 186, 27);
 		panel3.add(typeCB);
 		
 		JPanel panel4 = new JPanel();

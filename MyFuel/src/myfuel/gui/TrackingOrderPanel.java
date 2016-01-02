@@ -5,6 +5,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import myfuel.client.HomeOrder;
@@ -36,7 +38,7 @@ public class TrackingOrderPanel extends JPanel{
 		scrollPane.setBounds(20, 34, 540, 279);
 		add(scrollPane);
 		model = new MyTableModel(6,-1);
-		String[] names = {"	Order ID" ,"Quantity(Liters)","Ship Date","Order Time","Urgent","Status"};
+		String[] names = {"Order ID" ,"Amount(Liters)","Ship Date","Order Date","Order Price","Urgent","Status"};
 		for(String s : names)
 			model.addColumn(s);
 		
@@ -49,7 +51,6 @@ public class TrackingOrderPanel extends JPanel{
 		lblYourOrders.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 15));
 		lblYourOrders.setBounds(232, 6, 120, 16);
 		add(lblYourOrders);
-		
 		
 	}
 

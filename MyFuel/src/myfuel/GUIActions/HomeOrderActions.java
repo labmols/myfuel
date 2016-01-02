@@ -67,7 +67,7 @@ public class HomeOrderActions extends GUIActions {
 		this.LoginRes= res;
 		getInfo();
 		
-		  timer = new Timer(10000, new ActionListener() { // Get info from DB every 10 seconds
+		/*  timer = new Timer(10000, new ActionListener() { // Get info from DB every 10 seconds
               @Override
               public void actionPerformed(ActionEvent e) {
                 if(client.isConnected())getInfo();
@@ -77,7 +77,8 @@ public class HomeOrderActions extends GUIActions {
           timer.setRepeats(true);
           timer.setCoalesce(true);
           timer.setInitialDelay(0);
-          timer.start();
+          timer.start();/*/
+		
         gui.getOrderPanel().setAddress(res.getUser().getAddress());
        
 		gui.setVisible(true);
@@ -153,7 +154,7 @@ public class HomeOrderActions extends GUIActions {
 					shipDate = pdate;
 				
 				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty);
-				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent);
+				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent,p);
 				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
 				client.handleMessageFromGUI(req);
 			
@@ -198,7 +199,6 @@ public class HomeOrderActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		timer.stop();
 		changeFrame(gui, new CustomerOptionsActions(client, LoginRes), this);
 	}
 	

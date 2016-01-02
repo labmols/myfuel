@@ -33,7 +33,7 @@ public class SetNewRatesDBHandler extends DBHandler{
 			rs = ps.executeQuery();
 			while(rs.next())
 			{
-				OldRates.add(new saleModel(rs.getInt(1),rs.getInt(2)));
+				OldRates.add(new saleModel(rs.getInt(1),rs.getInt(3)));
 			}
 		
 		} catch (SQLException e) {

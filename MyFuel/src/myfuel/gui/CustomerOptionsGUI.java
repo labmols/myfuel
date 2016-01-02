@@ -28,12 +28,13 @@ public class CustomerOptionsGUI extends SuperGUI {
 	private JButton btnUpdateDetails;
 	private JButton btnCarFuel;
 	private JButton btnHomeFuel;
+	private JButton btnPurchases;
 	/**
 	 * Create the frame.
 	 */
 	public CustomerOptionsGUI(CustomerOptionsActions actions) {
 	
-		lblTitle.setBounds(211, 6, 207, 19);
+		lblTitle.setBounds(201, 0, 207, 41);
 		lblTitle.setText("Customer Options");
 		this.actions = actions;
 		
@@ -41,34 +42,35 @@ public class CustomerOptionsGUI extends SuperGUI {
 		setContentPane(contentPane);
 		JPanel MenuPanel = new JPanel();
 		MenuPanel.setBackground(Color.ORANGE);
-		MenuPanel.setBounds(96, 61, 475, 337);
+		MenuPanel.setBounds(23, 59, 567, 364);
 		MenuPanel.setOpaque(false);
 		panel.add(MenuPanel);
 		MenuPanel.setLayout(null);
 		
 		btnCarFuel = new JButton("Car Fuel");
-		btnCarFuel.setBounds(103, 22, 180, 50);
+		btnCarFuel.setBounds(178, 22, 180, 50);
 		btnCarFuel.addActionListener(new ButtonListener());
 		MenuPanel.add(btnCarFuel);
 		
 		btnHomeFuel = new JButton("Home Fuel");
-		btnHomeFuel.setBounds(103, 84, 180, 50);
+		btnHomeFuel.setBounds(178, 81, 180, 50);
 		btnHomeFuel.addActionListener(new ButtonListener());
 		MenuPanel.add(btnHomeFuel);
 		
 		btnUpdateDetails = new JButton("Update Details");
-		btnUpdateDetails.setBounds(103, 208, 180, 50);
+		btnUpdateDetails.setBounds(178, 143, 180, 50);
 		btnUpdateDetails.addActionListener(new ButtonListener());
 		MenuPanel.add(btnUpdateDetails);
 		
-		JButton btnNewButton = new JButton("Tracking Home Fuel Order");
-		btnNewButton.setBounds(103, 146, 180, 50);
-		MenuPanel.add(btnNewButton);
-		
 		btnChangePassword = new JButton("Change Password");
 		btnChangePassword.addActionListener(new ButtonListener());
-		btnChangePassword.setBounds(103, 270, 180, 50);
+		btnChangePassword.setBounds(178, 205, 180, 50);
 		MenuPanel.add(btnChangePassword);
+		
+		btnPurchases = new JButton("Purchases");
+		btnPurchases.addActionListener(new ButtonListener());
+		btnPurchases.setBounds(178, 267, 180, 50);
+		MenuPanel.add(btnPurchases);
 		
 		
 	}
@@ -89,5 +91,11 @@ public class CustomerOptionsGUI extends SuperGUI {
 		else if (e.getSource() ==btnUpdateDetails )actions.updateDetailsScreen();
 		else if(e.getSource()==btnCarFuel) actions.carFuelScreen();
 		else if(e.getSource() == btnHomeFuel ) actions.HomeFuelScreen();
+		else if(e.getSource() == btnPurchases ) {
+			this.dispose();
+			this.setVisible(false);
+			CustomerPurchaseGUI gui = new CustomerPurchaseGUI();
+			gui.setVisible(true);
+		}
 	}
 }
