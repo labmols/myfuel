@@ -2,6 +2,7 @@ package myfuel.gui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -18,9 +19,9 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		lblTitle.setBounds(226, 6, 175, 31);
 		lblTitle.setText("Your Purchases");
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(26, 96, 540, 279);
+		scrollPane.setBounds(6, 96, 584, 279);
 		model = new MyTableModel(6,-1);
-		String[] names = {"ID" ,"Station","Fuel Type","Date","Time","Price","Quantity(Liter)"};
+		String[] names = {"PID" ,"Car","Driver","Station","Fuel Type","Date","Time","Price","Amount(L)"};
 		for(String s : names)
 			model.addColumn(s);
 		
@@ -29,6 +30,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		purchaseTable.setModel(model);
 		scrollPane.setViewportView(purchaseTable);
 		panel.add(scrollPane);
+		model.insertRow(model.getRowCount(),new Object[]{1, 1234567,"Abalolo","Paz","95", "31/12/15", "18:00",435,40});
 	}
 	@Override
 	public void getInput(ActionEvent e) {

@@ -35,10 +35,10 @@ public class TrackingOrderPanel extends JPanel{
 		setBounds(6, 46, 584, 384);
 		setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 34, 540, 279);
+		scrollPane.setBounds(6, 34, 572, 279);
 		add(scrollPane);
 		model = new MyTableModel(6,-1);
-		String[] names = {"Order ID" ,"Amount(Liters)","Ship Date","Order Date","Order Price","Urgent","Status"};
+		String[] names = {"Order ID" ,"Amount(L)","Ship Date","Order Date","Urgent","Status"};
 		for(String s : names)
 			model.addColumn(s);
 		

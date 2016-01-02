@@ -259,7 +259,7 @@ public class RegisterGUI extends SuperGUI {
 		if(e.getSource()==btnRegister ){
 			actions.verifyDetails(idTextField.getText().toString(), fnameTextField.getText().toString(), lnameTextField.getText().toString(), 
 					passTextField.getPassword(),rePassTextField.getPassword(), emailTextField.getText().toString(),addressTextField.getText().toString(),
-					CCTextField.getText().toString(),typeCB.getSelectedIndex(), accessCB.getSelectedIndex(),saleModelCB.getSelectedIndex());
+					CCTextField.getText().toString(),typeCB.getSelectedIndex(), accessCB.getSelectedIndex(),saleModelCB.getSelectedIndex()+1);
 		}
 		
 		if(e.getSource() == btnClear){
