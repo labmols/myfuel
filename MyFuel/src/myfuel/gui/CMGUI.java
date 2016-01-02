@@ -30,6 +30,7 @@ public class CMGUI extends SuperGUI{
 		panel.add(btnConfirmNewRates);
 		
 		btnShowCompanyReports = new JButton("Show Company Reports");
+		btnShowCompanyReports.addActionListener(new btnHandler());
 		btnShowCompanyReports.setBounds(165, 228, 213, 48);
 		panel.add(btnShowCompanyReports);
 		
@@ -65,6 +66,10 @@ public class CMGUI extends SuperGUI{
 		
 		else if(e.getSource() == homeQty)
 			actions.homeQuantity();
+		else if(e.getSource() == btnShowCompanyReports)
+		{
+			actions.showReportsWindows();
+		}
 		
 	}
 	

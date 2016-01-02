@@ -19,6 +19,7 @@ import myfuel.GUIActions.GUIActions;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -59,6 +60,7 @@ public abstract class SuperGUI extends JFrame {
 		
 		
 		JMenuItem Exit = new JMenuItem("Exit");
+		Exit.addActionListener(new exitHandler());
 		mnMenu.add(Exit);
 		clockPanel = new ClockPane();
 		menuBar.add(clockPanel);
@@ -102,7 +104,7 @@ public abstract class SuperGUI extends JFrame {
 		    }
 		});
 	}
-	
+
 	public void showErrorMessage(String msg){
 	
 		JOptionPane.showMessageDialog(this, msg,"Error",JOptionPane.ERROR_MESSAGE);	
@@ -114,7 +116,23 @@ public abstract class SuperGUI extends JFrame {
 	}
 	
 	public abstract void getInput(ActionEvent e);
+
 	
+	private class exitHandler implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) 
+		{
+			   if (JOptionPane.showConfirmDialog(null, 
+			            "Are you sure to exit MyFuel?", "Really Closing?", 
+			            JOptionPane.YES_NO_OPTION,
+			            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+			            System.exit(0); }
+			
+		}
+		
+	}
 	
 	
 }
