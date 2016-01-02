@@ -32,22 +32,31 @@ public class SetNewRatesActions extends GUIActions {
 		boolean success = true;
 		String error="";
 		error += "Input Errors \n\n";
+	
 		if(SMRoneCar.equals("")||SMRfewCar.equals("")||SFMoneCar.equals(""))
 		{
 			success=false;
-			error+="The filed is Empty\n";
+			error+="Please fill all the fields\n";
 		}
 		else
 		{
+			try{
 			nSMRoneCar=Integer.parseInt(SMRoneCar);
 			nSMRfewCar=Integer.parseInt(SMRfewCar);
 			nSFMoneCarr=Integer.parseInt(SFMoneCar);
 			
-			if(nSMRoneCar<=0||nSMRoneCar<=0||nSMRoneCar<=0)
+			if(nSMRoneCar<=0||nSMRoneCar<=0||nSMRoneCar<=0 || nSMRoneCar>99||nSMRoneCar>99||nSMRoneCar>99 )
 			{
 				success=false;
-				error+="Some of the fileds are Negative\n";
+				error+="Some of the fields has illegal value\n";
 			}
+			
+			} catch(Exception e)
+			{
+				error+="Suggested rate has to be a number\n";
+				success = false;
+			}
+			
 		}
 		if(!success) gui.showErrorMessage(error);
 		else

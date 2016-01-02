@@ -57,30 +57,31 @@ public class SetNewRatesGUI extends SuperGUI {
 		panel.add(lblScooter);
 		
 		SMRoneCar = new JTextField();
-		SMRoneCar.setBounds(203, 119, 86, 20);
+		SMRoneCar.setBounds(250, 126, 41, 20);
 		panel.add(SMRoneCar);
 		SMRoneCar.setColumns(10);
 		
 		SMRfewCar = new JTextField();
-		SMRfewCar.setBounds(203, 155, 86, 20);
+		SMRfewCar.setBounds(250, 162, 41, 20);
 		panel.add(SMRfewCar);
 		SMRfewCar.setColumns(10);
 		
 		SFMoneCar = new JTextField();
-		SFMoneCar.setBounds(203, 189, 86, 20);
+		SFMoneCar.setBounds(250, 196, 41, 20);
 		panel.add(SFMoneCar);
 		SFMoneCar.setColumns(10);
 		
-		CMRoneCar = new JLabel("New label");
-		CMRoneCar.setBounds(365, 122, 46, 14);
+		CMRoneCar = new JLabel("0");
+		CMRoneCar.setBounds(430, 122, 46, 14);
 		panel.add(CMRoneCar);
 		
-		CMRfewCar = new JLabel("New label");
-		CMRfewCar.setBounds(365, 158, 46, 14);
+		CMRfewCar = new JLabel("0");
+		CMRfewCar.setToolTipText("0");
+		CMRfewCar.setBounds(430, 158, 46, 14);
 		panel.add(CMRfewCar);
 		
-		CFMoneCar = new JLabel("New label");
-		CFMoneCar.setBounds(365, 192, 46, 14);
+		CFMoneCar = new JLabel("0");
+		CFMoneCar.setBounds(430, 192, 46, 14);
 		panel.add(CFMoneCar);
 		
 		JButton UpdateBut = new JButton("Update");
@@ -100,12 +101,12 @@ public class SetNewRatesGUI extends SuperGUI {
 		
 		JLabel lblSuggested = new JLabel("Suggested");
 		lblSuggested.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblSuggested.setBounds(203, 77, 104, 31);
+		lblSuggested.setBounds(230, 84, 104, 31);
 		panel.add(lblSuggested);
 		
 		JLabel lblCurrent = new JLabel("Current");
 		lblCurrent.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblCurrent.setBounds(355, 85, 92, 21);
+		lblCurrent.setBounds(407, 85, 92, 21);
 		panel.add(lblCurrent);
 		
 		JSeparator separator_8 = new JSeparator();
@@ -119,15 +120,39 @@ public class SetNewRatesGUI extends SuperGUI {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setForeground(Color.BLACK);
 		separator.setBackground(Color.BLACK);
-		separator.setBounds(317, 84, 16, 180);
+		separator.setBounds(369, 84, 16, 180);
 		panel.add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 		separator_1.setForeground(Color.BLACK);
 		separator_1.setBackground(Color.BLACK);
-		separator_1.setBounds(445, 84, 2, 180);
+		separator_1.setBounds(497, 84, 2, 180);
 		panel.add(separator_1);
+		
+		JLabel label = new JLabel("%");
+		label.setBounds(441, 107, 46, 45);
+		panel.add(label);
+		
+		JLabel label_1 = new JLabel("%");
+		label_1.setBounds(297, 114, 46, 45);
+		panel.add(label_1);
+		
+		JLabel label_2 = new JLabel("%");
+		label_2.setBounds(297, 145, 46, 45);
+		panel.add(label_2);
+		
+		JLabel label_3 = new JLabel("%");
+		label_3.setBounds(297, 184, 46, 45);
+		panel.add(label_3);
+		
+		JLabel label_4 = new JLabel("%");
+		label_4.setBounds(440, 143, 46, 45);
+		panel.add(label_4);
+		
+		JLabel label_5 = new JLabel("%");
+		label_5.setBounds(440, 177, 46, 45);
+		panel.add(label_5);
 		setContentPane(contentPane);
 	}
 

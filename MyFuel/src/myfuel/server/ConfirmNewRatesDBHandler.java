@@ -65,7 +65,7 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 			  while(rs.next())
 			  {
 				  if(rs.getInt(1)!= 1)
-					  current.add(new saleModel(rs.getInt(1),rs.getInt(2)));
+					  current.add(new saleModel(rs.getInt(1),rs.getInt(3)));
 			  }
 			  
 			   answer = true;
