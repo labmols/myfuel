@@ -63,7 +63,7 @@ public class HomeFuelGUI extends SuperGUI {
 		JPanel optionPanel = new JPanel();
 		optionPanel.setOpaque(false);
 		optionPanel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)), "Options", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
-		optionPanel.setBounds(6, 43, 349, 45);
+		optionPanel.setBounds(6, 43, 349, 48);
 		panel.add(optionPanel);
 		optionPanel.setLayout(null);
 		

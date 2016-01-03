@@ -28,6 +28,8 @@ import myfuel.response.booleanResponse;
  *
  */
 public class FuelOrderDBHandler extends DBHandler{
+	
+	private int CustomerP;
 
 	FuelOrderDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
@@ -42,7 +44,7 @@ public class FuelOrderDBHandler extends DBHandler{
 	private ArrayList<HomeOrder> getHomeOrders(int customerID) {
 		// TODO Auto-generated method stub
 		ArrayList<HomeOrder> horders = new ArrayList<HomeOrder>();
-		ResultSet rs = null;
+		ResultSet rs1,rs2 = null;
 		PreparedStatement ps = null;
 		Statement st;
 
@@ -52,13 +54,21 @@ public class FuelOrderDBHandler extends DBHandler{
 				st.executeUpdate("update home_order SET status=1 where datediff(curdate(),sdate) > 0 or (datediff(curdate(),sdate)=0 and TIMESTAMPDIFF(HOUR,sdate,NOW()) >=6)");
 				st.close();
 				//Get all home orders query after status update.
-				ps= con.prepareStatement("select t2.uid, t1.orid, t1.qty, t1.adr, t1.sdate, t1.status,t1.urgent from home_order t1, customer_home_order t2 where t2.uid = ? and t1.orid = t2.orid");
+				ps= con.prepareStatement("select t2.uid, t1.orid, t1.qty, t1.adr, t1.sdate, t1.status,t1.urgent,t1.pid from home_order t1, customer_home_order t2 where t2.uid = ? and t1.orid = t2.orid");
 				ps.setInt(1, customerID);
-				rs = ps.executeQuery();
-				while(rs.next())
-				horders.add(new HomeOrder (rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getString(4), rs.getTimestamp(5), rs.getBoolean(6), rs.getBoolean(7),null));
+				rs1 = ps.executeQuery();
+				while(rs1.next())
+				{
+				ps = con.prepareStatement("select * from purchase where pid = ?");
+				ps.setInt(1, rs1.getInt(8));
+				rs2 = ps.executeQuery();
+				rs2.next();
+				Purchase pur = new Purchase(rs1.getInt(1),rs2.getInt(1),rs2.getInt(2),rs2.getInt(3),rs2.getInt(4),rs2.getTimestamp(5),rs2.getFloat(6),rs2.getFloat(7),rs2.getString(8));
+				horders.add(new HomeOrder (rs1.getInt(1), rs1.getInt(2), rs1.getFloat(3), rs1.getString(4), rs1.getTimestamp(5), rs1.getBoolean(6), rs1.getBoolean(7),pur));
+				}
 				ps.close();
-				rs.close();
+				rs1.close();
+				rs2.close();
 				return horders;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -77,7 +87,7 @@ public class FuelOrderDBHandler extends DBHandler{
 	 * @param order - The new Order object.
 	 * @return - true if the insertion succeed and false otherwise(SQL Error, etc).
 	 */
-	private boolean insertHomeOrder(HomeOrder order)
+	private boolean insertHomeOrder(HomeOrder order, int CustomerP)
 	{
 		ResultSet rs = null ;
 		PreparedStatement ps = null;
@@ -93,13 +103,14 @@ public class FuelOrderDBHandler extends DBHandler{
 			rs.close();
 			
 			//Insert into purchase table
-			ps = con.prepareStatement("insert into home_order values(?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into home_order values(?,?,?,?,?,?,?)");
 			ps.setInt(1, nextid);
-			ps.setFloat(2, order.getQty());
-			ps.setString(3, order.getAddress());
-			ps.setTimestamp(4, new java.sql.Timestamp(order.getShipDate().getTime()));
-			ps.setBoolean(5, order.isUrgent());
-			ps.setBoolean(6, order.getStatus());
+			ps.setInt(2, CustomerP);
+			ps.setFloat(3, order.getQty());
+			ps.setString(4, order.getAddress());
+			ps.setTimestamp(5, new java.sql.Timestamp(order.getShipDate().getTime()));
+			ps.setBoolean(6, order.isUrgent());
+			ps.setBoolean(7, order.getStatus());
 			ps.executeUpdate();
 			ps.close();
 			
@@ -140,11 +151,12 @@ public class FuelOrderDBHandler extends DBHandler{
 			rs = stmt.executeQuery("SHOW TABLE STATUS WHERE `Name` = 'purchase'");
 			rs.next();
 			int nextid = Integer.parseInt(rs.getString("Auto_increment"));
+			this.CustomerP = nextid;
 			stmt.close();
 			rs.close();
 			
 			//Insert into purchase table
-			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?,?)");
 			ps.setInt(1, nextid);
 			ps.setInt(2, p.getSid());
 			ps.setInt(3, p.getFuelid());
@@ -154,7 +166,9 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps.setTimestamp(5, new java.sql.Timestamp(p.getPdate().getTime()));
 			ps.setFloat(6, p.getBill());
 			ps.setFloat(7, p.getQty());
-			
+			if(p.getDriverName() == null)
+			ps.setNull(8, java.sql.Types.VARCHAR);
+			else ps.setString(8, p.getDriverName());
 			ps.executeUpdate();
 			ps.close();
 			
@@ -191,7 +205,8 @@ public class FuelOrderDBHandler extends DBHandler{
 	{
 		
 		PreparedStatement ps = null;
-		
+		ResultSet rs = null;
+		float mqty,fqty;
 		
 		try {
 			ps= con.prepareStatement("update station_inventory SET fqty=fqty-? where sid=? and fuelid=?");
@@ -199,9 +214,30 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps.setInt(2, sid);
 			ps.setInt(3, FuelID);
 			ps.executeUpdate();
-			//if the current qty < minimal qty create new inventory order
-			
 			ps.close();
+			
+			ps= con.prepareStatement("select fqty,mqty from station_inventory where sid=? and fuelid=?");
+			ps.setInt(1, sid);
+			ps.setInt(2, FuelID);
+			rs = ps.executeQuery();
+			rs.next();
+			fqty = rs.getFloat(1);
+			mqty = rs.getFloat(2);
+			ps.close();
+			rs.close();
+			//if the current qty < minimal qty create new inventory order
+			if(fqty < mqty)
+			{
+				ps= con.prepareStatement("insert into inventory_order values(?,?,?,?,?)");
+				ps.setInt(1, 0);
+				ps.setInt(2, sid);
+				ps.setInt(3, FuelID);
+				ps.setFloat(4, 5*mqty);
+				ps.setInt(5, 0);
+				ps.executeUpdate();
+				ps.close();	
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -376,7 +412,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				if(horder == null) // not home order
 					s = insertPurchase(p);
 				else 
-					s = insertPurchase(p) && insertHomeOrder(horder);
+					s = insertPurchase(p) && insertHomeOrder(horder,CustomerP);
 				if(s)
 				server.setResponse(new booleanResponse (true,"Success"));
 				else 

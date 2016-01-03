@@ -35,7 +35,7 @@ public class HomeOrder implements Serializable {
 	 */
 	private boolean status;
 	
-	private Purchase homePur;
+	private Purchase homeP;
 	
 	/**
 	 * Is this order urgent ? (within 6 hours from now).
@@ -51,7 +51,7 @@ public class HomeOrder implements Serializable {
 	 * @param shipDate - Shipping Date.
 	 * @param status - Order Status.
 	 */
-	public HomeOrder(int customerid, int orderid, float qty, String address, Date shipDate,boolean status, boolean urgent,Purchase homePur)
+	public HomeOrder(int customerid, int orderid, float qty, String address, Date shipDate,boolean status, boolean urgent,Purchase homeP)
 	{
 		setCustomerid(customerid);
 		setOrderid(orderid);
@@ -60,7 +60,7 @@ public class HomeOrder implements Serializable {
 		setShipDate(shipDate);
 		setStatus(status);
 		setUrgent(urgent);
-		setHomePur(homePur);
+		setHomeP(homeP);
 	}
 	
 	public int getCustomerid() {
@@ -108,13 +108,14 @@ public class HomeOrder implements Serializable {
 		this.urgent = urgent;
 	}
 
-	public Purchase getHomePur() {
-		return homePur;
+	public Purchase getHomeP() {
+		return homeP;
 	}
 
-	public void setHomePur(Purchase homePur) {
-		this.homePur = homePur;
+	public void setHomeP(Purchase homeP) {
+		this.homeP = homeP;
 	}
-	
+
+
 	
 }

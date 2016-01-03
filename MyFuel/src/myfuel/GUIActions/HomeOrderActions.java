@@ -153,7 +153,7 @@ public class HomeOrderActions extends GUIActions {
 				if(urgent) 
 					shipDate = pdate;
 				
-				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty);
+				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null);
 				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent,p);
 				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
 				client.handleMessageFromGUI(req);
@@ -249,11 +249,6 @@ public class HomeOrderActions extends GUIActions {
 			
 	}
 
-	public Timer getTimer() {
-		// TODO Auto-generated method stub
-		return this.timer;
-	}
-	
 	
 
 

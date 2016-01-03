@@ -38,7 +38,7 @@ public class TrackingOrderPanel extends JPanel{
 		scrollPane.setBounds(6, 34, 572, 279);
 		add(scrollPane);
 		model = new MyTableModel(6,-1);
-		String[] names = {"Order ID" ,"Amount(L)","Ship Date","Order Date","Urgent","Status"};
+		String[] names = {"#Order" ,"Amount(L)","Price","Ship Date","Urgent","Status"};
 		for(String s : names)
 			model.addColumn(s);
 		
@@ -62,13 +62,12 @@ public void updateTable(ArrayList <HomeOrder> horders)
 	for(HomeOrder order: horders)
 	{
 		Date date = order.getShipDate();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm");
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
 		if(order.isUrgent()) urgent = "Yes";
 		else urgent = "No";
 		if(order.getStatus()) status = "Delivered";
 		else status= "On delivery";
-		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getQty()+"L", format.format(date),format2.format(date), urgent, status});
+		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getQty()+"L",order.getHomeP().getBill(), format.format(date), urgent, status});
 	}
 }
 
