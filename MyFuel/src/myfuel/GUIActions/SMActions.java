@@ -47,4 +47,10 @@ public class SMActions extends GUIActions {
 		changeFrame(gui,new LowInventoryActions(client,sid),this);
 	}
 
+	public void CreateReports() 
+	{
+		
+		changeFrame(gui,new StationReportActions(client,sid),this);
+	}
+
 }

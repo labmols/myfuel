@@ -50,6 +50,11 @@ public class SMGUI extends SuperGUI{
 			actions.CreateLowInventoryWindow();
 		}
 		
+		else if(e.getSource() == createReports)
+		{
+			actions.CreateReports();
+		}
+		
 	}
 	
 	private class btnHandler implements ActionListener

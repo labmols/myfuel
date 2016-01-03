@@ -68,7 +68,13 @@ public class Purchase implements Serializable {
 		this.setDriverName(driverName);
 	}
 	
-	
+	public Purchase(int customerid,int fuelid, float bill, float qty )
+	{
+		this.setCustomerid(customerid);
+		this.setFuelid(fuelid);
+		this.setBill(bill);
+		this.setQty(qty);
+	}
 	
 	public int getPid() {
 		return pid;
