@@ -13,6 +13,7 @@ import myfuel.client.StationInventory;
  * @author Maor
  *
  */
+@SuppressWarnings("serial")
 public class FuelOrderResponse extends Response {
 	
 	/**
@@ -25,8 +26,14 @@ public class FuelOrderResponse extends Response {
 	 */
 	private ArrayList <Fuel> fuels;
 	
+	/**
+	 * Promotion object if exist(if not it will be null).
+	 */
 	private Promotion prom;
 	
+	/**
+	 * List of customer home orders (if the fuel order was home fuel, if not it will be null).
+	 */
 	private ArrayList <HomeOrder> horders;
 	/**
 	 * create new Car Fuel response 

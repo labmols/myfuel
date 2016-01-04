@@ -1,7 +1,5 @@
 package myfuel.GUIActions;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,21 +7,14 @@ import java.util.Date;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
-
 import myfuel.client.CalcPrice;
-import myfuel.client.Customer;
 import myfuel.client.Fuel;
 import myfuel.client.FuelQty;
 import myfuel.client.HomeOrder;
 import myfuel.client.MyFuelClient;
-import myfuel.client.PromotionTemplate;
 import myfuel.client.Purchase;
-import myfuel.client.Station;
-import myfuel.client.StationInventory;
 import myfuel.gui.HomeFuelGUI;
 import myfuel.request.FuelOrderRequest;
-import myfuel.request.MakeaPromotionRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.CustomerLoginResponse;
 import myfuel.response.FuelOrderResponse;
@@ -49,7 +40,7 @@ public class HomeOrderActions extends GUIActions {
 	 *The home fuel order details
 	 */
 	private HomeOrder order;
-	Timer timer;
+
 	/**
 	 * The response from server (include the fuel inventory and price).
 	 */
@@ -67,22 +58,47 @@ public class HomeOrderActions extends GUIActions {
 		this.LoginRes= res;
 		getInfo();
 		
-		/*  timer = new Timer(10000, new ActionListener() { // Get info from DB every 10 seconds
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                if(client.isConnected())getInfo();
-                else timer.stop();
-              }
-          });
-          timer.setRepeats(true);
-          timer.setCoalesce(true);
-          timer.setInitialDelay(0);
-          timer.start();/*/
-		
         gui.getOrderPanel().setAddress(res.getUser().getAddress());
        
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * Make new Home Fuel order request and sent it to the server.
+	 * @param shipDate - Chosen Shipping date.
+	 * @param qty - Order Quantity(Liters).
+	 * @param addr - Customer address.
+	 * @param urgent - Is the order urgent or not.
+	 */
+	private void MakeHomeFuelRequest(Date shipDate, float qty, String addr, boolean urgent)
+	{
+		
+		if(checkInventory(qty))
+		{
+			float totalPrice = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
+			if(showConfirmOrder(qty, urgent,totalPrice))
+			{
+				Date pdate = new Date();
+				int pid ;
+				if(response.getProm() != null)
+					pid = response.getProm().getPid();
+				else pid = -1;
+				if(urgent) 
+					shipDate = pdate;
+				
+				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null);
+				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent,p);
+				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
+				client.handleMessageFromGUI(req);
+			
+		  }
+		
+		}
+		else
+		{
+			gui.showErrorMessage("Not enough fuel quantity!");
+		}
 	}
 	
 	/**
@@ -114,6 +130,11 @@ public class HomeOrderActions extends GUIActions {
 		}
 	}
 	
+	/**
+	 * Check if there is enough fuel inventory for the order(compared to the value from DB).
+	 * @param qty - The order quantity.
+	 * @return
+	 */
 	private boolean checkInventory(float qty) {
 		ArrayList<FuelQty> f= response.getSi().get(3).getfQty();
 		if(qty > f.get(0).getQty())
@@ -124,48 +145,17 @@ public class HomeOrderActions extends GUIActions {
 	}
 
 	/**
-	 * 
-	 * @param shipDate
-	 * @param qty
-	 * @param addr
-	 * @param urgent
+	 * Get all the required info from DB. 
+	 * Including the current home fuel inventory and current promotions(if exist).
 	 */
-	
 	private void getInfo ()
 	{
 		FuelOrderRequest req = new FuelOrderRequest(RequestEnum.Select, Fuel.HomeFuelID, LoginRes.getUser().getUserid());
 		client.handleMessageFromGUI(req);
 		
 	}
-	private void MakeHomeFuelRequest(Date shipDate, float qty, String addr, boolean urgent)
-	{
-		
-		if(checkInventory(qty))
-		{
-			float totalPrice = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
-			if(showConfirmOrder(qty, urgent,totalPrice))
-			{
-				Date pdate = new Date();
-				int pid ;
-				if(response.getProm() != null)
-					pid = response.getProm().getPid();
-				else pid = -1;
-				if(urgent) 
-					shipDate = pdate;
-				
-				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null);
-				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent,p);
-				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
-				client.handleMessageFromGUI(req);
-			
-		  }
-		
-		}
-		else
-		{
-			gui.showErrorMessage("Not enough fuel quantity!");
-		}
-	}
+	
+
 	
 	/**
 	 * Confirm Order JOptionPane message, Show total order details , including promotion info , total price and quantity.
@@ -214,7 +204,7 @@ public class HomeOrderActions extends GUIActions {
 	{
 		boolean success = true;
 		String msg = "";
-		Date date = new Date();
+		Date date = new Date(); //Current date
 		float qtyF = 0;
 		try {
 			qtyF = Float.parseFloat(qty);

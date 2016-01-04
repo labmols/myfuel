@@ -21,7 +21,7 @@ import myfuel.response.WorkerLoginResponse;
 import myfuel.response.booleanResponse;
 
 /**
- * Log In interface Database Controller, responsible for Log In queries.
+ * Log In Database Controller, responsible for Log In queries.
  * @author Maor
  *
  */

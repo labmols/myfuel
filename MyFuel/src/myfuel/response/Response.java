@@ -2,6 +2,7 @@ package myfuel.response;
 
 import java.io.Serializable;
 
-public abstract class Response implements Serializable {
+@SuppressWarnings("serial")
+public class Response implements Serializable {
 
 }

@@ -19,14 +19,35 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ *JDialog that presents progress of sending mails to the confirmed customers(created in ConfirmationGUI).
+ */
 public class MailDialog extends JDialog {
-
+/**
+ * This JPanel contains all components
+ */
 	private final JPanel contentPanel = new JPanel();
+/**
+ * Progress Bar that indicates the sending mails progress.
+ */
 	JProgressBar progressBar;
-	private JLabel lblNewLabel;
+/**
+ * Sending complete label(visible when all mails sent successfully).
+ */
+	private JLabel sendComplbl;
+/**
+ * Customers approved message label.
+ */
 	private JLabel lblCustomersApprovedSuccessfully;
+/**
+ * OK Button(exit from Dialog).
+ */
 	private JButton btnOk;
 
+/**
+ * Create new Mail Dialog 
+ * @param maxValue - Number of mails need to send.
+ */
 	public MailDialog(int maxValue) {
 		setTitle("Sending Mails...");
 		setBounds(100, 100, 399, 160);
@@ -45,11 +66,11 @@ public class MailDialog extends JDialog {
 		lblFuelProgress.setBounds(58, 42, 117, 16);
 		contentPanel.add(lblFuelProgress);
 		{
-			lblNewLabel = new JLabel("Sending Complete!");
-			lblNewLabel.setForeground(Color.WHITE);
-			lblNewLabel.setBounds(137, 62, 126, 16);
-			lblNewLabel.setVisible(false);
-			contentPanel.add(lblNewLabel);
+			sendComplbl = new JLabel("Sending Complete!");
+			sendComplbl.setForeground(Color.WHITE);
+			sendComplbl.setBounds(137, 62, 126, 16);
+			sendComplbl.setVisible(false);
+			contentPanel.add(sendComplbl);
 		}
 		{
 			lblCustomersApprovedSuccessfully = new JLabel("Customers Approved successfully! ");
@@ -77,6 +98,10 @@ public class MailDialog extends JDialog {
 	
 	}
 	
+	/**
+	 * Set progress of the Mail ProgressBar.
+	 * @param value - Current number of mails that sent successfully.
+	 */
 	public void setProgress(int value) {
 		// TODO Auto-generated method stub
 		progressBar.setValue(value);

@@ -33,16 +33,37 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.MatteBorder;
 
+/**
+ * Home Fuel User Interface(Main Frame).
+ * Contains Order and Tracking JPanels.
+ */
 @SuppressWarnings("serial")
 public class HomeFuelGUI extends SuperGUI {
-	
+	/**
+	 * Home Order GUI Controller object.
+	 */
 	HomeOrderActions actions;
+	/**
+	 * Make new order Button.
+	 */
 	private JButton btnNewOrder;
+	/**
+	 * Tracking order menu option Button.
+	 */
 	private JButton btnTracking;
+	/**
+	 * Home Order JPanel.
+	 */
 	HomeOrderPanel orderPanel;
+	/**
+	 * Tracking Home Order JPanel.
+	 */
 	TrackingOrderPanel trackingPanel;
 	
-	
+	/**
+	 * Create new Home Fuel User Interface.
+	 * @param actions - Home Fuel GUI Controller.
+	 */
 	public HomeFuelGUI(HomeOrderActions actions)
 	{
 		lblTitle.setBounds(248, 6, 115, 32);
@@ -82,6 +103,10 @@ public class HomeFuelGUI extends SuperGUI {
 		
 	}
 	
+	/**
+	 * This class used for handling all components events.
+	 *
+	 */
 	private class eventListener implements ActionListener{
 
 		@Override

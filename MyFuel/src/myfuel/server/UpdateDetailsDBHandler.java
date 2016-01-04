@@ -18,6 +18,9 @@ import myfuel.response.RegisterResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
+/**
+ * Update Details Database Handler, responsible for all the related update details queries.
+ */
 public class UpdateDetailsDBHandler extends DBHandler{
 	
 	/**

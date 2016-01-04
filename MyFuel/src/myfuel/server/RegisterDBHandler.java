@@ -14,9 +14,7 @@ import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
 /**
- * 
- * 
- *
+ * Register Database Handler, responsible for all the related register queries.
  */
 public class RegisterDBHandler extends DBHandler {
 	/**

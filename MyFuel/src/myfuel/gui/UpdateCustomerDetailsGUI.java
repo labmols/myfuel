@@ -1,11 +1,5 @@
 package myfuel.gui;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.ItemSelectable;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -14,7 +8,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.JLabel;
-import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -30,36 +23,111 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import java.util.ArrayList;
 
-
+/**
+ * 
+ * @author Maor
+ *
+ */
+@SuppressWarnings("serial")
 public class UpdateCustomerDetailsGUI extends SuperGUI {
 	
-	
-	private UpdateDetailsActions actions;
-	private JTextField fnameText;
-	private JTextField lnameText;
-	private JTextField addText;
-	private JTextField emailText;
-	private JTextField CCText;
-	private JTextField cidText;
-	private JComboBox<String> saleCB;
-	private DefaultComboBoxModel<Integer> carModel;
-	private DefaultComboBoxModel<String> stationModel;
-	private DefaultComboBoxModel<String> stationModel2;
-	private JComboBox<Integer> carsCB;
-	private JComboBox<String> accessCB;
-	private JComboBox<String> typeCB;
-	private JButton sAdd;
-	private JButton btnRemove;
-	private JButton btnConfirmUpdate;
-	private JComboBox<String> fuelCB;
-	private JButton carAdd;
-	private JLabel lblStation;
-	int access;
-	private JComboBox<String> stationCB;
-	private JButton btnChange;
-	private JComboBox<String> stationCB2;
 	/**
-	 * Create the frame.
+	 * Update details controller object.
+	 */
+	private UpdateDetailsActions actions;
+	/**
+	 * Customer First name TextField.
+	 */
+	private JTextField fnameText;
+	/**
+	 * Customer Last name TextField.
+	 */
+	private JTextField lnameText;
+	/**
+	 * Customer Address TextField.
+	 */
+	private JTextField addText;
+	/**
+	 * Customer email TextField.
+	 */
+	private JTextField emailText;
+	/**
+	 * Customer Credit Card TextField.
+	 */
+	private JTextField CCText;
+	/**
+	 * Added Car ID TextField.
+	 */
+	private JTextField cidText;
+	/**
+	 * Sale Model ComboBox.
+	 */
+	private JComboBox<String> saleCB;
+	/**
+	 * Customer Cars ComboBox.
+	 */
+	private DefaultComboBoxModel<Integer> carModel;
+	/**
+	 * Customer Stations ComboBox model(used for elements functions).
+	 */
+	private DefaultComboBoxModel<String> stationModel;
+	/**
+	 * All stations ComboBox model (used for elements functions).
+	 */
+	private DefaultComboBoxModel<String> stationModel2;
+	/**
+	 * Customer Cars ComboBox.
+	 */
+	private JComboBox<Integer> carsCB;
+	/**
+	 * Customer Access Level ComboBox(One Station, Few Stations).
+	 */
+	private JComboBox<String> accessCB;
+	/**
+	 * Type of Customer ComboBox(Private/Company).
+	 */
+	private JComboBox<String> typeCB;
+	/**
+	 * Add new Station Button.
+	 */
+	private JButton sAdd;
+	/**
+	 * Remove station Button.
+	 */
+	private JButton btnRemove;
+	/**
+	 * Confirm Update Button.
+	 */
+	private JButton btnConfirmUpdate;
+	/**
+	 * Fuel Type ComboBox.
+	 */
+	private JComboBox<String> fuelCB;
+	/**
+	 * Add new Car Button.
+	 */
+	private JButton carAdd;
+	/**
+	 * Access Level of the Customer (0-Private,1-Company) , changed in ComboBox select item event.
+	 */
+	int access;
+	/**
+	 * Customer Stations ComboBox (contains all the customer stations).
+	 */
+	private JComboBox<String> stationCB;
+	/**
+	 * Change Station Button.
+	 */
+	private JButton btnChange;
+	/**
+	 * All Stations ComboBox (contains all the stations available in the company).
+	 */
+	private JComboBox<String> stationCB2;
+
+	
+	/**
+	 * Create new Update Customer Details User Interface.
+	 * @param actions - Update Details GUI Controller object.
 	 */
 	public UpdateCustomerDetailsGUI(UpdateDetailsActions actions) {
 		
@@ -217,7 +285,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		panel2.add(stationCB);
 		stationCB.setModel(stationModel);
 		
-		lblStation = new JLabel("Your Stations:");
+		JLabel lblStation = new JLabel("Your Stations:");
 		lblStation.setBounds(291, 67, 115, 16);
 		panel2.add(lblStation);
 		
@@ -245,6 +313,11 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		
 	}
 	
+	/**
+	 * Load all current customer details from DB into the interface.
+	 * @param user - Customer details object.
+	 * @param stations - All stations list.
+	 */
 	public void showUserDetails(Customer user, ArrayList<Station> stations){
 		fnameText.setText(user.getFname());
 		lnameText.setText(user.getLname());
@@ -278,7 +351,10 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		
 		
 	}
-	
+	/**
+	 * This class used for handling all components events.
+	 *
+	 */
 	private class eventListener implements ActionListener{
 
 		@Override
@@ -288,7 +364,10 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		
 	}
 	}
-	
+	/**
+	 * This class used for handling ComboBox events(Selecting an item, etc).
+	 *
+	 */
 	private class ItemLEvent implements ItemListener{
 
 		@Override
@@ -351,6 +430,10 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		}
 	}
 
+	/**
+	 * Set all fields according to the customer details before any update.
+	 * @param user - The Customer details object.
+	 */
 	public void clearAll(Customer user) {
 		cidText.setText("");
 		fnameText.setText(user.getFname());
@@ -371,6 +454,11 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 	
 	}
 	
+/**
+ * Update Customer stations ComboBox after Add/Remove a station.
+ * @param userStations - Current List of the customer stations.
+ * @param stations - All stations list.
+ */
 	public void updateCB(ArrayList<Integer> userStations,ArrayList<Station> stations)
 	{
 		stationModel.removeAllElements();

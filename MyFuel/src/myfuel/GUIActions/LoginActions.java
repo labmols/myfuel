@@ -1,5 +1,6 @@
 package myfuel.GUIActions;
 
+import java.awt.Cursor;
 import java.util.Observable;
 
 import myfuel.response.*;

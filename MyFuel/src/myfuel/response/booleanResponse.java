@@ -1,20 +1,28 @@
 package myfuel.response;
 
-import java.io.Serializable;
-
-
+/**
+ * This Response indicate if the request completed successful on the server or not.
+ * Include Message to the user that gives more information about what was wrong or success message.
+ */
 @SuppressWarnings("serial")
 public class booleanResponse extends Response {
+	/**
+	 * Indicate if the request completed successfully or not.
+	 */
 	private boolean success;
+	/**
+	 * Error or Success message.
+	 */
 	private String msg;
 	
+	/**
+	 * Create new boolean response.
+	 * @param success - Request Success/Not Success.
+	 * @param msg - Error/Success message.
+	 */
 	public booleanResponse(boolean success, String msg){
 		this.success = success;
 		this.setMsg(msg);
-	}
-	
-	public booleanResponse(boolean success){
-		this.success=success;
 	}
 	
 	public boolean getSuccess()

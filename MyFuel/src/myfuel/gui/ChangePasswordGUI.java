@@ -11,22 +11,39 @@ import myfuel.GUIActions.ChangePassActions;
 import myfuel.client.BackMainMenu;
 
 
-
+/**
+ * Change Password User Interface.
+ *
+ */
 @SuppressWarnings("serial")
 public class ChangePasswordGUI extends SuperGUI {
-
-	//private JPanel contentPane;
+	/**
+	 * Confirm Change Button
+	 */
 	private JButton btnConfirm;
+	/**
+	 * Old Password PasswordTextField.
+	 */
 	private JPasswordField origPass;
+	/**
+	 * New Password PasswordTextField.
+	 */
 	private JPasswordField newPass1;
+	/**
+	 * Repeat New Password PasswordTextField.
+	 */
 	private JPasswordField newPass2;
+	/**
+	 * GUI Controller Object.
+	 */
 	private ChangePassActions actions;
 	/**
 	 * Launch the application.
 	 */
 
 	/**
-	 * Create the frame.
+	 * Create new Change Password User Interface.
+	 * @param actions - Change Password GUI Controller.
 	 */
 	public ChangePasswordGUI(ChangePassActions actions) {
 	
@@ -69,6 +86,9 @@ public class ChangePasswordGUI extends SuperGUI {
 		panel.add(newPass2);
 	}
 	
+	/**
+	 * This class used for components event handling.
+	 */
 	private class ButtonListener implements ActionListener{
 
 		@Override

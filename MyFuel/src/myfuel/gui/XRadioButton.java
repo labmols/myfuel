@@ -1,6 +1,6 @@
 package myfuel.gui;
 
-import java.awt.GridBagLayout;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.Icon;
@@ -8,17 +8,33 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+/**
+ * Panel that enable to create custom radio button with an icon.
+ */
+@SuppressWarnings("serial")
 public class XRadioButton extends JPanel {
 
+	/**
+	 * Radio Button.
+	 */
     private JRadioButton radioButton;
+    /**
+     * Label that contains the icon.
+     */
     private JLabel label;
 
+    /**
+     * Create new Custom Radio Button.
+     */
     public XRadioButton() {
         setLayout(null);
         add(getRadioButton());
         add(getLabel());
     }
 
+    /**
+     * Create new Custom Radio Button with Icon and text.
+     */
     public XRadioButton(Icon icon, String text) {
         this();
         setIcon(icon);
@@ -41,10 +57,18 @@ public class XRadioButton extends JPanel {
         return label;
     }
 
+    /**
+     * Add actionListener to the Radio Button.
+     * @param listener - The ActionListener object.
+     */
     public void addActionListener(ActionListener listener) {
         getRadioButton().addActionListener(listener);
     }
 
+    /**
+     * Remove actionListener to the Radio Button.
+     * @param listener - The ActionListener object.
+     */
     public void removeActionListener(ActionListener listener) {
         getRadioButton().removeActionListener(listener);
     }

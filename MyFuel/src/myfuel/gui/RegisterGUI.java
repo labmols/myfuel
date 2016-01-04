@@ -1,13 +1,10 @@
 package myfuel.gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -18,35 +15,99 @@ import javax.swing.JPasswordField;
 import myfuel.GUIActions.RegisterActions;
 import myfuel.client.BackMainMenu;
 
+/**
+ * Register User Interface.
+ * @author Maor
+ *
+ */
+@SuppressWarnings("serial")
 public class RegisterGUI extends SuperGUI {
+/**
+ * User ID TextField
+ */
 	private JTextField idTextField;
+/**
+ * First Name TextField.
+ */
 	private JTextField fnameTextField;
+/**
+ * Last Name TextField.
+ */
 	private JTextField lnameTextField;
+/**
+ * Credit Card TextField.
+ */
 	private JTextField CCTextField;
+/**
+ * E-Mail TextField.
+ */
 	private JTextField emailTextField;
+/**
+ * Password TextField.
+ */
 	private JPasswordField passTextField;
+/**
+ * Retype password TextField.
+ */
 	private JPasswordField rePassTextField;
+/**
+ * Car ID TextField.
+ */
 	private JTextField cidTextField;
-	private JComboBox accessCB;
-	private JComboBox stationsCB;
-	private JComboBox fuelCB;
-	private JComboBox saleModelCB;
+/**
+ * Customer Access Level ComboBox (One Stations, Few Stations).
+ */
+	private JComboBox<String> accessCB;
+/**
+ * Current available Stations ComboBox.
+ */
+	private JComboBox<String> stationsCB;
+/**
+ * Fuel Type ComboBox.
+ */
+	private JComboBox<String> fuelCB;
+/**
+ * Sale Model ComboBox.
+ */
+	private JComboBox<String> saleModelCB;
+/**
+ * Register GUI Controller.
+ */
 	private RegisterActions actions;
+/**
+ * Station ComboBox model (used for elements functions).
+ */
 	private DefaultComboBoxModel<String> stationModel ;
+/**
+ * Add new station Button.
+ */
 	private JButton btnAddStation;
+/**
+ * Add new Car Button.
+ */
 	private JButton btnAddCar;
+/**
+ * Register Button(Send register request to DB).
+ */
 	private JButton btnRegister;
-	private JComboBox typeCB;
+/**
+ * Customer type (Private/Company).
+ */
+	private JComboBox<String> typeCB;
+/**
+ * Customer Address TextField.
+ */
 	private JTextField addressTextField;
+/**
+ * Clear all fields Button.
+ */
 	private JButton btnClear;
 
-	/**
-	 * Launch the application.
-	 */
 
-	/**
-	 * Create the frame.
-	 */
+/**
+ * Create new Register User Interface.
+ * @param actions
+ */
 	public RegisterGUI(RegisterActions actions) {
 		this.actions=actions;
 		panel.setLocation(0, 0);
@@ -131,8 +192,8 @@ public class RegisterGUI extends SuperGUI {
 		lblSaleModel.setBounds(41, 130, 91, 16);
 		panel3.add(lblSaleModel);
 		
-		saleModelCB = new JComboBox();
-		saleModelCB.setModel(new DefaultComboBoxModel(new String[] {"Occasional", "Monthly- One Car", "Monthly - Few Cars", "Fully Monthly - One Car"}));
+		saleModelCB = new JComboBox<String>();
+		saleModelCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Occasional", "Monthly- One Car", "Monthly - Few Cars", "Fully Monthly - One Car"}));
 		saleModelCB.setBounds(114, 126, 186, 27);
 		panel3.add(saleModelCB);
 		
@@ -148,8 +209,8 @@ public class RegisterGUI extends SuperGUI {
 		lblType.setBounds(70, 162, 91, 16);
 		panel3.add(lblType);
 		
-		typeCB = new JComboBox();
-		typeCB.setModel(new DefaultComboBoxModel(new String[] {"Private", "Company"}));
+		typeCB = new JComboBox<String>();
+		typeCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Private", "Company"}));
 		typeCB.setBounds(114, 158, 186, 27);
 		panel3.add(typeCB);
 		
@@ -163,8 +224,8 @@ public class RegisterGUI extends SuperGUI {
 		lblNewLabel.setBounds(18, 20, 91, 16);
 		panel4.add(lblNewLabel);
 		
-		accessCB = new JComboBox();
-		accessCB.setModel(new DefaultComboBoxModel(new String[] {"One Station", "Few Stations"}));
+		accessCB = new JComboBox<String>();
+		accessCB.setModel(new DefaultComboBoxModel<String>(new String[] {"One Station", "Few Stations"}));
 		accessCB.addActionListener(new ButtonListener());
 		accessCB.setBounds(104, 16, 141, 27);
 		panel4.add(accessCB);
@@ -173,7 +234,7 @@ public class RegisterGUI extends SuperGUI {
 		lblChooseStation.setBounds(6, 50, 104, 16);
 		panel4.add(lblChooseStation);
 		
-		stationsCB = new JComboBox();
+		stationsCB = new JComboBox<String>();
 		stationsCB.setBounds(104, 48, 141, 27);
 		panel4.add(stationsCB);
 		
@@ -192,8 +253,8 @@ public class RegisterGUI extends SuperGUI {
 		lblCarId.setBounds(37, 18, 53, 16);
 		panel5.add(lblCarId);
 		
-		fuelCB = new JComboBox();
-		fuelCB.setModel(new DefaultComboBoxModel(new String[] {"95", "Diesel", "Scooter"}));
+		fuelCB = new JComboBox<String>();
+		fuelCB.setModel(new DefaultComboBoxModel<String>(new String[] {"95", "Diesel", "Scooter"}));
 		fuelCB.setBounds(101, 51, 94, 27);
 		panel5.add(fuelCB);
 		
@@ -231,7 +292,10 @@ public class RegisterGUI extends SuperGUI {
 			
 		}
 	
-	
+	/**
+	 * This class used for handling all components events.
+	 *
+	 */
 	private class ButtonListener implements ActionListener{
 
 		@Override
@@ -267,12 +331,19 @@ public class RegisterGUI extends SuperGUI {
 			actions.resetAll();
 		}
 	}
-	
+/**
+ * Add new Station to the Stations ComboBox.
+ * @param st - The Station name received from DB.
+ */
 	public void addStation(String st)
 	{
 		stationModel.addElement(st);
 	}
+
 	
+/**
+ * Clear all Form fields.
+ */
 	public void clearAll()
 	{
 		idTextField.setText("");

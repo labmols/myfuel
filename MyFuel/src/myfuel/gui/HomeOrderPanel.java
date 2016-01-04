@@ -21,15 +21,44 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+/**
+ *Home Order panel ,Part of Home Fuel User Interface.
+ */
+@SuppressWarnings("serial")
 public class HomeOrderPanel extends JPanel{
+	/**
+	 * Home Order GUI Controller object.
+	 */
 	private HomeOrderActions actions;
+	/**
+	 * Fuel Quantity TextField.
+	 */
 	private JTextField qtyText;
+	/**
+	 * Urgent CheckBox (Is the order urgent?).
+	 */
 	private JCheckBox urgentCB;
+	/**
+	 * Shipping address TextField.
+	 */
 	private JTextField shipAddrText;
+	/**
+	 * Shipping DatePicker 
+	 */
 	private JDatePickerImpl datePicker;
+	/**
+	 * Make order button.
+	 */
 	private JButton btnMakeOrder;
+	/**
+	 * Urgent Label.
+	 */
 	private JLabel lblUrgent ;
 	
+	/**
+	 * Create new Home Order Panel(part of Home Fuel GUI).
+	 * @param actions - Home Order GUI Controller.
+	 */
 	public HomeOrderPanel(HomeOrderActions actions)
 	{
 		this.actions = actions;
@@ -114,6 +143,10 @@ public class HomeOrderPanel extends JPanel{
 		urgentCB.addActionListener(new eventListener());
 	}
 	
+	/**
+	 * This class used for handling all components events.
+	 *
+	 */
 	private class eventListener implements ActionListener{
 
 		@Override
@@ -138,6 +171,10 @@ public class HomeOrderPanel extends JPanel{
 		}
 		}
 	
+	/**
+	 * Set Customer address according the value from DB.
+	 * @param address - The address received from DB.
+	 */
 	public void setAddress(String address)
 	{
 		shipAddrText.setText(address);

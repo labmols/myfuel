@@ -18,19 +18,41 @@ import javax.swing.JMenuItem;
 
 import myfuel.GUIActions.CustomerOptionsActions;
 
-
+/**
+ * Customer Options(Main Screen) User Interface.
+ *
+ */
 @SuppressWarnings("serial")
 public class CustomerOptionsGUI extends SuperGUI {
 
-	
-	private CustomerOptionsActions actions;
-	private JButton btnChangePassword ;
-	private JButton btnUpdateDetails;
-	private JButton btnCarFuel;
-	private JButton btnHomeFuel;
-	private JButton btnPurchases;
 	/**
-	 * Create the frame.
+	 * GUI Controller object.
+	 */
+	private CustomerOptionsActions actions;
+	/**
+	 * Change Password option Button.
+	 */
+	private JButton btnChangePassword ;
+	/**
+	 * Update Details option Button.
+	 */
+	private JButton btnUpdateDetails;
+	/**
+	 * Car Fuel option Button.
+	 */
+	private JButton btnCarFuel;
+	/**
+	 * Home Fuel option Button.
+	 */
+	private JButton btnHomeFuel;
+	/**
+	 * Customer Purchases option Button.
+	 */
+	private JButton btnPurchases;
+	
+	/**
+	 * Create new Customer Options User Interface.
+	 * @param actions - Customer Options GUI Controller.
 	 */
 	public CustomerOptionsGUI(CustomerOptionsActions actions) {
 	
@@ -75,6 +97,9 @@ public class CustomerOptionsGUI extends SuperGUI {
 		
 	}
 	
+	/**
+	 * This Class used for handle all components events.
+	 */
 	private class ButtonListener implements ActionListener{
 
 		@Override

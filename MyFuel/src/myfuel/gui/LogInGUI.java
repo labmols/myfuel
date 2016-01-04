@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
+import java.awt.Cursor;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -27,18 +28,43 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 
-
+/**
+ * Login User Interface(For Worker/Customer).
+ */
 public class LogInGUI extends SuperGUI {
+	
+	/**
+	 * User Password TextField.
+	 */
 	private JPasswordField passwordField;
+	/**
+	 * User ID value.
+	 */
 	private JTextField useridField;
+	/**
+	 * Type of user ComboBox.
+	 */
 	private JComboBox comboBox;
+	/**
+	 * Fast fuel option button.
+	 */
 	private JButton fastButton;
+	/**
+	 * Login(send new login request) button.
+	 */
 	private JButton loginButton;
+	/**
+	 * Register option button (move to register screen).
+	 */
 	private JButton registerButton;
+	/**
+	 * Login GUI Controller.
+	 */
 	private LoginActions actions;
 
 	/**
-	 * Create the frame.
+	 * Create new Login User Interface.
+	 * @param actions - Login GUI Controller.
 	 */
 	public LogInGUI(LoginActions actions) {
 		this.actions=actions;
@@ -108,7 +134,10 @@ public class LogInGUI extends SuperGUI {
 	
 	}
 
-	
+	/**
+	 * This class used for handling all components events.
+	 *
+	 */
 	private class ButtonListener implements ActionListener {
 
 		@Override
@@ -123,7 +152,9 @@ public class LogInGUI extends SuperGUI {
 	public void getInput(ActionEvent e){
 	if(e.getSource()==loginButton){
 	String pass =new String(passwordField.getPassword());
+	
 	actions.verifyDetails(comboBox.getSelectedIndex(),useridField.getText(), pass);
+	
 	}
 	if(e.getSource()==registerButton){
 		actions.RegisterScreen();
