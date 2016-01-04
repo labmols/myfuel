@@ -193,7 +193,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		panel2.add(lblAccesstype);
 		
 		accessCB = new JComboBox<String>();
-		accessCB.addItemListener(new ItemLEvent());
+		accessCB.addItemListener(new eventListener());
 		accessCB.setModel(new DefaultComboBoxModel<String>(new String[] {"One Station", "Few Stations"}));
 		accessCB.setBounds(396, 27, 132, 27);
 		panel2.add(accessCB);
@@ -355,7 +355,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 	 * This class used for handling all components events.
 	 *
 	 */
-	private class eventListener implements ActionListener{
+	private class eventListener implements ActionListener,ItemListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -363,15 +363,9 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 			getInput(e);
 		
 	}
-	}
-	/**
-	 * This class used for handling ComboBox events(Selecting an item, etc).
-	 *
-	 */
-	private class ItemLEvent implements ItemListener{
 
 		@Override
-		public void itemStateChanged(java.awt.event.ItemEvent e) {
+		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
 			if(e.getStateChange()==ItemEvent.DESELECTED &&  e.getSource() == accessCB)
 			{
@@ -392,8 +386,9 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 				}
 			}
 		}
-		
 	}
+	
+	
 
 	@Override
 	public void getInput(ActionEvent e) {
