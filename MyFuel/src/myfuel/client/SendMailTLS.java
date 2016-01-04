@@ -10,8 +10,17 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * This class using JavaMail API for sending mail .
+ */
 public class SendMailTLS {
 
+	/**
+	 * Send an Email via Gmail SMTP server using TLS connection.
+	 * @param emailAddress - Destination email address.
+	 * @param subject - Mail Subject.
+	 * @param content - Mail Content.
+	 */
 	public static void sendMail(String emailAddress, String subject, String content){
 		final String username = "myfuel.braude@gmail.com";
 		final String password = "labmols1";
