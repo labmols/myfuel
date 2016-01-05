@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import myfuel.client.FuelQty;
 import myfuel.client.MyFuelClient;
-import myfuel.gui.homeQtyOrderGUI;
+import myfuel.gui.HomeQtyOrderGUI;
 import myfuel.request.RequestEnum;
 import myfuel.request.homeQtyOrderRequest;
 import myfuel.response.HomeQtyResponse;
@@ -12,7 +12,7 @@ import myfuel.response.booleanResponse;
 
 public class homeQtyOrderActions extends GUIActions {
 
-	private homeQtyOrderGUI gui;
+	private HomeQtyOrderGUI gui;
 	private Float level;    // current low level
 	private Float current;  // current quantity
 	private Float orderQty;
@@ -22,7 +22,7 @@ public class homeQtyOrderActions extends GUIActions {
 	 */
 	public homeQtyOrderActions(MyFuelClient client) {
 		super(client);
-		gui = new homeQtyOrderGUI(this);
+		gui = new HomeQtyOrderGUI(this);
 		homeQtyOrderRequest request = new homeQtyOrderRequest(RequestEnum.HomeGet);
 		client.handleMessageFromGUI(request);
 		gui.setVisible(true);

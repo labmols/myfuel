@@ -2,7 +2,7 @@ package myfuel.gui;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import myfuel.client.quarterStationIncome;
+import myfuel.client.QuarterStationIncome;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -11,12 +11,28 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 
+/***
+ * Company Incomes Panel
+ *
+ */
 @SuppressWarnings("serial")
 public class CIncomePanel extends IncomesReportPanel
 {
-	private ArrayList<quarterStationIncome> qStationIncome = null;
+	/***
+	 * Incomes details for a quarter
+	 */
+	private ArrayList<QuarterStationIncome> qStationIncome = null;
+	/***
+	 * Station that are shown in the Report
+	 */
 	private JComboBox<String> stations;
-	private JComboBox quarter;
+	/***
+	 * Quarters that are specified in the report
+	 */
+	private JComboBox<String> quarter;
+	/***
+	 * CIncomePanel Constructor
+	 */
 	public CIncomePanel() {
 		
 		 stations = new JComboBox<String>();
@@ -34,13 +50,16 @@ public class CIncomePanel extends IncomesReportPanel
 		lblQuarter.setBounds(303, 6, 71, 31);
 		add(lblQuarter);
 		
-		quarter = new JComboBox();
+		quarter = new JComboBox<String>();
 		quarter.addActionListener(new comboHandler());
-		quarter.setModel(new DefaultComboBoxModel(new String[] {"Q1", "Q2", "Q3", "Q4"}));
+		quarter.setModel(new DefaultComboBoxModel<String>(new String[] {"Q1", "Q2", "Q3", "Q4"}));
 		quarter.setBounds(373, 11, 88, 20);
 		add(quarter);
 	}
-	
+	/***
+	 * Action Listener for the comboboxes
+	 *
+	 */
 	private class comboHandler implements ActionListener
 	{
 
@@ -50,7 +69,7 @@ public class CIncomePanel extends IncomesReportPanel
 			int bill = 0 ;
 			int quantity = 0 ;
 			clearTable();
-			for(quarterStationIncome q : qStationIncome)
+			for(QuarterStationIncome q : qStationIncome)
 			{
 				if(stations.getSelectedItem().equals(q.getStation().getName()) && q.getQid() == quarter.getSelectedIndex()+1)
 				{
@@ -64,12 +83,16 @@ public class CIncomePanel extends IncomesReportPanel
 		}
 		
 	}
-	public void setDetails(ArrayList<quarterStationIncome> qStationIncome)
+	/***
+	 * This method will set the details of the report to this panel
+	 * @param qStationIncome - Company incomes detailed for stations and quarters
+	 */
+	public void setDetails(ArrayList<QuarterStationIncome> qStationIncome)
 	{
 		this.qStationIncome = qStationIncome;
 		ArrayList<String> stations_names = new ArrayList<String>();
 		
-		for(quarterStationIncome q : qStationIncome)
+		for(QuarterStationIncome q : qStationIncome)
 		{
 			if(!stations_names.contains(q.getStation().getName()))
 				stations_names.add(q.getStation().getName());

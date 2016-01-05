@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  */
 @SuppressWarnings("serial")
-public class quarterStationIncome implements Serializable{
+public class QuarterStationIncome implements Serializable{
 	/***
 	 * Purchase details
 	 */
@@ -27,7 +27,7 @@ public class quarterStationIncome implements Serializable{
 	 * @param station - stations Details {ID,NAME}
 	 * @param p - Purchase details
 	 */
-	public quarterStationIncome(int qid,Station station,Purchase p)
+	public QuarterStationIncome(int qid,Station station,Purchase p)
 	{
 		this.setP(p);
 		this.setQid(qid);

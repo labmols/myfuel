@@ -33,7 +33,15 @@ public class CustomerReport implements Serializable {
 	 */
 	private float qty;
 	
-	
+	/***
+	 * Customer Report Constructor
+	 * @param uid - User id
+	 * @param name - Customer Name 
+	 * @param sid	- Station ID
+	 * @param times -  Number of times the customer has bought in the Station (represented by this.sid) 
+	 * @param price - Total price that the customer has spent in the Station (represented by this.sid) 
+	 * @param qty - Total quantity that the customer has bought in the Station (represented by this.sid) 
+	 */
 	public CustomerReport(int uid,String name, int sid,int times,float price,float qty)
 	{
 		this.setUid(uid);

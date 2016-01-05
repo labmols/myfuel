@@ -14,16 +14,35 @@ import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 
 import myfuel.client.*;
+
+/***
+ * Marketing Delegate Customer Confirmation User Interface
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class ConfirmationGUI extends SuperGUI{
 
+	/***
+	 * Controller for this GUI
+	 */
 	private ConfirmationActions actions;
+	/***
+	 * Table Model
+	 */
 	private DefaultTableModel model;
+	/***
+	 * Table
+	 */
 	private JTable table;
 	private ArrayList<Customer> c ; 
 	JCheckBox c2;
 	private MailDialog dialog;
 	
+	/***
+	 * ConfirmationGUI constructor
+	 * @param actions - controller for this GUI
+	 */
 	public ConfirmationGUI(ConfirmationActions actions)
 	{
 		this.actions = actions;
@@ -69,6 +88,11 @@ public class ConfirmationGUI extends SuperGUI{
 		
 	}
 	
+	/***
+	 * will set the details of the customers to the table
+	 * @param size - number of customers
+	 * @param customers - customer details
+	 */
 	public void setDetails(int size,ArrayList<Customer> customers)
 	{
 		String type ;
@@ -83,6 +107,9 @@ public class ConfirmationGUI extends SuperGUI{
 		}
 	 
 	}
+	/***
+	 * Will get the approved customers from the table
+	 */
 	@Override
 	public void getInput(ActionEvent e) 
 	{
@@ -101,7 +128,11 @@ public class ConfirmationGUI extends SuperGUI{
 		
 	}
 	
-	
+	/***
+	 * JButton ActionListener
+	 * @author karmo
+	 *
+	 */
 	private class btnHandler implements ActionListener
 	{
 

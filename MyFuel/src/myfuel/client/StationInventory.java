@@ -3,15 +3,24 @@ package myfuel.client;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/***
+ * This class will specify the inventory of specific Station
+ *
+ */
 @SuppressWarnings("serial")
 public class StationInventory implements Serializable {
+	/***
+	 * Station Details
+	 */
 	private Station s;
+	/***
+	 * Fuel Quantities
+	 */
 	private ArrayList <FuelQty> fQty;
-	/**
-	 * 
-	 * @param s
-	 * @param fQty
-	 * @param mQty
+	/***
+	 * StationInventory Constructor
+	 * @param s - Station Details
+	 * @param fQty - Fuel Quantities
 	 */
 		public StationInventory(Station s, ArrayList <FuelQty> fQty)
 		{

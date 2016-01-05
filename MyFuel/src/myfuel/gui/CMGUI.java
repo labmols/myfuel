@@ -12,14 +12,34 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import java.awt.Color;
 
+/***
+ * Company Manager User Interface 
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class CMGUI extends SuperGUI{
-	
+	/***
+	 * Controller for this GUI
+	 */
 	private CMActions actions;
+	/***
+	 * Confirm New Rates Button 
+	 */
 	private JButton btnConfirmNewRates;
+	/***
+	 * Show Company Reports Button
+	 */
 	private JButton btnShowCompanyReports;
+	/***
+	 * Home Quantity Button
+	 */
 	private JButton homeQty;
 	
+	/***
+	 * CMGUI Constructor
+	 * @param actions - Controller for this GUI
+	 */
 	public CMGUI(CMActions actions) {
 		lblTitle.setBounds(192, 0, 220, 25);
 		lblTitle.setText("Company Manager Menu");
@@ -57,7 +77,9 @@ public class CMGUI extends SuperGUI{
 		this.setContentPane(contentPane);
 		this.actions = actions;
 	}
-
+/***
+ *  This method will get the source of ActionEvent and will turn to the correct method at the Controller
+ */
 	@Override
 	public void getInput(ActionEvent e) {
 		
@@ -78,6 +100,11 @@ public class CMGUI extends SuperGUI{
 		this.msg.setText(m);
 	}*/
 	
+	/***
+	 * Action Listener for JButton
+	 * @author karmo
+	 *
+	 */
 	private class btnHandler implements ActionListener
 	{
 

@@ -4,16 +4,44 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
+/***
+ * This class will has the details of the Promotion template 
+ *
+ */
 @SuppressWarnings("serial")
 public class PromotionTemplate implements Serializable{
 	
+	/***
+	 * Template ID
+	 */
 	private int tid;
+	/***
+	 * Template Name
+	 */
 	private String name;
+	/***
+	 * Template Discount
+	 */
 	private float discount;
+	/***
+	 * Template Start Time
+	 */
 	private Time startTime;
+	/***
+	 * Template End Time
+	 */
 	private Time endTime;
+	/***
+	 * Type of Customer for this Promotion Template
+	 */
 	private int typeOfCustomer;
+	/***
+	 * Type of Fuel for this Promotion Template
+	 */
 	private int typeOfFuel;
+	/***
+	 * Name of Fuel for this Promotion Template
+	 */
 	private String nameOfFuel;
 	/***
 	 * 

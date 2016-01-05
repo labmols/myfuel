@@ -3,18 +3,52 @@ package myfuel.client;
 import java.io.Serializable;
 import java.util.Date;
 
+/***
+ * This class will has the details for Promotion Report
+ *
+ */
 @SuppressWarnings("serial")
 public class PromotionReport implements Serializable {
 	
+	/***
+	 * Promotion Name
+	 */
 	private String pname;
+	/***
+	 * User ID
+	 */
 	private int uid;
+	/***
+	 * First Name
+	 */
 	private String fname;
+	/***
+	 * Last Name
+	 */
 	private String lname;
+	/***
+	 * Quantity Bought
+	 */
 	private float qty ;
+	/***
+	 * Type of Customer
+	 */
 	private int toc;
+	/***
+	 * Bill of the Purchase
+	 */
 	private float bill;
+	/***
+	 * Fuel Type (By name)
+	 */
 	private String fuelType;
+	/***
+	 * Purchase Date
+	 */
 	private Date pdate;
+	/***
+	 * Promotion ID
+	 */
 	private int pid;
 	
 	/***

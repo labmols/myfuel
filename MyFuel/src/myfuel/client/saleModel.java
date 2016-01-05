@@ -2,10 +2,20 @@ package myfuel.client;
 
 import java.io.Serializable;
 
+/****
+ * This class will contain the discount for a Sale Model
+ *
+ */
 @SuppressWarnings("serial")
 public class saleModel implements Serializable{
 	
+	/***
+	 * Discount amount
+	 */
 	private int discount;
+	/***
+	 * Type of Sale Model
+	 */
 	private int type;
 	
 	/***
@@ -15,7 +25,7 @@ public class saleModel implements Serializable{
 	 *   type = 2 -> Monthly Regular - one car
 	 *   type = 3 -> Monthly Regular - Few Cars
 	 *   type = 4 -> Fully Monthly  - one car
-	 * @param discount
+	 * @param discount - Discount amount
 	 */
 	public saleModel(int type , int discount)
 	{

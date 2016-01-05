@@ -10,7 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import myfuel.client.QuarterStationPurchase;
-import myfuel.client.quarterStationIncome;
+import myfuel.client.QuarterStationIncome;
 
 @SuppressWarnings("serial")
 public class CPurchasePanel extends PurchaseReportPanel

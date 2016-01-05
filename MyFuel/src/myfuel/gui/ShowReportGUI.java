@@ -7,8 +7,8 @@ import myfuel.GUIActions.StationReportActions;
 import myfuel.GUIActions.showReportsActions;
 import myfuel.client.BackMainMenu;
 import myfuel.client.QuarterStationPurchase;
-import myfuel.client.quarterStationIncome;
-import myfuel.client.quarterStationInventory;
+import myfuel.client.QuarterStationIncome;
+import myfuel.client.QuarterStationInventory;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -19,14 +19,14 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
 @SuppressWarnings("serial")
-public class showReportGUI extends SuperGUI{
+public class ShowReportGUI extends SuperGUI{
 
 	private showReportsActions actions;
 	private CinventoryPanel inventoryPanel;
 	private CIncomePanel incomesPanel;
 	private CPurchasePanel purchasePanel;
 	private JComboBox<String> comboBox;
-	public showReportGUI(showReportsActions actions)
+	public ShowReportGUI(showReportsActions actions)
 	{
 		lblTitle.setBounds(205, 6, 194, 25);
 		lblTitle.setText("Company Reports");
@@ -102,13 +102,13 @@ public class showReportGUI extends SuperGUI{
 		}
 		
 	}
-	public void setInventoryPanel(ArrayList<quarterStationInventory > in )
+	public void setInventoryPanel(ArrayList<QuarterStationInventory > in )
 	{
 		
 		inventoryPanel.setDetails( in);
 	}
 	
-	public void setIncomePanel(ArrayList<quarterStationIncome> qStationIncome) 
+	public void setIncomePanel(ArrayList<QuarterStationIncome> qStationIncome) 
 	{
 		incomesPanel.setDetails(qStationIncome);
 	}

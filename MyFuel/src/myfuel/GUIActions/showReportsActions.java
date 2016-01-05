@@ -11,7 +11,7 @@ import myfuel.response.booleanResponse;
 
 public class showReportsActions extends GUIActions {
 
-	private showReportGUI gui ; 
+	private ShowReportGUI gui ; 
 	
 	public showReportsActions(MyFuelClient client) 
 	{
@@ -19,7 +19,7 @@ public class showReportsActions extends GUIActions {
 		
 		CompanyReportRequest request = new CompanyReportRequest();
 		client.handleMessageFromGUI(request);
-		gui = new showReportGUI(this);
+		gui = new ShowReportGUI(this);
 		gui.setVisible(true);
 		
 	}

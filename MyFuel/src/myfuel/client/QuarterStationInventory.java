@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  */
 @SuppressWarnings("serial")
-public class quarterStationInventory  implements Serializable
+public class QuarterStationInventory  implements Serializable
 {
 	/***
 	 * Quarter ID
@@ -28,7 +28,7 @@ public class quarterStationInventory  implements Serializable
 	 * @param station - stations details
 	 * @param fuel - fuel details
 	 */
-	public quarterStationInventory(int qid,Station station,FuelQty fuel)
+	public QuarterStationInventory(int qid,Station station,FuelQty fuel)
 	{
 		this.setQid(qid);
 		this.setStation(station);

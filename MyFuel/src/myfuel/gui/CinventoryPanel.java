@@ -13,15 +13,38 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import myfuel.client.quarterStationInventory;
+import myfuel.client.QuarterStationInventory;
 
+/****
+ * Company Inventory Report Panel
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class CinventoryPanel extends JPanel{
-	private JComboBox quarter;
+	/***
+	 * Quarters that are specified in the report
+	 */
+	private JComboBox<String> quarter;
+	/***
+	 * Station that are shown in the Report
+	 */
 	private JComboBox<String> station;
+	/***
+	 * Table for showing report details
+	 */
 	private JTable table;
-	private ArrayList<quarterStationInventory > in;
+	/***
+	 * The details of the Company inventory detailed by Station and Quarter
+	 */
+	private ArrayList<QuarterStationInventory > in;
+	/***
+	 * Table model
+	 */
 	private DefaultTableModel model;
+	/***
+	 * CinventoryPanel Constructor
+	 */
 	public CinventoryPanel() {
 		setLayout(null);
 		
@@ -40,9 +63,9 @@ public class CinventoryPanel extends JPanel{
 		lblQuarter.setBounds(272, 4, 55, 19);
 		add(lblQuarter);
 		
-		quarter = new JComboBox();
+		quarter = new JComboBox<String>();
 		quarter.addActionListener(new stationHandler());
-		quarter.setModel(new DefaultComboBoxModel(new String[] {"Q1", "Q2", "Q3", "Q4"}));
+		quarter.setModel(new DefaultComboBoxModel<String>(new String[] {"Q1", "Q2", "Q3", "Q4"}));
 		quarter.setBounds(337, 5, 55, 20);
 		add(quarter);
 		
@@ -71,7 +94,7 @@ public class CinventoryPanel extends JPanel{
 		public void actionPerformed(ActionEvent e) 
 		{
 			clearTable();
-			for(quarterStationInventory i: in)
+			for(QuarterStationInventory i: in)
 			{
 				if(station.getSelectedItem().equals(i.getStation().getName()) && i.getQid() == quarter.getSelectedIndex()+1)
 				{
@@ -82,13 +105,16 @@ public class CinventoryPanel extends JPanel{
 		}
 		
 	}
-	
-	public void setDetails(ArrayList<quarterStationInventory> in)
+	/***
+	 * This method will set the details of the report to this panel
+	 * @param in - Company inventory detailed for stations and quarters
+	 */
+	public void setDetails(ArrayList<QuarterStationInventory> in)
 	{
 		this.in = in;
 		ArrayList<String> station_names = new ArrayList<String>();
 	
-		for(quarterStationInventory q : in)
+		for(QuarterStationInventory q : in)
 		{
 			if(!station_names.contains(q.getStation().getName()))
 				station_names.add(q.getStation().getName());
@@ -100,7 +126,9 @@ public class CinventoryPanel extends JPanel{
 		}
 		
 	}
-	
+	/***
+	 * This method will clear the table
+	 */
 	private void  clearTable()
 	{
 		

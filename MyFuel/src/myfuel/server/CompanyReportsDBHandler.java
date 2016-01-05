@@ -12,8 +12,8 @@ import myfuel.client.FuelQty;
 import myfuel.client.Purchase;
 import myfuel.client.QuarterStationPurchase;
 import myfuel.client.Station;
-import myfuel.client.quarterStationIncome;
-import myfuel.client.quarterStationInventory;
+import myfuel.client.QuarterStationIncome;
+import myfuel.client.QuarterStationInventory;
 import myfuel.request.CompanyReportRequest;
 import myfuel.request.CompanyReportRequest;
 import myfuel.response.ComapnyReportsResponse;
@@ -30,8 +30,8 @@ public class CompanyReportsDBHandler extends DBHandler {
 	private java.sql.Timestamp sdate = null;
 	private java.sql.Timestamp fdate = null;
 	private  Calendar cal;
-	private ArrayList<quarterStationInventory> qStationInventory = null;
-	private ArrayList<quarterStationIncome> qStationIncome = null;
+	private ArrayList<QuarterStationInventory> qStationInventory = null;
+	private ArrayList<QuarterStationIncome> qStationIncome = null;
 	private ArrayList<QuarterStationPurchase> qStationPurchase = null;
 	/***
 	 *  CompanyReportsDBHandler constructor
@@ -57,11 +57,11 @@ public class CompanyReportsDBHandler extends DBHandler {
 			 
 			 rs = ps.executeQuery();
 			 
-			 qStationInventory = new ArrayList<quarterStationInventory>();
+			 qStationInventory = new ArrayList<QuarterStationInventory>();
 			 
 			 while(rs.next())
 			 {
-				 qStationInventory.add(new quarterStationInventory(rs.getInt(1),  // quarter id 
+				 qStationInventory.add(new QuarterStationInventory(rs.getInt(1),  // quarter id 
 						 														new Station(rs.getInt(2),rs.getString(3)), // station 
 						 														new FuelQty(rs.getString(4),rs.getInt(5),rs.getFloat(6)))); // fuel 
 			 }
@@ -131,7 +131,7 @@ public class CompanyReportsDBHandler extends DBHandler {
 						
 						 while(rs.next())
 						 {
-							 qStationPurchase.add(new QuarterStationPurchase(  new quarterStationIncome( rs.getInt(1),  // quarter
+							 qStationPurchase.add(new QuarterStationPurchase(  new QuarterStationIncome( rs.getInt(1),  // quarter
 									 				new Station(rs.getInt(2),rs.getString(3)), // station id ,station name
 									 				new Purchase(rs.getInt(4),rs.getInt(5),rs.getFloat(6),rs.getFloat(7))) // uid , fuelid , bill , qty
 							 									,rs.getString(8))); // fuel name
@@ -156,7 +156,7 @@ public class CompanyReportsDBHandler extends DBHandler {
 		 ResultSet rs = null ;
 		 PreparedStatement ps = null;
 		 
-		 qStationIncome = new  ArrayList<quarterStationIncome>();
+		 qStationIncome = new  ArrayList<QuarterStationIncome>();
 		 ArrayList<Integer> quarters = new ArrayList<Integer> ();
 		 try{
 			 
@@ -183,7 +183,7 @@ public class CompanyReportsDBHandler extends DBHandler {
 						 
 						 while(rs.next())
 						 {
-							 qStationIncome.add(new quarterStationIncome( rs.getInt(1),  // quarter
+							 qStationIncome.add(new QuarterStationIncome( rs.getInt(1),  // quarter
 									 				new Station(rs.getInt(2),rs.getString(3)), // station id ,station name
 									 				new Purchase(rs.getInt(4),rs.getInt(5),rs.getFloat(6),rs.getFloat(7))));// uid , fuelid , bill , qty
 							 

@@ -20,14 +20,33 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+/***
+ * This class will be user interface for Station Worker Inventory Confirmation
+ *
+ */
 @SuppressWarnings("serial")
 public class CheckInventoryGUI extends SuperGUI{
 
+	/***
+	 * Controller for this GUI
+	 */
 	private CheckInventoryActions actions;
+	/***
+	 * Table model
+	 */
 	private DefaultTableModel model;
+	/***
+	 * Table for showing the details
+	 */
 	private JTable table;
+	/***
+	 * Confirmation Button
+	 */
 	private JButton Confirm ;
-	
+	/***
+	 * CheckInventoryGUI Constructor
+	 * @param actions - Controller for this GUI
+	 */
 	public CheckInventoryGUI(CheckInventoryActions actions) {
 		this.actions = actions;
 		this.setContentPane(contentPane);
@@ -57,7 +76,10 @@ public class CheckInventoryGUI extends SuperGUI{
 		table.setModel(model);
 		
 		Confirm = new JButton("Confirm");
-		Confirm.addActionListener(new ActionListener() {
+		Confirm.addActionListener(new ActionListener() { 
+			/***
+			 * Action Listener Method
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				getInput(arg0);
 			}
@@ -70,6 +92,11 @@ public class CheckInventoryGUI extends SuperGUI{
 		table.getColumnModel().getColumn(2).setPreferredWidth(117);
 		table.getColumnModel().getColumn(3).setPreferredWidth(103);
 	}
+	
+	/***
+	 * This method will update the table with the Order details
+	 * @param NewOrder - order Details
+	 */
 	public void setDetails(ArrayList<FuelQty> NewOrder)
 	{
 		String type="";
@@ -84,6 +111,10 @@ public class CheckInventoryGUI extends SuperGUI{
 			model.insertRow(model.getRowCount(),new Object[]{c.getFid(),type,c.getQty(),false});
 		}
 	}
+	
+	/***
+	 * Getting the input from the Attributes of this GUI
+	 */
 	@Override
 	public void getInput(ActionEvent e) {
 		

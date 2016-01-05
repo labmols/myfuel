@@ -12,9 +12,21 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class Promotion extends PromotionTemplate{
 	
+	/***
+	 * Start Date of the Promotion
+	 */
 	private Date startDate;
+	/***
+	 * End Date of the promotion
+	 */
 	private Date endDate;
+	/***
+	 * Promotion ID
+	 */
 	private int pid;
+	/***
+	 * Date Format - will be used to print the Date as dd/mm/yyyy format
+	 */
 	private DateFormat df;
 /***
  *  Promotion Constructor
@@ -92,6 +104,9 @@ public class Promotion extends PromotionTemplate{
 		this.pid = pid;
 	}
 	
+	/***
+	 * Will return a string with the promotion details
+	 */
 	@Override
 	public String toString()
 	{

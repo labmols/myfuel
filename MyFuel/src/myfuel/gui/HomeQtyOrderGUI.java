@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
-public class homeQtyOrderGUI extends SuperGUI{
+public class HomeQtyOrderGUI extends SuperGUI{
 
 	private homeQtyOrderActions actions;
 	private JTable table;
@@ -33,7 +33,7 @@ public class homeQtyOrderGUI extends SuperGUI{
 	private boolean order;
 	private FuelQty oDetails; // order details
 	
-	public homeQtyOrderGUI(homeQtyOrderActions actions)
+	public HomeQtyOrderGUI(homeQtyOrderActions actions)
 	{
 		lblTitle.setBounds(200, 0, 232, 25);
 		lblTitle.setText("Home Fuel Control");

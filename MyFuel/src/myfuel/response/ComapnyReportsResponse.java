@@ -3,8 +3,8 @@ package myfuel.response;
 import java.util.ArrayList;
 
 import myfuel.client.QuarterStationPurchase;
-import myfuel.client.quarterStationIncome;
-import myfuel.client.quarterStationInventory;
+import myfuel.client.QuarterStationIncome;
+import myfuel.client.QuarterStationInventory;
 
 /***
  * Will has the response from the DB and has each report's details organized in ArrayLists
@@ -16,11 +16,11 @@ public class ComapnyReportsResponse extends Response
 	/***
 	 * Station Inventory in a Quarter
 	 */
-	private ArrayList<quarterStationInventory> qStationInventory = null;
+	private ArrayList<QuarterStationInventory> qStationInventory = null;
 	/***
 	 * Station Income in a Quarter
 	 */
-	private ArrayList<quarterStationIncome> qStationIncome = null;
+	private ArrayList<QuarterStationIncome> qStationIncome = null;
 	/***
 	 * Station Purchases in a Quarter
 	 */
@@ -31,7 +31,7 @@ public class ComapnyReportsResponse extends Response
 	 * @param qStationIncome  - Station Income in a Quarter
 	 * @param qStationPurchase  - Station Purchases in a Quarter
 	 */
-	public ComapnyReportsResponse(ArrayList<quarterStationInventory> qStationInventory, ArrayList<quarterStationIncome> qStationIncome
+	public ComapnyReportsResponse(ArrayList<QuarterStationInventory> qStationInventory, ArrayList<QuarterStationIncome> qStationIncome
 															, ArrayList<QuarterStationPurchase> qStationPurchase)
 	{
 		this.setqStationInventory(qStationInventory);
@@ -40,20 +40,20 @@ public class ComapnyReportsResponse extends Response
 	}
 	
 	
-	public ArrayList<quarterStationInventory> getqStationInventory() {
+	public ArrayList<QuarterStationInventory> getqStationInventory() {
 		return qStationInventory;
 	}
-	public void setqStationInventory(ArrayList<quarterStationInventory> qStationInventory) {
+	public void setqStationInventory(ArrayList<QuarterStationInventory> qStationInventory) {
 		this.qStationInventory = qStationInventory;
 	}
 
 
-	public ArrayList<quarterStationIncome> getqStationIncome() {
+	public ArrayList<QuarterStationIncome> getqStationIncome() {
 		return qStationIncome;
 	}
 
 
-	public void setqStationIncome(ArrayList<quarterStationIncome> qStationIncome) {
+	public void setqStationIncome(ArrayList<QuarterStationIncome> qStationIncome) {
 		this.qStationIncome = qStationIncome;
 	}
 

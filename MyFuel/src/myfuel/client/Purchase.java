@@ -67,7 +67,13 @@ public class Purchase implements Serializable {
 		this.setQty(qty);
 		this.setDriverName(driverName);
 	}
-	
+	/***
+	 * Purchase Constructor 
+	 * @param customerid - Customer ID
+	 * @param fuelid - Fuel ID
+	 * @param bill - Total Bill value
+	 * @param qty  - Quantity (Liter)
+	 */
 	public Purchase(int customerid,int fuelid, float bill, float qty )
 	{
 		this.setCustomerid(customerid);
