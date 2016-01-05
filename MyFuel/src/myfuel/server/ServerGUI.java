@@ -131,18 +131,18 @@ public class ServerGUI extends SuperGUI{
 		pass.setBounds(160, 153, 139, 26);
 		panel.add(pass);
 		
-		serverStatus = new JLabel("Disconnect");
+		serverStatus = new JLabel("Disconnected");
 		serverStatus.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
 		serverStatus.setForeground(Color.RED);
 		serverStatus.setBounds(302, 53, 104, 16);
 		panel.add(serverStatus);
 		
-		sqlStatus = new JLabel("Disconnect");
+		sqlStatus = new JLabel("Disconnected");
 		sqlStatus.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
 		sqlStatus.setForeground(Color.RED);
 		sqlStatus.setBounds(302, 79, 115, 16);
 		panel.add(sqlStatus);
-		
+		this.setJMenuBar(null);
 		
 	}
 	
@@ -187,7 +187,9 @@ public class ServerGUI extends SuperGUI{
 			  }
 			  catch(SQLException e)
 			  {
-				  printMsg("Failed to Connect MySQL Server... ");
+				  printMsg("Failed to connect MySQL Server ...");
+				  stopServer();
+			      btnStartServer.setEnabled(true);
 				  e.printStackTrace();
 			  }
 			
@@ -223,8 +225,9 @@ public class ServerGUI extends SuperGUI{
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
 	int port;
-		if(sqlAdd.getText().equals("") || user.getText().equals("") || pass.getText().equals(""))
+		if(sqlAdd.getText().equals("") || user.getText().equals("") )
 			this.showErrorMessage("Please fill all the fields!");
+		else {
 		try {
 			port = Integer.parseInt(portTxt.getText());
 			 startServer(port);
@@ -232,6 +235,7 @@ public class ServerGUI extends SuperGUI{
 		catch(NumberFormatException e1){
 			this.showErrorMessage("Illegal port value!");
 			e1.printStackTrace();
+		}
 		}
 	}
 	

@@ -454,7 +454,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
  * @param userStations - Current List of the customer stations.
  * @param stations - All stations list.
  */
-	public void updateCB(ArrayList<Integer> userStations,ArrayList<Station> stations)
+	public void updateStationCB(ArrayList<Integer> userStations,ArrayList<Station> stations)
 	{
 		stationModel.removeAllElements();
 		for(Station s: stations){
@@ -462,6 +462,15 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 			stationModel.addElement(s.getName());
 		}
 	}
+	
+	
+
+	public void updateCarsCB(int cid) {
+		// TODO Auto-generated method stub
+		
+		carModel.addElement(cid);
+		}
+	
 }
 
 
