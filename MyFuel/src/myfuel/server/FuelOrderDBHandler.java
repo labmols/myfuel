@@ -76,7 +76,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				}
 				ps.close();
 				rs1.close();
-				rs2.close();
+				if(rs2!=null) rs2.close();
 				return horders;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

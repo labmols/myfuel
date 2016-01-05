@@ -12,7 +12,7 @@ import myfuel.client.Car;
 import myfuel.client.Fuel;
 import myfuel.client.Station;
 import myfuel.request.LoginRequest;
-import myfuel.request.registerRequest;
+import myfuel.request.RegisterRequest;
 import myfuel.response.ErrorEnum;
 import myfuel.response.RegisterResponse;
 import myfuel.response.Response;

@@ -12,7 +12,7 @@ import myfuel.client.SendMailTLS;
 import myfuel.client.Station;
 import myfuel.gui.RegisterGUI;
 import myfuel.request.RequestEnum;
-import myfuel.request.registerRequest;
+import myfuel.request.RegisterRequest;
 import myfuel.response.RegisterResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
@@ -46,7 +46,7 @@ public class RegisterActions extends GUIActions {
 	/**
 	 * the registerRequest object that will be send to the server.
 	 */
-	private registerRequest request;
+	private RegisterRequest request;
 	
 	/**
 	 * Create new Register GUI Controller.
@@ -78,7 +78,7 @@ public class RegisterActions extends GUIActions {
 			atype, int smodel){
 		String password= new String(pass);
 		customer = new Customer(userid,fname,lname,password,email,address,cnumber,toc,atype,smodel,cars,cstations);
-		request = new registerRequest(RequestEnum.Insert,customer);
+		request = new RegisterRequest(RequestEnum.Insert,customer);
 		client.handleMessageFromGUI(request);
 	}
 	
@@ -86,7 +86,7 @@ public class RegisterActions extends GUIActions {
 	 * Request for all the stations from DB.
 	 */
 	public void showStations(){
-		request = new registerRequest(RequestEnum.Select,null);
+		request = new RegisterRequest(RequestEnum.Select,null);
 		client.handleMessageFromGUI(request);
 	}
 	

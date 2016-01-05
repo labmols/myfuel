@@ -36,25 +36,31 @@ public class MyFuelClient extends ObservableClient {
 			sendToServer(msg);
 		} catch (IOException e) {
 			e.printStackTrace();
+			
 		}
 	}
 	
+	@Override
+	public void connectionClosed()
+	{
+		this.deleteObservers();
+	}
 	
 	public static void main(String[] args)  {
 		// TODO Auto-generated method stub
 		MyFuelClient client;
 		
-		//ConnectDialog dialog = new ConnectDialog();
-	//	dialog.setVisible(true);
+		ConnectDialog dialog = new ConnectDialog();
+		dialog.setVisible(true);
 		
-		try {
+		/*/try {
 			client = new MyFuelClient("localhost",5555);
 			new LoginActions(client);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Can't Connect to server in port 5555");
-		}
+		}/*/
 		
 		
 	}

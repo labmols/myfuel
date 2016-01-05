@@ -13,7 +13,7 @@ import myfuel.client.Customer;
 import myfuel.client.Station;
 import myfuel.request.RequestEnum;
 import myfuel.request.UpdateRequest;
-import myfuel.request.registerRequest;
+import myfuel.request.RegisterRequest;
 import myfuel.response.RegisterResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;

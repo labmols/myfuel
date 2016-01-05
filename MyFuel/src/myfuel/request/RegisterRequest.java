@@ -9,7 +9,7 @@ import myfuel.client.Customer;
  * @author Maor
  *
  */
-public class registerRequest implements Serializable {
+public class RegisterRequest implements Serializable {
 	
 	/**
 	 * New customer details object.
@@ -26,7 +26,7 @@ public class registerRequest implements Serializable {
 	 * @param type - Request query type (Select / Insert).
 	 * @param customer - New Customer details object.
 	 */
-	public registerRequest(RequestEnum type,Customer customer){
+	public RegisterRequest(RequestEnum type,Customer customer){
 		this.customer =customer;
 		this.type=type;
 	}

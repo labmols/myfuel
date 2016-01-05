@@ -8,7 +8,7 @@ import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Station;
 import myfuel.request.RequestEnum;
-import myfuel.request.registerRequest;
+import myfuel.request.RegisterRequest;
 import myfuel.response.RegisterResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
@@ -31,7 +31,7 @@ public class RegisterDBHandler extends DBHandler {
 	 * @param request - the request from the client.
 	 * @return RegisterResponse if there is not SQL Error, otherwise return booleanResponse(false).
 	 */
-	private Response showStations(registerRequest request)
+	private Response showStations(RegisterRequest request)
 	{
 		ResultSet rs = null;
 		Statement st = null;
@@ -65,7 +65,7 @@ public class RegisterDBHandler extends DBHandler {
 	  * @param request - the client request that contains the Customer object with all his register details.
 	  * @return - booleanResponse (false) if User ID, Car ID or E-mail exist or SQL Error, otherwise return booleanResponse(true).
 	  */
-	private Response CheckAndInsert(registerRequest request){
+	private Response CheckAndInsert(RegisterRequest request){
 		Customer customer = request.getCustomer();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
@@ -186,8 +186,8 @@ public class RegisterDBHandler extends DBHandler {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
-		if(arg instanceof registerRequest){
-		registerRequest request = (registerRequest)arg;
+		if(arg instanceof RegisterRequest){
+		RegisterRequest request = (RegisterRequest)arg;
 		if(request.getType() == RequestEnum.Select) server.setResponse(showStations(request));
 		else if(request.getType() == RequestEnum.Insert) server.setResponse(CheckAndInsert(request));
 	}
