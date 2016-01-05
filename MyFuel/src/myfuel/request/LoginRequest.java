@@ -76,4 +76,6 @@ public class LoginRequest implements Serializable{
 	public void setChangeStatus(int changeStatus) {
 		this.changeStatus = changeStatus;
 	}
+	
+
 }

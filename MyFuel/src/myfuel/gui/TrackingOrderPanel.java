@@ -38,13 +38,17 @@ public class TrackingOrderPanel extends JPanel{
 		scrollPane.setBounds(6, 34, 572, 279);
 		add(scrollPane);
 		model = new MyTableModel(6,-1);
-		String[] names = {"#Order" ,"Amount(L)","Price","Ship Date","Urgent","Status"};
+		String[] names = {"#Order" ,"Amount(L)","Address","Ship Date","Urgent","Status"};
 		for(String s : names)
 			model.addColumn(s);
 		
 		table = new JTable(model);
 		table.setFont(new Font("Calibri", Font.PLAIN, 13));
 		table.setModel(model);
+		table.getColumnModel().getColumn(0).setPreferredWidth(7);
+		table.getColumnModel().getColumn(0).setPreferredWidth(11);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(4).setPreferredWidth(6);
 		scrollPane.setViewportView(table);
 		
 		JLabel lblYourOrders = new JLabel("Your Orders ");
@@ -67,7 +71,7 @@ public void updateTable(ArrayList <HomeOrder> horders)
 		else urgent = "No";
 		if(order.getStatus()) status = "Delivered";
 		else status= "On delivery";
-		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getQty()+"L",order.getHomeP().getBill(), format.format(date), urgent, status});
+		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getQty()+"L",order.getAddress(), format.format(date), urgent, status});
 	}
 }
 

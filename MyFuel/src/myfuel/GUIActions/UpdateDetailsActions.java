@@ -23,6 +23,7 @@ import myfuel.response.booleanResponse;
  *
  */
 public class UpdateDetailsActions extends GUIActions {
+	
 	/**
 	 * Contains all the user login details(including his personal details ,etc)
 	 */
@@ -41,6 +42,7 @@ public class UpdateDetailsActions extends GUIActions {
 	 */
 	private ArrayList <Integer> origStations;
 	
+	boolean isConfirmed=false;
 	/**
 	 * create new UpdateDetails controller , which working with the UpdateDetailsGUI.
 	 * @param client - the client object for the communication.
@@ -76,12 +78,17 @@ public class UpdateDetailsActions extends GUIActions {
 		Customer user = res.getUser();
 		if(arg instanceof booleanResponse)
 		{
-			booleanResponse res= (booleanResponse) arg;
-			if(!res.getSuccess()) {
-				gui.showErrorMessage(res.getMsg());
+			booleanResponse res2= (booleanResponse) arg;
+			if(!res2.getSuccess()) {
+				gui.showErrorMessage(res2.getMsg());
 				clearLists();
 			}
-			else gui.showOKMessage(res.getMsg());
+			else
+			{
+				isConfirmed = true;
+				gui.showOKMessage(res2.getMsg());
+				
+			}
 		  gui.clearAll(user);
 		}
 	}
@@ -102,6 +109,7 @@ public class UpdateDetailsActions extends GUIActions {
 		if(!checkCar(Integer.parseInt(cid))){
 			user.getCars().add(c);
 			gui.showOKMessage("Car "+cid+" "+ "added!");
+			gui.updateCarsCB(Integer.parseInt(cid));
 		}
 		else gui.showErrorMessage("You already have this car!");
 		}
@@ -132,6 +140,7 @@ public class UpdateDetailsActions extends GUIActions {
 	 * @param sname - the name of station that chosen in the ComboBox.
 	 */
 	public void addStation(String sname, int access){
+		
 		ArrayList <Integer> userStations = res.getUser().getStations();
 		if(access == 1 || access==0 && userStations.isEmpty())
 		{
@@ -140,6 +149,7 @@ public class UpdateDetailsActions extends GUIActions {
 				if(!userStations.contains(s.getsid())) {
 					userStations.add(s.getsid());
 					gui.showOKMessage("Station "+sname + " is added!");
+					isConfirmed = false;
 				}
 				else gui.showErrorMessage("You already have this station!");
 				}
@@ -147,7 +157,7 @@ public class UpdateDetailsActions extends GUIActions {
 		}
 		else gui.showErrorMessage("You Can't add more then one stations in this access!");
 	
-		gui.updateCB(userStations,res.getStations());
+		gui.updateStationCB(userStations,res.getStations());
 		}
 		
 	/**
@@ -174,6 +184,7 @@ public class UpdateDetailsActions extends GUIActions {
 					{
 						userStations.set(index, s.getsid());
 						gui.showOKMessage("Station "+oldS + " changed to " +newS);
+						isConfirmed = false;
 					}
 					else gui.showErrorMessage("You already have this station!");
 					
@@ -181,7 +192,7 @@ public class UpdateDetailsActions extends GUIActions {
 			
 		}
 		
-		gui.updateCB(userStations,res.getStations());
+		gui.updateStationCB(userStations,res.getStations());
 			
 		}
 
@@ -196,13 +207,14 @@ public class UpdateDetailsActions extends GUIActions {
 	{
 		res.getUser().getCars().remove(index);
 		gui.showErrorMessage("Car "+cid+" "+ "removed!");
+		isConfirmed = false;
 	}
 	
 	public void resetAccess()
 	{
 			ArrayList <Integer> userStations = res.getUser().getStations();
 			userStations.clear();
-			gui.updateCB(userStations, res.getStations());
+			gui.updateStationCB(userStations, res.getStations());
 	}
 	
 	
@@ -291,7 +303,7 @@ public class UpdateDetailsActions extends GUIActions {
 	
 	@Override
 	public void backToMenu() {
-		clearLists();
+		if(!isConfirmed) clearLists();
 		changeFrame(gui,new CustomerOptionsActions(client,res),this);
 	}
 	

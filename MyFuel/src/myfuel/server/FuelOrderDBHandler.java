@@ -29,8 +29,16 @@ import myfuel.response.booleanResponse;
  */
 public class FuelOrderDBHandler extends DBHandler{
 	
+	/**
+	 * Contains the customer purchase id.
+	 */
 	private int CustomerP;
 
+	/**
+	 * Create new Car Fuel Database controller.
+	 * @param server - My Fuel Server.
+	 * @param con - JDBC Driver connection.
+	 */
 	FuelOrderDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 		// TODO Auto-generated constructor stub
@@ -68,7 +76,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				}
 				ps.close();
 				rs1.close();
-				rs2.close();
+				if(rs2!=null) rs2.close();
 				return horders;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -251,9 +259,9 @@ public class FuelOrderDBHandler extends DBHandler{
 	}
 	
 	/**
-	 * 
-	 * @param fid
-	 * @return
+	 * Get current promotion if exist(according to current time and fuelid).
+	 * @param fid - Fuel type id.
+	 * @return The promotion details object if exist(if not it will be null).
 	 */
 	private Promotion getPromotion(int fid)
 	{
@@ -325,7 +333,7 @@ public class FuelOrderDBHandler extends DBHandler{
 	
 	/**
 	 * Get all stations inventory from the Database.
-	 * @return ArrayList<StationInventory> that contains all the stations Inventory details.
+	 * @return List that contains all the stations Inventory details.
 	 */
 	private ArrayList <StationInventory> getInventory()
 	{

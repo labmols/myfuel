@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -30,7 +32,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		purchaseTable.setModel(model);
 		scrollPane.setViewportView(purchaseTable);
 		panel.add(scrollPane);
-		model.insertRow(model.getRowCount(),new Object[]{1, 1234567,"Abalolo","Paz","95", "31/12/15", "18:00",435,40});
+		model.insertRow(model.getRowCount(),new Object[]{1, 1234567,"Abalolo","Paz", "31/12/15", "18:00",435,40});
 	}
 	@Override
 	public void getInput(ActionEvent e) {

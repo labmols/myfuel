@@ -18,24 +18,69 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.util.ArrayList;
 
+/**
+ * Car Fuel User Interface
+ * @author Maor
+ *
+ */
 @SuppressWarnings("serial")
 public class CarFuelGUI extends SuperGUI {
-
-	
+	/**
+	 * Quantity Text Field.
+	 */
 	private JTextField qtyText;
+	/**
+	 * GUI Controller object.
+	 */
 	private CarFuelActions actions;
+	/**
+	 * Stations ComboBox model(used for handle elements functions).
+	 */
 	private DefaultComboBoxModel<String> stationModel;
+	/**
+	 * Cars ComboBox model(used for handle elements functions).
+	 */
 	private DefaultComboBoxModel<Integer> carModel;
+	/**
+	 * 95 Fuel type pump Radio Button.
+	 */
 	private XRadioButton rb95;
+	/**
+	 *  Scooter Fuel type pump Radio Button.
+	 */
 	private XRadioButton rbscooter;
+	/**
+	 *  Diesel Fuel type pump Radio Button.
+	 */
 	private XRadioButton rbdiesel;
+	/**
+	 * Current fuel selected value (1-95/2-Diesel/3-Scooter).
+	 */
 	private int fuelSelected;
+	/**
+	 * 95 Fuel type price Label
+	 */
 	private JLabel lblp95;
+	/**
+	 * Diesel Fuel type price Label
+	 */
 	private JLabel lblpdiesel;
+	/**
+	 * Scooter Fuel type price Label
+	 */
 	private JLabel lblpscooter;
+	/**
+	 * Cars ComboBox , contain all the customer cars.
+	 */
 	private JComboBox<Integer> carCB;
 	/**
-	 * Create the frame.
+	 * Stations ComboBox, contain all the available Stations.
+	 */
+	private JComboBox <String> stationCombo;
+
+	/**
+	 * Create new Car Fuel user interface.
+	 * @param actions - Car Fuel GUI Controller.
 	 */
 	public CarFuelGUI(CarFuelActions actions) {
 		this.actions=actions;
@@ -65,7 +110,7 @@ public class CarFuelGUI extends SuperGUI {
 		panel2.add(lblChooseStation);
 		lblChooseStation.setBackground(Color.RED);
 		
-		JComboBox <String> stationCombo = new JComboBox<String>();
+		stationCombo = new JComboBox<String>();
 		stationModel = new DefaultComboBoxModel<String>();
 		stationCombo.setModel(stationModel);
 		stationCombo.setBounds(146, 5, 109, 27);
@@ -196,29 +241,40 @@ public class CarFuelGUI extends SuperGUI {
 		
 	}
 	
+	/**
+	 * This Class is used for components events handling.
+	 *
+	 */
 	private class eventListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == rb95.getRadioButton())
-				fuelSelected = 1;
-				
-			if(e.getSource() == rbdiesel.getRadioButton())
-				fuelSelected = 2;
-			
-			if(e.getSource() == rbscooter.getRadioButton())
-				fuelSelected = 3;
-			
+			getInput(e);
 		}
 		
 	}
-
+	
+	/**
+	 * Handle User input.
+	 */
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource() == rb95.getRadioButton())
+			fuelSelected = 1;
+			
+		if(e.getSource() == rbdiesel.getRadioButton())
+			fuelSelected = 2;
+		
+		if(e.getSource() == rbscooter.getRadioButton())
+			fuelSelected = 3;
 		
 	}
 	
+	/**
+	 * Set all price labels to the current prices from DB.
+	 * @param fuels - List of all fuels prices.
+	 */
 	public void setPrices(ArrayList <Fuel> fuels)
 	{
 				lblp95.setText(fuels.get(1).getMaxPrice()+"₪");
@@ -226,12 +282,19 @@ public class CarFuelGUI extends SuperGUI {
 				lblpscooter.setText(fuels.get(3).getMaxPrice()+"₪");
 	}
 	
-
+	/**
+	 * Add Station to the Stations ComboBox.
+	 * @param st - The Station name String.
+	 */
 	public void addStation(String st)
 	{
 		stationModel.addElement(st);
 	}
 
+	/**
+	 * Add new Car to the Cars ComboBox.
+	 * @param cid - The Car ID number.
+	 */
 	public void addCar(int cid) {
 		
 		carModel.addElement(cid);

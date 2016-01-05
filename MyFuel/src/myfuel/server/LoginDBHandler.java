@@ -12,7 +12,7 @@ import myfuel.client.Car;
 import myfuel.client.Fuel;
 import myfuel.client.Station;
 import myfuel.request.LoginRequest;
-import myfuel.request.registerRequest;
+import myfuel.request.RegisterRequest;
 import myfuel.response.ErrorEnum;
 import myfuel.response.RegisterResponse;
 import myfuel.response.Response;
@@ -21,7 +21,7 @@ import myfuel.response.WorkerLoginResponse;
 import myfuel.response.booleanResponse;
 
 /**
- * Log In interface Database Controller, responsible for Log In queries.
+ * Log In Database Controller, responsible for Log In queries.
  * @author Maor
  *
  */

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import com.mysql.*;
 
 import myfuel.client.CustomerReport;
 import myfuel.client.Promotion;
