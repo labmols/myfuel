@@ -50,7 +50,7 @@ public class MailDialog extends JDialog {
  */
 	public MailDialog(int maxValue) {
 		setTitle("Sending Mails...");
-		setBounds(100, 100, 399, 160);
+		setBounds(100, 100, 399, 181);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,7 +68,7 @@ public class MailDialog extends JDialog {
 		{
 			sendComplbl = new JLabel("Sending Complete!");
 			sendComplbl.setForeground(Color.WHITE);
-			sendComplbl.setBounds(137, 62, 126, 16);
+			sendComplbl.setBounds(134, 83, 126, 16);
 			sendComplbl.setVisible(false);
 			contentPanel.add(sendComplbl);
 		}
@@ -86,7 +86,7 @@ public class MailDialog extends JDialog {
 				getDialog().setVisible(false);
 			}
 		});
-		btnOk.setBounds(164, 87, 61, 29);
+		btnOk.setBounds(164, 111, 61, 29);
 		contentPanel.add(btnOk);
 		{
 			JLabel label = new JLabel("");
@@ -104,9 +104,13 @@ public class MailDialog extends JDialog {
 	 */
 	public void setProgress(int value) {
 		// TODO Auto-generated method stub
-		progressBar.setValue(value);
+		//progressBar.setValue(value);
 		if(progressBar.getMaximum() == value) 
+		{
 			btnOk.setEnabled(true);
+			progressBar.setIndeterminate(false);
+			sendComplbl.setVisible(true);
+		}
 			
 	}
 	
