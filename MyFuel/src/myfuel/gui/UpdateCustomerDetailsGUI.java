@@ -407,7 +407,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		if(e.getSource() == btnConfirmUpdate)
 		{
 			actions.verifyDetails(fnameText.getText(), lnameText.getText(), emailText.getText(),
-					addText.getText(), CCText.getText(), typeCB.getSelectedIndex(), saleCB.getSelectedIndex(), access);
+					addText.getText(), CCText.getText(), typeCB.getSelectedIndex(), saleCB.getSelectedIndex()+1, access);
 		}
 		
 		if(e.getSource()==btnRemove)

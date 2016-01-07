@@ -269,6 +269,12 @@ public class UpdateDetailsActions extends GUIActions {
 			errors+= "illegal Email value. \n";
 		}
 		
+		if((smodel == 2 || smodel==4 ) && user.getCars().size() > 1)
+		{
+			success = false;
+			errors+="You can't have more then one car in this sale model!\n";
+		}
+		
 		if(!success) gui.showErrorMessage(errors);
 		else  
 		{

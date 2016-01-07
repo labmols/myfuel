@@ -213,9 +213,9 @@ public class RegisterActions extends GUIActions {
 		Pattern pattern = Pattern.compile("^.+@.+\\..+$");
 		Matcher matcher = pattern.matcher(email);
 		boolean success = true;
-		if(userid.length()>9 || userid.equals("")){ 
+		if(userid.length()<9 || userid.equals("") || !this.isAllDigits(userid)){ 
 			success = false;
-			errors+="ID length > 9 or Empty.\n";
+			errors+="ID length < 9 or illegal.\n";
 		}
 		if(address.equals("")){
 			success=false;
