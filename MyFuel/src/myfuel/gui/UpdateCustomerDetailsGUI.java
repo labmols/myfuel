@@ -203,7 +203,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		panel2.add(lblSaleModel);
 		
 		saleCB = new JComboBox<String>();
-		saleCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Occassional", "Monthly"}));
+		saleCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Occasional", "Monthly- One Car", "Monthly - Few Cars", "Fully Monthly - One Car"}));
 		saleCB.setBounds(103, 209, 149, 27);
 		panel2.add(saleCB);
 		

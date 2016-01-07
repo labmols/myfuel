@@ -48,6 +48,7 @@ public class RegisterActions extends GUIActions {
 	 */
 	private RegisterRequest request;
 	
+	
 	/**
 	 * Create new Register GUI Controller.
 	 * @param client - the client object for this controller
@@ -144,11 +145,14 @@ public class RegisterActions extends GUIActions {
 	 * add new car to the ArrayList cars of the user.
 	 * @param car , the car object.
 	 */
-	public void addCar(String cid, int fid){
+	public void addCar(String cid, int fid, int saleModel){
+		
+		if(cars.isEmpty() || (saleModel != 2 && saleModel !=4))
+		{
 		if(cid.length()==7 && isAllDigits(cid) ){
 			int carid = Integer.parseInt(cid);
 			Car car = new Car(carid,fid);
-			if(!cars.contains(car))
+			if(!checkCar(car.getcid()))
 			{
 			cars.add(car);
 			gui.showOKMessage("Car "+cid + " is added!");
@@ -156,7 +160,16 @@ public class RegisterActions extends GUIActions {
 			else gui.showErrorMessage("You already have this car!");
 		}
 		else gui.showErrorMessage("Car number value is illegal!");
+		}
+		else gui.showErrorMessage("You choose one car sale Model!");
 		
+	}
+	
+	public boolean checkCar(int cid)
+	{
+		for(Car c: cars)
+			if(c.getcid() == cid) return true;
+		return false;
 	}
 	
 	/**
@@ -287,11 +300,20 @@ public class RegisterActions extends GUIActions {
 	}
 
 	/**
-	 * remove all cstations array contents, because the user replace the access.
+	 * remove all customer stations list contents, because the user replace the access.
 	 */
 	public void resetStations() {
+		gui.showOKMessage("Now add your stations!");
 		cstations.clear();
-		
+	}
+	
+	/**
+	 * remove all cars list contents, because the user replace the sale model.
+	 */
+	public void resetCars() {
+		gui.showOKMessage("Now add your cars!");
+		cars.clear();
+
 	}
 
 	/**
