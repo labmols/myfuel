@@ -17,6 +17,7 @@ public class MMGUI extends SuperGUI {
 	JButton btnShowReports;
 	JButton btnSetNewRates;
 	MMActions actions;
+	private JButton aDetails;
 	/**
 	 * Create the frame.
 	 */
@@ -39,6 +40,11 @@ public class MMGUI extends SuperGUI {
 		 btnSetNewRates = new JButton("Set New Rates");
 		btnSetNewRates.setBounds(193, 260, 189, 48);
 		panel.add(btnSetNewRates);
+		
+		aDetails = new JButton("Analyzed Details");
+		aDetails.addActionListener(new btnHandler());
+		aDetails.setBounds(193, 334, 189, 48);
+		panel.add(aDetails);
 		btnSetNewRates.addActionListener(new btnHandler());
 	}
 
@@ -67,6 +73,9 @@ public class MMGUI extends SuperGUI {
 			
 			else if(e.getSource() == btnSetNewRates)
 				actions.createSetNewRatesWindow();
+			
+			else if(e.getSource() == aDetails)
+				actions.createaDetailsWindow();
 			
 			
 		}
