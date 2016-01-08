@@ -278,9 +278,9 @@ public class CarFuelGUI extends SuperGUI {
 	 */
 	public void setPrices(ArrayList <Fuel> fuels)
 	{
-				lblp95.setText(fuels.get(1).getMaxPrice()+"â‚ª");
-				lblpdiesel.setText(fuels.get(2).getMaxPrice()+"â‚ª");
-				lblpscooter.setText(fuels.get(3).getMaxPrice()+"â‚ª");
+				lblp95.setText(fuels.get(1).getMaxPrice()+"¤");
+				lblpdiesel.setText(fuels.get(2).getMaxPrice()+"¤");
+				lblpscooter.setText(fuels.get(3).getMaxPrice()+"¤");
 	}
 	
 

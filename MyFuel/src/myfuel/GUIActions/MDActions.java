@@ -48,4 +48,11 @@ public class MDActions extends GUIActions{
 		
 	}
 
+
+	public void createAnalystic() 
+	{
+		changeFrame(gui,new AnalysticActions(client),this);
+		
+	}
+
 }

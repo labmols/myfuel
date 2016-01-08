@@ -20,6 +20,7 @@ public class MDGUI extends SuperGUI {
 		lblTitle.setText("Marketing Delegate Menu");
 		
 		 analystic = new JButton("Analystic System");
+		 analystic.addActionListener(new btnHandler());
 		analystic.setBounds(182, 88, 199, 61);
 		panel.add(analystic);
 		
@@ -65,6 +66,10 @@ public class MDGUI extends SuperGUI {
 			actions.createConfirmationWindow();
 		}
 		
+		else if(e.getSource() == analystic)
+		{
+			actions.createAnalystic();
+		}
 		
 	}
 }
