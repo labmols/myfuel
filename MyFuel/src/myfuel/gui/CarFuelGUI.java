@@ -25,7 +25,7 @@ import java.util.ArrayList;
  */
 @SuppressWarnings("serial")
 public class CarFuelGUI extends SuperGUI {
-	private WaitDialog waitD;
+	
 	/**
 	 * Quantity Text Field.
 	 */
@@ -283,16 +283,7 @@ public class CarFuelGUI extends SuperGUI {
 				lblpscooter.setText(fuels.get(3).getMaxPrice()+"¤");
 	}
 	
-	public void createWaitDialog()
-	{
-		waitD = new WaitDialog();
-		waitD.setVisible(true);
-	}
-	
-	public void setWaitPorgress()
-	{
-		waitD.setProgress(1);
-	}
+
 	
 	/**
 	 * Add Station to the Stations ComboBox.
