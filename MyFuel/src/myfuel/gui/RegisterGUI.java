@@ -3,6 +3,8 @@ package myfuel.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -194,6 +196,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		saleModelCB = new JComboBox<String>();
 		saleModelCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Occasional", "Monthly- One Car", "Monthly - Few Cars", "Fully Monthly - One Car"}));
+		saleModelCB.addItemListener(new ButtonListener());
 		saleModelCB.setBounds(114, 126, 186, 27);
 		panel3.add(saleModelCB);
 		
@@ -226,7 +229,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		accessCB = new JComboBox<String>();
 		accessCB.setModel(new DefaultComboBoxModel<String>(new String[] {"One Station", "Few Stations"}));
-		accessCB.addActionListener(new ButtonListener());
+		accessCB.addItemListener(new ButtonListener());
 		accessCB.setBounds(104, 16, 141, 27);
 		panel4.add(accessCB);
 		
@@ -296,12 +299,24 @@ public class RegisterGUI extends SuperGUI {
 	 * This class used for handling all components events.
 	 *
 	 */
-	private class ButtonListener implements ActionListener{
+	private class ButtonListener implements ActionListener,ItemListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			getInput(e);
+		}
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getStateChange()==ItemEvent.DESELECTED)
+			{
+			if(e.getSource() == saleModelCB)
+				actions.resetCars();
+			else if(e.getSource() == accessCB)
+				actions.resetStations();
+			}
 		}
 		
 	}
@@ -317,7 +332,7 @@ public class RegisterGUI extends SuperGUI {
 		}
 		
 		if(e.getSource() == btnAddCar){
-			actions.addCar(cidTextField.getText().toString(), fuelCB.getSelectedIndex()+1);
+			actions.addCar(cidTextField.getText().toString(), fuelCB.getSelectedIndex()+1,saleModelCB.getSelectedIndex()+1);
 		}
 		
 		if(e.getSource()==btnRegister ){

@@ -14,6 +14,7 @@ import myfuel.client.FuelQty;
 import myfuel.client.HomeOrder;
 import myfuel.client.Promotion;
 import myfuel.client.Purchase;
+import myfuel.client.Rate;
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
 import myfuel.request.FuelOrderRequest;
@@ -222,7 +223,6 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps.setInt(2, sid);
 			ps.setInt(3, FuelID);
 			ps.executeUpdate();
-			ps.close();
 			
 			ps= con.prepareStatement("select fqty,mqty from station_inventory where sid=? and fuelid=?");
 			ps.setInt(1, sid);
@@ -231,10 +231,15 @@ public class FuelOrderDBHandler extends DBHandler{
 			rs.next();
 			fqty = rs.getFloat(1);
 			mqty = rs.getFloat(2);
-			ps.close();
-			rs.close();
+		
 			//if the current qty < minimal qty create new inventory order
-			if(fqty < mqty)
+			
+			ps= con.prepareStatement("select * from inventory_order where sid=? and fuelid=?");
+			ps.setInt(1, sid);
+			ps.setInt(2, FuelID);
+			rs= ps.executeQuery();
+			
+			if(fqty < mqty && !rs.next())
 			{
 				ps= con.prepareStatement("insert into inventory_order values(?,?,?,?,?)");
 				ps.setInt(1, 0);
@@ -243,8 +248,10 @@ public class FuelOrderDBHandler extends DBHandler{
 				ps.setFloat(4, 5*mqty);
 				ps.setInt(5, 0);
 				ps.executeUpdate();
-				ps.close();	
 			}
+			
+			ps.close();
+			rs.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -332,6 +339,39 @@ public class FuelOrderDBHandler extends DBHandler{
 	}
 	
 	/**
+	 * Get all current rates(according to sale model) from the Database.
+	 * @return List of all the current rates.
+	 */
+	private ArrayList <Rate> getRates()
+	{
+		ArrayList<Rate> rates = new ArrayList<Rate>();
+		ResultSet rs = null;
+		Statement st = null;
+		String sql;
+		
+		try {
+			st= con.createStatement();
+			sql = "select * from price_to_type";
+			rs = st.executeQuery(sql);
+			
+			while(rs.next())
+				rates.add(new Rate (rs.getInt(1), rs.getString(2), rs.getInt(3)));
+			return rates;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	
+	}
+	
+	
+	/**
 	 * Get all stations inventory from the Database.
 	 * @return List that contains all the stations Inventory details.
 	 */
@@ -404,11 +444,12 @@ public class FuelOrderDBHandler extends DBHandler{
 			{
 				ArrayList <Fuel> fuels = getFuels();
 				ArrayList <StationInventory> si = getInventory();
+				ArrayList <Rate> rates = getRates();
 				Promotion p = getPromotion(req.getFuelID());
 				ArrayList <HomeOrder> horders = null;
 				if(req.getFuelID() == Fuel.HomeFuelID) 
 				 horders = getHomeOrders(req.getCustomerID());
-				FuelOrderResponse res = new FuelOrderResponse (si,fuels, p,horders);
+				FuelOrderResponse res = new FuelOrderResponse (si,fuels, p,horders,rates);
 				server.setResponse(res);
 			}
 			

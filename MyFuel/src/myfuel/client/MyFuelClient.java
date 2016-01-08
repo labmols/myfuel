@@ -36,14 +36,16 @@ public class MyFuelClient extends ObservableClient {
 			sendToServer(msg);
 		} catch (IOException e) {
 			e.printStackTrace();
-			
 		}
 	}
+	
 	
 	@Override
 	public void connectionClosed()
 	{
-		this.deleteObservers();
+		JOptionPane.showMessageDialog(null, "Error! Server is down, exit from Application...");
+		System.exit(0);
+		
 	}
 	
 	public static void main(String[] args)  {

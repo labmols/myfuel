@@ -6,6 +6,7 @@ import myfuel.client.Fuel;
 import myfuel.client.FuelQty;
 import myfuel.client.HomeOrder;
 import myfuel.client.Promotion;
+import myfuel.client.Rate;
 import myfuel.client.StationInventory;
 
 /**
@@ -35,12 +36,18 @@ public class FuelOrderResponse extends Response {
 	 * List of customer home orders (if the fuel order was home fuel, if not it will be null).
 	 */
 	private ArrayList <HomeOrder> horders;
+	
+	/**
+	 * List of current rates.
+	 */
+	private ArrayList<Rate> rates;
+	
 	/**
 	 * create new Car Fuel response 
 	 * @param si - the stations inventory list.
 	 * @param fuels - the fuels details list.
 	 */
-	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels, Promotion prom,ArrayList <HomeOrder> horders )
+	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels, Promotion prom,ArrayList <HomeOrder> horders,ArrayList<Rate> rates )
 	{
 		this.si = new ArrayList<StationInventory>(si);
 		this.fuels = new ArrayList<Fuel>(fuels);
@@ -86,6 +93,16 @@ public class FuelOrderResponse extends Response {
 
 	public void setHorders(ArrayList <HomeOrder> horders) {
 		this.horders = horders;
+	}
+
+
+	public ArrayList<Rate> getRates() {
+		return rates;
+	}
+
+
+	public void setRates(ArrayList<Rate> rates) {
+		this.rates = rates;
 	}
 	
 

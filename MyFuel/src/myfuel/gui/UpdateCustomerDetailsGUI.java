@@ -203,7 +203,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		panel2.add(lblSaleModel);
 		
 		saleCB = new JComboBox<String>();
-		saleCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Occassional", "Monthly"}));
+		saleCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Occasional", "Monthly- One Car", "Monthly - Few Cars", "Fully Monthly - One Car"}));
 		saleCB.setBounds(103, 209, 149, 27);
 		panel2.add(saleCB);
 		
@@ -407,7 +407,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		if(e.getSource() == btnConfirmUpdate)
 		{
 			actions.verifyDetails(fnameText.getText(), lnameText.getText(), emailText.getText(),
-					addText.getText(), CCText.getText(), typeCB.getSelectedIndex(), saleCB.getSelectedIndex(), access);
+					addText.getText(), CCText.getText(), typeCB.getSelectedIndex(), saleCB.getSelectedIndex()+1, access);
 		}
 		
 		if(e.getSource()==btnRemove)
