@@ -18,19 +18,17 @@ import myfuel.response.CustomerLoginResponse;
 
 public class CarFuelActions extends GUIActions {
 	private CarFuelGUI gui;
-	private CustomerLoginResponse res;
-	private ArrayList <StationInventory> sInventory;
-	private ArrayList <Fuel> fuels;
+	private CustomerLoginResponse customerRes;
+	private FuelOrderResponse infoRes;
 	
 	public CarFuelActions(MyFuelClient client,CustomerLoginResponse res) {
 		super(client);
-		this.res = res;
-		sInventory = null;
-		fuels = null;
+		this.customerRes = res;
+		infoRes = null;
 		gui = new CarFuelGUI(this);
 		insertInfo();
-		getInventoryRequest();
 		gui.setVisible(true);
+		getInfoRequest();
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -39,16 +37,17 @@ public class CarFuelActions extends GUIActions {
     /**
      * 
      */
-	private void getInventoryRequest() {
+	private void getInfoRequest() {
 		// TODO Auto-generated method stub
+		gui.createWaitDialog();
 		FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Select,1,-1);
 		client.handleMessageFromGUI(req);
 	}
 	
 	private void insertInfo()
 	{
-		ArrayList<Station> stations = res.getStations();
-		ArrayList<Car> cars = res.getUser().getCars();
+		ArrayList<Station> stations = customerRes.getStations();
+		ArrayList<Car> cars = customerRes.getUser().getCars();
 		
 		for(Station s: stations)
 			gui.addStation(s.getName());
@@ -65,9 +64,9 @@ public class CarFuelActions extends GUIActions {
 		if(arg instanceof FuelOrderResponse)
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
-			sInventory = new ArrayList <StationInventory>(res.getSi());
-			fuels = new ArrayList<Fuel>(res.getFuels());
-			gui.setPrices(fuels);
+			this.infoRes = res;
+			gui.setPrices(infoRes.getFuels());
+			gui.setWaitPorgress();
 		}
 	}
 
@@ -75,13 +74,13 @@ public class CarFuelActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,new CustomerOptionsActions(client,res),this);
+		changeFrame(gui,new CustomerOptionsActions(client,customerRes),this);
 		
 	}
 
 
 	public ArrayList <Fuel> getFuels() {
-		return this.fuels;
+		return this.infoRes.getFuels();
 	}
 
 }
