@@ -29,7 +29,7 @@ import java.io.IOException;
  */
 @SuppressWarnings("serial")
 public abstract class SuperGUI extends JFrame {
-
+	private WaitDialog waitD;
 	/**
 	 * Content Panel of the Frame.
 	 */
@@ -172,6 +172,17 @@ public abstract class SuperGUI extends JFrame {
 			
 		}
 		
+	}
+	
+	public void createWaitDialog()
+	{
+		waitD = new WaitDialog();
+		waitD.setVisible(true);
+	}
+	
+	public void setWaitPorgress()
+	{
+		waitD.setProgress(1);
 	}
 	
 	
