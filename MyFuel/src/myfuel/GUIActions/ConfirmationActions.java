@@ -13,27 +13,44 @@ import myfuel.request.RequestEnum;
 import myfuel.response.ConfirmationResponse;
 import myfuel.response.booleanResponse;
 
+/***
+ * This Class will be a controller for the ConfirmationGUI
+ * @author karmo
+ *
+ */
 public class ConfirmationActions extends GUIActions {
 
+	/***
+	 * This class will be a controller for this GUI
+	 */
 	private ConfirmationGUI gui ; 
 	
+	/***
+	 * Customer Details
+	 */
 	private ArrayList<Customer> customers;
 
+	/***
+	 * Approved Customers ID's
+	 */
 	private ArrayList<Integer> approved;
+	/***
+	 * ConfirmationActions Constructor
+	 * @param client - MyFuelCLient
+	 */
 	public ConfirmationActions(MyFuelClient client)
 	{
 		super(client);
 		gui = new ConfirmationGUI(this);
 		ConfirmationRequest request = new ConfirmationRequest(RequestEnum.Select);
+		gui.createWaitDialog("Getting Customer Details...");
 		 client.handleMessageFromGUI(request);
 		gui.setVisible(true);
 		approved =new ArrayList<Integer>();
 		
 	}
 	
-	/***
-	 * handle message from the server
-	 */
+
 
 	@Override
 	public void update(Observable arg0, Object arg1) 
@@ -41,6 +58,9 @@ public class ConfirmationActions extends GUIActions {
 		if(arg1 instanceof ConfirmationResponse)
 		{
 				customers = ((ConfirmationResponse)arg1).getCustomers();
+				
+				gui.setWaitPorgress();
+				
 				if(customers.isEmpty())
 				{
 					gui.showErrorMessage("There are no customers waiting for confirmation!");
@@ -53,6 +73,8 @@ public class ConfirmationActions extends GUIActions {
 		
 		else if(arg1 instanceof booleanResponse)
 		{
+			gui.setWaitPorgress();
+			
 		    booleanResponse res  = ((booleanResponse)arg1);
 			if(res.getSuccess())
 			{
@@ -74,6 +96,10 @@ public class ConfirmationActions extends GUIActions {
 
 	}
 	
+	/***
+	 * Sending Mails For approved Customers
+	 * @param c - Approved Customer
+	 */
 	private void sendMail(Customer c) {
 		// TODO Auto-generated method stub
 		String subject = "Welcome to MyFuel!";
@@ -86,6 +112,10 @@ public class ConfirmationActions extends GUIActions {
 		SendMailTLS.sendMail(c.getEmail() , subject, content);
 	}
 
+	/***
+	 * Sending the Approved Customers to the DB
+	 * @param approved - approved Customers ID's
+	 */
 	public void sendApproved(ArrayList<Integer> approved)
 	{
 		this.approved = approved;

@@ -174,7 +174,7 @@ public class ConfirmationGUI extends SuperGUI{
 	
 		
 	}
-	
+
 	public void createProgressBar(int customers)
 	{
 		dialog = new MailDialog(customers);

@@ -14,16 +14,33 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
+/***
+ * User interface for New Rates Confirmation
+ * @author karmo
+ *
+ */
+@SuppressWarnings("serial")
 public class ConfirmNewRatesGUI extends SuperGUI{
-	
+	/***
+	 * Controller for this GUI
+	 */
 	private ConfirmNewRatesActions actions;
+	/***
+	 * Confirmation Button
+	 */
 	private JButton btnConfirm;
+	/***
+	 * Table for showing the Rates
+	 */
 	private JTable table;
+	/***
+	 * Table Model
+	 */
 	private DefaultTableModel model;
 	
 	/***
-	 * 
-	 * @param actions - the controller of the GUI
+	 * ConfirmNewRatesGUI Constructor
+	 * @param actions - the controller of this GUI
 	 */
 	public ConfirmNewRatesGUI(ConfirmNewRatesActions actions)
 	{

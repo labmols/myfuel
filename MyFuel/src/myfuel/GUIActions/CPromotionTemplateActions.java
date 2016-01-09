@@ -43,20 +43,18 @@ public class CPromotionTemplateActions extends GUIActions{
 	public void PromotionTemplate(PromotionTemplate p)
 	{
 		 rq  = new PromotionTemplateRequest(p);
+		 gui.createWaitDialog("Saving Promotion Template ...");
 		client.handleMessageFromGUI(rq);
 	}
 	
-/***
- *  will receive a response from the server
- *  if CreatePromotionTemplateGUI is active than the response will be check
- */
+
 	@Override
 	public void update(Observable arg0, Object arg1) 
 	{
-		if(gui.isActive() && arg1 instanceof booleanResponse)
+		if( arg1 instanceof booleanResponse)
 		{
 			booleanResponse response = (booleanResponse)arg1;
-			
+			gui.setWaitPorgress();
 			if(response.getSuccess() == true)
 				gui.showOKMessage("Promotion Template " +"\""+rq.getP().getName()+"\""+" Created!");
 			else
@@ -97,10 +95,8 @@ public class CPromotionTemplateActions extends GUIActions{
 		
 		if(result)
 			PromotionTemplate(p);
-}
-	/***
-	 * Return to previous menu
-	 */
+	}
+	
 	@Override
 	public void backToMenu() {
 

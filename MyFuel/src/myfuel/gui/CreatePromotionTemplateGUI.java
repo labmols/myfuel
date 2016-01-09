@@ -34,21 +34,57 @@ import java.util.GregorianCalendar;
 import javax.swing.JTextPane;
 import javax.swing.JSpinner;
 
+/***
+ * User Interface For Creating Promotion Template
+ * @author karmo
+ *
+ */
+@SuppressWarnings("serial")
 public class CreatePromotionTemplateGUI extends SuperGUI {
 
-	
+	/***
+	 * Controller for this GUI
+	 */
 	private CPromotionTemplateActions actions;
+	/***
+	 * Input for Name of the template
+	 */
 	private JTextField name;
+	/***
+	 * Input for Discount of the template
+	 */
 	private JTextField discount;
+	/***
+	 * Input for Start Time of the template
+	 */
 	private JSpinner startHour;
+	/***
+	 * Input for End Time of the template
+	 */
 	private JSpinner EndHour;
-	private JComboBox typeOfCustomer;
+	/***
+	 * JComboBox for Customer Type 
+	 */
+	private JComboBox<String> typeOfCustomer;
+	/***
+	 * Creation Button
+	 */
 	private JButton btnCreate;
-	private JComboBox fuel;
+	/***
+	 * JComboBox for fuel Type 
+	 */
+	private JComboBox<String> fuel;
+	/***
+	 * Object for saving the PromotionTemplate Details
+	 */
 	private PromotionTemplate p ;
+	/***
+	 * True for legal values and false otherwise
+	 */
 	private boolean legal;
 	/**
-	 * Create the frame.
+	 * CreatePromotionTemplateGUI Constructor
+	 * @param actions - Controller for this GUI
 	 */
 	public CreatePromotionTemplateGUI(CPromotionTemplateActions actions) {
 		this.actions = actions;
@@ -59,7 +95,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setText("Create Promotion Template");
 	
-		this.mnMenu.addActionListener(new menuListener());
+		this.mnMenu.addActionListener(new BackMainMenu(actions));
 		
 		
 		JLabel lblPromotionName = new JLabel("Promotion Template Name:");
@@ -117,8 +153,8 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		lblTypeOfCustomer.setBounds(101, 203, 149, 14);
 		panel.add(lblTypeOfCustomer);
 		
-		typeOfCustomer = new JComboBox();
-		typeOfCustomer.setModel(new DefaultComboBoxModel(new String[] {"Private", "Company"}));
+		typeOfCustomer = new JComboBox<String>();
+		typeOfCustomer.setModel(new DefaultComboBoxModel<String>(new String[] {"Private", "Company"}));
 		typeOfCustomer.setBounds(280, 201, 118, 20);
 		panel.add(typeOfCustomer);
 		
@@ -136,24 +172,14 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		
 		panel.add(lblTypeOfFuel);
 		
-		 fuel = new JComboBox();
-		 fuel.setModel(new DefaultComboBoxModel(new String[] {"95", "Diesel", "Scooter", "Home Fuel"}));
+		 fuel = new JComboBox<String>();
+		 fuel.setModel(new DefaultComboBoxModel<String>(new String[] {"95", "Diesel", "Scooter", "Home Fuel"}));
 		fuel.setBounds(280, 239, 115, 20);
 		panel.add(fuel);
 		
 	}
 	
-	private class menuListener implements ActionListener
-	{
 
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			actions.backToMenu();
-			
-		}
-		
-	}
 
 	@Override
 	public void getInput(ActionEvent e) 
@@ -182,7 +208,11 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		
 		
 	}
-	
+	/***
+	 * Action Listener for JButton
+	 * @author karmo
+	 *
+	 */
 	private class btnHandler implements ActionListener
 	{
 
