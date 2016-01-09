@@ -9,16 +9,29 @@ import myfuel.request.CompanyReportRequest;
 import myfuel.response.ComapnyReportsResponse;
 import myfuel.response.booleanResponse;
 
+/***
+ * Controller for ShowReportGUI
+ * @author karmo
+ *
+ */
 public class showReportsActions extends GUIActions {
 
+	/***
+	 * This class will be a controller for this GUI
+	 */
 	private ShowReportGUI gui ; 
 	
+	/***
+	 * showReportsActions Constructor
+	 * @param client - MyFuelClient
+	 */
 	public showReportsActions(MyFuelClient client) 
 	{
 		super(client);
 		
-		CompanyReportRequest request = new CompanyReportRequest();
+		CompanyReportRequest request = new CompanyReportRequest(-1);
 		client.handleMessageFromGUI(request);
+		
 		gui = new ShowReportGUI(this);
 		gui.setVisible(true);
 		
@@ -31,9 +44,16 @@ public class showReportsActions extends GUIActions {
 		{
 			
 			ComapnyReportsResponse r = (ComapnyReportsResponse)arg1;
-			gui.setInventoryPanel(r.getqStationInventory());
-			gui.setIncomePanel(r.getqStationIncome());
-			gui.setPurchasePanel(r.getqStationPurchase());
+			
+			if(r.getType() == 0)
+				gui.setYears(r.getYears());
+			
+			else if(r.getType() == 1)
+			{
+				gui.setInventoryPanel(r.getqStationInventory());
+				gui.setIncomePanel(r.getqStationIncome());
+				gui.setPurchasePanel(r.getqStationPurchase());
+			}
 		}
 		
 		else if(arg1 instanceof booleanResponse)
@@ -41,6 +61,16 @@ public class showReportsActions extends GUIActions {
 			gui.showErrorMessage(((booleanResponse)arg1).getMsg());
 		}
 
+	}
+	
+	/***
+	 * Get Reports details from the server for a specific year
+	 * @param year - Requested Year
+	 */
+	public void getDetails(int year)
+	{
+		CompanyReportRequest request = new CompanyReportRequest(year);
+		client.handleMessageFromGUI(request);
 	}
 
 	@Override

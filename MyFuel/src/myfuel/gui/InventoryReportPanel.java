@@ -33,7 +33,7 @@ public class InventoryReportPanel extends JPanel
 		}
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setOpaque(false);
-		scrollPane.setBounds(32, 29, 436, 242);
+		scrollPane.setBounds(37, 58, 430, 213);
 		add(scrollPane);
 		
 		table = new JTable(model);

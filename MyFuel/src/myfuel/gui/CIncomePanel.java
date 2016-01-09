@@ -30,6 +30,12 @@ public class CIncomePanel extends IncomesReportPanel
 	 * Quarters that are specified in the report
 	 */
 	private JComboBox<String> quarter;
+	
+	/***
+	 * ComboBox Model
+	 */
+	private DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+	
 	/***
 	 * CIncomePanel Constructor
 	 */
@@ -37,6 +43,7 @@ public class CIncomePanel extends IncomesReportPanel
 		
 		 stations = new JComboBox<String>();
 		 stations.addActionListener(new comboHandler());
+		 stations.setModel(comboModel);
 		 stations.setBounds(154, 11, 135, 20);
 		add(stations);
 		
@@ -69,13 +76,16 @@ public class CIncomePanel extends IncomesReportPanel
 			int bill = 0 ;
 			int quantity = 0 ;
 			clearTable();
-			for(QuarterStationIncome q : qStationIncome)
+			if(comboModel.getSize() != 0)
 			{
-				if(stations.getSelectedItem().equals(q.getStation().getName()) && q.getQid() == quarter.getSelectedIndex()+1)
+				for(QuarterStationIncome q : qStationIncome)
 				{
-					bill+= q.getP().getBill();
-					quantity += q.getP().getQty();
-					model.insertRow(model.getRowCount(), new Object[] {q.getP().getCustomerid(),q.getP().getBill(),q.getP().getQty()});
+					if(stations.getSelectedItem().equals(q.getStation().getName()) && q.getQid() == quarter.getSelectedIndex()+1)
+					{
+						bill+= q.getP().getBill();
+						quantity += q.getP().getQty();
+						model.insertRow(model.getRowCount(), new Object[] {q.getP().getCustomerid(),q.getP().getBill(),q.getP().getQty()});
+					}
 				}
 			}
 			 billLabel.setText(""+bill);
@@ -91,6 +101,8 @@ public class CIncomePanel extends IncomesReportPanel
 	{
 		this.qStationIncome = qStationIncome;
 		ArrayList<String> stations_names = new ArrayList<String>();
+		clearTable();
+		
 		
 		for(QuarterStationIncome q : qStationIncome)
 		{
@@ -98,7 +110,11 @@ public class CIncomePanel extends IncomesReportPanel
 				stations_names.add(q.getStation().getName());
 		}
 		
+		comboModel.removeAllElements();
+		
 		for(String str : stations_names)
-			stations.addItem(str);
+		{
+			comboModel.addElement(str);
+		}
 	}
 }

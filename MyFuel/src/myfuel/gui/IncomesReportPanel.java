@@ -36,7 +36,7 @@ public class IncomesReportPanel extends JPanel
 			model.addColumn(str);
 		}
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(26, 61, 464, 212);
+		scrollPane.setBounds(37, 58, 430, 213);
 		add(scrollPane);
 		
 		table = new JTable(model);

@@ -42,12 +42,24 @@ public class CinventoryPanel extends JPanel{
 	 * Table model
 	 */
 	private DefaultTableModel model;
+	
+	/***
+	 * ComboBox Model
+	 */
+	private DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+	
+	/***
+	 * All station names that will be presented in this panel
+	 */
+	ArrayList<String> station_names ;
 	/***
 	 * CinventoryPanel Constructor
 	 */
 	public CinventoryPanel() {
 		setLayout(null);
 		
+		
+		station_names = new ArrayList<String>();
 		JLabel lblChooseStation = new JLabel("Choose Station:");
 		lblChooseStation.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblChooseStation.setBounds(46, 4, 102, 19);
@@ -55,6 +67,7 @@ public class CinventoryPanel extends JPanel{
 		
 		station = new JComboBox<String>();
 		station.addActionListener(new stationHandler());
+		station.setModel(comboModel);
 		station.setBounds(158, 5, 82, 20);
 		add(station);
 		
@@ -70,7 +83,7 @@ public class CinventoryPanel extends JPanel{
 		add(quarter);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 36, 430, 253);
+		scrollPane.setBounds(37, 58, 430, 213);
 		add(scrollPane);
 		model = new MyTableModel(3,-1);
 		String[] names = {"Fuel ID","Fuel Name","Quantity"};
@@ -94,11 +107,14 @@ public class CinventoryPanel extends JPanel{
 		public void actionPerformed(ActionEvent e) 
 		{
 			clearTable();
-			for(QuarterStationInventory i: in)
+			if(comboModel.getSize() != 0)
 			{
-				if(station.getSelectedItem().equals(i.getStation().getName()) && i.getQid() == quarter.getSelectedIndex()+1)
+				for(QuarterStationInventory i: in)
 				{
-					model.insertRow(model.getRowCount(),new Object[] {i.getFuel().getFid(),i.getFuel().getFname(),i.getFuel().getQty()});
+					if(station.getSelectedItem().equals(i.getStation().getName()) && i.getQid() == quarter.getSelectedIndex()+1)
+					{
+						model.insertRow(model.getRowCount(),new Object[] {i.getFuel().getFid(),i.getFuel().getFname(),i.getFuel().getQty()});
+					}
 				}
 			}
 			
@@ -111,18 +127,27 @@ public class CinventoryPanel extends JPanel{
 	 */
 	public void setDetails(ArrayList<QuarterStationInventory> in)
 	{
-		this.in = in;
-		ArrayList<String> station_names = new ArrayList<String>();
+		try{
+		this.in = in ;
 	
+		clearTable();
+		
 		for(QuarterStationInventory q : in)
 		{
 			if(!station_names.contains(q.getStation().getName()))
 				station_names.add(q.getStation().getName());
 		}
 		
+		comboModel.removeAllElements();
+		
 		for(String str : station_names)
 		{
-			this.station.addItem(str);
+			comboModel.addElement(str);
+		}
+		
+		} catch(Exception e )
+		{
+			e.printStackTrace();
 		}
 		
 	}

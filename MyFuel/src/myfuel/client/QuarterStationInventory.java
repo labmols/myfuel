@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /***
  * This class will has the Inventory details of a station in a specific quarter
+ * @author karmo
  *
  */
 @SuppressWarnings("serial")
@@ -22,6 +23,8 @@ public class QuarterStationInventory  implements Serializable
 	 */
 	private FuelQty fuel;
 	
+
+	
 	/***
 	 *  quarterStationInventory constructor
 	 * @param qid - quarter id
@@ -33,6 +36,7 @@ public class QuarterStationInventory  implements Serializable
 		this.setQid(qid);
 		this.setStation(station);
 		this.setFuel(fuel);
+		
 	}
 
 	public int getQid() {
@@ -58,5 +62,7 @@ public class QuarterStationInventory  implements Serializable
 	public void setFuel(FuelQty fuel) {
 		this.fuel = fuel;
 	}
+
+
 
 }

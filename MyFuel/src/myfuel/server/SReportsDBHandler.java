@@ -39,7 +39,7 @@ public class SReportsDBHandler extends DBHandler{
 	
 	public SReportsDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
-		
+		cal = Calendar.getInstance();
 	}
 	
 	/***
@@ -56,11 +56,16 @@ public class SReportsDBHandler extends DBHandler{
 		 try{
 			 
 			// check if there is a report for this quarter
-			 ps = con.prepareStatement("select * from inventory_report where sid = ? and qid = ?");
+			 ps = con.prepareStatement("select * from inventory_report where sid = ? and qid = ? and year = ?");
 			 ps.setInt(1, sid);
 			 ps.setInt(2, q);
-			 
+			 ps.setInt(3,cal.getTime().getYear() + 1900 );
 			 rs = ps.executeQuery();
+			 
+			  
+			// cal.set(2013, Calendar.MONTH, 2);
+			 
+			 cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY,1);
 			 
 			 if(rs.next())
 			 {
@@ -83,11 +88,12 @@ public class SReportsDBHandler extends DBHandler{
 			
 				 for(FuelQty f : inventory)
 				 {
-					 ps = con.prepareStatement("insert into inventory_report values(?,?,?,?)");
+					 ps = con.prepareStatement("insert into inventory_report values(?,?,?,?,?)");
 					 ps.setInt(1, sid);
 					 ps.setInt(2, q); // Quarter
 					 ps.setInt(3, f.getFid());
 					 ps.setFloat(4,f.getQty());
+					 ps.setInt(5,cal.getTime().getYear() + 1900 );
 					 
 					 ps.executeUpdate();
 				 }
@@ -116,10 +122,11 @@ public class SReportsDBHandler extends DBHandler{
 			 
 		 
 		// check if there is a report for this quarter
-		 ps = con.prepareStatement("select * from company_report where sid = ? and qid = ? and rid = ?");
+		 ps = con.prepareStatement("select * from company_report where sid = ? and qid = ? and rid = ? and year = ?");
 		 ps.setInt(1, sid);
 		 ps.setInt(2, q);
 		 ps.setInt(3, rid);
+		 ps.setInt(4,cal.getTime().getYear() + 1900 );
 		 rs = ps.executeQuery();
 		 
 		 if(rs.next())
@@ -146,10 +153,12 @@ public class SReportsDBHandler extends DBHandler{
 	private void check_dates(int q)
 	{
 		try{
-	 		 
+	 		
 			  cal = Calendar.getInstance();
+			  
 			 switch(q)
 			  {
+			 
 			 	case 1:
 			 		cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY,1);
 			 		sdate = new java.sql.Timestamp( cal.getTime().getTime());
@@ -198,11 +207,11 @@ public class SReportsDBHandler extends DBHandler{
 			 
 			 
 			 check_dates(q);
-			ps = con.prepareStatement("insert into company_report values (?,?,?) ");
+			ps = con.prepareStatement("insert into company_report values (?,?,?,?) ");
 			ps.setInt(1,rid);
 			ps.setInt(2,sid);
 			ps.setInt(3, q);
-			
+			ps.setInt(4,cal.getTime().getYear() + 1900 );
 			ps.executeUpdate();
 			
 		 ps = con.prepareStatement("select c.uid,p.fuelid,p.bill,p.qty from customer_purchase as c, purchase as p  "
@@ -241,11 +250,11 @@ public class SReportsDBHandler extends DBHandler{
 		 PreparedStatement ps = null;
 	 try{ 
 		 
-			ps = con.prepareStatement("insert into company_report values (?,?,?) ");
+			ps = con.prepareStatement("insert into company_report values (?,?,?,?) ");
 			ps.setInt(1,rid);
 			ps.setInt(2,sid);
 			ps.setInt(3, q);
-			
+			ps.setInt(4,cal.getTime().getYear() + 1900 );
 			ps.executeUpdate();
 			
 		 check_dates(q);

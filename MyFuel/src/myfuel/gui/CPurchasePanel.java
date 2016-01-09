@@ -12,13 +12,35 @@ import javax.swing.DefaultComboBoxModel;
 import myfuel.client.QuarterStationPurchase;
 import myfuel.client.QuarterStationIncome;
 
+/***
+ * User Interface For showing the Purchase Report
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class CPurchasePanel extends PurchaseReportPanel
 {
+	/***
+	 * Purchase Details per QUarter
+	 */
 	private ArrayList<QuarterStationPurchase> qStationPurchase;
+	/***
+	 * Contains the Stations that mentioned in the Report
+	 */
 	private JComboBox<String> stations;
+	/***
+	 * Contains all quarters
+	 */
 	private JComboBox<String> quarter;
+	
+	/***
+	 * ComboBox Model
+	 */
+	private DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+	
 	public CPurchasePanel() {
+		fuelType.setLocation(227, 29);
+		lblChooseFuelType.setLocation(66, 27);
 		
 		JLabel lblPickStation = new JLabel("Pick Station:");
 		lblPickStation.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -28,17 +50,18 @@ public class CPurchasePanel extends PurchaseReportPanel
 		stations = new JComboBox<String>();
 		stations.addActionListener(new comboBoxHandler());
 		stations.setBounds(119, 6, 127, 20);
+		stations.setModel(comboModel);
 		add(stations);
 		
 		JLabel lblQuarter = new JLabel("Quarter:");
 		lblQuarter.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblQuarter.setBounds(315, -5, 107, 38);
+		lblQuarter.setBounds(302, -5, 107, 38);
 		add(lblQuarter);
 		
 		quarter = new JComboBox<String>();
 		quarter.addActionListener(new comboBoxHandler());
 		quarter.setModel(new DefaultComboBoxModel<String>(new String[] {"Q1", "Q2", "Q3", "Q4"}));
-		quarter.setBounds(388, 6, 78, 20);
+		quarter.setBounds(381, 6, 78, 20);
 		add(quarter);
 		
 	
@@ -48,6 +71,11 @@ public class CPurchasePanel extends PurchaseReportPanel
 		
 	}
 	
+	/***
+	 * ActionListener for Fuel Type ComboBox
+	 * @author karmo
+	 *
+	 */
 	private  class comboHandler2 implements ActionListener
 	{
 
@@ -56,20 +84,24 @@ public class CPurchasePanel extends PurchaseReportPanel
 		{
 			if(fuelType.getSelectedIndex() == 0)
 				show_all();
+			
 			else
 			{
 				float bill = 0 ;
 				float quantity = 0 ;
 				clearTable();
-				for(QuarterStationPurchase q : qStationPurchase)
+				if(comboModel.getSize() != 0)
 				{
-					
-					if(stations.getSelectedItem().equals(q.getQ().getStation().getName()) && q.getQ().getQid() == quarter.getSelectedIndex()+1
-									&& fuelType.getSelectedIndex() == q.getQ().getP().getFuelid())
+					for(QuarterStationPurchase q : qStationPurchase)
 					{
-						bill+= q.getQ().getP().getBill();
-						quantity += q.getQ().getP().getQty();
-						model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),q.getQ().getP().getBill(),q.getQ().getP().getQty()});
+						
+						if(stations.getSelectedItem().equals(q.getQ().getStation().getName()) && q.getQ().getQid() == quarter.getSelectedIndex()+1
+										&& fuelType.getSelectedIndex() == q.getQ().getP().getFuelid())
+						{
+							bill+= q.getQ().getP().getBill();
+							quantity += q.getQ().getP().getQty();
+							model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),q.getQ().getP().getBill(),q.getQ().getP().getQty()});
+						}
 					}
 				}
 				 billLabel.setText(""+bill);
@@ -79,6 +111,12 @@ public class CPurchasePanel extends PurchaseReportPanel
 		}
 		
 	}
+	
+	/***
+	 * Action Listener for Quarter and Stations COmboBox
+	 * @author karmo
+	 *
+	 */
 	private class comboBoxHandler implements ActionListener
 	{
 
@@ -88,6 +126,35 @@ public class CPurchasePanel extends PurchaseReportPanel
 			float bill = 0 ;
 			float quantity = 0 ;
 			clearTable();
+			if(comboModel.getSize() != 0)
+			{
+				for(QuarterStationPurchase q : qStationPurchase)
+				{
+					
+						if(stations.getSelectedItem().equals(q.getQ().getStation().getName()) && q.getQ().getQid() == quarter.getSelectedIndex()+1)
+						{
+							bill+= q.getQ().getP().getBill();
+							quantity += q.getQ().getP().getQty();
+							model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),q.getQ().getP().getBill(),q.getQ().getP().getQty()});
+						}
+				}
+			}
+			 billLabel.setText(""+bill);
+			 qtyLabel.setText(""+quantity);
+		}
+		
+	}
+	
+	/***
+	 * This method will fill the Table with the fully report details (Without Difference of the Fuel Types)
+	 */
+	private void show_all()
+	{
+		int bill = 0 ;
+		int quantity = 0 ;
+		clearTable();
+		if(comboModel.getSize() != 0)
+		{
 			for(QuarterStationPurchase q : qStationPurchase)
 			{
 				if(stations.getSelectedItem().equals(q.getQ().getStation().getName()) && q.getQ().getQid() == quarter.getSelectedIndex()+1)
@@ -97,34 +164,20 @@ public class CPurchasePanel extends PurchaseReportPanel
 					model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),q.getQ().getP().getBill(),q.getQ().getP().getQty()});
 				}
 			}
-			 billLabel.setText(""+bill);
-			 qtyLabel.setText(""+quantity);
-		}
-		
-	}
-	
-	private void show_all()
-	{
-		int bill = 0 ;
-		int quantity = 0 ;
-		clearTable();
-		for(QuarterStationPurchase q : qStationPurchase)
-		{
-			if(stations.getSelectedItem().equals(q.getQ().getStation().getName()) && q.getQ().getQid() == quarter.getSelectedIndex()+1)
-			{
-				bill+= q.getQ().getP().getBill();
-				quantity += q.getQ().getP().getQty();
-				model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),q.getQ().getP().getBill(),q.getQ().getP().getQty()});
-			}
 		}
 		 billLabel.setText(""+bill);
 		 qtyLabel.setText(""+quantity);
 	}
 	
+	/***
+	 * This method will update all elements in this panel that linked to the Report Presentation
+	 * @param qStationPurchase - Purchase Report Details 
+	 */
 	public void setDetails( ArrayList<QuarterStationPurchase> qStationPurchase)
 	{
 		this.qStationPurchase = qStationPurchase;
 		ArrayList<String> stations_names = new ArrayList<String>();
+		clearTable();
 		
 		for(QuarterStationPurchase q : qStationPurchase)
 		{
@@ -132,8 +185,10 @@ public class CPurchasePanel extends PurchaseReportPanel
 				stations_names.add(q.getQ().getStation().getName());
 		}
 		
+		comboModel.removeAllElements();
+		
 		for(String str : stations_names)
-			stations.addItem(str);
+			comboModel.addElement(str);
 	}
 
 }

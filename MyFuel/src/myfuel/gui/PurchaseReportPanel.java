@@ -32,7 +32,7 @@ public class PurchaseReportPanel extends JPanel {
 		setLayout(null);
 		purchase = null;
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(70, 58, 354, 207);
+		scrollPane.setBounds(37, 58, 430, 213);
 		add(scrollPane);
 		String[] names = {"Customer ID","BIll","Quantity"};
 		model = new MyTableModel(3,-1);
