@@ -14,18 +14,50 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 import myfuel.client.Purchase;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 
+/***
+ * User Interface for Showing Purchase Report 
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class PurchaseReportPanel extends JPanel {
+	/***
+	 * Table for showing report details
+	 */
 	private JTable table;
-	protected JComboBox<?> fuelType;
+	/***
+	 * ComboBox for picking FuelType
+	 */
+	protected JComboBox<String> fuelType;
+	/***
+	 * JTable Model
+	 */
 	protected DefaultTableModel model;
+	/***
+	 * Purchase Report Details
+	 */
 	private ArrayList<Purchase> purchase;
+	/***
+	 * Total Quantity Label
+	 */
 	protected JLabel qtyLabel;
+	/***
+	 * Total Bill Label
+	 */
 	protected JLabel billLabel;
+	/***
+	 * Choose Fuel Type
+	 */
 	protected JLabel lblChooseFuelType;
+	
+	/***
+	 * PurchaseReportPanel Constructor
+	 */
 	public PurchaseReportPanel() {
 		setOpaque(false);
 		setBounds(new Rectangle(42, 110, 517, 310));
@@ -45,9 +77,9 @@ public class PurchaseReportPanel extends JPanel {
 		table.setModel(model);
 		scrollPane.setViewportView(table);
 		
-		 fuelType = new JComboBox();
+		 fuelType = new JComboBox<String>();
 		 fuelType.addActionListener(new comboHandler());
-		fuelType.setModel(new DefaultComboBoxModel(new String[] {"All","95", "Diesel", "Scooter"}));
+		fuelType.setModel(new DefaultComboBoxModel<String>(new String[] {"All","95", "Diesel", "Scooter"}));
 		fuelType.setBounds(255, 27, 128, 20);
 		add(fuelType);
 		
@@ -77,6 +109,11 @@ public class PurchaseReportPanel extends JPanel {
 		add(lblChooseFuelType);
 	}
 	
+	/***
+	 * Action Listener will handle an event that occurred with an object it attached to.
+	 * @author karmo
+	 *
+	 */
 	protected class comboHandler implements ActionListener
 	{
 
@@ -107,6 +144,10 @@ public class PurchaseReportPanel extends JPanel {
 		}
 		
 	}
+	/***
+	 * This method will set the necessary elements of this panel for showing the Report
+	 * @param purchase - Purchase Report Details
+	 */
 	public void setTable(ArrayList<Purchase> purchase)
 	{
 		if(this.purchase == null)
@@ -124,7 +165,9 @@ public class PurchaseReportPanel extends JPanel {
 		}
 		billLabel.setText(""+bill); qtyLabel.setText(""+qty);
 	}
-	
+	/***
+	 * This method Clears the JTable and The Labels
+	 */
 	protected void  clearTable()
 	{
 		billLabel.setText("0"); qtyLabel.setText("0");

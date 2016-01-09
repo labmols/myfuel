@@ -18,15 +18,40 @@ import myfuel.client.Station;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
+/***
+ * This user interface will show the details for Customer Report
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class CustomerCReportPanel extends JPanel {
+	/***
+	 * ComboBox with Station Names
+	 */
 	private JComboBox<String> station;
+	/***
+	 * Stations Details
+	 */
 	private ArrayList<Station> stations ;
+	/***
+	 * Customer Report Details
+	 */
 	private ArrayList<CustomerReport> creport;
+	/***
+	 * JTable Model
+	 */
 	private DefaultTableModel model;
+	/***
+	 * Table for showing report details
+	 */
 	private JTable table;
+	/***
+	 * JScrollPane for the table
+	 */
 	private JScrollPane scrollPane;
-	
+	/***
+	 * CustomerCReportPanel Constructor
+	 */
 	public CustomerCReportPanel() {
 		setOpaque(false);
 		setLayout(null);
@@ -70,7 +95,11 @@ public class CustomerCReportPanel extends JPanel {
 	}
 	
 	
-	
+	/***
+	 * This method will set the elements of this Panel 
+	 * @param stations - Station Details
+	 * @param creport - Customer Report Details
+	 */
 	public void setElements(ArrayList<Station>stations ,ArrayList<CustomerReport>creport)
 	{
 		this.stations = stations;
@@ -81,12 +110,20 @@ public class CustomerCReportPanel extends JPanel {
 		}
 	}
 	
+	/***
+	 * This method  clears  JTable
+	 */
 	private void  clearTable()
 	{
 		while(model.getRowCount() > 0)
 			model.removeRow(0);
 	}
 	
+	/***
+	 * ActionListener for Station ComboBox
+	 * @author karmo
+	 *
+	 */
 	private class comboHandler implements ActionListener
 	{
 

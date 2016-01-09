@@ -22,13 +22,17 @@ public class AnalysticActions extends GUIActions {
 	 */
 	private AnalysticGUI gui;
 
-	
+	/***
+	 * AnalysticActions Constructor
+	 * @param client - MyFuelClient
+	 */
 	public AnalysticActions(MyFuelClient client) 
 	{
 		super(client);
-		
+	
 		AnalysticRequest  request = new AnalysticRequest(RequestEnum.Select,new Date());
 		gui = new AnalysticGUI(this);
+		gui.createWaitDialog("Getting Analysis ...");
 		client.handleMessageFromGUI(request);
 		gui.setVisible(true);
 		
@@ -40,13 +44,17 @@ public class AnalysticActions extends GUIActions {
 		if( arg1 instanceof AnalysticResponse)
 		{
 			AnalysticResponse r = (AnalysticResponse)arg1;
+			
+			
 			 gui.updateCustomerPanel(r.getcType());
 			 gui.updateFuelsPanel(r.getfType());
 			 gui.updateHoursPanel(r.gethType());
+			 gui.setWaitPorgress();
 		}
 		
 		else if(arg1 instanceof booleanResponse)
 		{
+			gui.setWaitPorgress();
 			booleanResponse r = (booleanResponse)arg1;
 			if(!r.getSuccess())
 				gui.showErrorMessage(r.getMsg());
@@ -63,9 +71,13 @@ public class AnalysticActions extends GUIActions {
 		changeFrame(gui, new MDActions(client),this);
 
 	}
-
+	
+	/***
+	 * This method will Save the Details in the DB
+	 */
 	public void saveToDB() 
 	{
+		gui.createWaitDialog("Saving Analysis ...");
 		AnalysticRequest  request = new AnalysticRequest(RequestEnum.Insert,new Date());
 		client.handleMessageFromGUI(request);
 		

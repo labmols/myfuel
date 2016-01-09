@@ -29,6 +29,7 @@ public class MMAnalyzedActions extends GUIActions {
 		AnalysticRequest request = new AnalysticRequest(RequestEnum.Select,null);
 		client.handleMessageFromGUI(request);
 		gui = new MMAnalyzedGUI(this);
+		gui.createWaitDialog("Getting Analysis Dates...");
 		gui.setVisible(true);
 		
 	}
@@ -49,6 +50,8 @@ public class MMAnalyzedActions extends GUIActions {
 				 gui.updateFuelsPanel(r.getfType());
 				 gui.updateHoursPanel(r.gethType());
 			}
+			
+			gui.setWaitPorgress();
 		}
 
 	}
@@ -69,6 +72,7 @@ public class MMAnalyzedActions extends GUIActions {
 	public void getDetails(Date date) 
 	{
 		AnalysticRequest request = new AnalysticRequest(RequestEnum.Select,date);
+		gui.createWaitDialog("Getting Analysis Data for"+" "+date);
 		client.handleMessageFromGUI(request);
 		
 	}

@@ -25,6 +25,7 @@ public class MMReportsActions extends GUIActions {
 		super(client);
 		gui = new MMReportGUI(this);
 		MMRerportsRequest request = new MMRerportsRequest();
+		gui.createWaitDialog("Getting Reports Details...");
 		client.handleMessageFromGUI(request);
 		
 		
@@ -48,6 +49,8 @@ public class MMReportsActions extends GUIActions {
 		
 		else if(arg1 instanceof booleanResponse)  // will return boolean response only in case of an error
 			gui.showErrorMessage(((booleanResponse)arg1).getMsg());
+		
+		gui.setWaitPorgress();
 
 	}
 /***

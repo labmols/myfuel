@@ -22,18 +22,56 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/***
+ * This user Interface will Show the details of the Promotion Report
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class PromtionRPanel extends JPanel{
+	/***
+	 * Table For showing the report
+	 */
 	private JTable table;
+	/***
+	 * Table Model
+	 */
 	private DefaultTableModel model ; 
+	/***
+	 * Combobox For picking a promotion
+	 */
 	private JComboBox<String> comboBox;
+	/***
+	 * Promoiton Report Details
+	 */
 	private ArrayList<PromotionReport> p;
+	/***
+	 * Promtions Details
+	 */
 	private ArrayList<Promotion> pnames;
+	/***
+	 * Will show the number of buyers
+	 */
 	private JLabel buyers ;
+	/***
+	 * Will show the total incomes
+	 */
 	private JLabel incomes;
+	/***
+	 * Will show the end date
+	 */
 	private JLabel endDate;
+	/***
+	 * Will show the Start Date
+	 */
 	private JLabel startDate;
+	/***
+	 * Will Show the Fuel Type
+	 */
 	private JLabel fuelType;
+	/****
+	 * Will show the total Discount amount
+	 */
 	private JLabel discount;
 	/***
 	 * Constructor for Promotion Report Panel
@@ -42,7 +80,7 @@ public class PromtionRPanel extends JPanel{
 		setOpaque(false);
 		setLayout(null);
 		
-		 comboBox = new JComboBox();
+		 comboBox = new JComboBox<String>();
 		 comboBox.addActionListener(new comboHandler());
 		comboBox.setBounds(162, 25, 373, 20);
 		add(comboBox);

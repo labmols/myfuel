@@ -12,14 +12,35 @@ import javax.swing.JButton;
 
 import myfuel.GUIActions.MMActions;
 
+/***
+ * User interface for the Marketing Manager
+ * @author karmo
+ *
+ */
 public class MMGUI extends SuperGUI {
-	JButton btnMakeAPromotion;
-	JButton btnShowReports;
-	JButton btnSetNewRates;
-	MMActions actions;
+	/***
+	 * Make a Promotion Button
+	 */
+	private JButton btnMakeAPromotion;
+	/***
+	 * Show Reports Button
+	 */
+	private JButton btnShowReports;
+	/***
+	 * Set New Rates BUtton
+	 */
+	private JButton btnSetNewRates;
+	/***
+	 * Controller for this GUI
+	 */
+	private MMActions actions;
+	/***
+	 * Analyzed Details BUtton
+	 */
 	private JButton aDetails;
-	/**
-	 * Create the frame.
+	/***
+	 * MMGUI Constructor
+	 * @param actions - controller for this GUI
 	 */
 	public MMGUI(MMActions actions) {
 		this.actions = actions;

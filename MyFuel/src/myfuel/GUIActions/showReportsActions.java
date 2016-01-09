@@ -33,6 +33,7 @@ public class showReportsActions extends GUIActions {
 		client.handleMessageFromGUI(request);
 		
 		gui = new ShowReportGUI(this);
+		gui.createWaitDialog("Getting Years That Listed In The DB...");
 		gui.setVisible(true);
 		
 	}
@@ -44,7 +45,7 @@ public class showReportsActions extends GUIActions {
 		{
 			
 			ComapnyReportsResponse r = (ComapnyReportsResponse)arg1;
-			
+			gui.setWaitPorgress();
 			if(r.getType() == 0)
 				gui.setYears(r.getYears());
 			
@@ -70,6 +71,7 @@ public class showReportsActions extends GUIActions {
 	public void getDetails(int year)
 	{
 		CompanyReportRequest request = new CompanyReportRequest(year);
+		gui.createWaitDialog("Getting Reports for"+" "+year+"...");
 		client.handleMessageFromGUI(request);
 	}
 

@@ -15,21 +15,41 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
+/***
+ * User Interface For the Marketing Manager Reports
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class MMReportGUI extends SuperGUI{
+	/***
+	 * Promotion Report Panel
+	 */
 	private PromtionRPanel reportPanel;
+	/***
+	 * Customer Report Panel
+	 */
 	private CustomerCReportPanel customerPanel;
+	/***
+	 * Controller for this GUI
+	 */
 	private MMReportsActions actions;
-	private JComboBox comboBox;
-	
+	/***
+	 * ComboBOx For Type of Report
+	 */
+	private JComboBox<String> comboBox;
+	/***
+	 * MMReportGUI COnstructor
+	 * @param actions - COntroller For This GUI
+	 */
 	public MMReportGUI(MMReportsActions actions)
 	{
 		lblTitle.setBounds(271, 6, 125, 25);
 		lblTitle.setText("Reports\r\n");
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new ComboHandler());
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Promotions Reports", "Customer Characterization"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Promotions Reports", "Customer Characterization"}));
 		comboBox.setBounds(193, 64, 191, 20);
 		panel.add(comboBox);
 		
@@ -47,7 +67,11 @@ public class MMReportGUI extends SuperGUI{
 	}
 	
 	
-	
+	/***
+	 * Action Listener 
+	 * @author karmo
+	 *
+	 */
 	private class ComboHandler implements ActionListener
 	{
 
@@ -72,11 +96,11 @@ public class MMReportGUI extends SuperGUI{
 		
 	}
 	/***
-	 * This method will send 
-	 * @param pr
-	 * @param names
-	 * @param stations
-	 * @param creport
+	 * This method will set the reports panels 
+	 * @param pr - Promotion Reports Details
+	 * @param names - Name of The Promotions
+	 * @param stations - Station Details
+	 * @param creport - Customer Report Details
 	 */
 	public void setReports(ArrayList<PromotionReport> pr,ArrayList<Promotion> names ,ArrayList<Station> stations,ArrayList<CustomerReport> creport)
 	{
