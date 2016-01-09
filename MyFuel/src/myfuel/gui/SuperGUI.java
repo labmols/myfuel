@@ -174,9 +174,9 @@ public abstract class SuperGUI extends JFrame {
 		
 	}
 	
-	public void createWaitDialog()
+	public void createWaitDialog(String msg)
 	{
-		waitD = new WaitDialog();
+		waitD = new WaitDialog(msg);
 		waitD.setVisible(true);
 	}
 	

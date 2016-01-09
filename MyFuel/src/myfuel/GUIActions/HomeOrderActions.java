@@ -56,11 +56,9 @@ public class HomeOrderActions extends GUIActions {
 		super(client);
 		this.gui = new HomeFuelGUI(this);
 		this.LoginRes= res;
-		getInfo();
-		
-        gui.getOrderPanel().setAddress(res.getUser().getAddress());
-       
 		gui.setVisible(true);
+		getInfo();
+        gui.getOrderPanel().setAddress(res.getUser().getAddress());
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -89,6 +87,7 @@ public class HomeOrderActions extends GUIActions {
 				
 				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null);
 				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent,p);
+				gui.createWaitDialog("Sending your order...");
 				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
 				client.handleMessageFromGUI(req);
 			
@@ -114,10 +113,12 @@ public class HomeOrderActions extends GUIActions {
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.response = res;
 			 gui.getTrackingPanel().updateTable(response.getHorders());
+			 gui.setWaitPorgress();
 		}
 		else if(arg instanceof booleanResponse)
 		{
 			booleanResponse res = (booleanResponse) arg;
+			gui.setWaitPorgress();
 			if(res.getSuccess()) 
 			{
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy"); 
@@ -150,6 +151,7 @@ public class HomeOrderActions extends GUIActions {
 	 */
 	private void getInfo ()
 	{
+		gui.createWaitDialog("Getting your orders Details...");
 		FuelOrderRequest req = new FuelOrderRequest(RequestEnum.Select, Fuel.HomeFuelID, LoginRes.getUser().getUserid());
 		client.handleMessageFromGUI(req);
 		

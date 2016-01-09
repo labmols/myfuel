@@ -39,7 +39,7 @@ public class CarFuelActions extends GUIActions {
      */
 	private void getInfoRequest() {
 		// TODO Auto-generated method stub
-		gui.createWaitDialog();
+		gui.createWaitDialog("Getting Details...");
 		FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Select,1,-1);
 		client.handleMessageFromGUI(req);
 	}

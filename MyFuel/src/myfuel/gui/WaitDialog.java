@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 /**
  *JDialog that presents progress of sending mails to the confirmed customers(created in ConfirmationGUI).
@@ -30,15 +31,16 @@ public class WaitDialog extends JDialog {
 /**
  * Progress Bar that indicates the sending mails progress.
  */
-	JProgressBar progressBar;
+	private JProgressBar progressBar;
+
+	
 
 /**
- * Create new Mail Dialog 
- * @param maxValue - Number of mails need to send.
+ * Create new Wait Dialog 
  */
-	public WaitDialog() {
-		setTitle("Getting Details...");
-		setBounds(100, 100, 339, 133);
+	public WaitDialog(String msg) {
+		setTitle("Wait...");
+		setBounds(100, 100, 339, 110);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -46,13 +48,14 @@ public class WaitDialog extends JDialog {
 		contentPanel.setLayout(null);
 		progressBar = new JProgressBar();
 		progressBar.setForeground(Color.ORANGE);
-		progressBar.setBounds(90, 51, 146, 20);
+		progressBar.setBounds(84, 44, 146, 20);
 		progressBar.setMaximum(1);
 		contentPanel.add(progressBar);
 		
-		JLabel lblFuelProgress = new JLabel("Getting Details...");
-		lblFuelProgress.setBounds(110, 23, 117, 16);
-		contentPanel.add(lblFuelProgress);
+		JLabel msgLabel = new JLabel(msg);
+		msgLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		msgLabel.setBounds(6, 23, 327, 16);
+		contentPanel.add(msgLabel);
 		{
 			JLabel label = new JLabel("");
 			label.setBounds(0, 0, 450, 239);
