@@ -53,6 +53,7 @@ public class FuelOrderResponse extends Response {
 		this.fuels = new ArrayList<Fuel>(fuels);
 		this.prom = prom;
 		this.setHorders(horders);
+		this.rates= new ArrayList<Rate>(rates);
 	}
 
 

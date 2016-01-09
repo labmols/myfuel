@@ -39,6 +39,8 @@ public class WaitDialog extends JDialog {
  * Create new Wait Dialog 
  */
 	public WaitDialog(String msg) {
+	setResizable(false);
+	setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setTitle("Wait...");
 		setBounds(100, 100, 339, 110);
 		setLocationRelativeTo(null);
@@ -78,6 +80,7 @@ public class WaitDialog extends JDialog {
 		{
 			progressBar.setIndeterminate(false);
 			this.dispose();
+			this.setVisible(false);
 		}
 			
 	}
