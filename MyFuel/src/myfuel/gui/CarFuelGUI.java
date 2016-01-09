@@ -203,16 +203,19 @@ public class CarFuelGUI extends SuperGUI {
 		rbscooter.add(label_1);
 		
 		lblpscooter = new JLabel("");
+		lblpscooter.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblpscooter.setForeground(Color.WHITE);
 		lblpscooter.setBounds(116, 109, 61, 16);
 		rbscooter.add(lblpscooter);
 		
 		lblp95 = new JLabel("");
+		lblp95.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblp95.setForeground(Color.WHITE);
 		lblp95.setBounds(134, 205, 61, 16);
 		panel2.add(lblp95);
 		
 		lblpdiesel = new JLabel("");
+		lblpdiesel.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblpdiesel.setForeground(Color.WHITE);
 		lblpdiesel.setBounds(308, 205, 61, 16);
 		panel2.add(lblpdiesel);

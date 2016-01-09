@@ -48,6 +48,16 @@ public class MyFuelClient extends ObservableClient {
 		
 	}
 	
+	@Override
+	public void connectionException(Exception e)
+	{
+		e.printStackTrace();
+		JOptionPane.showMessageDialog(null, "Error! exit from Application...");
+		System.exit(0);
+	}
+	
+	
+	
 	public static void main(String[] args)  {
 		// TODO Auto-generated method stub
 		MyFuelClient client;

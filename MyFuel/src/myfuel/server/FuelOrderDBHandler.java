@@ -232,7 +232,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			fqty = rs.getFloat(1);
 			mqty = rs.getFloat(2);
 		
-			//if the current qty < minimal qty create new inventory order
+			//if the current qty < minimalQty and there is no order create new inventory order
 			
 			ps= con.prepareStatement("select * from inventory_order where sid=? and fuelid=?");
 			ps.setInt(1, sid);

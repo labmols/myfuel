@@ -46,7 +46,6 @@ public class LoginDBHandler extends DBHandler {
 			ps = con.prepareStatement("select * from worker where wid=? and pass =?");
 			ps.setInt(1, request.getUserid());
 			ps.setString(2, request.getPassword());
-			System.out.println(""+request.getUserid() + " " +request.getPassword());
 			rs = ps.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

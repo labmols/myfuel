@@ -8,6 +8,10 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Rate implements Serializable{
 	
+	final static int Occasional = 1;
+	final static int MonthlyOne = 2;
+	final static int MonthlyFew = 3;
+	final static int FullyMonthly= 4;
 	/**
 	 * Sale Model ID. 
 	 */
