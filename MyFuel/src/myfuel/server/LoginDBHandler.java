@@ -10,6 +10,7 @@ import java.util.Observer;
 
 import myfuel.client.Car;
 import myfuel.client.Fuel;
+import myfuel.client.MessageForManager;
 import myfuel.client.Station;
 import myfuel.request.LoginRequest;
 import myfuel.request.RegisterRequest;
@@ -41,7 +42,8 @@ public class LoginDBHandler extends DBHandler {
 		// TODO Auto-generated method stub
 		ResultSet rs = null;
 		PreparedStatement ps = null;
-		int status;
+		int status,sid,role,wid;
+		ArrayList<MessageForManager> msg = null;
 		try {
 			ps = con.prepareStatement("select * from worker where wid=? and pass =?");
 			ps.setInt(1, request.getUserid());
@@ -60,7 +62,24 @@ public class LoginDBHandler extends DBHandler {
 				ps.setInt(1, 1);
 				ps.setInt(2, request.getUserid());
 				ps.executeUpdate();
-				return new WorkerLoginResponse(rs.getInt(6),rs.getInt(1),rs.getInt(8));
+				
+				sid = rs.getInt(8);
+				role = rs.getInt(6);
+				wid = rs.getInt(1);
+				if(role == 5 || role == 2 )
+				{
+						msg = new ArrayList<MessageForManager>();
+						ps = con.prepareStatement("select * from message where sid = ? ");
+						ps.setInt(1, sid);
+						
+						rs = ps.executeQuery();
+						
+						while(rs.next())
+						{
+							msg.add(new MessageForManager(rs.getInt(1),rs.getString(3),rs.getInt(2),rs.getInt(4)));
+						}
+				}
+				return new WorkerLoginResponse(role,wid,sid,msg);
 			}
 			else return new booleanResponse(false, "WorkerID or Password not correct!");
 		}

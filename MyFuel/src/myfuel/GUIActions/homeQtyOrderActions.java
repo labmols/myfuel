@@ -1,8 +1,10 @@
 package myfuel.GUIActions;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.FuelQty;
+import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.HomeQtyOrderGUI;
 import myfuel.request.RequestEnum;
@@ -16,20 +18,22 @@ public class homeQtyOrderActions extends GUIActions {
 	private Float level;    // current low level
 	private Float current;  // current quantity
 	private Float orderQty;
+	private ArrayList<MessageForManager> msg ;
 	/***
 	 * This ActionsGUI class has the methods to control homeQtyOrderGUI
 	 * @param client - MyFuelCLient
+	 * @param order  - Inventory Order for home fuel
+	 * @param msg - Messages for this user
 	 */
-	public homeQtyOrderActions(MyFuelClient client) {
+	public homeQtyOrderActions(MyFuelClient client, ArrayList<MessageForManager> msg) {
 		super(client);
+		this.msg = msg;
 		gui = new HomeQtyOrderGUI(this);
 		homeQtyOrderRequest request = new homeQtyOrderRequest(RequestEnum.HomeGet);
 		client.handleMessageFromGUI(request);
 		gui.setVisible(true);
 	}
-/***
- * Handling Message from the Server due to its type
- */
+
 	@Override
 	public void update(Observable arg0, Object arg1)
 	{
@@ -44,6 +48,20 @@ public class homeQtyOrderActions extends GUIActions {
 			
 			else if(arg1 instanceof booleanResponse)
 			{
+				MessageForManager temp = null ; 
+				
+				for(MessageForManager m : msg)
+				{
+					if(m.getType() == 1 && m.getSid() == 4)
+					{
+						temp = m;
+						break;
+					}
+				}
+				if(temp!=null)
+					msg.remove(msg.indexOf(temp));
+			
+				
 					if(((booleanResponse)arg1).getSuccess())
 						gui.showOKMessage(((booleanResponse)arg1).getMsg());
 					else
@@ -57,6 +75,8 @@ public class homeQtyOrderActions extends GUIActions {
 					gui.clearTable();
 					gui.setCurrQty(current + orderQty);
 				}
+				
+				
 			}
 			
 	}
@@ -65,7 +85,7 @@ public class homeQtyOrderActions extends GUIActions {
  */
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,new CMActions(client),this);
+		changeFrame(gui,new CMActions(client,msg),this);
 
 	}
 /***

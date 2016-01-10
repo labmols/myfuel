@@ -4,13 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.CMActions;
+import myfuel.client.MessageForManager;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+
 import java.awt.Color;
+import java.util.ArrayList;
+
+import javax.swing.JTextArea;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
 
 /***
  * Company Manager User Interface 
@@ -35,12 +42,16 @@ public class CMGUI extends SuperGUI{
 	 * Home Quantity Button
 	 */
 	private JButton homeQty;
-	
+	/***
+	 * Messages for this user
+	 */
+	private ArrayList<MessageForManager> msg;
+	private JTextArea msgBox;
 	/***
 	 * CMGUI Constructor
 	 * @param actions - Controller for this GUI
 	 */
-	public CMGUI(CMActions actions) {
+	public CMGUI(CMActions actions,ArrayList<MessageForManager> msg) {
 		lblTitle.setBounds(192, 0, 220, 25);
 		lblTitle.setText("Company Manager Menu");
 		
@@ -65,15 +76,26 @@ public class CMGUI extends SuperGUI{
 		panel.add(p);
 		p.setLayout(null);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setDisabledTextColor(Color.WHITE);
-		textPane.setEditable(false);
-		textPane.setBounds(22, 30, 299, 55);
-		p.add(textPane);
-		
 		JLabel lblNotifications = new JLabel("Notifications");
 		lblNotifications.setBounds(129, 5, 94, 14);
 		p.add(lblNotifications);
+		
+		msgBox = new JTextArea();
+		msgBox.setCaretColor(Color.LIGHT_GRAY);
+		msgBox.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		msgBox.setBounds(59, 27, 224, 58);
+		
+		if(!msg.isEmpty())
+		{
+			for(MessageForManager str : msg )
+				msgBox.append(str.getMsg()+"\n");
+		}
+		
+		else
+			msgBox.append("No new messages");
+		
+		msgBox.setEditable(false);
+		p.add(msgBox);
 		this.setContentPane(contentPane);
 		this.actions = actions;
 	}

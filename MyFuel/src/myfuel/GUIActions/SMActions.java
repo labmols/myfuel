@@ -1,18 +1,42 @@
 package myfuel.GUIActions;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.FuelQty;
+import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.SMGUI;
 
+/***
+ * Controller for SMGUI
+ * @author karmo
+ *
+ */
 public class SMActions extends GUIActions {
+	/***
+	 * Station ID
+	 */
 	private int sid;
+	/***
+	 * This class will be a controller to this GUI
+	 */
 	private SMGUI gui;
-	
-	public SMActions(MyFuelClient client,int sid) {
+	/***
+	 * Will contain the messages for this manager 
+	 */
+	private ArrayList<MessageForManager> msg;
+	/***
+	 * SMActions Constructor
+	 * @param client - MyFuelClient
+ 	 * @param sid - Station ID
+	 * @param msg  - Messages for this manager
+	 */
+	public SMActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg) {
 		super(client);
 		this.setSid(sid);
-		gui = new SMGUI(this);
+		this.msg = msg;
+		gui = new SMGUI(this,msg);
 		gui.setVisible(true);
 	}
 
@@ -36,21 +60,32 @@ public class SMActions extends GUIActions {
 		this.sid = sid;
 	}
 
+	/***
+	 * This method will create The Inventory Order Controller
+	 */
 	public void CreateCheckInventoryWindow() 
 	{
-		changeFrame(gui,new CheckInventoryActions(client,sid),this);
+		changeFrame(gui,new CheckInventoryActions(client,sid,msg),this);
 		
 	}
 	
+	/***
+	 * This method will create The Low Inventory Level Controller
+	 */
+	
 	public void CreateLowInventoryWindow()
 	{
-		changeFrame(gui,new LowInventoryActions(client,sid),this);
+		changeFrame(gui,new LowInventoryActions(client,sid,msg),this);
 	}
+	
+	/***
+	 * This method will create The Report Controller
+	 */
 
 	public void CreateReports() 
 	{
 		
-		changeFrame(gui,new StationReportActions(client,sid),this);
+		changeFrame(gui,new StationReportActions(client,sid,msg),this);
 	}
 
 }

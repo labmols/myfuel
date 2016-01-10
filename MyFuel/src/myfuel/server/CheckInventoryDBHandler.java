@@ -71,6 +71,10 @@ public class CheckInventoryDBHandler  extends DBHandler {
 				ps.setInt(2, i);
 				ps.executeUpdate();
 			}
+			
+			ps = con.prepareStatement("DELETE from message where sid = ? and type = 1 ");
+			ps.setInt(1,request.getSid());
+			ps.executeUpdate();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
