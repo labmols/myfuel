@@ -76,15 +76,18 @@ public class HomeOrderPanel extends JPanel{
 		setLayout(null);
 		
 		JLabel lblQuantity = new JLabel("Amount (Liter):");
+		lblQuantity.setFont(new Font("Arial", Font.BOLD, 13));
 		lblQuantity.setBounds(97, 100, 115, 16);
 		add(lblQuantity);
 		
 		qtyText = new JTextField();
+		qtyText.setFont(new Font("Arial", Font.PLAIN, 13));
 		qtyText.setBounds(224, 95, 128, 26);
 		add(qtyText);
 		qtyText.setColumns(10);
 		
 		urgentCB = new JCheckBox("Urgent Order?");
+		urgentCB.setFont(new Font("Arial", Font.PLAIN, 13));
 		urgentCB.setBounds(224, 169, 128, 23);
 		add(urgentCB);
 		urgentCB.setToolTipText("In 6 hours from now");
@@ -93,28 +96,34 @@ public class HomeOrderPanel extends JPanel{
 		urgentCB.setOpaque(false);
 		
 		JLabel lblShipAddr = new JLabel("Shipping Address:");
+		lblShipAddr.setFont(new Font("Arial", Font.BOLD, 13));
 		lblShipAddr.setBounds(97, 133, 134, 16);
 		add(lblShipAddr);
 		
 		shipAddrText = new JTextField();
+		shipAddrText.setFont(new Font("Arial", Font.PLAIN, 13));
 		shipAddrText.setBounds(224, 128, 128, 26);
 		add(shipAddrText);
 		shipAddrText.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Is it your correct Address?");
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblNewLabel_1.setBounds(357, 133, 174, 16);
 		add(lblNewLabel_1);
 		lblNewLabel_1.setForeground(Color.WHITE);
 		
 		JLabel lblIfNotEnter = new JLabel("if not, enter your address.");
+		lblIfNotEnter.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblIfNotEnter.setBounds(357, 153, 174, 16);
 		add(lblIfNotEnter);
 		
 		JLabel lblShipDate = new JLabel("Ship Date:");
+		lblShipDate.setFont(new Font("Arial", Font.BOLD, 13));
 		lblShipDate.setBounds(97, 213, 76, 29);
 		add(lblShipDate);
 		
 		lblUrgent = new JLabel("You will receieve your order within 6 hours from now!");
+		lblUrgent.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblUrgent.setBounds(186, 213, 345, 29);
 	    add(lblUrgent);
 		lblUrgent.setForeground(Color.RED);
@@ -123,17 +132,19 @@ public class HomeOrderPanel extends JPanel{
 		add(datePicker);
 		
 		JLabel lblOrderType = new JLabel("Order Type:");
+		lblOrderType.setFont(new Font("Arial", Font.BOLD, 13));
 		lblOrderType.setBounds(97, 173, 85, 16);
 		add(lblOrderType);
 		
 		btnMakeOrder = new JButton("Make Order");
+		btnMakeOrder.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnMakeOrder.setBounds(217, 310, 117, 29);
 		add(btnMakeOrder);
 		
 		JTextPane txtPane = new JTextPane();
 		txtPane.setBounds(87, 26, 437, 57);
 		add(txtPane);
-		txtPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtPane.setFont(new Font("Arial", Font.PLAIN, 13));
 		txtPane.setEditable(false);
 		
 		txtPane.setText("Urgent Order (in 6 hours from now) : Original price + 2%\n600 - 800 Liters: 3% Discount from Total order price.\nMore then 800 Liters: 4% Discount from Total order price. ");

@@ -1,10 +1,12 @@
 package myfuel.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JProgressBar;
@@ -13,89 +15,246 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.text.DecimalFormat;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+import myfuel.GUIActions.CarFuelActions;
+
+import java.awt.Font;
+
+import javax.swing.JTextField;
 
 public class FuelDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	CarFuelActions actions;
 	JProgressBar progressBar;
 	private JLabel liter;
 	private JLabel price;
 	private float p;
+	private float qty;
+	private JPanel payPanel;
+	private JButton btnPay;
+	private JLabel changeLabel;
+	private JLabel ccLabel;
+	private JPanel cashPanel;
+	private JComboBox methodCB;
+	private JTextField moneyTxt;
+	private JLabel lblCreditCardNo;
+	private CarFuelGUI gui;
+	private float currentPrice;
 
 	/**
 	 * Create the dialog.
 	 * @param p 
 	 */
-	public FuelDialog(int value, float p) {
+	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p) {
+		this.actions = actions;
+		this.gui = gui;
 		setTitle("Fueling...");
-		setBounds(100, 100, 434, 215);
-		setLocationRelativeTo(null);
+		setBounds(100, 100, 451, 273);
+		setLocationRelativeTo(gui);
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		this.p=p;
+		this.qty = qty;
 		progressBar = new JProgressBar();
 		progressBar.setForeground(Color.ORANGE);
-		progressBar.setBounds(187, 22, 146, 20);
-		progressBar.setMaximum(value);
+		progressBar.setBounds(177, 18, 146, 20);
+		progressBar.setMaximum((int)qty);
 		contentPanel.add(progressBar);
 		{
 			JLabel lblLiter = new JLabel("Liter: ");
-			lblLiter.setBounds(173, 62, 36, 16);
+			lblLiter.setFont(new Font("Arial", Font.BOLD, 13));
+			lblLiter.setBounds(163, 62, 46, 16);
 			contentPanel.add(lblLiter);
 		}
 		{
 			liter = new JLabel("");
-			liter.setBounds(137, 62, 61, 16);
+			liter.setFont(new Font("Arial", Font.PLAIN, 13));
+			liter.setBounds(209, 62, 61, 16);
 			contentPanel.add(liter);
 		}
 		{
 			JLabel lblPrice = new JLabel("Price: ");
-			lblPrice.setBounds(173, 88, 46, 16);
+			lblPrice.setFont(new Font("Arial", Font.BOLD, 13));
+			lblPrice.setBounds(163, 88, 56, 16);
 			contentPanel.add(lblPrice);
 		}
 		{
 			price = new JLabel("");
-			price.setBounds(137, 88, 61, 16);
+			price.setFont(new Font("Arial", Font.PLAIN, 13));
+			price.setBounds(209, 88, 61, 16);
 			contentPanel.add(price);
 		}
 		
 		JLabel lblFuelProgress = new JLabel("Fuel Progress: ");
+		lblFuelProgress.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblFuelProgress.setBounds(78, 22, 97, 16);
 		contentPanel.add(lblFuelProgress);
+		
+		payPanel = new JPanel();
+		payPanel.setOpaque(false);
+		payPanel.setBounds(78, 116, 276, 124);
+		contentPanel.add(payPanel);
+		payPanel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Payment Method: ");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
+		lblNewLabel.setBounds(6, 6, 112, 16);
+		payPanel.add(lblNewLabel);
+		
+		methodCB = new JComboBox();
+		methodCB.setFont(new Font("Arial", Font.PLAIN, 13));
+		methodCB.setModel(new DefaultComboBoxModel(new String[] {"Credit Card", "Cash"}));
+		methodCB.setBounds(130, 2, 127, 27);
+		methodCB.addItemListener(new eventListener());
+		payPanel.add(methodCB);
+		
+		lblCreditCardNo = new JLabel("Credit Card no: ");
+		lblCreditCardNo.setFont(new Font("Arial", Font.BOLD, 13));
+		lblCreditCardNo.setBounds(41, 42, 112, 16);
+		payPanel.add(lblCreditCardNo);
+		
+		ccLabel = new JLabel("");
+		ccLabel.setText(actions.getCustomerCC());
+		ccLabel.setBounds(140, 41, 158, 16);
+		payPanel.add(ccLabel);
+		
+		btnPay = new JButton("Pay");
+		btnPay.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnPay.setBounds(78, 92, 100, 29);
+		btnPay.addActionListener(new eventListener());
+		payPanel.add(btnPay);
+		
+		cashPanel = new JPanel();
+		cashPanel.setVisible(false);
+		cashPanel.setOpaque(false);
+		cashPanel.setBounds(51, 23, 149, 83);
+		payPanel.add(cashPanel);
+		cashPanel.setLayout(null);
+		
+		JLabel label_2 = new JLabel("Enter Money: ");
+		label_2.setBounds(6, 24, 100, 16);
+		cashPanel.add(label_2);
+		label_2.setFont(new Font("Arial", Font.BOLD, 13));
+		
+		changeLabel = new JLabel("");
+		changeLabel.setBounds(88, 30, 83, 16);
+		cashPanel.add(changeLabel);
+		
+		moneyTxt = new JTextField();
+		moneyTxt.setBounds(92, 18, 67, 26);
+		cashPanel.add(moneyTxt);
+		moneyTxt.setColumns(10);
+		
+		payPanel.setVisible(false);
 		{
 			JLabel label = new JLabel("");
-			label.setBounds(0, 0, 450, 239);
+			label.setBounds(0, 0, 450, 256);
 			contentPanel.add(label);
 			 java.net.URL url = getClass().getResource("/dialogBG.png");
 			label.setIcon(new ImageIcon(url));
 		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
-		ProgressBarThread t = new ProgressBarThread(this);
+		ProgressBarThread t = new ProgressBarThread(this,qty);
 		new Thread(t).start();
+		
+		
 	}
 	
-	public void setProgress(int value) {
-		// TODO Auto-generated method stub
-		progressBar.setValue(value);
-		liter.setText("" + progressBar.getValue());
-		price.setText("" + new DecimalFormat("##.##").format((progressBar.getValue()*p)));
+	private class eventListener implements ActionListener,ItemListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == btnPay)
+			{
+				float money=-1;
+				float change=-1;
+				boolean check=true;
+				if(methodCB.getSelectedIndex()==1)
+				{
+					try
+					{
+						money = Float.parseFloat(moneyTxt.getText());
+						if(money<0)
+						{
+							check = false;
+							JOptionPane.showMessageDialog(null, "illegal money value!","Error",JOptionPane.ERROR_MESSAGE);	
+						}
+					}
+					catch (NumberFormatException e1)
+					{
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "illegal money value!","Error",JOptionPane.ERROR_MESSAGE);	
+					}
+					change =money-currentPrice;
+					if(change<0)
+					{
+						check = false;
+						JOptionPane.showMessageDialog(null, "Not enough money!","Error",JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				if(check)
+				{
+					
+				JOptionPane.showMessageDialog(null, "Your change is : "+new DecimalFormat("##.##").format(change),"Your Change",JOptionPane.PLAIN_MESSAGE);	
+				actions.createPurchase();
+				dispose();
+				setVisible(false);
+				}
+			}
+		}
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getStateChange()==ItemEvent.DESELECTED &&  e.getSource() == methodCB)
+			{
+				setPay();
+				
+			}
+		}
 	}
-}
+	
+	public void setProgress(float value) {
+		// TODO Auto-generated method stub
+		progressBar.setValue((int)value);
+		if(progressBar.getValue() == (int)qty)
+			payPanel.setVisible(true);
+		
+		currentPrice =value*p;
+		liter.setText("" + new DecimalFormat("##.##").format(value)+" Liters");
+		price.setText("" + new DecimalFormat("##.##").format((currentPrice))+" NIS");
+	}
+
+	private void setPay() {
+		// TODO Auto-generated method stub
+		
+		if(methodCB.getSelectedIndex()==1)
+		{
+			cashPanel.setVisible(true);
+			lblCreditCardNo.setVisible(false);
+			ccLabel.setVisible(false);
+			
+		}
+		else
+		{
+			cashPanel.setVisible(false);
+			lblCreditCardNo.setVisible(true);
+			ccLabel.setVisible(true);
+		}
+		
+	}
+}	
+

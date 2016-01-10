@@ -210,11 +210,16 @@ public class HomeOrderActions extends GUIActions {
 		float qtyF = 0;
 		try {
 			qtyF = Float.parseFloat(qty);
+			if(qtyF<0)
+			{
+				success = false;
+				msg += "Illegal Amount value!\n";
+			}
 		}
 		catch(NumberFormatException e)
 		{
 			success = false;
-			msg += "Illegal Quantity value!\n";
+			msg += "Illegal Amount value!\n";
 		}
 		
 		if(addr.equals(""))
