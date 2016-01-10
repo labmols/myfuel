@@ -53,7 +53,7 @@ public class SetNewRatesDBHandler extends DBHandler{
 				rs = ps.executeQuery();
 				if(rs.next())
 				{
-					msg="There is One Suggested Rate wait";
+					msg="You can't file new suggestion while the older one hasn't been approved\\denied";
 				}
 				else
 				{
@@ -63,8 +63,13 @@ public class SetNewRatesDBHandler extends DBHandler{
 						ps.setInt(2,f.getDiscount());
 						ps.executeUpdate();
 					}
-					msg="The Suggested Rates are Send to confirm";
+					msg="The Suggestion has been Sent to the Company Manager";
 				}
+				
+				ps=con.prepareStatement("insert into message values(0,4,?,0)");
+				ps.setString(1,"New Rates Suggestion");
+				ps.executeUpdate();
+				
 		} catch (SQLException e) {
 			answer = false;
 			msg="The Update faild";

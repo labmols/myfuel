@@ -1,10 +1,12 @@
 package myfuel.GUIActions;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.client.ReportEnum;
 import myfuel.client.TimeIgnoringComparator;
@@ -23,11 +25,12 @@ public class StationReportActions extends GUIActions {
 	 * Station Report GUI
 	 */
 	private StationReportGUI gui;
+	private ArrayList<MessageForManager> msg;
 	
-	
-	public StationReportActions(MyFuelClient client,int sid) {
+	public StationReportActions(MyFuelClient client,int sid , ArrayList<MessageForManager> msg) {
 		super(client);
 		this.sid  = sid;
+		this.msg = msg;
 		
 		gui = new StationReportGUI(this);
 		gui.setVisible(true);
@@ -69,7 +72,7 @@ public class StationReportActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		
-			changeFrame(gui,new SMActions(client,sid),this);
+			changeFrame(gui,new SMActions(client,sid,msg),this);
 	}
 
 

@@ -1,15 +1,20 @@
 package myfuel.GUIActions;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.FuelQty;
+import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.CMGUI;
 
 public class CMActions extends GUIActions {
-	CMGUI gui ;
-	public CMActions(MyFuelClient client) {
+	private CMGUI gui ;
+	private ArrayList<MessageForManager> msg;
+	public CMActions(MyFuelClient client,ArrayList<MessageForManager> msg) {
 		super(client);
-		gui = new CMGUI(this);
+		this.msg = msg;
+		gui = new CMGUI(this,msg);
 		gui.setVisible(true);
 	}
 
@@ -21,7 +26,7 @@ public class CMActions extends GUIActions {
 
 	public void ConfirmNewRatesWindow() 
 	{
-		changeFrame(gui,new ConfirmNewRatesActions(client),this);	
+		changeFrame(gui,new ConfirmNewRatesActions(client,msg),this);	
 	}
 
 	@Override
@@ -32,13 +37,13 @@ public class CMActions extends GUIActions {
 
 	public void homeQuantity() 
 	{
-		changeFrame(gui,new homeQtyOrderActions(client),this);	
+		changeFrame(gui,new homeQtyOrderActions(client,msg),this);	
 		
 	}
 
 	public void showReportsWindows() 
 	{
-		changeFrame(gui,new showReportsActions(client),this);	
+		changeFrame(gui,new showReportsActions(client,msg),this);	
 		
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.Fuel;
+import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.LowInventoryGUI;
 import myfuel.request.LowInventoryRequest;
@@ -15,10 +16,11 @@ public class LowInventoryActions extends GUIActions {
 	private LowInventoryGUI gui ; 
 	private LowInventoryRequest request;
 	private ArrayList<Integer> NewLowInventory ;
-	
-	public LowInventoryActions(MyFuelClient client, int sid) {
+	private ArrayList<MessageForManager> msg;
+	public LowInventoryActions(MyFuelClient client, int sid,ArrayList<MessageForManager>msg) {
 		
 		super(client);
+		this.msg = msg;
 		this.sid = sid;
 		gui = new LowInventoryGUI(this);
 		gui.setVisible(true);
@@ -74,7 +76,7 @@ public class LowInventoryActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,new SMActions(client,this.sid),this);
+		changeFrame(gui,new SMActions(client,this.sid,msg),this);
 
 	}
 

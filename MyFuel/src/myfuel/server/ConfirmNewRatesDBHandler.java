@@ -14,10 +14,27 @@ import myfuel.request.RequestEnum;
 import myfuel.response.ConfirmNewRatesResponse;
 import myfuel.response.booleanResponse;
 
+/***
+ * This class will be used as a DBHandler for getting and updating Company Rates
+ * @author karmo
+ *
+ */
 public class ConfirmNewRatesDBHandler extends DBHandler{
+	/***
+	 * Suggested Rates
+	 */
 	private ArrayList<saleModel> sModes;
+	/***
+	 * Current Rates 
+	 */
 	private ArrayList<saleModel> current;
+	/***
+	 * True if there was no exception and false otherwise
+	 */
 	private boolean answer ;
+	/***
+	 *  status of operation 
+	 */
 	private String str,nstr;
 	
 	/***
@@ -151,14 +168,36 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 			else if(r.getType() == RequestEnum.Delete)
 			{
 				deleteSuggest();
+				deleteMsg();
 				server.setResponse(new booleanResponse(answer,nstr));
 			}
 			
 			else if(r.getType() == RequestEnum.Insert)
 			{
 				updatePrices(r.getApproved());
+				deleteMsg();
 				server.setResponse(new booleanResponse(answer,str));
 			}
+		}
+		
+	}
+	
+	/***
+	 * Delete Message From the DB
+	 */
+	private void deleteMsg() 
+	{
+		PreparedStatement ps = null;
+		try{
+			ps = con.prepareStatement("DELETE from  message where sid = 4 and type =?");
+			ps.setInt(1,0);
+			ps.executeUpdate();
+			
+		}catch(SQLException e )
+		{
+			e.printStackTrace();
+			answer = false;
+			str = "There was an error with the server!";
 		}
 		
 	}

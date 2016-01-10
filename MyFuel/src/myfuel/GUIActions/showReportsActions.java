@@ -1,11 +1,12 @@
 package myfuel.GUIActions;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.*;
 import myfuel.request.CompanyReportRequest;
-
 import myfuel.response.ComapnyReportsResponse;
 import myfuel.response.booleanResponse;
 
@@ -20,15 +21,18 @@ public class showReportsActions extends GUIActions {
 	 * This class will be a controller for this GUI
 	 */
 	private ShowReportGUI gui ; 
-	
+	/**
+	 * Messages for this User
+	 */
+	private ArrayList<MessageForManager> msg;
 	/***
 	 * showReportsActions Constructor
 	 * @param client - MyFuelClient
 	 */
-	public showReportsActions(MyFuelClient client) 
+	public showReportsActions(MyFuelClient client,ArrayList<MessageForManager> msg) 
 	{
 		super(client);
-		
+		this.msg = msg;
 		CompanyReportRequest request = new CompanyReportRequest(-1);
 		client.handleMessageFromGUI(request);
 		
@@ -78,7 +82,7 @@ public class showReportsActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		changeFrame(gui,new CMActions(client),this);
+		changeFrame(gui,new CMActions(client,msg),this);
 
 	}
 

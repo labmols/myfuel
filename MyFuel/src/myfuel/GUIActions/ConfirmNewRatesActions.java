@@ -3,6 +3,7 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.client.saleModel;
 import myfuel.gui.ConfirmNewRatesGUI;
@@ -21,14 +22,18 @@ public class ConfirmNewRatesActions extends GUIActions {
 	 * This class will be a Controller for this GUI
 	 */
 	private ConfirmNewRatesGUI gui ; 
-	
+	/***
+	 * Messages for this user
+	 */
+	private ArrayList<MessageForManager> msg;
 	
 	/***
 	 *  ConfirmNewRatesActions Constructor
 	 * @param client - MyFuelClient
 	 */
-	public ConfirmNewRatesActions(MyFuelClient client) {
+	public ConfirmNewRatesActions(MyFuelClient client,ArrayList<MessageForManager>msg) {
 		super(client);
+		this.msg = msg;
 		ConfirmNewRatesRequest request = new ConfirmNewRatesRequest(RequestEnum.Select);
 		gui = new ConfirmNewRatesGUI(this);
 		gui.createWaitDialog("Getting Rates...");
@@ -55,6 +60,20 @@ public class ConfirmNewRatesActions extends GUIActions {
 		else if(arg1 instanceof booleanResponse)
 		{
 			gui.setWaitPorgress();
+			
+			MessageForManager temp = null;
+			
+			for(MessageForManager m : msg)
+			{
+				if(m.getType() == 0 && m.getSid() == 4)
+				{
+					temp = m; break; 
+				}
+			}
+			
+			if(temp!=null)
+				msg.remove(msg.indexOf(temp));
+			
 			if(((booleanResponse)arg1).getSuccess())
 			{
 				gui.showOKMessage(((booleanResponse)arg1).getMsg());
@@ -72,7 +91,7 @@ public class ConfirmNewRatesActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		changeFrame(gui,new CMActions(client),this);
+		changeFrame(gui,new CMActions(client,msg),this);
 	}
 /***
  *  Sending approved rates(if there is) to the DB
