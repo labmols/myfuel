@@ -8,6 +8,10 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Rate implements Serializable{
 	
+	final static int Occasional = 1;
+	final static int MonthlyOne = 2;
+	final static int MonthlyFew = 3;
+	final static int FullyMonthly= 4;
 	/**
 	 * Sale Model ID. 
 	 */
@@ -19,9 +23,9 @@ public class Rate implements Serializable{
 	/**
 	 * Current discount for this model.
 	 */
-	private int discount;
+	private float discount;
 	
-	public Rate(int modelid, String modelDesc, int discount)
+	public Rate(int modelid, String modelDesc, float discount)
 	{
 		this.setModelid(modelid);
 		this.setModelDesc(modelDesc);
@@ -40,10 +44,10 @@ public class Rate implements Serializable{
 	public void setModelDesc(String modelDesc) {
 		this.modelDesc = modelDesc;
 	}
-	public int getDiscount() {
+	public float getDiscount() {
 		return discount;
 	}
-	public void setDiscount(int discount) {
+	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
 	

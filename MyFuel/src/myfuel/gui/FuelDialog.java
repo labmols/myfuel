@@ -29,7 +29,7 @@ public class FuelDialog extends JDialog {
 	 */
 	public FuelDialog(int value, float p) {
 		setTitle("Fueling...");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 434, 215);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -43,7 +43,7 @@ public class FuelDialog extends JDialog {
 		contentPanel.add(progressBar);
 		{
 			JLabel lblLiter = new JLabel("Liter: ");
-			lblLiter.setBounds(100, 62, 36, 16);
+			lblLiter.setBounds(173, 62, 36, 16);
 			contentPanel.add(lblLiter);
 		}
 		{
@@ -53,7 +53,7 @@ public class FuelDialog extends JDialog {
 		}
 		{
 			JLabel lblPrice = new JLabel("Price: ");
-			lblPrice.setBounds(100, 88, 46, 16);
+			lblPrice.setBounds(173, 88, 46, 16);
 			contentPanel.add(lblPrice);
 		}
 		{

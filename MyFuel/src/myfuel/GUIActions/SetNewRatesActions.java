@@ -6,7 +6,7 @@ import java.util.Observable;
 
 import myfuel.client.Fuel;
 import myfuel.client.MyFuelClient;
-import myfuel.client.saleModel;
+import myfuel.client.Rate;
 import myfuel.gui.SetNewRatesGUI;
 import myfuel.request.SetNewRatesRequest;
 import myfuel.response.SetNewRatesResponse;
@@ -17,7 +17,7 @@ public class SetNewRatesActions extends GUIActions {
 	private SetNewRatesGUI gui;
 	private SetNewRatesRequest request;
 	private SetNewRatesResponse response;
-	private ArrayList<saleModel> NewRates ;
+	private ArrayList<Rate> NewRates ;
 	
 	public SetNewRatesActions(MyFuelClient client) {
 		super(client);
@@ -61,7 +61,7 @@ public class SetNewRatesActions extends GUIActions {
 		if(!success) gui.showErrorMessage(error);
 		else
 		{
-		saleModel f;
+		Rate f;
 		f=NewRates.get(1);
 		f.setDiscount(nSMRoneCar);
 		f=NewRates.get(2);

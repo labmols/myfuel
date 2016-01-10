@@ -73,22 +73,17 @@ public class ConfirmationActions extends GUIActions {
 		
 		else if(arg1 instanceof booleanResponse)
 		{
-			gui.setWaitPorgress();
-			
 		    booleanResponse res  = ((booleanResponse)arg1);
 			if(res.getSuccess())
 			{
 			gui.updateTable(approved);
-			gui.createProgressBar(approved.size());
-			int index =0;
 			for(Customer c: customers)
 			{
 				if(approved.contains(c.getUserid()))
 				sendMail(c);
-				index ++;
-				gui.setProgress(index);
 			}
 			
+			gui.showOKMessage("Customers approved successfully and confirmation mails have beent sent!");
 			//backToMenu();
 			}
 			else gui.showErrorMessage(res.getMsg());
@@ -109,7 +104,8 @@ public class ConfirmationActions extends GUIActions {
 				  "\n"   +"Password: " + c.getPass() 
 				+ "\n\n\n" +"Marketing Department , MyFuel.";
 		
-		SendMailTLS.sendMail(c.getEmail() , subject, content);
+		MailThread mailT = new MailThread(c.getEmail(),subject,content);
+		new Thread(mailT).start();
 	}
 
 	/***

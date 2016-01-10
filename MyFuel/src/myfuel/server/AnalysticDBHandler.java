@@ -11,7 +11,6 @@ import java.util.Observable;
 
 import myfuel.client.AnalysticSystem;
 import myfuel.client.AnalyzeDetails;
-import myfuel.client.saleModel;
 import myfuel.request.AnalysticRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.AnalysticResponse;

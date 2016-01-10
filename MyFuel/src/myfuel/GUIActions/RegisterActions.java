@@ -59,8 +59,8 @@ public class RegisterActions extends GUIActions {
 		cstations = new ArrayList <Integer>();
 		cars = new ArrayList <Car>();
 		gui = new RegisterGUI(this);
-		showStations();
 		gui.setVisible(true);
+		showStations();
 	}
 	
 	/**
@@ -80,6 +80,7 @@ public class RegisterActions extends GUIActions {
 		String password= new String(pass);
 		customer = new Customer(userid,fname,lname,password,email,address,cnumber,toc,atype,smodel,cars,cstations);
 		request = new RegisterRequest(RequestEnum.Insert,customer);
+		gui.createWaitDialog("Sending register request...");
 		client.handleMessageFromGUI(request);
 	}
 	
@@ -87,6 +88,7 @@ public class RegisterActions extends GUIActions {
 	 * Request for all the stations from DB.
 	 */
 	public void showStations(){
+		gui.createWaitDialog("Getting Details...");
 		request = new RegisterRequest(RequestEnum.Select,null);
 		client.handleMessageFromGUI(request);
 	}
@@ -103,6 +105,7 @@ public class RegisterActions extends GUIActions {
 		if(arg instanceof RegisterResponse){
 		RegisterResponse res = (RegisterResponse)arg;
 		addStations(res);
+		gui.setWaitPorgress();
 		
 		}
 		else {
@@ -133,7 +136,7 @@ public class RegisterActions extends GUIActions {
 	 */
 	public void checkRegister(booleanResponse res){
 		if(res.getSuccess()) {
-			
+			gui.setWaitPorgress();
 			gui.showOKMessage(res.getMsg());
 			changeFrame(gui,new LoginActions(client),this);
 

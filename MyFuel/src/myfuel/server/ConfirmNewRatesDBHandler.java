@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.Fuel;
-import myfuel.client.saleModel;
+import myfuel.client.Rate;
 import myfuel.request.ConfirmNewRatesRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.ConfirmNewRatesResponse;
@@ -20,17 +20,11 @@ import myfuel.response.booleanResponse;
  *
  */
 public class ConfirmNewRatesDBHandler extends DBHandler{
-	/***
-	 * Suggested Rates
-	 */
-	private ArrayList<saleModel> sModes;
+	private ArrayList<Rate> sModes;
 	/***
 	 * Current Rates 
 	 */
-	private ArrayList<saleModel> current;
-	/***
-	 * True if there was no exception and false otherwise
-	 */
+	private ArrayList<Rate> current;
 	private boolean answer ;
 	/***
 	 *  status of operation 
@@ -55,8 +49,8 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 	{
 		ResultSet rs = null ;
 		PreparedStatement ps = null;
-		sModes = new ArrayList<saleModel>(); 
-		current = new ArrayList<saleModel>(); 
+		sModes = new ArrayList<Rate>(); 
+		current = new ArrayList<Rate>(); 
 		
 		try{
 			   ps = con.prepareStatement("select * from suggest_rates");
@@ -66,7 +60,7 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 			  while(rs.next())
 			  {
 				  if(rs.getInt(1) != 1)
-					  sModes.add(new saleModel(rs.getInt(1),rs.getInt(2)));
+					  sModes.add(new Rate(rs.getInt(1),null,rs.getFloat(2)));
 			  }
 			  
 			  if(sModes.isEmpty())
@@ -82,7 +76,7 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 			  while(rs.next())
 			  {
 				  if(rs.getInt(1)!= 1)
-					  current.add(new saleModel(rs.getInt(1),rs.getInt(3)));
+					  current.add(new Rate(rs.getInt(1),rs.getString(2),rs.getFloat(3)));
 			  }
 			  
 			   answer = true;
@@ -121,17 +115,17 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 	 * Update Discounts for each sale model
 	 * @param a - approved discounts
 	 */
-	private void updatePrices(ArrayList<saleModel> a)
+	private void updatePrices(ArrayList<Rate> a)
 	{
 		PreparedStatement ps = null;
 		
 		try{
 			
-			for(saleModel s : a)
+			for(Rate s : a)
 			{
 			ps = con.prepareStatement("update price_to_type SET discount = ? where modelid = ?");
-				ps.setInt(1,s.getDiscount());
-				ps.setInt(2, s.getType());
+				ps.setFloat(1,s.getDiscount());
+				ps.setInt(2, s.getModelid());
 				
 				ps.executeUpdate();
 			}

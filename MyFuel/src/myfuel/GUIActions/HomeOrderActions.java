@@ -74,13 +74,13 @@ public class HomeOrderActions extends GUIActions {
 		
 		if(checkInventory(qty))
 		{
-			float totalPrice = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getProm());
+			float totalPrice = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getPromotion(Fuel.HomeFuelID));
 			if(showConfirmOrder(qty, urgent,totalPrice))
 			{
 				Date pdate = new Date();
 				int pid ;
-				if(response.getProm() != null)
-					pid = response.getProm().getPid();
+				if(response.getPromotion(Fuel.HomeFuelID) != null)
+					pid = response.getPromotion(Fuel.HomeFuelID).getPid();
 				else pid = -1;
 				if(urgent) 
 					shipDate = pdate;
@@ -171,10 +171,10 @@ public class HomeOrderActions extends GUIActions {
 		String total = new DecimalFormat("##.##").format(totalPrice);
 		String liter =new DecimalFormat("##.##").format(totalPrice/qty);
 		String promotion;
-		if(response.getProm() == null)
+		if(response.getPromotion(Fuel.HomeFuelID) == null)
 		 promotion = "Promotion: No Promotion";
 		else
-		promotion = "Promotion : Discount of " +response.getProm().getDiscount() +"% from total order";
+		promotion = "Promotion : Discount of " +response.getPromotion(Fuel.HomeFuelID).getDiscount() +"% from total order";
 		String message = "" + promotion 
 				+"\n\n Total Order Price : " + total+ " NIS"
 				+ "\n\nPrice for liter : " + liter +" NIS"

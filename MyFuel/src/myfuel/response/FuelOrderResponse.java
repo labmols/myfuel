@@ -30,7 +30,7 @@ public class FuelOrderResponse extends Response {
 	/**
 	 * Promotion object if exist(if not it will be null).
 	 */
-	private Promotion prom;
+	private ArrayList<Promotion> promList;
 	
 	/**
 	 * List of customer home orders (if the fuel order was home fuel, if not it will be null).
@@ -47,12 +47,13 @@ public class FuelOrderResponse extends Response {
 	 * @param si - the stations inventory list.
 	 * @param fuels - the fuels details list.
 	 */
-	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels, Promotion prom,ArrayList <HomeOrder> horders,ArrayList<Rate> rates )
+	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels,  ArrayList<Promotion> promList , ArrayList <HomeOrder> horders,ArrayList<Rate> rates )
 	{
 		this.si = new ArrayList<StationInventory>(si);
 		this.fuels = new ArrayList<Fuel>(fuels);
-		this.prom = prom;
+		this.setPromList(new ArrayList<Promotion>(promList));
 		this.setHorders(horders);
+		this.rates= new ArrayList<Rate>(rates);
 	}
 
 
@@ -75,17 +76,6 @@ public class FuelOrderResponse extends Response {
 		this.fuels = fuels;
 	}
 
-
-	public Promotion getProm() {
-		return prom;
-	}
-
-
-	public void setProm(Promotion prom) {
-		this.prom = prom;
-	}
-
-
 	public ArrayList <HomeOrder> getHorders() {
 		return horders;
 	}
@@ -103,6 +93,26 @@ public class FuelOrderResponse extends Response {
 
 	public void setRates(ArrayList<Rate> rates) {
 		this.rates = rates;
+	}
+
+
+	public ArrayList<Promotion> getPromList() {
+		return promList;
+	}
+	
+	public Promotion getPromotion(int fuelID)
+	{
+		for(Promotion p: this.promList)
+		{
+			if(p.getTypeOfFuel() == fuelID)
+				return p;
+		}
+		return null;
+	}
+
+
+	public void setPromList(ArrayList<Promotion> promList) {
+		this.promList = promList;
 	}
 	
 
