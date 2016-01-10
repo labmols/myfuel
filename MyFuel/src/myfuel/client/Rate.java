@@ -23,9 +23,9 @@ public class Rate implements Serializable{
 	/**
 	 * Current discount for this model.
 	 */
-	private int discount;
+	private float discount;
 	
-	public Rate(int modelid, String modelDesc, int discount)
+	public Rate(int modelid, String modelDesc, float discount)
 	{
 		this.setModelid(modelid);
 		this.setModelDesc(modelDesc);
@@ -44,10 +44,10 @@ public class Rate implements Serializable{
 	public void setModelDesc(String modelDesc) {
 		this.modelDesc = modelDesc;
 	}
-	public int getDiscount() {
+	public float getDiscount() {
 		return discount;
 	}
-	public void setDiscount(int discount) {
+	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
 	

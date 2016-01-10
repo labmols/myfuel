@@ -51,9 +51,9 @@ public class CalcPrice {
 	 */
 	public static float calcCarFuelOrder(int modelid, ArrayList <Rate> rates, float qty,float maxPrice, Promotion p)
 	{
-	   int modelDiscount = rates.get(modelid-1).getDiscount();
-	   int discountMonthlyOne = rates.get(Rate.MonthlyOne-1).getDiscount();
-	   int discountMonthlyFew = rates.get(Rate.MonthlyFew-1).getDiscount();;
+	   float modelDiscount = rates.get(modelid-1).getDiscount();
+	   float discountMonthlyOne = rates.get(Rate.MonthlyOne-1).getDiscount();
+	   float discountMonthlyFew = rates.get(Rate.MonthlyFew-1).getDiscount();;
 	   float orderPrice;
 	   
 	   switch(modelid)

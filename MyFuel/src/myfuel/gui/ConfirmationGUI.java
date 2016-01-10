@@ -37,7 +37,6 @@ public class ConfirmationGUI extends SuperGUI{
 	private JTable table;
 	private ArrayList<Customer> c ; 
 	JCheckBox c2;
-	private MailDialog dialog;
 	
 	/***
 	 * ConfirmationGUI constructor
@@ -158,7 +157,6 @@ public class ConfirmationGUI extends SuperGUI{
 		
 		for(int i=0; i<n; i++)
 		{
-			System.out.println(index);
 			 if(approved.contains((Integer)model.getValueAt(index, 0)))
 			 {
 				model.removeRow(index);
@@ -175,19 +173,6 @@ public class ConfirmationGUI extends SuperGUI{
 		
 	}
 
-	public void createProgressBar(int customers)
-	{
-		dialog = new MailDialog(customers);
-		dialog.progressBar.setIndeterminate(true);
-		dialog.setVisible(true);
-	}
-
-	public void setProgress(int value) {
-		// TODO Auto-generated method stub
-		dialog.setProgress(value);
-	}
-	
-	
 	
 	
 }

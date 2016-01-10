@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.Fuel;
-import myfuel.client.saleModel;
+import myfuel.client.Rate;
 import myfuel.request.SetNewRatesRequest;
 import myfuel.response.SetNewRatesResponse;
 import myfuel.response.booleanResponse;
 
 
 public class SetNewRatesDBHandler extends DBHandler{
-	private ArrayList<saleModel> OldRates;
+	private ArrayList<Rate> OldRates;
 	private SetNewRatesRequest request;
 	private boolean answer =true;
 	private String msg;
@@ -26,14 +26,14 @@ public class SetNewRatesDBHandler extends DBHandler{
 	{
 		ResultSet rs = null ;
 		PreparedStatement ps = null;
-		OldRates = new ArrayList<saleModel>();
+		OldRates = new ArrayList<Rate>();
 		try {
 			
 			ps = con.prepareStatement("select * from price_to_type");
 			rs = ps.executeQuery();
 			while(rs.next())
 			{
-				OldRates.add(new saleModel(rs.getInt(1),rs.getInt(3)));
+				OldRates.add(new Rate(rs.getInt(1),rs.getString(2),rs.getFloat(3)));
 			}
 		
 		} catch (SQLException e) {
@@ -57,10 +57,10 @@ public class SetNewRatesDBHandler extends DBHandler{
 				}
 				else
 				{
-					for(saleModel f: request.getNewRates()){
+					for(Rate r: request.getNewRates()){
 						ps= con.prepareStatement("insert into suggest_rates values(?,?)");
-						ps.setInt(1,f.getType());
-						ps.setInt(2,f.getDiscount());
+						ps.setInt(1,r.getModelid());
+						ps.setFloat(2,r.getDiscount());
 						ps.executeUpdate();
 					}
 					msg="The Suggested Rates are Send to confirm";
@@ -91,27 +91,11 @@ public class SetNewRatesDBHandler extends DBHandler{
 		}
 		
 	}
-	public ArrayList<saleModel> getOldRates() {
-		return OldRates;
-	}
 
-	public void setOldRates(ArrayList<saleModel> OldRates) {
-		this.OldRates = OldRates;
-	}
-
-	public SetNewRatesRequest getRequest() {
-		return request;
-	}
 
 	public void setRequest(SetNewRatesRequest request) {
 		this.request = request;
 	}
-	public boolean isAnswer() {
-		return answer;
-	}
 
-	public void setAnswer(boolean answer) {
-		this.answer = answer;
-	}
 
 }

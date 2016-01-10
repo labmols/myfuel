@@ -313,7 +313,10 @@ public class CarFuelGUI extends SuperGUI {
 		public void actionPerformed(ActionEvent e) {
 			getInput(e);
 			if(e.getSource() == rb95.getRadioButton())
+			{
 				totalPrice.setText(""+new DecimalFormat("##.##").format(actions.getPrice(Fuel.Fuel95ID))+" NIS");
+				//promDisc.setText(text);
+			}
 			
 			if(e.getSource() == rbscooter.getRadioButton())
 				totalPrice.setText(""+new DecimalFormat("##.##").format(actions.getPrice(Fuel.FuelScooter))+" NIS");
@@ -348,12 +351,12 @@ public class CarFuelGUI extends SuperGUI {
 	 * Set all price labels to the current prices from DB.
 	 * @param fuels - List of all fuels prices.
 	 */
-	public void setInfo(int modelDisc, ArrayList <Fuel> fuels)
+	public void setInfo(float modelDisc, ArrayList <Fuel> fuels)
 	{
 				lblp95.setText(fuels.get(0).getMaxPrice()+"NIS");
 				lblpdiesel.setText(fuels.get(1).getMaxPrice()+"NIS");
 				lblpscooter.setText(fuels.get(2).getMaxPrice()+"NIS");
-				sModelDisc.setText(modelDisc + "%");
+				sModelDisc.setText(new DecimalFormat("##.##").format(modelDisc) + "%");
 				
 	}
 	

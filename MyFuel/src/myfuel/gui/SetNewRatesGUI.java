@@ -6,10 +6,11 @@ import java.awt.event.ActionEvent;
 
 
 
+
 import myfuel.GUIActions.SetNewRatesActions;
 import myfuel.client.BackMainMenu;
 import myfuel.client.Fuel;
-import myfuel.client.saleModel;
+import myfuel.client.Rate;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -162,14 +163,14 @@ public class SetNewRatesGUI extends SuperGUI {
 		
 	}
 	
-	public void SetNewDetails(ArrayList<saleModel> newdetails)
+	public void SetNewDetails(ArrayList<Rate> arrayList)
 	{
-		saleModel s;
-		s=newdetails.get(1);
+		Rate s;
+		s=arrayList.get(1);
 		CMRoneCar.setText(""+s.getDiscount());
-		s=newdetails.get(2);
+		s=arrayList.get(2);
 		CMRfewCar.setText(""+s.getDiscount());
-		s=newdetails.get(3);
+		s=arrayList.get(3);
 		CFMoneCar.setText(""+s.getDiscount());
 	}
 }

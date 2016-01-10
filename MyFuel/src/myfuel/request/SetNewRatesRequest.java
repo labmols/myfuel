@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import myfuel.client.Fuel;
-import myfuel.client.saleModel;
+import myfuel.client.Rate;
 
 @SuppressWarnings("serial")
 
 public class SetNewRatesRequest implements Serializable {
 	private int type;
-	private ArrayList<saleModel> NewRates ;
+	private ArrayList<Rate> NewRates ;
 
 	
 	
@@ -19,7 +19,7 @@ public class SetNewRatesRequest implements Serializable {
 		this.setType(type);
 	}
 	
-	public SetNewRatesRequest(int type, ArrayList<saleModel> Newrates)
+	public SetNewRatesRequest(int type, ArrayList<Rate> Newrates)
 	{
 		this.setType(type);
 		this.setNewRates(Newrates);
@@ -32,10 +32,10 @@ public class SetNewRatesRequest implements Serializable {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public ArrayList<saleModel> getNewRates() {
+	public ArrayList<Rate> getNewRates() {
 		return NewRates;
 	}
-	public void setNewRates(ArrayList<saleModel> NewRates){
+	public void setNewRates(ArrayList<Rate> NewRates){
 		this.NewRates=NewRates;
 	}
 }

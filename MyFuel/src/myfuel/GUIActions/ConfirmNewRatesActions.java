@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
-import myfuel.client.saleModel;
+import myfuel.client.Rate;
 import myfuel.gui.ConfirmNewRatesGUI;
 import myfuel.request.ConfirmNewRatesRequest;
 import myfuel.request.RequestEnum;
@@ -44,8 +44,8 @@ public class ConfirmNewRatesActions extends GUIActions {
 	{
 		if(arg1 instanceof ConfirmNewRatesResponse)
 		{
-			ArrayList<saleModel> s = (((ConfirmNewRatesResponse)arg1).getsModes());
-			ArrayList<saleModel> c = (((ConfirmNewRatesResponse)arg1).getCurrent());
+			ArrayList<Rate> s = (((ConfirmNewRatesResponse)arg1).getsModes());
+			ArrayList<Rate> c = (((ConfirmNewRatesResponse)arg1).getCurrent());
 			
 			gui.setDetails(s,c);
 			
@@ -78,7 +78,7 @@ public class ConfirmNewRatesActions extends GUIActions {
  *  Sending approved rates(if there is) to the DB
  * @param approved - all approved Rates
  */
-	public void sendNewRates(ArrayList<saleModel> approved)
+	public void sendNewRates(ArrayList<Rate> approved)
 	{
 		
 		if(approved.isEmpty())

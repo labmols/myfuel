@@ -88,7 +88,13 @@ public class CarFuelActions extends GUIActions {
 
 	public float getPrice(int fuelID) {
 		Customer c = customerRes.getUser();
-		return CalcPrice.calcCarFuelOrder(c.getSmodel(),infoRes.getRates(), 1, infoRes.getFuels().get(fuelID-1).getMaxPrice(), infoRes.getProm());
+		return CalcPrice.calcCarFuelOrder(c.getSmodel(),infoRes.getRates(), 1, infoRes.getFuels().get(fuelID-1).getMaxPrice(), infoRes.getPromotion(fuelID));
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public float getPromotion(int fuelID) {
+		return this.getPromotion(fuelID);
 		// TODO Auto-generated method stub
 		
 	}

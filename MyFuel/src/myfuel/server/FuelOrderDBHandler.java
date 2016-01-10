@@ -9,14 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
-import myfuel.client.Fuel;
-import myfuel.client.FuelQty;
-import myfuel.client.HomeOrder;
-import myfuel.client.Promotion;
-import myfuel.client.Purchase;
-import myfuel.client.Rate;
-import myfuel.client.Station;
-import myfuel.client.StationInventory;
+import myfuel.client.*;
 import myfuel.request.FuelOrderRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.FuelOrderResponse;
@@ -231,24 +224,8 @@ public class FuelOrderDBHandler extends DBHandler{
 			rs.next();
 			fqty = rs.getFloat(1);
 			mqty = rs.getFloat(2);
-		
 			//if the current qty < minimalQty and there is no order create new inventory order
-			
-			ps= con.prepareStatement("select * from inventory_order where sid=? and fuelid=?");
-			ps.setInt(1, sid);
-			ps.setInt(2, FuelID);
-			rs= ps.executeQuery();
-			
-			if(fqty < mqty && !rs.next())
-			{
-				ps= con.prepareStatement("insert into inventory_order values(?,?,?,?,?)");
-				ps.setInt(1, 0);
-				ps.setInt(2, sid);
-				ps.setInt(3, FuelID);
-				ps.setFloat(4, 5*mqty);
-				ps.setInt(5, 0);
-				ps.executeUpdate();
-			}
+			insertInventoryOrder(sid,FuelID, fqty, mqty);
 			
 			ps.close();
 			rs.close();
@@ -266,32 +243,114 @@ public class FuelOrderDBHandler extends DBHandler{
 	}
 	
 	/**
+	 * Insert new inventory order for the specific Station and Fuel type.
+	 * @param sid - Station id number.
+	 * @param FuelID - Fuel ID.
+	 * @param fqty - Fuel order amount.
+	 * @param mqty - Minimal fuel amount.
+	 */
+	private void insertInventoryOrder(int sid, int FuelID, float fqty, float mqty)
+	{
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps= con.prepareStatement("select * from inventory_order where sid=? and fuelid=?");
+			ps.setInt(1, sid);
+			ps.setInt(2, FuelID);
+			rs= ps.executeQuery();
+			
+			if(fqty < mqty && !rs.next())
+			{
+				ps= con.prepareStatement("insert into inventory_order values(?,?,?,?,?)");
+				ps.setInt(1, 0);
+				ps.setInt(2, sid);
+				ps.setInt(3, FuelID);
+				ps.setFloat(4, 5*mqty);
+				ps.setInt(5, 0);
+				ps.executeUpdate();
+				
+				ps= con.prepareStatement("select fname,lname,email from worker where (role=2 or role=5) and sid=?");
+				ps.setInt(1, sid);
+				rs= ps.executeQuery();
+				if(rs.next())
+				{
+				String fname = rs.getString(1);
+				String lname = rs.getString(2);
+				String email = rs.getString(3);
+				String fuelType="";
+				
+				
+				if(FuelID== Fuel.Fuel95ID) fuelType= "95";
+					else if(FuelID ==Fuel.FuelDiesel) fuelType="Diesel";
+						else if (FuelID ==Fuel.FuelScooter) fuelType="Scooter";
+							else if(FuelID == Fuel.HomeFuelID) fuelType="Home Fuel";
+				
+				String subject="New Inventory Order";
+				String content= "Dear " + fname + " " +lname + ",\n"
+						+ "New inventory order has been created: "
+						+ "\n\n" + "Fuel Type: " + fuelType + 
+						  "\n"   +"Amount: " + 5*mqty + " Liters" 
+						+ "\n\n\n" +"MyFuel System.";
+				
+				MailThread mailT = new MailThread(email,subject,content);
+				new Thread(mailT).start();
+				}
+				
+				ps= con.prepareStatement("insert into message values(?,?,?,?)");
+				ps.setInt(1, 0);
+				ps.setInt(2, sid);
+				ps.setString(3, "New Inventory Order");
+				ps.setInt(4, 1);
+				ps.executeUpdate();
+			}
+	
+			ps.close();
+			rs.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		
+		
+	}
+	
+	/**
 	 * Get current promotion if exist(according to current time and fuelid).
 	 * @param fid - Fuel type id.
 	 * @return The promotion details object if exist(if not it will be null).
 	 */
-	private Promotion getPromotion(int fid)
+	private ArrayList<Promotion> getPromotions()
 	{
 		ResultSet rs = null;
 		PreparedStatement ps = null;
+		ArrayList<Promotion> promList = new ArrayList<Promotion>();
 		
 		try {
 		
 			ps= con.prepareStatement("SELECT p.tid, t.pname, t.discount, t.shour, t.fhour, p.sdate, p.fdate, t.ctype, t.fid, p.pid"
 								     + " FROM promotion p, prom_temp t"
-								     +" WHERE p.tid = t.tid AND t.fid = ?"
+								     +" WHERE p.tid = t.tid"
 								     +" AND DATEDIFF( sdate, CURDATE( ) ) <=0"
 								     +" AND DATEDIFF( fdate, CURDATE( ) ) >=0 "
 								     + " AND CURTIME() > t.shour"
 								     + " AND CURTIME() < t.fhour");
-			ps.setInt(1, fid);
 			rs= ps.executeQuery();
 		
-			if(rs.next()) return new Promotion(rs.getInt(1),rs.getString(2),rs.getFloat(3),rs.getTime(4), 
-					rs.getTime(5), rs.getDate(6), rs.getDate(7), rs.getInt(8),rs.getInt(9),rs.getInt(10));
+			while(rs.next()) 
+				promList.add(new Promotion(rs.getInt(1),rs.getString(2),rs.getFloat(3),rs.getTime(4), 
+					rs.getTime(5), rs.getDate(6), rs.getDate(7), rs.getInt(8),rs.getInt(9),rs.getInt(10)));
 			ps.close();
 			rs.close();
-			return null;
+			return promList;
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -355,7 +414,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			rs = st.executeQuery(sql);
 			
 			while(rs.next())
-				rates.add(new Rate (rs.getInt(1), rs.getString(2), rs.getInt(3)));
+				rates.add(new Rate (rs.getInt(1), rs.getString(2), rs.getFloat(3)));
 			return rates;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -445,11 +504,11 @@ public class FuelOrderDBHandler extends DBHandler{
 				ArrayList <Fuel> fuels = getFuels();
 				ArrayList <StationInventory> si = getInventory();
 				ArrayList <Rate> rates = getRates();
-				Promotion p = getPromotion(req.getFuelID());
+				ArrayList<Promotion> promList = getPromotions();
 				ArrayList <HomeOrder> horders = null;
 				if(req.getFuelID() == Fuel.HomeFuelID) 
 				 horders = getHomeOrders(req.getCustomerID());
-				FuelOrderResponse res = new FuelOrderResponse (si,fuels, p,horders,rates);
+				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,rates);
 				server.setResponse(res);
 			}
 			
@@ -472,6 +531,8 @@ public class FuelOrderDBHandler extends DBHandler{
 			
 		}
 	}
+
+	
 
 	
 

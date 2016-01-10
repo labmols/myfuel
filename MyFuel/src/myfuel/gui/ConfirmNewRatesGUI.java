@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import myfuel.GUIActions.ConfirmNewRatesActions;
 import myfuel.client.BackMainMenu;
-import myfuel.client.saleModel;
+import myfuel.client.Rate;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -83,14 +83,14 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 	 */
 	void getApproved()
 	{
-		ArrayList<saleModel> approved = new ArrayList<saleModel>();
+		ArrayList<Rate> approved = new ArrayList<Rate>();
 		boolean app;
 		
 		for(int i=0;i<model.getRowCount();i++)
 		{
 			app = (boolean) model.getValueAt(i, 4);
 			if(app)
-				approved.add(new saleModel((Integer)model.getValueAt(i,0),(Integer)model.getValueAt(i,3)))	;
+				approved.add(new Rate((Integer)model.getValueAt(i,0),null,(Float)model.getValueAt(i,3)))	;
 		}
 		
 		if (JOptionPane.showConfirmDialog(null, "Unpicked Rates Will be considered as denied and will be removed from the Suggestion \n "
@@ -123,12 +123,12 @@ public class ConfirmNewRatesGUI extends SuperGUI{
  * @param s - suggested discounts
  * @param c - current discounts
  */
-	public void setDetails(ArrayList<saleModel> s, ArrayList<saleModel> c)
+	public void setDetails(ArrayList<Rate> s, ArrayList<Rate> c)
 	{
 		String[] type = {"Monthly Regular - One Car","Monthly Regular - few Cars","Fully monthly"};
 		for(int i=0; i < s.size() ; i++)
 		{
-			model.insertRow(i,new Object[]{s.get(i).getType(),type[i],c.get(i).getDiscount(),s.get(i).getDiscount(),false});
+			model.insertRow(i,new Object[]{s.get(i).getModelid(),type[i],c.get(i).getDiscount(),s.get(i).getDiscount(),false});
 		}
 		
 	}
