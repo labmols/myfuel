@@ -51,9 +51,9 @@ public class CalcPrice {
 	 */
 	public static float calcCarFuelOrder(int modelid, ArrayList <Rate> rates, float qty,float maxPrice, Promotion p)
 	{
-	   int modelDiscount = rates.get(modelid).getDiscount();
-	   int discountMonthlyOne = rates.get(Rate.MonthlyOne).getDiscount();
-	   int discountMonthlyFew = rates.get(Rate.MonthlyFew).getDiscount();;
+	   int modelDiscount = rates.get(modelid-1).getDiscount();
+	   int discountMonthlyOne = rates.get(Rate.MonthlyOne-1).getDiscount();
+	   int discountMonthlyFew = rates.get(Rate.MonthlyFew-1).getDiscount();;
 	   float orderPrice;
 	   
 	   switch(modelid)
@@ -63,24 +63,27 @@ public class CalcPrice {
 		   orderPrice = maxPrice * qty;
 		   break;
 	   case Rate.MonthlyOne:
-		   orderPrice = maxPrice*(1-(modelDiscount/100)) * qty;
+		   orderPrice = maxPrice*(1-((float)modelDiscount/100)) * qty;
+		   break;
 	   case Rate.MonthlyFew:
 		   //Like Monthly One.
-		   orderPrice = maxPrice*(1-(discountMonthlyOne/100)) * qty;
+		   orderPrice = maxPrice*(1-((float)discountMonthlyOne/100)) * qty;
 		   //Monthly Few cars discount.
-		   orderPrice *= (1-(modelDiscount/100));
+		   orderPrice *= (1-((float)modelDiscount/100));
+		   break;
 	   case Rate.FullyMonthly:
 		   //Like Monthly Few
-		   orderPrice = maxPrice*(1-(discountMonthlyOne/100)) * qty;
+		   orderPrice = maxPrice*(1-((float)discountMonthlyOne/100)) * qty;
 		   orderPrice *= (1-(discountMonthlyFew/100));
 		   //Fully Monthly Discount
-		   orderPrice *= (1-(modelDiscount/100));
+		   orderPrice *= (1-((float)modelDiscount/100));
+		   break;
 		default: orderPrice = -1;
 	   }
 	   
 	   //if there is any promotion.
 	   if(p != null)
-		   orderPrice *= (1-(p.getDiscount()/100));
+		   orderPrice *= (1-((float)p.getDiscount()/100));
 	   	
 	   
 		return orderPrice;

@@ -75,7 +75,7 @@ public class HomeOrderPanel extends JPanel{
 		setBounds(6, 46, 584, 384);
 		setLayout(null);
 		
-		JLabel lblQuantity = new JLabel("Quantity (Liter):");
+		JLabel lblQuantity = new JLabel("Amount (Liter):");
 		lblQuantity.setBounds(97, 100, 115, 16);
 		add(lblQuantity);
 		

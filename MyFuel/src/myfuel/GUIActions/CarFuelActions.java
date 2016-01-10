@@ -3,6 +3,7 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.CalcPrice;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Fuel;
@@ -65,7 +66,8 @@ public class CarFuelActions extends GUIActions {
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.infoRes = res;
-			gui.setPrices(infoRes.getFuels());
+			int modelid = customerRes.getUser().getSmodel();
+			gui.setInfo(infoRes.getRates().get(modelid-1).getDiscount(),infoRes.getFuels());
 			gui.setWaitPorgress();
 		}
 	}
@@ -81,6 +83,14 @@ public class CarFuelActions extends GUIActions {
 
 	public ArrayList <Fuel> getFuels() {
 		return this.infoRes.getFuels();
+	}
+
+
+	public float getPrice(int fuelID) {
+		Customer c = customerRes.getUser();
+		return CalcPrice.calcCarFuelOrder(c.getSmodel(),infoRes.getRates(), 1, infoRes.getFuels().get(fuelID-1).getMaxPrice(), infoRes.getProm());
+		// TODO Auto-generated method stub
+		
 	}
 
 }
