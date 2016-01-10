@@ -25,6 +25,9 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 	 * Current Rates 
 	 */
 	private ArrayList<Rate> current;
+	/***
+	 * True if there was no exception and false otherwise
+	 */
 	private boolean answer ;
 	/***
 	 *  status of operation 
