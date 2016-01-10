@@ -44,6 +44,8 @@ public class Purchase implements Serializable {
 	 */
 	private float qty;
 	
+	private int customerCarID;
+	
 	private String driverName;
 	/**
 	 * Create new Purchase object with the following parameters.
@@ -55,7 +57,7 @@ public class Purchase implements Serializable {
 	 * @param bill - Total Bill value. 
 	 * @param qty -Quantity (Liter).
 	 */
-	public Purchase (int customerid, int pid, int sid, int fuelid, int promid, Date pdate, float bill, float qty,  String driverName)
+	public Purchase (int customerid, int pid, int sid, int fuelid, int promid, Date pdate, float bill, float qty,  String driverName,int customerCarID)
 	{
 		this.setCustomerid(customerid);
 		this.setPid(pid);
@@ -66,6 +68,7 @@ public class Purchase implements Serializable {
 		this.setBill(bill);
 		this.setQty(qty);
 		this.setDriverName(driverName);
+		this.setCustomerCarID(customerCarID);
 	}
 	/***
 	 * Purchase Constructor 
@@ -151,6 +154,12 @@ public class Purchase implements Serializable {
 
 	public void setDriverName(String driverName) {
 		this.driverName = driverName;
+	}
+	public int getCustomerCarID() {
+		return customerCarID;
+	}
+	public void setCustomerCarID(int customerCarID) {
+		this.customerCarID = customerCarID;
 	}
 	
 	

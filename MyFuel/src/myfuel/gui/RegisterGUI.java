@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 
 import myfuel.GUIActions.RegisterActions;
 import myfuel.client.BackMainMenu;
+import java.awt.Font;
 
 /**
  * Register User Interface.
@@ -123,47 +124,57 @@ public class RegisterGUI extends SuperGUI {
 		panel2.setLayout(null);
 		
 		JLabel lblId = new JLabel("ID:");
+		lblId.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblId.setBounds(73, 27, 25, 16);
 		panel2.add(lblId);
 		
 		idTextField = new JTextField();
+		idTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		idTextField.setBounds(92, 22, 110, 26);
 		panel2.add(idTextField);
 		idTextField.setColumns(10);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
+		lblFirstName.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblFirstName.setBounds(19, 60, 79, 16);
 		panel2.add(lblFirstName);
 		
 		fnameTextField = new JTextField();
+		fnameTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		fnameTextField.setColumns(10);
 		fnameTextField.setBounds(92, 55, 110, 26);
 		panel2.add(fnameTextField);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
+		lblLastName.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblLastName.setBounds(19, 98, 79, 16);
 		panel2.add(lblLastName);
 		
 		lnameTextField = new JTextField();
+		lnameTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		lnameTextField.setColumns(10);
 		lnameTextField.setBounds(92, 93, 110, 26);
 		panel2.add(lnameTextField);
 		
 		JLabel label_3 = new JLabel("E-mail:");
+		label_3.setFont(new Font("Arial", Font.PLAIN, 13));
 		label_3.setBounds(46, 131, 53, 16);
 		panel2.add(label_3);
 		
 		emailTextField = new JTextField();
+		emailTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		emailTextField.setBounds(92, 126, 110, 26);
 		panel2.add(emailTextField);
 		emailTextField.setColumns(10);
 		
 		addressTextField = new JTextField();
+		addressTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		addressTextField.setColumns(10);
 		addressTextField.setBounds(92, 159, 110, 26);
 		panel2.add(addressTextField);
 		
 		JLabel lblAddress = new JLabel("Address:");
+		lblAddress.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblAddress.setBounds(33, 164, 66, 16);
 		panel2.add(lblAddress);
 		
@@ -174,45 +185,55 @@ public class RegisterGUI extends SuperGUI {
 		panel.add(panel3);
 		
 		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblPassword.setBounds(48, 24, 72, 16);
 		panel3.add(lblPassword);
 		
 		JLabel lblRetypePassword = new JLabel("Retype Password:");
+		lblRetypePassword.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblRetypePassword.setBounds(6, 57, 109, 16);
 		panel3.add(lblRetypePassword);
 		
 		JLabel lblCreditCard = new JLabel("Credit Card:");
+		lblCreditCard.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblCreditCard.setBounds(41, 95, 79, 16);
 		panel3.add(lblCreditCard);
 		
 		CCTextField = new JTextField();
+		CCTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		CCTextField.setColumns(10);
 		CCTextField.setBounds(114, 90, 94, 26);
 		panel3.add(CCTextField);
 		
 		JLabel lblSaleModel = new JLabel("Sale Model:");
+		lblSaleModel.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblSaleModel.setBounds(41, 130, 91, 16);
 		panel3.add(lblSaleModel);
 		
 		saleModelCB = new JComboBox<String>();
+		saleModelCB.setFont(new Font("Arial", Font.PLAIN, 13));
 		saleModelCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Occasional", "Monthly- One Car", "Monthly - Few Cars", "Fully Monthly - One Car"}));
 		saleModelCB.addItemListener(new ButtonListener());
 		saleModelCB.setBounds(114, 126, 186, 27);
 		panel3.add(saleModelCB);
 		
 		passTextField = new JPasswordField();
+		passTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		passTextField.setBounds(114, 19, 94, 26);
 		panel3.add(passTextField);
 		
 		rePassTextField = new JPasswordField();
+		rePassTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		rePassTextField.setBounds(114, 52, 94, 26);
 		panel3.add(rePassTextField);
 		
 		JLabel lblType = new JLabel("Type: ");
+		lblType.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblType.setBounds(70, 162, 91, 16);
 		panel3.add(lblType);
 		
 		typeCB = new JComboBox<String>();
+		typeCB.setFont(new Font("Arial", Font.PLAIN, 13));
 		typeCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Private", "Company"}));
 		typeCB.setBounds(114, 158, 186, 27);
 		panel3.add(typeCB);
@@ -224,16 +245,19 @@ public class RegisterGUI extends SuperGUI {
 		panel.add(panel4);
 		
 		JLabel lblNewLabel = new JLabel("Access Type:");
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblNewLabel.setBounds(18, 20, 91, 16);
 		panel4.add(lblNewLabel);
 		
 		accessCB = new JComboBox<String>();
+		accessCB.setFont(new Font("Arial", Font.PLAIN, 13));
 		accessCB.setModel(new DefaultComboBoxModel<String>(new String[] {"One Station", "Few Stations"}));
 		accessCB.addItemListener(new ButtonListener());
 		accessCB.setBounds(104, 16, 141, 27);
 		panel4.add(accessCB);
 		
 		JLabel lblChooseStation = new JLabel("Choose Station:");
+		lblChooseStation.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblChooseStation.setBounds(6, 50, 104, 16);
 		panel4.add(lblChooseStation);
 		
@@ -242,6 +266,7 @@ public class RegisterGUI extends SuperGUI {
 		panel4.add(stationsCB);
 		
 		btnAddStation = new JButton("Add Station");
+		btnAddStation.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnAddStation.setBounds(114, 78, 117, 29);
 		btnAddStation.addActionListener(new ButtonListener());
 		panel4.add(btnAddStation);
@@ -253,29 +278,35 @@ public class RegisterGUI extends SuperGUI {
 		panel.add(panel5);
 		
 		JLabel lblCarId = new JLabel("Car ID:");
+		lblCarId.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblCarId.setBounds(37, 18, 53, 16);
 		panel5.add(lblCarId);
 		
 		fuelCB = new JComboBox<String>();
+		fuelCB.setFont(new Font("Arial", Font.PLAIN, 13));
 		fuelCB.setModel(new DefaultComboBoxModel<String>(new String[] {"95", "Diesel", "Scooter"}));
 		fuelCB.setBounds(101, 51, 94, 27);
 		panel5.add(fuelCB);
 		
 		btnAddCar = new JButton("Add Car");
+		btnAddCar.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnAddCar.addActionListener(new ButtonListener());
 		btnAddCar.setBounds(94, 78, 117, 29);
 		panel5.add(btnAddCar);
 		
 		cidTextField = new JTextField();
+		cidTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		cidTextField.setColumns(10);
 		cidTextField.setBounds(102, 13, 94, 26);
 		panel5.add(cidTextField);
 		
 		JLabel lblFuelType = new JLabel("Fuel Type:");
+		lblFuelType.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblFuelType.setBounds(25, 55, 72, 16);
 		panel5.add(lblFuelType);
 		
 		btnRegister = new JButton("Register");
+		btnRegister.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnRegister.setToolTipText("Confirm register");
 		btnRegister.setBounds(241, 389, 117, 29);
 		btnRegister.addActionListener(new ButtonListener());
@@ -287,6 +318,7 @@ public class RegisterGUI extends SuperGUI {
 		stationsCB.setModel(stationModel);
 		
 		btnClear = new JButton("Clear");
+		btnClear.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnClear.setToolTipText("Clear all input include all added cars");
 		btnClear.setBounds(52, 389, 117, 29);
 		btnClear.addActionListener(new ButtonListener());

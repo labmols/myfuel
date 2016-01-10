@@ -7,12 +7,14 @@ import java.util.Date;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
+
 import myfuel.client.CalcPrice;
 import myfuel.client.Fuel;
 import myfuel.client.FuelQty;
 import myfuel.client.HomeOrder;
 import myfuel.client.MyFuelClient;
 import myfuel.client.Purchase;
+import myfuel.client.StationInventory;
 import myfuel.gui.HomeFuelGUI;
 import myfuel.request.FuelOrderRequest;
 import myfuel.request.RequestEnum;
@@ -85,7 +87,7 @@ public class HomeOrderActions extends GUIActions {
 				if(urgent) 
 					shipDate = pdate;
 				
-				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null);
+				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null,-1);
 				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent,p);
 				gui.createWaitDialog("Sending your order...");
 				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
@@ -137,11 +139,21 @@ public class HomeOrderActions extends GUIActions {
 	 * @return
 	 */
 	private boolean checkInventory(float qty) {
-		ArrayList<FuelQty> f= response.getSi().get(3).getfQty();
-		if(qty > f.get(0).getQty())
-			return false;
+		for(StationInventory s: response.getSi())
+		{
+			if(s.getS().getsid() == Fuel.HomeFuelID)
+			{
+				for(FuelQty f: s.getfQty())
+				{
+					if(f.getFid() == Fuel.HomeFuelID)
+						if(qty > f.getQty())
+							return false;
+						else return true;
+				}
+			}
 		
-		return true;
+		}
+		return false;
 		
 	}
 

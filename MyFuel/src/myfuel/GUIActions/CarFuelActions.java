@@ -8,6 +8,7 @@ import myfuel.client.CalcPrice;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Fuel;
+import myfuel.client.FuelQty;
 import myfuel.client.MyFuelClient;
 import myfuel.client.Promotion;
 import myfuel.client.Purchase;
@@ -145,13 +146,19 @@ public class CarFuelActions extends GUIActions {
 					check = false;
 		}
 		
+		if(!checkInventory(amountF, fuelSelected, stationID))
+		{
+			errors+= "Not enough fuel quantity.\n";
+			check = false;
+		}
+		
 		if(!check)
 			gui.showErrorMessage(errors);
 		else
 		{
 			Promotion prom = infoRes.getPromotion(fuelSelected);
 			float totalPrice = CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getRates(), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
-			fuelPurchase  = new Purchase(customer.getUserid(),0,stationID, fuelSelected, prom.getPid(),new Date(),totalPrice,amountF,dName);
+			fuelPurchase  = new Purchase(customer.getUserid(),0,stationID, fuelSelected, prom.getPid(),new Date(),totalPrice,amountF,dName,cid);
 		}
 		return check;
 		
@@ -210,6 +217,26 @@ public class CarFuelActions extends GUIActions {
 	public Promotion getPromotion(int fuelID) {
 		return infoRes.getPromotion(fuelID);
 		// TODO Auto-generated method stub
+		
+	}
+	
+	private boolean checkInventory(float qty, int fuelID, int sid) {
+		
+		for(StationInventory s: infoRes.getSi())
+		{
+			if(s.getS().getsid() == sid)
+			{
+				for(FuelQty f: s.getfQty())
+				{
+					if(f.getFid() == fuelID)
+						if(qty > f.getQty())
+							return false;
+						else return true;
+				}
+			}
+		
+		}
+		return false;
 		
 	}
 	

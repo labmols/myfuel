@@ -207,8 +207,8 @@ public class FuelDialog extends JDialog {
 				}
 				if(check)
 				{
-					
-				JOptionPane.showMessageDialog(null, "Your change is : "+new DecimalFormat("##.##").format(change),"Your Change",JOptionPane.PLAIN_MESSAGE);	
+				if(methodCB.getSelectedIndex()==1)
+					JOptionPane.showMessageDialog(null, "Your change is : "+new DecimalFormat("##.##").format(change),"Your Change",JOptionPane.PLAIN_MESSAGE);	
 				actions.createPurchase();
 				dispose();
 				setVisible(false);
