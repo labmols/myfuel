@@ -103,9 +103,14 @@ public class HomeControlDBHandler extends DBHandler
 			
 			ps.executeUpdate();
 			
+			ps = con.prepareStatement("DELETE from message where sid = 4 and type = ?");
+			ps.setInt(1,1);
+			ps.executeUpdate();
+			
 			answer = true;
 			str = "New order has been added to inventory!";
 			
+			ps.close();
 		}catch(SQLException e)
 		{
 			e.printStackTrace();

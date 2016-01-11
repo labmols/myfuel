@@ -1,8 +1,11 @@
 package myfuel.response;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import myfuel.client.Customer;
+import myfuel.client.FuelQty;
+import myfuel.client.MessageForManager;
 import myfuel.client.RoleEnum;
 
 @SuppressWarnings("serial")
@@ -22,6 +25,11 @@ public class WorkerLoginResponse extends Response{
 	 */
 	private int sid;
 	
+	/***
+	 * Messages for the user
+	 */
+	private ArrayList<MessageForManager> msg;
+	
 	/** new Worker login response
 	 * role 1 - Station Worker
 	 * role 2- Station Manager
@@ -30,8 +38,9 @@ public class WorkerLoginResponse extends Response{
 	 * role 5- Company Manager
 	 * @param workerExist
 	 * @param role
+	 * @param msg
 	 */
-	public WorkerLoginResponse(int roleid,int wid,int sid){
+	public WorkerLoginResponse(int roleid,int wid,int sid,ArrayList<MessageForManager> msg){
 		this.wid=wid;
 		this.sid = sid;
 		switch(roleid){
@@ -46,6 +55,11 @@ public class WorkerLoginResponse extends Response{
 		case 5: role=RoleEnum.CompanyManager;
 		break;
 		}
+		
+		this.setMsg(msg);
+		
+		
+		
 	}
 	
 	
@@ -71,6 +85,20 @@ public class WorkerLoginResponse extends Response{
 	public void setSid(int sid) {
 		this.sid = sid;
 	}
+
+
+	public ArrayList<MessageForManager> getMsg() {
+		return msg;
+	}
+
+
+	public void setMsg(ArrayList<MessageForManager> msg) {
+		this.msg = msg;
+	}
+
+
+
+
 
 	
 	

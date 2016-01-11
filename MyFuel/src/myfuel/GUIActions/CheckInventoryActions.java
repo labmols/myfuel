@@ -3,6 +3,7 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.CheckInventoryGUI;
 import myfuel.request.CheckInventoryRequest;
@@ -15,10 +16,11 @@ public class CheckInventoryActions extends GUIActions{
 	private int sid;
 	private CheckInventoryRequest request;
 	private CheckInventoryResponse response;
-	
-	public CheckInventoryActions(MyFuelClient client,int sid) {
+	private ArrayList<MessageForManager> msg;
+	public CheckInventoryActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg) {
 		super(client);
 		this.sid = sid;
+		this.msg = msg;
 		 gui = new CheckInventoryGUI(this) ;
 		 request=new CheckInventoryRequest(0,this.sid);
 		 client.handleMessageFromGUI(request);
@@ -43,7 +45,19 @@ public class CheckInventoryActions extends GUIActions{
 		
 		else if(arg1 instanceof booleanResponse)
 		{
-	
+			MessageForManager temp = null;
+			
+			for(MessageForManager m : msg)
+			{
+				if(m.getSid() == sid && m.getType() == 1)
+				{
+					temp = m;
+					break;
+				}
+			}
+			if(temp != null)
+				msg.remove(msg.indexOf(temp));
+				
 			booleanResponse resp = (booleanResponse)arg1;
 			if(!resp.getSuccess())
 			gui.showErrorMessage(resp.getMsg());
@@ -54,7 +68,7 @@ public class CheckInventoryActions extends GUIActions{
 
 	@Override
 	public void backToMenu() {
-		this.changeFrame(gui,new SMActions(client,sid),this);
+		this.changeFrame(gui,new SMActions(client,sid,msg),this);
 	}
 
 }
