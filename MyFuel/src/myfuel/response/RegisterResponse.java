@@ -2,6 +2,7 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
+import myfuel.client.Network;
 import myfuel.client.Station;
 
 /**
@@ -13,22 +14,24 @@ public class RegisterResponse extends Response {
 	/**
 	 * List of all Stations in the company.
 	 */
-	private ArrayList <Station> stations;
+	private ArrayList <Network> networks;
 	
 	/**
 	 * Create new Register Response object.
-	 * @param stations - List of all the stations in the company.
+	 * @param networks - List of all the stations in the company.
 	 */
-	public RegisterResponse(ArrayList<Station> stations){
-		this.setStations(stations);
+	public RegisterResponse(ArrayList<Network> networks){
+		this.setNetworks(networks);
+	}
+
+	public ArrayList <Network> getNetworks() {
+		return networks;
+	}
+
+	public void setNetworks(ArrayList <Network> networks) {
+		this.networks = networks;
 	}
 	
-	public ArrayList <Station> getStations() {
-		return stations;
-	}
 	
-	public void setStations(ArrayList <Station> stations) {
-		this.stations = stations;
-	}
 	
 }

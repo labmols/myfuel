@@ -58,13 +58,13 @@ public class RegisterGUI extends SuperGUI {
  */
 	private JTextField cidTextField;
 /**
- * Customer Access Level ComboBox (One Stations, Few Stations).
+ * Customer Access Level ComboBox (One network, Few networks).
  */
 	private JComboBox<String> accessCB;
 /**
- * Current available Stations ComboBox.
+ * Current available networks ComboBox.
  */
-	private JComboBox<String> stationsCB;
+	private JComboBox<String> networkCB;
 /**
  * Fuel Type ComboBox.
  */
@@ -80,11 +80,11 @@ public class RegisterGUI extends SuperGUI {
 /**
  * Station ComboBox model (used for elements functions).
  */
-	private DefaultComboBoxModel<String> stationModel ;
+	private DefaultComboBoxModel<String> networkModel ;
 /**
- * Add new station Button.
+ * Add new station network Button.
  */
-	private JButton btnAddStation;
+	private JButton btnAddNetwork;
 /**
  * Add new Car Button.
  */
@@ -256,20 +256,20 @@ public class RegisterGUI extends SuperGUI {
 		accessCB.setBounds(104, 16, 141, 27);
 		panel4.add(accessCB);
 		
-		JLabel lblChooseStation = new JLabel("Choose Station:");
+		JLabel lblChooseStation = new JLabel("Choose Network:");
 		lblChooseStation.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblChooseStation.setBounds(6, 50, 104, 16);
+		lblChooseStation.setBounds(6, 53, 104, 16);
 		panel4.add(lblChooseStation);
 		
-		stationsCB = new JComboBox<String>();
-		stationsCB.setBounds(104, 48, 141, 27);
-		panel4.add(stationsCB);
+		networkCB = new JComboBox<String>();
+		networkCB.setBounds(104, 48, 141, 27);
+		panel4.add(networkCB);
 		
-		btnAddStation = new JButton("Add Station");
-		btnAddStation.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnAddStation.setBounds(114, 78, 117, 29);
-		btnAddStation.addActionListener(new ButtonListener());
-		panel4.add(btnAddStation);
+		btnAddNetwork = new JButton("Add Station Network");
+		btnAddNetwork.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnAddNetwork.setBounds(84, 78, 161, 29);
+		btnAddNetwork.addActionListener(new ButtonListener());
+		panel4.add(btnAddNetwork);
 		
 		JPanel panel5 = new JPanel();
 		panel5.setLayout(null);
@@ -314,8 +314,8 @@ public class RegisterGUI extends SuperGUI {
 		setContentPane(contentPane);
 		
 		
-		stationModel= new DefaultComboBoxModel<String>();
-		stationsCB.setModel(stationModel);
+		networkModel= new DefaultComboBoxModel<String>();
+		networkCB.setModel(networkModel);
 		
 		btnClear = new JButton("Clear");
 		btnClear.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -347,7 +347,7 @@ public class RegisterGUI extends SuperGUI {
 			if(e.getSource() == saleModelCB)
 				actions.resetCars();
 			else if(e.getSource() == accessCB)
-				actions.resetStations();
+				actions.resetNetworks();
 			}
 		}
 		
@@ -357,10 +357,10 @@ public class RegisterGUI extends SuperGUI {
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()== accessCB)
-			actions.resetStations();
+			actions.resetNetworks();
 		
-		if(e.getSource() == btnAddStation){
-			actions.addStation((String)stationModel.getSelectedItem(), accessCB.getSelectedIndex());
+		if(e.getSource() == btnAddNetwork){
+			actions.addNetwork((String)networkModel.getSelectedItem(), accessCB.getSelectedIndex());
 		}
 		
 		if(e.getSource() == btnAddCar){
@@ -382,9 +382,9 @@ public class RegisterGUI extends SuperGUI {
  * Add new Station to the Stations ComboBox.
  * @param st - The Station name received from DB.
  */
-	public void addStation(String st)
+	public void addNetwork(String st)
 	{
-		stationModel.addElement(st);
+		networkModel.addElement(st);
 	}
 
 	

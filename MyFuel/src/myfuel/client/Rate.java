@@ -12,10 +12,11 @@ public class Rate implements Serializable{
 	final static int MonthlyOne = 2;
 	final static int MonthlyFew = 3;
 	final static int FullyMonthly= 4;
+	
 	/**
 	 * Sale Model ID. 
 	 */
-	private int modelid;
+	private int modelID;
 	/**
 	 * Sale Model description.
 	 */
@@ -32,11 +33,19 @@ public class Rate implements Serializable{
 		this.setDiscount(discount);
 	}
 	
+	public Rate(int modelid,  float discount)
+	{
+		this.setModelid(modelid);
+		this.setDiscount(discount);
+	}
+	
+	
+	
 	public int getModelid() {
-		return modelid;
+		return modelID;
 	}
 	public void setModelid(int modelid) {
-		this.modelid = modelid;
+		this.modelID = modelid;
 	}
 	public String getModelDesc() {
 		return modelDesc;
@@ -50,6 +59,7 @@ public class Rate implements Serializable{
 	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
+
 	
 
 }

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
+import myfuel.client.Network;
 import myfuel.client.SendMailTLS;
 import myfuel.client.Station;
 import myfuel.gui.RegisterGUI;
@@ -28,13 +29,13 @@ public class RegisterActions extends GUIActions {
 	 */
 	private RegisterGUI gui;
 	/**
-	 * List of all stations in the company, received from Database.
+	 * List of all networks in the company, received from Database.
 	 */
-	private ArrayList <Station> stations;
+	private ArrayList <Network> networks;
 	/**
 	 * List of all the new customer stations chosen.
 	 */
-	private ArrayList <Integer> cstations;
+	private ArrayList <Integer> cnetworks;
 	/**
 	 * List of all the new customer cars.
 	 */
@@ -55,12 +56,12 @@ public class RegisterActions extends GUIActions {
 	 */
 	public RegisterActions(MyFuelClient client) {
 		super(client);
-		stations = new ArrayList <Station>();
-		cstations = new ArrayList <Integer>();
+		networks = new ArrayList <Network>();
+		cnetworks = new ArrayList <Integer>();
 		cars = new ArrayList <Car>();
 		gui = new RegisterGUI(this);
 		gui.setVisible(true);
-		showStations();
+		showNetworks();
 	}
 	
 	/**
@@ -78,16 +79,16 @@ public class RegisterActions extends GUIActions {
 	public void registerRequest(int userid, String fname, String lname, char [] pass, String email,String address, String cnumber, int toc, int 
 			atype, int smodel){
 		String password= new String(pass);
-		customer = new Customer(userid,fname,lname,password,email,address,cnumber,toc,atype,smodel,cars,cstations);
+		customer = new Customer(userid,fname,lname,password,email,address,cnumber,toc,atype,smodel,cars,cnetworks);
 		request = new RegisterRequest(RequestEnum.Insert,customer);
 		gui.createWaitDialog("Sending register request...");
 		client.handleMessageFromGUI(request);
 	}
 	
 	/**
-	 * Request for all the stations from DB.
+	 * Request for all the networks from DB.
 	 */
-	public void showStations(){
+	public void showNetworks(){
 		gui.createWaitDialog("Getting Details...");
 		request = new RegisterRequest(RequestEnum.Select,null);
 		client.handleMessageFromGUI(request);
@@ -104,7 +105,7 @@ public class RegisterActions extends GUIActions {
 		if(request.getType()== RequestEnum.Select){
 		if(arg instanceof RegisterResponse){
 		RegisterResponse res = (RegisterResponse)arg;
-		addStations(res);
+		addNetworks(res);
 		gui.setWaitPorgress();
 		
 		}
@@ -120,13 +121,13 @@ public class RegisterActions extends GUIActions {
 		}
 }
 	/**
-	 * add all current available stations to the gui comboBox
+	 * add all current available networks to the gui comboBox
 	 * @param res - the response from the server(contains the stations values).
 	 */
-	public void addStations(RegisterResponse res){
-		this.stations = res.getStations();
-		for(Station st : stations){
-			gui.addStation(st.getName());
+	public void addNetworks(RegisterResponse res){
+		this.networks = res.getNetworks();
+		for(Network n : networks){
+			gui.addNetwork(n.getName());
 		}
 	}
 	
@@ -176,16 +177,17 @@ public class RegisterActions extends GUIActions {
 	}
 	
 	/**
-	 * add new station to the ArrayList stations of the user.
-	 * @param station, the station object
+	 * Add new network to the user list of networks.
+	 * @param netName - network name.
+	 * @param access - customer access type.
 	 */
-	public void addStation(String sname, int access){
-		if(access != 0 || cstations.isEmpty()){
-		for(Station s: stations){
-			if(s.getName().equals(sname)){
-				if(!cstations.contains(s.getsid())) {
-					cstations.add(s.getsid());
-					gui.showOKMessage("Station "+sname + " is added!");
+	public void addNetwork(String netName, int access){
+		if(access != 0 || cnetworks.isEmpty()){
+		for(Network n: networks){
+			if(n.getName().equals(netName)){
+				if(!cnetworks.contains(n.getNid())) {
+					cnetworks.add(n.getNid());
+					gui.showOKMessage("Station "+netName + " is added!");
 				}
 				else gui.showErrorMessage("You already have this station!");
 				}
@@ -260,7 +262,7 @@ public class RegisterActions extends GUIActions {
 			errors+= "Please add your cars. \n";
 		}
 		
-		if(cstations.isEmpty()){
+		if(cnetworks.isEmpty()){
 			success= false;
 			errors+= "Please add your Stations. \n";
 		}
@@ -305,9 +307,9 @@ public class RegisterActions extends GUIActions {
 	/**
 	 * remove all customer stations list contents, because the user replace the access.
 	 */
-	public void resetStations() {
+	public void resetNetworks() {
 		gui.showOKMessage("Now add your stations!");
-		cstations.clear();
+		cnetworks.clear();
 	}
 	
 	/**
@@ -333,7 +335,7 @@ public class RegisterActions extends GUIActions {
 	 */
 	public void resetAll() {
 		// TODO Auto-generated method stub
-		cstations.clear();
+		cnetworks.clear();
 		cars.clear();
 		
 	}

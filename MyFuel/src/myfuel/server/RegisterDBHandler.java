@@ -6,6 +6,7 @@ import java.sql.*;
 
 import myfuel.client.Car;
 import myfuel.client.Customer;
+import myfuel.client.Network;
 import myfuel.client.Station;
 import myfuel.request.RequestEnum;
 import myfuel.request.RegisterRequest;
@@ -31,22 +32,22 @@ public class RegisterDBHandler extends DBHandler {
 	 * @param request - the request from the client.
 	 * @return RegisterResponse if there is not SQL Error, otherwise return booleanResponse(false).
 	 */
-	private Response showStations(RegisterRequest request)
+	private Response getNetworks(RegisterRequest request)
 	{
 		ResultSet rs = null;
 		Statement st = null;
-		ArrayList<Station> stations = new ArrayList<Station>();
+		ArrayList<Network> networks = new ArrayList<Network>();
 		int id;
 		String name;
 	
 			try {
 				st = con.createStatement();
-				String query = "select * from station where sid!=4";
+				String query = "select * from network where sid!=0";
 				rs = st.executeQuery(query);
 				while(rs.next()){
 					id = rs.getInt(1);
 					name = rs.getString(2);
-					stations.add(new Station(id,name));
+					networks.add(new Network(id,name));
 					}
 				rs.close();
 				st.close();
@@ -56,7 +57,7 @@ public class RegisterDBHandler extends DBHandler {
 				return new booleanResponse(false,"SQL Error");
 			}
 
-			return new RegisterResponse(stations);
+			return new RegisterResponse(networks);
 		}
 	
 	
@@ -188,7 +189,7 @@ public class RegisterDBHandler extends DBHandler {
 		
 		if(arg instanceof RegisterRequest){
 		RegisterRequest request = (RegisterRequest)arg;
-		if(request.getType() == RequestEnum.Select) server.setResponse(showStations(request));
+		if(request.getType() == RequestEnum.Select) server.setResponse(getNetworks(request));
 		else if(request.getType() == RequestEnum.Insert) server.setResponse(CheckAndInsert(request));
 	}
 }

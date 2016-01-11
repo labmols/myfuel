@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -12,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import myfuel.GUIActions.CarFuelActions;
-
 import myfuel.client.*;
 
 import javax.swing.DefaultComboBoxModel;
@@ -25,6 +26,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JTextPane;
 import javax.swing.event.CaretEvent;
@@ -71,7 +73,7 @@ public class CarFuelGUI extends SuperGUI {
 	/**
 	 * Current fuel selected value (1-95/2-Diesel/3-Scooter).
 	 */
-	private int fuelSelected;
+	private int fuelSelected=-1;
 	/**
 	 * 95 Fuel type price Label
 	 */
@@ -93,6 +95,11 @@ public class CarFuelGUI extends SuperGUI {
 	 */
 	private JComboBox <String> stationCombo;
 	
+	ArrayList<NetworkRates> rates;
+	
+	int customerModel;
+	
+	HashMap<Integer, Integer> IDHolder;
 	private JTextField dName;
 	private JLabel totalPrice;
 	private JLabel sModelDisc;
@@ -107,6 +114,8 @@ public class CarFuelGUI extends SuperGUI {
 	 */
 	public CarFuelGUI(CarFuelActions actions) {
 		this.actions=actions;
+		IDHolder = new HashMap();
+		rates = new ArrayList<NetworkRates>();
 		panel.setLocation(0, 0);
 		lblTitle.setBounds(218, 6, 117, 23);
 		lblTitle.setText("Car Fueling");
@@ -139,6 +148,7 @@ public class CarFuelGUI extends SuperGUI {
 		stationModel = new DefaultComboBoxModel<String>();
 		stationCombo.setModel(stationModel);
 		stationCombo.setBounds(134, 5, 109, 27);
+		stationCombo.addItemListener(new eventListener());
 		panel2.add(stationCombo);
 		
 		JLabel lblChooseFuelPump = new JLabel("Choose Fuel Pump:");
@@ -322,7 +332,7 @@ public class CarFuelGUI extends SuperGUI {
 	 * This Class is used for components events handling.
 	 *
 	 */
-	private class eventListener implements ActionListener {
+	private class eventListener implements ActionListener,ItemListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -330,9 +340,14 @@ public class CarFuelGUI extends SuperGUI {
 			
 		}
 
-		
-
-		
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getStateChange()==ItemEvent.DESELECTED &&  e.getSource() == stationCombo)
+			{
+				updateDiscount();
+			}
+		}	
 	}
 	
 	/**
@@ -344,35 +359,22 @@ public class CarFuelGUI extends SuperGUI {
 		
 		if(e.getSource() == rb95.getRadioButton())
 		{
+			
 			fuelSelected = Fuel.Fuel95ID;
-			currentPrice = actions.getPrice(Fuel.Fuel95ID);
-			totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
-			Promotion p = actions.getPromotion(Fuel.Fuel95ID);
-			if(p!=null)
-			promDisc.setText(new DecimalFormat("##.##").format(p.getDiscount()) +"%");
-			else promDisc.setText("No Promotion.");
+			setDetails(fuelSelected);
+			
 		}
 		
 		if(e.getSource() == rbscooter.getRadioButton())
 		{
 			fuelSelected = Fuel.FuelScooter;
-			currentPrice = actions.getPrice(Fuel.FuelScooter);
-			totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
-			Promotion p = actions.getPromotion(Fuel.FuelScooter);
-			if(p!=null)
-			promDisc.setText(new DecimalFormat("##.##").format(p.getDiscount()) +"%");
-			else promDisc.setText("No Promotion.");
+			setDetails(fuelSelected);
 		}
 		
 		if(e.getSource() == rbdiesel.getRadioButton())
 		{
 			fuelSelected = Fuel.FuelDiesel;
-			currentPrice = actions.getPrice(Fuel.FuelDiesel);
-			totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
-			Promotion p = actions.getPromotion(Fuel.FuelDiesel);
-			if(p!=null)
-			promDisc.setText(new DecimalFormat("##.##").format(p.getDiscount()) +"%");
-			else promDisc.setText("No Promotion.");
+			setDetails(fuelSelected);
 		}
 		
 		if(e.getSource() == btnStartFuel)
@@ -383,16 +385,29 @@ public class CarFuelGUI extends SuperGUI {
 		
 	}
 	
-	/**
-	 * Set all price labels to the current prices from DB.
-	 * @param fuels - List of all fuels prices.
-	 */
-	public void setInfo(float modelDisc, ArrayList <Fuel> fuels)
+	private void setDetails(int fuelSelected) {
+		// TODO Auto-generated method stub
+	currentPrice = actions.getPrice(fuelSelected, IDHolder.get(stationCombo.getSelectedIndex()));
+	totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
+	Promotion p = actions.getPromotion(fuelSelected);
+	if(p!=null)
+	promDisc.setText(new DecimalFormat("##.##").format(p.getDiscount()) +"%");
+	else promDisc.setText("No Promotion.");
+	}
+
+/**
+ * 
+ * @param rates
+ * @param fuels
+ */
+	public void setInfo(int customerModel,ArrayList<NetworkRates> rates, ArrayList<Fuel> fuels)
 	{
 				lblp95.setText(fuels.get(0).getMaxPrice()+"NIS");
 				lblpdiesel.setText(fuels.get(1).getMaxPrice()+"NIS");
 				lblpscooter.setText(fuels.get(2).getMaxPrice()+"NIS");
-				sModelDisc.setText(new DecimalFormat("##.##").format(modelDisc) + "%");
+				this.rates = rates;
+				this.customerModel = customerModel;
+				this.updateDiscount();
 				
 	}
 	
@@ -402,9 +417,11 @@ public class CarFuelGUI extends SuperGUI {
 	 * Add Station to the Stations ComboBox.
 	 * @param st - The Station name String.
 	 */
-	public void addStation(String st)
+	public void addStation(Station s)
 	{
-		stationModel.addElement(st);
+		int nid = s.getNetwork().getNid();
+		IDHolder.put(stationModel.getSize(), nid);
+		stationModel.addElement(s.getName());
 	}
 
 	/**
@@ -434,4 +451,26 @@ public class CarFuelGUI extends SuperGUI {
 			lblDriverName.setVisible(true);
 		}
 	}
+	
+	private void updateDiscount()
+	{
+		int nid = IDHolder.get(stationCombo.getSelectedIndex());
+		float disc = getDiscount(nid, customerModel);	
+		sModelDisc.setText(new DecimalFormat("##.##").format(disc) + "%");
+		if(fuelSelected!=-1) setDetails(fuelSelected);
+	}
+	
+	private float getDiscount(int nid, int modelID)
+	{
+		for(NetworkRates n: rates)
+		{
+			if(n.getNid() == nid)
+			{
+				return n.getModelDiscount(modelID);
+			}
+		}
+		return -1;
+	}
+
+	
 }

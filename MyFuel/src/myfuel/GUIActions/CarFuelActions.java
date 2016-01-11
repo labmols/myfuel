@@ -56,9 +56,10 @@ public class CarFuelActions extends GUIActions {
 	{
 		ArrayList<Station> stations = customerRes.getStations();
 		ArrayList<Car> cars = customerRes.getUser().getCars();
+
 		gui.checkType(customerRes.getUser().getToc());
 		for(Station s: stations)
-			gui.addStation(s.getName());
+			gui.addStation(s);
 		for(Car c: cars)
 			gui.addCar(c.getcid());
 		
@@ -127,8 +128,8 @@ public class CarFuelActions extends GUIActions {
 			{
 				for(Integer sid : customerStations)
 				{
-					stationID= sid;
-					if(sid == s.getsid())
+					stationID= s.getsid();
+					if(sid == s.getNetwork().getNid())
 						found = true;
 				}
 				if(!found)
@@ -157,8 +158,8 @@ public class CarFuelActions extends GUIActions {
 		else
 		{
 			Promotion prom = infoRes.getPromotion(fuelSelected);
-			float totalPrice = CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getRates(), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
-			fuelPurchase  = new Purchase(customer.getUserid(),0,stationID, fuelSelected, prom.getPid(),new Date(),totalPrice,amountF,dName,cid);
+			//float totalPrice = CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getRates(), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
+			fuelPurchase  = new Purchase(customer.getUserid(),0,stationID, fuelSelected, prom.getPid(),new Date(),0,amountF,dName,cid);
 		}
 		return check;
 		
@@ -175,7 +176,7 @@ public class CarFuelActions extends GUIActions {
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.infoRes = res;
 			int modelid = customerRes.getUser().getSmodel();
-			gui.setInfo(infoRes.getRates().get(modelid-1).getDiscount(),infoRes.getFuels());
+			gui.setInfo(modelid,infoRes.getRates(), infoRes.getFuels());
 			gui.setWaitPorgress();
 		}
 		else if(arg instanceof booleanResponse)
@@ -207,9 +208,9 @@ public class CarFuelActions extends GUIActions {
 	}
 
 
-	public float getPrice(int fuelID) {
+	public float getPrice(int fuelID, int nid) {
 		Customer c = customerRes.getUser();
-		return CalcPrice.calcCarFuelOrder(c.getSmodel(),infoRes.getRates(), 1, infoRes.getFuels().get(fuelID-1).getMaxPrice(), infoRes.getPromotion(fuelID));
+		return CalcPrice.calcCarFuelOrder(c.getSmodel(),infoRes.getNRates(nid), 1, infoRes.getFuels().get(fuelID-1).getMaxPrice(), infoRes.getPromotion(fuelID));
 		// TODO Auto-generated method stub
 		
 	}
@@ -219,6 +220,7 @@ public class CarFuelActions extends GUIActions {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 	private boolean checkInventory(float qty, int fuelID, int sid) {
 		

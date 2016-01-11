@@ -49,11 +49,11 @@ public class CalcPrice {
 	 * @param p - Promotion details object(if exist) , if not it's null.
 	 * @return
 	 */
-	public static float calcCarFuelOrder(int modelid, ArrayList <Rate> rates, float qty,float maxPrice, Promotion p)
+	public static float calcCarFuelOrder(int modelid, NetworkRates rates, float qty,float maxPrice, Promotion p)
 	{
-	   float modelDiscount = rates.get(modelid-1).getDiscount();
-	   float discountMonthlyOne = rates.get(Rate.MonthlyOne-1).getDiscount();
-	   float discountMonthlyFew = rates.get(Rate.MonthlyFew-1).getDiscount();;
+	   float modelDiscount = rates.getModelDiscount(modelid);
+	   float discountMonthlyOne = rates.getModelDiscount(Rate.MonthlyOne);
+	   float discountMonthlyFew = rates.getModelDiscount(Rate.MonthlyFew);
 	   float orderPrice;
 	   
 	   switch(modelid)

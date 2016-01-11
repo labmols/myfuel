@@ -10,6 +10,7 @@ import java.util.Observer;
 
 import myfuel.client.Car;
 import myfuel.client.Fuel;
+import myfuel.client.Network;
 import myfuel.client.Station;
 import myfuel.request.LoginRequest;
 import myfuel.request.RegisterRequest;
@@ -117,7 +118,7 @@ public class LoginDBHandler extends DBHandler {
 				ps.setInt(2, userid);
 				ps.executeUpdate();
 				
-				ps = con.prepareStatement("select sid from customer_station where uid = ?");
+				ps = con.prepareStatement("select sid from customer_network where uid = ?");
 				ps.setInt(1, userid);
 				rs = ps.executeQuery();
 				while(rs.next()){
@@ -153,20 +154,35 @@ public class LoginDBHandler extends DBHandler {
 	private ArrayList<Station> getStations()
 	{
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		Statement st = null;
+		PreparedStatement ps = null;
 		ArrayList<Station> stations = new ArrayList<Station>();
 		int id;
 		String name;
 		
 			try {
 				st = con.createStatement();
-				String query = "select * from station where sid!=4";
+				String query = "select * from station_in_network";
 				rs = st.executeQuery(query);
-				while(rs.next()){
-					id = rs.getInt(1);
-					name = rs.getString(2);
-					stations.add(new Station(id,name));
+				while(rs.next())
+				{
+					ps = con.prepareStatement("select * from network where sid = ?");
+					ps.setInt(1, rs.getInt(2));
+					rs2 = ps.executeQuery();
+					if(rs2.next())
+					{
+						id = rs.getInt(1);
+						name = rs.getString(3);
+						stations.add(new Station(id,name,new Network(rs2.getInt(1),rs2.getString(2))));
 					}
+					
+				}
+				
+				rs.close();
+				rs2.close();
+				ps.close();
+				st.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -17,6 +17,9 @@ public class Station implements Serializable {
 	 */
 	private String sname;
 	
+	private Network network;
+	
+	
 	/***
 	 * Stations Constructor
 	 * @param sid - station id 
@@ -27,6 +30,13 @@ public class Station implements Serializable {
 		this.sname = sname;
 	}
 	
+	public Station(int sid,String sname , Network network){
+		this.sid = sid;
+		this.sname = sname;
+		this.network = network;
+	}
+	
+	
 
 	public String getName(){
 		return this.sname;
@@ -34,6 +44,14 @@ public class Station implements Serializable {
 	
 	public int getsid(){
 		return this.sid;
+	}
+
+	public Network getNetwork() {
+		return network;
+	}
+
+	public void setNetwork(Network network) {
+		this.network = network;
 	}
 
 	

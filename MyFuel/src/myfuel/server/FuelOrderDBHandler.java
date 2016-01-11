@@ -403,21 +403,39 @@ public class FuelOrderDBHandler extends DBHandler{
 	 * Get all current rates(according to sale model) from the Database.
 	 * @return List of all the current rates.
 	 */
-	private ArrayList <Rate> getRates()
+	private ArrayList <NetworkRates> getRates()
 	{
+		ArrayList<NetworkRates> networkRates = new ArrayList<NetworkRates>();
 		ArrayList<Rate> rates = new ArrayList<Rate>();
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		Statement st = null;
+		PreparedStatement ps = null;
+		NetworkRates netRates;
+		Network n;
 		String sql;
 		
 		try {
 			st= con.createStatement();
-			sql = "select * from price_to_type";
+			sql = "select * from network";
 			rs = st.executeQuery(sql);
 			
 			while(rs.next())
-				rates.add(new Rate (rs.getInt(1), rs.getString(2), rs.getFloat(3)));
-			return rates;
+			{
+				rates = new ArrayList<Rate>();
+				n = new Network (rs.getInt(1), rs.getString(2));
+				ps= con.prepareStatement("select * from network_rate where nid=?");
+				ps.setInt(1, n.getNid());
+				rs2 = ps.executeQuery();
+				while(rs2.next())
+				{
+				Rate r = new Rate (rs2.getInt(2), rs2.getFloat(3));
+				rates.add(r);
+				}
+				netRates = new NetworkRates(n.getNid(), rates);
+				networkRates.add(netRates);
+			}
+			return networkRates;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -449,7 +467,7 @@ public class FuelOrderDBHandler extends DBHandler{
 		
 		try {
 			st= con.createStatement();
-			sql = "select sid,sname from station";
+			sql = "select sid,name from station_in_network";
 			rs = st.executeQuery(sql);
 			while(rs.next()) //Add all stations
 			{
@@ -505,12 +523,12 @@ public class FuelOrderDBHandler extends DBHandler{
 			{
 				ArrayList <Fuel> fuels = getFuels();
 				ArrayList <StationInventory> si = getInventory();
-				ArrayList <Rate> rates = getRates();
+				ArrayList <NetworkRates> networkRates = getRates();
 				ArrayList<Promotion> promList = getPromotions();
 				ArrayList <HomeOrder> horders = null;
 				if(req.getFuelID() == Fuel.HomeFuelID) 
 				 horders = getHomeOrders(req.getCustomerID());
-				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,rates);
+				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,networkRates);
 				server.setResponse(res);
 			}
 			
