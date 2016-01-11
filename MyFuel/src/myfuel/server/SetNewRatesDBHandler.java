@@ -22,6 +22,9 @@ public class SetNewRatesDBHandler extends DBHandler{
 	public SetNewRatesDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);	
 	}
+	/***
+	 * Getting Current Rates From the DB
+	 */
 	void getRates()
 	{
 		ResultSet rs = null ;
