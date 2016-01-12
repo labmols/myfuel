@@ -111,6 +111,7 @@ public class RegisterActions extends GUIActions {
 		}
 		else {
 			booleanResponse res2 = (booleanResponse) arg;
+			
 			gui.showErrorMessage(res2.getMsg());
 		}
 		}
@@ -142,7 +143,12 @@ public class RegisterActions extends GUIActions {
 			changeFrame(gui,new LoginActions(client),this);
 
 		}
-		else gui.showErrorMessage(res.getMsg());
+		else 
+		{
+			gui.setWaitPorgress();
+			gui.showErrorMessage(res.getMsg());
+			this.resetCars();
+		}
 	}
 	
 	/** 

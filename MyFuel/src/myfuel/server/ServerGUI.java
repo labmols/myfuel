@@ -264,11 +264,7 @@ public class ServerGUI extends SuperGUI{
 	        textArea.setCaretPosition(textArea.getDocument().getLength());
 	}
 	
-	public static void main(String [] args){
-		JFrame serverFrame = new ServerGUI();
-		serverFrame.setVisible(true);
-		
-	}
+	
 }
 
 
