@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
+import myfuel.client.Network;
 import myfuel.client.Station;
 import myfuel.gui.LogInGUI;
 import myfuel.gui.UpdateCustomerDetailsGUI;
@@ -38,9 +39,9 @@ public class UpdateDetailsActions extends GUIActions {
 	private ArrayList <Car> origCars;
 	
 	/**
-	 * list of the customer original stations , before update.
+	 * list of the customer original station networks , before update.
 	 */
-	private ArrayList <Integer> origStations;
+	private ArrayList <Integer> origNetworks;
 	
 	boolean isConfirmed=false;
 	/**
@@ -52,7 +53,7 @@ public class UpdateDetailsActions extends GUIActions {
 		super(client);
 		this.res = res;
 		origCars = new ArrayList<Car>(res.getUser().getCars());
-		origStations = new ArrayList<Integer> (res.getUser().getStations());
+		origNetworks = new ArrayList<Integer> (res.getUser().getStations());
 		gui = new UpdateCustomerDetailsGUI(this);
 		gui.setVisible(true);
 		// TODO Auto-generated constructor stub
@@ -64,8 +65,8 @@ public class UpdateDetailsActions extends GUIActions {
 		return res.getUser();
 	}
 	
-	public ArrayList<Station> getStations(){
-		return res.getStations();
+	public ArrayList<Network> getNetworks(){
+		return res.getNetworks();
 	}
 
 	/**
@@ -135,29 +136,29 @@ public class UpdateDetailsActions extends GUIActions {
 	}
 	
 	/**
-	 * Add new station to the customer stations regardless he have it already or 
-	 * he have one station access type.
-	 * @param sname - the name of station that chosen in the ComboBox.
+	 * Add new station network to the list regardless he have it already or 
+	 * he have one station network access type.
+	 * @param sname - the name of station network that chosen in the ComboBox.
 	 */
-	public void addStation(String sname, int access){
+	public void addNetwork(String sname, int access){
 		
-		ArrayList <Integer> userStations = res.getUser().getStations();
-		if(access == 1 || access==0 && userStations.isEmpty())
+		ArrayList <Integer> userNetworks = res.getUser().getStations();
+		if(access == 1 || (access==0 && userNetworks.isEmpty()))
 		{
-		for(Station s: res.getStations()){
+		for(Network s: res.getNetworks()){
 			if(s.getName().equals(sname)){
-				if(!userStations.contains(s.getsid())) {
-					userStations.add(s.getsid());
-					gui.showOKMessage("Station "+sname + " is added!");
+				if(!userNetworks.contains(s.getNid())) {
+					userNetworks.add(s.getNid());
+					gui.showOKMessage("Station Network "+sname + " is added!");
 					isConfirmed = false;
 				}
-				else gui.showErrorMessage("You already have this station!");
+				else gui.showErrorMessage("You already have this station network !");
 				}
 			}
 		}
-		else gui.showErrorMessage("You Can't add more then one stations in this access!");
+		else gui.showErrorMessage("You Can't add more then one station networks in this access!");
 	
-		gui.updateStationCB(userStations,res.getStations());
+		gui.updateStationCB(userNetworks,res.getNetworks());
 		}
 		
 	/**
@@ -169,30 +170,30 @@ public class UpdateDetailsActions extends GUIActions {
 	{
 		ArrayList <Integer> userStations = res.getUser().getStations();
 		int index = -1;
-		for(Station s: res.getStations())
+		for(Network s: res.getNetworks())
 		{
 			if(s.getName().equals(oldS))
 			{
-					index =userStations.indexOf(s.getsid());
+					index =userStations.indexOf(s.getNid());
 			}
 		}
-		for(Station s: res.getStations())
+		for(Network s: res.getNetworks())
 		{
 			if(s.getName().equals(newS))
 				{
-					if(index!=-1 && !userStations.contains(s.getsid()))
+					if(index!=-1 && !userStations.contains(s.getNid()))
 					{
-						userStations.set(index, s.getsid());
-						gui.showOKMessage("Station "+oldS + " changed to " +newS);
+						userStations.set(index, s.getNid());
+						gui.showOKMessage("Station Network "+oldS + " changed to " +newS);
 						isConfirmed = false;
 					}
-					else gui.showErrorMessage("You already have this station!");
+					else gui.showErrorMessage("You already have this station network!");
 					
 				}
 			
 		}
 		
-		gui.updateStationCB(userStations,res.getStations());
+		gui.updateStationCB(userStations,res.getNetworks());
 			
 		}
 
@@ -214,7 +215,7 @@ public class UpdateDetailsActions extends GUIActions {
 	{
 			ArrayList <Integer> userStations = res.getUser().getStations();
 			userStations.clear();
-			gui.updateStationCB(userStations, res.getStations());
+			gui.updateStationCB(userStations, res.getNetworks());
 	}
 	
 	
@@ -302,7 +303,7 @@ public class UpdateDetailsActions extends GUIActions {
 		user.getCars().clear();
 		user.setCars(new ArrayList<Car>(origCars));
 		user.getStations().clear();
-		user.setStations(new ArrayList<Integer>(origStations));
+		user.setStations(new ArrayList<Integer>(origNetworks));
 	}
 	
 

@@ -26,7 +26,7 @@ class ProgressBarThread implements Runnable {
      */
     public void run() {
         do {
-        		value+=0.01;
+        		value+=0.1;
         		gui.setProgress(value);
             
             try {

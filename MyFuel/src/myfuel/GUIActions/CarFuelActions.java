@@ -34,7 +34,6 @@ public class CarFuelActions extends GUIActions {
 		infoRes = null;
 		fuelPurchase = null;
 		gui = new CarFuelGUI(this);
-		insertInfo();
 		gui.setVisible(true);
 		getInfoRequest();
 		
@@ -54,7 +53,7 @@ public class CarFuelActions extends GUIActions {
 	
 	private void insertInfo()
 	{
-		ArrayList<Station> stations = customerRes.getStations();
+		ArrayList<Station> stations = infoRes.getStations();
 		ArrayList<Car> cars = customerRes.getUser().getCars();
 
 		gui.checkType(customerRes.getUser().getToc());
@@ -79,7 +78,7 @@ public class CarFuelActions extends GUIActions {
 	
 	}
 	
-	public boolean verifyDetails(String amount, int fuelSelected, String dName ,String stationSelected,int cid)
+	public boolean verifyDetails(String amount, int fuelSelected, String dName ,String stationSelected,int cid,int nid)
 	{
 		float amountF=-1;
 		String errors="";
@@ -89,7 +88,7 @@ public class CarFuelActions extends GUIActions {
 		Customer customer = customerRes.getUser();
 		ArrayList<Car> customerCars = customerRes.getUser().getCars();
 		ArrayList<Integer> customerStations = customerRes.getUser().getStations();
-		ArrayList<Station> stations = customerRes.getStations();
+		ArrayList<Station> stations = infoRes.getStations();
 
 		try
 		{
@@ -132,13 +131,15 @@ public class CarFuelActions extends GUIActions {
 					if(sid == s.getNetwork().getNid())
 						found = true;
 				}
-				if(!found)
-				{
-				errors += "You don't have permission to fuel in this station.\n";
-				check = false;
-				}
-				break;
+				
 			}
+		}
+		
+		if(!found)
+		{
+		errors += "You don't have permission to fuel in this station.\n";
+		check = false;
+		
 		}
 		
 		if(customer.getToc()==1 && (dName.equals("") || !isAlpha(dName)))
@@ -157,9 +158,13 @@ public class CarFuelActions extends GUIActions {
 			gui.showErrorMessage(errors);
 		else
 		{
+			int pid;
 			Promotion prom = infoRes.getPromotion(fuelSelected);
-			//float totalPrice = CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getRates(), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
-			fuelPurchase  = new Purchase(customer.getUserid(),0,stationID, fuelSelected, prom.getPid(),new Date(),0,amountF,dName,cid);
+			float totalPrice = CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getNRates(nid), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
+			if(prom != null)
+				pid = prom.getPid();
+			else pid = -1;
+			fuelPurchase  = new Purchase(customer.getUserid(),0,stationID, fuelSelected, pid,new Date(),totalPrice,amountF,dName,cid);
 		}
 		return check;
 		
@@ -176,7 +181,9 @@ public class CarFuelActions extends GUIActions {
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.infoRes = res;
 			int modelid = customerRes.getUser().getSmodel();
+			insertInfo();
 			gui.setInfo(modelid,infoRes.getRates(), infoRes.getFuels());
+			
 			gui.setWaitPorgress();
 		}
 		else if(arg instanceof booleanResponse)

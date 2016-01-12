@@ -15,6 +15,7 @@ import myfuel.GUIActions.UpdateDetailsActions;
 import myfuel.client.BackMainMenu;
 import myfuel.client.Car;
 import myfuel.client.Customer;
+import myfuel.client.Network;
 import myfuel.client.Station;
 
 import javax.swing.JComboBox;
@@ -194,7 +195,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		
 		accessCB = new JComboBox<String>();
 		accessCB.addItemListener(new eventListener());
-		accessCB.setModel(new DefaultComboBoxModel<String>(new String[] {"One Station", "Few Stations"}));
+		accessCB.setModel(new DefaultComboBoxModel(new String[] {"One Network", "Few Networks"}));
 		accessCB.setBounds(396, 27, 132, 27);
 		panel2.add(accessCB);
 		
@@ -285,8 +286,8 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		panel2.add(stationCB);
 		stationCB.setModel(stationModel);
 		
-		JLabel lblStation = new JLabel("Your Stations:");
-		lblStation.setBounds(291, 67, 115, 16);
+		JLabel lblStation = new JLabel("Your Networks:");
+		lblStation.setBounds(294, 67, 103, 16);
 		panel2.add(lblStation);
 		
 		stationCB2 = new JComboBox<String>();
@@ -306,7 +307,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		
 		
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
-		showUserDetails(actions.getUserDetails(),actions.getStations());
+		showUserDetails(actions.getUserDetails(),actions.getNetworks());
 		
 		
 		
@@ -318,7 +319,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 	 * @param user - Customer details object.
 	 * @param stations - All stations list.
 	 */
-	public void showUserDetails(Customer user, ArrayList<Station> stations){
+	public void showUserDetails(Customer user, ArrayList<Network> networks){
 		fnameText.setText(user.getFname());
 		lnameText.setText(user.getLname());
 		addText.setText(user.getAddress());
@@ -330,8 +331,8 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		}
 		
 		accessCB.setSelectedIndex(user.getAtype());
-		saleCB.setSelectedItem(user.getSmodel());
-		typeCB.setSelectedItem(user.getToc());
+		saleCB.setSelectedIndex(user.getSmodel());
+		typeCB.setSelectedIndex(user.getToc());
 		if(accessCB.getSelectedIndex()==0) {
 			access=0;
 			sAdd.setEnabled(false);
@@ -341,8 +342,8 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 			sAdd.setEnabled(true);
 		}
 		
-		for(Station s: stations){
-			if(user.getStations().contains(s.getsid()))
+		for(Network s: networks){
+			if(user.getStations().contains(s.getNid()))
 			stationModel.addElement(s.getName());
 			stationModel2.addElement(s.getName());
 			
@@ -397,7 +398,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		
 		if(e.getSource() == sAdd)
 		{
-			actions.addStation((String)stationCB2.getSelectedItem(),access);
+			actions.addNetwork((String)stationCB2.getSelectedItem(),access);
 		}
 		
 		if(e.getSource()==carAdd){
@@ -443,8 +444,8 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		}
 		
 		accessCB.setSelectedIndex(user.getAtype());
-		saleCB.setSelectedItem(user.getSmodel());
-		typeCB.setSelectedItem(user.getToc());
+		saleCB.setSelectedIndex(user.getSmodel());
+		typeCB.setSelectedIndex(user.getToc());
 		
 	
 	}
@@ -452,13 +453,13 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 /**
  * Update Customer stations ComboBox after Add/Remove a station.
  * @param userStations - Current List of the customer stations.
- * @param stations - All stations list.
+ * @param arrayList - All stations list.
  */
-	public void updateStationCB(ArrayList<Integer> userStations,ArrayList<Station> stations)
+	public void updateStationCB(ArrayList<Integer> userStations,ArrayList<Network> arrayList)
 	{
 		stationModel.removeAllElements();
-		for(Station s: stations){
-			if(userStations.contains(s.getsid()))
+		for(Network s: arrayList){
+			if(userStations.contains(s.getNid()))
 			stationModel.addElement(s.getName());
 		}
 	}

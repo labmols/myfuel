@@ -85,6 +85,51 @@ public class FuelOrderDBHandler extends DBHandler{
 	}
 	
 	/**
+	 * Get all stations details available from the Database.
+	 * @return - ArrayList<Station> that contains all the stations info.
+	 */
+	private ArrayList<Station> getStations()
+	{
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		Statement st = null;
+		PreparedStatement ps = null;
+		ArrayList<Station> stations = new ArrayList<Station>();
+		int id;
+		String name;
+		
+			try {
+				st = con.createStatement();
+				String query = "select * from station_in_network";
+				rs = st.executeQuery(query);
+				while(rs.next())
+				{
+					ps = con.prepareStatement("select * from network where sid = ?");
+					ps.setInt(1, rs.getInt(2));
+					rs2 = ps.executeQuery();
+					if(rs2.next())
+					{
+						id = rs.getInt(1);
+						name = rs.getString(3);
+						stations.add(new Station(id,name,new Network(rs2.getInt(1),rs2.getString(2))));
+					}
+					
+				}
+				
+				rs.close();
+				rs2.close();
+				ps.close();
+				st.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return stations;
+			
+		}
+	
+	/**
 	 * Insert new Home Fuel Order to the Database.
 	 * @param order - The new Order object.
 	 * @return - true if the insertion succeed and false otherwise(SQL Error, etc).
@@ -158,7 +203,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			rs.close();
 			
 			//Insert into purchase table
-			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?)");
 			ps.setInt(1, nextid);
 			ps.setInt(2, p.getSid());
 			ps.setInt(3, p.getFuelid());
@@ -168,19 +213,20 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps.setTimestamp(5, new java.sql.Timestamp(p.getPdate().getTime()));
 			ps.setFloat(6, p.getBill());
 			ps.setFloat(7, p.getQty());
-			if(p.getDriverName() == null)
-			ps.setNull(8, java.sql.Types.VARCHAR);
-			else ps.setString(8, p.getDriverName());
+			
 			ps.executeUpdate();
 			ps.close();
 			
 			//Insert into customer_purchase table
-			ps = con.prepareStatement("insert into customer_purchase values(?,?,?)");
+			ps = con.prepareStatement("insert into customer_purchase values(?,?,?,?)");
 			ps.setInt(1, p.getCustomerid());
 			ps.setInt(2, nextid);
 			if(p.getCustomerCarID() == -1)
 			ps.setNull(3, java.sql.Types.INTEGER);
 			else ps.setInt(3, p.getCustomerCarID());
+			if(p.getDriverName() == null)
+				ps.setNull(4, java.sql.Types.VARCHAR);
+				else ps.setString(4, p.getDriverName());
 			ps.executeUpdate();
 			ps.close();
 			
@@ -526,9 +572,16 @@ public class FuelOrderDBHandler extends DBHandler{
 				ArrayList <NetworkRates> networkRates = getRates();
 				ArrayList<Promotion> promList = getPromotions();
 				ArrayList <HomeOrder> horders = null;
+				ArrayList<Station> stations ;
+				
 				if(req.getFuelID() == Fuel.HomeFuelID) 
+				{
 				 horders = getHomeOrders(req.getCustomerID());
-				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,networkRates);
+				 stations = null;
+				}
+				
+				else stations = getStations();
+				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,networkRates,stations);
 				server.setResponse(res);
 			}
 			
