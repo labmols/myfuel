@@ -164,16 +164,19 @@ public class RegisterDBHandler extends DBHandler {
 			}
 		
 			
-			try{
-			for(int sid: customer.getStations())
+			try
 			{
-			ps=con.prepareStatement("insert into customer_network values(?,?)");
-			ps.setInt(1,customer.getUserid());
-			ps.setInt(2,sid);
-			ps.executeUpdate();
-			ps.close();
-			}
-			}catch (SQLException e){
+				for(int sid: customer.getStations())
+				{
+					ps=con.prepareStatement("insert into customer_network values(?,?)");
+					ps.setInt(1,customer.getUserid());
+					ps.setInt(2,sid);
+					ps.executeUpdate();
+					ps.close();
+				}
+				}
+			catch (SQLException e)
+			{
 				e.printStackTrace();
 			}
 			

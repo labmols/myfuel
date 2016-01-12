@@ -71,7 +71,7 @@ public void updateTable(ArrayList <HomeOrder> horders)
 		else urgent = "No";
 		if(order.getStatus()) status = "Delivered";
 		else status= "On delivery";
-		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getQty()+"L",order.getAddress(), format.format(date), urgent, status});
+		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getHomeP().getQty()+"L",order.getAddress(), format.format(date), urgent, status});
 	}
 }
 

@@ -88,7 +88,7 @@ public class HomeOrderActions extends GUIActions {
 					shipDate = pdate;
 				
 				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null,-1);
-				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, qty , addr, shipDate, false, urgent,p);
+				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, addr, shipDate, false, urgent,p);
 				gui.createWaitDialog("Sending your order...");
 				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
 				client.handleMessageFromGUI(req);

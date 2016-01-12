@@ -56,17 +56,17 @@ public class FuelOrderDBHandler extends DBHandler{
 				st.executeUpdate("update home_order SET status=1 where datediff(curdate(),sdate) > 0 or (datediff(curdate(),sdate)=0 and TIMESTAMPDIFF(HOUR,sdate,NOW()) >=6)");
 				st.close();
 				//Get all home orders query after status update.
-				ps= con.prepareStatement("select t2.uid, t1.orid, t1.qty, t1.adr, t1.sdate, t1.status,t1.urgent,t1.pid from home_order t1, customer_home_order t2 where t2.uid = ? and t1.orid = t2.orid");
+				ps= con.prepareStatement("select t2.uid, t1.orid , t1.adr, t1.sdate, t1.status,t1.urgent,t1.pid from home_order t1, customer_home_order t2 where t2.uid = ? and t1.orid = t2.orid");
 				ps.setInt(1, customerID);
 				rs1 = ps.executeQuery();
 				while(rs1.next())
 				{
 				ps = con.prepareStatement("select * from purchase where pid = ?");
-				ps.setInt(1, rs1.getInt(8));
+				ps.setInt(1, rs1.getInt(7));
 				rs2 = ps.executeQuery();
 				rs2.next();
 				Purchase pur = new Purchase(rs1.getInt(1),rs2.getInt(1),rs2.getInt(2),rs2.getInt(3),rs2.getInt(4),rs2.getTimestamp(5),rs2.getFloat(6),rs2.getFloat(7),null,-1);
-				horders.add(new HomeOrder (rs1.getInt(1), rs1.getInt(2), rs1.getFloat(3), rs1.getString(4), rs1.getTimestamp(5), rs1.getBoolean(6), rs1.getBoolean(7),pur));
+				horders.add(new HomeOrder (rs1.getInt(1), rs1.getInt(2), rs1.getString(3), rs1.getTimestamp(4), rs1.getBoolean(5), rs1.getBoolean(6),pur));
 				}
 				ps.close();
 				rs1.close();
@@ -153,11 +153,10 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps = con.prepareStatement("insert into home_order values(?,?,?,?,?,?,?)");
 			ps.setInt(1, nextid);
 			ps.setInt(2, CustomerP);
-			ps.setFloat(3, order.getQty());
-			ps.setString(4, order.getAddress());
-			ps.setTimestamp(5, new java.sql.Timestamp(order.getShipDate().getTime()));
-			ps.setBoolean(6, order.isUrgent());
-			ps.setBoolean(7, order.getStatus());
+			ps.setString(3, order.getAddress());
+			ps.setTimestamp(4, new java.sql.Timestamp(order.getShipDate().getTime()));
+			ps.setBoolean(5, order.isUrgent());
+			ps.setBoolean(6, order.getStatus());
 			ps.executeUpdate();
 			ps.close();
 			

@@ -21,6 +21,8 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import com.alee.extended.date.WebDateField;
+
 /**
  *Home Order panel ,Part of Home Fuel User Interface.
  */
@@ -42,10 +44,7 @@ public class HomeOrderPanel extends JPanel{
 	 * Shipping address TextField.
 	 */
 	private JTextField shipAddrText;
-	/**
-	 * Shipping DatePicker 
-	 */
-	private JDatePickerImpl datePicker;
+
 	/**
 	 * Make order button.
 	 */
@@ -55,6 +54,8 @@ public class HomeOrderPanel extends JPanel{
 	 */
 	private JLabel lblUrgent ;
 	
+	 WebDateField dateField;
+	
 	/**
 	 * Create new Home Order Panel(part of Home Fuel GUI).
 	 * @param actions - Home Order GUI Controller.
@@ -63,13 +64,7 @@ public class HomeOrderPanel extends JPanel{
 	{
 		setOpaque(false);
 		this.actions = actions;
-		UtilDateModel model1 = new UtilDateModel();
-		Properties p = new Properties();
-		p.put("text.today", "Today");
-		p.put("text.month", "Month");
-		p.put("text.year", "Year");
-		
-		JDatePanelImpl datePanel = new JDatePanelImpl(model1,p);
+
 		setBounds(6, 46, 584, 384);
 		setLayout(null);
 		
@@ -86,7 +81,7 @@ public class HomeOrderPanel extends JPanel{
 		
 		urgentCB = new JCheckBox("Urgent Order?");
 		urgentCB.setFont(new Font("Arial", Font.PLAIN, 13));
-		urgentCB.setBounds(215, 128, 128, 23);
+		urgentCB.setBounds(213, 128, 128, 23);
 		add(urgentCB);
 		urgentCB.setToolTipText("In 6 hours from now");
 		urgentCB.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -122,12 +117,10 @@ public class HomeOrderPanel extends JPanel{
 		
 		lblUrgent = new JLabel("You will receieve your order within 6 hours from now!");
 		lblUrgent.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblUrgent.setBounds(177, 172, 345, 29);
+		lblUrgent.setBounds(201, 172, 345, 29);
 	    add(lblUrgent);
 		lblUrgent.setForeground(Color.RED);
-		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		datePicker.setBounds(202, 172, 159, 29);
-		add(datePicker);
+
 		
 		JLabel lblOrderType = new JLabel("Order Type:");
 		lblOrderType.setFont(new Font("Arial", Font.BOLD, 13));
@@ -136,11 +129,22 @@ public class HomeOrderPanel extends JPanel{
 		
 		btnMakeOrder = new JButton("Make Order");
 		btnMakeOrder.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnMakeOrder.setBounds(215, 252, 117, 29);
+		btnMakeOrder.setBounds(226, 250, 117, 29);
 		add(btnMakeOrder);
+		
+		JLabel lblMakeNewOrder = new JLabel("Make New Order");
+		lblMakeNewOrder.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 16));
+		lblMakeNewOrder.setBounds(213, 17, 159, 16);
+		add(lblMakeNewOrder);
 		btnMakeOrder.addActionListener(new eventListener());
 		lblUrgent.setVisible(false);
 		urgentCB.addActionListener(new eventListener());
+		
+		 dateField = new WebDateField ( new Date () );
+		 dateField.setSize(128, 25);
+		 dateField.setLocation(215, 173);
+		 add(dateField);
+
 	}
 	
 	/**
@@ -156,17 +160,17 @@ public class HomeOrderPanel extends JPanel{
 			{
 				if(urgentCB.isSelected())
 				{
-				datePicker.setVisible(false);
+				dateField.setVisible(false);
 				lblUrgent.setVisible(true);
 				}
 				else {
-					datePicker.setVisible(true);
+					dateField.setVisible(true);
 					lblUrgent.setVisible(false);
 				}
 			}
 			else if(e.getSource() == btnMakeOrder)
 			{
-				actions.verifyDetails((Date)datePicker.getModel().getValue(), qtyText.getText(), shipAddrText.getText(), urgentCB.isSelected());
+				actions.verifyDetails(dateField.getDate(), qtyText.getText(), shipAddrText.getText(), urgentCB.isSelected());
 			}
 		}
 		}
@@ -179,6 +183,5 @@ public class HomeOrderPanel extends JPanel{
 	{
 		shipAddrText.setText(address);
 	}
-		
 	}
 
