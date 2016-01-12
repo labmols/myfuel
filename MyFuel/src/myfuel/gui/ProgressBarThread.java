@@ -30,7 +30,7 @@ class ProgressBarThread implements Runnable {
         		gui.setProgress(value);
             
             try {
-                java.lang.Thread.sleep(5);
+                java.lang.Thread.sleep(20);
             } catch (java.lang.InterruptedException ex) {
                 ex.printStackTrace();
             }

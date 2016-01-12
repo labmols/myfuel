@@ -167,7 +167,7 @@ public class RegisterDBHandler extends DBHandler {
 			try{
 			for(int sid: customer.getStations())
 			{
-			ps=con.prepareStatement("insert into customer_station values(?,?)");
+			ps=con.prepareStatement("insert into customer_network values(?,?)");
 			ps.setInt(1,customer.getUserid());
 			ps.setInt(2,sid);
 			ps.executeUpdate();

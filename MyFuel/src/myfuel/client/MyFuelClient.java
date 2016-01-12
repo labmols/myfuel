@@ -3,6 +3,9 @@ package myfuel.client;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import com.alee.laf.WebLookAndFeel;
 
 import myfuel.GUIActions.LoginActions;
 import myfuel.gui.ConnectDialog;
@@ -59,20 +62,17 @@ public class MyFuelClient extends ObservableClient {
 	
 	
 	public static void main(String[] args)  {
-		// TODO Auto-generated method stub
-		MyFuelClient client;
+	
+		 SwingUtilities.invokeLater ( new Runnable ()
+	        {
+	            public void run ()
+	            {
+	            	WebLookAndFeel.install ();
+	        		ConnectDialog dialog = new ConnectDialog();
+	        		dialog.setVisible(true);
+	            }
+	        } );
 		
-		ConnectDialog dialog = new ConnectDialog();
-		dialog.setVisible(true);
-		
-		/*/try {
-			client = new MyFuelClient("localhost",5555);
-			new LoginActions(client);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Can't Connect to server in port 5555");
-		}/*/
 		
 		
 	}

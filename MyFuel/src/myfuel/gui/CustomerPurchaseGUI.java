@@ -23,16 +23,16 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 96, 584, 279);
 		model = new MyTableModel(6,-1);
-		String[] names = {"PID" ,"Car","Driver","Station","Fuel Type","Date","Time","Price","Amount(L)"};
+		String[] names = {"PID" ,"Car","Driver","Station","Fuel Type","Date","Time","Amount(L)","Price(NIS)"};
 		for(String s : names)
 			model.addColumn(s);
 		
 		purchaseTable = new JTable(model);
-		purchaseTable.setFont(new Font("Calibri", Font.PLAIN, 13));
+		purchaseTable.setFont(new Font("Arial", Font.PLAIN, 12));
 		purchaseTable.setModel(model);
 		scrollPane.setViewportView(purchaseTable);
 		panel.add(scrollPane);
-		model.insertRow(model.getRowCount(),new Object[]{1, 1234567,"Abalolo","Paz", "31/12/15", "18:00",435,40});
+		//model.insertRow(model.getRowCount(),new Object[]{1, 1234567,"Abalolo","Paz", "95", "31/12/15","11:10",435,40});
 	}
 	@Override
 	public void getInput(ActionEvent e) {

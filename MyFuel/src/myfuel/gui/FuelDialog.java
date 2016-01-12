@@ -83,7 +83,7 @@ public class FuelDialog extends JDialog {
 		{
 			liter = new JLabel("");
 			liter.setFont(new Font("Arial", Font.PLAIN, 13));
-			liter.setBounds(209, 62, 61, 16);
+			liter.setBounds(209, 62, 121, 16);
 			contentPanel.add(liter);
 		}
 		{
@@ -95,7 +95,7 @@ public class FuelDialog extends JDialog {
 		{
 			price = new JLabel("");
 			price.setFont(new Font("Arial", Font.PLAIN, 13));
-			price.setBounds(209, 88, 61, 16);
+			price.setBounds(209, 88, 114, 16);
 			contentPanel.add(price);
 		}
 		
@@ -134,14 +134,14 @@ public class FuelDialog extends JDialog {
 		
 		btnPay = new JButton("Pay");
 		btnPay.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnPay.setBounds(78, 92, 100, 29);
+		btnPay.setBounds(94, 89, 100, 29);
 		btnPay.addActionListener(new eventListener());
 		payPanel.add(btnPay);
 		
 		cashPanel = new JPanel();
 		cashPanel.setVisible(false);
 		cashPanel.setOpaque(false);
-		cashPanel.setBounds(51, 23, 149, 83);
+		cashPanel.setBounds(51, 23, 176, 83);
 		payPanel.add(cashPanel);
 		cashPanel.setLayout(null);
 		
@@ -155,7 +155,7 @@ public class FuelDialog extends JDialog {
 		cashPanel.add(changeLabel);
 		
 		moneyTxt = new JTextField();
-		moneyTxt.setBounds(92, 18, 67, 26);
+		moneyTxt.setBounds(92, 18, 78, 26);
 		cashPanel.add(moneyTxt);
 		moneyTxt.setColumns(10);
 		
@@ -247,7 +247,7 @@ public class FuelDialog extends JDialog {
 		
 		currentPrice =value*p;
 		liter.setText("" + new DecimalFormat("##.##").format(value)+" Liters");
-		price.setText("" + new DecimalFormat("##.##").format((currentPrice))+" NIS");
+		price.setText("" + new DecimalFormat("##.##").format((currentPrice))+"  NIS");
 	}
 
 	private void setPay() {

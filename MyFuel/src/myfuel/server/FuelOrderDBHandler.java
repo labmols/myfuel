@@ -65,7 +65,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				ps.setInt(1, rs1.getInt(8));
 				rs2 = ps.executeQuery();
 				rs2.next();
-				Purchase pur = new Purchase(rs1.getInt(1),rs2.getInt(1),rs2.getInt(2),rs2.getInt(3),rs2.getInt(4),rs2.getTimestamp(5),rs2.getFloat(6),rs2.getFloat(7),rs2.getString(8),-1);
+				Purchase pur = new Purchase(rs1.getInt(1),rs2.getInt(1),rs2.getInt(2),rs2.getInt(3),rs2.getInt(4),rs2.getTimestamp(5),rs2.getFloat(6),rs2.getFloat(7),null,-1);
 				horders.add(new HomeOrder (rs1.getInt(1), rs1.getInt(2), rs1.getFloat(3), rs1.getString(4), rs1.getTimestamp(5), rs1.getBoolean(6), rs1.getBoolean(7),pur));
 				}
 				ps.close();
