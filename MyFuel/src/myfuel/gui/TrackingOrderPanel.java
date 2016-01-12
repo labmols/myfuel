@@ -35,7 +35,7 @@ public class TrackingOrderPanel extends JPanel{
 		setBounds(6, 46, 584, 384);
 		setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 34, 572, 279);
+		scrollPane.setBounds(6, 34, 572, 189);
 		add(scrollPane);
 		model = new MyTableModel(6,-1);
 		String[] names = {"#" ,"Amount(L)","Address","Ship Date","Urgent","Status"};
@@ -47,8 +47,8 @@ public class TrackingOrderPanel extends JPanel{
 		table.setModel(model);
 		table.getColumnModel().getColumn(0).setPreferredWidth(7);
 		table.getColumnModel().getColumn(0).setPreferredWidth(11);
-		table.getColumnModel().getColumn(2).setPreferredWidth(50);
-		table.getColumnModel().getColumn(4).setPreferredWidth(20);
+		//table.getColumnModel().getColumn(2).setPreferredWidth(50);
+		//table.getColumnModel().getColumn(4).setPreferredWidth(20);
 		scrollPane.setViewportView(table);
 		
 		JLabel lblYourOrders = new JLabel("Your Orders ");

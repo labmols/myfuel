@@ -41,10 +41,9 @@ public class MyFuelServer extends ObservableServer{
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		setChanged();
-		notifyObservers(msg);
-		
 		String className = msg.getClass().getSimpleName();
 		gui.printMsg("<Recieved>: "+className);
+		notifyObservers(msg);
 		try {
 			client.sendToClient(response);
 			className = response.getClass().getSimpleName();
@@ -110,8 +109,10 @@ public class MyFuelServer extends ObservableServer{
  @Override
  public void serverClosed()
  {
+	 gui.showErrorMessage("Unexpected Error!");
 	 closeDBConnection(); 
 	 this.deleteObservers();
+	 System.exit(0);
  }
 	 
 public void createDBConnection (String add, String USER, String PASS) throws SQLException {

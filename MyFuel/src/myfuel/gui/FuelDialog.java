@@ -61,6 +61,7 @@ public class FuelDialog extends JDialog {
 		setBounds(100, 100, 451, 273);
 		this.setAlwaysOnTop(true);
 		setLocationRelativeTo(gui);
+		setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
@@ -212,7 +213,7 @@ public class FuelDialog extends JDialog {
 				{
 					setAlwaysOnTop(false);
 				if(methodCB.getSelectedIndex()==1)
-					JOptionPane.showMessageDialog(null, "Your change is : "+new DecimalFormat("##.##").format(change),"Your Change",JOptionPane.PLAIN_MESSAGE);	
+					JOptionPane.showMessageDialog(null, "Your change is : "+new DecimalFormat("##.##").format(change),"Your Change",JOptionPane.INFORMATION_MESSAGE);	
 				actions.createPurchase();
 				
 				dispose();
