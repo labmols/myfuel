@@ -99,7 +99,8 @@ public class CarFuelGUI extends SuperGUI {
 	
 	int customerModel;
 	
-	HashMap<Integer, Integer> IDHolder;
+	private HashMap<Integer, Integer> IDHolder;
+	
 	private JTextField dName;
 	private JLabel totalPrice;
 	private JLabel sModelDisc;
@@ -379,7 +380,7 @@ public class CarFuelGUI extends SuperGUI {
 		
 		if(e.getSource() == btnStartFuel)
 		{
-			if(actions.verifyDetails(LimitText.getText(), fuelSelected, dName.getText(), (String)stationCombo.getSelectedItem(),(Integer)carCB.getSelectedItem()))
+			if(actions.verifyDetails(LimitText.getText(), fuelSelected, dName.getText(), (String)stationCombo.getSelectedItem(),(Integer)carCB.getSelectedItem(),IDHolder.get(stationCombo.getSelectedIndex())))
 				startFuel(Float.parseFloat(LimitText.getText()), this.limitBox.getSelectedIndex());
 		}
 		

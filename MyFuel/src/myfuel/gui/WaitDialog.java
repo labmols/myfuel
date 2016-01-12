@@ -42,7 +42,7 @@ public class WaitDialog extends JDialog {
 	setResizable(false);
 	setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 	setResizable(false);
-	
+	this.setAlwaysOnTop(true);
 		setTitle("Wait...");
 		setBounds(100, 100, 339, 110);
 		setLocationRelativeTo(null);

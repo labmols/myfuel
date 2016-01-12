@@ -59,6 +59,7 @@ public class FuelDialog extends JDialog {
 		this.gui = gui;
 		setTitle("Fueling...");
 		setBounds(100, 100, 451, 273);
+		this.setAlwaysOnTop(true);
 		setLocationRelativeTo(gui);
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
@@ -182,6 +183,7 @@ public class FuelDialog extends JDialog {
 				float money=-1;
 				float change=-1;
 				boolean check=true;
+				String error="";
 				if(methodCB.getSelectedIndex()==1)
 				{
 					try
@@ -190,28 +192,38 @@ public class FuelDialog extends JDialog {
 						if(money<0)
 						{
 							check = false;
-							JOptionPane.showMessageDialog(null, "illegal money value!","Error",JOptionPane.ERROR_MESSAGE);	
+							error+= "illegal money value!\n";
 						}
 					}
 					catch (NumberFormatException e1)
 					{
 						e1.printStackTrace();
-						JOptionPane.showMessageDialog(null, "illegal money value!","Error",JOptionPane.ERROR_MESSAGE);	
+						check = false;
+						error+= "illegal money value!\n";
 					}
 					change =money-currentPrice;
-					if(change<0)
+					if(change<0 && check)
 					{
 						check = false;
-						JOptionPane.showMessageDialog(null, "Not enough money!","Error",JOptionPane.ERROR_MESSAGE);
+						error+= "Not enough money!\n";
 					}
 				}
 				if(check)
 				{
+					setAlwaysOnTop(false);
 				if(methodCB.getSelectedIndex()==1)
 					JOptionPane.showMessageDialog(null, "Your change is : "+new DecimalFormat("##.##").format(change),"Your Change",JOptionPane.PLAIN_MESSAGE);	
 				actions.createPurchase();
+				
 				dispose();
 				setVisible(false);
+				}
+				
+				else
+				{
+					setAlwaysOnTop(false);
+					JOptionPane.showMessageDialog(null, error,"Error",JOptionPane.ERROR_MESSAGE);
+					setAlwaysOnTop(true);
 				}
 			}
 		}

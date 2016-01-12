@@ -8,6 +8,7 @@ import myfuel.client.HomeOrder;
 import myfuel.client.NetworkRates;
 import myfuel.client.Promotion;
 import myfuel.client.Rate;
+import myfuel.client.Station;
 import myfuel.client.StationInventory;
 
 /**
@@ -43,18 +44,21 @@ public class FuelOrderResponse extends Response {
 	 */
 	private ArrayList<NetworkRates> rates;
 	
+	private ArrayList<Station> stations;
+	
 	/**
 	 * create new Car Fuel response 
 	 * @param si - the stations inventory list.
 	 * @param fuels - the fuels details list.
 	 */
-	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels,  ArrayList<Promotion> promList , ArrayList <HomeOrder> horders,ArrayList<NetworkRates> rates )
+	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels,  ArrayList<Promotion> promList , ArrayList <HomeOrder> horders,ArrayList<NetworkRates> rates, ArrayList<Station> stations )
 	{
 		this.si = new ArrayList<StationInventory>(si);
 		this.fuels = new ArrayList<Fuel>(fuels);
 		this.setPromList(new ArrayList<Promotion>(promList));
 		this.setHorders(horders);
 		this.setRates(new ArrayList<NetworkRates>(rates));
+		this.setStations(stations);
 	}
 
 
@@ -124,6 +128,16 @@ public class FuelOrderResponse extends Response {
 
 	public void setRates(ArrayList<NetworkRates> rates) {
 		this.rates = rates;
+	}
+
+
+	public ArrayList<Station> getStations() {
+		return stations;
+	}
+
+
+	public void setStations(ArrayList<Station> stations) {
+		this.stations = stations;
 	}
 	
 
