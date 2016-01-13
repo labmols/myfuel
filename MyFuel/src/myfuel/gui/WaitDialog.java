@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JProgressBar;
 import javax.swing.JLabel;
@@ -18,6 +19,7 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.SwingConstants;
 
 /**
@@ -68,6 +70,7 @@ public class WaitDialog extends JDialog {
 			label.setIcon(new ImageIcon(url));
 		}
 		progressBar.setIndeterminate(true);
+		
 	
 	}
 	
@@ -80,11 +83,30 @@ public class WaitDialog extends JDialog {
 		//progressBar.setValue(value);
 		if(progressBar.getMaximum() == value) 
 		{
-			progressBar.setIndeterminate(false);
-			this.dispose();
-			this.setVisible(false);
-		}
+		Thread t = new Thread(new Runnable() {
 			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+			t.start();
+			try {
+				t.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				        progressBar.setIndeterminate(false);
+	        			dispose();
+	        			setVisible(false);
+		}	
 	}
 	
 	public JDialog getDialog()

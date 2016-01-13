@@ -149,10 +149,10 @@ public class UpdateDetailsActions extends GUIActions {
 			if(s.getName().equals(sname)){
 				if(!userNetworks.contains(s.getNid())) {
 					userNetworks.add(s.getNid());
-					gui.showOKMessage("Station Network "+sname + " is added!");
+					gui.showOKMessage("Network "+sname + " is added!");
 					isConfirmed = false;
 				}
-				else gui.showErrorMessage("You already have this station network !");
+				else gui.showErrorMessage("You already have this network !");
 				}
 			}
 		}

@@ -68,6 +68,7 @@ public class CarFuelActions extends GUIActions {
 	{
 		try{
 			FuelOrderRequest req = new FuelOrderRequest(RequestEnum.Insert,fuelPurchase,null);
+			gui.createWaitDialog("Create your purchase...");
 			client.handleMessageFromGUI(req);
 		}
 		catch(NullPointerException e)
@@ -176,6 +177,7 @@ public class CarFuelActions extends GUIActions {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		gui.setWaitPorgress();
 		if(arg instanceof FuelOrderResponse)
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
@@ -191,6 +193,7 @@ public class CarFuelActions extends GUIActions {
 			 booleanResponse res = (booleanResponse) arg;
 			 if(res.getSuccess())
 			 {
+				 
 				 gui.showOKMessage("Thank you for choosing MyFuel!");
 				 this.backToMenu();
 			 }

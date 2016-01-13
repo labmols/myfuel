@@ -26,8 +26,8 @@ public class MyFuelServer extends ObservableServer{
 	 * 
 	 */
 	private Connection con;
-	Response response;
-	ServerGUI gui;
+	private Response response;
+	private ServerGUI gui;
 	/**
 	 * 
 	 * @param port
@@ -61,7 +61,6 @@ public class MyFuelServer extends ObservableServer{
 	 protected synchronized void clientConnected(ConnectionToClient client) 
 	  {
 	    setChanged();
-	    notifyObservers(CLIENT_CONNECTED);
 	    gui.printMsg("<ClientConnected>:"+ client + " Connected!");
 	  }
 	
@@ -109,10 +108,8 @@ public class MyFuelServer extends ObservableServer{
  @Override
  public void serverClosed()
  {
-	 gui.showErrorMessage("Unexpected Error!");
 	 closeDBConnection(); 
 	 this.deleteObservers();
-	 System.exit(0);
  }
 	 
 public void createDBConnection (String add, String USER, String PASS) throws SQLException {

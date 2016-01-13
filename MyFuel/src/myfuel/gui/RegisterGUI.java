@@ -265,7 +265,7 @@ public class RegisterGUI extends SuperGUI {
 		networkCB.setBounds(104, 48, 141, 27);
 		panel4.add(networkCB);
 		
-		btnAddNetwork = new JButton("Add Station Network");
+		btnAddNetwork = new JButton("Add Network");
 		btnAddNetwork.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnAddNetwork.setBounds(84, 78, 161, 29);
 		btnAddNetwork.addActionListener(new ButtonListener());

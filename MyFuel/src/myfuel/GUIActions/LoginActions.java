@@ -52,6 +52,7 @@ public class LoginActions extends GUIActions {
 	public void sendRequest(int type, int userid, String password) 
 	{
 		lr = new LoginRequest(type,userid,password);
+		gui.createWaitDialog("Verfiying your details...");
 		client.handleMessageFromGUI(lr);
 		
 	}
@@ -171,6 +172,7 @@ public class LoginActions extends GUIActions {
 	public void update(Observable o, Object arg) {
 		if(arg instanceof CustomerLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse){
 		// TODO Auto-generated method stub
+			gui.setWaitPorgress();
 				if(lr.getType() ==0) customerResponse(arg);
 				else workerResponse(arg);	
 		}

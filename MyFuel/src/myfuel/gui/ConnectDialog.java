@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -24,7 +25,8 @@ public class ConnectDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField serverAddr;
 	private JTextField port;
-
+	private WaitDialog waitD;
+    private int porti;
 	/**
 	 * Create the dialog.
 	 */
@@ -88,7 +90,7 @@ public class ConnectDialog extends JDialog {
 	public void connectToServer()
 	{
 		boolean check = true;
-		int porti=0;
+		this.porti =0;
 		if(port.getText().equals("") || serverAddr.getText().equals(""))
 		{
 			check = false;
@@ -96,7 +98,7 @@ public class ConnectDialog extends JDialog {
 			return;
 		}
 		try{
-			porti = Integer.parseInt(port.getText());
+			this.porti = Integer.parseInt(port.getText());
 		}
 		catch(NumberFormatException e)
 		{
@@ -107,21 +109,48 @@ public class ConnectDialog extends JDialog {
 		}
 		if(check)
 		{
-		try {
+			Thread t = new Thread (new Runnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					createWaitDialog("Connecting...");
+					try
+					{
+						MyFuelClient client = new MyFuelClient(serverAddr.getText(),getPort());
+							// TODO Auto-generated method stub
+						setWaitPorgress();
+						JOptionPane.showMessageDialog(null, "Connection Successful!","Connected",JOptionPane.INFORMATION_MESSAGE);	
+						dispose();
+						new LoginActions(client);
+							
+					}catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+									setWaitPorgress();
+									JOptionPane.showMessageDialog(null, "Can't Connect to server in port "+port.getText(),"Error",JOptionPane.ERROR_MESSAGE);
+								}
+				}
+			});
+			t.start();
 			
-			//this.connectToServer();
-			MyFuelClient client = new MyFuelClient(serverAddr.getText(),porti);
-			JOptionPane.showMessageDialog(this, "Connection Successful!","Connected",JOptionPane.PLAIN_MESSAGE);	
-			dispose();
-			new LoginActions(client);
-			
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			JOptionPane.showMessageDialog(this, "Can't Connect to server in port "+port.getText(),"Error",JOptionPane.ERROR_MESSAGE);
-		}
 		
 		
 	}
+	}
+	
+	public int getPort()
+	{
+		return this.porti;
+	}
+	
+	public void createWaitDialog(String msg)
+	{
+		waitD = new WaitDialog(msg);
+		waitD.setVisible(true);
+	}
+	
+	public void setWaitPorgress()
+	{
+		waitD.setProgress(1);
 	}
 }
