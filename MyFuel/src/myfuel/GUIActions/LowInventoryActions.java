@@ -46,18 +46,24 @@ public class LowInventoryActions extends GUIActions {
 		if(LowFuel95.equals("")||LowFuelDiesel.equals("")||LowFuelScooter.equals(""))
 		{
 			success=false;
-			error+="The filed is Empty\n";
+			error+="One of the Fields is Empty\n";
 		}
-		else
+		else 
 		{
+			try{
 			nLowFuel95=Integer.parseInt(LowFuel95);
 			nLowFuelDiesel=Integer.parseInt(LowFuelDiesel);
 			nLowFuelScooter=Integer.parseInt(LowFuelScooter);
+			} catch(Exception e)
+			{
+				success = false;
+				error+="Input must be a number\n";
+			}
 			
-			if(nLowFuel95<0||nLowFuelDiesel<0||nLowFuelScooter<0)
+			if(nLowFuel95 < 0||nLowFuelDiesel<0||nLowFuelScooter<0)
 			{
 				success=false;
-				error+="The input is Negative\n";
+				error+="Input can't be  Negative\n";
 			}
 		}
 		if(!success) gui.showErrorMessage(error);
