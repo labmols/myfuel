@@ -87,7 +87,7 @@ public class HomeOrderActions extends GUIActions {
 				if(urgent) 
 					shipDate = pdate;
 				
-				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, Fuel.HomeFuelID, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null,-1);
+				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, -1, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null,-1);
 				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, addr, shipDate, false, urgent,p);
 				gui.createWaitDialog("Sending your order...");
 				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
@@ -139,21 +139,10 @@ public class HomeOrderActions extends GUIActions {
 	 * @return
 	 */
 	private boolean checkInventory(float qty) {
-		for(StationInventory s: response.getSi())
-		{
-			if(s.getS().getsid() == Fuel.HomeFuelID)
-			{
-				for(FuelQty f: s.getfQty())
-				{
-					if(f.getFid() == Fuel.HomeFuelID)
-						if(qty > f.getQty())
-							return false;
-						else return true;
-				}
-			}
 		
-		}
-		return false;
+		FuelQty f = response.getHomeInventory();
+		if(qty > f.getQty()) return false;
+		else return true;
 		
 	}
 

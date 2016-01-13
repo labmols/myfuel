@@ -331,7 +331,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		}
 		
 		accessCB.setSelectedIndex(user.getAtype());
-		saleCB.setSelectedIndex(user.getSmodel());
+		saleCB.setSelectedIndex(user.getSmodel()-1);
 		typeCB.setSelectedIndex(user.getToc());
 		if(accessCB.getSelectedIndex()==0) {
 			access=0;
@@ -444,7 +444,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		}
 		
 		accessCB.setSelectedIndex(user.getAtype());
-		saleCB.setSelectedIndex(user.getSmodel());
+		saleCB.setSelectedIndex(user.getSmodel()-1);
 		typeCB.setSelectedIndex(user.getToc());
 		
 	
