@@ -12,9 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 import java.awt.Color;
 import java.util.Date;
