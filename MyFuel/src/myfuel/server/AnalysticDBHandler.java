@@ -16,14 +16,42 @@ import myfuel.request.RequestEnum;
 import myfuel.response.AnalysticResponse;
 import myfuel.response.booleanResponse;
 
+/***
+ * This class will be used to get / set Analyze details
+ * @author karmo
+ *
+ */
 public class AnalysticDBHandler extends DBHandler{
 
+	/***
+	 * Customer Types
+	 */
 	private ArrayList <AnalyzeDetails> cType;
+	/***
+	 * Fuel Types
+	 */
 	private ArrayList <AnalyzeDetails> fType;
+	/***
+	 * Customer type per hour
+	 */
 	private ArrayList <AnalyzeDetails> hType ;
+	/***
+	 * Analyzed Dates
+	 */
 	private ArrayList	<Date> dates;
+	/***
+	 * True if query is ok false otherwise
+	 */
 	private boolean answer ;
+	/***
+	 * Description of the action status
+	 */
 	private String str;
+	/***
+	 * AnalysticDBHandler COnstructor
+	 * @param server - MyFUelServer
+	 * @param con - JDBC
+	 */
 	public AnalysticDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 		
@@ -42,7 +70,7 @@ public class AnalysticDBHandler extends DBHandler{
 		try {
 			
 			ps = con.prepareStatement("SELECT c.smodel,s.desc, COUNT( * ) as c " +" "
-										+"   FROM purchase as p, customer_purchase as cp, customer as c , price_to_type as s"+" "
+										+"   FROM purchase as p, customer_purchase as cp, customer as c , sale_model as s"+" "
 										+"     WHERE p.pid = cp.pid"+" "
 										+"       AND cp.uid = c.uid"+" "
 										+"      AND DATEDIFF( ?, p.pdate ) <=7" +" " +
@@ -89,7 +117,7 @@ public class AnalysticDBHandler extends DBHandler{
 										"WHEN( HOUR( pdate ) > 20 and  HOUR( pdate ) < 0 )" + " "+
 										"THEN  '20:00 to 00:00'" + " "+
 										"END) AS hour,count(*) as ctr" + " "+ 
-										"from purchase as p , customer_purchase as cp , customer as c ,price_to_type as s" + " "+
+										"from purchase as p , customer_purchase as cp , customer as c ,sale_model as s" + " "+
 										"where p.pid = cp.pid and cp.uid = c.uid and " + " "+
 										"DATEDIFF(? , p.pdate) <= 7 and  DATEDIFF(? , p.pdate) >=0" + " "
 										+ "and c.smodel = s.modelid"+" "+

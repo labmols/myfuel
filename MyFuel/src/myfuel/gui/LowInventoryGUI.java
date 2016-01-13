@@ -3,14 +3,18 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 
 import myfuel.GUIActions.LowInventoryActions;
-
 import myfuel.client.BackMainMenu;
+import myfuel.client.FuelQty;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 public class LowInventoryGUI extends SuperGUI{
 
@@ -18,6 +22,12 @@ public class LowInventoryGUI extends SuperGUI{
 	private JTextField LowFuel95;
 	private JTextField LowFuelDiesel;
 	private JTextField LowFuelScooter;
+	private JTextField Current95;
+	private JTextField CurrentDiesel;
+	private JTextField CurrentScooter;
+	private JTextField min95;
+	private JTextField minDiesel;
+	private JTextField minScotter;
 	
 	public LowInventoryGUI(LowInventoryActions actions)
 	{
@@ -25,16 +35,16 @@ public class LowInventoryGUI extends SuperGUI{
 		panel.setLocation(0, 0);
 		this.actions = actions;
 		this.setContentPane(contentPane);
-		lblTitle.setText("Set Low limit Inventory");
+		lblTitle.setText("Set Low Inventory Level");
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		
 		LowFuel95 = new JTextField();
-		LowFuel95.setBounds(298, 129, 86, 20);
+		LowFuel95.setBounds(158, 126, 86, 20);
 		panel.add(LowFuel95);
 		LowFuel95.setColumns(10);
 		
 		JLabel lblLowInventory = new JLabel("Fuel 95 :");
-		lblLowInventory.setBounds(187, 132, 97, 14);
+		lblLowInventory.setBounds(51, 132, 97, 14);
 		panel.add(lblLowInventory);
 		
 		JButton Update = new JButton("Update");
@@ -47,26 +57,113 @@ public class LowInventoryGUI extends SuperGUI{
 		panel.add(Update);
 		
 		JLabel lblFuelDiesel = new JLabel("Fuel Diesel :");
-		lblFuelDiesel.setBounds(187, 163, 80, 14);
+		lblFuelDiesel.setBounds(51, 163, 80, 14);
 		panel.add(lblFuelDiesel);
 		
 		JLabel lblFuelScooter = new JLabel("Fuel Scooter :");
-		lblFuelScooter.setBounds(187, 194, 86, 14);
+		lblFuelScooter.setBounds(51, 194, 86, 14);
 		panel.add(lblFuelScooter);
 		
 		LowFuelDiesel = new JTextField();
-		LowFuelDiesel.setBounds(298, 160, 86, 20);
+		LowFuelDiesel.setBounds(158, 157, 86, 20);
 		panel.add(LowFuelDiesel);
 		LowFuelDiesel.setColumns(10);
 		
 		LowFuelScooter = new JTextField();
-		LowFuelScooter.setBounds(298, 191, 86, 20);
+		LowFuelScooter.setBounds(158, 188, 86, 20);
 		panel.add(LowFuelScooter);
 		LowFuelScooter.setColumns(10);
+		
+		Current95 = new JTextField();
+		Current95.setEditable(false);
+		Current95.setBounds(285, 126, 86, 20);
+		panel.add(Current95);
+		Current95.setColumns(10);
+		
+		CurrentDiesel = new JTextField();
+		CurrentDiesel.setEditable(false);
+		CurrentDiesel.setColumns(10);
+		CurrentDiesel.setBounds(285, 157, 86, 20);
+		panel.add(CurrentDiesel);
+		
+		CurrentScooter = new JTextField();
+		CurrentScooter.setEditable(false);
+		CurrentScooter.setColumns(10);
+		CurrentScooter.setBounds(285, 188, 86, 20);
+		panel.add(CurrentScooter);
+		
+		JLabel lblCurrent = new JLabel("Current Low Level\r\n");
+		lblCurrent.setBounds(419, 93, 127, 25);
+		panel.add(lblCurrent);
+		
+		JLabel lblCurrentQuantities = new JLabel("Current Quantities");
+		lblCurrentQuantities.setBounds(275, 95, 111, 14);
+		panel.add(lblCurrentQuantities);
+		
+		min95 = new JTextField();
+		min95.setEditable(false);
+		min95.setColumns(10);
+		min95.setBounds(419, 129, 86, 20);
+		panel.add(min95);
+		
+		minDiesel = new JTextField();
+		minDiesel.setEditable(false);
+		minDiesel.setColumns(10);
+		minDiesel.setBounds(419, 160, 86, 20);
+		panel.add(minDiesel);
+		
+		minScotter = new JTextField();
+		minScotter.setEditable(false);
+		minScotter.setColumns(10);
+		minScotter.setBounds(419, 191, 86, 20);
+		panel.add(minScotter);
+		
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(138, 93, 7, 160);
+		panel.add(separator);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		separator_1.setBounds(258, 93, 7, 160);
+		panel.add(separator_1);
+		
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		separator_2.setBounds(381, 93, 7, 160);
+		panel.add(separator_2);
+		
+		JLabel lblUpdate = new JLabel("Update");
+		lblUpdate.setBounds(164, 98, 80, 14);
+		panel.add(lblUpdate);
 		
 	}
 	@Override
 	public void getInput(ActionEvent e) {
+		
+	}
+	public void setText(ArrayList<FuelQty> qty) 
+	{
+		min95.setText(qty.get(0).getMqty()+"");
+		minDiesel.setText(qty.get(1).getMqty()+"");
+		minScotter.setText(qty.get(2).getMqty()+"");
+		
+		Current95.setText(qty.get(0).getQty()+"");
+		CurrentDiesel.setText(qty.get(1).getQty()+"");
+		CurrentScooter.setText(qty.get(2).getQty()+"");
+		
+	}
+	
+	
+	public void updateNew(ArrayList<Integer> newLowInventory) 
+	{
+		min95.setText(newLowInventory.get(0)+"");
+		minDiesel.setText(newLowInventory.get(1)+"");
+		minScotter.setText(newLowInventory.get(2)+"");
+		
+		LowFuel95.setText("");
+		LowFuelDiesel.setText("");
+		LowFuelScooter.setText("");
 		
 	}
 }

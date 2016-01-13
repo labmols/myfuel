@@ -17,16 +17,20 @@ public class CheckInventoryActions extends GUIActions{
 	private CheckInventoryRequest request;
 	private CheckInventoryResponse response;
 	private ArrayList<MessageForManager> msg;
-	public CheckInventoryActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg) {
+	private int nid;
+	
+	public CheckInventoryActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg , int nid) {
 		super(client);
 		this.sid = sid;
 		this.msg = msg;
+		this.nid = nid;
 		 gui = new CheckInventoryGUI(this) ;
 		 request=new CheckInventoryRequest(0,this.sid);
 		 client.handleMessageFromGUI(request);
 		 gui.setVisible(true);
 	}
 	
+
 	public void UpdateInventory(ArrayList <Integer> FuelId)
 	{
 		request=new CheckInventoryRequest(1,this.sid,FuelId);
@@ -68,7 +72,7 @@ public class CheckInventoryActions extends GUIActions{
 
 	@Override
 	public void backToMenu() {
-		this.changeFrame(gui,new SMActions(client,sid,msg),this);
+		this.changeFrame(gui,new SMActions(client,sid,msg,nid),this);
 	}
 
 }

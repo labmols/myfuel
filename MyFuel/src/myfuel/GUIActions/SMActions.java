@@ -26,16 +26,24 @@ public class SMActions extends GUIActions {
 	 * Will contain the messages for this manager 
 	 */
 	private ArrayList<MessageForManager> msg;
+	
+	/***
+	 * Network ID
+	 */
+	
+	private int nid;
+	
 	/***
 	 * SMActions Constructor
 	 * @param client - MyFuelClient
  	 * @param sid - Station ID
 	 * @param msg  - Messages for this manager
 	 */
-	public SMActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg) {
+	public SMActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg,int nid) {
 		super(client);
 		this.setSid(sid);
 		this.msg = msg;
+		this.nid = nid;
 		gui = new SMGUI(this,msg);
 		gui.setVisible(true);
 	}
@@ -65,7 +73,7 @@ public class SMActions extends GUIActions {
 	 */
 	public void CreateCheckInventoryWindow() 
 	{
-		changeFrame(gui,new CheckInventoryActions(client,sid,msg),this);
+		changeFrame(gui,new CheckInventoryActions(client,sid,msg,nid),this);
 		
 	}
 	
@@ -75,7 +83,7 @@ public class SMActions extends GUIActions {
 	
 	public void CreateLowInventoryWindow()
 	{
-		changeFrame(gui,new LowInventoryActions(client,sid,msg),this);
+		changeFrame(gui,new LowInventoryActions(client,sid,msg,nid),this);
 	}
 	
 	/***
@@ -85,7 +93,7 @@ public class SMActions extends GUIActions {
 	public void CreateReports() 
 	{
 		
-		changeFrame(gui,new StationReportActions(client,sid,msg),this);
+		changeFrame(gui,new StationReportActions(client,sid,msg,nid),this);
 	}
 
 }

@@ -52,7 +52,7 @@ public class WorkerLoginResponse extends Response{
 		switch(roleid){
 		case 1: role = RoleEnum.StationWorker;
 		break;
-		case 2: role=RoleEnum.StationManager;
+		case 8: role=RoleEnum.StationManager;
 		break;
 		case 3: role=RoleEnum.MarketingManager;
 		break;

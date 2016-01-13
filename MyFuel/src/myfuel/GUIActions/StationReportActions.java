@@ -15,6 +15,11 @@ import myfuel.request.SReportRequest;
 import myfuel.response.SReportResponse;
 import myfuel.response.booleanResponse;
 
+/***
+ * Controller for StationReportGUI
+ * @author karmo
+ *
+ */
 public class StationReportActions extends GUIActions {
 
 	/***
@@ -25,12 +30,26 @@ public class StationReportActions extends GUIActions {
 	 * Station Report GUI
 	 */
 	private StationReportGUI gui;
+	/***
+	 * Message for the manager
+	 */
 	private ArrayList<MessageForManager> msg;
 	
-	public StationReportActions(MyFuelClient client,int sid , ArrayList<MessageForManager> msg) {
+	/***
+	 * Network ID
+	 */
+	private int nid;
+	/***
+	 * StationReportActions Constructor
+	 * @param client - MyFuelClient
+	 * @param sid - Station ID
+	 * @param msg - Messages
+	 */
+	public StationReportActions(MyFuelClient client,int sid , ArrayList<MessageForManager> msg,int nid) {
 		super(client);
 		this.sid  = sid;
 		this.msg = msg;
+		this.nid = nid;
 		
 		gui = new StationReportGUI(this);
 		gui.setVisible(true);
@@ -43,7 +62,7 @@ public class StationReportActions extends GUIActions {
 			if(arg1 instanceof SReportResponse)
 			{
 				SReportResponse response = (SReportResponse)arg1;
-				
+				gui.setWaitPorgress();
 				if(response.getReport_type() == ReportEnum.InventoryReport)
 				{
 					gui.setInventoryPanel(response.getInventory());
@@ -62,6 +81,7 @@ public class StationReportActions extends GUIActions {
 			
 			else if(arg1 instanceof booleanResponse)
 			{
+				gui.setWaitPorgress();
 				booleanResponse a = (booleanResponse)arg1;
 				gui.showErrorMessage(a.getMsg());
 				backToMenu();
@@ -72,7 +92,7 @@ public class StationReportActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		
-			changeFrame(gui,new SMActions(client,sid,msg),this);
+			changeFrame(gui,new SMActions(client,sid,msg,nid),this);
 	}
 
 
@@ -81,7 +101,8 @@ public class StationReportActions extends GUIActions {
 	{
 		
 		
-		SReportRequest request = new SReportRequest(q,r,sid);
+		SReportRequest request = new SReportRequest(q,r,sid,nid);
+		gui.createWaitDialog("Getting Report Details...");
 		if(checkQuarter(q))
 			client.handleMessageFromGUI(request);
 		else

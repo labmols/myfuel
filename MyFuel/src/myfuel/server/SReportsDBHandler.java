@@ -28,13 +28,37 @@ import myfuel.response.booleanResponse;
  */
 public class SReportsDBHandler extends DBHandler{
 
+	/***
+	 * INventory Report Details
+	 */
 	private  ArrayList<FuelQty> inventory;
+	/***
+	 * Purchases Report Details
+	 */
 	private ArrayList<Purchase> p ;
+	/***
+	 * Incomes Report Details
+	 */
 	private ArrayList<Purchase> incomes;
+	/***
+	 * Status of the query. True if all good false otherwise
+	 */
 	private boolean answer ;
+	/***
+	 * Description for the action
+	 */
 	private  String str = "";
+	/***
+	 * Start Date of the quarter
+	 */
 	private java.sql.Timestamp sdate = null;
+	/***
+	 * End Date of the quarter
+	 */
 	private java.sql.Timestamp fdate = null;
+	/***
+	 * Details about date
+	 */
 	private  Calendar cal;
 	
 	public SReportsDBHandler(MyFuelServer server, Connection con) {
@@ -47,7 +71,7 @@ public class SReportsDBHandler extends DBHandler{
 	 * @param sid - Station ID
 	 * @param q  - Quarter
 	 */
-	private void getInventoryReport(int q, int sid)
+	private void getInventoryReport(int q, int sid,int nid)
 	{
 		 ResultSet rs = null ;
 		 PreparedStatement ps = null;
@@ -63,7 +87,7 @@ public class SReportsDBHandler extends DBHandler{
 			 rs = ps.executeQuery();
 			 
 			  
-			// cal.set(2013, Calendar.MONTH, 2);
+			
 			 
 			 cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY,1);
 			 
@@ -88,12 +112,13 @@ public class SReportsDBHandler extends DBHandler{
 			
 				 for(FuelQty f : inventory)
 				 {
-					 ps = con.prepareStatement("insert into inventory_report values(?,?,?,?,?)");
+					 ps = con.prepareStatement("insert into inventory_report values(?,?,?,?,?,?)");
 					 ps.setInt(1, sid);
-					 ps.setInt(2, q); // Quarter
-					 ps.setInt(3, f.getFid());
-					 ps.setFloat(4,f.getQty());
-					 ps.setInt(5,cal.getTime().getYear() + 1900 );
+					 ps.setInt(2, nid);
+					 ps.setInt(3, q); // Quarter
+					 ps.setInt(4, f.getFid());
+					 ps.setFloat(5,f.getQty());
+					 ps.setInt(6,cal.getTime().getYear() + 1900 );
 					 
 					 ps.executeUpdate();
 				 }
@@ -103,8 +128,10 @@ public class SReportsDBHandler extends DBHandler{
 			ps.close();
 		 }catch(Exception e)
 		 {
-			 e.printStackTrace();		 
-			 }
+			 e.printStackTrace();	
+			 answer = false;
+			 str = "There was an error with the server";
+		 }
 	}
 	
 	/***
@@ -122,7 +149,7 @@ public class SReportsDBHandler extends DBHandler{
 			 
 		 
 		// check if there is a report for this quarter
-		 ps = con.prepareStatement("select * from company_report where sid = ? and qid = ? and rid = ? and year = ?");
+		 ps = con.prepareStatement("select * from network_report where sid = ? and qid = ? and rid = ? and year = ?");
 		 ps.setInt(1, sid);
 		 ps.setInt(2, q);
 		 ps.setInt(3, rid);
@@ -143,6 +170,8 @@ public class SReportsDBHandler extends DBHandler{
 		 catch(SQLException e)
 		 {
 			 e.printStackTrace();
+			 answer = false;
+			 str = "There was an error with the server";
 		 }
 	}
 	
@@ -188,9 +217,12 @@ public class SReportsDBHandler extends DBHandler{
 			 		break;
 			 			
 			 }
+			 answer = true;
 		}catch(Exception e)
 		{
 			e.printStackTrace();
+			answer = false;
+			 str = "There was an error with the server";
 		}
 	}
 	/***
@@ -199,7 +231,7 @@ public class SReportsDBHandler extends DBHandler{
 	 * @param sid - Station ID
 	 * @param q  - Quarter
 	 */
-	private void getPurchaseReport(int rid,int sid, int q)
+	private void getPurchaseReport(int rid,int sid, int q , int nid)
 	{
 		 ResultSet rs = null ;
 		 PreparedStatement ps = null;
@@ -207,11 +239,12 @@ public class SReportsDBHandler extends DBHandler{
 			 
 			 
 			 check_dates(q);
-			ps = con.prepareStatement("insert into company_report values (?,?,?,?) ");
+			ps = con.prepareStatement("insert into network_report values (?,?,?,?,?) ");
 			ps.setInt(1,rid);
 			ps.setInt(2,sid);
-			ps.setInt(3, q);
-			ps.setInt(4,cal.getTime().getYear() + 1900 );
+			ps.setInt(3, nid);
+			ps.setInt(4, q);
+			ps.setInt(5,cal.getTime().getYear() + 1900 );
 			ps.executeUpdate();
 			
 		 ps = con.prepareStatement("select c.uid,p.fuelid,p.bill,p.qty from customer_purchase as c, purchase as p  "
@@ -222,7 +255,7 @@ public class SReportsDBHandler extends DBHandler{
 		 ps.setTimestamp(3, fdate);
 		 
 		 rs = ps.executeQuery();
-		  p = new  ArrayList<Purchase>();
+		 p = new  ArrayList<Purchase>();
 		  
 		 while(rs.next())
 		 {
@@ -236,6 +269,8 @@ public class SReportsDBHandler extends DBHandler{
 		 }catch(Exception e)
 		 {
 			 e.printStackTrace();
+			 answer = false;
+			 str = "There was an error with the server";
 		 }
 	}
 	/***
@@ -244,17 +279,18 @@ public class SReportsDBHandler extends DBHandler{
 	 * @param sid - Station ID
 	 * @param q  - Quarter
 	 */
-	private void getIncomesReport(int rid,int sid, int q)
+	private void getIncomesReport(int rid,int sid, int q , int nid)
 	{
 		ResultSet rs = null ;
 		 PreparedStatement ps = null;
 	 try{ 
 		 
-			ps = con.prepareStatement("insert into company_report values (?,?,?,?) ");
+		 ps = con.prepareStatement("insert into network_report values (?,?,?,?,?) ");
 			ps.setInt(1,rid);
 			ps.setInt(2,sid);
-			ps.setInt(3, q);
-			ps.setInt(4,cal.getTime().getYear() + 1900 );
+			ps.setInt(3, nid);
+			ps.setInt(4, q);
+			ps.setInt(5,cal.getTime().getYear() + 1900 );
 			ps.executeUpdate();
 			
 		 check_dates(q);
@@ -278,6 +314,8 @@ public class SReportsDBHandler extends DBHandler{
 		 }catch(Exception e)
 		 {
 			 e.printStackTrace();
+			 answer = false;
+			 str = "There was an error with the server";
 		 }
 	}
 
@@ -290,7 +328,7 @@ public class SReportsDBHandler extends DBHandler{
 			
 			if(request.getReport_type() == ReportEnum.InventoryReport)
 			{
-				getInventoryReport(request.getQ(),request.getSid());
+				getInventoryReport(request.getQ(),request.getSid(),request.getNid());
 				
 				if(answer)
 					server.setResponse(new SReportResponse(request.getReport_type(),inventory,null,null));
@@ -304,7 +342,7 @@ public class SReportsDBHandler extends DBHandler{
 		
 				if(answer)
 				{
-					getPurchaseReport(1,request.getSid(),request.getQ());
+					getPurchaseReport(1,request.getSid(),request.getQ(),request.getNid());
 					server.setResponse(new SReportResponse(request.getReport_type(),null,p,null));
 				}
 				else
@@ -316,9 +354,10 @@ public class SReportsDBHandler extends DBHandler{
 			{
 				
 				check_exist(2,request.getSid(),request.getQ());
+				
 				if(answer)
 				{
-					getIncomesReport(2,request.getSid(),request.getQ());
+					getIncomesReport(2,request.getSid(),request.getQ(),request.getNid());
 					server.setResponse(new SReportResponse(request.getReport_type(),null,null,incomes));
 				}
 				else

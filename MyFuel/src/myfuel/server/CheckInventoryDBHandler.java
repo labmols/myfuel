@@ -30,7 +30,7 @@ public class CheckInventoryDBHandler  extends DBHandler {
 		PreparedStatement ps = null;
 		try {
 			
-			ps = con.prepareStatement("select * from inventory_order where sid=?");
+			ps = con.prepareStatement("select * from inventory_order where sid=? ");
 			ps.setInt(1, request.getSid());
 			rs = ps.executeQuery();
 			while(rs.next())
@@ -43,7 +43,7 @@ public class CheckInventoryDBHandler  extends DBHandler {
 			if(NewOrder.isEmpty())
 			{
 				Answer=false;
-				msg="There are no Order waiting";
+				msg="There are no Orders waiting";
 			}
 		} catch (SQLException e) {
 			

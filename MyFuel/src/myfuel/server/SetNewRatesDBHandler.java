@@ -145,7 +145,7 @@ public class SetNewRatesDBHandler extends DBHandler{
 								ps.executeUpdate();
 							}
 							
-							ps=con.prepareStatement("insert into message values(0,?,0,?,0)");
+							ps=con.prepareStatement("insert into message values(0,?,NULL,?,0)");
 							ps.setInt(1, r.getNid());
 							ps.setString(2,"New Rates Suggestion");
 							

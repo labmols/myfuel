@@ -15,6 +15,11 @@ public class SReportRequest implements Serializable
 	 * Station ID
 	 */
 	private int sid;
+	
+	/***
+	 * Network ID
+	 */
+	private int nid;
 	/***
 	 * The selected Quarter
 	 */
@@ -30,11 +35,12 @@ public class SReportRequest implements Serializable
 	 * @param q2  - The selected Quarter
 	 * @param r - The selected report type
 	 */
-	public  SReportRequest(int q, ReportEnum report_type, int sid)
+	public  SReportRequest(int q, ReportEnum report_type, int sid,int nid)
 	{
 		this.setQ(q);
 		this.setReport_type(report_type);
 		this.setSid(sid);
+		this.setNid(nid);
 	}
 
 	public ReportEnum getReport_type() {
@@ -59,6 +65,14 @@ public class SReportRequest implements Serializable
 
 	public void setSid(int sid) {
 		this.sid = sid;
+	}
+
+	public int getNid() {
+		return nid;
+	}
+
+	public void setNid(int nid) {
+		this.nid = nid;
 	}
 
 	

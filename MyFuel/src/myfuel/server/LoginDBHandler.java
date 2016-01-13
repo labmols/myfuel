@@ -67,12 +67,12 @@ public class LoginDBHandler extends DBHandler {
 				sid = rs.getInt(9);
 				role = rs.getInt(6);
 				wid = rs.getInt(1);
-				if(role == 5 )
+				if(role == 5 || role == 8)
 				{
 						msg = new ArrayList<MessageForManager>();
-						ps = con.prepareStatement("select * from message where nid = ? ");
+						ps = con.prepareStatement("select * from message where nid = ? and sid = ? ");
 						ps.setInt(1, nid);
-						
+						ps.setInt(2,sid);
 						rs = ps.executeQuery();
 						
 						while(rs.next())

@@ -33,6 +33,7 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JTextPane;
 import javax.swing.JSpinner;
+import java.awt.Dimension;
 
 /***
  * User Interface For Creating Promotion Template
@@ -108,20 +109,20 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		name.setColumns(10);
 		
 		JLabel lblDiscountPercentage = new JLabel("Discount Percentage:");
-		lblDiscountPercentage.setBounds(101, 108, 167, 14);
+		lblDiscountPercentage.setBounds(101, 125, 167, 14);
 		panel.add(lblDiscountPercentage);
 		
 		discount = new JTextField();
-		discount.setBounds(280, 108, 32, 20);
+		discount.setBounds(280, 125, 32, 20);
 		panel.add(discount);
 		discount.setColumns(10);
 		
 		JLabel lblStartDate = new JLabel("Start Time:");
-		lblStartDate.setBounds(101, 135, 117, 14);
+		lblStartDate.setBounds(80, 167, 117, 14);
 		panel.add(lblStartDate);
 		
 		JLabel lblEndTime = new JLabel("End Time:");
-		lblEndTime.setBounds(101, 167, 63, 14);
+		lblEndTime.setBounds(332, 167, 63, 14);
 		panel.add(lblEndTime);
 		
 		//set start time spinner
@@ -131,50 +132,47 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		startHour = new JSpinner(sm);
 		JSpinner.DateEditor de = new JSpinner.DateEditor(startHour, "HH:mm");
 		startHour.setEditor(de);
-		startHour.setBounds(280, 132, 115, 20);
+		startHour.setBounds(153, 156, 115, 37);
 		panel.add(startHour);
 		
 		//set end time spinner
 		Date date2 = cal.getTime();
 		SpinnerDateModel sm2 =new SpinnerDateModel(date2, null, null, Calendar.HOUR_OF_DAY);
 		EndHour = new JSpinner(sm2);
+		
 		JSpinner.DateEditor de2 = new JSpinner.DateEditor(EndHour, "HH:mm");
 		EndHour.setEditor(de2);
-		EndHour.setBounds(280, 132, 115, 20);
+		EndHour.setBounds(417, 156, 115, 37);
 		panel.add(EndHour);
 		
-		EndHour.setBounds(280, 132, 115, 20);
-		panel.add(EndHour);
 		
-		EndHour.setBounds(280, 164, 115, 20);
-		panel.add(EndHour);
 		
 		JLabel lblTypeOfCustomer = new JLabel("Type Of Customer:");
-		lblTypeOfCustomer.setBounds(101, 203, 149, 14);
+		lblTypeOfCustomer.setBounds(132, 228, 149, 14);
 		panel.add(lblTypeOfCustomer);
 		
 		typeOfCustomer = new JComboBox<String>();
 		typeOfCustomer.setModel(new DefaultComboBoxModel<String>(new String[] {"Private", "Company"}));
-		typeOfCustomer.setBounds(280, 201, 118, 20);
+		typeOfCustomer.setBounds(311, 226, 118, 20);
 		panel.add(typeOfCustomer);
 		
 		btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new btnHandler());
-		btnCreate.setBounds(211, 277, 118, 37);
+		btnCreate.setBounds(211, 322, 118, 37);
 		panel.add(btnCreate);
 		
 		JLabel lblNewLabel = new JLabel("%");
-		lblNewLabel.setBounds(313, 111, 41, 16);
+		lblNewLabel.setBounds(313, 128, 41, 16);
 		panel.add(lblNewLabel);
 		
 		JLabel lblTypeOfFuel = new JLabel("Type of Fuel:");
-		lblTypeOfFuel.setBounds(101, 242, 117, 14);
+		lblTypeOfFuel.setBounds(132, 267, 117, 14);
 		
 		panel.add(lblTypeOfFuel);
 		
 		 fuel = new JComboBox<String>();
 		 fuel.setModel(new DefaultComboBoxModel<String>(new String[] {"95", "Diesel", "Scooter", "Home Fuel"}));
-		fuel.setBounds(280, 239, 115, 20);
+		fuel.setBounds(311, 264, 115, 20);
 		panel.add(fuel);
 		
 	}
