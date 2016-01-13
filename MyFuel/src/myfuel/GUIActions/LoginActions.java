@@ -125,7 +125,7 @@ public class LoginActions extends GUIActions {
 							 changeFrame(gui, new MDActions(client),this); 
 							 break;
 			case CompanyManager:
-				changeFrame(gui,new CMActions(client,res.getMsg()),this);
+				changeFrame(gui,new CMActions(client,res.getMsg(),res.getNid()),this);
 				break;
 			case StationManager:
 				changeFrame(gui,new SMActions(client,((WorkerLoginResponse) response).getSid(),res.getMsg()),this);
@@ -133,7 +133,11 @@ public class LoginActions extends GUIActions {
 			case StationWorker:
 				changeFrame(gui,new SWActions(client,((WorkerLoginResponse) response).getSid()),this);
 				break;
+			case HomeManager:
+				changeFrame(gui,new homeQtyOrderActions(client),this);	
 			 }
+			
+				 
 		}
 		
 		else 

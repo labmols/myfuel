@@ -39,10 +39,6 @@ public class CMGUI extends SuperGUI{
 	 */
 	private JButton btnShowCompanyReports;
 	/***
-	 * Home Quantity Button
-	 */
-	private JButton homeQty;
-	/***
 	 * Messages for this user
 	 */
 	private ArrayList<MessageForManager> msg;
@@ -53,7 +49,7 @@ public class CMGUI extends SuperGUI{
 	 */
 	public CMGUI(CMActions actions,ArrayList<MessageForManager> msg) {
 		lblTitle.setBounds(192, 0, 220, 25);
-		lblTitle.setText("Company Manager Menu");
+		lblTitle.setText("Network Manager Menu");
 		
 		btnConfirmNewRates = new JButton("Confirm New Rates");
 		btnConfirmNewRates.addActionListener(new btnHandler() );
@@ -64,11 +60,6 @@ public class CMGUI extends SuperGUI{
 		btnShowCompanyReports.addActionListener(new btnHandler());
 		btnShowCompanyReports.setBounds(165, 228, 213, 48);
 		panel.add(btnShowCompanyReports);
-		
-		homeQty = new JButton("Home Fuel Quantity");
-		homeQty.addActionListener(new btnHandler());
-		homeQty.setBounds(165, 287, 213, 48);
-		panel.add(homeQty);
 		
 		JPanel p = new JPanel();
 		p.setOpaque(false);
@@ -108,8 +99,6 @@ public class CMGUI extends SuperGUI{
 		if(e.getSource() == btnConfirmNewRates)
 			actions.ConfirmNewRatesWindow();
 		
-		else if(e.getSource() == homeQty)
-			actions.homeQuantity();
 		else if(e.getSource() == btnShowCompanyReports)
 		{
 			actions.showReportsWindows();
@@ -117,10 +106,7 @@ public class CMGUI extends SuperGUI{
 		
 	}
 	
-	/*public void setMsg(String m)
-	{
-		this.msg.setText(m);
-	}*/
+
 	
 	/***
 	 * Action Listener for JButton

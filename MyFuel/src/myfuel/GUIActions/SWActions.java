@@ -9,8 +9,19 @@ import myfuel.request.SWRequest;
 import myfuel.response.booleanResponse;
 import myfuel.response.inventoryResponse;
 
+/***
+ * Controller for SWGUI
+ * @author karmo
+ *
+ */
 public class SWActions extends GUIActions {
+	/***
+	 * Station ID
+	 */
 	private int sid;
+	/***
+	 * This GUI object will be controlled by this class
+	 */
 	private SWGUI gui;
 	
 	
@@ -55,7 +66,9 @@ public class SWActions extends GUIActions {
 	}
 
 
-
+/***
+ * Sending the order to the DB for updating the Station's inventory
+ */
 	public void ConfirmOrder() 
 	{
 		SWRequest request = new SWRequest(sid,RequestEnum.Insert);

@@ -382,7 +382,7 @@ public class SetNewRatesGUI extends SuperGUI {
 				this.showErrorMessage("You can't send empty suggestion");
 				return;
 			}
-			  if (JOptionPane.showConfirmDialog(null, "Are you sure want to send the suggsetion (You can't edit it while you press yes)?", "Confirmation", 
+			  if (JOptionPane.showConfirmDialog(null, "Are you sure want to send the suggsetion (You can't edit it once you press yes)?", "Confirmation", 
 			            JOptionPane.YES_NO_OPTION,
 			            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
 			  {

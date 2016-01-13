@@ -34,6 +34,8 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 	 */
 	private String str,nstr;
 	
+	
+	
 	/***
 	 *  ConfirmNewRates DB Handler
 	 * @param server  - MyFuelServer
@@ -48,7 +50,7 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
  * &
  * Getting the suggested discounts 
  */
-	private void getDetails()
+	private void getDetails(int nid)
 	{
 		ResultSet rs = null ;
 		PreparedStatement ps = null;
@@ -56,14 +58,13 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 		current = new ArrayList<Rate>(); 
 		
 		try{
-			   ps = con.prepareStatement("select * from suggest_rates");
-			   
+			   ps = con.prepareStatement("select modelid,discount from suggest_rates where nid = ? and modelid != 1");
+			   ps.setInt(1, nid);
 			   rs = ps.executeQuery();
 			   
 			  while(rs.next())
 			  {
-				  if(rs.getInt(1) != 1)
-					  sModes.add(new Rate(rs.getInt(1),null,rs.getFloat(2)));
+				 sModes.add(new Rate(rs.getInt(1),rs.getFloat(2)));
 			  }
 			  
 			  if(sModes.isEmpty())
@@ -73,12 +74,15 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 				  return;
 			  }
 			  
-			  ps = con.prepareStatement("select * from price_to_type");
+			  ps = con.prepareStatement("select r.modelid , s.desc , r.discount "
+			  		+ "					 from network_rate as r , sale_model as s"
+			  		+ "					 where nid = ? and r.modelid != 1"
+			  		+ "						and r.modelid = s.modelid");
+			  ps.setInt(1, nid);
 			  rs = ps.executeQuery();
 			  
 			  while(rs.next())
 			  {
-				  if(rs.getInt(1)!= 1)
 					  current.add(new Rate(rs.getInt(1),rs.getString(2),rs.getFloat(3)));
 			  }
 			  
@@ -94,12 +98,14 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 
 /***
  *  Delete the suggested prices	
+ * @param nid 
  */
-	private void deleteSuggest() 
+	private void deleteSuggest(int nid) 
 	{
 		PreparedStatement ps = null;
 		try{
-			ps = con.prepareStatement("TRUNCATE TABLE suggest_rates");
+			ps = con.prepareStatement("DELETE from suggest_rates where nid = ?");
+			ps.setInt(1, nid);
 			
 			ps.executeUpdate();
 			
@@ -118,7 +124,7 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 	 * Update Discounts for each sale model
 	 * @param a - approved discounts
 	 */
-	private void updatePrices(ArrayList<Rate> a)
+	private void updatePrices(ArrayList<Rate> a,int nid)
 	{
 		PreparedStatement ps = null;
 		
@@ -126,17 +132,17 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 			
 			for(Rate s : a)
 			{
-			ps = con.prepareStatement("update price_to_type SET discount = ? where modelid = ?");
+			ps = con.prepareStatement("update network_rate SET discount = ? where modelid = ? and nid = ?");
 				ps.setFloat(1,s.getDiscount());
 				ps.setInt(2, s.getModelid());
-				
+				ps.setInt(3, nid);
 				ps.executeUpdate();
 			}
 			
 			answer = true;
 			str = "Rates has been updated!";
 			
-			deleteSuggest();
+			deleteSuggest(nid);
 		}
 		catch(SQLException e)
 		{
@@ -155,7 +161,7 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 			
 			if(r.getType() == RequestEnum.Select)
 			{
-				getDetails();
+				getDetails(r.getNid());
 				if(!answer)
 					server.setResponse(new booleanResponse(answer,str));
 				else
@@ -164,15 +170,15 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 			
 			else if(r.getType() == RequestEnum.Delete)
 			{
-				deleteSuggest();
-				deleteMsg();
+				deleteSuggest(r.getNid());
+				deleteMsg(r.getNid());
 				server.setResponse(new booleanResponse(answer,nstr));
 			}
 			
 			else if(r.getType() == RequestEnum.Insert)
 			{
-				updatePrices(r.getApproved());
-				deleteMsg();
+				updatePrices(r.getApproved(),r.getNid());
+				deleteMsg(r.getNid());
 				server.setResponse(new booleanResponse(answer,str));
 			}
 		}
@@ -182,12 +188,13 @@ public class ConfirmNewRatesDBHandler extends DBHandler{
 	/***
 	 * Delete Message From the DB
 	 */
-	private void deleteMsg() 
+	private void deleteMsg(int nid) 
 	{
 		PreparedStatement ps = null;
 		try{
-			ps = con.prepareStatement("DELETE from  message where sid = 4 and type =?");
-			ps.setInt(1,0);
+			ps = con.prepareStatement("DELETE from  message where nid = ? and type =?");
+			ps.setInt(1, nid);
+			ps.setInt(2,0);
 			ps.executeUpdate();
 			
 		}catch(SQLException e )

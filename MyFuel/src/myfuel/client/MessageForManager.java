@@ -29,20 +29,29 @@ public class MessageForManager implements Serializable
 	 * Station ID
 	 */
 	private int sid;
+	
+	/***
+	 * Station ID
+	 */
+	private int nid;
+	
 	/***
 	 * MessageForManager Constructor
 	 * @param id - Message ID
 	 * @param msg - Message Content
+	 * @param nid - network ID
+	 * @param sid  - Station ID
 	 * @param type  - type of Message 
 	 *  type = 0 -> New Rates Confirmation
 	 *  type = 1 -> New Inventory Order
 	 */
-	public MessageForManager(int id , String msg , int sid , int type)
+	public MessageForManager(int id , String msg ,int nid, int sid , int type)
 	{
 		this.setMsg(msg);
 		this.setId(id);
 		this.setType(type);
 		this.setSid(sid);
+		this.setNid(nid);
 	}
 
 	public String getMsg() {
@@ -75,6 +84,14 @@ public class MessageForManager implements Serializable
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public int getNid() {
+		return nid;
+	}
+
+	public void setNid(int nid) {
+		this.nid = nid;
 	}
 
 }

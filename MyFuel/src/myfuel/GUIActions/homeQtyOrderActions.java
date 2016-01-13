@@ -12,22 +12,39 @@ import myfuel.request.homeQtyOrderRequest;
 import myfuel.response.HomeQtyResponse;
 import myfuel.response.booleanResponse;
 
+/***
+ * Controller for HomeQtyOrderGUI
+ * @author karmo
+ *
+ */
 public class homeQtyOrderActions extends GUIActions {
 
+	/***
+	 * THis class will be controller for this gui
+	 */
 	private HomeQtyOrderGUI gui;
+	/***
+	 * Current low inventory level
+	 */
 	private Float level;    // current low level
+	/***
+	 * Current Home Fuel quantity
+	 */
 	private Float current;  // current quantity
+	/***
+	 * The amount that specified in the inventory order
+	 */
 	private Float orderQty;
-	private ArrayList<MessageForManager> msg ;
+	
 	/***
 	 * This ActionsGUI class has the methods to control homeQtyOrderGUI
 	 * @param client - MyFuelCLient
 	 * @param order  - Inventory Order for home fuel
 	 * @param msg - Messages for this user
 	 */
-	public homeQtyOrderActions(MyFuelClient client, ArrayList<MessageForManager> msg) {
+	public homeQtyOrderActions(MyFuelClient client) {
 		super(client);
-		this.msg = msg;
+		
 		gui = new HomeQtyOrderGUI(this);
 		homeQtyOrderRequest request = new homeQtyOrderRequest(RequestEnum.HomeGet);
 		client.handleMessageFromGUI(request);
@@ -48,19 +65,6 @@ public class homeQtyOrderActions extends GUIActions {
 			
 			else if(arg1 instanceof booleanResponse)
 			{
-				MessageForManager temp = null ; 
-				
-				for(MessageForManager m : msg)
-				{
-					if(m.getType() == 1 && m.getSid() == 4)
-					{
-						temp = m;
-						break;
-					}
-				}
-				if(temp!=null)
-					msg.remove(msg.indexOf(temp));
-			
 				
 					if(((booleanResponse)arg1).getSuccess())
 						gui.showOKMessage(((booleanResponse)arg1).getMsg());
@@ -80,12 +84,10 @@ public class homeQtyOrderActions extends GUIActions {
 			}
 			
 	}
-/***
- * Return to main menu
- */
+
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,new CMActions(client,msg),this);
+
 
 	}
 /***

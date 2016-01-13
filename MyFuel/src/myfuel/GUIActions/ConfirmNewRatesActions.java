@@ -28,13 +28,24 @@ public class ConfirmNewRatesActions extends GUIActions {
 	private ArrayList<MessageForManager> msg;
 	
 	/***
+	 * Network ID
+	 */
+	private int nid;
+	
+	/***
 	 *  ConfirmNewRatesActions Constructor
 	 * @param client - MyFuelClient
+	 * @param msg - messages
+	 * @param nid - network ID
 	 */
-	public ConfirmNewRatesActions(MyFuelClient client,ArrayList<MessageForManager>msg) {
+	public ConfirmNewRatesActions(MyFuelClient client,ArrayList<MessageForManager>msg,int nid) {
 		super(client);
+		
 		this.msg = msg;
-		ConfirmNewRatesRequest request = new ConfirmNewRatesRequest(RequestEnum.Select);
+		this.nid = nid;
+		
+		ConfirmNewRatesRequest request = new ConfirmNewRatesRequest(RequestEnum.Select , nid);
+		
 		gui = new ConfirmNewRatesGUI(this);
 		gui.createWaitDialog("Getting Rates...");
 		client.handleMessageFromGUI(request);
@@ -65,7 +76,7 @@ public class ConfirmNewRatesActions extends GUIActions {
 			
 			for(MessageForManager m : msg)
 			{
-				if(m.getType() == 0 && m.getSid() == 4)
+				if(m.getType() == 0 && m.getNid() == nid)
 				{
 					temp = m; break; 
 				}
@@ -91,7 +102,7 @@ public class ConfirmNewRatesActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		changeFrame(gui,new CMActions(client,msg),this);
+		changeFrame(gui,new CMActions(client,msg,nid),this);
 	}
 /***
  *  Sending approved rates(if there is) to the DB
@@ -103,12 +114,12 @@ public class ConfirmNewRatesActions extends GUIActions {
 		if(approved.isEmpty())
 		{
 			gui.createWaitDialog("Canceling Suggestion...");
-			client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.Delete));
+			client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.Delete , nid));
 		}
 		else 
 		{
 			gui.createWaitDialog("Setting New Rates ...");
-			client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.Insert,approved) );
+			client.handleMessageFromGUI(new ConfirmNewRatesRequest(RequestEnum.Insert,approved , nid) );
 		}
 		
 	}

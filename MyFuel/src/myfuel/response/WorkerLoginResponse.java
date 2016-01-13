@@ -26,6 +26,11 @@ public class WorkerLoginResponse extends Response{
 	private int sid;
 	
 	/***
+	 * Network ID
+	 */
+	private int nid;
+	
+	/***
 	 * Messages for the user
 	 */
 	private ArrayList<MessageForManager> msg;
@@ -36,11 +41,12 @@ public class WorkerLoginResponse extends Response{
 	 * role 3- Marketing Manager
 	 * role 4- Marketing Delegate
 	 * role 5- Company Manager
+	 * role 6 - Home Fuel Manager
 	 * @param workerExist
 	 * @param role
 	 * @param msg
 	 */
-	public WorkerLoginResponse(int roleid,int wid,int sid,ArrayList<MessageForManager> msg){
+	public WorkerLoginResponse(int roleid,int wid,int nid,int sid,ArrayList<MessageForManager> msg){
 		this.wid=wid;
 		this.sid = sid;
 		switch(roleid){
@@ -54,9 +60,11 @@ public class WorkerLoginResponse extends Response{
 		break;
 		case 5: role=RoleEnum.CompanyManager;
 		break;
+		case 6: role = RoleEnum.HomeManager;
 		}
 		
 		this.setMsg(msg);
+		this.setNid(nid);
 		
 		
 		
@@ -94,6 +102,16 @@ public class WorkerLoginResponse extends Response{
 
 	public void setMsg(ArrayList<MessageForManager> msg) {
 		this.msg = msg;
+	}
+
+
+	public int getNid() {
+		return nid;
+	}
+
+
+	public void setNid(int nid) {
+		this.nid = nid;
 	}
 
 

@@ -43,7 +43,7 @@ public class LoginDBHandler extends DBHandler {
 		// TODO Auto-generated method stub
 		ResultSet rs = null;
 		PreparedStatement ps = null;
-		int status,sid,role,wid;
+		int status,sid,role,wid,nid;
 		ArrayList<MessageForManager> msg = null;
 		try {
 			ps = con.prepareStatement("select * from worker where wid=? and pass =?");
@@ -63,24 +63,24 @@ public class LoginDBHandler extends DBHandler {
 				ps.setInt(1, 1);
 				ps.setInt(2, request.getUserid());
 				ps.executeUpdate();
-				
-				sid = rs.getInt(8);
+				nid = rs.getInt(8);
+				sid = rs.getInt(9);
 				role = rs.getInt(6);
 				wid = rs.getInt(1);
-				if(role == 5 || role == 2 )
+				if(role == 5 )
 				{
 						msg = new ArrayList<MessageForManager>();
-						ps = con.prepareStatement("select * from message where sid = ? ");
-						ps.setInt(1, sid);
+						ps = con.prepareStatement("select * from message where nid = ? ");
+						ps.setInt(1, nid);
 						
 						rs = ps.executeQuery();
 						
 						while(rs.next())
 						{
-							msg.add(new MessageForManager(rs.getInt(1),rs.getString(3),rs.getInt(2),rs.getInt(4)));
+							msg.add(new MessageForManager(rs.getInt(1),rs.getString(4),rs.getInt(2),rs.getInt(3),rs.getInt(5)));
 						}
 				}
-				return new WorkerLoginResponse(role,wid,sid,msg);
+				return new WorkerLoginResponse(role,wid,nid,sid,msg);
 			}
 			else return new booleanResponse(false, "WorkerID or Password not correct!");
 		}

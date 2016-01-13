@@ -5,7 +5,7 @@ package myfuel.client;
  *
  */
 	public enum RoleEnum {
-	   StationWorker, MarketingDelegate,MarketingManager,StationManager,CompanyManager
+	   StationWorker, MarketingDelegate,MarketingManager,StationManager,CompanyManager,HomeManager
 	}
 
 

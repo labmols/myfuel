@@ -11,11 +11,29 @@ import myfuel.request.SWRequest;
 import myfuel.response.booleanResponse;
 import myfuel.response.inventoryResponse;
 
+/***
+ * Station Worker DBHandler  - will get and set Inventory Order Details to the worker's station
+ * @author karmo
+ *
+ */
 public class SWDBHandler extends DBHandler{
-	private int sid;
+	/***
+	 * True if query is ok and false otherwise
+	 */
 	private boolean answer;
+	/***
+	 * String the explain the status of the action
+	 */
 	private String str;
+	/***
+	 * Order details for he worker's station
+	 */
 	private InventoryOrder order;
+	/***
+	 * SWDBHandler Constructor
+	 * @param server - MyFUelServer
+	 * @param con - JDBC
+	 */
 	public SWDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 	}
@@ -32,11 +50,11 @@ public class SWDBHandler extends DBHandler{
 		if(arg1 instanceof SWRequest)
 		{
 			SWRequest rq = (SWRequest)arg1;
-			this.sid = rq.getSid();
+			
 			
 			if(rq.getType() == RequestEnum.Select)
 			{
-				getNewOrders();
+				getNewOrders(rq.getSid());
 				if(answer)
 					server.setResponse(new inventoryResponse(order));
 				else
@@ -45,8 +63,8 @@ public class SWDBHandler extends DBHandler{
 			
 			else if (rq.getType() == RequestEnum.Insert)
 			{
-				this.sid = rq.getSid();
-				addInventoryOrder();
+				
+				addInventoryOrder(rq.getSid());
 				server.setResponse(new booleanResponse(answer,str));
 			}
 			
@@ -58,17 +76,19 @@ public class SWDBHandler extends DBHandler{
 
 	/***
 	 * add fuel supply to the inventory of the station
+	 * @param sid  - station ID
 	 */
-	private void addInventoryOrder()
+	private void addInventoryOrder(int sid)
 	{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
 		ArrayList<Float> qty = new ArrayList<Float>();
 		ArrayList<Integer> id = new ArrayList<Integer>();
 		
 		try{
 			ps = con.prepareStatement("select fuelid,qty from inventory_order where sid = ?");
-			ps.setInt(1,this.sid);
+			ps.setInt(1,sid);
 			
 			rs = ps.executeQuery();
 			
@@ -83,7 +103,7 @@ public class SWDBHandler extends DBHandler{
 			{
 				ps = con.prepareStatement("update station_inventory SET fqty = fqty + ? where sid = ? and fuelid = ?");
 				ps.setFloat(1,qty.get(i));
-				ps.setInt(2, this.sid);
+				ps.setInt(2, sid);
 				ps.setInt(3, id.get(i));
 				
 				ps.executeUpdate();
@@ -92,13 +112,14 @@ public class SWDBHandler extends DBHandler{
 			for(int i : id)
 			{
 				ps = con.prepareStatement("DELETE from inventory_order where sid  = ? and fuelid = ? and status = 1 ");
-				ps.setInt(1, this.sid);
+				ps.setInt(1, sid);
 				ps.setInt(2, i);
 				
 				ps.executeUpdate();
 			}
 			answer = true;
 			str = "Inventory has been updated!";
+			
 		}catch(SQLException e)
 		{
 			answer = false;
@@ -110,8 +131,9 @@ public class SWDBHandler extends DBHandler{
 
 /***
  * get new orders from the DB
+ * @param sid  - Station ID
  */
-	private void getNewOrders() 
+	private void getNewOrders(int sid) 
 	{
 		ResultSet rs ;
 		PreparedStatement ps = null;
@@ -119,14 +141,14 @@ public class SWDBHandler extends DBHandler{
 		ArrayList<FuelQty> qty = new ArrayList<FuelQty>();
 		try{
 			
-			ps = con.prepareStatement("select sname from station where sid = ?");
-			ps.setInt(1, this.sid);
+			ps = con.prepareStatement("select name from station_in_network where sid = ?");
+			ps.setInt(1, sid);
 			
 			rs = ps.executeQuery();
 			
 			while(rs.next())
 			{
-				s = new Station(this.sid,rs.getString(1));
+				s = new Station(sid,rs.getString(1));
 			}
 			
 			ps = con.prepareStatement("select f.fname,i.qty,i.fuelid"
