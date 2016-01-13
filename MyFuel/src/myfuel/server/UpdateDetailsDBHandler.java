@@ -85,11 +85,45 @@ public class UpdateDetailsDBHandler extends DBHandler{
 			ps.setInt(8, customer.getToc());
 			ps.setInt(9, customer.getSmodel());
 			ps.executeUpdate();
+			
+			ps= con.prepareStatement("DELETE FROM customer_car WHERE uid=?");
+			ps.setInt(1, customer.getUserid());
+			ps.executeUpdate();
+			
+				for(Car car: customer.getCars()){
+					ps=con.prepareStatement("insert into customer_car values(?,?,?)");
+					ps.setInt(1,customer.getUserid());
+					ps.setInt(2,car.getcid());
+					ps.setInt(3, car.getfid());
+					ps.executeUpdate();
+					ps.close();
+					}
+		
+				ps= con.prepareStatement("DELETE FROM customer_network WHERE uid=?");
+				ps.setInt(1, customer.getUserid());
+				ps.executeUpdate();
+				
+					for(int sid: customer.getStations())
+					{
+						ps=con.prepareStatement("insert into customer_network values(?,?)");
+						ps.setInt(1,customer.getUserid());
+						ps.setInt(2,sid);
+						ps.executeUpdate();
+						ps.close();
+					}
+					
+			ps.close();
+			
 			return new booleanResponse (true, "Update details successful!");
+			
+			
+		
 		}catch (SQLException e){
 			e.printStackTrace();
 			return new booleanResponse (false, "Update Failed! SQL Error!");
 		}
+		
+		
 			
 			
 			
