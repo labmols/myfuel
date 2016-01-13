@@ -251,7 +251,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		accessCB = new JComboBox<String>();
 		accessCB.setFont(new Font("Arial", Font.PLAIN, 13));
-		accessCB.setModel(new DefaultComboBoxModel<String>(new String[] {"One Station", "Few Stations"}));
+		accessCB.setModel(new DefaultComboBoxModel(new String[] {"One Network", "Few Networks"}));
 		accessCB.addItemListener(new ButtonListener());
 		accessCB.setBounds(104, 16, 141, 27);
 		panel4.add(accessCB);

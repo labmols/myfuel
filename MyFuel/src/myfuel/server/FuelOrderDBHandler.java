@@ -56,17 +56,17 @@ public class FuelOrderDBHandler extends DBHandler{
 				st.executeUpdate("update home_order SET status=1 where datediff(curdate(),sdate) > 0 or (datediff(curdate(),sdate)=0 and TIMESTAMPDIFF(HOUR,sdate,NOW()) >=6)");
 				st.close();
 				//Get all home orders query after status update.
-				ps= con.prepareStatement("select t2.uid, t1.orid, t1.qty, t1.adr, t1.sdate, t1.status,t1.urgent,t1.pid from home_order t1, customer_home_order t2 where t2.uid = ? and t1.orid = t2.orid");
+				ps= con.prepareStatement("select t2.uid, t1.orid , t1.adr, t1.sdate, t1.status,t1.urgent,t1.pid from home_order t1, customer_home_order t2 where t2.uid = ? and t1.orid = t2.orid");
 				ps.setInt(1, customerID);
 				rs1 = ps.executeQuery();
 				while(rs1.next())
 				{
 				ps = con.prepareStatement("select * from purchase where pid = ?");
-				ps.setInt(1, rs1.getInt(8));
+				ps.setInt(1, rs1.getInt(7));
 				rs2 = ps.executeQuery();
 				rs2.next();
-				Purchase pur = new Purchase(rs1.getInt(1),rs2.getInt(1),rs2.getInt(2),rs2.getInt(3),rs2.getInt(4),rs2.getTimestamp(5),rs2.getFloat(6),rs2.getFloat(7),rs2.getString(8),-1);
-				horders.add(new HomeOrder (rs1.getInt(1), rs1.getInt(2), rs1.getFloat(3), rs1.getString(4), rs1.getTimestamp(5), rs1.getBoolean(6), rs1.getBoolean(7),pur));
+				Purchase pur = new Purchase(rs1.getInt(1),rs2.getInt(1),rs2.getInt(2),rs2.getInt(3),rs2.getInt(4),rs2.getTimestamp(5),rs2.getFloat(6),rs2.getFloat(7),null,-1);
+				horders.add(new HomeOrder (rs1.getInt(1), rs1.getInt(2), rs1.getString(3), rs1.getTimestamp(4), rs1.getBoolean(5), rs1.getBoolean(6),pur));
 				}
 				ps.close();
 				rs1.close();
@@ -83,6 +83,51 @@ public class FuelOrderDBHandler extends DBHandler{
 			return null;
 		}
 	}
+	
+	/**
+	 * Get all stations details available from the Database.
+	 * @return - ArrayList<Station> that contains all the stations info.
+	 */
+	private ArrayList<Station> getStations()
+	{
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		Statement st = null;
+		PreparedStatement ps = null;
+		ArrayList<Station> stations = new ArrayList<Station>();
+		int id;
+		String name;
+		
+			try {
+				st = con.createStatement();
+				String query = "select * from station_in_network";
+				rs = st.executeQuery(query);
+				while(rs.next())
+				{
+					ps = con.prepareStatement("select * from network where sid = ?");
+					ps.setInt(1, rs.getInt(2));
+					rs2 = ps.executeQuery();
+					if(rs2.next())
+					{
+						id = rs.getInt(1);
+						name = rs.getString(3);
+						stations.add(new Station(id,name,new Network(rs2.getInt(1),rs2.getString(2))));
+					}
+					
+				}
+				
+				rs.close();
+				rs2.close();
+				ps.close();
+				st.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return stations;
+			
+		}
 	
 	/**
 	 * Insert new Home Fuel Order to the Database.
@@ -108,11 +153,10 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps = con.prepareStatement("insert into home_order values(?,?,?,?,?,?,?)");
 			ps.setInt(1, nextid);
 			ps.setInt(2, CustomerP);
-			ps.setFloat(3, order.getQty());
-			ps.setString(4, order.getAddress());
-			ps.setTimestamp(5, new java.sql.Timestamp(order.getShipDate().getTime()));
-			ps.setBoolean(6, order.isUrgent());
-			ps.setBoolean(7, order.getStatus());
+			ps.setString(3, order.getAddress());
+			ps.setTimestamp(4, new java.sql.Timestamp(order.getShipDate().getTime()));
+			ps.setBoolean(5, order.isUrgent());
+			ps.setBoolean(6, order.getStatus());
 			ps.executeUpdate();
 			ps.close();
 			
@@ -158,7 +202,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			rs.close();
 			
 			//Insert into purchase table
-			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?)");
 			ps.setInt(1, nextid);
 			ps.setInt(2, p.getSid());
 			ps.setInt(3, p.getFuelid());
@@ -168,19 +212,20 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps.setTimestamp(5, new java.sql.Timestamp(p.getPdate().getTime()));
 			ps.setFloat(6, p.getBill());
 			ps.setFloat(7, p.getQty());
-			if(p.getDriverName() == null)
-			ps.setNull(8, java.sql.Types.VARCHAR);
-			else ps.setString(8, p.getDriverName());
+			
 			ps.executeUpdate();
 			ps.close();
 			
 			//Insert into customer_purchase table
-			ps = con.prepareStatement("insert into customer_purchase values(?,?,?)");
+			ps = con.prepareStatement("insert into customer_purchase values(?,?,?,?)");
 			ps.setInt(1, p.getCustomerid());
 			ps.setInt(2, nextid);
 			if(p.getCustomerCarID() == -1)
 			ps.setNull(3, java.sql.Types.INTEGER);
 			else ps.setInt(3, p.getCustomerCarID());
+			if(p.getDriverName() == null)
+				ps.setNull(4, java.sql.Types.VARCHAR);
+				else ps.setString(4, p.getDriverName());
 			ps.executeUpdate();
 			ps.close();
 			
@@ -526,9 +571,16 @@ public class FuelOrderDBHandler extends DBHandler{
 				ArrayList <NetworkRates> networkRates = getRates();
 				ArrayList<Promotion> promList = getPromotions();
 				ArrayList <HomeOrder> horders = null;
+				ArrayList<Station> stations ;
+				
 				if(req.getFuelID() == Fuel.HomeFuelID) 
+				{
 				 horders = getHomeOrders(req.getCustomerID());
-				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,networkRates);
+				 stations = null;
+				}
+				
+				else stations = getStations();
+				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,networkRates,stations);
 				server.setResponse(res);
 			}
 			

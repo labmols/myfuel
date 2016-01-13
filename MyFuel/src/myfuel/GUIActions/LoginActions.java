@@ -7,6 +7,8 @@ import myfuel.response.*;
 
 import java.util.Observer;
 
+import com.alee.managers.notification.NotificationManager;
+
 import myfuel.client.MyFuelClient;
 import myfuel.gui.LogInGUI;
 import myfuel.request.LoginRequest;
@@ -90,7 +92,9 @@ public class LoginActions extends GUIActions {
 		if(response instanceof CustomerLoginResponse)
 		{
 		CustomerLoginResponse res = (CustomerLoginResponse) response;
-
+		// NotificationManager.setLocation(1);
+		 //NotificationManager.showNotification ( gui,"Connected" );
+		 
 			gui.showOKMessage("Welcome to MyFuel!");
 			changeFrame(gui,new CustomerOptionsActions (client,res),this);
 			

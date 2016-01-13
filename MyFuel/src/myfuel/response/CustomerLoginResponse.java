@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Fuel;
+import myfuel.client.Network;
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
 
@@ -16,10 +17,7 @@ public class CustomerLoginResponse extends Response {
 	 */
 	private Customer user;
 	
-	/**
-	 * Array of all stations in the company.
-	 */
-	private ArrayList <Station> stations;
+	private ArrayList<Network> networks;
 	
 	/**
 	 * create new Customer Login Response .
@@ -38,9 +36,9 @@ public class CustomerLoginResponse extends Response {
 	 * @param Allstations - List of all Stations in the company.
 	 */
 	public CustomerLoginResponse(int userid, String fname, String lname, String pass, String email, String address,String cnumber, int toc, int 
-			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations,ArrayList <Station> Allstations){
+			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations,ArrayList<Network> networks){
 			setUser(new Customer(userid,fname,lname,pass,email,address,cnumber,toc,atype,smodel,cars,stations));
-			setStations(Allstations);
+			this.setNetworks(networks);
 	}
 
 
@@ -53,14 +51,15 @@ public class CustomerLoginResponse extends Response {
 	}
 
 
-	public ArrayList <Station> getStations() {
-		return stations;
+	public ArrayList<Network> getNetworks() {
+		return networks;
 	}
 
 
-	public void setStations(ArrayList <Station> stations) {
-		this.stations = stations;
+	public void setNetworks(ArrayList<Network> networks) {
+		this.networks = networks;
 	}
+
 
 
 }

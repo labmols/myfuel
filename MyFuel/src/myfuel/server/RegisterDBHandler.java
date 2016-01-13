@@ -28,11 +28,11 @@ public class RegisterDBHandler extends DBHandler {
 	}
 	
 	/**
-	 * Get all stations details from the Database.
+	 * Get all station networks details from the Database.
 	 * @param request - the request from the client.
 	 * @return RegisterResponse if there is not SQL Error, otherwise return booleanResponse(false).
 	 */
-	private Response getNetworks(RegisterRequest request)
+	private Response getNetworks()
 	{
 		ResultSet rs = null;
 		Statement st = null;
@@ -42,7 +42,7 @@ public class RegisterDBHandler extends DBHandler {
 	
 			try {
 				st = con.createStatement();
-				String query = "select * from network where sid!=0";
+				String query = "select * from network";
 				rs = st.executeQuery(query);
 				while(rs.next()){
 					id = rs.getInt(1);
@@ -164,16 +164,19 @@ public class RegisterDBHandler extends DBHandler {
 			}
 		
 			
-			try{
-			for(int sid: customer.getStations())
+			try
 			{
-			ps=con.prepareStatement("insert into customer_station values(?,?)");
-			ps.setInt(1,customer.getUserid());
-			ps.setInt(2,sid);
-			ps.executeUpdate();
-			ps.close();
-			}
-			}catch (SQLException e){
+				for(int sid: customer.getStations())
+				{
+					ps=con.prepareStatement("insert into customer_network values(?,?)");
+					ps.setInt(1,customer.getUserid());
+					ps.setInt(2,sid);
+					ps.executeUpdate();
+					ps.close();
+				}
+				}
+			catch (SQLException e)
+			{
 				e.printStackTrace();
 			}
 			
@@ -189,7 +192,7 @@ public class RegisterDBHandler extends DBHandler {
 		
 		if(arg instanceof RegisterRequest){
 		RegisterRequest request = (RegisterRequest)arg;
-		if(request.getType() == RequestEnum.Select) server.setResponse(getNetworks(request));
+		if(request.getType() == RequestEnum.Select) server.setResponse(getNetworks());
 		else if(request.getType() == RequestEnum.Insert) server.setResponse(CheckAndInsert(request));
 	}
 }

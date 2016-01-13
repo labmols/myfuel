@@ -26,11 +26,11 @@ class ProgressBarThread implements Runnable {
      */
     public void run() {
         do {
-        		value+=0.01;
+        		value+=0.1;
         		gui.setProgress(value);
             
             try {
-                java.lang.Thread.sleep(5);
+                java.lang.Thread.sleep(50);
             } catch (java.lang.InterruptedException ex) {
                 ex.printStackTrace();
             }

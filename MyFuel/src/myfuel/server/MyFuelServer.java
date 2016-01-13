@@ -5,6 +5,12 @@ import java.sql.*;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import com.alee.laf.WebLookAndFeel;
+
+import myfuel.gui.ConnectDialog;
 import myfuel.ocsf.server.AbstractServer;
 import myfuel.ocsf.server.ConnectionToClient;
 import myfuel.ocsf.server.ObservableServer;
@@ -133,6 +139,21 @@ public void createDBConnection (String add, String USER, String PASS) throws SQL
 	new SReportsDBHandler(this,con);
 	new CompanyReportsDBHandler(this,con);
 	new AnalysticDBHandler(this,con);
+	
+}
+
+public static void main(String [] args){
+	
+	 SwingUtilities.invokeLater ( new Runnable ()
+     {
+         public void run ()
+         {
+         	WebLookAndFeel.install ();
+         	JFrame serverFrame = new ServerGUI();
+        	serverFrame.setVisible(true);
+        	
+         }
+     } );
 	
 }
 	

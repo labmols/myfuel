@@ -28,7 +28,7 @@ public class ClockPane extends JPanel {
             setLayout(new BorderLayout());
             clock = new JLabel();
             clock.setHorizontalAlignment(SwingConstants.CENTER);
-            clock.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+            clock.setFont(new Font("Arial", Font.BOLD, 13));
             tickTock();
             add(clock);
 

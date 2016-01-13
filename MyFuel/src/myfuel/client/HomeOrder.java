@@ -18,10 +18,7 @@ public class HomeOrder implements Serializable {
 	 * Order ID.
 	 */
 	private int orderid;
-	/**
-	 * Order Quantity
-	 */
-	private float qty;
+
 	/**
 	 * Customer Address
 	 */
@@ -51,11 +48,10 @@ public class HomeOrder implements Serializable {
 	 * @param shipDate - Shipping Date.
 	 * @param status - Order Status.
 	 */
-	public HomeOrder(int customerid, int orderid, float qty, String address, Date shipDate,boolean status, boolean urgent,Purchase homeP)
+	public HomeOrder(int customerid, int orderid, String address, Date shipDate,boolean status, boolean urgent,Purchase homeP)
 	{
 		setCustomerid(customerid);
 		setOrderid(orderid);
-		setQty(qty);
 		setAddress(address);
 		setShipDate(shipDate);
 		setStatus(status);
@@ -75,12 +71,8 @@ public class HomeOrder implements Serializable {
 	public void setOrderid(int orderid) {
 		this.orderid = orderid;
 	}
-	public float getQty() {
-		return qty;
-	}
-	public void setQty(float qty) {
-		this.qty = qty;
-	}
+
+	
 	public String getAddress() {
 		return address;
 	}

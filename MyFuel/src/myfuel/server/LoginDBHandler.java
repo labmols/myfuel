@@ -152,10 +152,9 @@ public class LoginDBHandler extends DBHandler {
 					cars.add(new Car(rs.getInt(1), rs.getInt(2)));
 				}
 				
-				ArrayList<Station> Allstations = getStations();
-			
+				ArrayList<Network> networks = this.getNetworks();
 				return new CustomerLoginResponse(userid,fname,lname,pass,email,address
-						,cnumber,toc,atype,smodel,cars,stations,Allstations);
+						,cnumber,toc,atype,smodel,cars,stations,networks);
 			}
 			
 			
@@ -166,50 +165,7 @@ public class LoginDBHandler extends DBHandler {
 		return new booleanResponse(false, "UserID or password not correct!"); // User not Found
 	}
 	
-	/**
-	 * Get all stations details available from the Database.
-	 * @return - ArrayList<Station> that contains all the stations info.
-	 */
-	private ArrayList<Station> getStations()
-	{
-		ResultSet rs = null;
-		ResultSet rs2 = null;
-		Statement st = null;
-		PreparedStatement ps = null;
-		ArrayList<Station> stations = new ArrayList<Station>();
-		int id;
-		String name;
-		
-			try {
-				st = con.createStatement();
-				String query = "select * from station_in_network";
-				rs = st.executeQuery(query);
-				while(rs.next())
-				{
-					ps = con.prepareStatement("select * from network where sid = ?");
-					ps.setInt(1, rs.getInt(2));
-					rs2 = ps.executeQuery();
-					if(rs2.next())
-					{
-						id = rs.getInt(1);
-						name = rs.getString(3);
-						stations.add(new Station(id,name,new Network(rs2.getInt(1),rs2.getString(2))));
-					}
-					
-				}
-				
-				rs.close();
-				rs2.close();
-				ps.close();
-				st.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			return stations;
-			
-		}
+	
 	
 	/**
 	 * Update user login status in the system in Login and Exit.
@@ -245,6 +201,39 @@ public class LoginDBHandler extends DBHandler {
 			}
 		}
 	}
+	
+	/**
+	 * Get all station networks from DB.
+	 * @return list of all stations networks.
+	 */
+	private ArrayList<Network> getNetworks()
+	{
+		ResultSet rs = null;
+		Statement st = null;
+		ArrayList<Network> networks = new ArrayList<Network>();
+		int id;
+		String name;
+	
+			try {
+				st = con.createStatement();
+				String query = "select * from network";
+				rs = st.executeQuery(query);
+				while(rs.next()){
+					id = rs.getInt(1);
+					name = rs.getString(2);
+					networks.add(new Network(id,name));
+					}
+				rs.close();
+				st.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+
+			return networks;
+		}
+	
 	
 
 	/**
