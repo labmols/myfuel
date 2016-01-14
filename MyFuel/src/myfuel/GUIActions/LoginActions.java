@@ -183,5 +183,10 @@ public class LoginActions extends GUIActions {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void FastFuel() {
+		// TODO Auto-generated method stub
+		changeFrame(gui,new FastFuelActions(client),this);
+	}
 	
 }
