@@ -92,7 +92,8 @@ public class ChangePassActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		changeFrame(gui, new CustomerOptionsActions(client, res), this);
+		changeFrame(gui, this);
+		 new CustomerOptionsActions(client, res);
 	}
 	
 	

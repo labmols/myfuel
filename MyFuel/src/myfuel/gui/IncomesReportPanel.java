@@ -15,14 +15,37 @@ import java.awt.Font;
 import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
+/***
+ * User interface for showing the incomes report
+ * @author karmo
+ *
+ */
 public class IncomesReportPanel extends JPanel
 {
+	/***
+	 * Incomes Details
+	 */
 	private ArrayList<Purchase> incomes;
+	/***
+	 * Table for showing the details
+	 */
 	private JTable table;
+	/***
+	 * table model
+	 */
 	protected DefaultTableModel model;
+	/***
+	 * Showing the total bills 
+	 */
 	protected JLabel billLabel;
+	/***
+	 * Showing total Quantity
+	 */
 	protected JLabel qtyLabel;
 	
+	/***
+	 * IncomesReportPanel Constructor
+	 */
 	public IncomesReportPanel()
 	{
 		setOpaque(false);
@@ -64,6 +87,9 @@ public class IncomesReportPanel extends JPanel
 		add(billLabel);
 		
 	}
+	/***
+	 * Clears the table
+	 */
 	protected void  clearTable()
 	{
 		billLabel.setText("0"); qtyLabel.setText("0");
@@ -71,6 +97,10 @@ public class IncomesReportPanel extends JPanel
 			model.removeRow(0);
 	}
 	
+	/***
+	 * Sets the table with details
+	 * @param incomes - incomes details
+	 */
 	public void setTable(ArrayList<Purchase> incomes)
 	{
 		

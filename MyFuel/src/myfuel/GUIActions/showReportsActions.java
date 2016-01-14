@@ -25,19 +25,28 @@ public class showReportsActions extends GUIActions {
 	 * Messages for this User
 	 */
 	private ArrayList<MessageForManager> msg;
+	
+	/***
+	 * Network ID
+	 */
+	private int nid;
 	/***
 	 * showReportsActions Constructor
 	 * @param client - MyFuelClient
 	 */
-	public showReportsActions(MyFuelClient client,ArrayList<MessageForManager> msg) 
+	public showReportsActions(MyFuelClient client,ArrayList<MessageForManager> msg,int nid) 
 	{
 		super(client);
 		this.msg = msg;
-		CompanyReportRequest request = new CompanyReportRequest(-1);
-		client.handleMessageFromGUI(request);
+		this.nid = nid;
 		
 		gui = new ShowReportGUI(this);
 		gui.createWaitDialog("Getting Years That Listed In The DB...");
+		
+		CompanyReportRequest request = new CompanyReportRequest(-1,nid);
+		client.handleMessageFromGUI(request);
+		
+		
 		gui.setVisible(true);
 		
 	}
@@ -51,8 +60,16 @@ public class showReportsActions extends GUIActions {
 			ComapnyReportsResponse r = (ComapnyReportsResponse)arg1;
 			gui.setWaitProgress();
 			if(r.getType() == 0)
-				gui.setYears(r.getYears());
-			
+			{
+				if(r.getYears().isEmpty())
+				{
+					gui.showErrorMessage("There are no reports for you");
+					this.backToMenu();
+				}
+				
+				else
+					gui.setYears(r.getYears());
+			}
 			else if(r.getType() == 1)
 			{
 				gui.setInventoryPanel(r.getqStationInventory());
@@ -74,7 +91,7 @@ public class showReportsActions extends GUIActions {
 	 */
 	public void getDetails(int year)
 	{
-		CompanyReportRequest request = new CompanyReportRequest(year);
+		CompanyReportRequest request = new CompanyReportRequest(year,nid);
 		gui.createWaitDialog("Getting Reports for"+" "+year+"...");
 		client.handleMessageFromGUI(request);
 	}
@@ -82,7 +99,8 @@ public class showReportsActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		//changeFrame(gui,new CMActions(client,msg),this);
+		changeFrame(gui,this);
+		new CMActions(client,msg,nid);
 
 	}
 

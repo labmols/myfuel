@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
 import myfuel.GUIActions.MMActions;
+import myfuel.client.BackMainMenu;
 
 /***
  * User interface for the Marketing Manager
@@ -47,7 +48,7 @@ public class MMGUI extends SuperGUI {
 		setContentPane(contentPane);
 		lblTitle.setBounds(160, 6, 250, 22);
 		lblTitle.setText("Marketing Manager Menu");
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		 btnMakeAPromotion = new JButton("Make a Promotion");
 		btnMakeAPromotion.setBounds(194, 105, 189, 48);
 		panel.add(btnMakeAPromotion);

@@ -92,7 +92,8 @@ public class StationReportActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		
-			changeFrame(gui,new SMActions(client,sid,msg,nid),this);
+			changeFrame(gui,this);
+			new SMActions(client,sid,msg,nid);
 	}
 
 

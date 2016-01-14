@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.CMActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.MessageForManager;
 
 import javax.swing.JButton;
@@ -50,7 +51,7 @@ public class CMGUI extends SuperGUI{
 	public CMGUI(CMActions actions,ArrayList<MessageForManager> msg) {
 		lblTitle.setBounds(192, 0, 220, 25);
 		lblTitle.setText("Network Manager Menu");
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		btnConfirmNewRates = new JButton("Confirm New Rates");
 		btnConfirmNewRates.addActionListener(new btnHandler() );
 		btnConfirmNewRates.setBounds(165, 163, 213, 48);

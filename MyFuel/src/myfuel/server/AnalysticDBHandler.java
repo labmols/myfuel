@@ -114,7 +114,7 @@ public class AnalysticDBHandler extends DBHandler{
 										"THEN  '12:00 to 16:00'" + " "+ 
 										"WHEN (HOUR( pdate ) >16 and  HOUR( pdate ) <= 20)" + " "+
 										"THEN  '16:00 to 20:00'" + " "+
-										"WHEN( HOUR( pdate ) > 20 and  HOUR( pdate ) < 0 )" + " "+
+										"WHEN( HOUR( pdate ) > 20 and  HOUR( pdate ) <= 23 )" + " "+
 										"THEN  '20:00 to 00:00'" + " "+
 										"END) AS hour,count(*) as ctr" + " "+ 
 										"from purchase as p , customer_purchase as cp , customer as c ,sale_model as s" + " "+
@@ -122,7 +122,7 @@ public class AnalysticDBHandler extends DBHandler{
 										"DATEDIFF(? , p.pdate) <= 7 and  DATEDIFF(? , p.pdate) >=0" + " "
 										+ "and c.smodel = s.modelid"+" "+
 										"group by hour , c.smodel"+" "+
-										 " ORDER BY ctr ");
+										 " ORDER BY ctr desc");
 			
 			ps.setDate(1, new java.sql.Date(date.getTime()));
 			ps.setDate(2, new java.sql.Date(date.getTime()));
@@ -130,7 +130,7 @@ public class AnalysticDBHandler extends DBHandler{
 			
 			while(rs.next())
 			{
-				hType.add(new AnalyzeDetails(rs.getInt(1),rs.getString(2),rs.getString(3),AnalysticSystem.analyze(rs.getInt(3))));
+				hType.add(new AnalyzeDetails(rs.getInt(1),rs.getString(2),rs.getString(3),AnalysticSystem.analyze(rs.getInt(4))));
 			}
 			
 		ps.close();

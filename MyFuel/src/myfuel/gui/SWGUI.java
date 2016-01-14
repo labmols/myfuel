@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.SWActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.FuelQty;
 import myfuel.client.InventoryOrder;
 
@@ -47,7 +48,7 @@ public class SWGUI extends SuperGUI{
 		confirm.setBounds(214, 331, 129, 47);
 		confirm.addActionListener(new btnHandler());
 		panel.add(confirm);
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(148, 95, 280, 190);
 		panel.add(scrollPane);

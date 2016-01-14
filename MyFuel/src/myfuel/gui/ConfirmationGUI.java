@@ -35,7 +35,13 @@ public class ConfirmationGUI extends SuperGUI{
 	 * Table
 	 */
 	private JTable table;
+	/****
+	 * Customer ArrayList
+	 */
 	private ArrayList<Customer> c ; 
+	/***
+	 * Check Box
+	 */
 	JCheckBox c2;
 	
 	/***
@@ -164,10 +170,7 @@ public class ConfirmationGUI extends SuperGUI{
 			 else index ++ ;
 		}
 		
-		if(model.getRowCount() == 0)
-		{
-			//this.showErrorMessage("There are no customers waiting for confirmation!");
-		}
+	
 		
 	
 		

@@ -47,7 +47,8 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	public void changePasswordScreen()
 	{
-		changeFrame(gui,new ChangePassActions(client,res),this);
+		changeFrame(gui,this);
+		new ChangePassActions(client,res);
 		
 	}
 	
@@ -56,7 +57,8 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	public void updateDetailsScreen()
 	{
-		changeFrame(gui, new UpdateDetailsActions(client,res),this);
+		changeFrame(gui, this);
+		new UpdateDetailsActions(client,res);
 	}
 
 	@Override
@@ -70,13 +72,16 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	public void carFuelScreen() {
 		// TODO Auto-generated method stub
-		changeFrame(gui, new CarFuelActions(client,res),this);
+		changeFrame(gui, this);
+		new CarFuelActions(client,res);
 	}
 
 
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
+		changeFrame(gui, this);
+		new LoginActions(client);
 		
 	}
 
@@ -85,7 +90,8 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	public void HomeFuelScreen() {
 		// TODO Auto-generated method stub
-		changeFrame(gui, new HomeOrderActions(client,res),this);
+		changeFrame(gui, this);
+		new HomeOrderActions(client,res);
 	}
 	
 

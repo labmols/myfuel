@@ -87,7 +87,8 @@ public class homeQtyOrderActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-
+		changeFrame(gui,this);
+		new LoginActions(client);
 
 	}
 /***

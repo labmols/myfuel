@@ -100,7 +100,8 @@ public class CPromotionTemplateActions extends GUIActions{
 	@Override
 	public void backToMenu() {
 
-				changeFrame(gui,new MDActions(client),this);
+				changeFrame(gui,this);
+				new MDActions(client);
 		
 	}
 	

@@ -77,18 +77,20 @@ public class CompanyReportsDBHandler extends DBHandler {
 	 * This method will get all the inventory reports for a specific year
 	 * @param year - specific year for the report
 	 */
-	private void getCompanyInventoryReport(int year)
+	private void getCompanyInventoryReport(int year , int nid)
 	{
 		 ResultSet rs = null ;
 		 PreparedStatement ps = null;
 		 
 		 try{
 			// quarter , station id , station name , fuel name,fuel id , fuel quantity
-			 ps = con.prepareStatement("select r.qid ,s.sid,s.sname,f.fname,r.fuelid,r.qty "
-			 		+ "					 from inventory_report as r , station as s , fuel_price as f"
-			 		+ "						where s.sid = r.sid and f.fuelid = r.fuelid and r.year = ?");
+			 ps = con.prepareStatement("select r.qid ,s.sid,s.name,f.fname,r.fuelid,r.qty "
+			 		+ "					 from inventory_report as r , station_in_network as s , fuel_price as f"
+			 		+ "						where s.sid = r.sid and f.fuelid = r.fuelid and r.year = ?"
+			 		+ "								and r.nid = ?");
 			 
 			 ps.setInt(1, year);
+			 ps.setInt(2, nid);
 			 rs = ps.executeQuery();
 			 
 			 qStationInventory = new ArrayList<QuarterStationInventory>();
@@ -118,13 +120,13 @@ public class CompanyReportsDBHandler extends DBHandler {
 		{
 			CompanyReportRequest r = (CompanyReportRequest)arg1;
 			if(r.getYear() == -1) // if there is no requested year for the reports
-				getYearsOfReports();
+				getYearsOfReports(r.getNid());
 			
 			else  // if there is  a year for the reports
 			{
-				getCompanyInventoryReport(r.getYear());
-				getCompanyIncomesReport(r.getYear());
-				getCompanyPurchaseReport(r.getYear()); 
+				getCompanyInventoryReport(r.getYear(),r.getNid());
+				getCompanyIncomesReport(r.getYear(),r.getNid());
+				getCompanyPurchaseReport(r.getYear(),r.getNid()); 
 			}
 			
 			
@@ -147,7 +149,7 @@ public class CompanyReportsDBHandler extends DBHandler {
 	/***
 	 * This Method will return all that years that documented in the DB
 	 */
-	private void getYearsOfReports()
+	private void getYearsOfReports(int nid)
 	{
 		ResultSet rs = null ;
 		PreparedStatement ps = null;
@@ -155,7 +157,7 @@ public class CompanyReportsDBHandler extends DBHandler {
 		
 		try{
 			
-			ps = con.prepareStatement("select c.year from inventory_report as i , company_report as c where i.year = c.year");
+			ps = con.prepareStatement("select c.year from inventory_report as i , network_report as c where i.year = c.year and i.nid = c.nid");
 			
 			rs = ps.executeQuery();
 			
@@ -179,7 +181,7 @@ public class CompanyReportsDBHandler extends DBHandler {
  * Thie method will return all the details for the Purchase report of MyFuel
  * @param Year - requested year 
  */
-	private void getCompanyPurchaseReport(int Year) 
+	private void getCompanyPurchaseReport(int Year , int nid) 
 	{
 		ResultSet rs = null ;
 		 PreparedStatement ps = null;
@@ -187,33 +189,39 @@ public class CompanyReportsDBHandler extends DBHandler {
 		 qStationPurchase = new  ArrayList<QuarterStationPurchase>();
 		 ArrayList<Integer> quarters = new ArrayList<Integer> ();
 		 try{
-			 
-			 ps = con.prepareStatement("select qid from company_report where rid = 1 and year = ?");   // checking what quarters exist for this report
+			 int qid;
+			 ps = con.prepareStatement("select qid from network_report where rid = 1 and year = ? and nid = ?");   // checking what quarters exist for this report
 			 ps.setInt(1, Year);
+			 ps.setInt(2, nid);
 			 rs=ps.executeQuery();
 			 while(rs.next())
-				 quarters.add(rs.getInt(1));
+			 { 
+				 qid = rs.getInt(1);
+				if( !quarters.contains(qid))
+					quarters.add(qid);
+			 }
 			
 			 for(Integer q : quarters)  // will get the data for each quarter
 			 {
 				
 				 		check_dates(q,Year); // will set the beginning and ending of each quarters into class attributes
 				 		
-					 ps = con.prepareStatement("select r.qid,s.sid,s.sname,c.uid,p.fuelid,p.bill,p.qty,f.fname"
-					 		+ "					 from customer_purchase as c, purchase as p ,station as s,  company_report as r , fuel_price as f"
+					 ps = con.prepareStatement("select r.qid,s.sid,s.name,c.uid,p.fuelid,p.bill,p.qty,f.fname"
+					 		+ "					 from customer_purchase as c, purchase as p ,station_in_network as s,  network_report as r , fuel_price as f"
 						 		+ "					where p.sid = r.sid  and datediff(p.pdate,?) >=0 and datediff(p.pdate,?) <= 0 "
 						 		+ "							and p.pid = c.pid and r.rid = 1"
 						 		+ "							and s.sid = r.sid"
 						 		+ "							and f.fuelid = p.fuelid"
 						 		+ "							and r.qid = ?"
-						 		+ "							and r.Year = ?");
+						 		+ "							and r.Year = ?"
+						 		+ "							and r.nid = ?");
 					 
 						 
 						 ps.setTimestamp(1, sdate);
 						 ps.setTimestamp(2, fdate);
 						 ps.setInt(3, q);
 						 ps.setInt(4,Year);
-						 
+						 ps.setInt(5, nid);
 						 rs = ps.executeQuery();
 						
 						 while(rs.next())
@@ -241,7 +249,7 @@ public class CompanyReportsDBHandler extends DBHandler {
  * Get all the Details for the Incomes Report from the DB
  * @param year - requested year
  */
-	private void getCompanyIncomesReport(int year) 
+	private void getCompanyIncomesReport(int year , int nid) 
 	{
 		 ResultSet rs = null ;
 		 PreparedStatement ps = null;
@@ -249,30 +257,36 @@ public class CompanyReportsDBHandler extends DBHandler {
 		 qStationIncome = new  ArrayList<QuarterStationIncome>();
 		 ArrayList<Integer> quarters = new ArrayList<Integer> ();
 		 try{
-			 
-			 ps = con.prepareStatement("select qid from company_report where rid = 2 and year = ?");   // checking what quarters exist for this report
+			 int qid;
+			 ps = con.prepareStatement("select qid from network_report where rid = 2 and year = ? and nid = ?");   // checking what quarters exist for this report
 			 ps.setInt(1, year);
-			 
+			 ps.setInt(2,nid);
 			 rs=ps.executeQuery();
 			 while(rs.next())
-				 quarters.add(rs.getInt(1));
+			 { 
+				 qid = rs.getInt(1);
+				if( !quarters.contains(qid))
+					quarters.add(qid);
+			 }
 			
 			 for(Integer q : quarters)  // will get the data for each quarter
 			 {
 				 		check_dates(q,year); // will set the beginning and ending of each quarters into class attributes
 				 		
-					 ps = con.prepareStatement("select r.qid,s.sid,s.sname,c.uid,p.fuelid,p.bill,p.qty"
-					 		+ "					 from customer_purchase as c, purchase as p ,station as s,  company_report as r "
+					 ps = con.prepareStatement("select r.qid,s.sid,s.name,c.uid,p.fuelid,p.bill,p.qty"
+					 		+ "					 from customer_purchase as c, purchase as p ,station_in_network as s,  network_report as r "
 						 		+ "					where p.sid = r.sid  and datediff(p.pdate,?) >=0 and datediff(p.pdate,?) <= 0 "
 						 		+ "							and p.pid = c.pid and r.rid = 2"
 						 		+ "							and s.sid = r.sid and r.qid = ?"
-						 		+ "							and r.year = ?");
+						 		+ "							and r.year = ?"
+						 		+ "							and r.nid = ?");
 					 
 						 
 						 ps.setTimestamp(1, sdate);
 						 ps.setTimestamp(2, fdate);
 						 ps.setInt(3, q);
 						 ps.setInt(4, year);
+						 ps.setInt(5, nid);
 						 rs = ps.executeQuery();
 						 
 						 while(rs.next())

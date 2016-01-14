@@ -50,12 +50,14 @@ public class CMActions extends GUIActions {
 	 */
 	public void ConfirmNewRatesWindow() 
 	{
-		changeFrame(gui,new ConfirmNewRatesActions(client,msg,nid),this);	
+		changeFrame(gui,this);	
+		new ConfirmNewRatesActions(client,msg,nid);
 	}
 
 	@Override
 	public void backToMenu() {
-		
+		changeFrame(gui,this);	
+		new LoginActions(client);
 		
 	}
 
@@ -66,8 +68,8 @@ public class CMActions extends GUIActions {
 	 */
 	public void showReportsWindows() 
 	{
-		changeFrame(gui,new showReportsActions(client,msg),this);	
-		
+		changeFrame(gui,this);	
+		new showReportsActions(client,msg,nid);
 	}
 
 }

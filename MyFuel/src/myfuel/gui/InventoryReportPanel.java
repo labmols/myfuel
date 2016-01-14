@@ -11,13 +11,30 @@ import javax.swing.table.DefaultTableModel;
 
 import myfuel.client.FuelQty;
 
+/***
+ * Inventory Report User Interface
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class InventoryReportPanel extends JPanel 
 {
+	/***
+	 * Table for showing the details
+	 */
 	private JTable table;
+	/***
+	 * Table Model
+	 */
 	private DefaultTableModel model;
+	/***
+	 * Report Details
+	 */
 	private ArrayList<FuelQty> inventory;
 	
+	/***
+	 * InventoryReportPanel Constructor
+	 */
 	public InventoryReportPanel() 
 	{
 		setBounds(new Rectangle(42, 110, 517, 310));
@@ -41,6 +58,10 @@ public class InventoryReportPanel extends JPanel
 		scrollPane.setViewportView(table);
 	}
 	
+	/***
+	 * Sets the table with details
+	 * @param inventory - inventory report details
+	 */
 	public void setTable(ArrayList<FuelQty> inventory)
 	{
 		this.inventory = inventory;

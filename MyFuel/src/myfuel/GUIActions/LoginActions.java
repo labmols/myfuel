@@ -97,7 +97,8 @@ public class LoginActions extends GUIActions {
 		 //NotificationManager.showNotification ( gui,"Connected" );
 		 
 			gui.showOKMessage("Welcome to MyFuel!");
-			changeFrame(gui,new CustomerOptionsActions (client,res),this);
+			changeFrame(gui,this);
+			new CustomerOptionsActions (client,res);
 			
 		}
 		else
@@ -124,22 +125,29 @@ public class LoginActions extends GUIActions {
 			 gui.showOKMessage("Welcome to MyFuel!"); 
 			 switch(res.getRole()){
 			 case MarketingManager: 
-				 			changeFrame(gui,new MMActions(client),this);
+				 			changeFrame(gui,this);
+				 			new MMActions(client);
 				 			break;
 			 case MarketingDelegate: 
-							 changeFrame(gui, new MDActions(client),this); 
+							 changeFrame(gui, this); 
+							 new MDActions(client);
 							 break;
 			case CompanyManager:
-				changeFrame(gui,new CMActions(client,res.getMsg(),res.getNid()),this);
+				changeFrame(gui,this);
+				new CMActions(client,res.getMsg(),res.getNid());
 				break;
 			case StationManager:
-				changeFrame(gui,new SMActions(client,((WorkerLoginResponse) response).getSid(),res.getMsg(),res.getNid()),this);
+				changeFrame(gui,this);
+				new SMActions(client,((WorkerLoginResponse) response).getSid(),res.getMsg(),res.getNid());
 				break;
 			case StationWorker:
-				changeFrame(gui,new SWActions(client,((WorkerLoginResponse) response).getSid()),this);
+				changeFrame(gui,this);
+				new SWActions(client,((WorkerLoginResponse) response).getSid());
 				break;
 			case HomeManager:
-				changeFrame(gui,new homeQtyOrderActions(client),this);	
+				changeFrame(gui,this);	
+				new homeQtyOrderActions(client);
+				break;
 			 }
 			
 				 
@@ -158,7 +166,8 @@ public class LoginActions extends GUIActions {
 	 *  Open register option screen.
 	 */
 	public void RegisterScreen(){
-		changeFrame(gui,new RegisterActions(client),this);
+		changeFrame(gui,this);
+		new RegisterActions(client);
 	
 	
 	}
@@ -186,7 +195,8 @@ public class LoginActions extends GUIActions {
 
 	public void FastFuel() {
 		// TODO Auto-generated method stub
-		changeFrame(gui,new FastFuelActions(client),this);
+		changeFrame(gui,this);
+		new FastFuelActions(client);
 	}
 	
 }

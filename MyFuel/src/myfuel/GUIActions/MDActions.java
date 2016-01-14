@@ -22,7 +22,8 @@ public class MDActions extends GUIActions{
 	 */
 	public void createPromotionTemplate()
 	{
-		changeFrame(gui,new CPromotionTemplateActions(client),this);
+		changeFrame(gui,this);
+		new CPromotionTemplateActions(client);
 	}
 	@Override
 	public void update(Observable o, Object arg) {
@@ -34,7 +35,8 @@ public class MDActions extends GUIActions{
 
 	@Override
 	public void backToMenu() {
-		// TODO Auto-generated method stub
+		changeFrame(gui,this);
+		new LoginActions(client);
 		
 	}
 
@@ -44,14 +46,16 @@ public class MDActions extends GUIActions{
 
 	public void createConfirmationWindow() 
 	{
-		changeFrame(gui,new ConfirmationActions(client),this);
+		changeFrame(gui,this);
+		new ConfirmationActions(client);
 		
 	}
 
 
 	public void createAnalystic() 
 	{
-		changeFrame(gui,new AnalysticActions(client),this);
+		changeFrame(gui,this);
+		new AnalysticActions(client);
 		
 	}
 

@@ -117,7 +117,7 @@ private String str;
 		 
 		 try{
 			 
-			 ps = con.prepareStatement("select * from station ");
+			 ps = con.prepareStatement("select sid,name from station_in_network ");
 			 rs = ps.executeQuery();
 			 
 			 while(rs.next())

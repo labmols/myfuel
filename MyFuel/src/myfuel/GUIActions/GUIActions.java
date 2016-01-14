@@ -45,7 +45,7 @@ public abstract class GUIActions implements Observer {
 	 * @param actions - next JFrame Controller
 	 * @param currentActions - Current GUI Controller 
 	 */
-	public void changeFrame(SuperGUI g, GUIActions actions,GUIActions currentActions){
+	public void changeFrame(SuperGUI g,GUIActions currentActions){
 		g.setVisible(false);
 		g.dispose();
 		client.deleteObserver(currentActions);
