@@ -17,22 +17,67 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 
+/***
+ * Home Fuel Control User Interface
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class HomeQtyOrderGUI extends SuperGUI{
 
+	/***
+	 * Controller For this GUI
+	 */
 	private homeQtyOrderActions actions;
+	/***
+	 * Table for showing the Home Fuel inventory Order
+	 */
 	private JTable table;
+	/***
+	 * Setting Low inventory Level
+	 */
 	private JButton setLowLvl;
+	/***
+	 * New low lvl from the user
+	 */
 	private final JTextField lowLvl;
+	/***
+	 * Showing info to the user
+	 */
 	private JLabel lblLowLevel;
+	/***
+	 * Order Confirmation
+	 */
 	private JButton confirmOrder;
+	/***
+	 * Table model
+	 */
 	private DefaultTableModel model;
+	/***
+	 * Scroll pane for the table
+	 */
 	private JScrollPane scrollPane;
+	/***
+	 * Showing current Minimal Quantity
+	 */
 	private JTextField currMinQty;
+	/***
+	 * Showing current inventory Quantity
+	 */
 	private JTextField currQty;
+	/***
+	 * Indicating if there is a order or not
+	 */
 	private boolean order;
+	/***
+	 * Home Fuel Inventory Order details
+	 */
 	private FuelQty oDetails; // order details
 	
+	/***
+	 * HomeQtyOrderGUI Constructor
+	 * @param actions - COntroller for this gui
+	 */
 	public HomeQtyOrderGUI(homeQtyOrderActions actions)
 	{
 		lblTitle.setBounds(200, 0, 232, 25);
