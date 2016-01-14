@@ -180,7 +180,7 @@ public abstract class SuperGUI extends JFrame {
 		waitD.setVisible(true);
 	}
 	
-	public void setWaitPorgress()
+	public void setWaitProgress()
 	{
 		waitD.setProgress(1);
 	}

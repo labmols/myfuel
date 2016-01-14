@@ -113,6 +113,7 @@ public class LogInGUI extends SuperGUI {
 		panel.add(loginButton);
 		
 		fastButton = new JButton("Fast Fuel");
+		fastButton.addActionListener(new ButtonListener());
 		fastButton.setFont(new Font("Arial", Font.PLAIN, 13));
 		java.net.URL url = getClass().getResource("/fast.png");
 		fastButton.setIcon(new ImageIcon(url));
@@ -164,6 +165,11 @@ public class LogInGUI extends SuperGUI {
 	}
 	if(e.getSource()==registerButton){
 		actions.RegisterScreen();
+	}
+	
+	if(e.getSource() == fastButton)
+	{
+		actions.FastFuel();
 	}
 	}
 }

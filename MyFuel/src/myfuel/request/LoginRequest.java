@@ -4,8 +4,12 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class LoginRequest implements Serializable{
+	
+	public static final int CustomerLogin = 0;
+	public static final int WorkerLogin = 1;
+	public static final int FastFuel = 2;
 	/**
-	 * Type of User (0 - Customer, 1- Worker)
+	 * Type of User (0 - Customer, 1- Worker,2- FastFuel)
 	 */
 	private int type; 
 	
@@ -36,6 +40,12 @@ public class LoginRequest implements Serializable{
     	this.setPassword(password);
     	setChangeStatus(0);
     }
+
+
+	public LoginRequest(int type) {
+		// TODO Auto-generated constructor stub
+		this.type = type;
+	}
 
 
 	public int getType() {
