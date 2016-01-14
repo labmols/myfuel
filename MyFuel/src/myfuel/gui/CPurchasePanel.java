@@ -38,6 +38,9 @@ public class CPurchasePanel extends PurchaseReportPanel
 	 */
 	private DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
 	
+	/***
+	 * CPurchasePanel Constructor
+	 */
 	public CPurchasePanel() {
 		fuelType.setLocation(227, 29);
 		lblChooseFuelType.setLocation(66, 27);
