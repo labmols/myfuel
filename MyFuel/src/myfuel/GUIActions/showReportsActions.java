@@ -99,7 +99,8 @@ public class showReportsActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		changeFrame(gui,new CMActions(client,msg,nid),this);
+		changeFrame(gui,this);
+		new CMActions(client,msg,nid);
 
 	}
 

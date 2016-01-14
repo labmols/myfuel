@@ -22,28 +22,33 @@ public class MMActions extends GUIActions{
 	
 	public void createSetNewRatesWindow()
 	{
-		this.changeFrame(gui, new SetNewRatesActions(client),this);
+		this.changeFrame(gui, this);
+		new SetNewRatesActions(client);
 	}
 	
 	public void createMakeaPromotionWindow()
 	{
-		this.changeFrame(gui, new MakeAPromotionActions(client),this);
+		this.changeFrame(gui, this);
+		new MakeAPromotionActions(client);
 	}
 	
 	public void createShowReportsWindow()
 	{
-		this.changeFrame(gui, new MMReportsActions(client),this);
+		this.changeFrame(gui,this);
+		 new MMReportsActions(client);
 	}
 
 	@Override
 	public void backToMenu() {
-		
+		this.changeFrame(gui,this);
+		new LoginActions(client);
 		
 	}
 
 	public void createaDetailsWindow() 
 	{
-		changeFrame(gui,new MMAnalyzedActions(client) , this);
+		changeFrame(gui, this);
+		new MMAnalyzedActions(client) ;
 		
 	}
 

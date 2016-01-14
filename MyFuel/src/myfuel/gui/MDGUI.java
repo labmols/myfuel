@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.CPromotionTemplateActions;
 import myfuel.GUIActions.MDActions;
+import myfuel.client.BackMainMenu;
 
 import javax.swing.JButton;
 
@@ -18,7 +19,7 @@ public class MDGUI extends SuperGUI {
 		setContentPane(contentPane);
 		lblTitle.setBounds(194, 6, 250, 22);
 		lblTitle.setText("Marketing Delegate Menu");
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		 analystic = new JButton("Analystic System");
 		 analystic.addActionListener(new btnHandler());
 		analystic.setBounds(182, 88, 199, 61);

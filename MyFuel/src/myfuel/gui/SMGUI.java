@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.SMActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.MessageForManager;
 
 import javax.swing.JButton;
@@ -51,7 +52,7 @@ public class SMGUI extends SuperGUI{
 	public SMGUI(SMActions actions, ArrayList<MessageForManager> msg) {
 		
 		this.msg = msg;
-		
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setBounds(179, 6, 231, 25);
 		lblTitle.setText("Station Manager Menu");
 		
