@@ -182,7 +182,7 @@ public class CarFuelActions extends GUIActions {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		gui.setWaitPorgress();
+		gui.setWaitProgress();
 		if(arg instanceof FuelOrderResponse)
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
@@ -191,7 +191,7 @@ public class CarFuelActions extends GUIActions {
 			insertInfo();
 			gui.setInfo(modelid,infoRes.getRates(), infoRes.getFuels());
 			
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 		}
 		else if(arg instanceof booleanResponse)
 		{

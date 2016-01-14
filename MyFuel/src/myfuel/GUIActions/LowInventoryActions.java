@@ -85,7 +85,7 @@ public class LowInventoryActions extends GUIActions {
 		
 		if(arg1 instanceof booleanResponse)
 		{
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 			booleanResponse resp = (booleanResponse)arg1;	
 			if(!resp.getSuccess())
 				gui.showErrorMessage(resp.getMsg());
@@ -98,7 +98,7 @@ public class LowInventoryActions extends GUIActions {
 		
 		else if(arg1 instanceof LowInventoryResponse)
 		{
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 			LowInventoryResponse r = (LowInventoryResponse)arg1;
 			gui.setText(r.getQty());
 			

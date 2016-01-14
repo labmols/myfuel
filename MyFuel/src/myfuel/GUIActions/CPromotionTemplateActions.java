@@ -54,7 +54,7 @@ public class CPromotionTemplateActions extends GUIActions{
 		if( arg1 instanceof booleanResponse)
 		{
 			booleanResponse response = (booleanResponse)arg1;
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 			if(response.getSuccess() == true)
 				gui.showOKMessage("Promotion Template " +"\""+rq.getP().getName()+"\""+" Created!");
 			else

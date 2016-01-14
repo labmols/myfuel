@@ -19,6 +19,8 @@ public class CustomerLoginResponse extends Response {
 	
 	private ArrayList<Network> networks;
 	
+	private Car FastFuelCar;
+	
 	/**
 	 * create new Customer Login Response .
 	 * @param userid - customer id.
@@ -35,12 +37,19 @@ public class CustomerLoginResponse extends Response {
 	 * @param stations - List of customer stations.
 	 * @param Allstations - List of all Stations in the company.
 	 */
-	public CustomerLoginResponse(int userid, String fname, String lname, String pass, String email, String address,String cnumber, int toc, int 
-			atype, int smodel,ArrayList<Car> cars,ArrayList<Integer> stations,ArrayList<Network> networks){
-			setUser(new Customer(userid,fname,lname,pass,email,address,cnumber,toc,atype,smodel,cars,stations));
+	public CustomerLoginResponse(Customer customer ,ArrayList<Network> networks){
+			//setUser();
+			setUser(customer);
 			this.setNetworks(networks);
+			
 	}
-
+	
+	public CustomerLoginResponse(Customer customer ,ArrayList<Network> networks,Car fastFuelCar)
+	{
+		this.setUser(customer);
+		this.setNetworks(networks);
+		this.setFastFuelCar(fastFuelCar);
+	}
 
 	public Customer getUser() {
 		return user;
@@ -58,6 +67,20 @@ public class CustomerLoginResponse extends Response {
 
 	public void setNetworks(ArrayList<Network> networks) {
 		this.networks = networks;
+	}
+
+
+
+
+	public Car getFastFuelCar() {
+		return FastFuelCar;
+	}
+
+
+
+
+	public void setFastFuelCar(Car fastFuelCar) {
+		FastFuelCar = fastFuelCar;
 	}
 
 

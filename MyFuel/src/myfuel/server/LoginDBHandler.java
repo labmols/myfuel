@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import myfuel.client.Car;
+import myfuel.client.Customer;
 import myfuel.client.Fuel;
 import myfuel.client.MessageForManager;
 import myfuel.client.Network;
@@ -91,6 +92,38 @@ public class LoginDBHandler extends DBHandler {
 			}
 		
 	}
+	
+	private booleanResponse checkCustomer(LoginRequest request)
+	{
+		int approved, status;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		
+		try {
+			ps = con.prepareStatement("select * from customer where uid=? and pass =?");
+			ps.setInt(1, request.getUserid());
+			ps.setString(2, request.getPassword());
+			rs = ps.executeQuery();
+			
+			if(rs.next()){
+				status = rs.getInt(11);
+				approved = rs.getInt(12);
+				if(status == 1) return new booleanResponse(false, "This Customer is already logged in!");
+				else if(approved == 0) return new booleanResponse(false, "You are not approved yet!");
+			}
+			else
+			{
+				return new booleanResponse(false, "UserID or password incorrect!");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return  new booleanResponse(true, "");
+		
+		
+	}
 
 	/**
 	 * Verify Customer login details, including UserID and Password, and his status.
@@ -98,7 +131,7 @@ public class LoginDBHandler extends DBHandler {
 	 * @return - CustomerLoginResponse if current customer exist in DB and he not already connected,
 	 * otherwise return booleanResponse(false).
 	 */
-	private Response customerLogin(LoginRequest request){
+	private Customer getCustomer(int customerID){
 		
 		String fname,lname,pass,email,cnumber,address;
 		int userid,status,atype,smodel,toc,approved;
@@ -108,9 +141,8 @@ public class LoginDBHandler extends DBHandler {
 		PreparedStatement ps = null;
 		try {
 		
-			ps = con.prepareStatement("select * from customer where uid=? and pass =?");
-			ps.setInt(1, request.getUserid());
-			ps.setString(2, request.getPassword());
+			ps = con.prepareStatement("select * from customer where uid=?");
+			ps.setInt(1, customerID);
 			rs = ps.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -118,10 +150,6 @@ public class LoginDBHandler extends DBHandler {
 		}
 		try {
 			if(rs.next()){
-				status = rs.getInt(11);
-				approved = rs.getInt(12);
-				if(status == 1) return new booleanResponse(false, "This Customer is already logged in!");
-				else if(approved == 0) return new booleanResponse(false, "You are not approved yet!");
 				userid = rs.getInt(1);
 				fname = rs.getString(2);
 				lname = rs.getString(3);
@@ -152,17 +180,17 @@ public class LoginDBHandler extends DBHandler {
 					cars.add(new Car(rs.getInt(1), rs.getInt(2)));
 				}
 				
-				ArrayList<Network> networks = this.getNetworks();
-				return new CustomerLoginResponse(userid,fname,lname,pass,email,address
-						,cnumber,toc,atype,smodel,cars,stations,networks);
+				Customer customer = new Customer(userid,fname,lname,pass,email,address,cnumber,toc,atype,smodel,cars,stations);
+				return customer;
 			}
 			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return new booleanResponse(false, "UserID or password not correct!"); // User not Found
+		return null;
 	}
 	
 	
@@ -248,8 +276,22 @@ public class LoginDBHandler extends DBHandler {
 		if(arg instanceof LoginRequest){
 			LoginRequest request =(LoginRequest)arg;
 			if(request.getChangeStatus()==1) changeStatus(request);
-			else if(request.getType()==0) server.setResponse(customerLogin(request));
-			else if(request.getType()==1) server.setResponse(workerLogin(request));	 
+			else if(request.getType()==LoginRequest.CustomerLogin)
+			{
+				booleanResponse res = this.checkCustomer(request);
+				if(res.getSuccess())
+				{
+					Customer customer = this.getCustomer(request.getUserid());
+					ArrayList<Network> networks= this.getNetworks();
+					server.setResponse(new CustomerLoginResponse(customer,networks));
+				}
+				else server.setResponse(res);
+			}
+			else if(request.getType()==LoginRequest.WorkerLogin) server.setResponse(workerLogin(request));	
+			else if(request.getType() == LoginRequest.FastFuel)
+			{
+				
+			}
 		}
 		
 	

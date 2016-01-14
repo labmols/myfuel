@@ -49,7 +49,7 @@ public class showReportsActions extends GUIActions {
 		{
 			
 			ComapnyReportsResponse r = (ComapnyReportsResponse)arg1;
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 			if(r.getType() == 0)
 				gui.setYears(r.getYears());
 			

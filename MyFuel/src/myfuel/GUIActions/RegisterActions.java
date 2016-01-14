@@ -106,7 +106,7 @@ public class RegisterActions extends GUIActions {
 		if(arg instanceof RegisterResponse){
 		RegisterResponse res = (RegisterResponse)arg;
 		addNetworks(res);
-		gui.setWaitPorgress();
+		gui.setWaitProgress();
 		
 		}
 		else {
@@ -138,14 +138,14 @@ public class RegisterActions extends GUIActions {
 	 */
 	public void checkRegister(booleanResponse res){
 		if(res.getSuccess()) {
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 			gui.showOKMessage(res.getMsg());
 			changeFrame(gui,new LoginActions(client),this);
 
 		}
 		else 
 		{
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 			gui.showErrorMessage(res.getMsg());
 			this.resetCars();
 		}
