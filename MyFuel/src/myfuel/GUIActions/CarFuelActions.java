@@ -10,8 +10,10 @@ import myfuel.client.Customer;
 import myfuel.client.Fuel;
 import myfuel.client.FuelQty;
 import myfuel.client.MyFuelClient;
+import myfuel.client.NetworkRates;
 import myfuel.client.Promotion;
 import myfuel.client.Purchase;
+import myfuel.client.Rate;
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
 import myfuel.gui.CarFuelGUI;
@@ -189,7 +191,7 @@ public class CarFuelActions extends GUIActions {
 			this.infoRes = res;
 			int modelid = customerRes.getUser().getSmodel();
 			insertInfo();
-			gui.setInfo(modelid,infoRes.getRates(), infoRes.getFuels());
+			gui.Initialize(modelid,infoRes);
 			
 			gui.setWaitProgress();
 		}
@@ -225,7 +227,9 @@ public class CarFuelActions extends GUIActions {
 
 	public float getPrice(int fuelID, int nid) {
 		Customer c = customerRes.getUser();
-		return CalcPrice.calcCarFuelOrder(c.getSmodel(),infoRes.getNRates(nid), 1, infoRes.getFuels().get(fuelID-1).getMaxPrice(), infoRes.getPromotion(fuelID));
+		NetworkRates rates = infoRes.getNRates(nid);
+		float disc = rates.getModelDiscount(Rate.MonthlyOne);
+		return infoRes.getFuels().get(fuelID-1).getMaxPrice()*(1-(disc/100));
 		// TODO Auto-generated method stub
 		
 	}

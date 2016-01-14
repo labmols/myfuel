@@ -3,6 +3,7 @@ package myfuel.gui;
 import myfuel.GUIActions.CarFuelActions;
 import myfuel.GUIActions.FastFuelActions;
 import myfuel.client.Promotion;
+import myfuel.client.Station;
 
 import javax.swing.JLabel;
 
@@ -16,6 +17,7 @@ public class FastFuelGUI extends CarFuelGUI {
 	private JLabel lblCar;
 	private JLabel lblS;
 	private JLabel lblNfcDetails;
+	private int sid;
 
 	public FastFuelGUI(FastFuelActions actions) {
 		super(actions);
@@ -63,15 +65,17 @@ public class FastFuelGUI extends CarFuelGUI {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setCar(int cid) {
+	public void setNFC(int cid, Station s) {
 		// TODO Auto-generated method stub
 		lblCar.setText(""+cid);
+		lblS.setText(s.getName());
+		this.sid = s.getsid();
 	}
 	
 	@Override
-	protected void setDetails(int fuelSelected) {
+	protected void setDetails(int fuelSelected,int nid) {
 		// TODO Auto-generated method stub
-	currentPrice = actions.getPrice(fuelSelected, 1);
+	currentPrice = actions.getPrice(fuelSelected, sid);
 	totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
 	Promotion p = actions.getPromotion(fuelSelected);
 	if(p!=null)

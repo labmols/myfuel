@@ -72,8 +72,10 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	public void carFuelScreen() {
 		// TODO Auto-generated method stub
-		changeFrame(gui, this);
 		new CarFuelActions(client,res);
+		changeFrame(gui, this);
+	
+		
 	}
 
 

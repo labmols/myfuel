@@ -3,7 +3,6 @@ package myfuel.GUIActions;
 import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
-
 import myfuel.gui.FastFuelGUI;
 import myfuel.request.LoginRequest;
 import myfuel.response.CustomerLoginResponse;
@@ -13,6 +12,7 @@ import myfuel.response.booleanResponse;
 public class FastFuelActions extends CarFuelActions {
 	
 	private FastFuelGUI guiF;
+	int modelid;
 	public FastFuelActions(MyFuelClient client) {
 		super(client);
 		infoRes = null;
@@ -48,19 +48,29 @@ public class FastFuelActions extends CarFuelActions {
 		{
 			CustomerLoginResponse res= (CustomerLoginResponse) arg;
 			this.customerRes = res;
-			
 		}
 		
 		if(arg instanceof FuelOrderResponse)
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.infoRes = res;
-			int modelid = customerRes.getUser().getSmodel();
 			insertInfo();
-			gui.setInfo(modelid,infoRes.getRates(), infoRes.getFuels());
-			guiF.setCar(customerRes.getFastFuelCar().getcid());
 			
-			gui.setWaitProgress();
+			Thread t = new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					while(customerRes == null){};
+					modelid = customerRes.getUser().getSmodel();
+					guiF.setNFC(customerRes.getFastFuelCar().getcid(), customerRes.getFastStation());
+					gui.Initialize(modelid,infoRes);
+					gui.setWaitProgress();
+					
+				}
+			});
+			t.start();
+				
 		}
 		else if(arg instanceof booleanResponse)
 		{
@@ -73,7 +83,7 @@ public class FastFuelActions extends CarFuelActions {
 			 }
 			 else
 			 {
-				 gui.showErrorMessage("Error!");
+				 gui.showErrorMessage(res.getMsg());
 			 }
 		}
 	}
