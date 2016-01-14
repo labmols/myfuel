@@ -262,6 +262,44 @@ public class LoginDBHandler extends DBHandler {
 			return networks;
 		}
 	
+	private Response FastFuel()
+	{
+		ResultSet rs = null;
+		Statement st = null;
+		
+	
+			try {
+				st = con.createStatement();
+				String query = "select * from customer_car order by rand() limit 1";
+				rs = st.executeQuery(query);
+				if(rs.next())
+				{
+					Customer customer = this.getCustomer(rs.getInt(1));
+					Car FastFuelCar = new Car(rs.getInt(2), rs.getInt(3));
+					ArrayList<Network> networks = this.getNetworks();
+					rs.close();
+					st.close();
+					return new CustomerLoginResponse(customer, networks, FastFuelCar);
+				}
+				else 
+				{
+					rs.close();
+					st.close();
+					return new booleanResponse(false, "SQL Error");
+				}
+				
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+
+			
+		
+	}
+	
 	
 
 	/**
@@ -288,10 +326,7 @@ public class LoginDBHandler extends DBHandler {
 				else server.setResponse(res);
 			}
 			else if(request.getType()==LoginRequest.WorkerLogin) server.setResponse(workerLogin(request));	
-			else if(request.getType() == LoginRequest.FastFuel)
-			{
-				
-			}
+			else if(request.getType() == LoginRequest.FastFuel) server.setResponse(FastFuel());	
 		}
 		
 	
