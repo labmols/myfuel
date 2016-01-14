@@ -27,9 +27,9 @@ public class MMAnalyzedActions extends GUIActions {
 	public MMAnalyzedActions(MyFuelClient client) {
 		super(client);
 		AnalysticRequest request = new AnalysticRequest(RequestEnum.Select,null);
-		client.handleMessageFromGUI(request);
 		gui = new MMAnalyzedGUI(this);
 		gui.createWaitDialog("Getting Analysis Dates...");
+		client.handleMessageFromGUI(request);
 		gui.setVisible(true);
 		
 	}
