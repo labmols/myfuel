@@ -16,12 +16,18 @@ public class CompanyReportRequest implements Serializable
 	private int year;
 	
 	/***
+	 * Network ID
+	 */
+	private int nid;
+	
+	/***
 	 * CompanyReportRequest Constructor
 	 * @param year - The requested year to be presented
 	 */
-	public CompanyReportRequest(int year)
+	public CompanyReportRequest(int year,int nid)
 	{
 		this.setYear(year);
+		this.setNid(nid);
 	}
 
 	public int getYear() {
@@ -30,6 +36,14 @@ public class CompanyReportRequest implements Serializable
 
 	public void setYear(int year) {
 		this.year = year;
+	}
+
+	public int getNid() {
+		return nid;
+	}
+
+	public void setNid(int nid) {
+		this.nid = nid;
 	}
 	
 	
