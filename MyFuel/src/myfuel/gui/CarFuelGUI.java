@@ -45,69 +45,71 @@ public class CarFuelGUI extends SuperGUI {
 	/**
 	 * Quantity Text Field.
 	 */
-	private JTextField LimitText;
+	protected JTextField LimitText;
 	/**
 	 * GUI Controller object.
 	 */
-	private CarFuelActions actions;
+	protected CarFuelActions actions;
 	/**
 	 * Stations ComboBox model(used for handle elements functions).
 	 */
-	private DefaultComboBoxModel<String> stationModel;
+	protected  DefaultComboBoxModel<String> stationModel;
 	/**
 	 * Cars ComboBox model(used for handle elements functions).
 	 */
-	private DefaultComboBoxModel<Integer> carModel;
+	protected  DefaultComboBoxModel<Integer> carModel;
 	/**
 	 * 95 Fuel type pump Radio Button.
 	 */
-	private XRadioButton rb95;
+	protected  XRadioButton rb95;
 	/**
 	 *  Scooter Fuel type pump Radio Button.
 	 */
-	private XRadioButton rbscooter;
+	protected XRadioButton rbscooter;
 	/**
 	 *  Diesel Fuel type pump Radio Button.
 	 */
-	private XRadioButton rbdiesel;
+	protected  XRadioButton rbdiesel;
 	/**
 	 * Current fuel selected value (1-95/2-Diesel/3-Scooter).
 	 */
-	private int fuelSelected=-1;
+	protected  int fuelSelected=-1;
 	/**
 	 * 95 Fuel type price Label
 	 */
-	private JLabel lblp95;
+	protected  JLabel lblp95;
 	/**
 	 * Diesel Fuel type price Label
 	 */
-	private JLabel lblpdiesel;
+	protected  JLabel lblpdiesel;
 	/**
 	 * Scooter Fuel type price Label
 	 */
-	private JLabel lblpscooter;
+	protected  JLabel lblpscooter;
 	/**
 	 * Cars ComboBox , contain all the customer cars.
 	 */
-	private JComboBox<Integer> carCB;
+	protected  JComboBox<Integer> carCB;
 	/**
 	 * Stations ComboBox, contain all the available Stations.
 	 */
-	private JComboBox <String> stationCombo;
+	protected  JComboBox <String> stationCombo;
 	
-	ArrayList<NetworkRates> rates;
+	protected  ArrayList<NetworkRates> rates;
 	
-	int customerModel;
+	protected int customerModel;
 	
-	private HashMap<Integer, Integer> IDHolder;
+	protected  HashMap<Integer, Integer> IDHolder;
 	
-	private JTextField dName;
-	private JLabel totalPrice;
-	private JLabel promDisc;
-	private float currentPrice;
-	private JButton btnStartFuel;
-	private JLabel lblDriverName;
-	private JComboBox <String> limitBox;
+	protected  JTextField dName;
+	protected  JLabel totalPrice;
+	protected  JLabel promDisc;
+	protected  float currentPrice;
+	protected  JButton btnStartFuel;
+	protected  JLabel lblDriverName;
+	protected  JComboBox <String> limitBox;
+	protected JLabel lblChooseStation;
+	protected JLabel lblChooseCar;
 	/**
 	 * Create new Car Fuel user interface.
 	 * @param actions - Car Fuel GUI Controller.
@@ -137,7 +139,7 @@ public class CarFuelGUI extends SuperGUI {
 		panel2.setLayout(null);
 		
 		
-		JLabel lblChooseStation = new JLabel("Choose Station:");
+		lblChooseStation = new JLabel("Choose Station:");
 		lblChooseStation.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblChooseStation.setBounds(35, 10, 99, 16);
 		panel2.add(lblChooseStation);
@@ -251,7 +253,7 @@ public class CarFuelGUI extends SuperGUI {
 		lblpdiesel.setBounds(308, 173, 61, 16);
 		panel2.add(lblpdiesel);
 		
-		JLabel lblChooseCar = new JLabel("Choose Car:");
+		lblChooseCar = new JLabel("Choose Car:");
 		lblChooseCar.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblChooseCar.setBackground(Color.RED);
 		lblChooseCar.setBounds(276, 10, 99, 16);
@@ -375,7 +377,7 @@ public class CarFuelGUI extends SuperGUI {
 		
 	}
 	
-	private void setDetails(int fuelSelected) {
+	protected void setDetails(int fuelSelected) {
 		// TODO Auto-generated method stub
 	currentPrice = actions.getPrice(fuelSelected, IDHolder.get(stationCombo.getSelectedIndex()));
 	totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
