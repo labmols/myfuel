@@ -166,7 +166,4 @@ public class LogInGUI extends SuperGUI {
 		actions.RegisterScreen();
 	}
 	}
-
-	
-
 }

@@ -150,7 +150,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			rs.close();
 			
 			//Insert into purchase table
-			ps = con.prepareStatement("insert into home_order values(?,?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into home_order values(?,?,?,?,?,?)");
 			ps.setInt(1, nextid);
 			ps.setInt(2, CustomerP);
 			ps.setString(3, order.getAddress());
@@ -204,7 +204,9 @@ public class FuelOrderDBHandler extends DBHandler{
 			//Insert into purchase table
 			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?)");
 			ps.setInt(1, nextid);
-			ps.setInt(2, p.getSid());
+			if(p.getSid() == -1)
+	        ps.setNull(2,java.sql.Types.INTEGER);
+			else ps.setInt(2, p.getSid());
 			ps.setInt(3, p.getFuelid());
 			if(p.getPromid() != -1)
 			ps.setInt(4, p.getPromid());
@@ -229,8 +231,9 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps.executeUpdate();
 			ps.close();
 			
+			if(p.getSid() != -1)
 			updateInventory(p.getSid(), p.getFuelid(), p.getQty());
-			
+			else updateHomeInventory(p.getQty());
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -290,6 +293,46 @@ public class FuelOrderDBHandler extends DBHandler{
 	}
 	
 	/**
+	 * Update specific station inventory after fuel purchase.
+	 * @param si
+	 */
+	private void updateHomeInventory(float qty)
+	{
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		float mqty,fqty;
+		
+		try {
+			ps= con.prepareStatement("update home_inventory SET fqty=fqty-?");
+			ps.setFloat(1,qty);
+			ps.executeUpdate();
+			
+			ps= con.prepareStatement("select fqty,mqty from home_inventory");
+			rs = ps.executeQuery();
+			rs.next();
+			fqty = rs.getFloat(1);
+			mqty = rs.getFloat(2);
+			//if the current qty < minimalQty and there is no order create new inventory order
+			insertInventoryOrder(-1,Fuel.HomeFuelID, fqty, mqty);
+			
+			ps.close();
+			rs.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+	}
+	
+	
+	/**
 	 * Insert new inventory order for the specific Station and Fuel type.
 	 * @param sid - Station id number.
 	 * @param FuelID - Fuel ID.
@@ -302,21 +345,32 @@ public class FuelOrderDBHandler extends DBHandler{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
+			if(sid != -1)
+			{
 			ps= con.prepareStatement("select * from inventory_order where sid=? and fuelid=?");
 			ps.setInt(1, sid);
 			ps.setInt(2, FuelID);
 			rs= ps.executeQuery();
+			}
+			else
+			{
+				ps= con.prepareStatement("select * from inventory_order where sid is null");
+				rs= ps.executeQuery();
+			}
 			
 			if(fqty < mqty && !rs.next())
 			{
 				ps= con.prepareStatement("insert into inventory_order values(?,?,?,?,?)");
 				ps.setInt(1, 0);
+				if(sid != -1)
 				ps.setInt(2, sid);
+				else ps.setNull(2, java.sql.Types.INTEGER);
 				ps.setInt(3, FuelID);
 				ps.setFloat(4, 5*mqty);
 				ps.setInt(5, 0);
 				ps.executeUpdate();
 				
+				/*
 				ps= con.prepareStatement("select fname,lname,email from worker where (role=2 or role=5) and sid=?");
 				ps.setInt(1, sid);
 				rs= ps.executeQuery();
@@ -350,6 +404,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				ps.setString(3, "New Inventory Order");
 				ps.setInt(4, 1);
 				ps.executeUpdate();
+				 */
 			}
 	
 			ps.close();
@@ -553,6 +608,37 @@ public class FuelOrderDBHandler extends DBHandler{
 		
 	}
 	
+	private FuelQty getHomeInventory() {
+		// TODO Auto-generated method stub
+		FuelQty homeInventory=null;
+		ResultSet rs = null;
+		Statement st = null;
+		String sql;
+		
+		try {
+			st= con.createStatement();
+			sql = "select fqty,mqty from home_inventory";
+			rs = st.executeQuery(sql);
+			
+			if(rs.next()) 
+				homeInventory = new FuelQty(Fuel.HomeFuelID, rs.getFloat(1), rs.getFloat(2));
+			rs.close();
+			st.close();
+			return homeInventory;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	
+	}
+
+	
 	/**
 	 * This method notified by the server when a new client request received, 
 	 * Sets the server response to booleanResponse or CarFuelResponse , according to the
@@ -572,15 +658,17 @@ public class FuelOrderDBHandler extends DBHandler{
 				ArrayList<Promotion> promList = getPromotions();
 				ArrayList <HomeOrder> horders = null;
 				ArrayList<Station> stations ;
+				FuelQty homeInventory=null ;
 				
 				if(req.getFuelID() == Fuel.HomeFuelID) 
 				{
 				 horders = getHomeOrders(req.getCustomerID());
 				 stations = null;
+				 homeInventory = getHomeInventory();
 				}
 				
 				else stations = getStations();
-				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,networkRates,stations);
+				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,networkRates,stations,homeInventory);
 				server.setResponse(res);
 			}
 			
@@ -603,6 +691,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			
 		}
 	}
+
 
 	
 

@@ -193,9 +193,9 @@ public class RegisterActions extends GUIActions {
 			if(n.getName().equals(netName)){
 				if(!cnetworks.contains(n.getNid())) {
 					cnetworks.add(n.getNid());
-					gui.showOKMessage("Station "+netName + " is added!");
+					gui.showOKMessage("Network "+netName + " is added!");
 				}
-				else gui.showErrorMessage("You already have this station!");
+				else gui.showErrorMessage("You already have this network!");
 				}
 			}
 		}

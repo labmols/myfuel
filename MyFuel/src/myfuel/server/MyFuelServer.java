@@ -26,8 +26,8 @@ public class MyFuelServer extends ObservableServer{
 	 * 
 	 */
 	private Connection con;
-	Response response;
-	ServerGUI gui;
+	private Response response;
+	private ServerGUI gui;
 	/**
 	 * 
 	 * @param port
@@ -41,10 +41,9 @@ public class MyFuelServer extends ObservableServer{
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		setChanged();
-		notifyObservers(msg);
-		
 		String className = msg.getClass().getSimpleName();
 		gui.printMsg("<Recieved>: "+className);
+		notifyObservers(msg);
 		try {
 			client.sendToClient(response);
 			className = response.getClass().getSimpleName();
@@ -62,7 +61,6 @@ public class MyFuelServer extends ObservableServer{
 	 protected synchronized void clientConnected(ConnectionToClient client) 
 	  {
 	    setChanged();
-	    notifyObservers(CLIENT_CONNECTED);
 	    gui.printMsg("<ClientConnected>:"+ client + " Connected!");
 	  }
 	

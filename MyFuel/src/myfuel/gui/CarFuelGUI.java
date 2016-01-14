@@ -103,7 +103,6 @@ public class CarFuelGUI extends SuperGUI {
 	
 	private JTextField dName;
 	private JLabel totalPrice;
-	private JLabel sModelDisc;
 	private JLabel promDisc;
 	private float currentPrice;
 	private JButton btnStartFuel;
@@ -284,32 +283,22 @@ public class CarFuelGUI extends SuperGUI {
 		
 		JLabel lblPromotion = new JLabel("Promotion : ");
 		lblPromotion.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblPromotion.setBounds(6, 30, 77, 16);
+		lblPromotion.setBounds(6, 16, 77, 16);
 		panel.add(lblPromotion);
-		
-		JLabel lblSaleModelDiscount = new JLabel("Sale Model Discount: ");
-		lblSaleModelDiscount.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblSaleModelDiscount.setBounds(6, 6, 142, 16);
-		panel.add(lblSaleModelDiscount);
 		
 		JLabel lblYourPricefor = new JLabel("Your Price (For Liter): ");
 		lblYourPricefor.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblYourPricefor.setBounds(6, 54, 142, 16);
+		lblYourPricefor.setBounds(6, 44, 142, 16);
 		panel.add(lblYourPricefor);
-		
-		sModelDisc = new JLabel("");
-		sModelDisc.setFont(new Font("Arial", Font.PLAIN, 13));
-		sModelDisc.setBounds(146, 6, 61, 16);
-		panel.add(sModelDisc);
 		
 		promDisc = new JLabel("");
 		promDisc.setFont(new Font("Arial", Font.PLAIN, 13));
-		promDisc.setBounds(87, 30, 120, 16);
+		promDisc.setBounds(87, 16, 120, 16);
 		panel.add(promDisc);
 		
 		totalPrice = new JLabel("");
 		totalPrice.setFont(new Font("Arial", Font.PLAIN, 13));
-		totalPrice.setBounds(146, 54, 61, 16);
+		totalPrice.setBounds(146, 44, 61, 16);
 		panel.add(totalPrice);
 		
 		lblDriverName = new JLabel("Driver Name: ");
@@ -455,23 +444,10 @@ public class CarFuelGUI extends SuperGUI {
 	
 	private void updateDiscount()
 	{
-		int nid = IDHolder.get(stationCombo.getSelectedIndex());
-		float disc = getDiscount(nid, customerModel);	
-		sModelDisc.setText(new DecimalFormat("##.##").format(disc) + "%");
 		if(fuelSelected!=-1) setDetails(fuelSelected);
 	}
 	
-	private float getDiscount(int nid, int modelID)
-	{
-		for(NetworkRates n: rates)
-		{
-			if(n.getNid() == nid)
-			{
-				return n.getModelDiscount(modelID);
-			}
-		}
-		return -1;
-	}
+	
 
 	
 }

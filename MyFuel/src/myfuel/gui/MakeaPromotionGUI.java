@@ -17,13 +17,12 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+import com.alee.extended.date.WebDateField;
 
 import javax.swing.JButton;
 
 import java.awt.Color;
+import java.awt.Font;
 
 
 public class MakeaPromotionGUI extends SuperGUI{
@@ -39,8 +38,9 @@ public class MakeaPromotionGUI extends SuperGUI{
 	private Date startDate;
 	private JLabel fuel;
 	private DefaultComboBoxModel model;
-	private JDatePickerImpl datePicker;
-	private JDatePickerImpl datePicker2;
+	private WebDateField datePicker;
+	private WebDateField datePicker2;
+	
 	public MakeaPromotionGUI(MakeAPromotionActions actions) 
 	{
 		model = new DefaultComboBoxModel(  );
@@ -51,77 +51,68 @@ public class MakeaPromotionGUI extends SuperGUI{
 		lblTitle.setText("Make a Promotion");
 		this.actions = actions;
 		this.setContentPane(contentPane);
-		Properties p = new Properties();
-		p.put("text.today", "Today");
-		p.put("text.month", "Month");
-		p.put("text.year", "Year");
-		
-		UtilDateModel model1 = new UtilDateModel();
-		UtilDateModel model2 = new UtilDateModel();
-	
-		JDatePanelImpl datePanel = new JDatePanelImpl(model1,p);
-		 datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());	 
-		datePicker.setSize(159, 29);
-		datePicker.setLocation(238, 239);
-		panel.add(datePicker);
-		
-		JDatePanelImpl datePanel2 = new JDatePanelImpl(model2,p);
-		 datePicker2 = new JDatePickerImpl(datePanel2, new DateLabelFormatter());	 
-		 datePicker2.setSize(159, 29);
-		 datePicker2.setLocation(238, 279);
-		panel.add(datePicker2);
 		
 		JLabel lblNewLabel = new JLabel("Select a Template:");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		lblNewLabel.setBounds(112, 71, 129, 14);
 		panel.add(lblNewLabel);
 		
 		templates = new JComboBox();
+		templates.setFont(new Font("Arial", Font.PLAIN, 13));
 		templates.addActionListener(new template_show());
 		templates.setModel(model);
-		templates.setBounds(248, 69, 137, 20);
+		templates.setBounds(241, 66, 137, 27);
 		panel.add(templates);
 		
 		JLabel lblDiscountPercentage = new JLabel("Discount Percentage:");
-		lblDiscountPercentage.setBounds(112, 127, 137, 14);
+		lblDiscountPercentage.setFont(new Font("Arial", Font.BOLD, 13));
+		lblDiscountPercentage.setBounds(102, 139, 137, 14);
 		panel.add(lblDiscountPercentage);
 		
 		
 		
 		JLabel sign = new JLabel("%");
+		sign.setFont(new Font("Arial", Font.PLAIN, 13));
 		sign.setForeground(Color.WHITE);
-		sign.setBounds(289, 127, 18, 14);
+		sign.setBounds(275, 139, 18, 14);
 		panel.add(sign);
 		
 		dis = new JLabel();
 		dis.setForeground(Color.WHITE);
-		dis.setBounds(252, 127, 37, 14);
+		dis.setBounds(242, 139, 37, 14);
 		panel.add(dis);
 		
 		JLabel lblTypeOfCustomer = new JLabel("Type of Customer:");
-		lblTypeOfCustomer.setBounds(112, 157, 117, 14);
+		lblTypeOfCustomer.setFont(new Font("Arial", Font.BOLD, 13));
+		lblTypeOfCustomer.setBounds(102, 169, 117, 14);
 		panel.add(lblTypeOfCustomer);
 		
 		 type = new JLabel();
+		 type.setFont(new Font("Arial", Font.PLAIN, 13));
 		 type.setForeground(Color.WHITE);
-		type.setBounds(238, 157, 77, 14);
+		type.setBounds(228, 169, 77, 14);
 		panel.add(type);
 		
 		JLabel lblStartHour = new JLabel("Start Time:");
-		lblStartHour.setBounds(345, 127, 77, 14);
+		lblStartHour.setFont(new Font("Arial", Font.BOLD, 13));
+		lblStartHour.setBounds(335, 139, 77, 14);
 		panel.add(lblStartHour);
 		
 		JLabel lblEndTime = new JLabel("End Time:");
-		lblEndTime.setBounds(345, 157, 77, 14);
+		lblEndTime.setFont(new Font("Arial", Font.BOLD, 13));
+		lblEndTime.setBounds(335, 169, 77, 14);
 		panel.add(lblEndTime);
 		
 		 start = new JLabel();
+		 start.setFont(new Font("Arial", Font.PLAIN, 13));
 		 start.setForeground(Color.WHITE);
-		start.setBounds(425, 127, 84, 14);
+		start.setBounds(415, 139, 84, 14);
 		panel.add(start);
 		
 		 end = new JLabel();
+		 end.setFont(new Font("Arial", Font.PLAIN, 13));
 		 end.setForeground(Color.WHITE);
-		end.setBounds(425, 157, 84, 14);
+		end.setBounds(415, 169, 84, 14);
 		panel.add(end);
 		
 		JButton btnCreate = new JButton("Create");
@@ -130,21 +121,38 @@ public class MakeaPromotionGUI extends SuperGUI{
 		panel.add(btnCreate);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
-		lblStartDate.setBounds(150, 239, 91, 14);
+		lblStartDate.setFont(new Font("Arial", Font.BOLD, 13));
+		lblStartDate.setBounds(180, 255, 91, 14);
 		panel.add(lblStartDate);
 		
+		 datePicker = new WebDateField ( new Date () );
+		 datePicker.setLocation(250, 249);
+		 datePicker.setSize(128, 25);
+		 panel.add(datePicker);
 		JLabel lblEndDate = new JLabel("End Date:");
-		lblEndDate.setBounds(150, 279, 90, 14);
+		lblEndDate.setFont(new Font("Arial", Font.BOLD, 13));
+		lblEndDate.setBounds(181, 295, 90, 14);
 		panel.add(lblEndDate);
 		
+		 datePicker2 = new WebDateField ( new Date () );
+		 datePicker2.setLocation(250, 289);
+		 datePicker2.setSize(128, 25);
+		 panel.add(datePicker2);
 		JLabel lblTypeOfFuel = new JLabel("Type of Fuel:");
-		lblTypeOfFuel.setBounds(112, 182, 117, 14);
+		lblTypeOfFuel.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblTypeOfFuel.setBounds(180, 195, 117, 14);
 		panel.add(lblTypeOfFuel);
 		
 		 fuel = new JLabel("New label");
+		 fuel.setFont(new Font("Arial", Font.PLAIN, 13));
 		fuel.setForeground(Color.WHITE);
-		fuel.setBounds(226, 182, 81, 14);
+		fuel.setBounds(275, 195, 81, 14);
 		panel.add(fuel);
+		
+		JLabel lblTemplateDetails = new JLabel("Template Details: ");
+		lblTemplateDetails.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 14));
+		lblTemplateDetails.setBounds(229, 111, 129, 16);
+		panel.add(lblTemplateDetails);
 	}
 
 	@Override
@@ -152,8 +160,8 @@ public class MakeaPromotionGUI extends SuperGUI{
 	{
 	
 		
-		setStartDate((Date) datePicker.getModel().getValue());
-		setEndDate((Date) datePicker2.getModel().getValue());
+		setStartDate((Date) datePicker.getDate());
+		setEndDate((Date) datePicker2.getDate());
 		actions.verifyDetails(startDate, endDate);
 		
 	}

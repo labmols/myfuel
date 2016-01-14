@@ -17,10 +17,6 @@ import javax.swing.SwingConstants;
 
 import myfuel.GUIActions.HomeOrderActions;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
-
 import com.alee.extended.date.WebDateField;
 
 /**
