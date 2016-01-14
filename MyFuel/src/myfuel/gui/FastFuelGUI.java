@@ -24,6 +24,7 @@ public class FastFuelGUI extends CarFuelGUI {
 
 		lblChooseStation.setSize(0, 0);
 		lblChooseStation.setVisible(false);
+		lblChooseCar.setSize(0, 0);
 		lblChooseCar.setVisible(false);
 		carCB.setSize(-3, 27);
 		carCB.setLocation(593, 145);
