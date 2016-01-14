@@ -23,10 +23,15 @@ import myfuel.response.CustomerLoginResponse;
 import myfuel.response.booleanResponse;
 
 public class CarFuelActions extends GUIActions {
-	private CarFuelGUI gui;
-	private CustomerLoginResponse customerRes;
-	private FuelOrderResponse infoRes;
-	private Purchase fuelPurchase;
+	protected CarFuelGUI gui;
+	protected CustomerLoginResponse customerRes;
+	protected FuelOrderResponse infoRes;
+	protected Purchase fuelPurchase;
+	
+	public CarFuelActions(MyFuelClient client)
+	{
+		super(client);
+	}
 	
 	public CarFuelActions(MyFuelClient client,CustomerLoginResponse res) {
 		super(client);
@@ -44,14 +49,14 @@ public class CarFuelActions extends GUIActions {
     /**
      * 
      */
-	private void getInfoRequest() {
+	protected void getInfoRequest() {
 		// TODO Auto-generated method stub
 		gui.createWaitDialog("Getting Details...");
 		FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Select,1,-1);
 		client.handleMessageFromGUI(req);
 	}
 	
-	private void insertInfo()
+	protected void insertInfo()
 	{
 		ArrayList<Station> stations = infoRes.getStations();
 		ArrayList<Car> cars = customerRes.getUser().getCars();
@@ -177,7 +182,7 @@ public class CarFuelActions extends GUIActions {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		gui.setWaitPorgress();
+		gui.setWaitProgress();
 		if(arg instanceof FuelOrderResponse)
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
@@ -186,7 +191,7 @@ public class CarFuelActions extends GUIActions {
 			insertInfo();
 			gui.setInfo(modelid,infoRes.getRates(), infoRes.getFuels());
 			
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 		}
 		else if(arg instanceof booleanResponse)
 		{

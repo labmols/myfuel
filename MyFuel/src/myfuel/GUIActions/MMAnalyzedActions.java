@@ -51,7 +51,7 @@ public class MMAnalyzedActions extends GUIActions {
 				 gui.updateHoursPanel(r.gethType());
 			}
 			
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 		}
 
 	}

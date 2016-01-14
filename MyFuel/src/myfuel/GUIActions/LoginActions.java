@@ -172,7 +172,7 @@ public class LoginActions extends GUIActions {
 	public void update(Observable o, Object arg) {
 		if(arg instanceof CustomerLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse){
 		// TODO Auto-generated method stub
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 				if(lr.getType() ==0) customerResponse(arg);
 				else workerResponse(arg);	
 		}
@@ -182,6 +182,11 @@ public class LoginActions extends GUIActions {
 	public void backToMenu() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void FastFuel() {
+		// TODO Auto-generated method stub
+		changeFrame(gui,new FastFuelActions(client),this);
 	}
 	
 }

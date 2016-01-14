@@ -65,12 +65,12 @@ public class ConfirmNewRatesActions extends GUIActions {
 			
 			gui.setDetails(s,c);
 			
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 		}
 		
 		else if(arg1 instanceof booleanResponse)
 		{
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 			
 			MessageForManager temp = null;
 			

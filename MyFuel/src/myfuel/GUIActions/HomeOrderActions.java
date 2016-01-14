@@ -115,12 +115,12 @@ public class HomeOrderActions extends GUIActions {
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.response = res;
 			 gui.getTrackingPanel().updateTable(response.getHorders());
-			 gui.setWaitPorgress();
+			 gui.setWaitProgress();
 		}
 		else if(arg instanceof booleanResponse)
 		{
 			booleanResponse res = (booleanResponse) arg;
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 			if(res.getSuccess()) 
 			{
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy"); 

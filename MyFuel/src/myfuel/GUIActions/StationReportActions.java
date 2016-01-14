@@ -62,7 +62,7 @@ public class StationReportActions extends GUIActions {
 			if(arg1 instanceof SReportResponse)
 			{
 				SReportResponse response = (SReportResponse)arg1;
-				gui.setWaitPorgress();
+				gui.setWaitProgress();
 				if(response.getReport_type() == ReportEnum.InventoryReport)
 				{
 					gui.setInventoryPanel(response.getInventory());
@@ -81,7 +81,7 @@ public class StationReportActions extends GUIActions {
 			
 			else if(arg1 instanceof booleanResponse)
 			{
-				gui.setWaitPorgress();
+				gui.setWaitProgress();
 				booleanResponse a = (booleanResponse)arg1;
 				gui.showErrorMessage(a.getMsg());
 				backToMenu();

@@ -49,12 +49,12 @@ public class AnalysticActions extends GUIActions {
 			 gui.updateCustomerPanel(r.getcType());
 			 gui.updateFuelsPanel(r.getfType());
 			 gui.updateHoursPanel(r.gethType());
-			 gui.setWaitPorgress();
+			 gui.setWaitProgress();
 		}
 		
 		else if(arg1 instanceof booleanResponse)
 		{
-			gui.setWaitPorgress();
+			gui.setWaitProgress();
 			booleanResponse r = (booleanResponse)arg1;
 			if(!r.getSuccess())
 				gui.showErrorMessage(r.getMsg());

@@ -59,7 +59,7 @@ public class ConfirmationActions extends GUIActions {
 		{
 				customers = ((ConfirmationResponse)arg1).getCustomers();
 				
-				gui.setWaitPorgress();
+				gui.setWaitProgress();
 				
 				if(customers.isEmpty())
 				{
