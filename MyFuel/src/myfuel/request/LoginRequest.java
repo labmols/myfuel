@@ -42,6 +42,12 @@ public class LoginRequest implements Serializable{
     }
 
 
+	public LoginRequest(int type) {
+		// TODO Auto-generated constructor stub
+		this.type = type;
+	}
+
+
 	public int getType() {
 		return type;
 	}
