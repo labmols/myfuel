@@ -30,6 +30,8 @@ import myfuel.client.Rate;
 import java.awt.Font;
 
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
 
 /**
  *Fueling Dialog process user interface.
@@ -133,6 +135,8 @@ public class FuelDialog extends JDialog {
 	private JLabel lblTotal;
 	
 	int customerModel;
+	private JLabel PayMethodlbl;
+	private JTextArea FullyMonthlyPane;
 	
 	/**
 	 * Create new Fuel Dialog(indicates the fuel progress and make new purchase).
@@ -170,79 +174,79 @@ public class FuelDialog extends JDialog {
 		this.qty = qty;
 		progressBar = new JProgressBar();
 		progressBar.setForeground(Color.ORANGE);
-		progressBar.setBounds(177, 18, 146, 20);
+		progressBar.setBounds(174, 22, 146, 20);
 		progressBar.setMaximum((int)qty);
 		contentPanel.add(progressBar);
 		{
 			JLabel lblLiter = new JLabel("Liter: ");
 			lblLiter.setFont(new Font("Arial", Font.BOLD, 13));
-			lblLiter.setBounds(163, 62, 46, 16);
+			lblLiter.setBounds(136, 50, 46, 16);
 			contentPanel.add(lblLiter);
 		}
 		{
 			liter = new JLabel("");
 			liter.setFont(new Font("Arial", Font.PLAIN, 13));
-			liter.setBounds(209, 62, 121, 16);
+			liter.setBounds(182, 50, 121, 16);
 			contentPanel.add(liter);
 		}
 		{
 			JLabel lblPrice = new JLabel("Price: ");
 			lblPrice.setFont(new Font("Arial", Font.BOLD, 13));
-			lblPrice.setBounds(163, 88, 56, 16);
+			lblPrice.setBounds(136, 76, 56, 16);
 			contentPanel.add(lblPrice);
 		}
 		{
 			price = new JLabel("");
 			price.setFont(new Font("Arial", Font.PLAIN, 13));
-			price.setBounds(209, 88, 114, 16);
+			price.setBounds(182, 76, 114, 16);
 			contentPanel.add(price);
 		}
 		
 		JLabel lblFuelProgress = new JLabel("Fuel Progress: ");
-		lblFuelProgress.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblFuelProgress.setFont(new Font("Arial", Font.BOLD, 13));
 		lblFuelProgress.setBounds(78, 22, 97, 16);
 		contentPanel.add(lblFuelProgress);
 		
 		payPanel = new JPanel();
 		payPanel.setOpaque(false);
-		payPanel.setBounds(78, 110, 276, 189);
+		payPanel.setBounds(19, 104, 404, 195);
 		contentPanel.add(payPanel);
 		payPanel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Payment Method: ");
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
-		lblNewLabel.setBounds(16, 30, 112, 16);
-		payPanel.add(lblNewLabel);
+		PayMethodlbl = new JLabel("Payment Method: ");
+		PayMethodlbl.setFont(new Font("Arial", Font.BOLD, 13));
+		PayMethodlbl.setBounds(73, 30, 112, 16);
+		payPanel.add(PayMethodlbl);
 		
 		methodCB = new JComboBox();
 		methodCB.setFont(new Font("Arial", Font.PLAIN, 13));
 		methodCB.setModel(new DefaultComboBoxModel(new String[] {"Credit Card", "Cash"}));
-		methodCB.setBounds(130, 26, 127, 27);
+		methodCB.setBounds(197, 26, 127, 27);
 		methodCB.addItemListener(new eventListener());
 		payPanel.add(methodCB);
 		
 		lblCreditCardNo = new JLabel("Credit Card no: ");
 		lblCreditCardNo.setFont(new Font("Arial", Font.BOLD, 13));
-		lblCreditCardNo.setBounds(33, 65, 112, 16);
+		lblCreditCardNo.setBounds(73, 58, 112, 16);
 		payPanel.add(lblCreditCardNo);
 		
 		ccLabel = new JLabel("");
 		ccLabel.setForeground(Color.WHITE);
 		ccLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		ccLabel.setText(actions.getCustomerCC());
-		ccLabel.setBounds(148, 64, 158, 16);
+		ccLabel.setBounds(170, 58, 158, 16);
 		payPanel.add(ccLabel);
 		
-		btnPay = new JButton("Pay");
+		btnPay = new JButton("Confirm");
 		btnPay.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnPay.setBounds(80, 142, 100, 29);
+		btnPay.setBounds(159, 144, 100, 29);
 		btnPay.addActionListener(new eventListener());
 		payPanel.add(btnPay);
 		
 		cashPanel = new JPanel();
 		cashPanel.setVisible(false);
 		cashPanel.setOpaque(false);
-		cashPanel.setBounds(51, 71, 176, 83);
+		cashPanel.setBounds(103, 77, 176, 55);
 		payPanel.add(cashPanel);
 		cashPanel.setLayout(null);
 		
@@ -260,27 +264,35 @@ public class FuelDialog extends JDialog {
 		cashPanel.add(moneyTxt);
 		moneyTxt.setColumns(10);
 		
-		lblPriceAfter = new JLabel("Price after ");
-		lblPriceAfter.setFont(new Font("Arial", Font.BOLD, 13));
-		lblPriceAfter.setBounds(25, 2, 78, 16);
-		payPanel.add(lblPriceAfter);
-		
-		lblDisc = new JLabel("");
-		lblDisc.setForeground(Color.WHITE);
-		lblDisc.setFont(new Font("Arial", Font.BOLD, 13));
-		lblDisc.setBounds(97, 2, 43, 16);
-		payPanel.add(lblDisc);
-		
-		JLabel lblDiscount = new JLabel("Discount: ");
-		lblDiscount.setFont(new Font("Arial", Font.BOLD, 13));
-		lblDiscount.setBounds(140, 2, 65, 16);
-		payPanel.add(lblDiscount);
-		
 		lblTotal = new JLabel("");
+		lblTotal.setBounds(256, 6, 76, 16);
+		payPanel.add(lblTotal);
 		lblTotal.setFont(new Font("Arial", Font.BOLD, 13));
 		lblTotal.setForeground(Color.WHITE);
-		lblTotal.setBounds(200, 2, 76, 16);
-		payPanel.add(lblTotal);
+		
+		JLabel lblDiscount = new JLabel("Discount: ");
+		lblDiscount.setBounds(197, 6, 65, 16);
+		payPanel.add(lblDiscount);
+		lblDiscount.setFont(new Font("Arial", Font.BOLD, 13));
+		
+		lblPriceAfter = new JLabel("Price after ");
+		lblPriceAfter.setBounds(73, 6, 78, 16);
+		payPanel.add(lblPriceAfter);
+		lblPriceAfter.setFont(new Font("Arial", Font.BOLD, 13));
+		
+		lblDisc = new JLabel("");
+		lblDisc.setBounds(148, 6, 43, 16);
+		payPanel.add(lblDisc);
+		lblDisc.setForeground(Color.WHITE);
+		lblDisc.setFont(new Font("Arial", Font.BOLD, 13));
+		
+		FullyMonthlyPane = new JTextArea();
+		FullyMonthlyPane.setVisible(false);
+		FullyMonthlyPane.setFont(new Font("Arial", Font.ITALIC, 14));
+		FullyMonthlyPane.setOpaque(false);
+		FullyMonthlyPane.setText("Your Credit Card will be chraged in the next month.\nYou can see all your purchases every time you want\n in the Purchases option.");
+		FullyMonthlyPane.setBounds(45, 86, 339, 55);
+		payPanel.add(FullyMonthlyPane);
 		
 		payPanel.setVisible(false);
 		{
@@ -388,10 +400,7 @@ public class FuelDialog extends JDialog {
 		progressBar.setValue((int)value);
 		if(progressBar.getValue() == progressBar.getMaximum())
 		{
-			this.lblDisc.setText(new DecimalFormat("##.##").format((discount))+"%");
-			this.lblTotal.setText(new DecimalFormat("##.##").format((origPrice))+"NIS");
-			if(customerModel != Rate.FullyMonthly)
-			payPanel.setVisible(true);
+			setView();
 			
 		}
 		currentPrice =value*p;
@@ -405,6 +414,19 @@ public class FuelDialog extends JDialog {
 		{
 			liter.setText("" + new DecimalFormat("##.##").format(origQty)+" Liters");
 			price.setText("" + new DecimalFormat("##.##").format((totalPriceN))+"  NIS");
+		}
+	}
+
+	private void setView() {
+		// TODO Auto-generated method stub
+		this.lblDisc.setText(new DecimalFormat("##.##").format((discount))+"%");
+		this.lblTotal.setText(new DecimalFormat("##.##").format((origPrice))+"NIS");
+		payPanel.setVisible(true);
+		if(customerModel == Rate.FullyMonthly)
+		{
+			FullyMonthlyPane.setVisible(true);
+			this.PayMethodlbl.setVisible(false);
+			this.methodCB.setVisible(false);
 		}
 	}
 
