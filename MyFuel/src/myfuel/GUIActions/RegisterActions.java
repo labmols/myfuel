@@ -12,6 +12,7 @@ import myfuel.client.Network;
 import myfuel.client.SendMailTLS;
 import myfuel.client.Station;
 import myfuel.gui.RegisterGUI;
+import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.request.RegisterRequest;
 import myfuel.response.RegisterResponse;
@@ -54,8 +55,8 @@ public class RegisterActions extends GUIActions {
 	 * Create new Register GUI Controller.
 	 * @param client - the client object for this controller
 	 */
-	public RegisterActions(MyFuelClient client) {
-		super(client);
+	public RegisterActions(MyFuelClient client,LoginRequest lr) {
+		super(client,lr);
 		networks = new ArrayList <Network>();
 		cnetworks = new ArrayList <Integer>();
 		cars = new ArrayList <Car>();

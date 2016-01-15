@@ -17,6 +17,7 @@ import myfuel.client.Purchase;
 import myfuel.client.StationInventory;
 import myfuel.gui.HomeFuelGUI;
 import myfuel.request.FuelOrderRequest;
+import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.CustomerLoginResponse;
 import myfuel.response.FuelOrderResponse;
@@ -54,8 +55,8 @@ public class HomeOrderActions extends GUIActions {
 	 * @param customer - Customer details object.
 	 * @param fuels 
 	 */
-	public HomeOrderActions(MyFuelClient client, CustomerLoginResponse res) {
-		super(client);
+	public HomeOrderActions(MyFuelClient client, CustomerLoginResponse res,LoginRequest lr) {
+		super(client,lr);
 		this.gui = new HomeFuelGUI(this);
 		this.LoginRes= res;
 		gui.setVisible(true);
@@ -192,7 +193,7 @@ public class HomeOrderActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		new CustomerOptionsActions(client, LoginRes);
+		new CustomerOptionsActions(client, LoginRes,lr);
 		changeFrame(gui, this);
 		 
 	}
@@ -252,6 +253,7 @@ public class HomeOrderActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

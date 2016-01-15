@@ -6,11 +6,24 @@ import myfuel.client.MyFuelClient;
 import myfuel.gui.MMGUI;
 import myfuel.request.LoginRequest;
 
+/***
+ * MMGUI Controller
+ * @author karmo
+ *
+ */
 public class MMActions extends GUIActions{
 
+	/***
+	 * This class will be used as a controller to this GUI object
+	 */
 	private MMGUI gui ;
-	public MMActions(MyFuelClient client) {
-		super(client);
+	/***
+	 * MMActions Constructor
+	 * @param client - MyFuelCLient
+	 * @param lr - LoginRequest with user details
+	 */
+	public MMActions(MyFuelClient client,LoginRequest lr) {
+		super(client,lr);
 		gui = new MMGUI(this);
 		gui.setVisible(true);
 	}
@@ -20,42 +33,57 @@ public class MMActions extends GUIActions{
 		
 		
 	}
-	
+	/***
+	 * Creating New Rates Windows
+	 */
 	public void createSetNewRatesWindow()
 	{
+		new SetNewRatesActions(client,lr);
 		this.changeFrame(gui, this);
-		new SetNewRatesActions(client);
+		
 	}
 	
+	/***
+	 * Creating Promotion Making Window
+	 */
 	public void createMakeaPromotionWindow()
 	{
+		new MakeAPromotionActions(client,lr);
 		this.changeFrame(gui, this);
-		new MakeAPromotionActions(client);
+		
 	}
 	
+	/***
+	 * Creating Station Report Menu
+	 */
 	public void createShowReportsWindow()
 	{
+		 new MMReportsActions(client,lr);
 		this.changeFrame(gui,this);
-		 new MMReportsActions(client);
+		
 	}
 
 	@Override
 	public void backToMenu() {
-		this.changeFrame(gui,this);
-		new LoginActions(client);
+		
 		
 	}
 
+	/***
+	 * Create Analytic System Menu
+	 */
 	public void createaDetailsWindow() 
 	{
+		new MMAnalyzedActions(client,lr) ;
 		changeFrame(gui, this);
-		new MMAnalyzedActions(client) ;
+		
 		
 	}
 
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

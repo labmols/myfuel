@@ -18,6 +18,7 @@ import myfuel.client.Station;
 import myfuel.client.StationInventory;
 import myfuel.gui.CarFuelGUI;
 import myfuel.request.FuelOrderRequest;
+import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.FuelOrderResponse;
 import myfuel.response.Response;
@@ -30,13 +31,13 @@ public class CarFuelActions extends GUIActions {
 	protected FuelOrderResponse infoRes;
 	protected Purchase fuelPurchase;
 	
-	public CarFuelActions(MyFuelClient client)
+	public CarFuelActions(MyFuelClient client,LoginRequest lr)
 	{
-		super(client);
+		super(client,lr);
 	}
 	
-	public CarFuelActions(MyFuelClient client,CustomerLoginResponse res) {
-		super(client);
+	public CarFuelActions(MyFuelClient client,CustomerLoginResponse res , LoginRequest lr) {
+		super(client,lr);
 		this.customerRes = res;
 		infoRes = null;
 		fuelPurchase = null;
@@ -228,7 +229,7 @@ public class CarFuelActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		new CustomerOptionsActions(client,customerRes);
+		new CustomerOptionsActions(client,customerRes,lr);
 		changeFrame(gui,this);
 		
 	}
@@ -296,7 +297,7 @@ public class CarFuelActions extends GUIActions {
 
 	@Override
 	public void LogOut() {
-		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

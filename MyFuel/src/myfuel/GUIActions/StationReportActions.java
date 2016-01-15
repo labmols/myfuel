@@ -11,6 +11,7 @@ import myfuel.client.MyFuelClient;
 import myfuel.client.ReportEnum;
 import myfuel.client.TimeIgnoringComparator;
 import myfuel.gui.StationReportGUI;
+import myfuel.request.LoginRequest;
 import myfuel.request.SReportRequest;
 import myfuel.response.SReportResponse;
 import myfuel.response.booleanResponse;
@@ -45,8 +46,8 @@ public class StationReportActions extends GUIActions {
 	 * @param sid - Station ID
 	 * @param msg - Messages
 	 */
-	public StationReportActions(MyFuelClient client,int sid , ArrayList<MessageForManager> msg,int nid) {
-		super(client);
+	public StationReportActions(MyFuelClient client,int sid , ArrayList<MessageForManager> msg,int nid,LoginRequest lr) {
+		super(client,lr);
 		this.sid  = sid;
 		this.msg = msg;
 		this.nid = nid;
@@ -92,7 +93,7 @@ public class StationReportActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		
-			new SMActions(client,sid,msg,nid);
+			new SMActions(client,sid,msg,nid,lr);
 			changeFrame(gui,this);
 			
 	}
@@ -167,6 +168,7 @@ public class StationReportActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

@@ -7,6 +7,7 @@ import myfuel.client.Fuel;
 import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.LowInventoryGUI;
+import myfuel.request.LoginRequest;
 import myfuel.request.LowInventoryRequest;
 import myfuel.response.booleanResponse;
 import myfuel.server.LowInventoryResponse;
@@ -50,9 +51,9 @@ public class LowInventoryActions extends GUIActions {
 	 * @param msg - Messages for the manager
 	 * @param nid  - Network ID
 	 */
-	public LowInventoryActions(MyFuelClient client, int sid,ArrayList<MessageForManager>msg, int nid) {
+	public LowInventoryActions(MyFuelClient client, int sid,ArrayList<MessageForManager>msg, int nid,LoginRequest lr) {
 		
-		super(client);
+		super(client,lr);
 		this.msg = msg;
 		this.sid = sid;
 		this.nid = nid;
@@ -144,7 +145,7 @@ public class LowInventoryActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		new SMActions(client,this.sid,msg,nid);
+		new SMActions(client,this.sid,msg,nid,lr);
 		changeFrame(gui,this);
 		
 
@@ -153,7 +154,7 @@ public class LowInventoryActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
-		
+		this.LogOutRequest(gui, lr);
 	}
 
 }

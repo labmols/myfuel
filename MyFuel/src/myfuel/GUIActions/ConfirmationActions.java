@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import myfuel.client.*;
 import myfuel.gui.ConfirmationGUI;
 import myfuel.request.ConfirmationRequest;
+import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.ConfirmationResponse;
 import myfuel.response.booleanResponse;
@@ -38,9 +39,9 @@ public class ConfirmationActions extends GUIActions {
 	 * ConfirmationActions Constructor
 	 * @param client - MyFuelCLient
 	 */
-	public ConfirmationActions(MyFuelClient client)
+	public ConfirmationActions(MyFuelClient client,LoginRequest lr)
 	{
-		super(client);
+		super(client,lr);
 		gui = new ConfirmationGUI(this);
 		ConfirmationRequest request = new ConfirmationRequest(RequestEnum.Select);
 		gui.createWaitDialog("Getting Customer Details...");
@@ -125,7 +126,7 @@ public class ConfirmationActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 	
-			new MDActions(client);
+			new MDActions(client,lr);
 			changeFrame(gui,this);
 			
 	}
@@ -135,6 +136,7 @@ public class ConfirmationActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

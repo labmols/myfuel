@@ -9,6 +9,7 @@ import myfuel.client.MyFuelClient;
 import myfuel.client.NetworkRates;
 import myfuel.client.Rate;
 import myfuel.gui.SetNewRatesGUI;
+import myfuel.request.LoginRequest;
 import myfuel.request.SetNewRatesRequest;
 import myfuel.response.SetNewRatesResponse;
 import myfuel.response.booleanResponse;
@@ -40,9 +41,9 @@ public class SetNewRatesActions extends GUIActions {
 	 * SetNewRatesActions Constructor
 	 * @param client - MyFuelClient
 	 */
-	public SetNewRatesActions(MyFuelClient client) 
+	public SetNewRatesActions(MyFuelClient client,LoginRequest lr) 
 	{
-		super(client);
+		super(client,lr);
 		gui = new SetNewRatesGUI(this);
 		request=new SetNewRatesRequest(0);
 		gui.createWaitDialog("Getting Networks...");
@@ -118,7 +119,7 @@ public class SetNewRatesActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		new MMActions(client);
+		new MMActions(client,lr);
 		changeFrame(gui,this);
 		
 		
@@ -139,6 +140,7 @@ public class SetNewRatesActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

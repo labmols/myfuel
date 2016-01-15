@@ -9,6 +9,7 @@ import myfuel.client.Station;
 import myfuel.gui.ChangePasswordGUI;
 import myfuel.gui.UpdateCustomerDetailsGUI;
 import myfuel.gui.CustomerOptionsGUI;
+import myfuel.request.LoginRequest;
 import myfuel.response.Response;
 import myfuel.response.CustomerLoginResponse;
 
@@ -29,14 +30,15 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	private CustomerLoginResponse res;
 	
+
 	/**
 	 * Create new Customer Options Main Menu controller.
 	 * @param client - MyFuelClient object.
 	 * @param res - Customer Login Details.
 	 */
-	public CustomerOptionsActions(MyFuelClient client , CustomerLoginResponse res)
+	public CustomerOptionsActions(MyFuelClient client , CustomerLoginResponse res, LoginRequest lr)
 	{	
-		super(client);
+		super(client,lr);
 		gui =new CustomerOptionsGUI(this);
 		gui.setVisible(true);
 		this.res = res;
@@ -47,7 +49,7 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	public void changePasswordScreen()
 	{
-		new ChangePassActions(client,res);
+		new ChangePassActions(client,res,lr);
 		changeFrame(gui,this);
 		
 		
@@ -58,7 +60,7 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	public void updateDetailsScreen()
 	{
-		new UpdateDetailsActions(client,res);
+		new UpdateDetailsActions(client,res,lr);
 		changeFrame(gui, this);
 		
 	}
@@ -75,7 +77,7 @@ public class CustomerOptionsActions extends GUIActions {
 	public void carFuelScreen() {
 		// TODO Auto-generated method stub
 		changeFrame(gui, this);
-		new CarFuelActions(client,res);
+		new CarFuelActions(client,res,lr);
 		
 	
 		
@@ -85,8 +87,7 @@ public class CustomerOptionsActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		new LoginActions(client);
-		changeFrame(gui, this);
+	
 		
 		
 	}
@@ -96,14 +97,14 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	public void HomeFuelScreen() {
 		// TODO Auto-generated method stub
-		new HomeOrderActions(client,res);
+		new HomeOrderActions(client,res,lr);
 		changeFrame(gui, this);
 		
 	}
 
 	@Override
 	public void LogOut() {
-		// TODO Auto-generated method stub
+	this.LogOutRequest(gui, lr);	
 		
 	}
 	

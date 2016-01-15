@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.Observable;
 
 
+
 import myfuel.client.*;
 import myfuel.gui.*;
+import myfuel.request.LoginRequest;
 import myfuel.request.PromotionTemplateRequest;
 import myfuel.response.booleanResponse;
 
@@ -28,8 +30,8 @@ public class CPromotionTemplateActions extends GUIActions{
 	 * Constructor for CPromotionTemplateActions class
 	 * @param client - MyFuelClient
 	 */
-	public CPromotionTemplateActions(MyFuelClient client) {
-		super(client);
+	public CPromotionTemplateActions(MyFuelClient client,LoginRequest lr) {
+		super(client,lr);
 		gui = new CreatePromotionTemplateGUI(this);
 		
 		gui.setVisible(true);
@@ -99,7 +101,7 @@ public class CPromotionTemplateActions extends GUIActions{
 	
 	@Override
 	public void backToMenu() {
-				new MDActions(client);
+				new MDActions(client,lr);
 				changeFrame(gui,this);
 				
 		
@@ -107,6 +109,7 @@ public class CPromotionTemplateActions extends GUIActions{
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 	

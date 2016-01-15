@@ -34,8 +34,8 @@ public class FastFuelActions extends CarFuelActions {
 	 * Create new Fast Fuel GUI Controller and get all the required information including random Car and customer from DB.
 	 * @param client - MyFuelClient object.
 	 */
-	public FastFuelActions(MyFuelClient client) {
-		super(client);
+	public FastFuelActions(MyFuelClient client,LoginRequest lr) {
+		super(client,lr);
 		infoRes = null;
 		fuelPurchase = null;
 		guiF = new FastFuelGUI(this);
@@ -215,6 +215,12 @@ public class FastFuelActions extends CarFuelActions {
 	{
 		new LoginActions(client);
 		changeFrame(guiF,this);
+		
+	}
+	
+	@Override
+	public void LogOut()
+	{
 		
 	}
 	
