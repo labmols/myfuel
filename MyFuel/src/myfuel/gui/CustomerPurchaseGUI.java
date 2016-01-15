@@ -22,11 +22,11 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		setContentPane(contentPane);
 		panel.setLocation(0, 0);
 		lblTitle.setBounds(226, 6, 175, 31);
-		lblTitle.setText("Your Purchases");
+		lblTitle.setText("Purchase History");
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 96, 584, 279);
 		model = new MyTableModel(6,-1);
-		String[] names = {"PID" ,"Car","Driver","Station","Fuel Type","Date","Time","Amount(L)","Price(NIS)"};
+		String[] names = {"#" ,"Car","Station","Fuel","Date","Time","Amount(L)","Price(NIS)"};
 		for(String s : names)
 			model.addColumn(s);
 		
