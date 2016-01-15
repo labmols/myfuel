@@ -16,10 +16,24 @@ import myfuel.response.CustomerLoginResponse;
 import myfuel.response.FuelOrderResponse;
 import myfuel.response.booleanResponse;
 
+/**
+ * Fast Fuel GUI Controller, handle all the logic functionality.
+ */
 public class FastFuelActions extends CarFuelActions {
 	
+	/**
+	 * Fast Fuel GUI Interface.
+	 */
 	private FastFuelGUI guiF;
+	/**
+	 * Random customer model number.
+	 */
 	int modelid;
+	
+	/**
+	 * Create new Fast Fuel GUI Controller and get all the required information including random Car and customer from DB.
+	 * @param client - MyFuelClient object.
+	 */
 	public FastFuelActions(MyFuelClient client) {
 		super(client);
 		infoRes = null;
@@ -32,20 +46,20 @@ public class FastFuelActions extends CarFuelActions {
 		
 		// TODO Auto-generated constructor stub
 	}
-	
-	@Override
-	protected void insertInfo()
-	{
-		
-	}
-	
+
+	/**
+	 * Get Random Car and station and the owner (The Customer) from the DataBase.
+	 */
 	private void getCustomer()
 	{
 		LoginRequest req = new LoginRequest(LoginRequest.FastFuel);
 		client.handleMessageFromGUI(req);
 	}
 	
-
+	/**
+	 * Notified when new response recieved from the server, in this case this method handle CustomerLoginResponse 
+	 * and FuelOrderResponse.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -98,7 +112,15 @@ public class FastFuelActions extends CarFuelActions {
 	}
 	
 
-	
+	/**
+	 * Verify Customer input, if all details are correct create new Purchase that will be send to the server.
+	 * @param amount - Fuel amount or Price limit.
+	 * @param fuelSelected - Fuel ID number.
+	 * @param dName - Driver name(If its company customer).
+	 * @param nid -Station Network ID.
+	 * @param limit - 0- Amount limit, 1- Price limit.
+	 * @return true- if all details correct, false- if one of the input details is wrong.
+	 */
 	public boolean verifyDetails(String amount, int fuelSelected, String dName ,int nid,int limit)
 	{
 		int cid = customerRes.getFastFuelCar().getcid();
@@ -108,7 +130,6 @@ public class FastFuelActions extends CarFuelActions {
 		String errors="";
 		boolean check= true;
 
-	
 		Customer customer = customerRes.getUser();
 		
 		try
@@ -126,15 +147,15 @@ public class FastFuelActions extends CarFuelActions {
 			errors += "illegal amount value.\n";
 			check = false;
 		}
-		
+
+		if(fid != fuelSelected)
+		{
+			errors += "This fuel pump doesn't match for your car.\n";
+			check = false;
+		}
+
+
 	
-				if(fid != fuelSelected)
-				{
-					errors += "This fuel pump doesn't match for your car.\n";
-					check = false;
-				}
-		
-		
 		if(customer.getToc()==1 && (dName.equals("") || !isAlpha(dName)))
 		{
 					errors+= "illegal Driver name value.\n";
@@ -171,6 +192,9 @@ public class FastFuelActions extends CarFuelActions {
 		
 	}
 	
+	/**
+	 * Back to Login screen.
+	 */
 	@Override
 	public void backToMenu()
 	{
