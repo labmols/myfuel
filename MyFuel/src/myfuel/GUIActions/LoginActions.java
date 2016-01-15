@@ -193,7 +193,10 @@ public class LoginActions extends GUIActions {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	/**
+	 * Move to Fast Fuel option screen.
+	 */
 	public void FastFuel() {
 		// TODO Auto-generated method stub
 		client.deleteObserver(this);

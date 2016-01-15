@@ -14,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
+/**
+ *	Fast Fuel User Interface
+ */
 @SuppressWarnings("serial")
 public class FastFuelGUI extends CarFuelGUI {
 	//private FastFuelActions actions;
@@ -21,11 +24,23 @@ public class FastFuelGUI extends CarFuelGUI {
 	 * The Car number that identified by the nfc sensor.
 	 */
 	private JLabel lblCar;
+	/**
+	 * Random station name.
+	 */
 	private JLabel lblS;
-	private JLabel lblNfcDetails;
+	/**
+	 * Random Station ID.
+	 */
 	private int sid;
-	FastFuelActions actionsF;
+	/**
+	 * Fast Fuel GUI Controller.
+	 */
+	private FastFuelActions actionsF;
 
+	/**
+	 * Create new Fast Fuel user interface that extends Car Fuel user interface.
+	 * @param actions - Fast Fuel GUI Controller, handle all the logic functionality.
+	 */
 	public FastFuelGUI(FastFuelActions actions) {
 		super(actions);
 		this.actionsF = actions;
@@ -65,7 +80,7 @@ public class FastFuelGUI extends CarFuelGUI {
 		lblCar.setBounds(388, 69, 117, 16);
 		panel.add(lblCar);
 		
-		lblNfcDetails = new JLabel("NFC Details: ");
+		JLabel lblNfcDetails = new JLabel("NFC Details: ");
 		lblNfcDetails.setFont(new Font("Arial", Font.BOLD, 14));
 		lblNfcDetails.setBounds(35, 54, 99, 16);
 		panel.add(lblNfcDetails);
@@ -75,6 +90,11 @@ public class FastFuelGUI extends CarFuelGUI {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Set NFC Details, received random Car and station details from DataBase.
+	 * @param cid- Car ID Number.
+	 * @param s - One of the customer stations.
+	 */
 	public void setNFC(int cid, Station s) {
 		// TODO Auto-generated method stub
 		lblCar.setText(""+cid);
@@ -83,30 +103,11 @@ public class FastFuelGUI extends CarFuelGUI {
 		this.nid = s.getNetwork().getNid();
 	}
 	
-	@Override
-	protected void setDetails(int fuelSelected,int nid) {
-		
-		discount = 0;
-		float MonthlyOneDisc=0;
-		NetworkRates rates= res.getNRates(nid);
-		for(int i=0; i<customerModel; i++)
-		{
-			if(i!=1) discount += rates.getModelDiscount(i+1);
-			if(i==1)  MonthlyOneDisc = rates.getModelDiscount(i+1);
-		}
-	currentPrice = actions.getPriceForLiter(fuelSelected, nid);
-	totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
-	lblModelDisc.setText(MonthlyOneDisc +"% (For Liter) ,"+new DecimalFormat("##.##").format(discount)+" %"+"(from total)");
-	p = actions.getPromotion(fuelSelected);
-	
-	if(p!=null)
-	{
-	promDisc.setText(new DecimalFormat("##.##").format(p.getDiscount()) +"%");
-	discount += p.getDiscount();
-	}
-	else promDisc.setText("No Promotion.");
-	}
-	
+
+	/**
+	 * This Class is used for components events handling.
+	 *
+	 */
 	private class eventListener implements ActionListener
 	{
 

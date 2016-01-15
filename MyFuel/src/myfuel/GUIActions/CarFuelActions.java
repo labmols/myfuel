@@ -240,7 +240,10 @@ public class CarFuelActions extends GUIActions {
 
 	public float getPriceForLiter(int fuelID, int nid) {
 		NetworkRates rates = infoRes.getNRates(nid);
-		float disc = rates.getModelDiscount(customerRes.getUser().getSmodel());
+		float disc;
+		if(customerRes.getUser().getSmodel() > 1)
+		disc = rates.getModelDiscount(Rate.MonthlyOne);
+		else disc=0;
 		return infoRes.getFuels().get(fuelID-1).getMaxPrice()*(1-(disc/100));
 		// TODO Auto-generated method stub
 		

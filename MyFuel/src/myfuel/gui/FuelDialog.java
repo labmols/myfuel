@@ -140,6 +140,8 @@ public class FuelDialog extends JDialog {
 		payPanel.add(lblCreditCardNo);
 		
 		ccLabel = new JLabel("");
+		ccLabel.setForeground(Color.WHITE);
+		ccLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		ccLabel.setText(actions.getCustomerCC());
 		ccLabel.setBounds(148, 64, 158, 16);
 		payPanel.add(ccLabel);
@@ -179,18 +181,18 @@ public class FuelDialog extends JDialog {
 		lblDisc = new JLabel("");
 		lblDisc.setForeground(Color.WHITE);
 		lblDisc.setFont(new Font("Arial", Font.BOLD, 13));
-		lblDisc.setBounds(91, 2, 28, 16);
+		lblDisc.setBounds(85, 2, 43, 16);
 		payPanel.add(lblDisc);
 		
 		lblDiscount = new JLabel("Discount: ");
 		lblDiscount.setFont(new Font("Arial", Font.BOLD, 13));
-		lblDiscount.setBounds(130, 2, 65, 16);
+		lblDiscount.setBounds(139, 2, 65, 16);
 		payPanel.add(lblDiscount);
 		
 		lblTotal = new JLabel("");
 		lblTotal.setFont(new Font("Arial", Font.BOLD, 13));
 		lblTotal.setForeground(Color.WHITE);
-		lblTotal.setBounds(194, 2, 76, 16);
+		lblTotal.setBounds(200, 2, 76, 16);
 		payPanel.add(lblTotal);
 		
 		payPanel.setVisible(false);
