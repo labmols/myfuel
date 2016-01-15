@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
 import myfuel.gui.SWGUI;
+import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.request.SWRequest;
 import myfuel.response.booleanResponse;
@@ -24,9 +25,14 @@ public class SWActions extends GUIActions {
 	 */
 	private SWGUI gui;
 	
-	
-	public SWActions(MyFuelClient client,int sid) {
-		super(client);
+	/***
+	 * SWActions Constructor
+	 * @param client - MyFuelClient
+	 * @param sid - Station ID
+	 * @param lr - LoginRequest
+	 */
+	public SWActions(MyFuelClient client,int sid,LoginRequest lr) {
+		super(client,lr);
 		this.sid = sid;
 		gui = new SWGUI(this);
 		gui.createWaitDialog("Getting Details...");
@@ -63,9 +69,7 @@ public class SWActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		new LoginActions(client);
-		changeFrame(gui,this);
-		
+	
 
 	}
 
@@ -86,6 +90,7 @@ public class SWActions extends GUIActions {
 @Override
 public void LogOut() {
 	// TODO Auto-generated method stub
+	this.LogOutRequest(gui, lr);
 	
 }
 

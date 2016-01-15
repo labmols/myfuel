@@ -7,6 +7,7 @@ import myfuel.client.FuelQty;
 import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.HomeQtyOrderGUI;
+import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.request.homeQtyOrderRequest;
 import myfuel.response.HomeQtyResponse;
@@ -42,8 +43,8 @@ public class homeQtyOrderActions extends GUIActions {
 	 * @param order  - Inventory Order for home fuel
 	 * @param msg - Messages for this user
 	 */
-	public homeQtyOrderActions(MyFuelClient client) {
-		super(client);
+	public homeQtyOrderActions(MyFuelClient client,LoginRequest lr) {
+		super(client,lr);
 		
 		gui = new HomeQtyOrderGUI(this);
 		homeQtyOrderRequest request = new homeQtyOrderRequest(RequestEnum.HomeGet);
@@ -90,8 +91,7 @@ public class homeQtyOrderActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		new LoginActions(client);
-		changeFrame(gui,this);
+		
 	}
 /***
  *  Sending Order details to the server
@@ -145,6 +145,7 @@ public class homeQtyOrderActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

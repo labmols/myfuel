@@ -12,6 +12,7 @@ import myfuel.client.Promotion;
 import myfuel.client.PromotionTemplate;
 import myfuel.client.TimeIgnoringComparator;
 import myfuel.gui.MakeaPromotionGUI;
+import myfuel.request.LoginRequest;
 import myfuel.request.MakeaPromotionRequest;
 import myfuel.request.PromotionTemplateRequest;
 import myfuel.response.MakeaPromotionResponse;
@@ -40,8 +41,8 @@ public class MakeAPromotionActions extends GUIActions {
 	 * MakeAPromotionActions Constructor
 	 * @param client - MyFuelClient
 	 */
-	public MakeAPromotionActions(MyFuelClient client) {
-		super(client);
+	public MakeAPromotionActions(MyFuelClient client,LoginRequest lr) {
+		super(client,lr);
 		gui = new MakeaPromotionGUI(this);
 	
 		request = new MakeaPromotionRequest(0);
@@ -125,7 +126,7 @@ public class MakeAPromotionActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		new MMActions(client);
+		new MMActions(client,lr);
 		changeFrame(gui,this);
 		
 		
@@ -134,6 +135,7 @@ public class MakeAPromotionActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 	

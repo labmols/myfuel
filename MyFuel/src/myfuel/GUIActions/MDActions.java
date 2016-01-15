@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
 import myfuel.gui.MDGUI;
+import myfuel.request.LoginRequest;
 
 /***
  * Controller for the MDGUI
@@ -20,8 +21,8 @@ public class MDActions extends GUIActions{
 	 * MDActions Constructor
 	 * @param client - MyFuelClient
 	 */
-	public MDActions(MyFuelClient client) {
-		super(client);
+	public MDActions(MyFuelClient client,LoginRequest lr) {
+		super(client,lr);
 		gui = new MDGUI(this);
 		gui.setVisible(true);
 		
@@ -34,7 +35,7 @@ public class MDActions extends GUIActions{
 	 */
 	public void createPromotionTemplate()
 	{
-		new CPromotionTemplateActions(client);
+		new CPromotionTemplateActions(client,lr);
 		changeFrame(gui,this);
 		
 	}
@@ -48,8 +49,7 @@ public class MDActions extends GUIActions{
 
 	@Override
 	public void backToMenu() {
-		new LoginActions(client);
-		changeFrame(gui,this);
+		
 		
 		
 	}
@@ -60,7 +60,7 @@ public class MDActions extends GUIActions{
 
 	public void createConfirmationWindow() 
 	{
-		new ConfirmationActions(client);
+		new ConfirmationActions(client,lr);
 		changeFrame(gui,this);
 		
 		
@@ -71,7 +71,7 @@ public class MDActions extends GUIActions{
 	 */
 	public void createAnalystic() 
 	{
-		new AnalysticActions(client);
+		new AnalysticActions(client,lr);
 		changeFrame(gui,this);
 		
 	}
@@ -80,7 +80,7 @@ public class MDActions extends GUIActions{
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
-		
+		this.LogOutRequest(gui, lr);
 	}
 
 }

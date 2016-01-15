@@ -6,6 +6,7 @@ import java.util.Observable;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.AnalysticGUI;
 import myfuel.request.AnalysticRequest;
+import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.AnalysticResponse;
 import myfuel.response.booleanResponse;
@@ -26,9 +27,9 @@ public class AnalysticActions extends GUIActions {
 	 * AnalysticActions Constructor
 	 * @param client - MyFuelClient
 	 */
-	public AnalysticActions(MyFuelClient client) 
+	public AnalysticActions(MyFuelClient client,LoginRequest lr) 
 	{
-		super(client);
+		super(client,lr);
 	
 		AnalysticRequest  request = new AnalysticRequest(RequestEnum.Select,new Date());
 		gui = new AnalysticGUI(this);
@@ -68,7 +69,7 @@ public class AnalysticActions extends GUIActions {
 	@Override
 	public void backToMenu()
 	{
-		new MDActions(client);
+		new MDActions(client,lr);
 		changeFrame(gui,this);
 		 
 	}
@@ -86,7 +87,7 @@ public class AnalysticActions extends GUIActions {
 
 	@Override
 	public void LogOut() {
-		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

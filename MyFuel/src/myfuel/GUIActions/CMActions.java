@@ -7,6 +7,7 @@ import myfuel.client.FuelQty;
 import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.CMGUI;
+import myfuel.request.LoginRequest;
 
 /***
  * Network Manager GUI Controller
@@ -31,8 +32,8 @@ public class CMActions extends GUIActions {
 	 * @param client - MyFuelClient
 	 * @param msg   - Messages
 	 */
-	public CMActions(MyFuelClient client,ArrayList<MessageForManager> msg, int nid) {
-		super(client);
+	public CMActions(MyFuelClient client,ArrayList<MessageForManager> msg, int nid,LoginRequest lr) {
+		super(client,lr);
 		this.msg = msg;
 		this.nid = nid;
 		gui = new CMGUI(this,msg);
@@ -50,16 +51,13 @@ public class CMActions extends GUIActions {
 	 */
 	public void ConfirmNewRatesWindow() 
 	{
-		new ConfirmNewRatesActions(client,msg,nid);
+		new ConfirmNewRatesActions(client,msg,nid,lr);
 		changeFrame(gui,this);	
 		
 	}
 
 	@Override
 	public void backToMenu() {
-		
-		new LoginActions(client);
-		changeFrame(gui,this);	
 		
 		
 	}
@@ -71,7 +69,7 @@ public class CMActions extends GUIActions {
 	 */
 	public void showReportsWindows() 
 	{
-		new showReportsActions(client,msg,nid);
+		new showReportsActions(client,msg,nid,lr);
 		changeFrame(gui,this);	
 		
 	}
@@ -79,6 +77,7 @@ public class CMActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

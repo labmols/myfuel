@@ -7,6 +7,7 @@ import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.*;
 import myfuel.request.CompanyReportRequest;
+import myfuel.request.LoginRequest;
 import myfuel.response.ComapnyReportsResponse;
 import myfuel.response.booleanResponse;
 
@@ -34,9 +35,9 @@ public class showReportsActions extends GUIActions {
 	 * showReportsActions Constructor
 	 * @param client - MyFuelClient
 	 */
-	public showReportsActions(MyFuelClient client,ArrayList<MessageForManager> msg,int nid) 
+	public showReportsActions(MyFuelClient client,ArrayList<MessageForManager> msg,int nid,LoginRequest lr) 
 	{
-		super(client);
+		super(client,lr);
 		this.msg = msg;
 		this.nid = nid;
 		
@@ -75,6 +76,7 @@ public class showReportsActions extends GUIActions {
 				gui.setInventoryPanel(r.getqStationInventory());
 				gui.setIncomePanel(r.getqStationIncome());
 				gui.setPurchasePanel(r.getqStationPurchase());
+				gui.setVisibleThings();
 			}
 		}
 		
@@ -99,7 +101,7 @@ public class showReportsActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		new CMActions(client,msg,nid);
+		new CMActions(client,msg,nid,lr);
 		changeFrame(gui,this);
 		
 
@@ -108,6 +110,7 @@ public class showReportsActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

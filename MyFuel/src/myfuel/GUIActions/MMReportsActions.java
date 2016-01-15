@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
 import myfuel.gui.MMReportGUI;
+import myfuel.request.LoginRequest;
 import myfuel.request.MMRerportsRequest;
 import myfuel.response.MMReportsResponse;
 import myfuel.response.booleanResponse;
@@ -20,9 +21,9 @@ public class MMReportsActions extends GUIActions {
 	 * Constructor for MMReportGUI class
 	 * @param client - MyFuelClient
 	 */
-	public MMReportsActions(MyFuelClient client)
+	public MMReportsActions(MyFuelClient client,LoginRequest lr)
 	{
-		super(client);
+		super(client,lr);
 		gui = new MMReportGUI(this);
 		MMRerportsRequest request = new MMRerportsRequest();
 		gui.createWaitDialog("Getting Reports Details...");
@@ -62,7 +63,7 @@ public class MMReportsActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		new MMActions(client);
+		new MMActions(client,lr);
 		changeFrame(gui,this);
 		
 
@@ -72,6 +73,7 @@ public class MMReportsActions extends GUIActions {
 @Override
 public void LogOut() {
 	// TODO Auto-generated method stub
+	this.LogOutRequest(gui, lr);
 	
 }
 

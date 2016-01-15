@@ -20,14 +20,18 @@ public abstract class GUIActions implements Observer {
 	 * the client object
 	 */
 	protected MyFuelClient client;
-	
+	/***
+	 * Details of the user
+	 */
+	protected LoginRequest lr;
 	/**
 	 * create new GUI Controller
 	 * @param client - the client object
 	 */
-	public GUIActions(MyFuelClient client)
+	public GUIActions(MyFuelClient client,LoginRequest lr)
 	{
 		client.addObserver(this);
+		this.lr = lr;
 		this.client = client;
 	}
 	

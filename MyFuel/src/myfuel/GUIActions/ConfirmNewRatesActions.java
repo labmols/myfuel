@@ -8,6 +8,7 @@ import myfuel.client.MyFuelClient;
 import myfuel.client.Rate;
 import myfuel.gui.ConfirmNewRatesGUI;
 import myfuel.request.ConfirmNewRatesRequest;
+import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.ConfirmNewRatesResponse;
 import myfuel.response.booleanResponse;
@@ -38,8 +39,8 @@ public class ConfirmNewRatesActions extends GUIActions {
 	 * @param msg - messages
 	 * @param nid - network ID
 	 */
-	public ConfirmNewRatesActions(MyFuelClient client,ArrayList<MessageForManager>msg,int nid) {
-		super(client);
+	public ConfirmNewRatesActions(MyFuelClient client,ArrayList<MessageForManager>msg,int nid,LoginRequest lr) {
+		super(client,lr);
 		
 		this.msg = msg;
 		this.nid = nid;
@@ -102,7 +103,7 @@ public class ConfirmNewRatesActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		new CMActions(client,msg,nid);
+		new CMActions(client,msg,nid,lr);
 		changeFrame(gui,this);
 		
 	}
@@ -129,6 +130,7 @@ public class ConfirmNewRatesActions extends GUIActions {
 @Override
 public void LogOut() {
 	// TODO Auto-generated method stub
+	this.LogOutRequest(gui, lr);
 	
 }
 

@@ -56,6 +56,10 @@ public class ShowReportGUI extends SuperGUI{
 	 */
 	private JButton btnSelect;
 	/***
+	 * Description for user
+	 */
+	private JLabel lblChoose;
+	/***
 	 * ShowReportGUI Constructor
 	 * @param actions - Controller for this GUI
 	 */
@@ -71,7 +75,7 @@ public class ShowReportGUI extends SuperGUI{
 		comboBox.setBounds(128, 71, 140, 20);
 		panel.add(comboBox);
 		
-		JLabel lblChoose = new JLabel("Choose Report:");
+		 lblChoose = new JLabel("Choose Report:");
 		lblChoose.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblChoose.setBounds(10, 71, 131, 17);
 		panel.add(lblChoose);
@@ -105,14 +109,22 @@ public class ShowReportGUI extends SuperGUI{
 		
 		purchasePanel.setVisible(false);
 		incomesPanel.setVisible(false);
-		inventoryPanel.setVisible(true);
+		inventoryPanel.setVisible(false);
 		
+		comboBox.setVisible(false);
+		lblChoose.setVisible(false);
 		
 		this.actions = actions;
 		this.setContentPane(contentPane);
 	}
 	
 	
+	public void  setVisibleThings()
+	{
+		comboBox.setVisible(true);
+		lblChoose.setVisible(true);
+		inventoryPanel.setVisible(true);
+	}
 	
 	
 	@Override

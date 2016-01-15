@@ -6,6 +6,7 @@ import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.ChangePasswordGUI;
 import myfuel.request.ChangePassRequest;
+import myfuel.request.LoginRequest;
 import myfuel.response.Response;
 import myfuel.response.CustomerLoginResponse;
 import myfuel.response.booleanResponse;
@@ -32,8 +33,8 @@ public class ChangePassActions extends GUIActions {
 	 * @param client - MyFuelClient object.
 	 * @param res - The Customer Login Response(Contains Customer details and Stations).
 	 */
-	public ChangePassActions(MyFuelClient client, CustomerLoginResponse res) {
-		super(client);
+	public ChangePassActions(MyFuelClient client, CustomerLoginResponse res,LoginRequest lr) {
+		super(client,lr);
 		this.res = res;
 		gui = new ChangePasswordGUI(this);
 		gui.setVisible(true);
@@ -92,7 +93,7 @@ public class ChangePassActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		new CustomerOptionsActions(client, res);
+		new CustomerOptionsActions(client, res,lr);
 		changeFrame(gui, this);
 		 
 	}
@@ -100,7 +101,7 @@ public class ChangePassActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
-		
+		this.LogOutRequest(gui, lr);
 	}
 	
 	

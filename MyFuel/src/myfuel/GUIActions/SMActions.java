@@ -7,6 +7,7 @@ import myfuel.client.FuelQty;
 import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.SMGUI;
+import myfuel.request.LoginRequest;
 
 /***
  * Controller for SMGUI
@@ -39,8 +40,8 @@ public class SMActions extends GUIActions {
  	 * @param sid - Station ID
 	 * @param msg  - Messages for this manager
 	 */
-	public SMActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg,int nid) {
-		super(client);
+	public SMActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg,int nid,LoginRequest lr) {
+		super(client,lr);
 		this.setSid(sid);
 		this.msg = msg;
 		this.nid = nid;
@@ -56,9 +57,7 @@ public class SMActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		new LoginActions(client);
-		changeFrame(gui,this);
-		
+	
 
 	}
 
@@ -75,7 +74,7 @@ public class SMActions extends GUIActions {
 	 */
 	public void CreateCheckInventoryWindow() 
 	{
-		new CheckInventoryActions(client,sid,msg,nid);
+		new CheckInventoryActions(client,sid,msg,nid,lr);
 		changeFrame(gui,this);
 		
 		
@@ -87,7 +86,7 @@ public class SMActions extends GUIActions {
 	
 	public void CreateLowInventoryWindow()
 	{
-		new LowInventoryActions(client,sid,msg,nid);
+		new LowInventoryActions(client,sid,msg,nid,lr);
 		changeFrame(gui,this);
 		
 	}
@@ -98,7 +97,7 @@ public class SMActions extends GUIActions {
 
 	public void CreateReports() 
 	{
-		new StationReportActions(client,sid,msg,nid);
+		new StationReportActions(client,sid,msg,nid,lr);
 		changeFrame(gui,this);
 		
 	}
@@ -106,6 +105,7 @@ public class SMActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 

@@ -12,6 +12,7 @@ import myfuel.client.Network;
 import myfuel.client.Station;
 import myfuel.gui.LogInGUI;
 import myfuel.gui.UpdateCustomerDetailsGUI;
+import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.request.UpdateRequest;
 import myfuel.response.Response;
@@ -49,8 +50,8 @@ public class UpdateDetailsActions extends GUIActions {
 	 * @param client - the client object for the communication.
 	 * @param res - the UserLoginResponse object which contains all the required details.
 	 */
-	public UpdateDetailsActions(MyFuelClient client,CustomerLoginResponse res) {
-		super(client);
+	public UpdateDetailsActions(MyFuelClient client,CustomerLoginResponse res,LoginRequest lr) {
+		super(client,lr);
 		this.res = res;
 		origCars = new ArrayList<Car>(res.getUser().getCars());
 		origNetworks = new ArrayList<Integer> (res.getUser().getStations());
@@ -311,7 +312,7 @@ public class UpdateDetailsActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		if(!isConfirmed) clearLists();
-		new CustomerOptionsActions(client,res);
+		new CustomerOptionsActions(client,res,lr);
 		changeFrame(gui,this);
 		
 	}
@@ -338,6 +339,7 @@ public class UpdateDetailsActions extends GUIActions {
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub
+		this.LogOutRequest(gui, lr);
 		
 	}
 
