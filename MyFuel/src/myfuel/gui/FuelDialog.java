@@ -30,44 +30,125 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 
+/**
+ *Fueling Dialog process user interface.
+ */
 public class FuelDialog extends JDialog {
 
+	/**
+	 * Content Panel
+	 */
 	private final JPanel contentPanel = new JPanel();
-	CarFuelActions actions;
-	JProgressBar progressBar;
+	
+	/**
+	 * CarFuel GUI Controller, for handle logic functionality.
+	 */
+	private CarFuelActions actions;
+	
+	/**
+	 * Fueling Progress bar, indicates when the fueling is over.
+	 */
+	private JProgressBar progressBar;
+	/**
+	 * Current liter label.
+	 */
 	private JLabel liter;
+	/**
+	 * Current price label.
+	 */
 	private JLabel price;
+	/**
+	 * Price for liter.
+	 */
 	private float p;
+	/**
+	 * Fuel amount needed.
+	 */
 	private float qty;
+	/**
+	 * Pay Panel, appeared when the fueling is over.
+	 */
 	private JPanel payPanel;
+	/**
+	 * Pay button - creating new purchase.
+	 */
 	private JButton btnPay;
+	/**
+	 * Order change- if customer payed with cash.
+	 */
 	private JLabel changeLabel;
+	/**
+	 * Credit Card number.
+	 */
 	private JLabel ccLabel;
+	/**
+	 * Cash Panel - appeared when customer want to pay with cash.
+	 */
 	private JPanel cashPanel;
+	/**
+	 *Payment method comboBox(Cash/Credit Card).
+	 */
 	private JComboBox methodCB;
+	/**
+	 * Cash money textField.
+	 */
 	private JTextField moneyTxt;
+	/**
+	 * Credit card label(disabled when in cash option).
+	 */
 	private JLabel lblCreditCardNo;
+	/**
+	 * Car Fuel GUI (the parent component).
+	 */
 	private CarFuelGUI gui;
+	/**
+	 * Current Price (according to the progress bar).
+	 */
 	private float currentPrice;
+	/**
+	 * Discount from total order(according to the customer model).
+	 */
 	private float discount;
-	private float borigPrice;
+	/**
+	 * Total price without discount
+	 */
+	private float totalPriceN;
+	/**
+	 * Total price(after discount) and amount that calculated in the gui controller.
+	 */
 	private float origQty,origPrice;
+	/**
+	 * 
+	 */
 	private JLabel lblPriceAfter;
+	/**
+	 * Total discount(including promotion).
+	 */
 	private JLabel lblDisc;
-	private JLabel lblDiscount;
+	
+	/**
+	 * Total price(after discount).
+	 */
 	private JLabel lblTotal;
 	
 	/**
-	 * Create the dialog.
-	 * @param p 
+	 * Create new Fuel Dialog(indicates the fuel progress and make new purchase).
+	 * @param actions - Car Fuel GUI Controller.
+	 * @param gui - Car Fuel GUI(the parent component).
+	 * @param qty - Fuel Amount.
+	 * @param p - Price for liter.
+	 * @param origQty - Total fuel amount.
+	 * @param origPrice -Total order price(calculated in the controller and after discount).
+	 * @param discount - Total Discount.
+	 * @param totalPriceN - Total order price(before discount).
 	 */
-	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p,float origQty, float origPrice,float discount,float borigPrice) {
+	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p,float origQty, float origPrice,float discount,float totalPriceN) {
 		this.actions = actions;
 		this.gui = gui;
 		this.origPrice = origPrice;
 		this.origQty = origQty;
 		this.discount = discount;
-		this.borigPrice = borigPrice;
+		this.totalPriceN = totalPriceN;
 		setTitle("Fueling...");
 		setBounds(100, 100, 451, 327);
 		this.setAlwaysOnTop(true);
@@ -184,7 +265,7 @@ public class FuelDialog extends JDialog {
 		lblDisc.setBounds(85, 2, 43, 16);
 		payPanel.add(lblDisc);
 		
-		lblDiscount = new JLabel("Discount: ");
+		JLabel lblDiscount = new JLabel("Discount: ");
 		lblDiscount.setFont(new Font("Arial", Font.BOLD, 13));
 		lblDiscount.setBounds(139, 2, 65, 16);
 		payPanel.add(lblDiscount);
@@ -214,6 +295,10 @@ public class FuelDialog extends JDialog {
 		
 	}
 	
+	/**
+	 * Handle all components events.
+	 *
+	 */
 	private class eventListener implements ActionListener,ItemListener
 	{
 
@@ -221,52 +306,7 @@ public class FuelDialog extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnPay)
 			{
-				
-				float money=-1;
-				float change=-1;
-				boolean check=true;
-				String error="";
-				if(methodCB.getSelectedIndex()==1)
-				{
-					try
-					{
-						money = Float.parseFloat(moneyTxt.getText());
-						if(money<0)
-						{
-							check = false;
-							error+= "illegal money value!\n";
-						}
-					}
-					catch (NumberFormatException e1)
-					{
-						e1.printStackTrace();
-						check = false;
-						error+= "illegal money value!\n";
-					}
-					change =money-origPrice;
-					if(change<0 && check)
-					{
-						check = false;
-						error+= "Not enough money!\n";
-					}
-				}
-				if(check)
-				{
-					setAlwaysOnTop(false);
-				if(methodCB.getSelectedIndex()==1)
-					JOptionPane.showMessageDialog(null, "Your change is : "+new DecimalFormat("##.##").format(change),"Your Change",JOptionPane.INFORMATION_MESSAGE);	
-				actions.createPurchase();
-				
-				dispose();
-				setVisible(false);
-				}
-				
-				else
-				{
-					setAlwaysOnTop(false);
-					JOptionPane.showMessageDialog(null, error,"Error",JOptionPane.ERROR_MESSAGE);
-					setAlwaysOnTop(true);
-				}
+				CheckAndMakePurchase();
 			}
 		}
 
@@ -281,6 +321,62 @@ public class FuelDialog extends JDialog {
 		}
 	}
 	
+	/**
+	 * Check customer input , if all details are correct make new purchase via the gui controller.
+	 */
+	private void CheckAndMakePurchase()
+	{
+		float money=-1;
+		float change=-1;
+		boolean check=true;
+		String error="";
+		if(methodCB.getSelectedIndex()==1)
+		{
+			try
+			{
+				money = Float.parseFloat(moneyTxt.getText());
+				if(money<0)
+				{
+					check = false;
+					error+= "illegal money value!\n";
+				}
+			}
+			catch (NumberFormatException e1)
+			{
+				e1.printStackTrace();
+				check = false;
+				error+= "illegal money value!\n";
+			}
+			change =money-origPrice;
+			if(change<0 && check)
+			{
+				check = false;
+				error+= "Not enough money!\n";
+			}
+		}
+		if(check)
+		{
+			setAlwaysOnTop(false);
+		if(methodCB.getSelectedIndex()==1)
+			JOptionPane.showMessageDialog(null, "Your change is : "+new DecimalFormat("##.##").format(change),"Your Change",JOptionPane.INFORMATION_MESSAGE);	
+		actions.createPurchase();
+		
+		dispose();
+		setVisible(false);
+		}
+		
+		else
+		{
+			setAlwaysOnTop(false);
+			JOptionPane.showMessageDialog(null, error,"Error",JOptionPane.ERROR_MESSAGE);
+			setAlwaysOnTop(true);
+		}
+	}
+	
+	/**
+	 * Set progress bar with the value from the Progress thread.
+	 * @param value - The value received from the progress Thread.
+	 */
 	public void setProgress(float value) {
 		// TODO Auto-generated method stub
 		progressBar.setValue((int)value);
@@ -300,10 +396,13 @@ public class FuelDialog extends JDialog {
 		else
 		{
 			liter.setText("" + new DecimalFormat("##.##").format(origQty)+" Liters");
-			price.setText("" + new DecimalFormat("##.##").format((borigPrice))+"  NIS");
+			price.setText("" + new DecimalFormat("##.##").format((totalPriceN))+"  NIS");
 		}
 	}
 
+	/**
+	 * Show Pay panel options.
+	 */
 	private void setPay() {
 		// TODO Auto-generated method stub
 		
