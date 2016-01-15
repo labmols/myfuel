@@ -50,18 +50,24 @@ public class FuelDialog extends JDialog {
 	private CarFuelGUI gui;
 	private float currentPrice;
 	private float discount;
+	private float borigPrice;
 	private float origQty,origPrice;
-
+	private JLabel lblPriceAfter;
+	private JLabel lblDisc;
+	private JLabel lblDiscount;
+	private JLabel lblTotal;
+	
 	/**
 	 * Create the dialog.
 	 * @param p 
 	 */
-	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p,float origQty, float origPrice,float discount) {
+	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p,float origQty, float origPrice,float discount,float borigPrice) {
 		this.actions = actions;
 		this.gui = gui;
 		this.origPrice = origPrice;
 		this.origQty = origQty;
-		
+		this.discount = discount;
+		this.borigPrice = borigPrice;
 		setTitle("Fueling...");
 		setBounds(100, 100, 451, 327);
 		this.setAlwaysOnTop(true);
@@ -165,6 +171,28 @@ public class FuelDialog extends JDialog {
 		cashPanel.add(moneyTxt);
 		moneyTxt.setColumns(10);
 		
+		lblPriceAfter = new JLabel("Price after ");
+		lblPriceAfter.setFont(new Font("Arial", Font.BOLD, 13));
+		lblPriceAfter.setBounds(16, 2, 78, 16);
+		payPanel.add(lblPriceAfter);
+		
+		lblDisc = new JLabel("");
+		lblDisc.setForeground(Color.WHITE);
+		lblDisc.setFont(new Font("Arial", Font.BOLD, 13));
+		lblDisc.setBounds(91, 2, 28, 16);
+		payPanel.add(lblDisc);
+		
+		lblDiscount = new JLabel("Discount: ");
+		lblDiscount.setFont(new Font("Arial", Font.BOLD, 13));
+		lblDiscount.setBounds(130, 2, 65, 16);
+		payPanel.add(lblDiscount);
+		
+		lblTotal = new JLabel("");
+		lblTotal.setFont(new Font("Arial", Font.BOLD, 13));
+		lblTotal.setForeground(Color.WHITE);
+		lblTotal.setBounds(194, 2, 76, 16);
+		payPanel.add(lblTotal);
+		
 		payPanel.setVisible(false);
 		{
 			JLabel label = new JLabel("");
@@ -256,6 +284,8 @@ public class FuelDialog extends JDialog {
 		progressBar.setValue((int)value);
 		if(progressBar.getValue() == (int)qty)
 		{
+			this.lblDisc.setText(new DecimalFormat("##.##").format((discount))+"%");
+			this.lblTotal.setText(new DecimalFormat("##.##").format((origPrice))+"NIS");
 			payPanel.setVisible(true);
 		}
 		currentPrice =value*p;
@@ -268,7 +298,7 @@ public class FuelDialog extends JDialog {
 		else
 		{
 			liter.setText("" + new DecimalFormat("##.##").format(origQty)+" Liters");
-			price.setText("" + new DecimalFormat("##.##").format((origPrice))+"  NIS");
+			price.setText("" + new DecimalFormat("##.##").format((borigPrice))+"  NIS");
 		}
 	}
 

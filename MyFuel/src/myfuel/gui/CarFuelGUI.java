@@ -111,9 +111,11 @@ public class CarFuelGUI extends SuperGUI {
 	protected JLabel lblChooseStation;
 	protected JLabel lblChooseCar;
 	private JLabel lblModelDiscount;
-	private JLabel lblModelDisc;
+	protected JLabel lblModelDisc;
 	protected FuelOrderResponse res;
 	protected float discount;
+	protected Promotion p;
+	protected ActionListener listener ;
 	/**
 	 * Create new Car Fuel user interface.
 	 * @param actions - Car Fuel GUI Controller.
@@ -121,7 +123,7 @@ public class CarFuelGUI extends SuperGUI {
 	public CarFuelGUI(CarFuelActions actions) {
 		this.actions=actions;
 		IDHolder = new HashMap();
-		
+		p = null;
 		panel.setLocation(0, 0);
 		lblTitle.setBounds(218, 6, 117, 23);
 		lblTitle.setText("Car Fueling");
@@ -319,17 +321,17 @@ public class CarFuelGUI extends SuperGUI {
 		
 		lblDriverName = new JLabel("Driver Name: ");
 		lblDriverName.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblDriverName.setBounds(276, 37, 99, 16);
+		lblDriverName.setBounds(6, 206, 99, 16);
 		lblDriverName.setVisible(false);
 		panel2.add(lblDriverName);
 		
 		dName = new JTextField();
 		dName.setVisible(false);
-		dName.setBounds(362, 32, 86, 26);
+		dName.setBounds(92, 201, 74, 26);
 		panel2.add(dName);
 		dName.setColumns(10);
-
-		btnStartFuel.addActionListener(new eventListener());
+		listener = new eventListener();
+		btnStartFuel.addActionListener(listener);
 		
 		
 	}
@@ -408,9 +410,13 @@ public class CarFuelGUI extends SuperGUI {
 	currentPrice = actions.getPriceForLiter(fuelSelected, nid);
 	totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
 	lblModelDisc.setText(MonthlyOneDisc +"% (For Liter) ,"+new DecimalFormat("##.##").format(discount)+" %"+"(from total)");
-	Promotion p = actions.getPromotion(fuelSelected);
+	p = actions.getPromotion(fuelSelected);
+	
 	if(p!=null)
+	{
 	promDisc.setText(new DecimalFormat("##.##").format(p.getDiscount()) +"%");
+	discount += p.getDiscount();
+	}
 	else promDisc.setText("No Promotion.");
 	}
 
@@ -457,18 +463,21 @@ public class CarFuelGUI extends SuperGUI {
 		carModel.addElement(cid);
 	}
 	
-	private void startFuel(float qty, int limit) {
+	protected void startFuel(float qty, int limit) {
 		// TODO Auto-generated method stub
 		float max;
-		float origPrice = actions.getTotalPrice(fuelSelected, nid, qty);
+		float origPrice ;
+		float borigPrice = actions.getPriceForLiter(fuelSelected, nid) * qty;
 		if(limit == 1)
 		{
 			max = qty / currentPrice; 
-			origPrice = qty;
+			borigPrice = qty;
+			
 		}
 		else max = qty;
+		origPrice = actions.getTotalPrice(fuelSelected, nid, max);
 		float origQty = max;
-		FuelDialog dialog = new FuelDialog(this.actions,this,max,currentPrice,origQty,origPrice);
+		FuelDialog dialog = new FuelDialog(this.actions,this,max,currentPrice,origQty,origPrice,discount,borigPrice);
 		dialog.setVisible(true);
 	}
 

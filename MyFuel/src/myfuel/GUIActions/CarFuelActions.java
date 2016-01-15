@@ -173,8 +173,8 @@ public class CarFuelActions extends GUIActions {
 				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
 				else
 				{
-					totalPrice = amountF;
 					amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
+					totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
 				}
 			if(prom != null)
 				pid = prom.getPid();
@@ -240,7 +240,7 @@ public class CarFuelActions extends GUIActions {
 
 	public float getPriceForLiter(int fuelID, int nid) {
 		NetworkRates rates = infoRes.getNRates(nid);
-		float disc = rates.getModelDiscount(Rate.MonthlyOne);
+		float disc = rates.getModelDiscount(customerRes.getUser().getSmodel());
 		return infoRes.getFuels().get(fuelID-1).getMaxPrice()*(1-(disc/100));
 		// TODO Auto-generated method stub
 		
@@ -253,7 +253,7 @@ public class CarFuelActions extends GUIActions {
 	}
 	
 	
-	private boolean checkInventory(float qty, int fuelID, int sid) {
+	protected boolean checkInventory(float qty, int fuelID, int sid) {
 		
 		for(StationInventory s: infoRes.getSi())
 		{
@@ -273,7 +273,7 @@ public class CarFuelActions extends GUIActions {
 		
 	}
 	
-	private boolean isAlpha(String name) {
+	protected boolean isAlpha(String name) {
 	    char[] chars = name.toCharArray();
 
 	    for (char c : chars) {

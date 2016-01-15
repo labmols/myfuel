@@ -293,7 +293,7 @@ public class LoginDBHandler extends DBHandler {
 					ps.setInt(1, nid);
 					rs3=ps.executeQuery();
 					if(rs3.next())
-						s= new Station(rs3.getInt(1),rs3.getString(3));
+						s= new Station(rs3.getInt(1),rs3.getString(3),new Network(nid,null));
 					else return new booleanResponse(false, "Station SQL Error");
 					
 					Customer customer = this.getCustomer(rs.getInt(1));
