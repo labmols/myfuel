@@ -150,41 +150,32 @@ public class ServerGUI extends SuperGUI{
 	
 	public void startServer(int port)
 	{
-	
 		server = new MyFuelServer(port,this);
-		
-		 try 
-		    {
-			 
-		      server.listen(); //Start listening for connections
-		      this.serverStatus.setText("Connected");
-		      this.serverStatus.setForeground(Color.GREEN);
-		      btnStartServer.setEnabled(false);
-		      printMsg("Server is up and listening to port "+port +" ...");
-		      
-		      MyTask process = new MyTask();
-		        try {
-		          process.execute();
-		          
-		         
-		        } catch (Exception e1) {
-		          e1.printStackTrace();
-		        }    
-		    } 
-		    catch (Exception ex) 
-		    {
-		      this.printMsg("ERROR - Could not listen for clients!");
-		    }
+		StartServer process = new StartServer(port);
+		process.start();	    
 	}
 	
-	private class MyTask extends SwingWorker<Void,Void> {
-		  protected Void doInBackground() {
+	private class StartServer extends Thread {
+		private int port;
+			public StartServer(int port)
+			{
+				this.port=port;
+			}
+			public void run() {
 			  try{  
+				  btnStartServer.setEnabled(false); 
 		      server.createDBConnection(sqlAdd.getText(), user.getText(), pass.getText());
 			  printMsg("Connected to MySQL Server successfully...");
 			  sqlStatus.setText("Connected");
 			  sqlStatus.setForeground(Color.GREEN);
+			  
 			  btnStopServer.setEnabled(true);
+			  server.listen(); //Start listening for connections
+		      serverStatus.setText("Connected");
+		      serverStatus.setForeground(Color.GREEN);
+		     
+		      printMsg("Server is up and listening to port "+port +" ...");
+		      
 			  disableAll();
 			  }
 			  catch(SQLException e)
@@ -194,8 +185,11 @@ public class ServerGUI extends SuperGUI{
 			      btnStartServer.setEnabled(true);
 				  e.printStackTrace();
 			  }
+			  catch (Exception ex) 
+			    {
+			      printMsg("ERROR - Could not listen for clients!");
+			    }
 			
-			return null;
 		  }
 	}
 	

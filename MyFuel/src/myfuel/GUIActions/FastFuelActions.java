@@ -69,6 +69,10 @@ public class FastFuelActions extends CarFuelActions {
 		{
 			CustomerLoginResponse res= (CustomerLoginResponse) arg;
 			this.customerRes = res;
+			synchronized (customerRes)
+			{
+			customerRes.notifyAll();
+			}
 		}
 		
 		if(arg instanceof FuelOrderResponse)
@@ -81,13 +85,24 @@ public class FastFuelActions extends CarFuelActions {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					while(customerRes == null){};
+					synchronized (customerRes)
+					{
+					while(customerRes == null)
+					{
+						try {
+							customerRes.wait();
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 					insertInfo();
 					modelid = customerRes.getUser().getSmodel();
 					guiF.setNFC(customerRes.getFastFuelCar().getcid(), customerRes.getFastStation());
 					gui.Initialize(modelid,infoRes);
 					gui.checkType(customerRes.getUser().getToc());
 					gui.setWaitProgress();
+					}
 					
 				}
 			});
