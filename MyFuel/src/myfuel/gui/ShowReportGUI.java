@@ -61,6 +61,7 @@ public class ShowReportGUI extends SuperGUI{
 	 */
 	public ShowReportGUI(showReportsActions actions)
 	{
+		super(actions);
 		lblTitle.setBounds(205, 6, 194, 25);
 		lblTitle.setText("Company Reports");
 		this.mainMenu.addActionListener(new BackMainMenu(actions));

@@ -46,7 +46,7 @@ public class ChangePasswordGUI extends SuperGUI {
 	 * @param actions - Change Password GUI Controller.
 	 */
 	public ChangePasswordGUI(ChangePassActions actions) {
-	
+		super(actions);
 		this.actions= actions;
 
 		lblTitle.setBounds(230, 6, 174, 29);

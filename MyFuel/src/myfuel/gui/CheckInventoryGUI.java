@@ -48,6 +48,7 @@ public class CheckInventoryGUI extends SuperGUI{
 	 * @param actions - Controller for this GUI
 	 */
 	public CheckInventoryGUI(CheckInventoryActions actions) {
+		super(actions);
 		this.actions = actions;
 		this.setContentPane(contentPane);
 		this.mainMenu.addActionListener(new BackMainMenu(actions));

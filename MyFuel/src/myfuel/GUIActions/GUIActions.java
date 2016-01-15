@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import myfuel.client.MyFuelClient;
 import myfuel.gui.SuperGUI;
+import myfuel.request.LoginRequest;
 import myfuel.response.Response;
 
 
@@ -55,6 +56,14 @@ public abstract class GUIActions implements Observer {
 	 * Abstract method that replace the current JFrame with the Main Menu JFrame.
 	 */
 	public abstract void backToMenu(); 
+	
+	public void LogOut(SuperGUI g, LoginRequest req)
+	{
+		req.setChangeStatus(1);
+		client.handleMessageFromGUI(req);
+		new LoginActions(client);
+		changeFrame(g,this);
+	}
 	
 
 	

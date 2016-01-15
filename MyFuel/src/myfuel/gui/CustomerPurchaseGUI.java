@@ -9,13 +9,16 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import myfuel.GUIActions.GUIActions;
+
 @SuppressWarnings("serial")
 public class CustomerPurchaseGUI extends SuperGUI {
 	private MyTableModel model;
 	private JTable purchaseTable;
 	
-	public CustomerPurchaseGUI()
+	public CustomerPurchaseGUI(GUIActions actions)
 	{
+		super(actions);
 		setContentPane(contentPane);
 		panel.setLocation(0, 0);
 		lblTitle.setBounds(226, 6, 175, 31);

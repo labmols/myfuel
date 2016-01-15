@@ -131,7 +131,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 	 * @param actions - Update Details GUI Controller object.
 	 */
 	public UpdateCustomerDetailsGUI(UpdateDetailsActions actions) {
-		
+		super(actions);
 		lblTitle.setBounds(220, 6, 144, 23);
 		lblTitle.setText("Update Details");
 		this.actions = actions;

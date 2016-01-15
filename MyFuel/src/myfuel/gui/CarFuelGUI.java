@@ -171,6 +171,7 @@ public class CarFuelGUI extends SuperGUI {
 	 * @param actions - Car Fuel GUI Controller.
 	 */
 	public CarFuelGUI(CarFuelActions actions) {
+		super(actions);
 		this.actions=actions;
 		IDHolder = new HashMap();
 		p = null;

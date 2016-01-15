@@ -44,6 +44,7 @@ public class MMGUI extends SuperGUI {
 	 * @param actions - controller for this GUI
 	 */
 	public MMGUI(MMActions actions) {
+		super(actions);
 		this.actions = actions;
 		setContentPane(contentPane);
 		lblTitle.setBounds(160, 6, 250, 22);

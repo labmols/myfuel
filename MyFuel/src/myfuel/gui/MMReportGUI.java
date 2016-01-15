@@ -44,6 +44,7 @@ public class MMReportGUI extends SuperGUI{
 	 */
 	public MMReportGUI(MMReportsActions actions)
 	{
+		super(actions);
 		lblTitle.setBounds(271, 6, 125, 25);
 		lblTitle.setText("Reports\r\n");
 		this.mainMenu.addActionListener(new BackMainMenu(actions));

@@ -44,6 +44,7 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 	 */
 	public ConfirmNewRatesGUI(ConfirmNewRatesActions actions)
 	{
+		super(actions);
 		lblTitle.setBounds(187, 0, 264, 25);
 		lblTitle.setText("New Rates Confirmation");
 		

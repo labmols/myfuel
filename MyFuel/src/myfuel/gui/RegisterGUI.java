@@ -112,6 +112,7 @@ public class RegisterGUI extends SuperGUI {
  * @param actions
  */
 	public RegisterGUI(RegisterActions actions) {
+		super(actions);
 		this.actions=actions;
 		panel.setLocation(0, 0);
 		lblTitle.setBounds(238, 6, 94, 22);

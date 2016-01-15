@@ -55,6 +55,7 @@ public class CustomerOptionsGUI extends SuperGUI {
 	 * @param actions - Customer Options GUI Controller.
 	 */
 	public CustomerOptionsGUI(CustomerOptionsActions actions) {
+		super(actions);
 	
 		lblTitle.setBounds(201, 0, 207, 41);
 		lblTitle.setText("Customer Options");
@@ -119,7 +120,7 @@ public class CustomerOptionsGUI extends SuperGUI {
 		else if(e.getSource() == btnPurchases ) {
 			this.dispose();
 			this.setVisible(false);
-			CustomerPurchaseGUI gui = new CustomerPurchaseGUI();
+			CustomerPurchaseGUI gui = new CustomerPurchaseGUI(actions);
 			gui.setVisible(true);
 		}
 	}

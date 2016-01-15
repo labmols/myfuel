@@ -63,6 +63,7 @@ public class HomeFuelGUI extends SuperGUI {
 	 */
 	public HomeFuelGUI(HomeOrderActions actions)
 	{
+		super(actions);
 		lblTitle.setBounds(248, 6, 115, 32);
 		lblTitle.setText("Home Fuel");
 		this.actions = actions;

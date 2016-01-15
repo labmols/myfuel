@@ -88,6 +88,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 	 * @param actions - Controller for this GUI
 	 */
 	public CreatePromotionTemplateGUI(CPromotionTemplateActions actions) {
+		super(actions);
 		this.actions = actions;
 		setContentPane(contentPane);
 		lblTitle.setBounds(176, 6, 308, 16);

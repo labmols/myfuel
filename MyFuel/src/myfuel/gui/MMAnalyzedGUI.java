@@ -69,6 +69,7 @@ public class MMAnalyzedGUI extends SuperGUI{
 	 */
 	public MMAnalyzedGUI(MMAnalyzedActions actions)
 	{
+		super(actions);
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setBounds(230, 0, 168, 27);
 		lblTitle.setText("Analyzed Details");

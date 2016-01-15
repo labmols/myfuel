@@ -23,6 +23,13 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.swing.JToolBar;
+
+import com.alee.laf.button.WebButton;
+import com.alee.laf.toolbar.WebToolBar;
+
+import java.awt.Component;
+
 /**
  * This class is the Basic User Interface with the basic appearance.
  *
@@ -67,7 +74,7 @@ public abstract class SuperGUI extends JFrame {
 	/**
 	 * Create new Basic User Interface with all the Basic apperance.
 	 */
-	public SuperGUI() {
+	public SuperGUI(GUIActions actions) {
 		super("MyFuel System");
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
 		setResizable(false);
@@ -86,6 +93,9 @@ public abstract class SuperGUI extends JFrame {
 		
 		JMenuItem Exit = new JMenuItem("Exit");
 		Exit.addActionListener(new exitHandler());
+		
+		JMenuItem LogOut = new JMenuItem("Log Out");
+		mnMenu.add(LogOut);
 		mnMenu.add(Exit);
 		clockPanel = new ClockPane();
 		menuBar.add(clockPanel);
@@ -105,17 +115,29 @@ public abstract class SuperGUI extends JFrame {
 		 lblTitle.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 18));
 		 lblTitle.setBounds(271, 6, 61, 16);
 		 panel.add(lblTitle);
-		
-		
 		 background = new JLabel("");
 		 background.setBounds(0, 0, 596, 481);
 		 java.net.URL url = getClass().getResource("/BackGround.png");
 		
 		 ImageIcon icon = new ImageIcon(url);
+		 
+		 java.net.URL url2 = getClass().getResource("/logout.png");
+			
+		 ImageIcon icon2 = new ImageIcon(url2);
+		 
+		 java.net.URL url3 = getClass().getResource("/exit.png");
+			
+		 ImageIcon icon3 = new ImageIcon(url3);
+		 
+		 java.net.URL url4 = getClass().getResource("/return.png");
+			
+		 ImageIcon icon4 = new ImageIcon(url4);
+		 LogOut.setIcon(icon3);
+		 Exit.setIcon(icon2);
+		 mainMenu.setIcon(icon4);
 		
 		 background.setIcon(icon);
 		contentPane.add( background);
-		
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -184,6 +206,4 @@ public abstract class SuperGUI extends JFrame {
 	{
 		waitD.setProgress(1);
 	}
-	
-	
 }

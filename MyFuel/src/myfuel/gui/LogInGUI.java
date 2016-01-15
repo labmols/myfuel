@@ -67,6 +67,7 @@ public class LogInGUI extends SuperGUI {
 	 * @param actions - Login GUI Controller.
 	 */
 	public LogInGUI(LoginActions actions) {
+		super(actions);
 		this.actions=actions;
 		lblTitle.setBounds(271, 6, 61, 26);
 		lblTitle.setText("Log In");

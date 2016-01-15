@@ -50,7 +50,7 @@ public class SMGUI extends SuperGUI{
 	 * @param actions - Controller for this GUI
 	 */
 	public SMGUI(SMActions actions, ArrayList<MessageForManager> msg) {
-		
+		super(actions);
 		this.msg = msg;
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setBounds(179, 6, 231, 25);

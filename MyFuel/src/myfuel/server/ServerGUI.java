@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 
+import myfuel.GUIActions.GUIActions;
 import myfuel.gui.SuperGUI;
 
 import javax.swing.JButton;
@@ -46,7 +47,8 @@ public class ServerGUI extends SuperGUI{
 	
 	
 	
-	public ServerGUI(){
+	public ServerGUI(GUIActions actions){
+		super(actions);
 		lblTitle.setBounds(228, 6, 163, 22);
 		lblTitle.setText("MyFuel Server");
 		setContentPane(contentPane);

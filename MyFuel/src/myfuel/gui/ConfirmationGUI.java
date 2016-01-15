@@ -50,6 +50,7 @@ public class ConfirmationGUI extends SuperGUI{
 	 */
 	public ConfirmationGUI(ConfirmationActions actions)
 	{
+		super(actions);
 		this.actions = actions;
 		this.setContentPane(contentPane);
 		this.mainMenu.addActionListener(new BackMainMenu(actions));

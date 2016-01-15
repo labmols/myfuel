@@ -80,6 +80,7 @@ public class HomeQtyOrderGUI extends SuperGUI{
 	 */
 	public HomeQtyOrderGUI(homeQtyOrderActions actions)
 	{
+		super(actions);
 		lblTitle.setBounds(200, 0, 232, 25);
 		lblTitle.setText("Home Fuel Control");
 		

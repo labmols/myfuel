@@ -147,7 +147,7 @@ public static void main(String [] args){
          public void run ()
          {
          	WebLookAndFeel.install ();
-         	JFrame serverFrame = new ServerGUI();
+         	JFrame serverFrame = new ServerGUI(null);
         	serverFrame.setVisible(true);
         	
          }

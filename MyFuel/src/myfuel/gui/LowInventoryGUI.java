@@ -31,6 +31,7 @@ public class LowInventoryGUI extends SuperGUI{
 	
 	public LowInventoryGUI(LowInventoryActions actions)
 	{
+		super(actions);
 		lblTitle.setBounds(203, 0, 234, 30);
 		panel.setLocation(0, 0);
 		this.actions = actions;

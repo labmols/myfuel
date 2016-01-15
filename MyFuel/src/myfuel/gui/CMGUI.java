@@ -49,6 +49,7 @@ public class CMGUI extends SuperGUI{
 	 * @param actions - Controller for this GUI
 	 */
 	public CMGUI(CMActions actions,ArrayList<MessageForManager> msg) {
+		super(actions);
 		lblTitle.setBounds(192, 0, 220, 25);
 		lblTitle.setText("Network Manager Menu");
 		this.mainMenu.addActionListener(new BackMainMenu(actions));

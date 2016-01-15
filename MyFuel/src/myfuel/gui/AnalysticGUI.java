@@ -59,6 +59,7 @@ public class AnalysticGUI extends SuperGUI{
 	 */
 	public AnalysticGUI(AnalysticActions actions)
 	{
+		super(actions);
 		lblTitle.setBounds(215, 6, 176, 28);
 		lblTitle.setText("Analystic System");
 		this.actions = actions;

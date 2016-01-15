@@ -41,6 +41,7 @@ public class SWGUI extends SuperGUI{
 	
 	public SWGUI(SWActions actions)
 	{
+		super(actions);
 		lblTitle.setBounds(187, 0, 241, 25);
 		lblTitle.setText("");
 		

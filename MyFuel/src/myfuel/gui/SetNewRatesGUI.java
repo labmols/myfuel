@@ -117,6 +117,7 @@ public class SetNewRatesGUI extends SuperGUI {
 	 * SetNewRatesGUI Constructor
 	 */
 	public SetNewRatesGUI(SetNewRatesActions actions) {
+		super(actions);
 		panel.setLocation(0, 0);
 		this.actions = actions;
 		lblTitle.setBounds(203, 11, 162, 16);

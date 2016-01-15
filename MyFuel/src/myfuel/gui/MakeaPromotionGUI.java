@@ -43,6 +43,7 @@ public class MakeaPromotionGUI extends SuperGUI{
 	
 	public MakeaPromotionGUI(MakeAPromotionActions actions) 
 	{
+		super(actions);
 		model = new DefaultComboBoxModel(  );
 		
 		

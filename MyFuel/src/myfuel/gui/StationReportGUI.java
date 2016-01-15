@@ -39,6 +39,7 @@ public class StationReportGUI extends SuperGUI{
 	
 	public StationReportGUI(StationReportActions actions)
 	{
+		super(actions);
 		lblTitle.setBounds(218, 6, 183, 25);
 		lblTitle.setText("Station Reports");
 		
