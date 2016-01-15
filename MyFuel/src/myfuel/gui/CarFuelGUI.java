@@ -96,25 +96,75 @@ public class CarFuelGUI extends SuperGUI {
 	 */
 	protected  JComboBox <String> stationCombo;
 
-	
+	/**
+	 * Customer sale model number.
+	 */
 	protected int customerModel;
 	
+	/**
+	 * Mapping between comboBox selection and network number.
+	 */
 	protected  HashMap<Integer, Integer> IDHolder;
 	
+	/**
+	 * Driver Name TextField.
+	 */
 	protected  JTextField dName;
+	/**
+	 * Total Price TextField.
+	 */
 	protected  JLabel totalPrice;
+	/**
+	 * Promotion discount TextField.
+	 */
 	protected  JLabel promDisc;
+	/**
+	 * Current Price(for Liter) according to the Fuel selected.
+	 */
 	protected  float currentPrice;
+	/**
+	 * Start Fuel Button.
+	 */
 	protected  JButton btnStartFuel;
+	/**
+	 * Driver Name Label(disabled in private customers).
+	 */
 	protected  JLabel lblDriverName;
+	/**
+	 * Limit By ComboBox(Amount/Price).
+	 */
 	protected  JComboBox <String> limitBox;
+	/**
+	 * Choose station label(disabled in fast fuel).
+	 */
 	protected JLabel lblChooseStation;
+	/**
+	 * Choose Car label(disabled in fast fuel).
+	 */
 	protected JLabel lblChooseCar;
+	/**
+	 * Model Discount Label
+	 */
 	private JLabel lblModelDiscount;
+	/**
+	 * This label Contains the model discount.
+	 */
 	protected JLabel lblModelDisc;
+	/**
+	 * Response from server,contains all the info required for fueling.
+	 */
 	protected FuelOrderResponse res;
+	/**
+	 * current model discount value.
+	 */
 	protected float discount;
+	/**
+	 *  Promotion details (if exist).
+	 */
 	protected Promotion p;
+	/**
+	 * Start Fuel ActionListener.
+	 */
 	protected ActionListener listener ;
 	/**
 	 * Create new Car Fuel user interface.
@@ -395,6 +445,11 @@ public class CarFuelGUI extends SuperGUI {
 		
 	}
 	
+	/**
+	 * Set all the information for the customer,including promotion, discount and current price(for liter).
+	 * @param fuelSelected - Current fuel selected by the customer.
+	 * @param nid - Current network number selecting by the customer.
+	 */
 	protected void setDetails(int fuelSelected,int nid) {
 		// TODO Auto-generated method stub
 		
@@ -421,9 +476,9 @@ public class CarFuelGUI extends SuperGUI {
 	}
 
 /**
- * 
- * @param rates
- * @param fuels
+ * Initialize all fuel prices and class variables.
+ * @param customerModel - Customer model number.
+ * @param infoRes - The response from the server, that contains all the informaion required for the fueling.
  */
 	public void Initialize(int customerModel,FuelOrderResponse infoRes)
 	{
@@ -463,6 +518,11 @@ public class CarFuelGUI extends SuperGUI {
 		carModel.addElement(cid);
 	}
 	
+	/**
+	 * Creating the fuel process dialog.
+	 * @param qty - Fuel Amount.
+	 * @param limit - limit chosen by the customer(amount-0/price-1).
+	 */
 	protected void startFuel(float qty, int limit) {
 		// TODO Auto-generated method stub
 		float max;
@@ -481,6 +541,10 @@ public class CarFuelGUI extends SuperGUI {
 		dialog.setVisible(true);
 	}
 
+	/**
+	 * Check the type of customer, if it Company ask for his driver name(enables the textfield).
+	 * @param toc
+	 */
 	public void checkType(int toc) {
 		// TODO Auto-generated method stub
 		

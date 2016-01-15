@@ -17,6 +17,9 @@ import java.text.DecimalFormat;
 @SuppressWarnings("serial")
 public class FastFuelGUI extends CarFuelGUI {
 	//private FastFuelActions actions;
+	/**
+	 * The Car number that identified by the nfc sensor.
+	 */
 	private JLabel lblCar;
 	private JLabel lblS;
 	private JLabel lblNfcDetails;
