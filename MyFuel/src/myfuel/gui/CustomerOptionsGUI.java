@@ -123,11 +123,7 @@ public class CustomerOptionsGUI extends SuperGUI {
 		else if (e.getSource() ==btnUpdateDetails )actions.updateDetailsScreen();
 		else if(e.getSource()==btnCarFuel) actions.carFuelScreen();
 		else if(e.getSource() == btnHomeFuel ) actions.HomeFuelScreen();
-		else if(e.getSource() == btnPurchases ) {
-			this.dispose();
-			this.setVisible(false);
-			CustomerPurchaseGUI gui = new CustomerPurchaseGUI(actions);
-			gui.setVisible(true);
-		}
+		else if(e.getSource() == btnPurchases ) actions.PurchaseHistory();
+		
 	}
 }

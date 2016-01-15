@@ -107,6 +107,12 @@ public class CustomerOptionsActions extends GUIActions {
 	this.LogOutRequest(gui, lr);	
 		
 	}
+
+	public void PurchaseHistory() {
+		// TODO Auto-generated method stub
+		new PurchaseActions(client,res,lr);
+		changeFrame(gui, this);
+	}
 	
 
 

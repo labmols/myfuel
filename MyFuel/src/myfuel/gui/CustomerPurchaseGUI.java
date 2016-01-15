@@ -2,6 +2,8 @@ package myfuel.gui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.DefaultCellEditor;
@@ -10,6 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import myfuel.GUIActions.GUIActions;
+import myfuel.client.HomeOrder;
+import myfuel.client.Purchase;
 
 @SuppressWarnings("serial")
 public class CustomerPurchaseGUI extends SuperGUI {
@@ -26,7 +30,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 96, 584, 279);
 		model = new MyTableModel(6,-1);
-		String[] names = {"#" ,"Car","Station","Fuel","Date","Time","Amount(L)","Price(NIS)"};
+		String[] names = {"#" ,"Car","Station","Fuel","Date","Amount(L)","Price(NIS)"};
 		for(String s : names)
 			model.addColumn(s);
 		
@@ -35,12 +39,31 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		purchaseTable.setModel(model);
 		scrollPane.setViewportView(purchaseTable);
 		panel.add(scrollPane);
-		//model.insertRow(model.getRowCount(),new Object[]{1, 1234567,"Abalolo","Paz", "95", "31/12/15","11:10",435,40});
+		
 	}
 	@Override
 	public void getInput(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void showPurchases(ArrayList<Purchase> pList) 
+	{
+			clearTable();
+			String sdate="";
+			for(Purchase p: pList)
+			{
+				Date date = p.getPdate();
+				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy HH:mm");
+				sdate = format.format(date);
+				model.insertRow(model.getRowCount(),new Object[]{p.getPid(),p.getCustomerCarID(),p.getSid(),p.getFuelid(),sdate,p.getQty(),p.getBill()});
+			}
+		}
+	
+	private void clearTable()
+	{
+		while(model.getRowCount() > 0 )
+			model.removeRow(0);
 	}
 
 }

@@ -8,7 +8,7 @@ import myfuel.client.PromotionTemplate;
 
 /***
  * This request will contain the Promotion Template details
- * as enered from the user in the CreatePromotionTemplateGUI screen 
+ * as entered from the user in the CreatePromotionTemplateGUI screen 
  * The request will be sent to the server 
  *
  */
