@@ -141,9 +141,18 @@ public class FastFuelActions extends CarFuelActions {
 		int cid = customerRes.getFastFuelCar().getcid();
 		int fid = customerRes.getFastFuelCar().getfid();
 		int stationID= customerRes.getFastStation().getsid();
+		float totalPrice;
 		float amountF=-1;
 		String errors="";
 		boolean check= true;
+		
+		if(limit == 0)
+			totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+			else
+			{
+				amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
+				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+			}
 
 		Customer customer = customerRes.getUser();
 		
@@ -188,15 +197,7 @@ public class FastFuelActions extends CarFuelActions {
 		else
 		{
 			int pid;
-			float totalPrice;
 			Promotion prom = infoRes.getPromotion(fuelSelected);
-			if(limit == 0)
-				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
-				else
-				{
-					amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
-					totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
-				}
 			if(prom != null)
 				pid = prom.getPid();
 			else pid = -1;

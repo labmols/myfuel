@@ -262,18 +262,18 @@ public class FuelDialog extends JDialog {
 		
 		lblPriceAfter = new JLabel("Price after ");
 		lblPriceAfter.setFont(new Font("Arial", Font.BOLD, 13));
-		lblPriceAfter.setBounds(16, 2, 78, 16);
+		lblPriceAfter.setBounds(25, 2, 78, 16);
 		payPanel.add(lblPriceAfter);
 		
 		lblDisc = new JLabel("");
 		lblDisc.setForeground(Color.WHITE);
 		lblDisc.setFont(new Font("Arial", Font.BOLD, 13));
-		lblDisc.setBounds(85, 2, 43, 16);
+		lblDisc.setBounds(97, 2, 43, 16);
 		payPanel.add(lblDisc);
 		
 		JLabel lblDiscount = new JLabel("Discount: ");
 		lblDiscount.setFont(new Font("Arial", Font.BOLD, 13));
-		lblDiscount.setBounds(139, 2, 65, 16);
+		lblDiscount.setBounds(140, 2, 65, 16);
 		payPanel.add(lblDiscount);
 		
 		lblTotal = new JLabel("");
@@ -386,7 +386,7 @@ public class FuelDialog extends JDialog {
 	public void setProgress(float value) {
 		// TODO Auto-generated method stub
 		progressBar.setValue((int)value);
-		if(progressBar.getValue() == (int)qty)
+		if(progressBar.getValue() == progressBar.getMaximum())
 		{
 			this.lblDisc.setText(new DecimalFormat("##.##").format((discount))+"%");
 			this.lblTotal.setText(new DecimalFormat("##.##").format((origPrice))+"NIS");
@@ -395,7 +395,7 @@ public class FuelDialog extends JDialog {
 			
 		}
 		currentPrice =value*p;
-		if(currentPrice < origPrice)
+		if(currentPrice < totalPriceN)
 		{
 		
 		liter.setText("" + new DecimalFormat("##.##").format(value)+" Liters");

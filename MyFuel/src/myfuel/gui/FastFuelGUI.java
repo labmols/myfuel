@@ -117,7 +117,7 @@ public class FastFuelGUI extends CarFuelGUI {
 			if(e.getSource() == btnStartFuel )
 			{
 				
-				if(actionsF.verifyDetails(LimitText.getText(), fuelSelected, dName.getText(),nid,limitBox.getSelectedIndex()));
+				if(actionsF.verifyDetails(LimitText.getText(), fuelSelected, dName.getText(),nid,limitBox.getSelectedIndex()))
 				startFuel(Float.parseFloat(LimitText.getText()), limitBox.getSelectedIndex());
 			}
 		}
