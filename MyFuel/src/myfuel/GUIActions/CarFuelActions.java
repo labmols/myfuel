@@ -228,8 +228,9 @@ public class CarFuelActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,this);
 		new CustomerOptionsActions(client,customerRes);
+		changeFrame(gui,this);
+		
 	}
 
 

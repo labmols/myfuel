@@ -92,18 +92,24 @@ public class StationReportActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		
-			changeFrame(gui,this);
 			new SMActions(client,sid,msg,nid);
+			changeFrame(gui,this);
+			
 	}
 
 
-
+	/***
+	 * This method will send a request to save the report details in the DB if possible
+	 *  and will Show the details for the Station Manager
+	 * @param q - Quarter
+	 * @param r - Report Type
+	 */
 	public void getReport(int q, ReportEnum r) 
 	{
 		
 		
 		SReportRequest request = new SReportRequest(q,r,sid,nid);
-		gui.createWaitDialog("Getting Report Details...");
+		gui.createWaitDialog("Saving Report Details...");
 		if(checkQuarter(q))
 			client.handleMessageFromGUI(request);
 		else
@@ -111,6 +117,11 @@ public class StationReportActions extends GUIActions {
 		
 	}
 	
+	/***
+	 * This method will check if the Quarter that the User choose is the current Quarter
+	 * @param q - Quarter picked by the user
+	 * @return true is this is the current Quarter and false otherwise
+	 */
 	boolean checkQuarter(int q)
 	{
 		Date sdate = null;

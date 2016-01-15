@@ -29,7 +29,7 @@ public class SWActions extends GUIActions {
 		super(client);
 		this.sid = sid;
 		gui = new SWGUI(this);
-		
+		gui.createWaitDialog("Getting Details...");
 		SWRequest request = new SWRequest(sid,RequestEnum.Select);
 		client.handleMessageFromGUI(request);
 		
@@ -44,11 +44,13 @@ public class SWActions extends GUIActions {
 		
 		if(arg instanceof inventoryResponse)
 		{
+			gui.setWaitProgress();
 			inventoryResponse r = (inventoryResponse)arg;
 			gui.updateLables(r.getOrder());
 		}
 		else if(arg instanceof booleanResponse)
 		{
+			gui.setWaitProgress();
 			if(((booleanResponse)arg).getSuccess())
 			{
 				gui.showOKMessage(((booleanResponse)arg).getMsg());
@@ -61,8 +63,9 @@ public class SWActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,this);
 		new LoginActions(client);
+		changeFrame(gui,this);
+		
 
 	}
 
@@ -73,6 +76,7 @@ public class SWActions extends GUIActions {
 	public void ConfirmOrder() 
 	{
 		SWRequest request = new SWRequest(sid,RequestEnum.Insert);
+		gui.createWaitDialog("Updating Inentory...");
 		client.handleMessageFromGUI(request);
 		
 	}

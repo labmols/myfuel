@@ -41,7 +41,7 @@ public class showReportsActions extends GUIActions {
 		this.nid = nid;
 		
 		gui = new ShowReportGUI(this);
-		gui.createWaitDialog("Getting Years That Listed In The DB...");
+		gui.createWaitDialog("Getting Reported Years...");
 		
 		CompanyReportRequest request = new CompanyReportRequest(-1,nid);
 		client.handleMessageFromGUI(request);
@@ -99,8 +99,9 @@ public class showReportsActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		changeFrame(gui,this);
 		new CMActions(client,msg,nid);
+		changeFrame(gui,this);
+		
 
 	}
 

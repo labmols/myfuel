@@ -59,8 +59,9 @@ public class MMAnalyzedActions extends GUIActions {
 	@Override
 	public void backToMenu()
 	{
-		changeFrame(gui,this);
 		new MMActions(client);
+		changeFrame(gui,this);
+		
 
 	}
 
