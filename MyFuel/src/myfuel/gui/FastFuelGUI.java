@@ -75,7 +75,7 @@ public class FastFuelGUI extends CarFuelGUI {
 	@Override
 	protected void setDetails(int fuelSelected,int nid) {
 		// TODO Auto-generated method stub
-	currentPrice = actions.getPrice(fuelSelected, sid);
+	currentPrice = actions.getPriceForLiter(fuelSelected, sid);
 	totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
 	Promotion p = actions.getPromotion(fuelSelected);
 	if(p!=null)

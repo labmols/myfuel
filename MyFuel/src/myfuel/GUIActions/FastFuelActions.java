@@ -93,8 +93,6 @@ public class FastFuelActions extends CarFuelActions {
 	{
 		changeFrame(guiF,this);
 		new LoginActions(client);
-		
-		
 	}
 	
 

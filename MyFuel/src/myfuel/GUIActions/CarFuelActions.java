@@ -86,7 +86,7 @@ public class CarFuelActions extends GUIActions {
 	
 	}
 	
-	public boolean verifyDetails(String amount, int fuelSelected, String dName ,String stationSelected,int cid,int nid)
+	public boolean verifyDetails(String amount, int fuelSelected, String dName ,String stationSelected,int cid,int nid,int limit)
 	{
 		float amountF=-1;
 		String errors="";
@@ -167,8 +167,15 @@ public class CarFuelActions extends GUIActions {
 		else
 		{
 			int pid;
+			float totalPrice;
 			Promotion prom = infoRes.getPromotion(fuelSelected);
-			float totalPrice = CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getNRates(nid), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
+			if(limit == 0)
+				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+				else
+				{
+					totalPrice = amountF;
+					amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
+				}
 			if(prom != null)
 				pid = prom.getPid();
 			else pid = -1;
@@ -177,6 +184,12 @@ public class CarFuelActions extends GUIActions {
 		return check;
 		
 		
+	}
+	
+	public float getTotalPrice(int fuelSelected, int nid, float amountF)
+	{
+		Customer customer = customerRes.getUser();
+		return CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getNRates(nid), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
 	}
 
 
@@ -225,8 +238,7 @@ public class CarFuelActions extends GUIActions {
 	}
 
 
-	public float getPrice(int fuelID, int nid) {
-		Customer c = customerRes.getUser();
+	public float getPriceForLiter(int fuelID, int nid) {
 		NetworkRates rates = infoRes.getNRates(nid);
 		float disc = rates.getModelDiscount(Rate.MonthlyOne);
 		return infoRes.getFuels().get(fuelID-1).getMaxPrice()*(1-(disc/100));

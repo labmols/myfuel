@@ -113,6 +113,7 @@ public class CarFuelGUI extends SuperGUI {
 	private JLabel lblModelDiscount;
 	private JLabel lblModelDisc;
 	protected FuelOrderResponse res;
+	protected float discount;
 	/**
 	 * Create new Car Fuel user interface.
 	 * @param actions - Car Fuel GUI Controller.
@@ -329,7 +330,7 @@ public class CarFuelGUI extends SuperGUI {
 		dName.setColumns(10);
 
 		btnStartFuel.addActionListener(new eventListener());
-	
+		
 		
 	}
 	
@@ -351,6 +352,8 @@ public class CarFuelGUI extends SuperGUI {
 			if(e.getStateChange()==ItemEvent.DESELECTED &&  e.getSource() == stationCombo)
 			{
 				nid = IDHolder.get(stationCombo.getSelectedIndex());
+				
+				setDetails(fuelSelected, nid);
 			}
 		}	
 	}
@@ -384,8 +387,8 @@ public class CarFuelGUI extends SuperGUI {
 		
 		if(e.getSource() == btnStartFuel)
 		{
-			if(actions.verifyDetails(LimitText.getText(), fuelSelected, dName.getText(), (String)stationCombo.getSelectedItem(),(Integer)carCB.getSelectedItem(),IDHolder.get(stationCombo.getSelectedIndex())))
-				setDetails(fuelSelected, nid);
+			if(actions.verifyDetails(LimitText.getText(), fuelSelected, dName.getText(), (String)stationCombo.getSelectedItem(),(Integer)carCB.getSelectedItem(),IDHolder.get(stationCombo.getSelectedIndex()),this.limitBox.getSelectedIndex()))
+				startFuel(Float.parseFloat(LimitText.getText()), this.limitBox.getSelectedIndex());
 		}
 		
 	}
@@ -393,7 +396,7 @@ public class CarFuelGUI extends SuperGUI {
 	protected void setDetails(int fuelSelected,int nid) {
 		// TODO Auto-generated method stub
 		
-		float discount = 0;
+		discount = 0;
 		this.nid = nid;
 		float MonthlyOneDisc=0;
 		NetworkRates rates= res.getNRates(nid);
@@ -402,7 +405,7 @@ public class CarFuelGUI extends SuperGUI {
 			if(i!=1) discount += rates.getModelDiscount(i+1);
 			if(i==1)  MonthlyOneDisc = rates.getModelDiscount(i+1);
 		}
-	currentPrice = actions.getPrice(fuelSelected, nid);
+	currentPrice = actions.getPriceForLiter(fuelSelected, nid);
 	totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
 	lblModelDisc.setText(MonthlyOneDisc +"% (For Liter) ,"+new DecimalFormat("##.##").format(discount)+" %"+"(from total)");
 	Promotion p = actions.getPromotion(fuelSelected);
@@ -418,13 +421,17 @@ public class CarFuelGUI extends SuperGUI {
  */
 	public void Initialize(int customerModel,FuelOrderResponse infoRes)
 	{
-			nid = IDHolder.get(stationCombo.getSelectedIndex());
+				if(stationCombo.getSelectedIndex()>= 0)
+				nid = IDHolder.get(stationCombo.getSelectedIndex());
 				ArrayList<Fuel>fuels = infoRes.getFuels();
 				lblp95.setText(fuels.get(0).getMaxPrice()+"NIS");
 				lblpdiesel.setText(fuels.get(1).getMaxPrice()+"NIS");
 				lblpscooter.setText(fuels.get(2).getMaxPrice()+"NIS");
 				this.customerModel = customerModel;
 				this.res= infoRes;
+				rb95.getRadioButton().setSelected(true);
+				fuelSelected=1;
+				setDetails(fuelSelected,nid);
 				
 	}
 	
@@ -450,12 +457,18 @@ public class CarFuelGUI extends SuperGUI {
 		carModel.addElement(cid);
 	}
 	
-	private void startFuel(float maxValue, int limit) {
+	private void startFuel(float qty, int limit) {
 		// TODO Auto-generated method stub
 		float max;
-		if(limit == 1) max = maxValue / currentPrice; 
-		else max = maxValue;
-		FuelDialog dialog = new FuelDialog(this.actions,this,max,currentPrice);
+		float origPrice = actions.getTotalPrice(fuelSelected, nid, qty);
+		if(limit == 1)
+		{
+			max = qty / currentPrice; 
+			origPrice = qty;
+		}
+		else max = qty;
+		float origQty = max;
+		FuelDialog dialog = new FuelDialog(this.actions,this,max,currentPrice,origQty,origPrice);
 		dialog.setVisible(true);
 	}
 
