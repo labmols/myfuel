@@ -370,8 +370,8 @@ public class FuelOrderDBHandler extends DBHandler{
 				ps.setInt(5, 0);
 				ps.executeUpdate();
 				
-				/*
-				ps= con.prepareStatement("select fname,lname,email from worker where (role=2 or role=5) and sid=?");
+				
+				ps= con.prepareStatement("select fname,lname,email from worker where (role=8 or role=6) and sid=?");
 				ps.setInt(1, sid);
 				rs= ps.executeQuery();
 				if(rs.next())
@@ -398,13 +398,13 @@ public class FuelOrderDBHandler extends DBHandler{
 				new Thread(mailT).start();
 				}
 				
-				ps= con.prepareStatement("insert into message values(?,?,?,?)");
-				ps.setInt(1, 0);
-				ps.setInt(2, sid);
-				ps.setString(3, "New Inventory Order");
-				ps.setInt(4, 1);
-				ps.executeUpdate();
-				 */
+				ps=con.prepareStatement("insert into message values(0,NULL,?,?,1)");
+				if(sid == -1)
+					  ps.setNull(1, java.sql.Types.INTEGER);
+			       ps.setInt(1, sid);
+			       ps.setString(2,"New Inventory Order");
+			       ps.executeUpdate();
+				 
 			}
 	
 			ps.close();

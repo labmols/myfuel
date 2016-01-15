@@ -341,7 +341,10 @@ public class LoginDBHandler extends DBHandler {
 		
 		if(arg instanceof LoginRequest){
 			LoginRequest request =(LoginRequest)arg;
-			if(request.getChangeStatus()==1) changeStatus(request);
+			if(request.getChangeStatus()==1) 
+			{
+				changeStatus(request);
+			}
 			else if(request.getType()==LoginRequest.CustomerLogin)
 			{
 				booleanResponse res = this.checkCustomer(request);

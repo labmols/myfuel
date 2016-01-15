@@ -93,7 +93,7 @@ public class LoginActions extends GUIActions {
 		if(response instanceof CustomerLoginResponse)
 		{
 		CustomerLoginResponse res = (CustomerLoginResponse) response;
-		// NotificationManager.setLocation(1);
+		NotificationManager.setLocation(1);
 		 //NotificationManager.showNotification ( gui,"Connected" );
 		 
 			gui.showOKMessage("Welcome to MyFuel!");
@@ -181,11 +181,15 @@ public class LoginActions extends GUIActions {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg instanceof CustomerLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse){
+		if(arg instanceof CustomerLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse) {
 		// TODO Auto-generated method stub
+			if(gui!=null)
 			gui.setWaitProgress();
+			if(lr!=null)
+			{
 				if(lr.getType() ==0) customerResponse(arg);
 				else workerResponse(arg);	
+			}
 		}
 	}
 
