@@ -57,13 +57,17 @@ public abstract class GUIActions implements Observer {
 	 */
 	public abstract void backToMenu(); 
 	
-	public void LogOut(SuperGUI g, LoginRequest req)
+	public void LogOutRequest(SuperGUI g, LoginRequest req)
 	{
 		req.setChangeStatus(1);
 		client.handleMessageFromGUI(req);
 		new LoginActions(client);
 		changeFrame(g,this);
 	}
+
+	public abstract void LogOut() ;
+		// TODO Auto-generated method stub
+		
 	
 
 	

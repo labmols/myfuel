@@ -205,5 +205,11 @@ public class LoginActions extends GUIActions {
 		changeFrame(gui,this);
 		
 	}
+
+	@Override
+	public void LogOut() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

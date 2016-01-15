@@ -349,6 +349,12 @@ public class RegisterActions extends GUIActions {
 		cars.clear();
 		
 	}
+
+	@Override
+	public void LogOut() {
+		// TODO Auto-generated method stub
+		
+	}
 		
 	}
 	

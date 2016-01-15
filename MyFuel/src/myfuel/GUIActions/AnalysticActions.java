@@ -84,4 +84,10 @@ public class AnalysticActions extends GUIActions {
 		
 	}
 
+	@Override
+	public void LogOut() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

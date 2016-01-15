@@ -95,6 +95,11 @@ public abstract class SuperGUI extends JFrame {
 		Exit.addActionListener(new exitHandler());
 		
 		JMenuItem LogOut = new JMenuItem("Log Out");
+		LogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actions.LogOut();
+			}
+		});
 		mnMenu.add(LogOut);
 		mnMenu.add(Exit);
 		clockPanel = new ClockPane();

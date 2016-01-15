@@ -294,6 +294,12 @@ public class CarFuelActions extends GUIActions {
 		return customerRes.getUser().getCnumber();
 	}
 
+	@Override
+	public void LogOut() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	
 

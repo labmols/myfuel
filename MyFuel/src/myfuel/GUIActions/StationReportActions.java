@@ -164,4 +164,10 @@ public class StationReportActions extends GUIActions {
 			 
 	}
 
+	@Override
+	public void LogOut() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -100,6 +100,12 @@ public class CustomerOptionsActions extends GUIActions {
 		changeFrame(gui, this);
 		
 	}
+
+	@Override
+	public void LogOut() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 
