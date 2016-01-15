@@ -300,6 +300,11 @@ public class CarFuelActions extends GUIActions {
 		
 	}
 
+	public int getCustomerModel() {
+		// TODO Auto-generated method stub
+		return customerRes.getUser().getSmodel();
+	}
+
 
 	
 

@@ -181,7 +181,7 @@ public class ServerGUI extends SuperGUI{
 		  protected Void doInBackground() {
 			  try{  
 		      server.createDBConnection(sqlAdd.getText(), user.getText(), pass.getText());
-			  printMsg("Connecting to MySQL Server successfully...");
+			  printMsg("Connected to MySQL Server successfully...");
 			  sqlStatus.setText("Connected");
 			  sqlStatus.setForeground(Color.GREEN);
 			  btnStopServer.setEnabled(true);

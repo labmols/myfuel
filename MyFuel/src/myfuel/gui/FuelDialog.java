@@ -25,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import myfuel.GUIActions.CarFuelActions;
+import myfuel.client.Rate;
 
 import java.awt.Font;
 
@@ -131,6 +132,8 @@ public class FuelDialog extends JDialog {
 	 */
 	private JLabel lblTotal;
 	
+	int customerModel;
+	
 	/**
 	 * Create new Fuel Dialog(indicates the fuel progress and make new purchase).
 	 * @param actions - Car Fuel GUI Controller.
@@ -142,13 +145,16 @@ public class FuelDialog extends JDialog {
 	 * @param discount - Total Discount.
 	 * @param totalPriceN - Total order price(before discount).
 	 */
-	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p,float origQty, float origPrice,float discount,float totalPriceN) {
+	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p,float origQty, float origPrice,float discount,float totalPriceN) 
+	{
+		
 		this.actions = actions;
 		this.gui = gui;
 		this.origPrice = origPrice;
 		this.origQty = origQty;
 		this.discount = discount;
 		this.totalPriceN = totalPriceN;
+		customerModel = actions.getCustomerModel();
 		setTitle("Fueling...");
 		setBounds(100, 100, 451, 327);
 		this.setAlwaysOnTop(true);
@@ -384,7 +390,9 @@ public class FuelDialog extends JDialog {
 		{
 			this.lblDisc.setText(new DecimalFormat("##.##").format((discount))+"%");
 			this.lblTotal.setText(new DecimalFormat("##.##").format((origPrice))+"NIS");
+			if(customerModel != Rate.FullyMonthly)
 			payPanel.setVisible(true);
+			
 		}
 		currentPrice =value*p;
 		if(currentPrice < origPrice)

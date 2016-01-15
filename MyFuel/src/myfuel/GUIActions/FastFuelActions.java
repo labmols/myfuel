@@ -75,7 +75,6 @@ public class FastFuelActions extends CarFuelActions {
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.infoRes = res;
-			insertInfo();
 			
 			Thread t = new Thread(new Runnable() {
 				
@@ -83,6 +82,7 @@ public class FastFuelActions extends CarFuelActions {
 				public void run() {
 					// TODO Auto-generated method stub
 					while(customerRes == null){};
+					insertInfo();
 					modelid = customerRes.getUser().getSmodel();
 					guiF.setNFC(customerRes.getFastFuelCar().getcid(), customerRes.getFastStation());
 					gui.Initialize(modelid,infoRes);
