@@ -1,9 +1,15 @@
 package myfuel.GUIActions;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Observable;
 
+import myfuel.client.Car;
+import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
-
+import myfuel.client.Promotion;
+import myfuel.client.Purchase;
+import myfuel.client.Station;
 import myfuel.gui.FastFuelGUI;
 import myfuel.request.LoginRequest;
 import myfuel.response.CustomerLoginResponse;
@@ -13,6 +19,7 @@ import myfuel.response.booleanResponse;
 public class FastFuelActions extends CarFuelActions {
 	
 	private FastFuelGUI guiF;
+	int modelid;
 	public FastFuelActions(MyFuelClient client) {
 		super(client);
 		infoRes = null;
@@ -48,34 +55,120 @@ public class FastFuelActions extends CarFuelActions {
 		{
 			CustomerLoginResponse res= (CustomerLoginResponse) arg;
 			this.customerRes = res;
-			
 		}
 		
 		if(arg instanceof FuelOrderResponse)
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.infoRes = res;
-			int modelid = customerRes.getUser().getSmodel();
 			insertInfo();
-			gui.setInfo(modelid,infoRes.getRates(), infoRes.getFuels());
-			guiF.setCar(customerRes.getFastFuelCar().getcid());
 			
-			gui.setWaitProgress();
+			Thread t = new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					while(customerRes == null){};
+					modelid = customerRes.getUser().getSmodel();
+					guiF.setNFC(customerRes.getFastFuelCar().getcid(), customerRes.getFastStation());
+					gui.Initialize(modelid,infoRes);
+					gui.checkType(customerRes.getUser().getToc());
+					gui.setWaitProgress();
+					
+				}
+			});
+			t.start();
+				
 		}
 		else if(arg instanceof booleanResponse)
 		{
+			gui.setWaitProgress();
 			 booleanResponse res = (booleanResponse) arg;
 			 if(res.getSuccess())
 			 {
-				 
+			
 				 gui.showOKMessage("Thank you for choosing MyFuel!");
 				 this.backToMenu();
 			 }
 			 else
 			 {
-				 gui.showErrorMessage("Error!");
+				 gui.showErrorMessage(res.getMsg());
 			 }
 		}
+	}
+	
+
+	
+	public boolean verifyDetails(String amount, int fuelSelected, String dName ,int nid,int limit)
+	{
+		int cid = customerRes.getFastFuelCar().getcid();
+		int fid = customerRes.getFastFuelCar().getfid();
+		int stationID= customerRes.getFastStation().getsid();
+		float amountF=-1;
+		String errors="";
+		boolean check= true;
+
+	
+		Customer customer = customerRes.getUser();
+		
+		try
+		{
+			amountF = Float.parseFloat(amount);
+			if(amountF<0)
+			{
+				errors += "illegal amount value.\n";
+				check = false;
+			}
+		}
+		catch(NumberFormatException e)
+		{
+			e.printStackTrace();
+			errors += "illegal amount value.\n";
+			check = false;
+		}
+		
+	
+				if(fid != fuelSelected)
+				{
+					errors += "This fuel pump doesn't match for your car.\n";
+					check = false;
+				}
+		
+		
+		if(customer.getToc()==1 && (dName.equals("") || !isAlpha(dName)))
+		{
+					errors+= "illegal Driver name value.\n";
+					check = false;
+		}
+		
+		if(!checkInventory(amountF, fuelSelected, stationID))
+		{
+			errors+= "Not enough fuel quantity.\n";
+			check = false;
+		}
+		
+		if(!check)
+			gui.showErrorMessage(errors);
+		else
+		{
+			int pid;
+			float totalPrice;
+			Promotion prom = infoRes.getPromotion(fuelSelected);
+			if(limit == 0)
+				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+				else
+				{
+					amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
+					totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+				}
+			if(prom != null)
+				pid = prom.getPid();
+			else pid = -1;
+			fuelPurchase  = new Purchase(customer.getUserid(),0,stationID, fuelSelected, pid,new Date(),totalPrice,amountF,dName,cid);
+		}
+		return check;
+		
+		
 	}
 	
 	@Override
@@ -83,8 +176,6 @@ public class FastFuelActions extends CarFuelActions {
 	{
 		changeFrame(guiF,this);
 		new LoginActions(client);
-		
-		
 	}
 	
 

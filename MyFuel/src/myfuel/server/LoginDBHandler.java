@@ -265,8 +265,12 @@ public class LoginDBHandler extends DBHandler {
 	private Response FastFuel()
 	{
 		ResultSet rs = null;
+		ResultSet rs2 = null;
+		ResultSet rs3 = null;
 		Statement st = null;
-		
+		PreparedStatement ps = null;
+		int nid;
+		Station s = null;
 	
 			try {
 				st = con.createStatement();
@@ -274,24 +278,48 @@ public class LoginDBHandler extends DBHandler {
 				rs = st.executeQuery(query);
 				if(rs.next())
 				{
+					//Random network
+					query = "select sid from customer_network where uid = ? order by rand() limit 1";
+					ps = con.prepareStatement(query);
+					ps.setInt(1, rs.getInt(1));
+					rs2=ps.executeQuery();
+					if(rs2.next())
+						nid = rs2.getInt(1);
+					else return new booleanResponse(false, "Network SQL Error");
+					
+					//Random station
+					query = "select * from station_in_network where nid = ? order by rand() limit 1";
+					ps = con.prepareStatement(query);
+					ps.setInt(1, nid);
+					rs3=ps.executeQuery();
+					if(rs3.next())
+						s= new Station(rs3.getInt(1),rs3.getString(3),new Network(nid,null));
+					else return new booleanResponse(false, "Station SQL Error");
+					
 					Customer customer = this.getCustomer(rs.getInt(1));
 					Car FastFuelCar = new Car(rs.getInt(2), rs.getInt(3));
 					ArrayList<Network> networks = this.getNetworks();
 					rs.close();
 					st.close();
-					return new CustomerLoginResponse(customer, networks, FastFuelCar);
+					return new CustomerLoginResponse(customer, networks, FastFuelCar,s);
 				}
 				else 
 				{
 					rs.close();
 					st.close();
-					return new booleanResponse(false, "SQL Error");
+					return new booleanResponse(false, "Customer Car SQL Error");
 				}
 				
 				
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+			
+			 catch (Exception e) {
+		// TODO Auto-generated catch block
 				e.printStackTrace();
 				return null;
 			}

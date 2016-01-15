@@ -10,8 +10,10 @@ import myfuel.client.Customer;
 import myfuel.client.Fuel;
 import myfuel.client.FuelQty;
 import myfuel.client.MyFuelClient;
+import myfuel.client.NetworkRates;
 import myfuel.client.Promotion;
 import myfuel.client.Purchase;
+import myfuel.client.Rate;
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
 import myfuel.gui.CarFuelGUI;
@@ -84,7 +86,7 @@ public class CarFuelActions extends GUIActions {
 	
 	}
 	
-	public boolean verifyDetails(String amount, int fuelSelected, String dName ,String stationSelected,int cid,int nid)
+	public boolean verifyDetails(String amount, int fuelSelected, String dName ,String stationSelected,int cid,int nid,int limit)
 	{
 		float amountF=-1;
 		String errors="";
@@ -165,8 +167,15 @@ public class CarFuelActions extends GUIActions {
 		else
 		{
 			int pid;
+			float totalPrice;
 			Promotion prom = infoRes.getPromotion(fuelSelected);
-			float totalPrice = CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getNRates(nid), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
+			if(limit == 0)
+				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+				else
+				{
+					amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
+					totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+				}
 			if(prom != null)
 				pid = prom.getPid();
 			else pid = -1;
@@ -175,6 +184,12 @@ public class CarFuelActions extends GUIActions {
 		return check;
 		
 		
+	}
+	
+	public float getTotalPrice(int fuelSelected, int nid, float amountF)
+	{
+		Customer customer = customerRes.getUser();
+		return CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getNRates(nid), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
 	}
 
 
@@ -189,7 +204,7 @@ public class CarFuelActions extends GUIActions {
 			this.infoRes = res;
 			int modelid = customerRes.getUser().getSmodel();
 			insertInfo();
-			gui.setInfo(modelid,infoRes.getRates(), infoRes.getFuels());
+			gui.Initialize(modelid,infoRes);
 			
 			gui.setWaitProgress();
 		}
@@ -223,9 +238,10 @@ public class CarFuelActions extends GUIActions {
 	}
 
 
-	public float getPrice(int fuelID, int nid) {
-		Customer c = customerRes.getUser();
-		return CalcPrice.calcCarFuelOrder(c.getSmodel(),infoRes.getNRates(nid), 1, infoRes.getFuels().get(fuelID-1).getMaxPrice(), infoRes.getPromotion(fuelID));
+	public float getPriceForLiter(int fuelID, int nid) {
+		NetworkRates rates = infoRes.getNRates(nid);
+		float disc = rates.getModelDiscount(customerRes.getUser().getSmodel());
+		return infoRes.getFuels().get(fuelID-1).getMaxPrice()*(1-(disc/100));
 		// TODO Auto-generated method stub
 		
 	}
@@ -237,7 +253,7 @@ public class CarFuelActions extends GUIActions {
 	}
 	
 	
-	private boolean checkInventory(float qty, int fuelID, int sid) {
+	protected boolean checkInventory(float qty, int fuelID, int sid) {
 		
 		for(StationInventory s: infoRes.getSi())
 		{
@@ -257,7 +273,7 @@ public class CarFuelActions extends GUIActions {
 		
 	}
 	
-	private boolean isAlpha(String name) {
+	protected boolean isAlpha(String name) {
 	    char[] chars = name.toCharArray();
 
 	    for (char c : chars) {

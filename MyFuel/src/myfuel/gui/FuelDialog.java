@@ -49,16 +49,27 @@ public class FuelDialog extends JDialog {
 	private JLabel lblCreditCardNo;
 	private CarFuelGUI gui;
 	private float currentPrice;
-
+	private float discount;
+	private float borigPrice;
+	private float origQty,origPrice;
+	private JLabel lblPriceAfter;
+	private JLabel lblDisc;
+	private JLabel lblDiscount;
+	private JLabel lblTotal;
+	
 	/**
 	 * Create the dialog.
 	 * @param p 
 	 */
-	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p) {
+	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p,float origQty, float origPrice,float discount,float borigPrice) {
 		this.actions = actions;
 		this.gui = gui;
+		this.origPrice = origPrice;
+		this.origQty = origQty;
+		this.discount = discount;
+		this.borigPrice = borigPrice;
 		setTitle("Fueling...");
-		setBounds(100, 100, 451, 273);
+		setBounds(100, 100, 451, 327);
 		this.setAlwaysOnTop(true);
 		setLocationRelativeTo(gui);
 		setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
@@ -107,42 +118,42 @@ public class FuelDialog extends JDialog {
 		
 		payPanel = new JPanel();
 		payPanel.setOpaque(false);
-		payPanel.setBounds(78, 116, 276, 124);
+		payPanel.setBounds(78, 110, 276, 189);
 		contentPanel.add(payPanel);
 		payPanel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Payment Method: ");
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
-		lblNewLabel.setBounds(6, 6, 112, 16);
+		lblNewLabel.setBounds(16, 30, 112, 16);
 		payPanel.add(lblNewLabel);
 		
 		methodCB = new JComboBox();
 		methodCB.setFont(new Font("Arial", Font.PLAIN, 13));
 		methodCB.setModel(new DefaultComboBoxModel(new String[] {"Credit Card", "Cash"}));
-		methodCB.setBounds(130, 2, 127, 27);
+		methodCB.setBounds(130, 26, 127, 27);
 		methodCB.addItemListener(new eventListener());
 		payPanel.add(methodCB);
 		
 		lblCreditCardNo = new JLabel("Credit Card no: ");
 		lblCreditCardNo.setFont(new Font("Arial", Font.BOLD, 13));
-		lblCreditCardNo.setBounds(41, 42, 112, 16);
+		lblCreditCardNo.setBounds(33, 65, 112, 16);
 		payPanel.add(lblCreditCardNo);
 		
 		ccLabel = new JLabel("");
 		ccLabel.setText(actions.getCustomerCC());
-		ccLabel.setBounds(140, 41, 158, 16);
+		ccLabel.setBounds(148, 64, 158, 16);
 		payPanel.add(ccLabel);
 		
 		btnPay = new JButton("Pay");
 		btnPay.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnPay.setBounds(94, 89, 100, 29);
+		btnPay.setBounds(80, 142, 100, 29);
 		btnPay.addActionListener(new eventListener());
 		payPanel.add(btnPay);
 		
 		cashPanel = new JPanel();
 		cashPanel.setVisible(false);
 		cashPanel.setOpaque(false);
-		cashPanel.setBounds(51, 23, 176, 83);
+		cashPanel.setBounds(51, 71, 176, 83);
 		payPanel.add(cashPanel);
 		cashPanel.setLayout(null);
 		
@@ -160,16 +171,43 @@ public class FuelDialog extends JDialog {
 		cashPanel.add(moneyTxt);
 		moneyTxt.setColumns(10);
 		
+		lblPriceAfter = new JLabel("Price after ");
+		lblPriceAfter.setFont(new Font("Arial", Font.BOLD, 13));
+		lblPriceAfter.setBounds(16, 2, 78, 16);
+		payPanel.add(lblPriceAfter);
+		
+		lblDisc = new JLabel("");
+		lblDisc.setForeground(Color.WHITE);
+		lblDisc.setFont(new Font("Arial", Font.BOLD, 13));
+		lblDisc.setBounds(91, 2, 28, 16);
+		payPanel.add(lblDisc);
+		
+		lblDiscount = new JLabel("Discount: ");
+		lblDiscount.setFont(new Font("Arial", Font.BOLD, 13));
+		lblDiscount.setBounds(130, 2, 65, 16);
+		payPanel.add(lblDiscount);
+		
+		lblTotal = new JLabel("");
+		lblTotal.setFont(new Font("Arial", Font.BOLD, 13));
+		lblTotal.setForeground(Color.WHITE);
+		lblTotal.setBounds(194, 2, 76, 16);
+		payPanel.add(lblTotal);
+		
 		payPanel.setVisible(false);
 		{
 			JLabel label = new JLabel("");
-			label.setBounds(0, 0, 450, 256);
+			label.setBounds(0, 0, 450, 305);
 			contentPanel.add(label);
 			 java.net.URL url = getClass().getResource("/dialogBG.png");
 			label.setIcon(new ImageIcon(url));
 		}
+		
+		JLabel label = new JLabel("");
+		label.setBounds(252, 116, 90, 16);
+		contentPanel.add(label);
 		ProgressBarThread t = new ProgressBarThread(this,qty);
 		new Thread(t).start();
+		 
 		
 		
 	}
@@ -181,6 +219,7 @@ public class FuelDialog extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnPay)
 			{
+				
 				float money=-1;
 				float change=-1;
 				boolean check=true;
@@ -202,7 +241,7 @@ public class FuelDialog extends JDialog {
 						check = false;
 						error+= "illegal money value!\n";
 					}
-					change =money-currentPrice;
+					change =money-origPrice;
 					if(change<0 && check)
 					{
 						check = false;
@@ -244,11 +283,23 @@ public class FuelDialog extends JDialog {
 		// TODO Auto-generated method stub
 		progressBar.setValue((int)value);
 		if(progressBar.getValue() == (int)qty)
+		{
+			this.lblDisc.setText(new DecimalFormat("##.##").format((discount))+"%");
+			this.lblTotal.setText(new DecimalFormat("##.##").format((origPrice))+"NIS");
 			payPanel.setVisible(true);
-		
+		}
 		currentPrice =value*p;
+		if(currentPrice < origPrice)
+		{
+		
 		liter.setText("" + new DecimalFormat("##.##").format(value)+" Liters");
 		price.setText("" + new DecimalFormat("##.##").format((currentPrice))+"  NIS");
+		}
+		else
+		{
+			liter.setText("" + new DecimalFormat("##.##").format(origQty)+" Liters");
+			price.setText("" + new DecimalFormat("##.##").format((borigPrice))+"  NIS");
+		}
 	}
 
 	private void setPay() {

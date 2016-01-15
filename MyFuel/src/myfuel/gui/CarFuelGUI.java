@@ -15,6 +15,7 @@ import javax.swing.JButton;
 
 import myfuel.GUIActions.CarFuelActions;
 import myfuel.client.*;
+import myfuel.response.FuelOrderResponse;
 
 import javax.swing.DefaultComboBoxModel;
 
@@ -41,7 +42,7 @@ import javax.swing.event.DocumentListener;
  */
 @SuppressWarnings("serial")
 public class CarFuelGUI extends SuperGUI {
-	
+	int nid;
 	/**
 	 * Quantity Text Field.
 	 */
@@ -94,8 +95,7 @@ public class CarFuelGUI extends SuperGUI {
 	 * Stations ComboBox, contain all the available Stations.
 	 */
 	protected  JComboBox <String> stationCombo;
-	
-	protected  ArrayList<NetworkRates> rates;
+
 	
 	protected int customerModel;
 	
@@ -110,6 +110,12 @@ public class CarFuelGUI extends SuperGUI {
 	protected  JComboBox <String> limitBox;
 	protected JLabel lblChooseStation;
 	protected JLabel lblChooseCar;
+	private JLabel lblModelDiscount;
+	protected JLabel lblModelDisc;
+	protected FuelOrderResponse res;
+	protected float discount;
+	protected Promotion p;
+	protected ActionListener listener ;
 	/**
 	 * Create new Car Fuel user interface.
 	 * @param actions - Car Fuel GUI Controller.
@@ -117,7 +123,7 @@ public class CarFuelGUI extends SuperGUI {
 	public CarFuelGUI(CarFuelActions actions) {
 		this.actions=actions;
 		IDHolder = new HashMap();
-		rates = new ArrayList<NetworkRates>();
+		p = null;
 		panel.setLocation(0, 0);
 		lblTitle.setBounds(218, 6, 117, 23);
 		lblTitle.setText("Car Fueling");
@@ -279,43 +285,53 @@ public class CarFuelGUI extends SuperGUI {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(175, 234, 242, 75);
+		panel.setBounds(107, 239, 370, 75);
 		panel2.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblPromotion = new JLabel("Promotion : ");
-		lblPromotion.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblPromotion.setBounds(6, 16, 77, 16);
+		lblPromotion.setFont(new Font("Arial", Font.BOLD, 13));
+		lblPromotion.setBounds(6, 29, 85, 16);
 		panel.add(lblPromotion);
 		
 		JLabel lblYourPricefor = new JLabel("Your Price (For Liter): ");
-		lblYourPricefor.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblYourPricefor.setBounds(6, 44, 142, 16);
+		lblYourPricefor.setFont(new Font("Arial", Font.BOLD, 13));
+		lblYourPricefor.setBounds(6, 53, 142, 16);
 		panel.add(lblYourPricefor);
 		
 		promDisc = new JLabel("");
 		promDisc.setFont(new Font("Arial", Font.PLAIN, 13));
-		promDisc.setBounds(87, 16, 120, 16);
+		promDisc.setBounds(87, 29, 120, 16);
 		panel.add(promDisc);
 		
 		totalPrice = new JLabel("");
 		totalPrice.setFont(new Font("Arial", Font.PLAIN, 13));
-		totalPrice.setBounds(146, 44, 61, 16);
+		totalPrice.setBounds(146, 53, 61, 16);
 		panel.add(totalPrice);
+		
+		lblModelDiscount = new JLabel("Total Model Discount: ");
+		lblModelDiscount.setFont(new Font("Arial", Font.BOLD, 13));
+		lblModelDiscount.setBounds(6, 6, 142, 16);
+		panel.add(lblModelDiscount);
+		
+		lblModelDisc = new JLabel("");
+		lblModelDisc.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblModelDisc.setBounds(146, 5, 218, 16);
+		panel.add(lblModelDisc);
 		
 		lblDriverName = new JLabel("Driver Name: ");
 		lblDriverName.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblDriverName.setBounds(276, 37, 99, 16);
+		lblDriverName.setBounds(6, 206, 99, 16);
 		lblDriverName.setVisible(false);
 		panel2.add(lblDriverName);
 		
 		dName = new JTextField();
 		dName.setVisible(false);
-		dName.setBounds(362, 32, 86, 26);
+		dName.setBounds(92, 201, 74, 26);
 		panel2.add(dName);
 		dName.setColumns(10);
-
-		btnStartFuel.addActionListener(new eventListener());
+		listener = new eventListener();
+		btnStartFuel.addActionListener(listener);
 		
 		
 	}
@@ -337,7 +353,9 @@ public class CarFuelGUI extends SuperGUI {
 			// TODO Auto-generated method stub
 			if(e.getStateChange()==ItemEvent.DESELECTED &&  e.getSource() == stationCombo)
 			{
-				updateDiscount();
+				nid = IDHolder.get(stationCombo.getSelectedIndex());
+				
+				setDetails(fuelSelected, nid);
 			}
 		}	
 	}
@@ -353,37 +371,52 @@ public class CarFuelGUI extends SuperGUI {
 		{
 			
 			fuelSelected = Fuel.Fuel95ID;
-			setDetails(fuelSelected);
+			setDetails(fuelSelected, nid);
 			
 		}
 		
 		if(e.getSource() == rbscooter.getRadioButton())
 		{
 			fuelSelected = Fuel.FuelScooter;
-			setDetails(fuelSelected);
+			setDetails(fuelSelected, nid);
 		}
 		
 		if(e.getSource() == rbdiesel.getRadioButton())
 		{
 			fuelSelected = Fuel.FuelDiesel;
-			setDetails(fuelSelected);
+			setDetails(fuelSelected, nid);
 		}
 		
 		if(e.getSource() == btnStartFuel)
 		{
-			if(actions.verifyDetails(LimitText.getText(), fuelSelected, dName.getText(), (String)stationCombo.getSelectedItem(),(Integer)carCB.getSelectedItem(),IDHolder.get(stationCombo.getSelectedIndex())))
+			if(actions.verifyDetails(LimitText.getText(), fuelSelected, dName.getText(), (String)stationCombo.getSelectedItem(),(Integer)carCB.getSelectedItem(),IDHolder.get(stationCombo.getSelectedIndex()),this.limitBox.getSelectedIndex()))
 				startFuel(Float.parseFloat(LimitText.getText()), this.limitBox.getSelectedIndex());
 		}
 		
 	}
 	
-	protected void setDetails(int fuelSelected) {
+	protected void setDetails(int fuelSelected,int nid) {
 		// TODO Auto-generated method stub
-	currentPrice = actions.getPrice(fuelSelected, IDHolder.get(stationCombo.getSelectedIndex()));
+		
+		discount = 0;
+		this.nid = nid;
+		float MonthlyOneDisc=0;
+		NetworkRates rates= res.getNRates(nid);
+		for(int i=0; i<customerModel; i++)
+		{
+			if(i!=1) discount += rates.getModelDiscount(i+1);
+			if(i==1)  MonthlyOneDisc = rates.getModelDiscount(i+1);
+		}
+	currentPrice = actions.getPriceForLiter(fuelSelected, nid);
 	totalPrice.setText(""+new DecimalFormat("##.##").format(currentPrice)+" NIS");
-	Promotion p = actions.getPromotion(fuelSelected);
+	lblModelDisc.setText(MonthlyOneDisc +"% (For Liter) ,"+new DecimalFormat("##.##").format(discount)+" %"+"(from total)");
+	p = actions.getPromotion(fuelSelected);
+	
 	if(p!=null)
+	{
 	promDisc.setText(new DecimalFormat("##.##").format(p.getDiscount()) +"%");
+	discount += p.getDiscount();
+	}
 	else promDisc.setText("No Promotion.");
 	}
 
@@ -392,14 +425,19 @@ public class CarFuelGUI extends SuperGUI {
  * @param rates
  * @param fuels
  */
-	public void setInfo(int customerModel,ArrayList<NetworkRates> rates, ArrayList<Fuel> fuels)
+	public void Initialize(int customerModel,FuelOrderResponse infoRes)
 	{
+				if(stationCombo.getSelectedIndex()>= 0)
+				nid = IDHolder.get(stationCombo.getSelectedIndex());
+				ArrayList<Fuel>fuels = infoRes.getFuels();
 				lblp95.setText(fuels.get(0).getMaxPrice()+"NIS");
 				lblpdiesel.setText(fuels.get(1).getMaxPrice()+"NIS");
 				lblpscooter.setText(fuels.get(2).getMaxPrice()+"NIS");
-				this.rates = rates;
 				this.customerModel = customerModel;
-				this.updateDiscount();
+				this.res= infoRes;
+				rb95.getRadioButton().setSelected(true);
+				fuelSelected=1;
+				setDetails(fuelSelected,nid);
 				
 	}
 	
@@ -425,12 +463,21 @@ public class CarFuelGUI extends SuperGUI {
 		carModel.addElement(cid);
 	}
 	
-	private void startFuel(float maxValue, int limit) {
+	protected void startFuel(float qty, int limit) {
 		// TODO Auto-generated method stub
 		float max;
-		if(limit == 1) max = maxValue / currentPrice; 
-		else max = maxValue;
-		FuelDialog dialog = new FuelDialog(this.actions,this,max,currentPrice);
+		float origPrice ;
+		float borigPrice = actions.getPriceForLiter(fuelSelected, nid) * qty;
+		if(limit == 1)
+		{
+			max = qty / currentPrice; 
+			borigPrice = qty;
+			
+		}
+		else max = qty;
+		origPrice = actions.getTotalPrice(fuelSelected, nid, max);
+		float origQty = max;
+		FuelDialog dialog = new FuelDialog(this.actions,this,max,currentPrice,origQty,origPrice,discount,borigPrice);
 		dialog.setVisible(true);
 	}
 
@@ -444,10 +491,6 @@ public class CarFuelGUI extends SuperGUI {
 		}
 	}
 	
-	private void updateDiscount()
-	{
-		if(fuelSelected!=-1) setDetails(fuelSelected);
-	}
 	
 	
 

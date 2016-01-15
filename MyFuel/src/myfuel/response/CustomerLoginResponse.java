@@ -21,6 +21,8 @@ public class CustomerLoginResponse extends Response {
 	
 	private Car FastFuelCar;
 	
+	private Station FastStation;
+	
 	/**
 	 * create new Customer Login Response .
 	 * @param userid - customer id.
@@ -44,11 +46,12 @@ public class CustomerLoginResponse extends Response {
 			
 	}
 	
-	public CustomerLoginResponse(Customer customer ,ArrayList<Network> networks,Car fastFuelCar)
+	public CustomerLoginResponse(Customer customer ,ArrayList<Network> networks,Car fastFuelCar,Station s)
 	{
 		this.setUser(customer);
 		this.setNetworks(networks);
 		this.setFastFuelCar(fastFuelCar);
+		this.setFastStation(s);
 	}
 
 	public Customer getUser() {
@@ -81,6 +84,14 @@ public class CustomerLoginResponse extends Response {
 
 	public void setFastFuelCar(Car fastFuelCar) {
 		FastFuelCar = fastFuelCar;
+	}
+
+	public Station getFastStation() {
+		return FastStation;
+	}
+
+	public void setFastStation(Station fastStation) {
+		FastStation = fastStation;
 	}
 
 
