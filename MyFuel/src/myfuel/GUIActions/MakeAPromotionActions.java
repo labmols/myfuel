@@ -18,15 +18,34 @@ import myfuel.response.MakeaPromotionResponse;
 import myfuel.response.Response;
 import myfuel.response.booleanResponse;
 
+/***
+ * This class will be uses as a controller for MakeaPromotionGUI
+ * @author karmo
+ *
+ */
 public class MakeAPromotionActions extends GUIActions {
+	/***
+	 * This class will be used as a controller for this GUI object
+	 */
 	MakeaPromotionGUI gui;
+	/***
+	 * Details about the requested data from the server 
+	 */
 	MakeaPromotionRequest request;
+	/***
+	 * Response Object from the server
+	 */
 	private Response response;
+	/***
+	 * MakeAPromotionActions Constructor
+	 * @param client - MyFuelClient
+	 */
 	public MakeAPromotionActions(MyFuelClient client) {
 		super(client);
 		gui = new MakeaPromotionGUI(this);
 	
 		request = new MakeaPromotionRequest(0);
+		gui.createWaitDialog("Getting Promotion Templates...");
 		client.handleMessageFromGUI(request);
 		gui.setVisible(true);
 	}
@@ -37,6 +56,7 @@ public class MakeAPromotionActions extends GUIActions {
 		
 		if(arg1 instanceof MakeaPromotionResponse)
 		{
+			gui.setWaitProgress();
 			response = (MakeaPromotionResponse)arg1;
 			
 			
@@ -50,6 +70,7 @@ public class MakeAPromotionActions extends GUIActions {
 		
 		else if(arg1 instanceof booleanResponse)
 		{
+			gui.setWaitProgress();
 			booleanResponse resp = (booleanResponse)arg1;
 			
 			if(resp.getSuccess())
@@ -60,13 +81,21 @@ public class MakeAPromotionActions extends GUIActions {
 		}
 
 	}
-	
+	/***
+	 * Getting the details about a specific promotion template
+	 * @param index - index of the template
+	 * @return Promotion Template Details
+	 */
 	public PromotionTemplate getPromotion(int index)
 	{
 		return ((MakeaPromotionResponse)response).getTemplates().get(index);
 	}
 	
-	
+	/***
+	 * Verifying that the input from the user is legal
+	 * @param start - Start Date of the promotion
+	 * @param end - end Date of the Promotion
+	 */
 	public void verifyDetails(Date start,Date end)
 	{
 		
@@ -86,6 +115,7 @@ public class MakeAPromotionActions extends GUIActions {
 			{
 				PromotionTemplate p =  gui.getP();
 				request = new MakeaPromotionRequest(1,p.getTid(),start,end);
+				gui.createWaitDialog("Creating Promotion...");
 				client.handleMessageFromGUI(request);
 			}
 		}
@@ -95,8 +125,9 @@ public class MakeAPromotionActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,this);
 		new MMActions(client);
+		changeFrame(gui,this);
+		
 		
 	}
 	

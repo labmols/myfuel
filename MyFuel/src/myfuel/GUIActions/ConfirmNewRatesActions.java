@@ -102,8 +102,9 @@ public class ConfirmNewRatesActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		changeFrame(gui,this);
 		new CMActions(client,msg,nid);
+		changeFrame(gui,this);
+		
 	}
 /***
  *  Sending approved rates(if there is) to the DB

@@ -45,6 +45,7 @@ public class SetNewRatesActions extends GUIActions {
 		super(client);
 		gui = new SetNewRatesGUI(this);
 		request=new SetNewRatesRequest(0);
+		gui.createWaitDialog("Getting Networks...");
 		client.handleMessageFromGUI(request);
 		gui.setVisible(true);	
 	}
@@ -98,6 +99,7 @@ public class SetNewRatesActions extends GUIActions {
 		
 		if(arg1 instanceof SetNewRatesResponse)
 		{
+			gui.setWaitProgress();
 			response = (SetNewRatesResponse)arg1;
 			OldRates=response.getOldRates();
 			gui.SetNewDetails(response.getOldRates(),response.getNetworks());
@@ -105,6 +107,7 @@ public class SetNewRatesActions extends GUIActions {
 		
 		else if(arg1 instanceof booleanResponse)
 		{
+			gui.setWaitProgress();
 			booleanResponse resp = (booleanResponse)arg1;
 			if(resp.getSuccess())
 			gui.showOKMessage(resp.getMsg());
@@ -115,8 +118,9 @@ public class SetNewRatesActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,this);
 		new MMActions(client);
+		changeFrame(gui,this);
+		
 		
 	}
 
@@ -127,6 +131,7 @@ public class SetNewRatesActions extends GUIActions {
 	public void sendSuggestion(ArrayList<NetworkRates> newRates) 
 	{
 		SetNewRatesRequest r = new SetNewRatesRequest(1,newRates);
+		gui.createWaitDialog("Updating Rates...");
 		client.handleMessageFromGUI(r);
 		
 	}

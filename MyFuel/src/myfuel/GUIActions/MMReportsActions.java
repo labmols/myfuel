@@ -42,15 +42,18 @@ public class MMReportsActions extends GUIActions {
 	{
 		if(arg1 instanceof MMReportsResponse) // will return MMReportsResponse in case of success
 		{
-			
+			gui.setWaitProgress();
 			gui.setReports(((MMReportsResponse)arg1).getPr(),((MMReportsResponse)arg1).getNames(),((MMReportsResponse)arg1).getStations(),
 					((MMReportsResponse)arg1).getCreport());
 		}
 		
 		else if(arg1 instanceof booleanResponse)  // will return boolean response only in case of an error
+		{
+			gui.setWaitProgress();
 			gui.showErrorMessage(((booleanResponse)arg1).getMsg());
+		}
 		
-		gui.setWaitProgress();
+		
 
 	}
 /***
@@ -59,8 +62,9 @@ public class MMReportsActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		changeFrame(gui,this);
 		new MMActions(client);
+		changeFrame(gui,this);
+		
 
 	}
 

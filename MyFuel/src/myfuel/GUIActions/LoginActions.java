@@ -97,8 +97,9 @@ public class LoginActions extends GUIActions {
 		 //NotificationManager.showNotification ( gui,"Connected" );
 		 
 			gui.showOKMessage("Welcome to MyFuel!");
-			changeFrame(gui,this);
 			new CustomerOptionsActions (client,res);
+			changeFrame(gui,this);
+			
 			
 		}
 		else
@@ -125,28 +126,28 @@ public class LoginActions extends GUIActions {
 			 gui.showOKMessage("Welcome to MyFuel!"); 
 			 switch(res.getRole()){
 			 case MarketingManager: 
-				 			changeFrame(gui,this);
 				 			new MMActions(client);
+				 			changeFrame(gui,this);	
 				 			break;
 			 case MarketingDelegate: 
+				 			  new MDActions(client);
 							 changeFrame(gui, this); 
-							 new MDActions(client);
 							 break;
 			case CompanyManager:
-				changeFrame(gui,this);
 				new CMActions(client,res.getMsg(),res.getNid());
+				changeFrame(gui,this);
 				break;
 			case StationManager:
-				changeFrame(gui,this);
 				new SMActions(client,((WorkerLoginResponse) response).getSid(),res.getMsg(),res.getNid());
+				changeFrame(gui,this);
 				break;
 			case StationWorker:
-				changeFrame(gui,this);
 				new SWActions(client,((WorkerLoginResponse) response).getSid());
+				changeFrame(gui,this);	
 				break;
 			case HomeManager:
-				changeFrame(gui,this);	
 				new homeQtyOrderActions(client);
+				changeFrame(gui,this);	
 				break;
 			 }
 			

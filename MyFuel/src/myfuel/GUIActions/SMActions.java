@@ -56,8 +56,9 @@ public class SMActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,this);
 		new LoginActions(client);
+		changeFrame(gui,this);
+		
 
 	}
 
@@ -74,8 +75,9 @@ public class SMActions extends GUIActions {
 	 */
 	public void CreateCheckInventoryWindow() 
 	{
-		changeFrame(gui,this);
 		new CheckInventoryActions(client,sid,msg,nid);
+		changeFrame(gui,this);
+		
 		
 	}
 	
@@ -85,8 +87,9 @@ public class SMActions extends GUIActions {
 	
 	public void CreateLowInventoryWindow()
 	{
-		changeFrame(gui,this);
 		new LowInventoryActions(client,sid,msg,nid);
+		changeFrame(gui,this);
+		
 	}
 	
 	/***
@@ -95,9 +98,9 @@ public class SMActions extends GUIActions {
 
 	public void CreateReports() 
 	{
-		
-		changeFrame(gui,this);
 		new StationReportActions(client,sid,msg,nid);
+		changeFrame(gui,this);
+		
 	}
 
 }

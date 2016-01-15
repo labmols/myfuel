@@ -11,15 +11,45 @@ import myfuel.request.LowInventoryRequest;
 import myfuel.response.booleanResponse;
 import myfuel.server.LowInventoryResponse;
 
+/***
+ * Controller for  LowInventoryGUI
+ * @author karmo
+ *
+ */
 public class LowInventoryActions extends GUIActions {
 
+	/***
+	 * Station ID
+	 */
 	private int sid;
+	/***
+	 * This class will be used as a controller for this GUI object
+	 */
 	private LowInventoryGUI gui ; 
+	/***
+	 * Details about the requested data from the server 
+	 */
 	private LowInventoryRequest request;
+	/***
+	 * Contains the new low inventory Level as set by the manager
+	 */
 	private ArrayList<Integer> NewLowInventory ;
+	/***
+	 * Messages for the manager
+	 */
 	private ArrayList<MessageForManager> msg;
+	/***
+	 * Network ID
+	 */
 	private int nid ; 
 	
+	/***
+	 * LowInventoryActions Constructor
+	 * @param client - MyFuelClient
+	 * @param sid - Station ID
+	 * @param msg - Messages for the manager
+	 * @param nid  - Network ID
+	 */
 	public LowInventoryActions(MyFuelClient client, int sid,ArrayList<MessageForManager>msg, int nid) {
 		
 		super(client);
@@ -37,6 +67,12 @@ public class LowInventoryActions extends GUIActions {
 		NewLowInventory=new  ArrayList<Integer>();
 	}
 
+	/***
+	 * This method will check if the details that the user set are legal
+	 * @param LowFuel95 - New Low inventory level for 95 
+	 * @param LowFuelDiesel - New Low inventory level for diesel
+	 * @param LowFuelScooter - New Low inventory level for Scooter 
+	 */
 	public void verifyDetails(String LowFuel95,String LowFuelDiesel,String LowFuelScooter)
 	{
 		int nLowFuel95=0,nLowFuelDiesel=0,nLowFuelScooter=0;
@@ -108,8 +144,9 @@ public class LowInventoryActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,this);
 		new SMActions(client,this.sid,msg,nid);
+		changeFrame(gui,this);
+		
 
 	}
 

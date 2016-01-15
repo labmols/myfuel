@@ -140,8 +140,9 @@ public class RegisterActions extends GUIActions {
 		if(res.getSuccess()) {
 			gui.setWaitProgress();
 			gui.showOKMessage(res.getMsg());
-			changeFrame(gui,this);
 			new LoginActions(client);
+			changeFrame(gui,this);
+			
 
 		}
 		else 
@@ -333,8 +334,9 @@ public class RegisterActions extends GUIActions {
 	 */
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,this);
 		new LoginActions(client);
+		changeFrame(gui,this);
+		
 		
 	}
 	

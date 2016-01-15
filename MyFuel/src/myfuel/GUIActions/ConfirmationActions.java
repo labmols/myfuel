@@ -73,6 +73,7 @@ public class ConfirmationActions extends GUIActions {
 		
 		else if(arg1 instanceof booleanResponse)
 		{
+			gui.setWaitProgress();
 		    booleanResponse res  = ((booleanResponse)arg1);
 			if(res.getSuccess())
 			{
@@ -116,6 +117,7 @@ public class ConfirmationActions extends GUIActions {
 	{
 		this.approved = approved;
 		ConfirmationRequest request = new ConfirmationRequest(RequestEnum.Insert,approved);
+		gui.createWaitDialog("Updating Details...");
 		client.handleMessageFromGUI(request);
 	}
 
@@ -123,8 +125,9 @@ public class ConfirmationActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 	
-			changeFrame(gui,this);
 			new MDActions(client);
+			changeFrame(gui,this);
+			
 	}
 
 }

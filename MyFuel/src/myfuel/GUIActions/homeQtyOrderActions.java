@@ -47,6 +47,7 @@ public class homeQtyOrderActions extends GUIActions {
 		
 		gui = new HomeQtyOrderGUI(this);
 		homeQtyOrderRequest request = new homeQtyOrderRequest(RequestEnum.HomeGet);
+		gui.createWaitDialog("Getting Details...");
 		client.handleMessageFromGUI(request);
 		gui.setVisible(true);
 	}
@@ -56,7 +57,8 @@ public class homeQtyOrderActions extends GUIActions {
 	{
 		
 			if(arg1 instanceof HomeQtyResponse)
-			{				 
+			{	
+				gui.setWaitProgress();
 				current = ((HomeQtyResponse)arg1).getMinimal().getQty();
 				if(((HomeQtyResponse)arg1).getOrder()!= null)
 					orderQty =  ((HomeQtyResponse)arg1).getOrder().getQty();
@@ -65,6 +67,7 @@ public class homeQtyOrderActions extends GUIActions {
 			
 			else if(arg1 instanceof booleanResponse)
 			{
+				gui.setWaitProgress();
 				
 					if(((booleanResponse)arg1).getSuccess())
 						gui.showOKMessage(((booleanResponse)arg1).getMsg());
@@ -87,9 +90,8 @@ public class homeQtyOrderActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		changeFrame(gui,this);
 		new LoginActions(client);
-
+		changeFrame(gui,this);
 	}
 /***
  *  Sending Order details to the server
@@ -97,6 +99,7 @@ public class homeQtyOrderActions extends GUIActions {
  */
 	public void setOrder() 
 	{
+		gui.createWaitDialog("Updating Inventory Quantity...");
 		client.handleMessageFromGUI(new homeQtyOrderRequest(RequestEnum.HomeSetOrder) );
 		
 	}
@@ -127,6 +130,7 @@ public class homeQtyOrderActions extends GUIActions {
 				else
 				{
 					this.level = low;
+					gui.createWaitDialog("Updating Low Level Limit...");
 					client.handleMessageFromGUI(new homeQtyOrderRequest(RequestEnum.HomeSetLow,low));
 				}
 			

@@ -68,8 +68,9 @@ public class AnalysticActions extends GUIActions {
 	@Override
 	public void backToMenu()
 	{
+		new MDActions(client);
 		changeFrame(gui,this);
-		 new MDActions(client);
+		 
 	}
 	
 	/***
