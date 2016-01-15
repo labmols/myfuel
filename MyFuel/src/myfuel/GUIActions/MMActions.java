@@ -4,10 +4,11 @@ import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
 import myfuel.gui.MMGUI;
+import myfuel.request.LoginRequest;
 
 public class MMActions extends GUIActions{
 
-	MMGUI gui ;
+	private MMGUI gui ;
 	public MMActions(MyFuelClient client) {
 		super(client);
 		gui = new MMGUI(this);
