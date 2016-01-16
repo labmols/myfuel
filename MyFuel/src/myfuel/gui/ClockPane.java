@@ -12,6 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.SwingConstants;
 
+/***
+ * User Interface for showing the current  Date & Hour
+ * @author Maor
+ *
+ */
 @SuppressWarnings("serial")
 public class ClockPane extends JPanel {
 		

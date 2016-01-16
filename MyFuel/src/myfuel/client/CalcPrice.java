@@ -1,6 +1,5 @@
 package myfuel.client;
 
-import java.util.ArrayList;
 
 /**
  * This class has static methods that calculate all orders total price(according to promotions and sale model).

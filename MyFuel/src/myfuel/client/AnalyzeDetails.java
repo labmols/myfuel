@@ -1,7 +1,7 @@
 package myfuel.client;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 /***
  * This class will has the details for the analystic system

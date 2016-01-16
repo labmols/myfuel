@@ -16,19 +16,59 @@ import java.util.ArrayList;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+/***
+ * User interface for showing the Low inventory level and current levels of fuels 
+ * @author karmo
+ *
+ */
+@SuppressWarnings("serial")
 public class LowInventoryGUI extends SuperGUI{
 
+	/***
+	 * Controller for this GUI
+	 */
 	private LowInventoryActions actions;
+	/****
+	 * TextField for getting the suggested low level for 95 fuel type
+	 */
 	private JTextField LowFuel95;
+	/****
+	 * TextField for getting the suggested low level for Diesel fuel type
+	 */
 	private JTextField LowFuelDiesel;
+	/****
+	 * TextField for getting the suggested low level for Scooter fuel type
+	 */
 	private JTextField LowFuelScooter;
+	/****
+	 * TextField for Showing the current  Quantity for 95 fuel type
+	 */
 	private JTextField Current95;
+	/****
+	 * TextField for Showing the current  Quantity for Diesel fuel type
+	 */
 	private JTextField CurrentDiesel;
+	/****
+	 * TextField for Showing the current  Quantity for Scooter fuel type
+	 */
 	private JTextField CurrentScooter;
+	/****
+	 * TextField for Showing the current  low level for 95 fuel type
+	 */
 	private JTextField min95;
+	/****
+	 * TextField for Showing the current  low level for Diesel fuel type
+	 */
 	private JTextField minDiesel;
+	/****
+	 * TextField for Showing the current  low level for Scooter fuel type
+	 */
 	private JTextField minScotter;
 	
+	/***
+	 * LowInventoryGUI Constructor
+	 * @param actions - controller for this GUI
+	 */
 	public LowInventoryGUI(LowInventoryActions actions)
 	{
 		super(actions);
@@ -143,6 +183,12 @@ public class LowInventoryGUI extends SuperGUI{
 	public void getInput(ActionEvent e) {
 		
 	}
+	
+	
+	/***
+	 * This method will update the textefields with the current low level value and current quantity
+	 * @param qty - current details
+	 */
 	public void setText(ArrayList<FuelQty> qty) 
 	{
 		min95.setText(qty.get(0).getMqty()+"");
@@ -155,7 +201,10 @@ public class LowInventoryGUI extends SuperGUI{
 		
 	}
 	
-	
+	/***
+	 * This method will the current low level with the new low level after the change.
+	 * @param newLowInventory - New low inventory levels.
+	 */
 	public void updateNew(ArrayList<Integer> newLowInventory) 
 	{
 		min95.setText(newLowInventory.get(0)+"");

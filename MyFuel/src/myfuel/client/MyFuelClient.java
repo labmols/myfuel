@@ -7,7 +7,7 @@ import javax.swing.SwingUtilities;
 
 import com.alee.laf.WebLookAndFeel;
 
-import myfuel.GUIActions.LoginActions;
+
 import myfuel.gui.ConnectDialog;
 import myfuel.ocsf.client.ObservableClient;
 

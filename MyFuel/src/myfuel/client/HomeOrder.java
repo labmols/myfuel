@@ -8,6 +8,7 @@ import java.util.Date;
  *
  *
  */
+@SuppressWarnings("serial")
 public class HomeOrder implements Serializable {
 	
 	/**

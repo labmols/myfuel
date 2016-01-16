@@ -24,27 +24,77 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 
-
+/***
+ * User interface for making new promotion
+ * @author karmo
+ *
+ */
+@SuppressWarnings("serial")
 public class MakeaPromotionGUI extends SuperGUI{
-
-	MakeAPromotionActions actions;
+	/***
+	 * Controller for this GUI
+	 */
+	private MakeAPromotionActions actions;
+	/***
+	 * Description for user
+	 */
 	private JLabel dis;  // discount amount
+	/***
+	 * Description for user
+	 */
 	private JLabel type; // type of customer
+	/***
+	 * Description for user
+	 */
 	private JLabel end; // end time 
+	/***
+	 * Description for user
+	 */
 	private JLabel start; // start time
-	private JComboBox<?> templates;
+	/***
+	 * ConboBox for showing the templates names
+	 */
+	private JComboBox<String> templates;
+	/***
+	 * The promotion selected 
+	 */
 	private PromotionTemplate p ;
+	/***
+	 * End date of the promotion
+	 */
 	private Date endDate;
+	/***
+	 * Start Date of the promtoin
+	 */
 	private Date startDate;
+	/***
+	 * Description for user
+	 */
 	private JLabel fuel;
-	private DefaultComboBoxModel model;
+	/***
+	 * Combobox model 
+	 */
+	private DefaultComboBoxModel<String> model;
+	/***
+	 * Date picker for choosing the start date
+	 */
 	private WebDateField datePicker;
+	/***
+	 * Date picker for choosing the end date
+	 */
 	private WebDateField datePicker2;
-	
+	/***
+	 * Creation Button
+	 */
+	private JButton btnCreate;
+	/***
+	 * MakeaPromotionGUI Constructor
+	 * @param actions - controller for this GUI
+	 */
 	public MakeaPromotionGUI(MakeAPromotionActions actions) 
 	{
 		super(actions);
-		model = new DefaultComboBoxModel(  );
+		model = new DefaultComboBoxModel<String>(  );
 		
 		
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
@@ -58,9 +108,9 @@ public class MakeaPromotionGUI extends SuperGUI{
 		lblNewLabel.setBounds(112, 71, 129, 14);
 		panel.add(lblNewLabel);
 		
-		templates = new JComboBox();
+		templates = new JComboBox<String>();
 		templates.setFont(new Font("Arial", Font.PLAIN, 13));
-		templates.addActionListener(new template_show());
+		templates.addActionListener(new handler());
 		templates.setModel(model);
 		templates.setBounds(241, 66, 137, 27);
 		panel.add(templates);
@@ -116,9 +166,9 @@ public class MakeaPromotionGUI extends SuperGUI{
 		end.setBounds(415, 169, 84, 14);
 		panel.add(end);
 		
-		JButton btnCreate = new JButton("Create");
+		 btnCreate = new JButton("Create");
 		btnCreate.setBounds(239, 348, 114, 38);
-		btnCreate.addActionListener(new createPromotion());
+		btnCreate.addActionListener(new handler());
 		panel.add(btnCreate);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
@@ -160,18 +210,7 @@ public class MakeaPromotionGUI extends SuperGUI{
 	public void getInput(ActionEvent e)
 	{
 	
-		
-		setStartDate((Date) datePicker.getDate());
-		setEndDate((Date) datePicker2.getDate());
-		actions.verifyDetails(startDate, endDate);
-		
-	}
-	
-	private class template_show implements ActionListener
-	{
-		
-		@Override
-		public void actionPerformed(ActionEvent e) 
+		if(e.getSource() == templates)
 		{
 			p = actions.getPromotion(templates.getSelectedIndex());
 			dis.setText(""+p.getDiscount());
@@ -199,24 +238,34 @@ public class MakeaPromotionGUI extends SuperGUI{
 				type.setText("Company");
 			start.setText(""+p.getStartTime());
 			end.setText(""+p.getEndTime());
-			
+		}
+		
+		else if(e.getSource() == btnCreate)
+		{
+			setStartDate((Date) datePicker.getDate());
+			setEndDate((Date) datePicker2.getDate());
+			actions.verifyDetails(startDate, endDate);
 		}
 		
 	}
 	
-	private class createPromotion implements ActionListener
+	/***
+	 * Action Listener for handling action events
+	 * @author karmo
+	 *
+	 */
+	private class handler implements ActionListener
 	{
-
+		
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			 
+		public void actionPerformed(ActionEvent e) 
+		{
 			getInput(e);
-			
-			
-			
 		}
 		
 	}
+	
+
 	
 	public PromotionTemplate getP()
 	{
