@@ -392,7 +392,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				String content= "Dear " + fname + " " +lname + ",\n"
 						+ "New inventory order has been created: "
 						+ "\n\n" + "Fuel Type: " + fuelType + 
-						  "\n"   +"Amount: " + 5*mqty + " Liters" 
+						  "\n"   +"Amount: " + factor*mqty + " Liters" 
 						+ "\n\n\n" +"MyFuel System.";
 				
 				MailThread mailT = new MailThread(email,subject,content);
