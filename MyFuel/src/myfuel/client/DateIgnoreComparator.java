@@ -17,6 +17,7 @@ public class DateIgnoreComparator implements Comparator<Date>{
 	 * @param Date start - Start Date
 	 * @param Date end - end Date
 	 */
+	@SuppressWarnings("deprecation")
 	public int compare(Date start, Date end)
 	{
 		if(start.getHours() != end.getHours())

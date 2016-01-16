@@ -1,14 +1,19 @@
 package myfuel.client;
 
 
-import java.io.Serializable;
+
 import java.sql.Time;
-import java.sql.Timestamp;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
+/***
+ * Promotion details
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class Promotion extends PromotionTemplate{
 	
@@ -69,36 +74,21 @@ public class Promotion extends PromotionTemplate{
 	}
 	
 	
-/***
- * 
- * @return startDate
- */
+
 	public Date getStartDate()
 	{
 		return startDate;
 	}
-	/***
-	 * 
-	 * @return endDate
-	 */
+	
 	public Date getEndDate()
 	{
 		return endDate;
 	}
 
-/***
- * 
- * @return pid
- */
-
 	public int getPid() {
 		return pid;
 	}
 
-/***
- * set pid 
- * @param pid
- */
 
 	public void setPid(int pid) {
 		this.pid = pid;

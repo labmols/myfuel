@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 
 
 
+
 import myfuel.GUIActions.SetNewRatesActions;
 import myfuel.client.BackMainMenu;
 import myfuel.client.Fuel;
@@ -37,6 +38,12 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 
+/***
+ * User interface for setting new rates 
+ * @author karmo
+ *
+ */
+@SuppressWarnings("serial")
 public class SetNewRatesGUI extends SuperGUI {
 	/***
 	 * Controller for this GUI

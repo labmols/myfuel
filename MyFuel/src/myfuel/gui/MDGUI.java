@@ -9,12 +9,34 @@ import myfuel.client.BackMainMenu;
 
 import javax.swing.JButton;
 
+/***
+ * User Interface for the Marketing Delegate
+ * @author karmo
+ *
+ */
+@SuppressWarnings("serial")
 public class MDGUI extends SuperGUI {
-	MDActions actions;
-	JButton btnCreatePromotionTemplate;
-	JButton analystic;
-	JButton btnConfirmNewCustomers;
+	/***
+	 * Controller for this GUI
+	 */
+	private MDActions actions;
+	/***
+	 * Create Promotion Template Button
+	 */
+	private JButton btnCreatePromotionTemplate;
+	/***
+	 * Analytic system button
+	 */
+	private JButton analystic;
+	/***
+	 * Confirm new customers button
+	 */
+	private JButton btnConfirmNewCustomers;
 	
+	/***
+	 * MDGUI Constructor
+	 * @param actions - controller for this GUI
+	 */
 	public MDGUI(MDActions actions){
 		super(actions);
 		setContentPane(contentPane);
@@ -42,8 +64,6 @@ public class MDGUI extends SuperGUI {
 	/***
 	 * Listener for JButtons
 	 * When a button is pressed the correct window will be show to the user 
-	 * 
-	 *
 	 */
 	private class btnHandler implements ActionListener
 	{

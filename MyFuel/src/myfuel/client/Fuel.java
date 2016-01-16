@@ -46,35 +46,23 @@ public class Fuel implements Serializable {
 	}
 	
 
-	/***
-	 *  
-	 * @return fuel id 
-	 */
+	
 	public int getFid() {
 		return fid;
 	}
 	
-	/***
-	 *  set fuel id 
-	 * @param fid
-	 */
+	
 	public void setFid(int fid) {
 		this.fid = fid;
 	}
 	
 
-	/***
-	 * 
-	 * @return maximal price
-	 */
+	
 	public float getMaxPrice() {
 		return maxPrice;
 	}
 	
-	/***
-	 * set maximal price
-	 * @param maxPrice
-	 */
+	
 	public void setMaxPrice(float maxPrice) {
 		this.maxPrice = maxPrice;
 	}

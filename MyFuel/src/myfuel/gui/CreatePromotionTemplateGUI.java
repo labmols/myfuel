@@ -105,7 +105,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		panel.add(lblPromotionName);
 		
 		 name = new JTextField();
-		name.setBounds(280, 79, 135, 20);
+		name.setBounds(280, 72, 135, 35);
 		panel.add(name);
 		name.setColumns(10);
 		

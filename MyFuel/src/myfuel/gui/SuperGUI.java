@@ -201,12 +201,19 @@ public abstract class SuperGUI extends JFrame {
 		
 	}
 	
+	/***
+	 * Creates waiting dialog with a message tp the user
+	 * @param msg - the message for the user
+	 */
 	public void createWaitDialog(String msg)
 	{
 		waitD = new WaitDialog(msg);
 		waitD.setVisible(true);
 	}
 	
+	/***
+	 * Closing the waiting dialog
+	 */
 	public void setWaitProgress()
 	{
 		waitD.setProgress(1);

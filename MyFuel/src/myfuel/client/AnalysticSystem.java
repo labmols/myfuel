@@ -7,8 +7,7 @@ package myfuel.client;
  */
 public class AnalysticSystem 
 {
-	static int min;
-	static int d;
+	
 	
 	/***
 	 * This method will calculate the Rating of count that sent to it 

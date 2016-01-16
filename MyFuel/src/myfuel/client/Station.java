@@ -17,6 +17,9 @@ public class Station implements Serializable {
 	 */
 	private String sname;
 	
+	/***
+	 * The network this station is belong
+	 */
 	private Network network;
 	
 	
@@ -30,6 +33,12 @@ public class Station implements Serializable {
 		this.sname = sname;
 	}
 	
+	/***
+	 * Stations Constructor 
+	 * @param sid - Station ID
+	 * @param sname - Station Name
+	 * @param network - Network Details
+	 */
 	public Station(int sid,String sname , Network network){
 		this.sid = sid;
 		this.sname = sname;

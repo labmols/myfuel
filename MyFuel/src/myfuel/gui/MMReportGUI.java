@@ -40,7 +40,7 @@ public class MMReportGUI extends SuperGUI{
 	private JComboBox<String> comboBox;
 	/***
 	 * MMReportGUI COnstructor
-	 * @param actions - COntroller For This GUI
+	 * @param actions - Controller For This GUI
 	 */
 	public MMReportGUI(MMReportsActions actions)
 	{
@@ -69,7 +69,7 @@ public class MMReportGUI extends SuperGUI{
 	
 	
 	/***
-	 * Action Listener 
+	 * Action Listener for handling action events
 	 * @author karmo
 	 *
 	 */
@@ -79,20 +79,7 @@ public class MMReportGUI extends SuperGUI{
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			if(comboBox.getSelectedIndex() == 0) // promotion reports
-			{
-				reportPanel.setVisible(true);
-				customerPanel.setVisible(false);
-			}
-			
-			else  // customer reports
-			{
-				reportPanel.setVisible(false);
-				customerPanel.setVisible(true);
-			}
-			
-			
-			
+				getInput(e);
 		}
 		
 	}
@@ -115,7 +102,20 @@ public class MMReportGUI extends SuperGUI{
 	@Override
 	public void getInput(ActionEvent e) 
 	{
-		
+		if(e.getSource() == comboBox)
+		{
+			if(comboBox.getSelectedIndex() == 0) // promotion reports
+			{
+				reportPanel.setVisible(true);
+				customerPanel.setVisible(false);
+			}
+			
+			else  // customer reports
+			{
+				reportPanel.setVisible(false);
+				customerPanel.setVisible(true);
+			}
+		}
 		
 	}
 	

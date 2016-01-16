@@ -2,7 +2,7 @@ package myfuel.client;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.Date;
+
 
 /***
  * This class will has the details of the Promotion template 

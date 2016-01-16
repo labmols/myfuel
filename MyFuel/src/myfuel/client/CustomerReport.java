@@ -3,9 +3,10 @@ package myfuel.client;
 import java.io.Serializable;
 /***
  * This class will represent the user's behavior  in a specific station
- * @author ORON
+ * @author karmo
  *
  */
+@SuppressWarnings("serial")
 public class CustomerReport implements Serializable {
 
 	/***

@@ -15,6 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+/***
+ * User interface for station reports
+ * @author karmo
+ *
+ */
+@SuppressWarnings("serial")
 public class StationReportGUI extends SuperGUI{
 
 	/***
@@ -112,7 +118,7 @@ public class StationReportGUI extends SuperGUI{
 		
 	}
 	/***
-	 * This method will send the inventory to its panel 
+	 * This method will set the Inventory report panel with its details
 	 * @param inventory - The fuels with it's quantities for specific station
 	 */
 	public void setInventoryPanel(ArrayList<FuelQty> inventory)
@@ -123,6 +129,11 @@ public class StationReportGUI extends SuperGUI{
 		purchaseR.setVisible(false);
 	}
 	
+	/***
+	 * Action Listener for handling action events
+	 * @author karmo
+	 *
+	 */
 	private class btnHandler implements ActionListener
 	{
 
@@ -136,6 +147,10 @@ public class StationReportGUI extends SuperGUI{
 		
 	}
 
+	/***
+	 * This method will set the Purchase report panel with its details
+	 * @param p - Details for the purchase report
+	 */
 	public void setPurchasePanel(ArrayList<Purchase> p) 
 	{
 		purchaseR.setTable(p);
@@ -144,6 +159,10 @@ public class StationReportGUI extends SuperGUI{
 		purchaseR.setVisible(true);
 	}
 	
+	/***
+	 * This method will set the Incomes report panel with its details
+	 * @param incomes - Details for the incomes report
+	 */
 	public void setIncomesPanel(ArrayList<Purchase> incomes)
 	{
 		incomesR.setTable(incomes);
