@@ -1,6 +1,7 @@
 package myfuel.response;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import myfuel.client.Purchase;
 
@@ -14,10 +15,15 @@ public class PurchaseResponse extends Response {
 	 * List of Customer purchases.
 	 */
 	private ArrayList <Purchase> customerPurchases;
+	/**
+	 * List of sorted months list for showing the purchase according month.
+	 */
+	private ArrayList <Date> dateList;
 	
-	public PurchaseResponse(ArrayList<Purchase> customerPurchases)
+	public PurchaseResponse(ArrayList<Purchase> customerPurchases,ArrayList <Date> dateList)
 	{
 		this.setCustomerPurchases(customerPurchases);
+		this.setDateList(dateList);
 	}
 
 	public ArrayList <Purchase> getCustomerPurchases() {
@@ -26,6 +32,14 @@ public class PurchaseResponse extends Response {
 
 	public void setCustomerPurchases(ArrayList <Purchase> customerPurchases) {
 		this.customerPurchases = customerPurchases;
+	}
+
+	public ArrayList <Date> getDateList() {
+		return dateList;
+	}
+
+	public void setDateList(ArrayList <Date> dateList) {
+		this.dateList = dateList;
 	}
 	
 	

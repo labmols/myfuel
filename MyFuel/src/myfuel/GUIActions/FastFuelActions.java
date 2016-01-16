@@ -215,8 +215,9 @@ public class FastFuelActions extends CarFuelActions {
 	@Override
 	public void backToMenu()
 	{
-		new LoginActions(client);
+
 		changeFrame(guiF,this);
+		new LoginActions(client);
 		
 	}
 	

@@ -1,6 +1,7 @@
 package myfuel.GUIActions;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Observable;
 
 import myfuel.client.MyFuelClient;
@@ -11,6 +12,7 @@ import myfuel.request.LoginRequest;
 import myfuel.request.PurchaseRequest;
 import myfuel.response.CustomerLoginResponse;
 import myfuel.response.PurchaseResponse;
+import myfuel.response.booleanResponse;
 
 /**
  * Purchase History GUI Controller, handle all the logic functionality and getting info from DB.
@@ -60,6 +62,14 @@ public class PurchaseActions extends GUIActions {
 			PurchaseResponse res = (PurchaseResponse) arg;
 			ArrayList<Purchase> pList = new ArrayList<Purchase>(res.getCustomerPurchases());
 			gui.showPurchases(pList);
+			gui.addDates(res.getDateList());
+		}
+		
+		else if(arg instanceof booleanResponse)
+		{
+			booleanResponse res = (booleanResponse) arg;
+			gui.showOKMessage(res.getMsg());
+			this.backToMenu();
 		}
 		
 	}
@@ -67,8 +77,9 @@ public class PurchaseActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		new CustomerOptionsActions(client, res, lr);
+
 		changeFrame(gui,this);
+		new CustomerOptionsActions(client, res, lr);
 	}
 
 	@Override

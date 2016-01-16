@@ -312,8 +312,8 @@ public class UpdateDetailsActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		if(!isConfirmed) clearLists();
-		new CustomerOptionsActions(client,res,lr);
 		changeFrame(gui,this);
+		new CustomerOptionsActions(client,res,lr);
 		
 	}
 	

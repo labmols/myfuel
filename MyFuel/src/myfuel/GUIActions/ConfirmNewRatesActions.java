@@ -103,8 +103,9 @@ public class ConfirmNewRatesActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		new CMActions(client,msg,nid,lr);
+
 		changeFrame(gui,this);
+		new CMActions(client,msg,nid,lr);
 		
 	}
 /***

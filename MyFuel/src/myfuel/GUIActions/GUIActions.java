@@ -51,9 +51,9 @@ public abstract class GUIActions implements Observer {
 	 * @param currentActions - Current GUI Controller 
 	 */
 	public void changeFrame(SuperGUI g,GUIActions currentActions){
+		client.deleteObserver(currentActions);
 		g.setVisible(false);
 		g.dispose();
-		client.deleteObserver(currentActions);
 	}
 	
 	/**
@@ -65,10 +65,13 @@ public abstract class GUIActions implements Observer {
 	{
 		req.setChangeStatus(1);
 		client.handleMessageFromGUI(req);
-		new LoginActions(client);
 		changeFrame(g,this);
+		new LoginActions(client);
 	}
-
+	
+	/**
+	 * Log out from the system.
+	 */
 	public abstract void LogOut() ;
 		// TODO Auto-generated method stub
 		

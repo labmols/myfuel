@@ -193,8 +193,9 @@ public class HomeOrderActions extends GUIActions {
 	@Override
 	public void backToMenu() {
 		// TODO Auto-generated method stub
-		new CustomerOptionsActions(client, LoginRes,lr);
+		
 		changeFrame(gui, this);
+		new CustomerOptionsActions(client, LoginRes,lr);
 		 
 	}
 	

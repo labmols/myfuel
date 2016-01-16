@@ -6,11 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Observable;
 
 import myfuel.client.Purchase;
 import myfuel.request.PurchaseRequest;
 import myfuel.response.PurchaseResponse;
+import myfuel.response.booleanResponse;
 
 /**
  * This DB Handler handle all the queries related to the customer purchase user interface.
@@ -33,15 +35,17 @@ public class PurchaseDBHandler extends DBHandler{
 	 * @param customerID - Customer ID number.
 	 * @return
 	 */
-	private ArrayList<Purchase> getPurchases(int customerID) {
+	private PurchaseResponse getAll(int customerID) {
 		// TODO Auto-generated method stub
 		ArrayList<Purchase> pList = new ArrayList<Purchase>();
+		ArrayList <Date> datesList = new ArrayList<Date>();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 
 			try 
 			{
-				ps= con.prepareStatement("SELECT p.pid,c.cid,s.name,f.fname,p.pdate,p.qty,p.bill FROM purchase p,customer_purchase c,station_in_network s, fuel_price f where c.uid = ? and p.pid=c.pid and p.fuelid=f.fuelid and s.sid = p.sid" );
+				ps= con.prepareStatement("SELECT p.pid,c.cid,s.name,f.fname,p.pdate,p.qty,p.bill"
+						+ " FROM purchase p,customer_purchase c,station_in_network s, fuel_price f where c.uid = ? and p.pid=c.pid and p.fuelid=f.fuelid and s.sid = p.sid" );
 				ps.setInt(1, customerID);
 				rs = ps.executeQuery();
 				while(rs.next())
@@ -49,9 +53,17 @@ public class PurchaseDBHandler extends DBHandler{
 						Purchase p = new Purchase(customerID,rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getTimestamp(5),rs.getFloat(6),rs.getFloat(7));
 						pList.add(p);
 				}
+				ps= con.prepareStatement("SELECT DISTINCT INTERVAL 1"
+										+" DAY + DATE( STR_TO_DATE( DATE_FORMAT( pdate,  '%c,%Y' ) ,  '%m,%Y' ) ) "
+										+" FROM purchase");
+				rs = ps.executeQuery();
+				while(rs.next())
+				{
+					datesList.add(rs.getDate(1));
+				}
 				ps.close();
 				rs.close();
-				return pList;
+				return new PurchaseResponse(pList, datesList);
 				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -74,9 +86,10 @@ public class PurchaseDBHandler extends DBHandler{
 		if(arg instanceof PurchaseRequest)
 		{
 			PurchaseRequest req = (PurchaseRequest) arg;
-			ArrayList<Purchase> customerPurchases = getPurchases(req.getCustomerID());
-			PurchaseResponse res = new PurchaseResponse(customerPurchases);
+			PurchaseResponse res = getAll(req.getCustomerID());
+			if(res != null)
 			server.setResponse(res);
+			else server.setResponse(new booleanResponse(false, "SQL Error"));
 		}
 	}
 	

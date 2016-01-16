@@ -167,8 +167,8 @@ public class LoginActions extends GUIActions {
 	 *  Open register option screen.
 	 */
 	public void RegisterScreen(){
-		new RegisterActions(client,lr);
 		changeFrame(gui,this);
+		new RegisterActions(client,lr);
 		
 	
 	
@@ -200,9 +200,8 @@ public class LoginActions extends GUIActions {
 	 */
 	public void FastFuel() {
 		// TODO Auto-generated method stub
-		client.deleteObserver(this);
-		new FastFuelActions(client,lr);
 		changeFrame(gui,this);
+		new FastFuelActions(client,lr);
 		
 	}
 

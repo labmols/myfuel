@@ -145,8 +145,9 @@ public class LowInventoryActions extends GUIActions {
 
 	@Override
 	public void backToMenu() {
-		new SMActions(client,this.sid,msg,nid,lr);
+
 		changeFrame(gui,this);
+		new SMActions(client,this.sid,msg,nid,lr);
 		
 
 	}

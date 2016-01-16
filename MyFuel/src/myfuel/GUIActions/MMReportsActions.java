@@ -63,8 +63,9 @@ public class MMReportsActions extends GUIActions {
 	@Override
 	public void backToMenu() 
 	{
-		new MMActions(client,lr);
+
 		changeFrame(gui,this);
+		new MMActions(client,lr);
 		
 
 	}

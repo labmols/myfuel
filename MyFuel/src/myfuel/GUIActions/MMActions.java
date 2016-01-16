@@ -74,8 +74,9 @@ public class MMActions extends GUIActions{
 	 */
 	public void createaDetailsWindow() 
 	{
-		new MMAnalyzedActions(client,lr) ;
+	
 		changeFrame(gui, this);
+		new MMAnalyzedActions(client,lr) ;
 		
 		
 	}

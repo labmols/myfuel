@@ -439,7 +439,8 @@ public class FuelOrderDBHandler extends DBHandler{
 								     +" AND DATEDIFF( sdate, CURDATE( ) ) <=0"
 								     +" AND DATEDIFF( fdate, CURDATE( ) ) >=0 "
 								     + " AND CURTIME() > t.shour"
-								     + " AND CURTIME() < t.fhour");
+								     + " AND CURTIME() < t.fhour"
+								     + " ORDER BY t.discount desc");
 			rs= ps.executeQuery();
 		
 			while(rs.next()) 

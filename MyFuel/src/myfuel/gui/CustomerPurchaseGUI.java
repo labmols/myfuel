@@ -2,12 +2,16 @@ package myfuel.gui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -33,7 +37,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 	/**
 	 * Table model.
 	 */
-	private MyTableModel model;
+	private MyTableModel tableModel;
 	/**
 	 * Table that contains all the customer purchases details.
 	 */
@@ -42,6 +46,11 @@ public class CustomerPurchaseGUI extends SuperGUI {
 	 * Purchase GUI Controller object, for handle all the logic functionality.
 	 */
 	private PurchaseActions actions;
+	
+	private HashMap<Integer,Date> comboMap;
+	private JComboBox<String> dateCombo;
+	private DefaultComboBoxModel<String> comboModel;
+	private ArrayList<Purchase> pList;
 	
 	/**
 	 * Create new Customer Purchase User interface.
@@ -56,20 +65,20 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		lblTitle.setBounds(226, 6, 175, 31);
 		lblTitle.setText("Purchase History");
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 96, 584, 229);
-		model = new MyTableModel(6,-1);
+		scrollPane.setBounds(6, 123, 584, 229);
+		tableModel = new MyTableModel(6,-1);
 		String[] names = {"#" ,"Car","Station","Fuel","Date","Amount","Price"};
 		for(String s : names)
-			model.addColumn(s);
+			tableModel.addColumn(s);
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
 		
-		purchaseTable = new JTable(model);
+		purchaseTable = new JTable(tableModel);
 		purchaseTable.setFont(new Font("Arial", Font.PLAIN, 12));
-		purchaseTable.setModel(model);
+		purchaseTable.setModel(tableModel);
 		purchaseTable.getColumnModel().getColumn(0).setPreferredWidth(5);
 		purchaseTable.getColumnModel().getColumn(4).setPreferredWidth(100);
-		for (int x = 0; x < model.getColumnCount(); x ++)
+		for (int x = 0; x < tableModel.getColumnCount(); x ++)
 		{
 			purchaseTable. getColumnModel (). getColumn (x). setCellRenderer (centerRenderer);
 	     }
@@ -78,8 +87,20 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		
 		JLabel lblHereYouCan = new JLabel("Here you can find all your purchases :");
 		lblHereYouCan.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 14));
-		lblHereYouCan.setBounds(16, 68, 274, 16);
+		lblHereYouCan.setBounds(6, 93, 274, 16);
 		panel.add(lblHereYouCan);
+		
+		comboMap = new HashMap<Integer, Date>();
+		comboModel = new DefaultComboBoxModel<String>();
+		dateCombo = new JComboBox<String>();
+		dateCombo.addItemListener(new comboListener());
+		dateCombo.setBounds(236, 54, 112, 27);
+		dateCombo.setModel(comboModel);
+		panel.add(dateCombo);
+		
+		JLabel lblShowOnlyFor = new JLabel("Show only for month:");
+		lblShowOnlyFor.setBounds(85, 58, 156, 16);
+		panel.add(lblShowOnlyFor);
 		
 	}
 	@Override
@@ -88,6 +109,52 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		
 	}
 	
+	private class comboListener implements ItemListener{
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getStateChange()==ItemEvent.DESELECTED )
+			{
+				Date d = comboMap.get(dateCombo.getSelectedIndex());
+				System.out.println(d);
+				sortDate(d);
+			}
+		}
+		
+	}
+	
+	public void addDates(ArrayList<Date> dateList)
+	{
+		SimpleDateFormat format = new SimpleDateFormat("MM/yy");
+		for(Date d: dateList)
+		{
+			System.out.println(d);
+			String dateString = format.format(d);
+			comboMap.put(comboModel.getSize(), d);
+			comboModel.addElement(dateString);
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void sortDate(Date d) {
+		clearTable();
+		String sdate="";
+		if(pList != null)
+		{
+			for(Purchase p: pList)
+			{
+			Date date = p.getPdate();
+			if(date.getYear() == d.getYear() && date.getMonth()==d.getMonth())
+			{
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy HH:mm");
+			sdate = format.format(date);
+			tableModel.insertRow(tableModel.getRowCount(),new Object[]{p.getPid(),p.getCustomerCarID(),p.getSname(),p.getFuelName(),sdate,new DecimalFormat("##.##").format(p.getQty())+"(L)",new DecimalFormat("##.##").format(p.getBill())+" NIS"});
+			}
+			}
+		}
+		
+	}
 	/**
 	 * Insert all the purchase list into the table.
 	 * @param pList - The purchase list object.
@@ -96,6 +163,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 	{
 			clearTable();
 			String sdate="";
+			this.pList = pList;
 			if(pList != null)
 			{
 				for(Purchase p: pList)
@@ -103,7 +171,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 				Date date = p.getPdate();
 				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy HH:mm");
 				sdate = format.format(date);
-				model.insertRow(model.getRowCount(),new Object[]{p.getPid(),p.getCustomerCarID(),p.getSname(),p.getFuelName(),sdate,new DecimalFormat("##.##").format(p.getQty())+"(L)",new DecimalFormat("##.##").format(p.getBill())+" NIS"});
+				tableModel.insertRow(tableModel.getRowCount(),new Object[]{p.getPid(),p.getCustomerCarID(),p.getSname(),p.getFuelName(),sdate,new DecimalFormat("##.##").format(p.getQty())+"(L)",new DecimalFormat("##.##").format(p.getBill())+" NIS"});
 				}
 			}
 			else
@@ -119,8 +187,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 	 */
 	private void clearTable()
 	{
-		while(model.getRowCount() > 0 )
-			model.removeRow(0);
+		while(tableModel.getRowCount() > 0 )
+			tableModel.removeRow(0);
 	}
-
 }

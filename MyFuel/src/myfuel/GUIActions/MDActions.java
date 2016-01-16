@@ -71,8 +71,9 @@ public class MDActions extends GUIActions{
 	 */
 	public void createAnalystic() 
 	{
-		new AnalysticActions(client,lr);
+
 		changeFrame(gui,this);
+		new AnalysticActions(client,lr);
 		
 	}
 

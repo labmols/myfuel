@@ -110,8 +110,9 @@ public class CheckInventoryActions extends GUIActions{
 
 	@Override
 	public void backToMenu() {
-		new SMActions(client,sid,msg,nid,lr);
+
 		this.changeFrame(gui,this);
+		new SMActions(client,sid,msg,nid,lr);
 		
 	}
 

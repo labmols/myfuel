@@ -69,8 +69,9 @@ public class CMActions extends GUIActions {
 	 */
 	public void showReportsWindows() 
 	{
-		new showReportsActions(client,msg,nid,lr);
+
 		changeFrame(gui,this);	
+		new showReportsActions(client,msg,nid,lr);
 		
 	}
 

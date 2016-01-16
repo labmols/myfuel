@@ -86,8 +86,9 @@ public class SMActions extends GUIActions {
 	
 	public void CreateLowInventoryWindow()
 	{
-		new LowInventoryActions(client,sid,msg,nid,lr);
+	
 		changeFrame(gui,this);
+		new LowInventoryActions(client,sid,msg,nid,lr);
 		
 	}
 	
@@ -97,8 +98,9 @@ public class SMActions extends GUIActions {
 
 	public void CreateReports() 
 	{
-		new StationReportActions(client,sid,msg,nid,lr);
+
 		changeFrame(gui,this);
+		new StationReportActions(client,sid,msg,nid,lr);
 		
 	}
 

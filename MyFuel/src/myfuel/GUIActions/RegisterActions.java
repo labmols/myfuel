@@ -335,8 +335,9 @@ public class RegisterActions extends GUIActions {
 	 */
 	@Override
 	public void backToMenu() {
-		new LoginActions(client);
+	
 		changeFrame(gui,this);
+		new LoginActions(client);
 		
 		
 	}
