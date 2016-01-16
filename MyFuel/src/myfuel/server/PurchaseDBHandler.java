@@ -44,18 +44,19 @@ public class PurchaseDBHandler extends DBHandler{
 
 			try 
 			{
-				ps= con.prepareStatement("SELECT p.pid,c.cid,s.name,f.fname,p.pdate,p.qty,p.bill"
+				ps= con.prepareStatement("SELECT p.pid,c.cid,s.name,f.fname,p.pdate,p.qty,p.bill,p.status"
 						+ " FROM purchase p,customer_purchase c,station_in_network s, fuel_price f where c.uid = ? and p.pid=c.pid and p.fuelid=f.fuelid and s.sid = p.sid" );
 				ps.setInt(1, customerID);
 				rs = ps.executeQuery();
 				while(rs.next())
 				{
-						Purchase p = new Purchase(customerID,rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getTimestamp(5),rs.getFloat(6),rs.getFloat(7));
+						Purchase p = new Purchase(customerID,rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getTimestamp(5),rs.getFloat(6),rs.getFloat(7),rs.getBoolean(8));
 						pList.add(p);
 				}
-				ps= con.prepareStatement("SELECT DISTINCT INTERVAL 1"
-										+" DAY + DATE( STR_TO_DATE( DATE_FORMAT( pdate,  '%c,%Y' ) ,  '%m,%Y' ) ) "
-										+" FROM purchase");
+				ps= con.prepareStatement("SELECT DISTINCT STR_TO_DATE( DATE_FORMAT( pdate,  '%c,01,%Y' ) ,'%m,%d,%Y') as date "+
+										 " FROM purchase p,customer_purchase c where p.pid = c.pid and c.uid = ? "
+										 + "ORDER BY date desc ");
+				ps.setInt(1, customerID);
 				rs = ps.executeQuery();
 				while(rs.next())
 				{

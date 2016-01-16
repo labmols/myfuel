@@ -62,6 +62,11 @@ public class Purchase implements Serializable {
 	 * Fuel type name
 	 */
 	private String fuelName;
+	
+	/**
+	 * Is the order has been paid or not.
+	 */
+	private boolean paid;
 	/**
 	 * Create new Purchase object with the following parameters.
 	 * @param pid - Purchase ID.
@@ -72,7 +77,7 @@ public class Purchase implements Serializable {
 	 * @param bill - Total Bill value. 
 	 * @param qty -Quantity (Liter).
 	 */
-	public Purchase (int customerid, int pid, int sid, int fuelid, int promid, Date pdate, float bill, float qty,  String driverName,int customerCarID)
+	public Purchase (int customerid, int pid, int sid, int fuelid, int promid, Date pdate, float bill, float qty,  String driverName,int customerCarID,boolean paid)
 	{
 		this.setCustomerid(customerid);
 		this.setPid(pid);
@@ -84,9 +89,10 @@ public class Purchase implements Serializable {
 		this.setQty(qty);
 		this.setDriverName(driverName);
 		this.setCustomerCarID(customerCarID);
+		this.setPaid(paid);
 	}
 	
-	public Purchase (int customerid, int pid, int cid, String sname, String fname, Date pdate,  float qty,  float bill)
+	public Purchase (int customerid, int pid, int cid, String sname, String fname, Date pdate,  float qty,  float bill,boolean paid)
 	{
 		this.setCustomerid(customerid);
 		this.setPid(pid);
@@ -96,6 +102,7 @@ public class Purchase implements Serializable {
 		this.setBill(bill);
 		this.setQty(qty);
 		this.setCustomerCarID(cid);
+		this.setPaid(paid);
 	}
 	
 	/***
@@ -205,7 +212,15 @@ public class Purchase implements Serializable {
 	public void setFuelName(String fuelName) {
 		this.fuelName = fuelName;
 	}
-	
+
+	public boolean isPaid() {
+		return paid;
+	}
+
+	public void setPaid(boolean paid) {
+		this.paid = paid;
+	}
+
 	
 	
 	

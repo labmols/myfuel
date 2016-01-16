@@ -73,32 +73,32 @@ public class CustomerOptionsGUI extends SuperGUI {
 		
 		btnCarFuel = new JButton("Car Fuel");
 		btnCarFuel.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnCarFuel.setBounds(178, 22, 180, 50);
+		btnCarFuel.setBounds(179, 32, 180, 50);
 		btnCarFuel.addActionListener(new ButtonListener());
 		MenuPanel.add(btnCarFuel);
 		
 		btnHomeFuel = new JButton("Home Fuel");
 		btnHomeFuel.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnHomeFuel.setBounds(178, 81, 180, 50);
+		btnHomeFuel.setBounds(179, 91, 180, 50);
 		btnHomeFuel.addActionListener(new ButtonListener());
 		MenuPanel.add(btnHomeFuel);
 		
 		btnUpdateDetails = new JButton("Update Details");
 		btnUpdateDetails.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnUpdateDetails.setBounds(178, 143, 180, 50);
+		btnUpdateDetails.setBounds(179, 153, 180, 50);
 		btnUpdateDetails.addActionListener(new ButtonListener());
 		MenuPanel.add(btnUpdateDetails);
 		
 		btnChangePassword = new JButton("Change Password");
 		btnChangePassword.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnChangePassword.addActionListener(new ButtonListener());
-		btnChangePassword.setBounds(178, 205, 180, 50);
+		btnChangePassword.setBounds(179, 215, 180, 50);
 		MenuPanel.add(btnChangePassword);
 		
 		btnPurchases = new JButton("Purchase History");
 		btnPurchases.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnPurchases.addActionListener(new ButtonListener());
-		btnPurchases.setBounds(178, 267, 180, 50);
+		btnPurchases.setBounds(179, 277, 180, 50);
 		MenuPanel.add(btnPurchases);
 		
 		
@@ -126,4 +126,6 @@ public class CustomerOptionsGUI extends SuperGUI {
 		else if(e.getSource() == btnPurchases ) actions.PurchaseHistory();
 		
 	}
+	
+
 }

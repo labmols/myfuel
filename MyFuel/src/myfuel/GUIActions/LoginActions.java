@@ -93,8 +93,8 @@ public class LoginActions extends GUIActions {
 		if(response instanceof CustomerLoginResponse)
 		{
 		CustomerLoginResponse res = (CustomerLoginResponse) response;
-		NotificationManager.setLocation(1);
-		 //NotificationManager.showNotification ( gui,"Connected" );
+		//NotificationManager.setLocation(1);
+		 
 		 
 			gui.showOKMessage("Welcome to MyFuel!");
 			new CustomerOptionsActions (client,res,lr);

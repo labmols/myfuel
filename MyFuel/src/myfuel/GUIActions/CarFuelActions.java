@@ -221,12 +221,14 @@ public class CarFuelActions extends GUIActions {
 			gui.showErrorMessage(errors);
 		else
 		{
+			boolean paid = true;
+			if(customer.getSmodel() == Rate.FullyMonthly) paid= false;
 			int pid;
 			Promotion prom = infoRes.getPromotion(fuelSelected);
 			if(prom != null)
 				pid = prom.getPid();
 			else pid = -1;
-			fuelPurchase  = new Purchase(customer.getUserid(),0,stationID, fuelSelected, pid,new Date(),totalPrice,amountF,dName,cid);
+			fuelPurchase  = new Purchase(customer.getUserid(),0,stationID, fuelSelected, pid,new Date(),totalPrice,amountF,dName,cid,paid);
 		}
 		return check;
 		

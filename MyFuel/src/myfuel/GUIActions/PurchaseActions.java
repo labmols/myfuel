@@ -61,7 +61,8 @@ public class PurchaseActions extends GUIActions {
 		{
 			PurchaseResponse res = (PurchaseResponse) arg;
 			ArrayList<Purchase> pList = new ArrayList<Purchase>(res.getCustomerPurchases());
-			gui.showPurchases(pList);
+			//gui.showPurchases(pList);
+			gui.Init(pList);
 			gui.addDates(res.getDateList());
 		}
 		

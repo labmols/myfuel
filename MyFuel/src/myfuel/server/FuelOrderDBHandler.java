@@ -61,7 +61,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				ps.setInt(1, rs1.getInt(7));
 				rs2 = ps.executeQuery();
 				rs2.next();
-				Purchase pur = new Purchase(rs1.getInt(1),rs2.getInt(1),rs2.getInt(2),rs2.getInt(3),rs2.getInt(4),rs2.getTimestamp(5),rs2.getFloat(6),rs2.getFloat(7),null,-1);
+				Purchase pur = new Purchase(rs1.getInt(1),rs2.getInt(1),rs2.getInt(2),rs2.getInt(3),rs2.getInt(4),rs2.getTimestamp(5),rs2.getFloat(6),rs2.getFloat(7),null,-1,rs2.getBoolean(8));
 				horders.add(new HomeOrder (rs1.getInt(1), rs1.getInt(2), rs1.getString(3), rs1.getTimestamp(4), rs1.getBoolean(5), rs1.getBoolean(6),pur));
 				}
 				ps.close();
@@ -198,7 +198,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			rs.close();
 			
 			//Insert into purchase table
-			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into purchase values(?,?,?,?,?,?,?,?)");
 			ps.setInt(1, nextid);
 			if(p.getSid() == -1)
 	        ps.setNull(2,java.sql.Types.INTEGER);
@@ -210,7 +210,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			ps.setTimestamp(5, new java.sql.Timestamp(p.getPdate().getTime()));
 			ps.setFloat(6, p.getBill());
 			ps.setFloat(7, p.getQty());
-			
+			ps.setBoolean(8, p.isPaid());
 			ps.executeUpdate();
 			ps.close();
 			

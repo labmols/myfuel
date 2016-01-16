@@ -29,7 +29,7 @@ public class BackgroundCheck {
 				st.executeUpdate("update home_order SET status=1 where datediff(curdate(),sdate) > 0 or (datediff(curdate(),sdate)=0 and TIMESTAMPDIFF(HOUR,sdate,NOW()) >=6)");
 				st.close();
 				try {
-					Thread.sleep(1000*60*60);
+					Thread.sleep(1000*60);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -64,7 +64,7 @@ public class BackgroundCheck {
 				
 				try {
 					st = con.createStatement();
-					st.executeUpdate("update home_order SET status=1 where datediff(curdate(),sdate) > 0 or (datediff(curdate(),sdate)=0 and TIMESTAMPDIFF(HOUR,sdate,NOW()) >=6)");
+					st.executeUpdate("update ");
 					st.close();
 					try {
 						Thread.sleep(1000*60*60);

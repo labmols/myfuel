@@ -3,6 +3,8 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import com.alee.managers.notification.NotificationManager;
+
 import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
 import myfuel.client.Station;
@@ -38,9 +40,13 @@ public class CustomerOptionsActions extends GUIActions {
 	 */
 	public CustomerOptionsActions(MyFuelClient client , CustomerLoginResponse res, LoginRequest lr)
 	{	
+		
 		super(client,lr);
+		
 		gui =new CustomerOptionsGUI(this);
 		gui.setVisible(true);
+		NotificationManager.setLocation(2);
+		NotificationManager.showNotification (gui,"No new Messages" );
 		this.res = res;
 	}
 	

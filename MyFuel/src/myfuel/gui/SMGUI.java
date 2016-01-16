@@ -17,6 +17,8 @@ import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 
+import com.alee.managers.notification.NotificationManager;
+
 /***
  * Station Manager User Interface
  * @author karmo
@@ -86,9 +88,12 @@ public class SMGUI extends SuperGUI{
 		}
 		else
 		{
+			String messages="";
 			for(MessageForManager m : msg)
 			{
 				textArea.append(m.getMsg()+"\n");
+				NotificationManager.setLocation(2);
+				NotificationManager.showNotification (this,m.getMsg() );
 			}
 		}
 		textArea.setEditable(false);
