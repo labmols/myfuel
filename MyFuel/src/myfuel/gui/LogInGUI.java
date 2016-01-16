@@ -44,7 +44,7 @@ public class LogInGUI extends SuperGUI {
 	/**
 	 * Type of user ComboBox.
 	 */
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	/**
 	 * Fast fuel option button.
 	 */
@@ -96,8 +96,8 @@ public class LogInGUI extends SuperGUI {
 		passwordField.setBounds(253, 198, 130, 26);
 		panel.add(passwordField);
 		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Customer", "Worker"}));
+		comboBox = new JComboBox<String>();
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Customer", "Worker"}));
 		comboBox.setBounds(253, 131, 130, 27);
 		panel.add(comboBox);
 		
@@ -172,5 +172,10 @@ public class LogInGUI extends SuperGUI {
 	{
 		actions.FastFuel();
 	}
+	}
+	
+	public void setButton(boolean flag)
+	{
+		this.loginButton.setEnabled(flag);
 	}
 }

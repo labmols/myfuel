@@ -88,7 +88,6 @@ public class SMGUI extends SuperGUI{
 		}
 		else
 		{
-			String messages="";
 			for(MessageForManager m : msg)
 			{
 				textArea.append(m.getMsg()+"\n");

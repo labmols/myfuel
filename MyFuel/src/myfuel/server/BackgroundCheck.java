@@ -2,6 +2,9 @@ package myfuel.server;
 
 import java.sql.*;
 
+/**
+ *
+ */
 public class BackgroundCheck {
 	public BackgroundCheck(Connection con)
 	{
