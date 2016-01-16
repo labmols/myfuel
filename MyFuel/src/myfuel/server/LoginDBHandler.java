@@ -68,12 +68,12 @@ public class LoginDBHandler extends DBHandler {
 				sid = rs.getInt(9);
 				role = rs.getInt(6);
 				wid = rs.getInt(1);
-				if(role == 5 || role == 8)
+				
+				if(role == 5 )
 				{
 						msg = new ArrayList<MessageForManager>();
-						ps = con.prepareStatement("select * from message where nid = ? and sid = ? ");
+						ps = con.prepareStatement("select * from message where nid = ? and type = 0");
 						ps.setInt(1, nid);
-						ps.setInt(2,sid);
 						rs = ps.executeQuery();
 						
 						while(rs.next())
@@ -81,6 +81,20 @@ public class LoginDBHandler extends DBHandler {
 							msg.add(new MessageForManager(rs.getInt(1),rs.getString(4),rs.getInt(2),rs.getInt(3),rs.getInt(5)));
 						}
 				}
+				
+				else if(role == 8)
+				{
+						msg = new ArrayList<MessageForManager>();
+						ps = con.prepareStatement("select * from message where sid  = ? ");
+						ps.setInt(1, sid);
+						rs = ps.executeQuery();
+						
+						while(rs.next())
+						{
+							msg.add(new MessageForManager(rs.getInt(1),rs.getString(4),rs.getInt(2),rs.getInt(3),rs.getInt(5)));
+						}
+				}
+				
 				return new WorkerLoginResponse(role,wid,nid,sid,msg);
 			}
 			else return new booleanResponse(false, "WorkerID or Password not correct!");
