@@ -12,12 +12,27 @@ import myfuel.client.Purchase;
 import myfuel.request.PurchaseRequest;
 import myfuel.response.PurchaseResponse;
 
+/**
+ * This DB Handler handle all the queries related to the customer purchase user interface.
+ * @author Maor
+ *
+ */
 public class PurchaseDBHandler extends DBHandler{
 
+	/**
+	 * Create new Purchase DB Handler.
+	 * @param server - MyFuelServer object.
+	 * @param con - JDBC Connection driver connection.
+	 */
 	public PurchaseDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 	}
 	
+	/**
+	 * 
+	 * @param customerID
+	 * @return
+	 */
 	private ArrayList<Purchase> getPurchases(int customerID) {
 		// TODO Auto-generated method stub
 		ArrayList<Purchase> pList = new ArrayList<Purchase>();

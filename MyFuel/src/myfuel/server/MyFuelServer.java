@@ -112,7 +112,7 @@ public class MyFuelServer extends ObservableServer{
 	 this.deleteObservers();
  }
 	 
-public void createDBConnection (String add, String USER, String PASS) throws SQLException {
+public void InitServer (String add, String USER, String PASS) throws SQLException {
 	// TODO Auto-generated method stub
 	
 	String DB_URL = "jdbc:mysql://"+add+"/myfuel";
@@ -138,6 +138,7 @@ public void createDBConnection (String add, String USER, String PASS) throws SQL
 	new CompanyReportsDBHandler(this,con);
 	new AnalysticDBHandler(this,con);
 	new PurchaseDBHandler(this, con);
+	new BackgroundCheck(con);
 	
 }
 

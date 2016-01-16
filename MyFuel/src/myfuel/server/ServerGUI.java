@@ -164,7 +164,7 @@ public class ServerGUI extends SuperGUI{
 			public void run() {
 			  try{  
 				  btnStartServer.setEnabled(false); 
-		      server.createDBConnection(sqlAdd.getText(), user.getText(), pass.getText());
+		      server.InitServer(sqlAdd.getText(), user.getText(), pass.getText());
 			  printMsg("Connected to MySQL Server successfully...");
 			  sqlStatus.setText("Connected");
 			  sqlStatus.setForeground(Color.GREEN);
@@ -195,6 +195,7 @@ public class ServerGUI extends SuperGUI{
 	
 	public void stopServer()
 	{
+		 server.closeDBConnection();
 		server.stopListening();
 		try {
 			server.close();
@@ -207,7 +208,6 @@ public class ServerGUI extends SuperGUI{
 	      this.serverStatus.setForeground(Color.RED);
 	      btnStartServer.setEnabled(true);
 	      this.btnStopServer.setEnabled(false);
-	      server.closeDBConnection();
 	      this.sqlStatus.setText("Disconnected");
 	      this.sqlStatus.setForeground(Color.RED);
 	      printMsg("Server is down... ");

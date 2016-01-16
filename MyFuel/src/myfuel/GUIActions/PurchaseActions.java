@@ -50,6 +50,9 @@ public class PurchaseActions extends GUIActions {
 		client.handleMessageFromGUI(req);
 	}
 
+	/**
+	 * Get purchase response from the server(contains all the customer purchases list).
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if(arg instanceof PurchaseResponse)

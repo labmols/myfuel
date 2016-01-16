@@ -49,14 +49,9 @@ public class FuelOrderDBHandler extends DBHandler{
 		ArrayList<HomeOrder> horders = new ArrayList<HomeOrder>();
 		ResultSet rs1,rs2 = null;
 		PreparedStatement ps = null;
-		Statement st;
 
 			try {
-				//Update order status query
-				st = con.createStatement();
-				st.executeUpdate("update home_order SET status=1 where datediff(curdate(),sdate) > 0 or (datediff(curdate(),sdate)=0 and TIMESTAMPDIFF(HOUR,sdate,NOW()) >=6)");
-				st.close();
-				//Get all home orders query after status update.
+				//Get all home orders
 				ps= con.prepareStatement("select t2.uid, t1.orid , t1.adr, t1.sdate, t1.status,t1.urgent,t1.pid from home_order t1, customer_home_order t2 where t2.uid = ? and t1.orid = t2.orid");
 				ps.setInt(1, customerID);
 				rs1 = ps.executeQuery();
