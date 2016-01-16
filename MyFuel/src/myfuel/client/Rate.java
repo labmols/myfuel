@@ -8,9 +8,21 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Rate implements Serializable{
 	
+	/**
+	 * final id value of Occasional sale model.
+	 */
 	public final static int Occasional = 1;
+	/**
+	 * final id value of MonthlyOne sale model.
+	 */
 	public final static int MonthlyOne = 2;
+	/**
+	 * final id value of MonthlyFew sale model.
+	 */
 	public final static int MonthlyFew = 3;
+	/**
+	 * final id value of FullyMonthly sale model.
+	 */
 	public final static int FullyMonthly= 4;
 	
 	/**
@@ -26,6 +38,12 @@ public class Rate implements Serializable{
 	 */
 	private float discount;
 	
+	/**
+	 * Create new Rate with all the details.
+	 * @param modelid - Sale model id number.
+	 * @param modelDesc - Sale model description.
+	 * @param discount- Sale model discount.
+	 */
 	public Rate(int modelid, String modelDesc, float discount)
 	{
 		this.setModelid(modelid);
@@ -33,10 +51,16 @@ public class Rate implements Serializable{
 		this.setDiscount(discount);
 	}
 	
+	/**
+	 * Create new Rate without description.
+	 * @param modelid - Sale model id number.
+	 * @param discount- Sale model discount.
+	 */
 	public Rate(int modelid,  float discount)
 	{
 		this.setModelid(modelid);
 		this.setDiscount(discount);
+		this.setModelDesc(null);
 	}
 	
 	
