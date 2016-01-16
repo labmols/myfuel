@@ -146,13 +146,6 @@ public class FastFuelActions extends CarFuelActions {
 		String errors="";
 		boolean check= true;
 		
-		if(limit == 0)
-			totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
-			else
-			{
-				amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
-				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
-			}
 
 		Customer customer = customerRes.getUser();
 		
@@ -171,6 +164,14 @@ public class FastFuelActions extends CarFuelActions {
 			errors += "illegal amount value.\n";
 			check = false;
 		}
+		
+		if(limit == 0)
+			totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+			else
+			{
+				amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
+				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+			}
 
 		if(fid != fuelSelected)
 		{

@@ -137,6 +137,7 @@ public void createDBConnection (String add, String USER, String PASS) throws SQL
 	new SReportsDBHandler(this,con);
 	new CompanyReportsDBHandler(this,con);
 	new AnalysticDBHandler(this,con);
+	new PurchaseDBHandler(this, con);
 	
 }
 

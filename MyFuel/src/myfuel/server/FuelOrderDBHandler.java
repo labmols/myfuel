@@ -23,6 +23,7 @@ import myfuel.response.booleanResponse;
  */
 public class FuelOrderDBHandler extends DBHandler{
 	
+	private static final float factor = 5;
 	/**
 	 * Contains the customer purchase id.
 	 */
@@ -366,7 +367,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				ps.setInt(2, sid);
 				else ps.setNull(2, java.sql.Types.INTEGER);
 				ps.setInt(3, FuelID);
-				ps.setFloat(4, 5*mqty);
+				ps.setFloat(4, factor*mqty);
 				ps.setInt(5, 0);
 				ps.executeUpdate();
 				

@@ -93,6 +93,7 @@ public class CarFuelActions extends GUIActions {
 		String errors="";
 		boolean check= true;
 		boolean found = false;
+		float totalPrice;
 		int stationID= -1;
 		Customer customer = customerRes.getUser();
 		ArrayList<Car> customerCars = customerRes.getUser().getCars();
@@ -114,6 +115,14 @@ public class CarFuelActions extends GUIActions {
 			errors += "illegal amount value.\n";
 			check = false;
 		}
+		
+		if(limit == 0)
+			totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+			else
+			{
+				amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
+				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
+			}
 		
 		
 		for(Car c: customerCars)
@@ -168,15 +177,7 @@ public class CarFuelActions extends GUIActions {
 		else
 		{
 			int pid;
-			float totalPrice;
 			Promotion prom = infoRes.getPromotion(fuelSelected);
-			if(limit == 0)
-				totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
-				else
-				{
-					amountF = amountF/ this.getPriceForLiter(fuelSelected, nid);
-					totalPrice = this.getTotalPrice(fuelSelected, nid, amountF);
-				}
 			if(prom != null)
 				pid = prom.getPid();
 			else pid = -1;

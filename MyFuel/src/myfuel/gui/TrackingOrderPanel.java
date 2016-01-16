@@ -1,17 +1,21 @@
 package myfuel.gui;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import myfuel.client.HomeOrder;
 import myfuel.client.Promotion;
 import myfuel.client.PromotionReport;
+import myfuel.client.Purchase;
 import myfuel.client.TimeIgnoringComparator;
 
 import java.awt.Font;
@@ -19,6 +23,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +43,7 @@ public class TrackingOrderPanel extends JPanel{
 		scrollPane.setBounds(6, 34, 572, 189);
 		add(scrollPane);
 		model = new MyTableModel(6,-1);
-		String[] names = {"#" ,"Amount(L)","Address","Ship Date","Urgent","Status"};
+		String[] names = {"#" ,"Amount(L)","Price(NIS)","Address","Ship Date","U","Status"};
 		for(String s : names)
 			model.addColumn(s);
 		
@@ -46,8 +51,8 @@ public class TrackingOrderPanel extends JPanel{
 		table.setFont(new Font("Calibri", Font.PLAIN, 13));
 		table.setModel(model);
 		table.getColumnModel().getColumn(0).setPreferredWidth(7);
-		table.getColumnModel().getColumn(0).setPreferredWidth(11);
-		//table.getColumnModel().getColumn(2).setPreferredWidth(50);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.getColumnModel().getColumn(5).setPreferredWidth(20);
 		//table.getColumnModel().getColumn(4).setPreferredWidth(20);
 		scrollPane.setViewportView(table);
 		
@@ -56,6 +61,18 @@ public class TrackingOrderPanel extends JPanel{
 		lblYourOrders.setBounds(232, 6, 120, 16);
 		add(lblYourOrders);
 		
+		JLabel lbluIsUrgent = new JLabel("*U- Is Urgent Order");
+		lbluIsUrgent.setFont(new Font("Arial", Font.PLAIN, 13));
+		lbluIsUrgent.setBounds(6, 6, 133, 16);
+		add(lbluIsUrgent);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+		
+		for (int x = 0; x < model.getColumnCount(); x ++)
+		{
+	         table. getColumnModel (). getColumn (x). setCellRenderer (centerRenderer);
+	     }
+		
 	}
 
 public void updateTable(ArrayList <HomeOrder> horders)
@@ -63,18 +80,26 @@ public void updateTable(ArrayList <HomeOrder> horders)
 	clearTable();
 	String urgent;
 	String status;
+	if(horders != null)
+	{
 	for(HomeOrder order: horders)
 	{
+		Purchase p = order.getHomeP();
 		Date date = order.getShipDate();
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
 		if(order.isUrgent()) urgent = "Yes";
 		else urgent = "No";
 		if(order.getStatus()) status = "Delivered";
 		else status= "On delivery";
-		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getHomeP().getQty()+"L",order.getAddress(), format.format(date), urgent, status});
+		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), new DecimalFormat("##.##").format(order.getHomeP().getQty())+"L",new DecimalFormat("##.##").format(p.getBill()),order.getAddress(), format.format(date), urgent, status});
+	}
+	}
+	else
+	{
+		JOptionPane.showMessageDialog(this, "You don't have any Home Order that have been recorded!","Message",JOptionPane.INFORMATION_MESSAGE);	
+
 	}
 }
-
 	
 	/***
 	 * Clears the table
