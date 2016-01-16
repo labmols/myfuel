@@ -22,12 +22,31 @@ import myfuel.client.Purchase;
 
 import javax.swing.JLabel;
 
+/**
+ * Customer Purchase User interface, display all the purchase history for the customer.
+ * @author Maor
+ *
+ */
 @SuppressWarnings("serial")
 public class CustomerPurchaseGUI extends SuperGUI {
+
+	/**
+	 * Table model.
+	 */
 	private MyTableModel model;
+	/**
+	 * Table that contains all the customer purchases details.
+	 */
 	private JTable purchaseTable;
+	/**
+	 * Purchase GUI Controller object, for handle all the logic functionality.
+	 */
 	private PurchaseActions actions;
 	
+	/**
+	 * Create new Customer Purchase User interface.
+	 * @param actions - GUI Controller object,for handle all the logic functionality.
+	 */
 	public CustomerPurchaseGUI(PurchaseActions actions)
 	{
 		super(actions);

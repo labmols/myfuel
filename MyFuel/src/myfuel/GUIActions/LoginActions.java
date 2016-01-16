@@ -183,13 +183,9 @@ public class LoginActions extends GUIActions {
 	public void update(Observable o, Object arg) {
 		if(arg instanceof CustomerLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse) {
 		// TODO Auto-generated method stub
-			if(gui!=null)
 			gui.setWaitProgress();
-			if(lr!=null)
-			{
 				if(lr.getType() ==0) customerResponse(arg);
 				else workerResponse(arg);	
-			}
 		}
 	}
 

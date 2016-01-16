@@ -14,9 +14,9 @@ import myfuel.ocsf.client.ObservableClient;
 public class MyFuelClient extends ObservableClient {
 	
 	/**
-	 * 
-	 * @param host
-	 * @param port
+	 * Create new Client connection.
+	 * @param host - The host address.
+	 * @param port - port value.
 	 * @throws IOException
 	 */
 	public MyFuelClient(String host, int port) throws IOException {

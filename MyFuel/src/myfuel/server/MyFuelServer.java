@@ -22,15 +22,24 @@ import myfuel.response.WorkerLoginResponse;
 
 
 public class MyFuelServer extends ObservableServer{
+	
 	/**
-	 * 
+	 * JDBC Connection driver.
 	 */
 	private Connection con;
-	private Response response;
-	private ServerGUI gui;
 	/**
-	 * 
-	 * @param port
+	 * Response object (send to client).
+	 */
+	private Response response;
+	/**
+	 * Server User interface.
+	 */
+	private ServerGUI gui;
+
+	/**
+	 * Create new Server.
+	 * @param port - The port value.
+	 * @param gui- Server User interface.
 	 */
 	public MyFuelServer(int port,ServerGUI gui) {
 		super(port);
@@ -45,9 +54,12 @@ public class MyFuelServer extends ObservableServer{
 		gui.printMsg("<Recieved>: "+className);
 		notifyObservers(msg);
 		try {
+			if(response != null)
+			{
 			client.sendToClient(response);
 			className = response.getClass().getSimpleName();
 			gui.printMsg("<Sent To Client>: "+className);
+			}
 			setClientInfo(client,msg);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -64,6 +76,9 @@ public class MyFuelServer extends ObservableServer{
 	    gui.printMsg("<ClientConnected>:"+ client + " Connected!");
 	  }
 	
+	/**
+	 * Called when a client disconnected and change his status to "Not connected" in DB.
+	 */
 	@Override
 	protected synchronized void clientDisconnected(ConnectionToClient client) 
 	  {
@@ -82,6 +97,11 @@ public class MyFuelServer extends ObservableServer{
 		 this.response=response;
 	 }
 	 
+	 /**
+	  * Set client info when connecting.
+	  * @param client - The client object.
+	  * @param msg - the client info(Login details).
+	  */
 	 private void setClientInfo(ConnectionToClient client, Object msg) {
 			// TODO Auto-generated method stub
 			if(msg instanceof LoginRequest){
@@ -93,6 +113,9 @@ public class MyFuelServer extends ObservableServer{
 			}
 	}
 
+	 /**
+	  * Close MySQL Conncetion
+	  */
  public void closeDBConnection()
  {
 	try {
@@ -111,8 +134,15 @@ public class MyFuelServer extends ObservableServer{
 	 closeDBConnection(); 
 	 this.deleteObservers();
  }
-	 
-public void InitServer (String add, String USER, String PASS) throws SQLException {
+
+ /**
+  * Initialize variables and DBControllers and established MySQL connection.
+  * @param add - MySQL server address.
+  * @param USER -MySQL server userName.
+  * @param PASS - MySQL server password.
+  * @throws SQLException
+  */
+ public void InitServer (String add, String USER, String PASS) throws SQLException {
 	// TODO Auto-generated method stub
 	
 	String DB_URL = "jdbc:mysql://"+add+"/myfuel";
@@ -148,6 +178,7 @@ public static void main(String [] args){
      {
          public void run ()
          {
+        	 // Set java look and feel.
          	WebLookAndFeel.install ();
          	JFrame serverFrame = new ServerGUI(null);
         	serverFrame.setVisible(true);

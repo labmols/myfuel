@@ -29,8 +29,8 @@ public class PurchaseDBHandler extends DBHandler{
 	}
 	
 	/**
-	 * 
-	 * @param customerID
+	 * Get the Purchases list from the Database for a specific customer.
+	 * @param customerID - Customer ID number.
 	 * @return
 	 */
 	private ArrayList<Purchase> getPurchases(int customerID) {
@@ -65,6 +65,9 @@ public class PurchaseDBHandler extends DBHandler{
 		}
 	}
 
+	/**
+	 * Notified by the server when a new Request is received.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
