@@ -88,6 +88,10 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		
 	}
 	
+	/**
+	 * Insert all the purchase list into the table.
+	 * @param pList - The purchase list object.
+	 */
 	public void showPurchases(ArrayList<Purchase> pList) 
 	{
 			clearTable();
@@ -110,6 +114,9 @@ public class CustomerPurchaseGUI extends SuperGUI {
 			
 		}
 	
+	/**
+	 * Clear all table.
+	 */
 	private void clearTable()
 	{
 		while(model.getRowCount() > 0 )

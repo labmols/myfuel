@@ -306,7 +306,7 @@ public class FuelDialog extends JDialog {
 		JLabel label = new JLabel("");
 		label.setBounds(252, 116, 90, 16);
 		contentPanel.add(label);
-		ProgressBarThread t = new ProgressBarThread(this,qty);
+		CarFuelProgress t = new CarFuelProgress(this,qty);
 		new Thread(t).start();
 		 
 		
