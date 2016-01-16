@@ -15,8 +15,8 @@ import myfuel.client.QuarterStationPurchase;
 import myfuel.client.Station;
 import myfuel.client.QuarterStationIncome;
 import myfuel.client.QuarterStationInventory;
-import myfuel.request.CompanyReportRequest;
-import myfuel.request.CompanyReportRequest;
+import myfuel.request.NetworkReportRequest;
+import myfuel.request.NetworkReportRequest;
 import myfuel.response.ComapnyReportsResponse;
 import myfuel.response.booleanResponse;
 
@@ -25,7 +25,7 @@ import myfuel.response.booleanResponse;
  * Company Reports DBHAndler  - will get the Stations reports from the DB
  *
  */
-public class CompanyReportsDBHandler extends DBHandler {
+public class NetworkReportsDBHandler extends DBHandler {
 	/***
 	 * Will be true if there was no exception  and false otherwise
 	 */
@@ -63,11 +63,11 @@ public class CompanyReportsDBHandler extends DBHandler {
 	 */
 	private ArrayList<Integer> years = null;
 	/***
-	 *  CompanyReportsDBHandler constructor
+	 *  NetworkReportsDBHandler constructor
 	 * @param server - MyFuelServer
 	 * @param con - JDBC
 	 */
-	public CompanyReportsDBHandler(MyFuelServer server, Connection con) {
+	public NetworkReportsDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 		
 	}
@@ -116,9 +116,9 @@ public class CompanyReportsDBHandler extends DBHandler {
 	@Override
 	public void update(Observable arg0, Object arg1) 
 	{
-		if(arg1 instanceof CompanyReportRequest)
+		if(arg1 instanceof NetworkReportRequest)
 		{
-			CompanyReportRequest r = (CompanyReportRequest)arg1;
+			NetworkReportRequest r = (NetworkReportRequest)arg1;
 			if(r.getYear() == -1) // if there is no requested year for the reports
 				getYearsOfReports(r.getNid());
 			

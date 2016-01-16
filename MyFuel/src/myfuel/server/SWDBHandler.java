@@ -40,9 +40,7 @@ public class SWDBHandler extends DBHandler{
 	
 
 	
-	/***
-	 * Handle request from the client
-	 */
+	
 	
 	@Override
 	public void update(Observable arg0, Object arg1)
@@ -129,10 +127,10 @@ public class SWDBHandler extends DBHandler{
 	}
 
 
-/***
- * get new orders from the DB
- * @param sid  - Station ID
- */
+		/***
+		 * Gets new orders from the DB
+		 * @param sid  - Station ID
+		 */
 	private void getNewOrders(int sid) 
 	{
 		ResultSet rs ;

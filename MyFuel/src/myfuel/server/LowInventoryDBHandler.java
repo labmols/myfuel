@@ -10,6 +10,7 @@ import java.util.Observable;
 import myfuel.client.FuelQty;
 import myfuel.request.LowInventoryRequest;
 import myfuel.request.SetNewRatesRequest;
+import myfuel.response.LowInventoryResponse;
 import myfuel.response.SetNewRatesResponse;
 import myfuel.response.booleanResponse;
 

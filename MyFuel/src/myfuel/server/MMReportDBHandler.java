@@ -54,7 +54,7 @@ private String str;
 	}
 	/***
 	 * This method will get the Marketing Manager Promotion Report details
-	 * The details will be set into 2 ArrayList that are Attributes in this class
+	 * The details will be set into 2 ArrayList which defined as  Attributes in this class
 	 * 
 	 */
 	private void getPromotionReportDetails()
@@ -169,10 +169,7 @@ private String str;
 		
 	}
 	
-	/***
-	 * Will receive a request from the client and handle 
-	 * After it will Handle the request the Response will be sent back
-	 */
+
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {

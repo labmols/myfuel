@@ -1,6 +1,6 @@
 package myfuel.request;
 
-import java.io.Serializable;
+
 
 @SuppressWarnings("serial")
 /**
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Maor
  *
  */
-public class ChangePassRequest implements Serializable {
+public class ChangePassRequest extends Request {
 	
 	/**
 	 * New Password

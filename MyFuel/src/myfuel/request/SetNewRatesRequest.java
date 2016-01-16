@@ -1,11 +1,9 @@
 package myfuel.request;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 
-import myfuel.client.Fuel;
+import java.util.ArrayList;
 import myfuel.client.NetworkRates;
-import myfuel.client.Rate;
+
 
 /***
  * This class will contain the new rates suggestion and will be sent to the server 
@@ -13,7 +11,7 @@ import myfuel.client.Rate;
  *
  */
 @SuppressWarnings("serial")
-public class SetNewRatesRequest implements Serializable {
+public class SetNewRatesRequest extends Request{
 	/***
 	 * Type of request
 	 */

@@ -1,9 +1,6 @@
 package myfuel.request;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 
-import myfuel.client.FuelQty;
 import myfuel.client.HomeOrder;
 import myfuel.client.Purchase;
 
@@ -13,7 +10,7 @@ import myfuel.client.Purchase;
  * @author Maor
  *
  */
-public class FuelOrderRequest implements Serializable {
+public class FuelOrderRequest extends Request{
 	/**
 	 * Request Query Type (Insert, Select)
 	 */

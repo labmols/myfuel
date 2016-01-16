@@ -3,12 +3,12 @@ package myfuel.request;
 import java.io.Serializable;
 
 /***
- * This object will be used as a request object from the DB
+ * This object will be used as a request object for getting Network Report from the DB
  * @author karmo
  *
  */
 @SuppressWarnings("serial")
-public class CompanyReportRequest implements Serializable
+public class NetworkReportRequest implements Serializable
 {
 	/***
 	 * The requested year to be presented
@@ -21,10 +21,10 @@ public class CompanyReportRequest implements Serializable
 	private int nid;
 	
 	/***
-	 * CompanyReportRequest Constructor
+	 * NetworkReportRequest Constructor
 	 * @param year - The requested year to be presented
 	 */
-	public CompanyReportRequest(int year,int nid)
+	public NetworkReportRequest(int year,int nid)
 	{
 		this.setYear(year);
 		this.setNid(nid);

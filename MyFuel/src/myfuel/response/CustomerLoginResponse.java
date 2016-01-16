@@ -10,17 +10,30 @@ import myfuel.client.Network;
 import myfuel.client.Station;
 import myfuel.client.StationInventory;
 
+/***
+ * This class will contain the details of a customer as retrieved from the DB
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class CustomerLoginResponse extends Response {
 	/**
 	 * this object contains all customer details
 	 */
 	private Customer user;
-	
+	/***
+	 * Networks that this customers is listed to.
+	 */
 	private ArrayList<Network> networks;
 	
+	/***
+	 * The car that the customer is fueling with the NFC chip
+	 */
 	private Car FastFuelCar;
 	
+	/***
+	 * The station that the customer is fueling at with the NFC chip
+	 */
 	private Station FastStation;
 	
 	/**
@@ -46,6 +59,13 @@ public class CustomerLoginResponse extends Response {
 			
 	}
 	
+	/***
+	 * CustomerLoginResponse Constructor
+	 * @param customer - Customer Details
+	 * @param networks - Networks that this customers is listed to.
+	 * @param fastFuelCar - The car that the customer is fueling with the NFC chip
+	 * @param s - The station that the customer is fueling at with the NFC chip
+	 */
 	public CustomerLoginResponse(Customer customer ,ArrayList<Network> networks,Car fastFuelCar,Station s)
 	{
 		this.setUser(customer);

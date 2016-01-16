@@ -1,11 +1,23 @@
 package myfuel.request;
 
-import java.io.Serializable;
 
+
+/***
+ * This class will be used as a request object from the server. In order to get all approved inventory orders 
+ * that need to be inserted to the station inventory and update the inventory if possible.
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
-public class SWRequest implements Serializable{
+public class SWRequest extends Request{
 	
+	/***
+	 * Station ID
+	 */
 	private int sid;
+	/***
+	 * Type of Request
+	 */
 	private RequestEnum type;
 	
 	/***

@@ -1,14 +1,29 @@
 package myfuel.request;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
+
+/***
+ * This class will be used as a request object for 2 things:
+ * 1.Request for getting all unapproved customers from the DB
+ * 2.Request for updating the approved customers (depends if there was any customers waiting for approve)
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
-public class ConfirmationRequest implements Serializable{
+public class ConfirmationRequest extends Request{
+	
+	/***
+	 * Customers to be approved
+	 */
 	private ArrayList<Integer> approved;
+	/***
+	 * Type of Request
+	 */
 	private RequestEnum type;
 	/***
-	 *  Create a request object 
+	 *  ConfirmationRequest Constructor
 	 * @param type - Select for getting unapproved customers from the DB
 	 */
 	public ConfirmationRequest (RequestEnum type)
@@ -18,7 +33,7 @@ public class ConfirmationRequest implements Serializable{
 	}
 	
 	/***
-	 * 
+	 * ConfirmationRequest Constructor
 	 * @param type - Insert , updating the approved customers in the DB
 	 * @param approved - The id's of the approved customers
 	 */

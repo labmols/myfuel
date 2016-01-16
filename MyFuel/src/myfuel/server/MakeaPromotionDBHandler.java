@@ -14,18 +14,42 @@ import myfuel.request.MakeaPromotionRequest;
 import myfuel.response.MakeaPromotionResponse;
 import myfuel.response.booleanResponse;
 
+/**
+ * This class is responsible for Updating the DB with new Promotion
+ * @author karmo
+ *
+ */
 public class MakeaPromotionDBHandler extends DBHandler{
+	/***
+	 * List of all Promotion Templates  with their details
+	 */
 	private ArrayList<PromotionTemplate> templates;
+	/***
+	 * The request object as received from the client
+	 */
 	private MakeaPromotionRequest request;
+	/***
+	 * Indicates the status of the operation
+	 */
 	private boolean answer =true;
+	/***
+	 * Description of the operation
+	 */
 	private String str;
-	MakeaPromotionDBHandler(MyFuelServer server, Connection con) {
+	
+	/***
+	 * MakeaPromotionDBHandler Constructor
+	 * @param server - MyFuelServer
+ 	 * @param con - JDBC
+	 */
+	public MakeaPromotionDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 		
 	}
-/***
- * Get promotion templates from the DB
- */
+	
+		/***
+		 * Get promotion templates from the DB
+		 */
 	 void selectPTemplates()
 	 {
 		 	ResultSet rs = null ;
@@ -49,8 +73,12 @@ public class MakeaPromotionDBHandler extends DBHandler{
 			}
 		
 	 }
+	 
+	 
 	 /***
 	  * Checks if there is already a promotion with those details
+	  * If exists the new promotion won't be insert to the DB
+	  * else the DB will be updated with the new promotion
 	  */
 	 void checkExist()
 	 {
@@ -58,41 +86,27 @@ public class MakeaPromotionDBHandler extends DBHandler{
 			PreparedStatement ps = null;
 			
 				
- 
+		
 		       try {
-		   		ps=con.prepareStatement("SELECT p.pid"+
-		   			"	FROM promotion as p"+
-		   			"	WHERE "+
-		   			"	( p.tid = ? AND(   (p.sdate <= ? AND p.fdate >= ?) "
-		   			+ "OR (p.sdate <=? AND p.fdate >= ? AND p.fdate <=?))"
-		   			+ "OR ((p.sdate <= ? AND p.fdate >= ? AND p.sdate >= ?))"
-		   			+ "OR (p.fdate <= ? AND p.sdate >= ?))");
+		   		ps=con.prepareStatement("SELECT  pid from promotion where tid = ? and sdate = ? and fdate = ?");
 		   		
 		   		ps.setInt(1,request.getTid());
 		   		ps.setDate(2, new java.sql.Date(request.getStart().getTime()));
 				ps.setDate(3, new java.sql.Date(request.getEnd().getTime())); 
-				ps.setDate(4, new java.sql.Date(request.getStart().getTime()));
-				ps.setDate(5, new java.sql.Date(request.getStart().getTime()));
-				ps.setDate(6, new java.sql.Date(request.getEnd().getTime())); 
-				ps.setDate(7, new java.sql.Date(request.getEnd().getTime())); 
-				ps.setDate(8, new java.sql.Date(request.getEnd().getTime())); 
-				ps.setDate(9, new java.sql.Date(request.getStart().getTime()));
-				ps.setDate(10, new java.sql.Date(request.getEnd().getTime())); 
-				ps.setDate(11, new java.sql.Date(request.getStart().getTime()));
 		   		exist =  ps.executeQuery();
 		   		
 		   		
 		   		
 		   		if(!exist.next())
 		   		{
-		   			//System.out.println(exist.next());
+		   		
 		   			insertNewPromotion();
 		   			answer = true;
 		   		}
 		   		else
 		   		{
 		   			answer = false;
-		   			str = "Promotion already exist!";
+		   			str = "This promotion already exist!";
 		   		}
 		   		
 		       } catch (SQLException e) {
@@ -131,19 +145,13 @@ public class MakeaPromotionDBHandler extends DBHandler{
 	 
 	 
 	 
-	/***
-	 * Gets the response from the server 
-	 * Processing the message due to the functions in this class
-	 * Send appropriate response to the Client 
-	 */
-	 
-	 
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		
 		if(arg1 instanceof MakeaPromotionRequest)
 		{
-			 setRequest((MakeaPromotionRequest)arg1);
+			this.request = ((MakeaPromotionRequest)arg1);
 			 
 			 if(request.getType() == 0)
 			 {
@@ -158,47 +166,6 @@ public class MakeaPromotionDBHandler extends DBHandler{
 		}
 		
 	}
-/***
- * 
- * @return Promotion templates arraylist
- */
-	public ArrayList<PromotionTemplate> getTemplates() {
-		return templates;
-	}
-/**
- *  sets promotion templates arraylist
- * @param templates
- */
-	public void setTemplates(ArrayList<PromotionTemplate> templates) {
-		this.templates = templates;
-	}
-/***
- * getting the request
- * @return
- */
-	public MakeaPromotionRequest getRequest() {
-		return request;
-	}
-/***
- * setting the request
- * @param request
- */
-	public void setRequest(MakeaPromotionRequest request) {
-		this.request = request;
-	}
-/***
- * 
- * @return answer
- */
-	public boolean isAnswer() {
-		return answer;
-	}
-/***
- * set answer
- * @param answer
- */
-	public void setAnswer(boolean answer) {
-		this.answer = answer;
-	}
+
 
 }

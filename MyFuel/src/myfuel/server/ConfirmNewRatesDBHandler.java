@@ -20,6 +20,9 @@ import myfuel.response.booleanResponse;
  *
  */
 public class ConfirmNewRatesDBHandler extends DBHandler{
+	/***
+	 * Suggested Rates
+	 */
 	private ArrayList<Rate> sModes;
 	/***
 	 * Current Rates 

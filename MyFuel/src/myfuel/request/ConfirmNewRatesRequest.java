@@ -1,6 +1,6 @@
 package myfuel.request;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
 import myfuel.client.Rate;
@@ -11,7 +11,7 @@ import myfuel.client.Rate;
  *
  */
 @SuppressWarnings("serial")
-public class ConfirmNewRatesRequest  implements Serializable
+public class ConfirmNewRatesRequest  extends Request
 {
 	/***
 	 * Type of request

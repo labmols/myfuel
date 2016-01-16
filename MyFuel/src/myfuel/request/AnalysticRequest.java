@@ -1,6 +1,6 @@
 package myfuel.request;
 
-import java.io.Serializable;
+
 import java.util.Date;
 
 /***
@@ -9,7 +9,7 @@ import java.util.Date;
  *
  */
 @SuppressWarnings("serial")
-public class AnalysticRequest implements Serializable
+public class AnalysticRequest extends Request
 {
 	/***
 	 * Type of Request
