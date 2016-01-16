@@ -2,6 +2,7 @@ package myfuel.GUIActions;
 
 
 import java.awt.Frame;
+import java.util.Observable;
 import java.util.Observer;
 
 import myfuel.client.MyFuelClient;
@@ -61,6 +62,11 @@ public abstract class GUIActions implements Observer {
 	 */
 	public abstract void backToMenu(); 
 	
+	/**
+	 *Change status of user to "Not Connected" by sending request to server.
+	 * @param g
+	 * @param req
+	 */
 	public void LogOutRequest(SuperGUI g, LoginRequest req)
 	{
 		req.setChangeStatus(1);
@@ -74,8 +80,12 @@ public abstract class GUIActions implements Observer {
 	 */
 	public abstract void LogOut() ;
 		// TODO Auto-generated method stub
-		
 	
+	/**
+	 * This method notified by the client when received new response from server and 
+	 * act according to the GUI controller implement.
+	 */
+	public abstract void update(Observable o, Object arg);
 
 	
 }

@@ -171,12 +171,19 @@ public class ConnectDialog extends JDialog {
 		return this.porti;
 	}
 	
+	/**
+	 * Create new Waiting dialog for indicates process.
+	 * @param msg
+	 */
 	public void createWaitDialog(String msg)
 	{
 		waitD = new WaitDialog(msg);
 		waitD.setVisible(true);
 	}
 	
+	/**
+	 * Stop waiting dialog.
+	 */
 	public void setWaitPorgress()
 	{
 		waitD.setProgress(1);
