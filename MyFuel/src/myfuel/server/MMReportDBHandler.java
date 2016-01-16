@@ -79,7 +79,8 @@ private String str;
 			}
 			
 			names = new ArrayList<Promotion>();
-			ps = con.prepareStatement("select t.pname,p.sdate,p.fdate,f.fname,p.pid,t.discount from prom_temp as t , promotion as p,fuel_price as f where p.tid = t.tid and f.fuelid = t.fid");
+			ps = con.prepareStatement("select t.pname,p.sdate,p.fdate,f.fname,p.pid,t.discount from prom_temp as t , promotion as p,fuel_price as f where p.tid = t.tid and f.fuelid = t.fid"
+					+ "					order by p.sdate desc");
 			rs = ps.executeQuery();
 			
 			while(rs.next())

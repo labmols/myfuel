@@ -51,7 +51,7 @@ public class MMReportGUI extends SuperGUI{
 		comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new ComboHandler());
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Promotions Reports", "Customer Characterization"}));
-		comboBox.setBounds(193, 64, 191, 20);
+		comboBox.setBounds(193, 53, 191, 31);
 		panel.add(comboBox);
 		
 		reportPanel = new PromtionRPanel();

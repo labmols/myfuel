@@ -82,7 +82,7 @@ public class PromtionRPanel extends JPanel{
 		
 		 comboBox = new JComboBox<String>();
 		 comboBox.addActionListener(new comboHandler());
-		comboBox.setBounds(162, 25, 373, 20);
+		comboBox.setBounds(162, 25, 373, 31);
 		add(comboBox);
 		
 		JLabel lblChoosePromotion = new JLabel("Choose Promotion:");
