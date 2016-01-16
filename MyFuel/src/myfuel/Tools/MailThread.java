@@ -1,4 +1,5 @@
-package myfuel.client;
+package myfuel.Tools;
+
 
 public class MailThread implements Runnable 
 {

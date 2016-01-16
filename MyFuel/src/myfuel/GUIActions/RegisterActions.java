@@ -5,11 +5,11 @@ import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import myfuel.Tools.SendMailTLS;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.MyFuelClient;
 import myfuel.client.Network;
-import myfuel.client.SendMailTLS;
 import myfuel.client.Station;
 import myfuel.gui.RegisterGUI;
 import myfuel.request.LoginRequest;

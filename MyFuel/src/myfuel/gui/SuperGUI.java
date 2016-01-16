@@ -16,6 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import myfuel.GUIActions.GUIActions;
+import myfuel.Tools.ClockPane;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;

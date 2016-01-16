@@ -7,10 +7,10 @@ import java.util.Observable;
 
 import javax.swing.DefaultComboBoxModel;
 
+import myfuel.Tools.TimeIgnoringComparator;
 import myfuel.client.MyFuelClient;
 import myfuel.client.Promotion;
 import myfuel.client.PromotionTemplate;
-import myfuel.client.TimeIgnoringComparator;
 import myfuel.gui.MakeaPromotionGUI;
 import myfuel.request.LoginRequest;
 import myfuel.request.MakeaPromotionRequest;

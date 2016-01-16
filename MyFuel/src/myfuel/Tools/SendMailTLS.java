@@ -1,4 +1,4 @@
-package myfuel.client;
+package myfuel.Tools;
 
 import java.util.Properties;
 

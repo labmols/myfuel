@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
-import myfuel.client.CalcPrice;
+import myfuel.Tools.CalcPrice;
 import myfuel.client.Car;
 import myfuel.client.Customer;
 import myfuel.client.Fuel;
