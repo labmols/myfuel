@@ -358,6 +358,7 @@ public class LoginDBHandler extends DBHandler {
 			if(request.getChangeStatus()==1) 
 			{
 				changeStatus(request);
+				server.setResponse(null);
 			}
 			else if(request.getType()==LoginRequest.CustomerLogin)
 			{

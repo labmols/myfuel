@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 /**
- *JDialog that presents progress of sending mails to the confirmed customers(created in ConfirmationGUI).
+ *JDialog that presents progress of task waiting.
  */
 public class WaitDialog extends JDialog {
 /**
@@ -31,7 +31,7 @@ public class WaitDialog extends JDialog {
  */
 	private final JPanel contentPanel = new JPanel();
 /**
- * Progress Bar that indicates the sending mails progress.
+ * Progress Bar that indicates the wait progress.
  */
 	private JProgressBar progressBar;
 
@@ -75,8 +75,8 @@ public class WaitDialog extends JDialog {
 	}
 	
 	/**
-	 * Set progress of the Mail ProgressBar.
-	 * @param value - Current number of mails that sent successfully.
+	 * Set progress.
+	 * @param value - value of progress.
 	 */
 	public void setProgress(int value) {
 		// TODO Auto-generated method stub

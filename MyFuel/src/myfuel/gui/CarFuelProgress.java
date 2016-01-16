@@ -1,21 +1,32 @@
 package myfuel.gui;
 
-import javax.swing.JProgressBar;
 
-class ProgressBarThread implements Runnable {
+/**
+ * This class simulate fuel progress by Thread execute.
+ * @author Maor
+ *
+ */
+public class CarFuelProgress implements Runnable {
 
-    /**
-     * Progress bar that shows the current status
-     */
+   /**
+    * The User Interface object.
+    */
     private FuelDialog gui;
+    /**
+     * Initial value.
+     */
     private float value=0;
+    /**
+     * 
+     */
     private float max ;
 
-    /**
-     * Constructor
-     * @param jpb The progress bar this has to update
-     */
-    public ProgressBarThread(FuelDialog gui,float max) {
+  /**
+   * Create new Car Fuel Progress thread.
+   * @param gui - the User interface.
+   * @param max - Max value(the order amount).
+   */
+    public CarFuelProgress(FuelDialog gui,float max) {
         this.gui = gui;
         this.max = max;
     }

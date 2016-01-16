@@ -44,8 +44,14 @@ public class FuelOrderResponse extends Response {
 	 */
 	private ArrayList<NetworkRates> rates;
 	
+	/**
+	 * List of all the stations.
+	 */
 	private ArrayList<Station> stations;
 	
+	/**
+	 * Home inventory status (for home fuel order).
+	 */
 	private FuelQty homeInventory;
 	
 	/**

@@ -25,17 +25,45 @@ import myfuel.response.Response;
 import myfuel.response.CustomerLoginResponse;
 import myfuel.response.booleanResponse;
 
+/**
+ * Car Fuel GUI Controller, responsible for all logic functionality.
+ * @author Maor
+ *
+ */
 public class CarFuelActions extends GUIActions {
+	/**
+	 * Car Fuel User interface.
+	 */
 	protected CarFuelGUI gui;
+	/**
+	 * Customer Login response from server(contains all the customer details).
+	 */
 	protected CustomerLoginResponse customerRes;
+	/**
+	 * Fuel order response from server(contains all the information required for fuel order).
+	 */
 	protected FuelOrderResponse infoRes;
+	/**
+	 * Fuel Purchase details.
+	 */
 	protected Purchase fuelPurchase;
 	
+	/**
+	 * Create new Car Fuel GUI Controller(for inherited class).
+	 * @param client - MyFuel client object (for communication to the server).
+	 * @param lr - Login Request object(contains the login details).
+	 */
 	public CarFuelActions(MyFuelClient client,LoginRequest lr)
 	{
 		super(client,lr);
 	}
 	
+	/**
+	 * Create new Car Fuel GUI Controller and getting all the required information for creating an order.
+	 * @param client -MyFuel client object (for communication to server).
+	 * @param res - Customer Login Response(contains all the customer details).
+	 * @param lr - Login Request object(contains the login details).
+	 */
 	public CarFuelActions(MyFuelClient client,CustomerLoginResponse res , LoginRequest lr) {
 		super(client,lr);
 		this.customerRes = res;
@@ -48,10 +76,9 @@ public class CarFuelActions extends GUIActions {
 		// TODO Auto-generated constructor stub
 	}
 
-
-    /**
-     * 
-     */
+/**
+ * Getting All the required information request from Server(including inventory status,stations details and rates).
+ */
 	protected void getInfoRequest() {
 		// TODO Auto-generated method stub
 		gui.createWaitDialog("Getting Details...");
@@ -59,6 +86,9 @@ public class CarFuelActions extends GUIActions {
 		client.handleMessageFromGUI(req);
 	}
 	
+/**
+ * Insert Customer cars and list of stations to the User interface.
+ */
 	protected void insertInfo()
 	{
 		ArrayList<Station> stations = infoRes.getStations();
@@ -71,7 +101,11 @@ public class CarFuelActions extends GUIActions {
 			gui.addCar(c.getcid());
 		
 	}
+
 	
+/**
+ * Create new fuel Purchase that will send to the client.
+ */
 	public void createPurchase()
 	{
 		try{
@@ -86,7 +120,18 @@ public class CarFuelActions extends GUIActions {
 		}
 	
 	}
-	
+
+	/**
+	 * Verify user input details.
+	 * @param amount - Fuel Order amount.
+	 * @param fuelSelected - Fuel type selected.
+	 * @param dName - Driver name .
+	 * @param stationSelected - Station selected.
+	 * @param cid - Car ID Number.
+	 * @param nid - Network ID number.
+	 * @param limit - Limit type(0- Amount,1-Cash).
+	 * @return true if all input details is correct and false otherwise.
+	 */
 	public boolean verifyDetails(String amount, int fuelSelected, String dName ,String stationSelected,int cid,int nid,int limit)
 	{
 		float amountF=-1;
@@ -188,6 +233,13 @@ public class CarFuelActions extends GUIActions {
 		
 	}
 	
+	/**
+	 * Get total order price according to input.
+	 * @param fuelSelected - Fuel type selected.
+	 * @param nid - Network id number.
+	 * @param amountF - Fuel amount.
+	 * @return total price for current order.
+	 */
 	public float getTotalPrice(int fuelSelected, int nid, float amountF)
 	{
 		Customer customer = customerRes.getUser();
@@ -195,7 +247,7 @@ public class CarFuelActions extends GUIActions {
 	}
 
 
-
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -240,7 +292,12 @@ public class CarFuelActions extends GUIActions {
 		return this.infoRes.getFuels();
 	}
 
-
+	/**
+	 * Get specific fuel price for liter.
+	 * @param fuelID - FuelID number.
+	 * @param nid -Network id number.
+	 * @return Fuel price for liter.
+	 */
 	public float getPriceForLiter(int fuelID, int nid) {
 		NetworkRates rates = infoRes.getNRates(nid);
 		float disc;
@@ -252,13 +309,24 @@ public class CarFuelActions extends GUIActions {
 		
 	}
 	
+	/**
+	 * Get promotion details (if exist)
+	 * @param fuelID - Fuel ID number.
+	 * @return the promotion details object.
+	 */
 	public Promotion getPromotion(int fuelID) {
 		return infoRes.getPromotion(fuelID);
 		// TODO Auto-generated method stub
 		
 	}
 	
-	
+	/**
+	 * Check inventory status for a specific fuel type. 
+	 * @param qty - Fuel order amount
+	 * @param fuelID - Fuel type id number.
+	 * @param sid - Station id number
+	 * @return true, if there is enough amount for current order, otherwise false.
+	 */
 	protected boolean checkInventory(float qty, int fuelID, int sid) {
 		
 		for(StationInventory s: infoRes.getSi())
@@ -279,6 +347,11 @@ public class CarFuelActions extends GUIActions {
 		
 	}
 	
+	/**
+	 * Check if string contains only chars.
+	 * @param name - String value.
+	 * @return true if all chars, otherwise false.
+	 */
 	protected boolean isAlpha(String name) {
 	    char[] chars = name.toCharArray();
 
@@ -291,6 +364,10 @@ public class CarFuelActions extends GUIActions {
 	    return true;
 	}
 	
+	/**
+	 * Get customer credit card number.
+	 * @return the customer credit card number.
+	 */
 	public String getCustomerCC()
 	{
 		return customerRes.getUser().getCnumber();
@@ -302,6 +379,10 @@ public class CarFuelActions extends GUIActions {
 		
 	}
 
+	/**
+	 * Get customer model id.
+	 * @return the customer model id.
+	 */
 	public int getCustomerModel() {
 		// TODO Auto-generated method stub
 		return customerRes.getUser().getSmodel();

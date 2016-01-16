@@ -28,19 +28,30 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Panel that contains all the user interface for Tracking Home order.
+ *
+ */
 @SuppressWarnings("serial")
 public class TrackingOrderPanel extends JPanel{
+	/**
+	 * Table of all customer home orders.
+	 */
 	private JTable table;
+	/**
+	 * Table model.
+	 */
 	private DefaultTableModel model ; 
-	/***
-	 * Constructor for Promotion Report Panel
+	
+	/**
+	 * Create new Tracking order panel.
 	 */
 	public TrackingOrderPanel() {
 		setOpaque(false);
 		setBounds(6, 46, 584, 384);
 		setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 34, 572, 189);
+		scrollPane.setBounds(6, 34, 572, 272);
 		add(scrollPane);
 		model = new MyTableModel(6,-1);
 		String[] names = {"#" ,"Amount(L)","Price(NIS)","Address","Ship Date","U","Status"};
@@ -75,6 +86,10 @@ public class TrackingOrderPanel extends JPanel{
 		
 	}
 
+	/**
+	 * Insert all the home orders to the table.
+	 * @param horders - List of all the home orders.
+	 */
 public void updateTable(ArrayList <HomeOrder> horders)
 {
 	clearTable();
