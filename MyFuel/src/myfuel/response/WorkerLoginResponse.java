@@ -8,6 +8,11 @@ import myfuel.client.FuelQty;
 import myfuel.client.MessageForManager;
 import myfuel.client.RoleEnum;
 
+/***
+ * This class contains all the details of the Worker that Logged in to the System
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class WorkerLoginResponse extends Response{
 	/**

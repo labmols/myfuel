@@ -135,7 +135,7 @@ public void InitServer (String add, String USER, String PASS) throws SQLExceptio
 	new HomeControlDBHandler(this,con);
 	new MMReportDBHandler(this,con);
 	new SReportsDBHandler(this,con);
-	new CompanyReportsDBHandler(this,con);
+	new NetworkReportsDBHandler(this,con);
 	new AnalysticDBHandler(this,con);
 	new PurchaseDBHandler(this, con);
 	new BackgroundCheck(con);

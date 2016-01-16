@@ -1,15 +1,15 @@
 package myfuel.request;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 /***
- * This class will be used to update the DB with new Low inventory Levels
+ * This class will be used as a request object to the server for updating the DB with new Low inventory Levels
  * @author karmo
  *
  */
-public class LowInventoryRequest implements Serializable {
+public class LowInventoryRequest extends Request{
 	/***
 	 * Station ID
 	 */

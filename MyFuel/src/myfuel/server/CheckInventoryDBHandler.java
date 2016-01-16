@@ -11,17 +11,41 @@ import myfuel.client.FuelQty;
 import myfuel.request.CheckInventoryRequest;
 import myfuel.response.CheckInventoryResponse;
 import myfuel.response.booleanResponse;
-
+/***
+ * This class is responsible for managing the inventory orders for specific station
+ * @author karmo
+ *
+ */
 public class CheckInventoryDBHandler  extends DBHandler {
+	/***
+	 * Request received from client
+	 */
 	private CheckInventoryRequest request;
+	/***
+	 * Inventory Order for the station
+	 */
 	private ArrayList<FuelQty> NewOrder;
+	/***
+	 * Description of the operation
+	 */
 	private String msg;
+	/***
+	 * WIll indicate if operations went good or bad (true or false)
+	 */
 	private boolean Answer;
 
+	/***
+	 * CheckInventoryDBHandler Constructor
+ 	 * @param server - MyFuelServer
+	 * @param con  - JDBC
+	 */
 	public CheckInventoryDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 	}
-
+	
+	/***
+	 * This method retrieves any inventory order from the DB for specific station
+	 */
 	public void getInventoryOrder()
 	{
 		NewOrder=new ArrayList<FuelQty> ();
@@ -50,6 +74,10 @@ public class CheckInventoryDBHandler  extends DBHandler {
 			e.printStackTrace();
 		}
 	}
+	
+	/***
+	 * This method updates the station inventory with the order's quantities  and deletes the order from it's table afterwards.
+	 */
 	public void UpdateInventory()
 	{
 		msg="";
@@ -85,7 +113,7 @@ public class CheckInventoryDBHandler  extends DBHandler {
 		
 		if(arg1 instanceof CheckInventoryRequest)
 		{
-			 setRequest((CheckInventoryRequest)arg1);
+			 this.request = ((CheckInventoryRequest)arg1);
 			 
 			 if(request.getType() == 0)
 			 {
@@ -105,12 +133,6 @@ public class CheckInventoryDBHandler  extends DBHandler {
 		}
 	}
 	
-	public CheckInventoryRequest getRequest() {
-		return request;
-	}
 
-	public void setRequest(CheckInventoryRequest request) {
-		this.request = request;
-	}
 
 }

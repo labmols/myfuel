@@ -1,6 +1,6 @@
 package myfuel.request;
 
-import java.io.Serializable;
+
 
 import myfuel.client.Customer;
 
@@ -9,7 +9,8 @@ import myfuel.client.Customer;
  * @author Maor
  *
  */
-public class RegisterRequest implements Serializable {
+@SuppressWarnings("serial")
+public class RegisterRequest extends Request {
 	
 	/**
 	 * New customer details object.

@@ -13,14 +13,35 @@ import myfuel.request.RequestEnum;
 import myfuel.response.ConfirmationResponse;
 import myfuel.response.booleanResponse;
 
+/***
+ * This class is responsible for getting and setting Customers that needs to be approved 
+ * @author karmo
+ *
+ */
 public class ConfirmationDBHandler extends DBHandler{
 	
+	/**
+	 * List of Customers that needs to be approved
+	 */
 	private ArrayList<Customer> customers ;
+	/***
+	 * Description of the OPeration
+	 */
 	private String str;
+	/***
+	 * WIll indicate if operations went good or bad (true or false)
+	 */
 	private boolean answer;
+	/***
+	 * ConfirmationDBHandler Constructor
+	 * @param server - MyFuelServer
+	 * @param con - JDBC
+	 */
 	public ConfirmationDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 	}
+	
+	
 	/***
 	 * Getting the unapproved customers from the DB
 	 */
@@ -48,6 +69,10 @@ public class ConfirmationDBHandler extends DBHandler{
 		}
 	}
 	
+	/***
+	 * Approving customers
+	 * @param approved - The list of approved customers
+	 */
 	private void updateApproved(ArrayList<Integer> approved) 
 	{
 		PreparedStatement ps = null;
@@ -71,9 +96,7 @@ public class ConfirmationDBHandler extends DBHandler{
 	}
 	
 	
-	/***
-	 * gets message from the client via the server
-	 */
+
 	@Override
 	public void update(Observable arg0, Object arg1) 
 	{

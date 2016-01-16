@@ -1,18 +1,41 @@
 package myfuel.request;
 
-import java.io.Serializable;
+
 import java.util.Date;
 
 import myfuel.client.Promotion;
 
+
+/***
+ * This request object will be used for 2 things : 
+ * 1. Requesting all promotion templates that listed in the DB.
+ * 2. Request to save new Promotion in the DB
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 
-public class MakeaPromotionRequest implements Serializable{
+public class MakeaPromotionRequest extends Request{
 	
+	/***
+	 * Type of Request
+	 */
 	private int type;
+	/***
+	 * Promotion Details
+	 */
 	private Promotion p;
+	/***
+	 * Template ID
+	 */
 	private int tid;
+	/***
+	 * Start Date of the Promotion
+	 */
 	private Date start;
+	/***
+	 * End Date of the promotion
+	 */
 	private Date end;
 	/***
 	 * The request represented by this constructor will only bring the template

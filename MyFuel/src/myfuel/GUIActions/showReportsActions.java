@@ -6,7 +6,7 @@ import java.util.Observable;
 import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.*;
-import myfuel.request.CompanyReportRequest;
+import myfuel.request.NetworkReportRequest;
 import myfuel.request.LoginRequest;
 import myfuel.response.ComapnyReportsResponse;
 import myfuel.response.booleanResponse;
@@ -44,7 +44,7 @@ public class showReportsActions extends GUIActions {
 		gui = new ShowReportGUI(this);
 		gui.createWaitDialog("Getting Reported Years...");
 		
-		CompanyReportRequest request = new CompanyReportRequest(-1,nid);
+		NetworkReportRequest request = new NetworkReportRequest(-1,nid);
 		client.handleMessageFromGUI(request);
 		
 		
@@ -93,7 +93,7 @@ public class showReportsActions extends GUIActions {
 	 */
 	public void getDetails(int year)
 	{
-		CompanyReportRequest request = new CompanyReportRequest(year,nid);
+		NetworkReportRequest request = new NetworkReportRequest(year,nid);
 		gui.createWaitDialog("Getting Reports for"+" "+year+"...");
 		client.handleMessageFromGUI(request);
 	}

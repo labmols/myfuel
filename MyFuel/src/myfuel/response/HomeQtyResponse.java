@@ -2,14 +2,25 @@ package myfuel.response;
 
 import myfuel.client.FuelQty;
 
+/***
+ * This class contains details about the home fuel quantity and orders as retreived from the DB
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class HomeQtyResponse extends Response {
 
+		/***
+		 * contains the current and minimal quantity of the Home Fuel 
+		 */
 		private FuelQty minimal;
+		/***
+		 * contains the details of Home Fuel inventory order (if exists)
+		 */
 		private FuelQty order;
 		
 		/***
-		 * 
+		 * HomeQtyResponse Constructor
 		 * @param minimal - this object contains the current and minimal quantity of the Home Fuel 
 		 * @param order - this object contains the details of Home Fuel inventory order (if exists)
 		 */
@@ -18,32 +29,20 @@ public class HomeQtyResponse extends Response {
 		this.minimal = minimal;
 		this.order = order;
 	}
-	/***
-	 * 
-	 * @return   Home Fuel inventory order
-	 */
+
 	public FuelQty getOrder() {
 		return order;
 	}
-	/***
-	 *  sets   Home Fuel inventory order
-	 * @param order
-	 */
+
 	public void setOrder(FuelQty order) {
 		this.order = order;
 	}
 	
-	/***
-	 * 
-	 * @return minimal quantity of the Home Fuel 
-	 */
+	
 	public FuelQty getMinimal() {
 		return minimal;
 	}
-	/***
-	 * sets minimal quantity of the Home Fuel 
-	 * @param minimal 
-	 */
+
 	public void setMinimal(FuelQty minimal) {
 		this.minimal = minimal;
 	}

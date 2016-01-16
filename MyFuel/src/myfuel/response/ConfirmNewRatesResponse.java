@@ -4,13 +4,27 @@ import java.util.ArrayList;
 
 import myfuel.client.Rate;
 
+
+/***
+ * This class contains details about the rates of specific company as received from the DB
+ * @author karmo
+ *
+ */
 @SuppressWarnings("serial")
 public class ConfirmNewRatesResponse extends Response 
 {
-	private ArrayList<Rate> sModes;
-	private ArrayList<Rate> current;
 	/***
-	 * Response from the DB 
+	 * Suggested rates
+	 */
+	private ArrayList<Rate> sModes;
+	/***
+	 * Current Rates
+	 */
+	private ArrayList<Rate> current;
+	
+	
+	/***
+	 * ConfirmNewRatesResponse Constructor
 	 * @param sModes - the sale modes with their discounts
 	 */
 	public ConfirmNewRatesResponse(ArrayList<Rate> sModes,ArrayList<Rate> current)

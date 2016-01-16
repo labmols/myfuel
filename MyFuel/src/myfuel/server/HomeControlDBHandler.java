@@ -13,6 +13,11 @@ import myfuel.request.homeQtyOrderRequest;
 import myfuel.response.HomeQtyResponse;
 import myfuel.response.booleanResponse;
 
+/***
+ * This class is responsible for managing the Home Fuel Details as listed in the DB
+ * @author karmo
+ *
+ */
 public class HomeControlDBHandler extends DBHandler
 {
 	/***
@@ -31,6 +36,8 @@ public class HomeControlDBHandler extends DBHandler
 	 * contain message details for the user
 	 */
 	private String str = "";
+	
+	
 	/***
 	 *  Create HomeControl DB Handler
 	 * @param server  - MyFuelServer
@@ -39,6 +46,8 @@ public class HomeControlDBHandler extends DBHandler
 	public HomeControlDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 	}
+	
+	
 	/***
 	 * Getting the details From the DB
 	 * Home FUel Order (If Exist)
@@ -98,6 +107,8 @@ public class HomeControlDBHandler extends DBHandler
 		}
 		
 	}
+	
+	
 	/***
 	 * Adding order Quantity to Home Fuel Inventory
 	 */
@@ -130,9 +141,7 @@ public class HomeControlDBHandler extends DBHandler
 	}
 
 	
-	/***
-	 * Getting the request object from the client and handling it due to request's type
-	 */
+
 	@Override
 	public void update(Observable arg0, Object arg1) 
 	{

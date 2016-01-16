@@ -1,6 +1,6 @@
 package myfuel.request;
 
-import java.io.Serializable;
+
 
 /**
  * This class contain the required info for get 
@@ -8,13 +8,17 @@ import java.io.Serializable;
  *
  */
 @SuppressWarnings("serial")
-public class PurchaseRequest implements Serializable {
+public class PurchaseRequest extends Request{
 	
 	/**
 	 * Customer ID Number.
 	 */
 	private int customerID;
-	
+
+/***
+ * PurchaseRequest Constructor
+ * @param customerID - Customer ID Number.
+ */
 	public PurchaseRequest(int customerID)
 	{
 		this.setCustomerID(customerID);

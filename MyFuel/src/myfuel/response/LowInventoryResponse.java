@@ -1,9 +1,8 @@
-package myfuel.server;
+package myfuel.response;
 
 import java.util.ArrayList;
 
 import myfuel.client.FuelQty;
-import myfuel.response.Response;
 
 /***
  * This class will contain the details about the inventory for a specific station
@@ -17,14 +16,17 @@ public class LowInventoryResponse extends Response
 	 * Details about the inventory 
 	 */
 	private ArrayList<FuelQty> qty;
+	
 	/***
 	 * LowInventoryResponse Constructor
-	 * @param qty
+	 * @param qty -  Details about the inventory  
 	 */
 	public LowInventoryResponse(ArrayList<FuelQty> qty)
 	{
 		this.setQty(new ArrayList<FuelQty>(qty));
 	}
+	
+	
 	public ArrayList<FuelQty> getQty() 
 	{
 		return qty;

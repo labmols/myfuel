@@ -23,13 +23,13 @@ import myfuel.response.SReportResponse;
 import myfuel.response.booleanResponse;
 
 /***
- * Station Reports DBHandler - will get the specific report details from the DB
+ * Station Reports DBHandler - will get the specific report details from the DB and if possible will save them in the DB 
  *
  */
 public class SReportsDBHandler extends DBHandler{
 
 	/***
-	 * INventory Report Details
+	 * Inventory Report Details
 	 */
 	private  ArrayList<FuelQty> inventory;
 	/***
@@ -61,6 +61,11 @@ public class SReportsDBHandler extends DBHandler{
 	 */
 	private  Calendar cal;
 	
+	/***
+	 * SReportsDBHandler COnstructor
+	 * @param server  - MyFUelServer
+ 	 * @param con - JDBC
+	 */
 	public SReportsDBHandler(MyFuelServer server, Connection con) {
 		super(server, con);
 		cal = Calendar.getInstance();

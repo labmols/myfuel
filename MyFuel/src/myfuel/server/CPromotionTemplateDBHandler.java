@@ -12,14 +12,38 @@ import myfuel.client.PromotionTemplate;
 import myfuel.request.PromotionTemplateRequest;
 import myfuel.response.booleanResponse;
 
+/***
+ * This class is responsible for updating the DB with the created Promotion Template
+ * @author karmo
+ *
+ */
 public class CPromotionTemplateDBHandler extends DBHandler {
 
+	/***
+	 * WIll indicate the status of the operations (true or false)
+	 */
 	boolean answer;
-	PromotionTemplateRequest request;
-	PromotionTemplate promotion;
-	java.sql.Time stime;
-	 java.sql.Time etime ;
+	/***
+	 * The request as received from the client
+	 */
+	private PromotionTemplateRequest request;
+	/***
+	 * The promotion Template details
+	 */
+	private PromotionTemplate promotion;
+	/***
+	 * Start Time of the promotion
+	 */
+	private java.sql.Time stime;
+	/***
+	 * End Time of the promotion
+	 */
+	private  java.sql.Time etime ;
+	/***
+	 * Description of the operation
+	 */
 	private String str ;
+	
 	/***
 	 *  Create Promotion Template DB Handler
 	 * @param server  - MyFuelServer
@@ -29,11 +53,13 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	{
 		super(server,con);
 	}
+	
+	
 	/***
 	 * First this method will check if there is an existing promotion template with 
 	 * the same details as the new one
 	 * if there is the new one won't enter to the DB
-	 * else it will insert it to the DB
+	 * else it will be insert to the DB
 	 */
 	void insert_promotionTemplate()
 	{
@@ -42,18 +68,7 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	 
 	        stime = new java.sql.Time (promotion.getStartTime().getTime());
 	       etime = new java.sql.Time (promotion.getEndTime().getTime());
-	       
-	       /*	ps=con.prepareStatement("select p.tid from prom_temp p "
-	   				+ "where p.pname = ? and p.shour=? and p.fhour=? and p.discount =?"
-	   				+ "and ctype=?  and fid=?");
-	
-	   		ps.setString(1, promotion.getName());
-	   		ps.setTime(2, stime);
-	   		ps.setTime(3, etime);
-	   		ps.setFloat(4, promotion.getDiscount());
-	   		ps.setInt(5, promotion.getTypeOfCustomer());
-	   		ps.setInt(6,promotion.getTypeOfFuel());
-	   		*/
+ 	
 	       
 	       try {
 	    	  
@@ -83,6 +98,8 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 	   		}  
 	       
 	}
+	
+	
 	/***
 	 * will insert the new promotion template to the DB with it's details
 	 */
@@ -109,12 +126,9 @@ public class CPromotionTemplateDBHandler extends DBHandler {
 				e.printStackTrace();
 			}
 	}
-/***
- *  will get a request from the server.
- *  if the request is instance of 	PromotionTemplateRequest than the request will be 
- *  handled.
- *  after the request is handled a response will be sent back to the client
- */
+	
+	
+
 	@Override
 	public void update(Observable arg0, Object arg1) 
 	{

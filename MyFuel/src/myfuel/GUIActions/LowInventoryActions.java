@@ -9,8 +9,8 @@ import myfuel.client.MyFuelClient;
 import myfuel.gui.LowInventoryGUI;
 import myfuel.request.LoginRequest;
 import myfuel.request.LowInventoryRequest;
+import myfuel.response.LowInventoryResponse;
 import myfuel.response.booleanResponse;
-import myfuel.server.LowInventoryResponse;
 
 /***
  * Controller for  LowInventoryGUI

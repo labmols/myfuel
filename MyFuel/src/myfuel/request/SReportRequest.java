@@ -1,6 +1,5 @@
 package myfuel.request;
 
-import java.io.Serializable;
 
 import myfuel.client.ReportEnum;
 
@@ -9,7 +8,7 @@ import myfuel.client.ReportEnum;
  * This class will be sent to the server in order to request specific report details
  *
  */
-public class SReportRequest implements Serializable 
+public class SReportRequest extends Request
 {
 	/***
 	 * Station ID
