@@ -2,6 +2,7 @@ package myfuel.gui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,35 +11,56 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import myfuel.GUIActions.GUIActions;
+import myfuel.GUIActions.PurchaseActions;
+import myfuel.client.BackMainMenu;
 import myfuel.client.HomeOrder;
 import myfuel.client.Purchase;
+
+import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class CustomerPurchaseGUI extends SuperGUI {
 	private MyTableModel model;
 	private JTable purchaseTable;
+	private PurchaseActions actions;
 	
-	public CustomerPurchaseGUI(GUIActions actions)
+	public CustomerPurchaseGUI(PurchaseActions actions)
 	{
 		super(actions);
+		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		setContentPane(contentPane);
 		panel.setLocation(0, 0);
 		lblTitle.setBounds(226, 6, 175, 31);
 		lblTitle.setText("Purchase History");
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 96, 584, 279);
+		scrollPane.setBounds(6, 96, 584, 229);
 		model = new MyTableModel(6,-1);
-		String[] names = {"#" ,"Car","Station","Fuel","Date","Amount(L)","Price(NIS)"};
+		String[] names = {"#" ,"Car","Station","Fuel","Date","Amount","Price"};
 		for(String s : names)
 			model.addColumn(s);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
 		
 		purchaseTable = new JTable(model);
 		purchaseTable.setFont(new Font("Arial", Font.PLAIN, 12));
 		purchaseTable.setModel(model);
+		purchaseTable.getColumnModel().getColumn(0).setPreferredWidth(5);
+		purchaseTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+		for (int x = 0; x < model.getColumnCount(); x ++)
+		{
+			purchaseTable. getColumnModel (). getColumn (x). setCellRenderer (centerRenderer);
+	     }
 		scrollPane.setViewportView(purchaseTable);
 		panel.add(scrollPane);
+		
+		JLabel lblHereYouCan = new JLabel("Here you can find all your purchases :");
+		lblHereYouCan.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 14));
+		lblHereYouCan.setBounds(16, 68, 274, 16);
+		panel.add(lblHereYouCan);
 		
 	}
 	@Override
@@ -51,13 +73,22 @@ public class CustomerPurchaseGUI extends SuperGUI {
 	{
 			clearTable();
 			String sdate="";
-			for(Purchase p: pList)
+			if(pList != null)
 			{
+				for(Purchase p: pList)
+				{
 				Date date = p.getPdate();
 				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy HH:mm");
 				sdate = format.format(date);
-				model.insertRow(model.getRowCount(),new Object[]{p.getPid(),p.getCustomerCarID(),p.getSid(),p.getFuelid(),sdate,p.getQty(),p.getBill()});
+				model.insertRow(model.getRowCount(),new Object[]{p.getPid(),p.getCustomerCarID(),p.getSname(),p.getFuelName(),sdate,new DecimalFormat("##.##").format(p.getQty())+"(L)",new DecimalFormat("##.##").format(p.getBill())+" NIS"});
+				}
 			}
+			else
+			{
+				this.showOKMessage("You don't have any Purchase that have been recorded!");
+				actions.backToMenu();
+			}
+			
 		}
 	
 	private void clearTable()

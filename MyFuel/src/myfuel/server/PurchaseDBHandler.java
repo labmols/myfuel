@@ -26,12 +26,12 @@ public class PurchaseDBHandler extends DBHandler{
 
 			try 
 			{
-				ps= con.prepareStatement("SELECT p.pid,c.cid,p.sid,p.fuelid,p.pdate,p.qty,p.bill FROM purchase p,customer_purchase c where c.uid = ? and p.fuelid!=4 and p.pid=c.pid");
+				ps= con.prepareStatement("SELECT p.pid,c.cid,s.name,f.fname,p.pdate,p.qty,p.bill FROM purchase p,customer_purchase c,station_in_network s, fuel_price f where c.uid = ? and p.pid=c.pid and p.fuelid=f.fuelid and s.sid = p.sid" );
 				ps.setInt(1, customerID);
 				rs = ps.executeQuery();
 				while(rs.next())
 				{
-						Purchase p = new Purchase(customerID,rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getTimestamp(5),rs.getFloat(6),rs.getFloat(7));
+						Purchase p = new Purchase(customerID,rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getTimestamp(5),rs.getFloat(6),rs.getFloat(7));
 						pList.add(p);
 				}
 				ps.close();

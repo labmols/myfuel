@@ -1,5 +1,6 @@
 package myfuel.gui;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,6 +80,8 @@ public void updateTable(ArrayList <HomeOrder> horders)
 	clearTable();
 	String urgent;
 	String status;
+	if(horders != null)
+	{
 	for(HomeOrder order: horders)
 	{
 		Purchase p = order.getHomeP();
@@ -87,7 +91,13 @@ public void updateTable(ArrayList <HomeOrder> horders)
 		else urgent = "No";
 		if(order.getStatus()) status = "Delivered";
 		else status= "On delivery";
-		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), order.getHomeP().getQty()+"L",p.getBill(),order.getAddress(), format.format(date), urgent, status});
+		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), new DecimalFormat("##.##").format(order.getHomeP().getQty())+"L",new DecimalFormat("##.##").format(p.getBill()),order.getAddress(), format.format(date), urgent, status});
+	}
+	}
+	else
+	{
+		JOptionPane.showMessageDialog(this, "You don't have any Home Order that have been recorded!","Message",JOptionPane.INFORMATION_MESSAGE);	
+
 	}
 }
 	
