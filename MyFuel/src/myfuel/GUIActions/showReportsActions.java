@@ -3,13 +3,13 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.MessageForManager;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.*;
-import myfuel.request.NetworkReportRequest;
-import myfuel.request.LoginRequest;
-import myfuel.response.ComapnyReportsResponse;
-import myfuel.response.booleanResponse;
+import myfuel.GUI.*;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.NetworkReportRequest;
+import myfuel.Response.ComapnyReportsResponse;
+import myfuel.Response.booleanResponse;
 
 /***
  * Controller for ShowReportGUI

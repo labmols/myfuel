@@ -4,15 +4,15 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Fuel;
 import myfuel.Entity.NetworkRates;
 import myfuel.Entity.Rate;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.SetNewRatesGUI;
-import myfuel.request.LoginRequest;
-import myfuel.request.SetNewRatesRequest;
-import myfuel.response.SetNewRatesResponse;
-import myfuel.response.booleanResponse;
+import myfuel.GUI.SetNewRatesGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.SetNewRatesRequest;
+import myfuel.Response.SetNewRatesResponse;
+import myfuel.Response.booleanResponse;
 
 /***
  * This class will be used as a controller to SetNewRatesGUI

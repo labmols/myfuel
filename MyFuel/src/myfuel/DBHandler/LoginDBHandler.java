@@ -14,15 +14,15 @@ import myfuel.Entity.Fuel;
 import myfuel.Entity.MessageForManager;
 import myfuel.Entity.Network;
 import myfuel.Entity.Station;
-import myfuel.request.LoginRequest;
-import myfuel.request.RegisterRequest;
-import myfuel.response.ErrorEnum;
-import myfuel.response.RegisterResponse;
-import myfuel.response.Response;
-import myfuel.response.CustomerLoginResponse;
-import myfuel.response.WorkerLoginResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RegisterRequest;
+import myfuel.Response.CustomerLoginResponse;
+import myfuel.Response.ErrorEnum;
+import myfuel.Response.RegisterResponse;
+import myfuel.Response.Response;
+import myfuel.Response.WorkerLoginResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /**
  * Log In Database Controller, responsible for Log In queries.

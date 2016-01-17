@@ -5,15 +5,15 @@ import java.util.Observable;
 
 import com.alee.managers.notification.NotificationManager;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Customer;
 import myfuel.Entity.Station;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.ChangePasswordGUI;
-import myfuel.gui.UpdateCustomerDetailsGUI;
-import myfuel.gui.CustomerOptionsGUI;
-import myfuel.request.LoginRequest;
-import myfuel.response.Response;
-import myfuel.response.CustomerLoginResponse;
+import myfuel.GUI.ChangePasswordGUI;
+import myfuel.GUI.CustomerOptionsGUI;
+import myfuel.GUI.UpdateCustomerDetailsGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Response.CustomerLoginResponse;
+import myfuel.Response.Response;
 
 /**
  * Customer Options Main Menu Controller class.

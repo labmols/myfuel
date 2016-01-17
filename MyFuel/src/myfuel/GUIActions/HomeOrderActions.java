@@ -8,20 +8,20 @@ import java.util.Observable;
 
 import javax.swing.JOptionPane;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Fuel;
 import myfuel.Entity.FuelQty;
 import myfuel.Entity.HomeOrder;
 import myfuel.Entity.Purchase;
 import myfuel.Entity.StationInventory;
+import myfuel.GUI.HomeFuelGUI;
+import myfuel.Request.FuelOrderRequest;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.CustomerLoginResponse;
+import myfuel.Response.FuelOrderResponse;
+import myfuel.Response.booleanResponse;
 import myfuel.Tools.CalcPrice;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.HomeFuelGUI;
-import myfuel.request.FuelOrderRequest;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.response.CustomerLoginResponse;
-import myfuel.response.FuelOrderResponse;
-import myfuel.response.booleanResponse;
 
 /**
  * Home Fuel GUI Controller.

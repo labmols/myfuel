@@ -3,15 +3,15 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.MessageForManager;
 import myfuel.Entity.Rate;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.ConfirmNewRatesGUI;
-import myfuel.request.ConfirmNewRatesRequest;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.response.ConfirmNewRatesResponse;
-import myfuel.response.booleanResponse;
+import myfuel.GUI.ConfirmNewRatesGUI;
+import myfuel.Request.ConfirmNewRatesRequest;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.ConfirmNewRatesResponse;
+import myfuel.Response.booleanResponse;
 
 /***
  * Controller for ConfirmNewRatesGUI

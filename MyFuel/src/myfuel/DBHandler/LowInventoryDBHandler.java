@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.Entity.FuelQty;
-import myfuel.request.LowInventoryRequest;
-import myfuel.request.SetNewRatesRequest;
-import myfuel.response.LowInventoryResponse;
-import myfuel.response.SetNewRatesResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.LowInventoryRequest;
+import myfuel.Request.SetNewRatesRequest;
+import myfuel.Response.LowInventoryResponse;
+import myfuel.Response.SetNewRatesResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /***
  * Updates / Gets The details about the quantities in a station

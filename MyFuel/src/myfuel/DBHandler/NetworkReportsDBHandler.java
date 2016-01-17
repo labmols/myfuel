@@ -15,11 +15,10 @@ import myfuel.Entity.QuarterStationIncome;
 import myfuel.Entity.QuarterStationInventory;
 import myfuel.Entity.QuarterStationPurchase;
 import myfuel.Entity.Station;
-import myfuel.request.NetworkReportRequest;
-import myfuel.request.NetworkReportRequest;
-import myfuel.response.ComapnyReportsResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.NetworkReportRequest;
+import myfuel.Response.ComapnyReportsResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 
 /***

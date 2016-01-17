@@ -1,6 +1,6 @@
 package myfuel.Tools;
 
-import myfuel.gui.FuelDialog;
+import myfuel.GUI.FuelDialog;
 
 
 /**

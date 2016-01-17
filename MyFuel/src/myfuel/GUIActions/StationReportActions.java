@@ -6,16 +6,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.MessageForManager;
+import myfuel.GUI.StationReportGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Request.SReportRequest;
+import myfuel.Response.SReportResponse;
+import myfuel.Response.booleanResponse;
 import myfuel.Tools.ReportEnum;
 import myfuel.Tools.TimeIgnoringComparator;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.StationReportGUI;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.request.SReportRequest;
-import myfuel.response.SReportResponse;
-import myfuel.response.booleanResponse;
 
 /***
  * Controller for StationReportGUI

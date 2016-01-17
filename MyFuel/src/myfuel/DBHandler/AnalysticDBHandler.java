@@ -9,12 +9,12 @@ import java.util.Date;
 import java.util.Observable;
 
 import myfuel.Entity.AnalyzeDetails;
+import myfuel.Request.AnalysticRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.AnalysticResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 import myfuel.Tools.AnalysticSystem;
-import myfuel.request.AnalysticRequest;
-import myfuel.request.RequestEnum;
-import myfuel.response.AnalysticResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
 
 /***
  * This class will be used to get / set Analyze details

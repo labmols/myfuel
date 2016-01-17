@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Purchase;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.CustomerOptionsGUI;
-import myfuel.gui.CustomerPurchaseGUI;
-import myfuel.request.LoginRequest;
-import myfuel.request.PurchaseRequest;
-import myfuel.response.CustomerLoginResponse;
-import myfuel.response.PurchaseResponse;
-import myfuel.response.booleanResponse;
+import myfuel.GUI.CustomerOptionsGUI;
+import myfuel.GUI.CustomerPurchaseGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.PurchaseRequest;
+import myfuel.Response.CustomerLoginResponse;
+import myfuel.Response.PurchaseResponse;
+import myfuel.Response.booleanResponse;
 
 /**
  * Purchase History GUI Controller, handle all the logic functionality and getting info from DB.

@@ -7,17 +7,17 @@ import java.util.Observable;
 
 import javax.swing.DefaultComboBoxModel;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Promotion;
 import myfuel.Entity.PromotionTemplate;
+import myfuel.GUI.MakeaPromotionGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.MakeaPromotionRequest;
+import myfuel.Request.PromotionTemplateRequest;
+import myfuel.Response.MakeaPromotionResponse;
+import myfuel.Response.Response;
+import myfuel.Response.booleanResponse;
 import myfuel.Tools.TimeIgnoringComparator;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.MakeaPromotionGUI;
-import myfuel.request.LoginRequest;
-import myfuel.request.MakeaPromotionRequest;
-import myfuel.request.PromotionTemplateRequest;
-import myfuel.response.MakeaPromotionResponse;
-import myfuel.response.Response;
-import myfuel.response.booleanResponse;
 
 /***
  * This class will be uses as a controller for MakeaPromotionGUI

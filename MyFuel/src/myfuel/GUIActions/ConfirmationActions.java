@@ -6,15 +6,15 @@ import java.util.Observable;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import myfuel.Client.*;
 import myfuel.Entity.Customer;
+import myfuel.GUI.ConfirmationGUI;
+import myfuel.Request.ConfirmationRequest;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.ConfirmationResponse;
+import myfuel.Response.booleanResponse;
 import myfuel.Tools.MailThread;
-import myfuel.client.*;
-import myfuel.gui.ConfirmationGUI;
-import myfuel.request.ConfirmationRequest;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.response.ConfirmationResponse;
-import myfuel.response.booleanResponse;
 
 /***
  * This Class will be a controller for the ConfirmationGUI

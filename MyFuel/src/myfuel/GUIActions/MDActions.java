@@ -2,9 +2,9 @@ package myfuel.GUIActions;
 
 import java.util.Observable;
 
-import myfuel.client.MyFuelClient;
-import myfuel.gui.MDGUI;
-import myfuel.request.LoginRequest;
+import myfuel.Client.MyFuelClient;
+import myfuel.GUI.MDGUI;
+import myfuel.Request.LoginRequest;
 
 /***
  * Controller for the MDGUI

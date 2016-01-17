@@ -9,11 +9,11 @@ import java.util.Observable;
 
 import myfuel.Entity.Fuel;
 import myfuel.Entity.Rate;
-import myfuel.request.ConfirmNewRatesRequest;
-import myfuel.request.RequestEnum;
-import myfuel.response.ConfirmNewRatesResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.ConfirmNewRatesRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.ConfirmNewRatesResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /***
  * This class will be used as a DBHandler for getting and updating Company Rates

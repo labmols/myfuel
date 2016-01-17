@@ -3,11 +3,11 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.FuelQty;
 import myfuel.Entity.MessageForManager;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.NetworkMGUI;
-import myfuel.request.LoginRequest;
+import myfuel.GUI.NetworkMGUI;
+import myfuel.Request.LoginRequest;
 
 /***
  * Network Manager GUI Controller

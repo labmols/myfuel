@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.sql.PreparedStatement;
 
+import myfuel.Client.*;
 import myfuel.Entity.FuelQty;
 import myfuel.Entity.InventoryOrder;
 import myfuel.Entity.Station;
-import myfuel.client.*;
-import myfuel.request.RequestEnum;
-import myfuel.request.SWRequest;
-import myfuel.response.booleanResponse;
-import myfuel.response.inventoryResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.RequestEnum;
+import myfuel.Request.SWRequest;
+import myfuel.Response.booleanResponse;
+import myfuel.Response.inventoryResponse;
+import myfuel.Server.MyFuelServer;
 
 /***
  * Station Worker DBHandler  - will get and set Inventory Order Details to the worker's station

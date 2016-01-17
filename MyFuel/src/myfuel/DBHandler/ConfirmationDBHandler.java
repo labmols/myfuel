@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.Client.*;
 import myfuel.Entity.Customer;
-import myfuel.client.*;
-import myfuel.request.ConfirmationRequest;
-import myfuel.request.RequestEnum;
-import myfuel.response.ConfirmationResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.ConfirmationRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.ConfirmationResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /***
  * This class is responsible for getting and setting Customers that needs to be approved 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Car;
 import myfuel.Entity.Customer;
 import myfuel.Entity.Fuel;
@@ -14,16 +15,15 @@ import myfuel.Entity.Purchase;
 import myfuel.Entity.Rate;
 import myfuel.Entity.Station;
 import myfuel.Entity.StationInventory;
+import myfuel.GUI.CarFuelGUI;
+import myfuel.Request.FuelOrderRequest;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.CustomerLoginResponse;
+import myfuel.Response.FuelOrderResponse;
+import myfuel.Response.Response;
+import myfuel.Response.booleanResponse;
 import myfuel.Tools.CalcPrice;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.CarFuelGUI;
-import myfuel.request.FuelOrderRequest;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.response.FuelOrderResponse;
-import myfuel.response.Response;
-import myfuel.response.CustomerLoginResponse;
-import myfuel.response.booleanResponse;
 
 /**
  * Car Fuel GUI Controller, responsible for all logic functionality.

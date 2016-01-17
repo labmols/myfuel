@@ -11,13 +11,13 @@ import java.util.Observable;
 import myfuel.Entity.Car;
 import myfuel.Entity.Customer;
 import myfuel.Entity.Station;
-import myfuel.request.RequestEnum;
-import myfuel.request.UpdateRequest;
-import myfuel.request.RegisterRequest;
-import myfuel.response.RegisterResponse;
-import myfuel.response.Response;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.RegisterRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Request.UpdateRequest;
+import myfuel.Response.RegisterResponse;
+import myfuel.Response.Response;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /**
  * Update Details Database Handler, responsible for all the related update details queries.

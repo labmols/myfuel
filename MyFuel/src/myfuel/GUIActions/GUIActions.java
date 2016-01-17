@@ -5,10 +5,10 @@ import java.awt.Frame;
 import java.util.Observable;
 import java.util.Observer;
 
-import myfuel.client.MyFuelClient;
-import myfuel.gui.SuperGUI;
-import myfuel.request.LoginRequest;
-import myfuel.response.Response;
+import myfuel.Client.MyFuelClient;
+import myfuel.GUI.SuperGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Response.Response;
 
 
 /**

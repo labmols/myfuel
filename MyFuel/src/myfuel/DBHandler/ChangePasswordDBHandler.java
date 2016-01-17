@@ -5,10 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Observable;
 
-import myfuel.request.ChangePassRequest;
-import myfuel.response.Response;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.ChangePassRequest;
+import myfuel.Response.Response;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /**
  * This DB Controller responsible for changing password request.

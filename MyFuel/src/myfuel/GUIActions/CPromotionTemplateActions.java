@@ -8,13 +8,17 @@ import java.util.Observable;
 
 
 
+
+
+
+
+import myfuel.Client.*;
 import myfuel.Entity.PromotionTemplate;
+import myfuel.GUI.*;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.PromotionTemplateRequest;
+import myfuel.Response.booleanResponse;
 import myfuel.Tools.DateIgnoreComparator;
-import myfuel.client.*;
-import myfuel.gui.*;
-import myfuel.request.LoginRequest;
-import myfuel.request.PromotionTemplateRequest;
-import myfuel.response.booleanResponse;
 
 /***
  *  this class will has the actions for the CreatePromotionTemplateGUI class

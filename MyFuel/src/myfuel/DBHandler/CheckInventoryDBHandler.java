@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import myfuel.Entity.FuelQty;
-import myfuel.request.CheckInventoryRequest;
-import myfuel.response.CheckInventoryResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.CheckInventoryRequest;
+import myfuel.Response.CheckInventoryResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 /***
  * This class is responsible for managing the inventory orders for specific station
  * @author karmo

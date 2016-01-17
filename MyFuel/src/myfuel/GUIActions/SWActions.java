@@ -2,13 +2,13 @@ package myfuel.GUIActions;
 
 import java.util.Observable;
 
-import myfuel.client.MyFuelClient;
-import myfuel.gui.SWGUI;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.request.SWRequest;
-import myfuel.response.booleanResponse;
-import myfuel.response.inventoryResponse;
+import myfuel.Client.MyFuelClient;
+import myfuel.GUI.SWGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Request.SWRequest;
+import myfuel.Response.booleanResponse;
+import myfuel.Response.inventoryResponse;
 
 /***
  * Controller for SWGUI

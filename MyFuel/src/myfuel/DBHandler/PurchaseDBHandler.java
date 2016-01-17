@@ -10,10 +10,10 @@ import java.util.Date;
 import java.util.Observable;
 
 import myfuel.Entity.Purchase;
-import myfuel.request.PurchaseRequest;
-import myfuel.response.PurchaseResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.PurchaseRequest;
+import myfuel.Response.PurchaseResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /**
  * This DB Handler handle all the queries related to the customer purchase user interface.

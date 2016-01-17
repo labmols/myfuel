@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.Client.*;
 import myfuel.Entity.Fuel;
 import myfuel.Entity.FuelQty;
 import myfuel.Entity.HomeOrder;
@@ -19,14 +20,13 @@ import myfuel.Entity.Purchase;
 import myfuel.Entity.Rate;
 import myfuel.Entity.Station;
 import myfuel.Entity.StationInventory;
+import myfuel.Request.FuelOrderRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.FuelOrderResponse;
+import myfuel.Response.Response;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 import myfuel.Tools.MailThread;
-import myfuel.client.*;
-import myfuel.request.FuelOrderRequest;
-import myfuel.request.RequestEnum;
-import myfuel.response.FuelOrderResponse;
-import myfuel.response.Response;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
 
 /**
  * Car Fuel Database Handler, responsible for all the related Car fuel queries.

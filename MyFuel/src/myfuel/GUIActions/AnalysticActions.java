@@ -3,13 +3,13 @@ package myfuel.GUIActions;
 import java.util.Date;
 import java.util.Observable;
 
-import myfuel.client.MyFuelClient;
-import myfuel.gui.AnalysticGUI;
-import myfuel.request.AnalysticRequest;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.response.AnalysticResponse;
-import myfuel.response.booleanResponse;
+import myfuel.Client.MyFuelClient;
+import myfuel.GUI.AnalysticGUI;
+import myfuel.Request.AnalysticRequest;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.AnalysticResponse;
+import myfuel.Response.booleanResponse;
 
 /***
  * Controller for the AnalysticGUI

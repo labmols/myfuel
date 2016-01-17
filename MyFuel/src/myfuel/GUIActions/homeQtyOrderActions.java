@@ -3,15 +3,15 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.FuelQty;
 import myfuel.Entity.MessageForManager;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.HomeQtyOrderGUI;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.request.homeQtyOrderRequest;
-import myfuel.response.HomeQtyResponse;
-import myfuel.response.booleanResponse;
+import myfuel.GUI.HomeQtyOrderGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Request.homeQtyOrderRequest;
+import myfuel.Response.HomeQtyResponse;
+import myfuel.Response.booleanResponse;
 
 /***
  * Controller for HomeQtyOrderGUI

@@ -10,10 +10,10 @@ import java.util.Observable;
 
 import myfuel.Entity.Promotion;
 import myfuel.Entity.PromotionTemplate;
-import myfuel.request.MakeaPromotionRequest;
-import myfuel.response.MakeaPromotionResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.MakeaPromotionRequest;
+import myfuel.Response.MakeaPromotionResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /**
  * This class is responsible for Updating the DB with new Promotion

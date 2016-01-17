@@ -2,12 +2,12 @@ package myfuel.GUIActions;
 
 import java.util.Observable;
 
-import myfuel.client.MyFuelClient;
-import myfuel.gui.MMReportGUI;
-import myfuel.request.LoginRequest;
-import myfuel.request.MMRerportsRequest;
-import myfuel.response.MMReportsResponse;
-import myfuel.response.booleanResponse;
+import myfuel.Client.MyFuelClient;
+import myfuel.GUI.MMReportGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.MMRerportsRequest;
+import myfuel.Response.MMReportsResponse;
+import myfuel.Response.booleanResponse;
 /***
  * This class will has methods that will assist to the GUI functioning 
  *

@@ -17,13 +17,13 @@ import myfuel.Entity.FuelQty;
 import myfuel.Entity.Purchase;
 import myfuel.Entity.Station;
 import myfuel.Entity.StationInventory;
+import myfuel.Request.RequestEnum;
+import myfuel.Request.SReportRequest;
+import myfuel.Response.SReportResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 import myfuel.Tools.ReportEnum;
 import myfuel.Tools.TimeIgnoringComparator;
-import myfuel.request.RequestEnum;
-import myfuel.request.SReportRequest;
-import myfuel.response.SReportResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
 
 /***
  * Station Reports DBHandler - will get the specific report details from the DB and if possible will save them in the DB 

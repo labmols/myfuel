@@ -2,14 +2,14 @@ package myfuel.GUIActions;
 
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Customer;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.ChangePasswordGUI;
-import myfuel.request.ChangePassRequest;
-import myfuel.request.LoginRequest;
-import myfuel.response.Response;
-import myfuel.response.CustomerLoginResponse;
-import myfuel.response.booleanResponse;
+import myfuel.GUI.ChangePasswordGUI;
+import myfuel.Request.ChangePassRequest;
+import myfuel.Request.LoginRequest;
+import myfuel.Response.CustomerLoginResponse;
+import myfuel.Response.Response;
+import myfuel.Response.booleanResponse;
 
 /**
  * Change Password GUI Controller class.

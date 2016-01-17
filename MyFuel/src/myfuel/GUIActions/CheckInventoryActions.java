@@ -3,13 +3,13 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.MessageForManager;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.CheckInventoryGUI;
-import myfuel.request.CheckInventoryRequest;
-import myfuel.request.LoginRequest;
-import myfuel.response.CheckInventoryResponse;
-import myfuel.response.booleanResponse;
+import myfuel.GUI.CheckInventoryGUI;
+import myfuel.Request.CheckInventoryRequest;
+import myfuel.Request.LoginRequest;
+import myfuel.Response.CheckInventoryResponse;
+import myfuel.Response.booleanResponse;
 
 /***
  * Controller for the CheckInventoryGUI

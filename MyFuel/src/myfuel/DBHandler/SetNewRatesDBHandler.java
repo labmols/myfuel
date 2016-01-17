@@ -11,10 +11,10 @@ import myfuel.Entity.Fuel;
 import myfuel.Entity.Network;
 import myfuel.Entity.NetworkRates;
 import myfuel.Entity.Rate;
-import myfuel.request.SetNewRatesRequest;
-import myfuel.response.SetNewRatesResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.SetNewRatesRequest;
+import myfuel.Response.SetNewRatesResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /***
  * This class will Handle the update of the rates for the networks

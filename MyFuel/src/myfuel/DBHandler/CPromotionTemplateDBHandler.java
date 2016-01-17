@@ -9,9 +9,9 @@ import java.sql.*;
 
 import myfuel.Entity.Promotion;
 import myfuel.Entity.PromotionTemplate;
-import myfuel.request.PromotionTemplateRequest;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.PromotionTemplateRequest;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /***
  * This class is responsible for updating the DB with the created Promotion Template

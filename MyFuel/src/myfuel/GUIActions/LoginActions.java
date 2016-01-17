@@ -2,20 +2,14 @@ package myfuel.GUIActions;
 
 import java.awt.Cursor;
 import java.util.Observable;
-
-import myfuel.response.*;
-
 import java.util.Observer;
 
 import com.alee.managers.notification.NotificationManager;
 
-import myfuel.client.MyFuelClient;
-import myfuel.gui.LogInGUI;
-import myfuel.request.LoginRequest;
-import myfuel.response.ErrorEnum;
-import myfuel.response.Response;
-import myfuel.response.CustomerLoginResponse;
-import myfuel.response.WorkerLoginResponse;
+import myfuel.Client.MyFuelClient;
+import myfuel.GUI.LogInGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Response.*;
 
 /**
  * Log In GUI Controller, responsible for all related login queries.

@@ -5,19 +5,19 @@ import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Car;
 import myfuel.Entity.Customer;
 import myfuel.Entity.Network;
 import myfuel.Entity.Station;
+import myfuel.GUI.RegisterGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RegisterRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Response.RegisterResponse;
+import myfuel.Response.Response;
+import myfuel.Response.booleanResponse;
 import myfuel.Tools.SendMailTLS;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.RegisterGUI;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.request.RegisterRequest;
-import myfuel.response.RegisterResponse;
-import myfuel.response.Response;
-import myfuel.response.booleanResponse;
 
 /**
  * Register GUI Controller.

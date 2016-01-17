@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Car;
 import myfuel.Entity.Customer;
 import myfuel.Entity.Promotion;
 import myfuel.Entity.Purchase;
 import myfuel.Entity.Rate;
 import myfuel.Entity.Station;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.FastFuelGUI;
-import myfuel.request.LoginRequest;
-import myfuel.response.CustomerLoginResponse;
-import myfuel.response.FuelOrderResponse;
-import myfuel.response.booleanResponse;
+import myfuel.GUI.FastFuelGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Response.CustomerLoginResponse;
+import myfuel.Response.FuelOrderResponse;
+import myfuel.Response.booleanResponse;
 
 /**
  * Fast Fuel GUI Controller, handle all the logic functionality.

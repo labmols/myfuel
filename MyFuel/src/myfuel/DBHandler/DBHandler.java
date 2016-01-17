@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.Observable;
 import java.util.Observer;
 
-import myfuel.server.MyFuelServer;
+import myfuel.Server.MyFuelServer;
 
 /**
  * Abstract class that implements Observer ,

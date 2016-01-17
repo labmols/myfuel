@@ -8,11 +8,11 @@ import java.util.Observable;
 
 import myfuel.Entity.Fuel;
 import myfuel.Entity.FuelQty;
-import myfuel.request.RequestEnum;
-import myfuel.request.homeQtyOrderRequest;
-import myfuel.response.HomeQtyResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.RequestEnum;
+import myfuel.Request.homeQtyOrderRequest;
+import myfuel.Response.HomeQtyResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 
 /***
  * This class is responsible for managing the Home Fuel Details as listed in the DB

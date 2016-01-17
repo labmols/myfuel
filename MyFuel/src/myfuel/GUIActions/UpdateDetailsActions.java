@@ -5,19 +5,19 @@ import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Car;
 import myfuel.Entity.Customer;
 import myfuel.Entity.Network;
 import myfuel.Entity.Station;
-import myfuel.client.MyFuelClient;
-import myfuel.gui.LogInGUI;
-import myfuel.gui.UpdateCustomerDetailsGUI;
-import myfuel.request.LoginRequest;
-import myfuel.request.RequestEnum;
-import myfuel.request.UpdateRequest;
-import myfuel.response.Response;
-import myfuel.response.CustomerLoginResponse;
-import myfuel.response.booleanResponse;
+import myfuel.GUI.LogInGUI;
+import myfuel.GUI.UpdateCustomerDetailsGUI;
+import myfuel.Request.LoginRequest;
+import myfuel.Request.RequestEnum;
+import myfuel.Request.UpdateRequest;
+import myfuel.Response.CustomerLoginResponse;
+import myfuel.Response.Response;
+import myfuel.Response.booleanResponse;
 
 /**
  * Update details Controller

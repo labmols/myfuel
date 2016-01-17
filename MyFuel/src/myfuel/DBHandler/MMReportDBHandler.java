@@ -14,14 +14,17 @@ import java.util.Observable;
 
 
 
+
+
+
 import myfuel.Entity.CustomerReport;
 import myfuel.Entity.Promotion;
 import myfuel.Entity.PromotionReport;
 import myfuel.Entity.Station;
-import myfuel.request.MMRerportsRequest;
-import myfuel.response.MMReportsResponse;
-import myfuel.response.booleanResponse;
-import myfuel.server.MyFuelServer;
+import myfuel.Request.MMRerportsRequest;
+import myfuel.Response.MMReportsResponse;
+import myfuel.Response.booleanResponse;
+import myfuel.Server.MyFuelServer;
 /***
  * This class will has the necessary queries and methods to get the details for the Marketing Manager reports
  *
