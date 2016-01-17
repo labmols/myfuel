@@ -90,13 +90,22 @@ public class MyFuelServer extends ObservableServer{
 	@Override
 	protected synchronized void clientDisconnected(ConnectionToClient client) 
 	  {
+		LoginRequest lr = null;
 	    setChanged();
-	    LoginRequest l = (LoginRequest)(client.getInfo("Info"));
-	    notifyObservers(l);
+	    try {
+			if(!con.isClosed())
+			{
+			lr = (LoginRequest)(client.getInfo("Info"));
+			notifyObservers(lr);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    if(client.getInetAddress()!=null) 
 	    {
-	    if(l!=null)
-	    	gui.printMsg("Client with ID: " + l.getUserid() +" " + client+ " Disconnected!");
+	    if(lr!=null)
+	    	gui.printMsg("Client with ID: " + lr.getUserid() +" " + client+ " Disconnected!");
 	    else gui.printMsg("<ClientDisconnected>:"+ client + " Disconnected!");
 	    }
 	  }

@@ -4,12 +4,12 @@ package myfuel.Request;
 import myfuel.Entity.HomeOrder;
 import myfuel.Entity.Purchase;
 
-@SuppressWarnings("serial")
 /**
  * Fuel Request class, contains all the request details that will be send to the server.
  * @author Maor
  *
  */
+@SuppressWarnings("serial")
 public class FuelOrderRequest extends Request{
 	/**
 	 * Request Query Type (Insert, Select)

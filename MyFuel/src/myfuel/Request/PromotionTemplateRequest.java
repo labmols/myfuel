@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import myfuel.Entity.Promotion;
 import myfuel.Entity.PromotionTemplate;
-@SuppressWarnings("serial")
 
 /***
  * This request will contain the Promotion Template details
@@ -12,6 +11,8 @@ import myfuel.Entity.PromotionTemplate;
  * The request will be sent to the server 
  *
  */
+@SuppressWarnings("serial")
+
 public class PromotionTemplateRequest implements Serializable{
 	private PromotionTemplate p;
 	
