@@ -28,15 +28,20 @@ public class CMActions extends GUIActions {
 	 */
 	private int nid;
 	/***
+	 * Network Name
+	 */
+	private String nName;
+	/***
 	 * CMActions Constructor
 	 * @param client - MyFuelClient
 	 * @param msg   - Messages
 	 */
-	public CMActions(MyFuelClient client,ArrayList<MessageForManager> msg, int nid,LoginRequest lr) {
+	public CMActions(MyFuelClient client,ArrayList<MessageForManager> msg, int nid,LoginRequest lr,String netName) {
 		super(client,lr);
 		this.msg = msg;
 		this.nid = nid;
-		gui = new NetworkMGUI(this,msg);
+		this.nName = netName;
+		gui = new NetworkMGUI(this,msg,nName);
 		gui.setVisible(true);
 	}
 
@@ -51,7 +56,7 @@ public class CMActions extends GUIActions {
 	 */
 	public void ConfirmNewRatesWindow() 
 	{
-		new ConfirmNewRatesActions(client,msg,nid,lr);
+		new ConfirmNewRatesActions(client,msg,nid,lr,this.nName);
 		changeFrame(gui,this);	
 		
 	}
@@ -71,7 +76,7 @@ public class CMActions extends GUIActions {
 	{
 
 		changeFrame(gui,this);	
-		new showReportsActions(client,msg,nid,lr);
+		new showReportsActions(client,msg,nid,lr,this.nName);
 		
 	}
 

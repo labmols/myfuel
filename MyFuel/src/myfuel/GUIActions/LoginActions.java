@@ -135,7 +135,7 @@ public class LoginActions extends GUIActions {
 							 changeFrame(gui, this); 
 							 break;
 			case CompanyManager:
-				new CMActions(client,res.getMsg(),res.getNid(),lr);
+				new CMActions(client,res.getMsg(),res.getNid(),lr,res.getNetName());
 				changeFrame(gui,this);
 				break;
 			case StationManager:

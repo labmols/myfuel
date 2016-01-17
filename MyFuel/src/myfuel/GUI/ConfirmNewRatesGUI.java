@@ -41,12 +41,13 @@ public class ConfirmNewRatesGUI extends SuperGUI{
 	/***
 	 * ConfirmNewRatesGUI Constructor
 	 * @param actions - the controller of this GUI
+	 * @param netName - network name
 	 */
-	public ConfirmNewRatesGUI(ConfirmNewRatesActions actions)
+	public ConfirmNewRatesGUI(ConfirmNewRatesActions actions,String netName)
 	{
 		super(actions);
 		lblTitle.setBounds(187, 0, 264, 25);
-		lblTitle.setText("New Rates Confirmation");
+		lblTitle.setText("New Rates for"+" "+netName);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(47, 90, 498, 217);

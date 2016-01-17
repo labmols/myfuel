@@ -34,20 +34,26 @@ public class ConfirmNewRatesActions extends GUIActions {
 	private int nid;
 	
 	/***
+	 * Network Name
+	 */
+	private String netName;
+	/***
 	 *  ConfirmNewRatesActions Constructor
 	 * @param client - MyFuelClient
 	 * @param msg - messages
 	 * @param nid - network ID
+	 * @param lr - Login Request Details
+	 * @param netName - Network Name
 	 */
-	public ConfirmNewRatesActions(MyFuelClient client,ArrayList<MessageForManager>msg,int nid,LoginRequest lr) {
+	public ConfirmNewRatesActions(MyFuelClient client,ArrayList<MessageForManager>msg,int nid,LoginRequest lr,String netName) {
 		super(client,lr);
 		
 		this.msg = msg;
 		this.nid = nid;
-		
+		this.netName = netName;
 		ConfirmNewRatesRequest request = new ConfirmNewRatesRequest(RequestEnum.Select , nid);
 		
-		gui = new ConfirmNewRatesGUI(this);
+		gui = new ConfirmNewRatesGUI(this,this.netName);
 		gui.createWaitDialog("Getting Rates...");
 		client.handleMessageFromGUI(request);
 		
@@ -105,7 +111,7 @@ public class ConfirmNewRatesActions extends GUIActions {
 	{
 
 		changeFrame(gui,this);
-		new CMActions(client,msg,nid,lr);
+		new CMActions(client,msg,nid,lr,this.netName);
 		
 	}
 /***

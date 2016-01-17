@@ -43,18 +43,29 @@ public class WorkerLoginResponse extends Response{
 	 * Name of the station that this worker belongs to
 	 */
 	private String StationName;
-	/** new Worker login response
+	
+	
+	/***
+	 * Network name
+	 */
+	private String netName;
+	
+	/** new Worker login response constructor
 	 * role 1 - Station Worker
 	 * role 2- Station Manager
 	 * role 3- Marketing Manager
 	 * role 4- Marketing Delegate
 	 * role 5- Company Manager
 	 * role 6 - Home Fuel Manager
-	 * @param workerExist
-	 * @param role
-	 * @param msg
+	 * @param wid - worker id
+	 * @param nid - network id
+	 * @param sid - station id
+	 * @param msg - messages for the worker
+	 * @param StationName - station name
+	 * @param netName - network name
 	 */
-	public WorkerLoginResponse(int roleid,int wid,int nid,int sid,ArrayList<MessageForManager> msg,String StationName){
+	
+	public WorkerLoginResponse(int roleid,int wid,int nid,int sid,ArrayList<MessageForManager> msg,String StationName,String netName){
 		this.wid=wid;
 		this.sid = sid;
 		switch(roleid){
@@ -75,7 +86,7 @@ public class WorkerLoginResponse extends Response{
 		this.setNid(nid);
 		
 		this.setStationName(StationName);
-		
+		this.setNetName(netName);
 	}
 	
 	
@@ -130,6 +141,16 @@ public class WorkerLoginResponse extends Response{
 
 	public void setStationName(String stationName) {
 		StationName = stationName;
+	}
+
+
+	public String getNetName() {
+		return netName;
+	}
+
+
+	public void setNetName(String netName) {
+		this.netName = netName;
 	}
 
 

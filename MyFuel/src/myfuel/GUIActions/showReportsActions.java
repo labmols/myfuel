@@ -31,17 +31,22 @@ public class showReportsActions extends GUIActions {
 	 * Network ID
 	 */
 	private int nid;
+	
+	/***
+	 * Network Name
+	 */
+	private String netName;
 	/***
 	 * showReportsActions Constructor
 	 * @param client - MyFuelClient
 	 */
-	public showReportsActions(MyFuelClient client,ArrayList<MessageForManager> msg,int nid,LoginRequest lr) 
+	public showReportsActions(MyFuelClient client,ArrayList<MessageForManager> msg,int nid,LoginRequest lr,String netName) 
 	{
 		super(client,lr);
 		this.msg = msg;
 		this.nid = nid;
-		
-		gui = new ShowReportGUI(this);
+		this.netName = netName;
+		gui = new ShowReportGUI(this,this.netName);
 		gui.createWaitDialog("Getting Reported Years...");
 		
 		NetworkReportRequest request = new NetworkReportRequest(-1,nid);
@@ -103,7 +108,7 @@ public class showReportsActions extends GUIActions {
 	{
 
 		changeFrame(gui,this);
-		new CMActions(client,msg,nid,lr);
+		new CMActions(client,msg,nid,lr,this.netName);
 		
 
 	}

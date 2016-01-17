@@ -77,6 +77,13 @@ public class LoginDBHandler extends DBHandler {
 				String stationName = "";
 				while(rs.next())
 					stationName = rs.getString(1);
+				
+				ps = con.prepareStatement("select sname from network where sid = ? ");
+				ps.setInt(1, nid);
+				rs = ps.executeQuery(); 
+				String netName = "";
+				while(rs.next())
+					netName = rs.getString(1);
 				if(role == 5 )
 				{
 						msg = new ArrayList<MessageForManager>();
@@ -105,7 +112,7 @@ public class LoginDBHandler extends DBHandler {
 						}
 				}
 				
-				return new WorkerLoginResponse(role,wid,nid,sid,msg,stationName);
+				return new WorkerLoginResponse(role,wid,nid,sid,msg,stationName,netName);
 			}
 			else return new booleanResponse(false, "WorkerID or Password not correct!");
 		}

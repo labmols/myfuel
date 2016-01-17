@@ -46,13 +46,15 @@ public class NetworkMGUI extends SuperGUI{
 	 */
 	private ArrayList<MessageForManager> msg;
 	/***
-	 * NMGUI Constructor
-	 * @param actions - Controller for this GUI
+	 * NetworkMGUI Constructor
+	 * @param actions - controller for this gui
+	 * @param msg - messages for this user
+	 * @param netName - network name
 	 */
-	public NetworkMGUI(CMActions actions,ArrayList<MessageForManager> msg) {
+	public NetworkMGUI(CMActions actions,ArrayList<MessageForManager> msg,String netName) {
 		super(actions);
 		lblTitle.setBounds(192, 0, 220, 25);
-		lblTitle.setText("Network Manager Menu");
+		lblTitle.setText(netName+"  "+"Manager Menu");
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		btnConfirmNewRates = new JButton("Confirm New Rates");
 		btnConfirmNewRates.addActionListener(new btnHandler() );

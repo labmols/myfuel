@@ -67,11 +67,11 @@ public class ShowReportGUI extends SuperGUI{
 	 * ShowReportGUI Constructor
 	 * @param actions - Controller for this GUI
 	 */
-	public ShowReportGUI(showReportsActions actions)
+	public ShowReportGUI(showReportsActions actions,String netName)
 	{
 		super(actions);
 		lblTitle.setBounds(205, 6, 194, 25);
-		lblTitle.setText("Company Reports");
+		lblTitle.setText(netName +"  "+"Reports");
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		 comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new Handler());
