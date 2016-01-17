@@ -25,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import myfuel.GUIActions.CarFuelActions;
+import myfuel.Tools.CalcPrice;
 import myfuel.Tools.CarFuelProgress;
 import myfuel.client.Rate;
 
@@ -37,6 +38,7 @@ import javax.swing.JTextArea;
 /**
  *Fueling Dialog process user interface.
  */
+@SuppressWarnings("serial")
 public class FuelDialog extends JDialog {
 
 	/**
@@ -140,6 +142,7 @@ public class FuelDialog extends JDialog {
 	private JTextArea FullyMonthlyPane;
 	private JLabel lblFew;
 	private int accessType;
+	private JLabel accessPercent;
 	
 	/**
 	 * Create new Fuel Dialog(indicates the fuel progress and make new purchase).
@@ -298,12 +301,19 @@ public class FuelDialog extends JDialog {
 		FullyMonthlyPane.setBounds(39, 103, 339, 55);
 		payPanel.add(FullyMonthlyPane);
 		
-		lblFew = new JLabel("You have been charged for Few networks fee of 2%");
+		lblFew = new JLabel("You have been charged for Few networks fee of ");
 		lblFew.setForeground(Color.RED);
 		lblFew.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblFew.setBounds(56, 0, 311, 16);
+		lblFew.setBounds(56, 0, 287, 16);
 		lblFew.setVisible(false);
 		payPanel.add(lblFew);
+		
+		accessPercent = new JLabel("");
+		accessPercent.setVisible(false);
+		accessPercent.setBounds(340, 0, 43, 16);
+		payPanel.add(accessPercent);
+		accessPercent.setForeground(Color.RED);
+		accessPercent.setFont(new Font("Arial", Font.PLAIN, 13));
 		
 		payPanel.setVisible(false);
 		{
@@ -431,7 +441,12 @@ public class FuelDialog extends JDialog {
 	private void setView() {
 		// TODO Auto-generated method stub
 		if(accessType == 1)
+		{
 			lblFew.setVisible(true);
+			accessPercent.setVisible(true);
+			accessPercent.setText(""+new DecimalFormat("##.##").format(CalcPrice.factor)+"%.");
+			
+		}
 		this.lblDisc.setText(new DecimalFormat("##.##").format((discount))+"%");
 		this.lblTotal.setText(new DecimalFormat("##.##").format((origPrice))+"NIS");
 		payPanel.setVisible(true);

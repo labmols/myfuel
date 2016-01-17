@@ -85,10 +85,6 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 	 */
 	private JComboBox<String> accessCB;
 	/**
-	 * Type of Customer ComboBox(Private/Company).
-	 */
-	private JComboBox<String> typeCB;
-	/**
 	 * Add new Station Button.
 	 */
 	private JButton sAdd;
@@ -243,15 +239,6 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		btnRemove.setBounds(481, 249, 91, 29);
 		panel2.add(btnRemove);
 		
-		JLabel lblType = new JLabel("Type:");
-		lblType.setBounds(29, 255, 91, 16);
-		panel2.add(lblType);
-		
-		typeCB = new JComboBox<String>();
-		typeCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Private", "Company"}));
-		typeCB.setBounds(103, 251, 149, 27);
-		panel2.add(typeCB);
-		
 		JLabel lblCarId = new JLabel("Car ID:");
 		lblCarId.setBounds(294, 181, 57, 16);
 		panel2.add(lblCarId);
@@ -332,7 +319,6 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		
 		accessCB.setSelectedIndex(user.getAtype());
 		saleCB.setSelectedIndex(user.getSmodel()-1);
-		typeCB.setSelectedIndex(user.getToc());
 		if(accessCB.getSelectedIndex()==0) {
 			access=0;
 			sAdd.setEnabled(false);
@@ -408,7 +394,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		if(e.getSource() == btnConfirmUpdate)
 		{
 			actions.verifyDetails(fnameText.getText(), lnameText.getText(), emailText.getText(),
-					addText.getText(), CCText.getText(), typeCB.getSelectedIndex(), saleCB.getSelectedIndex()+1, access);
+					addText.getText(), CCText.getText(), saleCB.getSelectedIndex()+1, access);
 		}
 		
 		if(e.getSource()==btnRemove)
@@ -445,7 +431,6 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		
 		accessCB.setSelectedIndex(user.getAtype());
 		saleCB.setSelectedIndex(user.getSmodel()-1);
-		typeCB.setSelectedIndex(user.getToc());
 		
 	
 	}

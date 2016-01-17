@@ -13,7 +13,10 @@ import myfuel.client.Rate;
 
 public class CalcPrice {
 
-	public static final float factor = (float) 1.02;
+	/**
+	 * Few networks Access Type fee(in percent)
+	 */
+	public static final float factor = (float) 2;
 	/**
 	 * Calculate Home Order total price.
 	 * @param urgent - Is the order urgent or not.
@@ -87,7 +90,7 @@ public class CalcPrice {
 	   
 	   //if access type is few networks
 	   if(accessType == 1)
-	   orderPrice *= factor;
+	   orderPrice *= (1+ (factor/100));
 	   
 	   //if there is any promotion.
 	   if(p != null)
