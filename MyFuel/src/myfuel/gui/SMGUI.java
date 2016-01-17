@@ -82,6 +82,8 @@ public class SMGUI extends SuperGUI{
 		textArea.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		textArea.setBounds(179, 77, 204, 46);
 		
+		NotificationManager.setLocation(2);
+		NotificationManager.showNotification (this,"Check" );
 		if(msg.isEmpty())
 		{
 			textArea.append("No new messages");
@@ -89,6 +91,8 @@ public class SMGUI extends SuperGUI{
 		else
 		{
 			String messages="";
+			
+		
 			for(MessageForManager m : msg)
 			{
 				textArea.append(m.getMsg()+"\n");
