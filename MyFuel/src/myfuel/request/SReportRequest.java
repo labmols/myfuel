@@ -26,7 +26,7 @@ public class SReportRequest extends Request
 	/***
 	 * The selected report type
 	 */
-	private ReportEnum report_type;
+	private RequestEnum report_type;
 	
 	/***
 	 * SReportRequest Constructor
@@ -34,7 +34,7 @@ public class SReportRequest extends Request
 	 * @param q2  - The selected Quarter
 	 * @param r - The selected report type
 	 */
-	public  SReportRequest(int q, ReportEnum report_type, int sid,int nid)
+	public  SReportRequest(int q, RequestEnum report_type, int sid,int nid)
 	{
 		this.setQ(q);
 		this.setReport_type(report_type);
@@ -42,13 +42,7 @@ public class SReportRequest extends Request
 		this.setNid(nid);
 	}
 
-	public ReportEnum getReport_type() {
-		return report_type;
-	}
-
-	public void setReport_type(ReportEnum report_type) {
-		this.report_type = report_type;
-	}
+	
 
 	public int getQ() {
 		return q;
@@ -72,6 +66,18 @@ public class SReportRequest extends Request
 
 	public void setNid(int nid) {
 		this.nid = nid;
+	}
+
+
+
+	public RequestEnum getReport_type() {
+		return report_type;
+	}
+
+
+
+	public void setReport_type(RequestEnum report_type) {
+		this.report_type = report_type;
 	}
 
 	

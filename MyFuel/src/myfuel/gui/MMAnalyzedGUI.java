@@ -78,7 +78,7 @@ public class MMAnalyzedGUI extends SuperGUI{
 		this.setContentPane(contentPane);
 		
 		datesPick = new JComboBox<String>();
-		datesPick.setBounds(193, 56, 135, 20);
+		datesPick.setBounds(193, 49, 135, 27);
 		panel.add(datesPick);
 		
 		JLabel lblPickDate = new JLabel("Pick Date:");
@@ -88,13 +88,13 @@ public class MMAnalyzedGUI extends SuperGUI{
 		
 		 getBtn = new JButton("Get Details");
 		 getBtn.addActionListener(new Handler());
-		getBtn.setBounds(363, 55, 135, 23);
+		getBtn.setBounds(360, 49, 135, 27);
 		panel.add(getBtn);
 		
 		rating = new JComboBox<String>();
 		rating.addActionListener(new Handler());
 		rating.setModel(new DefaultComboBoxModel<String>(new String[] {"Fuel Type Ratings", "Customer Type Ratings", "Customer Type(Hours)Ratings"}));
-		rating.setBounds(203, 87, 208, 20);
+		rating.setBounds(203, 87, 208, 27);
 		panel.add(rating);
 		rating.setVisible(false);
 		

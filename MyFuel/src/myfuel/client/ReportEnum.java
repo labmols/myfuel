@@ -5,5 +5,5 @@ package myfuel.client;
  *
  */
 public enum ReportEnum {
-		InventoryReport,PurchaseReport,IncomesReport;
+		InventoryReport,PurchaseReport,IncomesReport, ALLReport;
 }
