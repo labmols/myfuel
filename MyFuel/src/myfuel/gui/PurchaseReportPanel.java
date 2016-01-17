@@ -135,14 +135,14 @@ public class PurchaseReportPanel extends JPanel {
 						{
 							qty += p.getQty();
 							bill += p.getBill();
-							model.insertRow(model.getRowCount(), new Object[]{p.getCustomerid(),p.getBill(),p.getQty()});
+							model.insertRow(model.getRowCount(), new Object[]{p.getCustomerid(),new DecimalFormat("##.##").format(p.getBill()),new DecimalFormat("##.##").format(p.getQty())});
 						}
 				}
 				
-				String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
-				 billLabel.setText(""+msg);
-				 msg = qty+"(LITER)";
-				 qtyLabel.setText(""+msg);
+		
+				 billLabel.setText( new DecimalFormat("##.##").format(bill) + "(NIS)");
+				
+				 qtyLabel.setText( new DecimalFormat("##.##").format(qty) + "(L)");
 			}
 			
 		}
@@ -165,12 +165,11 @@ public class PurchaseReportPanel extends JPanel {
 		{
 			qty += p.getQty();
 			bill += p.getBill();
-			model.insertRow(model.getRowCount(), new Object[]{p.getCustomerid(),p.getBill(),p.getQty()});
+			model.insertRow(model.getRowCount(), new Object[]{p.getCustomerid(),	new DecimalFormat("##.##").format(p.getBill()),new DecimalFormat("##.##").format(p.getQty())});
 		}
-		String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
-		 billLabel.setText(""+msg);
-		 msg = qty+"(LITER)";
-		 qtyLabel.setText(""+msg);
+	
+		 billLabel.setText(new DecimalFormat("##.##").format(bill) + "(NIS)");
+		 qtyLabel.setText(new DecimalFormat("##.##").format(qty) + "(L)");
 	}
 	/***
 	 * This method Clears the JTable and The Labels

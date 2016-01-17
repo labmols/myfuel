@@ -107,14 +107,14 @@ public class CPurchasePanel extends PurchaseReportPanel
 						{
 							bill+= q.getQ().getP().getBill();
 							quantity += q.getQ().getP().getQty();
-							model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),q.getQ().getP().getBill(),q.getQ().getP().getQty()});
+							model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),new DecimalFormat("##.##").format(q.getQ().getP().getBill()) ,
+								new DecimalFormat("##.##").format(q.getQ().getP().getQty()) });
 						}
 					}
 				}
-				String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
-				 billLabel.setText(""+msg);
-				 msg = quantity+"(LITER)";
-				 qtyLabel.setText(""+msg);
+				
+				 billLabel.setText(new DecimalFormat("##.##").format(bill) + "(NIS)");
+				 qtyLabel.setText(new DecimalFormat("##.##").format(quantity) + "(NIS)");
 			}
 			
 		}
@@ -144,14 +144,13 @@ public class CPurchasePanel extends PurchaseReportPanel
 						{
 							bill+= q.getQ().getP().getBill();
 							quantity += q.getQ().getP().getQty();
-							model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),q.getQ().getP().getBill(),q.getQ().getP().getQty()});
+							model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),new DecimalFormat("##.##").format(q.getQ().getP().getBill()) ,
+								new DecimalFormat("##.##").format(q.getQ().getP().getQty())});
 						}
 				}
 			}
-			String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
-			 billLabel.setText(""+msg);
-			 msg = quantity+"(LITER)";
-			 qtyLabel.setText(""+msg);
+			 billLabel.setText(new DecimalFormat("##.##").format(bill) + "(NIS)");
+			 qtyLabel.setText(new DecimalFormat("##.##").format(quantity) + "(NIS)");
 		}
 		
 	}
@@ -172,14 +171,13 @@ public class CPurchasePanel extends PurchaseReportPanel
 				{
 					bill+= q.getQ().getP().getBill();
 					quantity += q.getQ().getP().getQty();
-					model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),q.getQ().getP().getBill(),q.getQ().getP().getQty()});
+					model.insertRow(model.getRowCount(), new Object[] {q.getQ().getP().getCustomerid(),new DecimalFormat("##.##").format(q.getQ().getP().getBill()) ,
+						new DecimalFormat("##.##").format(q.getQ().getP().getQty())});
 				}
 			}
 		}
-		String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
-		 billLabel.setText(""+msg);
-		 msg = quantity+"(LITER)";
-		 qtyLabel.setText(""+msg);
+		 billLabel.setText(new DecimalFormat("##.##").format(bill) + "(NIS)");
+		 qtyLabel.setText(new DecimalFormat("##.##").format(quantity) + "(NIS)");
 	}
 	
 	/***

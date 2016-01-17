@@ -89,14 +89,14 @@ public class CIncomePanel extends IncomesReportPanel
 					{
 						bill+= q.getP().getBill();
 						quantity += q.getP().getQty();
-						model.insertRow(model.getRowCount(), new Object[] {q.getP().getCustomerid(),q.getP().getBill(),q.getP().getQty()});
+						model.insertRow(model.getRowCount(), new Object[] {q.getP().getCustomerid(),new DecimalFormat("##.##").format(q.getP().getBill())
+							,new DecimalFormat("##.##").format(q.getP().getQty())});
 					}
 				}
 			}
-			String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
-			 billLabel.setText(""+msg);
-			 msg = quantity+"(LITER)";
-			 qtyLabel.setText(""+msg);
+			
+			 billLabel.setText(new DecimalFormat("##.##").format(bill) + "(NIS)");
+			 qtyLabel.setText(new DecimalFormat("##.##").format(quantity) + "(NIS)");
 		}
 		
 	}

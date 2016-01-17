@@ -46,7 +46,7 @@ public class CustomerTypeRatingPanel extends JPanel
 	{
 		setOpaque(false);
 		setLayout(null);
-		String[] names = {"Customer Type ID" , "Customer Type" , "Rate"};
+		String[] names = {"Type ID" , "Customer Type" , "Rate"};
 		
 		model = new MyTableModel(3,-1);
 		for(String str : names)
@@ -65,6 +65,8 @@ public class CustomerTypeRatingPanel extends JPanel
 		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		table.setModel(model);
 		scrollPane.setViewportView(table);
+		
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
 		
 		for (int x = 0; x < model.getColumnCount(); x ++)
 		{

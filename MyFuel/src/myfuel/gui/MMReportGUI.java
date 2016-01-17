@@ -14,6 +14,8 @@ import myfuel.client.Station;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 /***
  * User Interface For the Marketing Manager Reports
@@ -51,7 +53,7 @@ public class MMReportGUI extends SuperGUI{
 		comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new ComboHandler());
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Promotions Reports", "Customer Characterization"}));
-		comboBox.setBounds(193, 53, 191, 31);
+		comboBox.setBounds(281, 48, 191, 31);
 		panel.add(comboBox);
 		
 		reportPanel = new PromtionRPanel();
@@ -61,6 +63,11 @@ public class MMReportGUI extends SuperGUI{
 		customerPanel = new CustomerCReportPanel();
 		customerPanel.setBounds(10, 90, 576, 297);
 		panel.add(customerPanel);
+		
+		JLabel lblChooseReportType = new JLabel("Choose Report Type:");
+		lblChooseReportType.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblChooseReportType.setBounds(79, 48, 179, 31);
+		panel.add(lblChooseReportType);
 		customerPanel.setVisible(false);
 		
 		this.actions = actions;
@@ -118,7 +125,4 @@ public class MMReportGUI extends SuperGUI{
 		}
 		
 	}
-	
-	
-
 }

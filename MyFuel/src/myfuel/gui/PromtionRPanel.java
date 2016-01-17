@@ -83,15 +83,15 @@ public class PromtionRPanel extends JPanel{
 		
 		 comboBox = new JComboBox<String>();
 		 comboBox.addActionListener(new comboHandler());
-		comboBox.setBounds(162, 25, 373, 31);
+		comboBox.setBounds(161, 11, 373, 31);
 		add(comboBox);
 		
 		JLabel lblChoosePromotion = new JLabel("Choose Promotion:");
-		lblChoosePromotion.setBounds(44, 28, 136, 14);
+		lblChoosePromotion.setBounds(43, 14, 136, 14);
 		add(lblChoosePromotion);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 120, 540, 188);
+		scrollPane.setBounds(10, 99, 540, 188);
 		add(scrollPane);
 		model = new MyTableModel(5,-1);
 		String[] names = {"ID" ,"Name","Quantity","Type","Date","Bill"};
@@ -112,58 +112,58 @@ public class PromtionRPanel extends JPanel{
 	     }
 		
 		JLabel lblBuyers = new JLabel("Buyers:");
-		lblBuyers.setBounds(44, 62, 46, 14);
+		lblBuyers.setBounds(43, 48, 46, 14);
 		add(lblBuyers);
 		
 		JLabel lblNewLabel = new JLabel("Total Incomes:");
-		lblNewLabel.setBounds(135, 62, 94, 14);
+		lblNewLabel.setBounds(134, 48, 94, 14);
 		add(lblNewLabel);
 		
 		 buyers = new JLabel("0");
 		buyers.setForeground(new Color(0, 0, 0));
 		buyers.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		buyers.setBounds(92, 62, 46, 14);
+		buyers.setBounds(91, 48, 46, 14);
 		add(buyers);
 		
 		 incomes = new JLabel("0");
 		incomes.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		incomes.setBounds(227, 62, 104, 14);
+		incomes.setBounds(226, 48, 104, 14);
 		add(incomes);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
-		lblStartDate.setBounds(44, 95, 79, 14);
+		lblStartDate.setBounds(43, 81, 79, 14);
 		add(lblStartDate);
 		
 		JLabel lblEndDate = new JLabel("End Date:");
-		lblEndDate.setBounds(213, 95, 79, 14);
+		lblEndDate.setBounds(212, 81, 79, 14);
 		add(lblEndDate);
 		
 		endDate = new JLabel("00");
 		endDate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		endDate.setBounds(284, 95, 104, 14);
+		endDate.setBounds(283, 81, 104, 14);
 		add(endDate);
 		
 		 startDate = new JLabel("00");
 		 startDate.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		startDate.setBounds(125, 95, 136, 14);
+		startDate.setBounds(124, 81, 136, 14);
 		add(startDate);
 		
 		JLabel lblDiscount = new JLabel("Discount:");
-		lblDiscount.setBounds(364, 62, 66, 14);
+		lblDiscount.setBounds(363, 48, 66, 14);
 		add(lblDiscount);
 		
 		JLabel lblFuelType = new JLabel("Fuel Type:");
-		lblFuelType.setBounds(364, 95, 66, 14);
+		lblFuelType.setBounds(363, 81, 66, 14);
 		add(lblFuelType);
 		
 		fuelType = new JLabel("0");
 		fuelType.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		fuelType.setBounds(435, 95, 46, 14);
+		fuelType.setBounds(434, 81, 46, 14);
 		add(fuelType);
 		
 		discount = new JLabel("0");
 		discount.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		discount.setBounds(435, 62, 46, 14);
+		discount.setBounds(434, 48, 46, 14);
 		add(discount);
 	}
 	
@@ -196,11 +196,11 @@ public class PromtionRPanel extends JPanel{
 					else
 						str = "Company";
 					
-					model.insertRow(model.getRowCount(),new Object[]{pr.getUid(),pr.getFname()+" "+pr.getLname(),pr.getQty(),str,df.format(pr.getPdate()),pr.getBill()});
+					model.insertRow(model.getRowCount(),new Object[]{pr.getUid(),pr.getFname()+" "+pr.getLname(),new DecimalFormat("##.##").format(pr.getQty()) ,str,df.format(pr.getPdate()),new DecimalFormat("##.##").format(pr.getBill()) + "(NIS)"});
 					amount += pr.getBill();
 					buy ++;
 				
-					
+				
 				}
 			}
 			

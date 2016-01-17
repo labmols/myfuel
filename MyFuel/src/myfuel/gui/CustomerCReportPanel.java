@@ -135,7 +135,7 @@ public class CustomerCReportPanel extends JPanel {
 				
 				if(stations.get(index).getsid() == c.getSid())
 					model.insertRow(model.getRowCount(), new Object[] {c.getUid(),c.getName(),new DecimalFormat("##.##").format(c.getPrice())
-						,c.getQty()+"  Liter",c.getTimes()});
+						,new DecimalFormat("##.##").format(c.getQty())+"  Liter",c.getTimes()});
 			}
 			
 		}

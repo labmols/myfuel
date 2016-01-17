@@ -44,7 +44,7 @@ public class HourRatingPanel extends JPanel
 	{
 		setOpaque(false);
 		setLayout(null);
-		String[] names = {"Model ID" , "Sale Model Name","Hours" , "Rating"};
+		String[] names = {"ID" , "Sale Model Name","Hours" , "Rating"};
 		
 		model = new MyTableModel(4,-1);
 		for(String str : names)
@@ -62,8 +62,8 @@ public class HourRatingPanel extends JPanel
 		table = new JTable();
 		table.setModel(model);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		table.getColumnModel().getColumn(0).setPreferredWidth(1);
-		table.getColumnModel().getColumn(3).setPreferredWidth(1);
+		table.getColumnModel().getColumn(1).setPreferredWidth(250);
+		table.getColumnModel().getColumn(2).setPreferredWidth(200);
 		scrollPane.setViewportView(table);
 		
 		for (int x = 0; x < model.getColumnCount(); x ++)
