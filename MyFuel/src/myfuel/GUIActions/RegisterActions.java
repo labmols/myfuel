@@ -273,7 +273,7 @@ public class RegisterActions extends GUIActions {
 		
 		if(cnetworks.isEmpty()){
 			success= false;
-			errors+= "Please add your Stations. \n";
+			errors+= "Please add your Networks. \n";
 		}
 		if(!success) gui.showErrorMessage(errors);
 		else registerRequest(Integer.parseInt(userid), fname, lname, pass, email,address,cnumber,toc, atype, smodel);
@@ -317,7 +317,7 @@ public class RegisterActions extends GUIActions {
 	 * remove all customer stations list contents, because the user replace the access.
 	 */
 	public void resetNetworks() {
-		gui.showOKMessage("Now add your stations!");
+		gui.showOKMessage("Now add your networks!");
 		cnetworks.clear();
 	}
 	
