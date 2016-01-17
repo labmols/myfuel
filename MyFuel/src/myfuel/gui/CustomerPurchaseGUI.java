@@ -47,10 +47,25 @@ public class CustomerPurchaseGUI extends SuperGUI {
 	 */
 	private PurchaseActions actions;
 	
+	/**
+	 * Mapping between ComboBox item to Date object.
+	 */
 	private HashMap<Integer,Date> comboMap;
+	/**
+	 * Date ComboBox(choosing the desired month).
+	 */
 	private JComboBox<String> dateCombo;
+	/**
+	 * ComboBox model(used for combobox functions).
+	 */
 	private DefaultComboBoxModel<String> comboModel;
+	/**
+	 *Customer Purchase history list.
+	 */
 	private ArrayList<Purchase> pList;
+	/**
+	 * Total charges for month label
+	 */
 	private JLabel totalLabel;
 	
 	/**
@@ -60,6 +75,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 	public CustomerPurchaseGUI(PurchaseActions actions)
 	{
 		super(actions);
+		this.actions = actions;
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		setContentPane(contentPane);
 		panel.setLocation(0, 0);
@@ -161,7 +177,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		String sdate="";
 		String paid = "";
 		float total= 0;
-		if(pList != null)
+		if(pList != null && pList.size() > 0)
 		{
 			for(Purchase p: pList)
 			{

@@ -115,8 +115,9 @@ public class HomeOrderActions extends GUIActions {
 		{
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.response = res;
+			gui.setWaitProgress();
 			 gui.getTrackingPanel().updateTable(response.getHorders());
-			 gui.setWaitProgress();
+			
 		}
 		else if(arg instanceof booleanResponse)
 		{

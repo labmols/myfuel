@@ -95,7 +95,7 @@ public void updateTable(ArrayList <HomeOrder> horders)
 	clearTable();
 	String urgent;
 	String status;
-	if(horders != null)
+	if(horders != null )
 	{
 	for(HomeOrder order: horders)
 	{
@@ -109,12 +109,7 @@ public void updateTable(ArrayList <HomeOrder> horders)
 		model.insertRow(model.getRowCount(),new Object[]{order.getOrderid(), new DecimalFormat("##.##").format(order.getHomeP().getQty())+"L",new DecimalFormat("##.##").format(p.getBill()),order.getAddress(), format.format(date), urgent, status});
 	}
 	}
-	else
-	{
-		JOptionPane.showMessageDialog(this, "You don't have any Home Order that have been recorded!","Message",JOptionPane.INFORMATION_MESSAGE);	
-		
-
-	}
+	
 }
 	
 	/***
