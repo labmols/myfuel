@@ -320,7 +320,7 @@ public class FuelDialog extends JDialog {
 		FullyMonthlyPane.setVisible(false);
 		FullyMonthlyPane.setFont(new Font("Arial", Font.ITALIC, 14));
 		FullyMonthlyPane.setOpaque(false);
-		FullyMonthlyPane.setText("Your Credit Card will be charged in the next month.\nYou can see all your purchases every time you want\n in the Purchases option.");
+		FullyMonthlyPane.setText("Your Credit Card will be charged in the next month.\nYou can see all your purchases every time you want\n in the Purchase History option.");
 		FullyMonthlyPane.setBounds(39, 103, 339, 55);
 		payPanel.add(FullyMonthlyPane);
 		
