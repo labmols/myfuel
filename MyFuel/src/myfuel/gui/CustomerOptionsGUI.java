@@ -51,17 +51,19 @@ public class CustomerOptionsGUI extends SuperGUI {
 	 */
 	private JButton btnPurchases;
 	
+	private int type;
+	
 	/**
 	 * Create new Customer Options User Interface.
 	 * @param actions - Customer Options GUI Controller.
 	 */
-	public CustomerOptionsGUI(CustomerOptionsActions actions) {
+	public CustomerOptionsGUI(CustomerOptionsActions actions, int type) {
 		super(actions);
 	
 		lblTitle.setBounds(201, 0, 207, 41);
 		lblTitle.setText("Customer Options");
 		this.actions = actions;
-		
+		this.type = type;
 		
 		setContentPane(contentPane);
 		JPanel MenuPanel = new JPanel();
@@ -79,8 +81,10 @@ public class CustomerOptionsGUI extends SuperGUI {
 		
 		btnHomeFuel = new JButton("Home Fuel");
 		btnHomeFuel.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnHomeFuel.setBounds(179, 91, 180, 50);
+		btnHomeFuel.setBounds(179, 273, 180, 50);
 		btnHomeFuel.addActionListener(new ButtonListener());
+		if(type == 1)
+		btnHomeFuel.setVisible(false);
 		MenuPanel.add(btnHomeFuel);
 		
 		btnUpdateDetails = new JButton("Update Details");
@@ -98,7 +102,7 @@ public class CustomerOptionsGUI extends SuperGUI {
 		btnPurchases = new JButton("Purchase History");
 		btnPurchases.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnPurchases.addActionListener(new ButtonListener());
-		btnPurchases.setBounds(179, 277, 180, 50);
+		btnPurchases.setBounds(179, 91, 180, 50);
 		MenuPanel.add(btnPurchases);
 		
 		
