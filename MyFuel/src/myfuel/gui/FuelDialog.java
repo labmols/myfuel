@@ -219,7 +219,7 @@ public class FuelDialog extends JDialog {
 		
 		PayMethodlbl = new JLabel("Payment Method: ");
 		PayMethodlbl.setFont(new Font("Arial", Font.BOLD, 13));
-		PayMethodlbl.setBounds(73, 51, 112, 16);
+		PayMethodlbl.setBounds(62, 51, 129, 16);
 		payPanel.add(PayMethodlbl);
 		
 		methodCB = new JComboBox();
