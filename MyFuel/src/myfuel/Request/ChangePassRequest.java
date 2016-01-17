@@ -1,13 +1,12 @@
 package myfuel.Request;
 
 
-
-@SuppressWarnings("serial")
 /**
  * ChangePassRequest class, contains all the request details that will be send to the server.
  * @author Maor
  *
  */
+@SuppressWarnings("serial")
 public class ChangePassRequest extends Request {
 	
 	/**

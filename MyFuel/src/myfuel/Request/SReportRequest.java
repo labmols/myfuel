@@ -3,11 +3,11 @@ package myfuel.Request;
 
 import myfuel.Tools.ReportEnum;
 
-@SuppressWarnings("serial")
 /***
  * This class will be sent to the server in order to request specific report details
  *
  */
+@SuppressWarnings("serial")
 public class SReportRequest extends Request
 {
 	/***

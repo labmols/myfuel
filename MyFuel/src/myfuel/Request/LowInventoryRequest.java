@@ -3,12 +3,12 @@ package myfuel.Request;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("serial")
 /***
  * This class will be used as a request object to the server for updating the DB with new Low inventory Levels
  * @author karmo
  *
  */
+@SuppressWarnings("serial")
 public class LowInventoryRequest extends Request{
 	/***
 	 * Station ID
