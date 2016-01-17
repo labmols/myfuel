@@ -62,9 +62,9 @@ public class CustomerCReportPanel extends JPanel {
 		
 		station = new JComboBox<String>();
 		station.addActionListener(new comboHandler());
-		station.setBounds(267, 29, 146, 20);
+		station.setBounds(267, 21, 146, 28);
 		add(station); 
-		String[] names = {"ID","Name","Total Bills","Total Quantity Bought","No. Purchases"};
+		String[] names = {"ID","Name","Total Bills","Total Bought","Total"};
 		model = new MyTableModel(5,-1);
 		
 		for(String s: names)
@@ -72,7 +72,7 @@ public class CustomerCReportPanel extends JPanel {
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
 		
-	
+		
 	
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(22, 75, 481, 182);
@@ -82,11 +82,9 @@ public class CustomerCReportPanel extends JPanel {
 		scrollPane.setViewportView(table);
 		table.setModel(model);
 		
-		table.getColumnModel().getColumn(0).setPreferredWidth(55);
-		table.getColumnModel().getColumn(1).setPreferredWidth(80);
-		table.getColumnModel().getColumn(2).setPreferredWidth(80);
-		table.getColumnModel().getColumn(3).setPreferredWidth(130);
-		table.getColumnModel().getColumn(4).setPreferredWidth(100);
+		table.getColumnModel().getColumn(0).setPreferredWidth(150);
+		for(int i = 1 ; i < 4 ; i++)
+			table.getColumnModel().getColumn(i).setPreferredWidth(150);
 		
 		for (int x = 0; x < model.getColumnCount(); x ++)
 		{
