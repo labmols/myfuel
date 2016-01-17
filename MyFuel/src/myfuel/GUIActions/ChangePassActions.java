@@ -52,8 +52,11 @@ public class ChangePassActions extends GUIActions {
 		String nPass1 = new String (newPass1);
 		String nPass2 = new String(newPass2);
 		
-		if(old.equals("") || nPass1.equals("") || nPass2.equals(""))
+		if(old.equals("") || nPass1.equals("")  || nPass2.equals(""))
+		{
 			gui.showErrorMessage("One or more fields are missing!");
+		}
+		else if(nPass1.length() < 4) gui.showErrorMessage("Password length must be > 4");
 		else if(nPass1.equals(nPass2)){
 			changePassword(old,nPass1);
 		}

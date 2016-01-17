@@ -105,7 +105,7 @@ public class LoginActions extends GUIActions {
 		}
 		else
 		{
-		gui.setButton(true);
+	
 		booleanResponse res = (booleanResponse) response;
 		 gui.showErrorMessage(res.getMsg());
 		
@@ -123,6 +123,7 @@ public class LoginActions extends GUIActions {
 	private void workerResponse(Object response){
 		if(response instanceof WorkerLoginResponse)
 		{
+		
 		WorkerLoginResponse res = (WorkerLoginResponse) response;
 		
 			 gui.showOKMessage("Welcome to MyFuel!"); 
@@ -185,6 +186,7 @@ public class LoginActions extends GUIActions {
 	public void update(Observable o, Object arg) {
 		if(arg instanceof CustomerLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse) {
 		// TODO Auto-generated method stub
+			gui.setButton(true);
 			gui.setWaitProgress();
 				if(lr.getType() ==0) customerResponse(arg);
 				else workerResponse(arg);	

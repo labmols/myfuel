@@ -13,6 +13,7 @@ import myfuel.client.Rate;
 
 public class CalcPrice {
 
+	public static final float factor = (float) 1.02;
 	/**
 	 * Calculate Home Order total price.
 	 * @param urgent - Is the order urgent or not.
@@ -52,7 +53,7 @@ public class CalcPrice {
 	 * @param p - Promotion details object(if exist) , if not it's null.
 	 * @return
 	 */
-	public static float calcCarFuelOrder(int modelid, NetworkRates rates, float qty,float maxPrice, Promotion p)
+	public static float calcCarFuelOrder(int modelid,int accessType, NetworkRates rates, float qty,float maxPrice, Promotion p)
 	{
 	   float modelDiscount = rates.getModelDiscount(modelid);
 	   float discountMonthlyOne = rates.getModelDiscount(Rate.MonthlyOne);
@@ -83,6 +84,10 @@ public class CalcPrice {
 		   break;
 		default: orderPrice = -1;
 	   }
+	   
+	   //if access type is few networks
+	   if(accessType == 1)
+	   orderPrice *= factor;
 	   
 	   //if there is any promotion.
 	   if(p != null)

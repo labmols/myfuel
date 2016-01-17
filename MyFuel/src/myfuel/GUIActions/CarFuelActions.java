@@ -245,7 +245,7 @@ public class CarFuelActions extends GUIActions {
 	public float getTotalPrice(int fuelSelected, int nid, float amountF)
 	{
 		Customer customer = customerRes.getUser();
-		return CalcPrice.calcCarFuelOrder(customer.getSmodel(),infoRes.getNRates(nid), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
+		return CalcPrice.calcCarFuelOrder(customer.getSmodel(),customer.getAtype(), infoRes.getNRates(nid), amountF, infoRes.getFuels().get(fuelSelected-1).getMaxPrice(), infoRes.getPromotion(fuelSelected));
 	}
 
 

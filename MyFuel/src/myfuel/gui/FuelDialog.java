@@ -138,6 +138,7 @@ public class FuelDialog extends JDialog {
 	int customerModel;
 	private JLabel PayMethodlbl;
 	private JTextArea FullyMonthlyPane;
+	private JLabel lblFew;
 	
 	/**
 	 * Create new Fuel Dialog(indicates the fuel progress and make new purchase).
@@ -216,38 +217,38 @@ public class FuelDialog extends JDialog {
 		
 		PayMethodlbl = new JLabel("Payment Method: ");
 		PayMethodlbl.setFont(new Font("Arial", Font.BOLD, 13));
-		PayMethodlbl.setBounds(73, 30, 112, 16);
+		PayMethodlbl.setBounds(73, 51, 112, 16);
 		payPanel.add(PayMethodlbl);
 		
 		methodCB = new JComboBox();
 		methodCB.setFont(new Font("Arial", Font.PLAIN, 13));
 		methodCB.setModel(new DefaultComboBoxModel(new String[] {"Credit Card", "Cash"}));
-		methodCB.setBounds(197, 26, 127, 27);
+		methodCB.setBounds(197, 47, 127, 27);
 		methodCB.addItemListener(new eventListener());
 		payPanel.add(methodCB);
 		
 		lblCreditCardNo = new JLabel("Credit Card no: ");
 		lblCreditCardNo.setFont(new Font("Arial", Font.BOLD, 13));
-		lblCreditCardNo.setBounds(73, 58, 112, 16);
+		lblCreditCardNo.setBounds(73, 75, 112, 16);
 		payPanel.add(lblCreditCardNo);
 		
 		ccLabel = new JLabel("");
 		ccLabel.setForeground(Color.WHITE);
 		ccLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		ccLabel.setText(actions.getCustomerCC());
-		ccLabel.setBounds(170, 58, 158, 16);
+		ccLabel.setBounds(170, 75, 158, 16);
 		payPanel.add(ccLabel);
 		
 		btnPay = new JButton("Confirm");
 		btnPay.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnPay.setBounds(159, 144, 100, 29);
+		btnPay.setBounds(151, 160, 100, 29);
 		btnPay.addActionListener(new eventListener());
 		payPanel.add(btnPay);
 		
 		cashPanel = new JPanel();
 		cashPanel.setVisible(false);
 		cashPanel.setOpaque(false);
-		cashPanel.setBounds(103, 77, 176, 55);
+		cashPanel.setBounds(99, 86, 176, 55);
 		payPanel.add(cashPanel);
 		cashPanel.setLayout(null);
 		
@@ -266,23 +267,23 @@ public class FuelDialog extends JDialog {
 		moneyTxt.setColumns(10);
 		
 		lblTotal = new JLabel("");
-		lblTotal.setBounds(256, 6, 76, 16);
+		lblTotal.setBounds(256, 23, 76, 16);
 		payPanel.add(lblTotal);
 		lblTotal.setFont(new Font("Arial", Font.BOLD, 13));
 		lblTotal.setForeground(Color.WHITE);
 		
 		JLabel lblDiscount = new JLabel("Discount: ");
-		lblDiscount.setBounds(197, 6, 65, 16);
+		lblDiscount.setBounds(197, 23, 65, 16);
 		payPanel.add(lblDiscount);
 		lblDiscount.setFont(new Font("Arial", Font.BOLD, 13));
 		
 		lblPriceAfter = new JLabel("Price after ");
-		lblPriceAfter.setBounds(73, 6, 78, 16);
+		lblPriceAfter.setBounds(73, 23, 78, 16);
 		payPanel.add(lblPriceAfter);
 		lblPriceAfter.setFont(new Font("Arial", Font.BOLD, 13));
 		
 		lblDisc = new JLabel("");
-		lblDisc.setBounds(148, 6, 43, 16);
+		lblDisc.setBounds(148, 23, 43, 16);
 		payPanel.add(lblDisc);
 		lblDisc.setForeground(Color.WHITE);
 		lblDisc.setFont(new Font("Arial", Font.BOLD, 13));
@@ -291,9 +292,16 @@ public class FuelDialog extends JDialog {
 		FullyMonthlyPane.setVisible(false);
 		FullyMonthlyPane.setFont(new Font("Arial", Font.ITALIC, 14));
 		FullyMonthlyPane.setOpaque(false);
-		FullyMonthlyPane.setText("Your Credit Card will be chraged in the next month.\nYou can see all your purchases every time you want\n in the Purchases option.");
-		FullyMonthlyPane.setBounds(45, 86, 339, 55);
+		FullyMonthlyPane.setText("Your Credit Card will be charged in the next month.\nYou can see all your purchases every time you want\n in the Purchases option.");
+		FullyMonthlyPane.setBounds(39, 103, 339, 55);
 		payPanel.add(FullyMonthlyPane);
+		
+		lblFew = new JLabel("You have been charged for Few networks fee of 2%");
+		lblFew.setVisible(false);
+		lblFew.setForeground(Color.RED);
+		lblFew.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblFew.setBounds(56, 0, 311, 16);
+		payPanel.add(lblFew);
 		
 		payPanel.setVisible(false);
 		{
@@ -420,6 +428,7 @@ public class FuelDialog extends JDialog {
 
 	private void setView() {
 		// TODO Auto-generated method stub
+		lblFew.setVisible(true);
 		this.lblDisc.setText(new DecimalFormat("##.##").format((discount))+"%");
 		this.lblTotal.setText(new DecimalFormat("##.##").format((origPrice))+"NIS");
 		payPanel.setVisible(true);

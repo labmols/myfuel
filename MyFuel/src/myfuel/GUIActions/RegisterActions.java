@@ -236,7 +236,7 @@ public class RegisterActions extends GUIActions {
 			errors+="address field empty.\n";
 		}
 		
-		if(cnumber.equals(""))
+		if(cnumber.equals("") || cnumber.length() < 8)
 		{
 			success=false;
 			errors+="illegal Credit Card value.\n";
