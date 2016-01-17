@@ -84,6 +84,8 @@ public class LoginDBHandler extends DBHandler {
 				
 				else if(role == 8)
 				{
+						ps.close();
+						rs.close();
 						msg = new ArrayList<MessageForManager>();
 						ps = con.prepareStatement("select * from message where sid  = ? ");
 						ps.setInt(1, sid);
@@ -145,10 +147,10 @@ public class LoginDBHandler extends DBHandler {
 	 * @return - CustomerLoginResponse if current customer exist in DB and he not already connected,
 	 * otherwise return booleanResponse(false).
 	 */
-	private Customer getCustomer(int customerID){
+	private Customer getCustomer(int customerID, boolean fast){
 		
 		String fname,lname,pass,email,cnumber,address;
-		int userid,status,atype,smodel,toc,approved;
+		int userid,atype,smodel,toc;
 		ArrayList<Integer> stations=new ArrayList<Integer>();
 		ArrayList<Car> cars = new ArrayList<Car>();
 		ResultSet rs = null;
@@ -174,11 +176,13 @@ public class LoginDBHandler extends DBHandler {
 				atype = rs.getInt(8);
 				toc = rs.getInt(9);
 				smodel = rs.getInt(10);
-				ps = con.prepareStatement("update customer SET status=? where uid = ?");
-				ps.setInt(1, 1);
-				ps.setInt(2, userid);
-				ps.executeUpdate();
-				
+				if(!fast)
+				{
+					ps = con.prepareStatement("update customer SET status=? where uid = ?");
+					ps.setInt(1, 1);
+					ps.setInt(2, userid);
+					ps.executeUpdate();
+				}
 				ps = con.prepareStatement("select sid from customer_network where uid = ?");
 				ps.setInt(1, userid);
 				rs = ps.executeQuery();
@@ -310,7 +314,7 @@ public class LoginDBHandler extends DBHandler {
 						s= new Station(rs3.getInt(1),rs3.getString(3),new Network(nid,null));
 					else return new booleanResponse(false, "Station SQL Error");
 					
-					Customer customer = this.getCustomer(rs.getInt(1));
+					Customer customer = this.getCustomer(rs.getInt(1),true);
 					Car FastFuelCar = new Car(rs.getInt(2), rs.getInt(3));
 					ArrayList<Network> networks = this.getNetworks();
 					rs.close();
@@ -365,7 +369,7 @@ public class LoginDBHandler extends DBHandler {
 				booleanResponse res = this.checkCustomer(request);
 				if(res.getSuccess())
 				{
-					Customer customer = this.getCustomer(request.getUserid());
+					Customer customer = this.getCustomer(request.getUserid(),false);
 					ArrayList<Network> networks= this.getNetworks();
 					server.setResponse(new CustomerLoginResponse(customer,networks));
 				}
