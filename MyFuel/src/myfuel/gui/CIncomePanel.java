@@ -7,6 +7,7 @@ import myfuel.client.QuarterStationIncome;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -40,11 +41,15 @@ public class CIncomePanel extends IncomesReportPanel
 	 * CIncomePanel Constructor
 	 */
 	public CIncomePanel() {
+		billLabel.setLocation(136, 34);
+		qtyLabel.setLocation(372, 36);
+		qtyLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		billLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		 stations = new JComboBox<String>();
 		 stations.addActionListener(new comboHandler());
 		 stations.setModel(comboModel);
-		 stations.setBounds(154, 11, 135, 20);
+		 stations.setBounds(154, 4, 135, 27);
 		add(stations);
 		
 		JLabel lblPickStation = new JLabel("Pick Station:");
@@ -54,13 +59,13 @@ public class CIncomePanel extends IncomesReportPanel
 		
 		JLabel lblQuarter = new JLabel("Quarter:");
 		lblQuarter.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblQuarter.setBounds(303, 6, 71, 31);
+		lblQuarter.setBounds(332, 0, 71, 31);
 		add(lblQuarter);
 		
 		quarter = new JComboBox<String>();
 		quarter.addActionListener(new comboHandler());
 		quarter.setModel(new DefaultComboBoxModel<String>(new String[] {"Q1", "Q2", "Q3", "Q4"}));
-		quarter.setBounds(373, 11, 88, 20);
+		quarter.setBounds(413, 4, 47, 27);
 		add(quarter);
 	}
 	/***
@@ -73,8 +78,8 @@ public class CIncomePanel extends IncomesReportPanel
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			int bill = 0 ;
-			int quantity = 0 ;
+			float bill = 0 ;
+			float quantity = 0 ;
 			clearTable();
 			if(comboModel.getSize() != 0)
 			{
@@ -88,8 +93,10 @@ public class CIncomePanel extends IncomesReportPanel
 					}
 				}
 			}
-			 billLabel.setText(""+bill);
-			 qtyLabel.setText(""+quantity);
+			String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
+			 billLabel.setText(""+msg);
+			 msg = quantity+"(LITER)";
+			 qtyLabel.setText(""+msg);
 		}
 		
 	}

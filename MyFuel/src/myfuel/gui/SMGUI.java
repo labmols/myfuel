@@ -60,43 +60,34 @@ public class SMGUI extends SuperGUI{
 		
 		 createReports = new JButton("Create Station Reports");
 		 createReports.addActionListener(new btnHandler());
-		createReports.setBounds(179, 155, 204, 46);
+		createReports.setBounds(179, 72, 204, 71);
 		panel.add(createReports);
 		
 		 btnSetLowInventory = new JButton("Set Low Inventory Level");
 		 btnSetLowInventory.addActionListener(new btnHandler());
-		btnSetLowInventory.setBounds(179, 245, 204, 46);
+		btnSetLowInventory.setBounds(179, 183, 204, 71);
 		panel.add(btnSetLowInventory);
 		
 		 btnCheckInventoryOrder = new JButton("Check Inventory Order");
 		 btnCheckInventoryOrder.addActionListener(new btnHandler());
-		btnCheckInventoryOrder.setBounds(179, 332, 204, 46);
+		btnCheckInventoryOrder.setBounds(179, 307, 204, 71);
 		panel.add(btnCheckInventoryOrder);
-		
-		JLabel lblNotifications = new JLabel("notifications");
-		lblNotifications.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNotifications.setBounds(230, 42, 168, 33);
-		panel.add(lblNotifications);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		textArea.setBounds(179, 77, 204, 46);
 		
 		if(msg.isEmpty())
 		{
-			textArea.append("No new messages");
+			NotificationManager.setLocation(2);
+			NotificationManager.showNotification (this,"No new Messages for you" );
 		}
 		else
 		{
+
+			
 			for(MessageForManager m : msg)
 			{
-				textArea.append(m.getMsg()+"\n");
 				NotificationManager.setLocation(2);
 				NotificationManager.showNotification (this,m.getMsg() );
 			}
 		}
-		textArea.setEditable(false);
-		panel.add(textArea);
 		this.actions = actions;
 		this.setContentPane(contentPane);
 	}

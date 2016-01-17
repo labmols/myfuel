@@ -7,8 +7,9 @@ package myfuel.Tools;
  */
 public class AnalysticSystem 
 {
-	/**
-	 * Initial purchases value for calculate the rating.
+	/***
+	 * This attribute helps to determine the rating for each count value
+	 * sent to this function.
 	 */
 	private final static int factor = 3;
 	

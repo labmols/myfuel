@@ -53,17 +53,17 @@ public class StationReportGUI extends SuperGUI{
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		 dates = new JComboBox<String>();
 		dates.setModel(new DefaultComboBoxModel<String>(new String[] {"Q1", "Q2", "Q3", "Q4"}));
-		dates.setBounds(254, 79, 62, 20);
+		dates.setBounds(254, 64, 62, 35);
 		panel.add(dates);
 		
 		 reportType = new JComboBox<String>();
 		reportType.setModel(new DefaultComboBoxModel<String>(new String[] {"Inventory Report", "Purchases Report", "Incomes Report"}));
-		reportType.setBounds(42, 79, 162, 20);
+		reportType.setBounds(42, 64, 162, 35);
 		panel.add(reportType);
 		
 		 create = new JButton("Create");
 		 create.addActionListener(new btnHandler() );
-		create.setBounds(369, 78, 138, 23);
+		create.setBounds(369, 64, 138, 37);
 		panel.add(create);
 		
 		inventoryR = new InventoryReportPanel();

@@ -60,6 +60,10 @@ public class ShowReportGUI extends SuperGUI{
 	 */
 	private JLabel lblChoose;
 	/***
+	 * Description for user
+	 */
+	private JLabel lblChooseYear;
+	/***
 	 * ShowReportGUI Constructor
 	 * @param actions - Controller for this GUI
 	 */
@@ -72,7 +76,7 @@ public class ShowReportGUI extends SuperGUI{
 		 comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new Handler());
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Inventory Report", "Incomes Report", "Purchase Report"}));
-		comboBox.setBounds(128, 71, 140, 20);
+		comboBox.setBounds(128, 59, 140, 32);
 		panel.add(comboBox);
 		
 		 lblChoose = new JLabel("Choose Report:");
@@ -94,16 +98,16 @@ public class ShowReportGUI extends SuperGUI{
 		panel.add(purchasePanel);
 		
 		years = new JComboBox<Integer>();
-		years.setBounds(376, 71, 87, 20);
+		years.setBounds(250, 200, 87, 32);
 		panel.add(years);
 		
-		JLabel lblChooseYear = new JLabel("Choose Year:");
+		lblChooseYear = new JLabel("Choose Year:");
 		lblChooseYear.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblChooseYear.setBounds(278, 71, 118, 17);
+		lblChooseYear.setBounds(250, 150, 118, 17);
 		panel.add(lblChooseYear);
 		
 		btnSelect = new JButton("Select");
-		btnSelect.setBounds(481, 70, 89, 23);
+		btnSelect.setBounds(250, 250, 89, 34);
 		btnSelect.addActionListener(new Handler());
 		panel.add(btnSelect);
 		
@@ -121,6 +125,9 @@ public class ShowReportGUI extends SuperGUI{
 	
 	public void  setVisibleThings()
 	{
+		lblChooseYear.setBounds(278, 71, 118, 17);
+		btnSelect.setBounds(481, 59, 89, 34);
+		years.setBounds(376, 59, 87, 32);
 		comboBox.setVisible(true);
 		lblChoose.setVisible(true);
 		inventoryPanel.setVisible(true);
