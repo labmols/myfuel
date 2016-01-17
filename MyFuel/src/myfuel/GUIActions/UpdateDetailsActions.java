@@ -277,6 +277,13 @@ public class UpdateDetailsActions extends GUIActions {
 			errors+="You can't have more then one car in this sale model!\n";
 		}
 		
+		if(toc == 1 && (smodel == 4 || smodel == 2))
+		{
+			success= false;
+			errors+= "Company customer can't have this sale model!. \n";
+		}
+		
+		
 		if(!success) gui.showErrorMessage(errors);
 		else  
 		{

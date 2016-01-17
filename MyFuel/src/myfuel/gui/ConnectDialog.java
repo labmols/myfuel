@@ -145,7 +145,7 @@ public class ConnectDialog extends JDialog {
 					{
 						MyFuelClient client = new MyFuelClient(serverAddr.getText(),getPort());
 							// TODO Auto-generated method stub
-						setWaitPorgress();
+						setWaitProgress();
 						JOptionPane.showMessageDialog(null, "Connection Successful!","Connected",JOptionPane.INFORMATION_MESSAGE);	
 						dispose();
 						new LoginActions(client);
@@ -153,7 +153,7 @@ public class ConnectDialog extends JDialog {
 					}catch (IOException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
-									setWaitPorgress();
+									setWaitProgress();
 									btnConnect.setEnabled(true);
 									JOptionPane.showMessageDialog(null, "Can't Connect to server in port "+port.getText(),"Error",JOptionPane.ERROR_MESSAGE);
 								}
@@ -184,7 +184,7 @@ public class ConnectDialog extends JDialog {
 	/**
 	 * Stop waiting dialog.
 	 */
-	public void setWaitPorgress()
+	public void setWaitProgress()
 	{
 		waitD.setProgress(1);
 	}

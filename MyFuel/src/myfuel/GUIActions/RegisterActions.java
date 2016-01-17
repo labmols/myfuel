@@ -275,6 +275,13 @@ public class RegisterActions extends GUIActions {
 			success= false;
 			errors+= "Please add your Networks. \n";
 		}
+		
+		if(toc == 1 && (smodel == 4 || smodel == 2))
+		{
+			success= false;
+			errors+= "Company customer can't have this sale model!. \n";
+		}
+		
 		if(!success) gui.showErrorMessage(errors);
 		else registerRequest(Integer.parseInt(userid), fname, lname, pass, email,address,cnumber,toc, atype, smodel);
 	}
