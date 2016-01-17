@@ -295,13 +295,13 @@ public class FuelDialog extends JDialog {
 		moneyTxt.setColumns(10);
 		
 		lblTotal = new JLabel("");
-		lblTotal.setBounds(256, 23, 76, 16);
+		lblTotal.setBounds(240, 23, 76, 16);
 		payPanel.add(lblTotal);
 		lblTotal.setFont(new Font("Arial", Font.BOLD, 13));
 		lblTotal.setForeground(Color.WHITE);
 		
 		JLabel lblDiscount = new JLabel("Discount: ");
-		lblDiscount.setBounds(197, 23, 65, 16);
+		lblDiscount.setBounds(180, 23, 65, 16);
 		payPanel.add(lblDiscount);
 		lblDiscount.setFont(new Font("Arial", Font.BOLD, 13));
 		
@@ -311,7 +311,7 @@ public class FuelDialog extends JDialog {
 		lblPriceAfter.setFont(new Font("Arial", Font.BOLD, 13));
 		
 		lblDisc = new JLabel("");
-		lblDisc.setBounds(148, 23, 43, 16);
+		lblDisc.setBounds(146, 23, 43, 16);
 		payPanel.add(lblDisc);
 		lblDisc.setForeground(Color.WHITE);
 		lblDisc.setFont(new Font("Arial", Font.BOLD, 13));
