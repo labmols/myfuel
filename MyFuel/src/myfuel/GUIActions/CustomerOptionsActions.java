@@ -45,8 +45,6 @@ public class CustomerOptionsActions extends GUIActions {
 		
 		gui =new CustomerOptionsGUI(this,res.getUser().getToc());
 		gui.setVisible(true);
-		NotificationManager.setLocation(2);
-		NotificationManager.showNotification (gui,"No new Messages" );
 		this.res = res;
 	}
 	
