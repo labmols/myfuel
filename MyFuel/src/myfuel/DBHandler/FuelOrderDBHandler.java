@@ -355,6 +355,7 @@ public class FuelOrderDBHandler extends DBHandler{
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		String fuelType="";
 		try {
 			if(sid != -1)
 			{
@@ -390,7 +391,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				String fname = rs.getString(1);
 				String lname = rs.getString(2);
 				String email = rs.getString(3);
-				String fuelType="";
+				fuelType="";
 				
 				
 				if(FuelID== Fuel.Fuel95ID) fuelType= "95";
@@ -413,7 +414,7 @@ public class FuelOrderDBHandler extends DBHandler{
 				if(sid == -1)
 					  ps.setNull(1, java.sql.Types.INTEGER);
 			       ps.setInt(1, sid);
-			       ps.setString(2,"New Inventory Order");
+			       ps.setString(2,"New Inventory Order for Fuel type "+ fuelType);
 			       ps.executeUpdate();
 				 
 			}
