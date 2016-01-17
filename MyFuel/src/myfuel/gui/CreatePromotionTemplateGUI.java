@@ -114,7 +114,7 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		panel.add(lblDiscountPercentage);
 		
 		discount = new JTextField();
-		discount.setBounds(280, 125, 32, 20);
+		discount.setBounds(280, 118, 32, 27);
 		panel.add(discount);
 		discount.setColumns(10);
 		
@@ -149,12 +149,12 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		
 		
 		JLabel lblTypeOfCustomer = new JLabel("Type Of Customer:");
-		lblTypeOfCustomer.setBounds(132, 228, 149, 14);
+		lblTypeOfCustomer.setBounds(163, 221, 149, 14);
 		panel.add(lblTypeOfCustomer);
 		
 		typeOfCustomer = new JComboBox<String>();
 		typeOfCustomer.setModel(new DefaultComboBoxModel<String>(new String[] {"Private", "Company"}));
-		typeOfCustomer.setBounds(311, 226, 118, 20);
+		typeOfCustomer.setBounds(311, 211, 118, 35);
 		panel.add(typeOfCustomer);
 		
 		btnCreate = new JButton("Create");
@@ -163,17 +163,17 @@ public class CreatePromotionTemplateGUI extends SuperGUI {
 		panel.add(btnCreate);
 		
 		JLabel lblNewLabel = new JLabel("%");
-		lblNewLabel.setBounds(313, 128, 41, 16);
+		lblNewLabel.setBounds(321, 124, 41, 16);
 		panel.add(lblNewLabel);
 		
 		JLabel lblTypeOfFuel = new JLabel("Type of Fuel:");
-		lblTypeOfFuel.setBounds(132, 267, 117, 14);
+		lblTypeOfFuel.setBounds(164, 263, 117, 14);
 		
 		panel.add(lblTypeOfFuel);
 		
 		 fuel = new JComboBox<String>();
 		 fuel.setModel(new DefaultComboBoxModel<String>(new String[] {"95", "Diesel", "Scooter", "Home Fuel"}));
-		fuel.setBounds(311, 264, 115, 20);
+		fuel.setBounds(311, 257, 115, 27);
 		panel.add(fuel);
 		
 	}

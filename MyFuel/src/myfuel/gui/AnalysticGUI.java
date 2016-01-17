@@ -68,12 +68,12 @@ public class AnalysticGUI extends SuperGUI{
 		rating = new JComboBox<String>();
 		rating.addActionListener(new Handler());
 		rating.setModel(new DefaultComboBoxModel<String>(new String[] {"Fuel Type Ratings", "Customer Type Ratings", "Customer Type(Hours)Ratings"}));
-		rating.setBounds(215, 56, 208, 20);
+		rating.setBounds(215, 45, 208, 31);
 		panel.add(rating);
 		
 		JLabel lblPickCategory = new JLabel("Pick Category:");
 		lblPickCategory.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblPickCategory.setBounds(73, 51, 132, 28);
+		lblPickCategory.setBounds(69, 45, 132, 28);
 		panel.add(lblPickCategory);
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		
@@ -93,7 +93,7 @@ public class AnalysticGUI extends SuperGUI{
 		
 		saveBtn = new JButton("Save Details");
 		saveBtn.addActionListener(new Handler());
-		saveBtn.setBounds(442, 55, 124, 23);
+		saveBtn.setBounds(442, 45, 124, 33);
 		panel.add(saveBtn);
 		hoursPanel.setVisible(false);
 		
