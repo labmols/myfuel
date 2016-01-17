@@ -137,11 +137,34 @@ public class FuelDialog extends JDialog {
 	 */
 	private JLabel lblTotal;
 	
+	/**
+	 * Customer model ID number.
+	 */
 	int customerModel;
+	
+	/**
+	 * Pay method label
+	 */
 	private JLabel PayMethodlbl;
+	
+	/**
+	 * Fully Monthly textArea(showing when the customer have fully monthly sale model).
+	 */
 	private JTextArea FullyMonthlyPane;
+	
+	/**
+	 * Few networks fee label.
+	 */
 	private JLabel lblFew;
+	
+	/**
+	 * Access type of customer(used for decide to show/not show the FullyMonthlyPane).
+	 */
 	private int accessType;
+	
+	/**
+	 * Few networks fee value label.
+	 */
 	private JLabel accessPercent;
 	
 	/**
@@ -438,6 +461,9 @@ public class FuelDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * Set the pay panel components (according to the price,type of customer and more).
+	 */
 	private void setView() {
 		// TODO Auto-generated method stub
 		if(accessType == 1)

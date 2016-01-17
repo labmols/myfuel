@@ -280,6 +280,11 @@ public class LoginDBHandler extends DBHandler {
 			return networks;
 		}
 	
+	/**
+	 * Fast Fuel method, getting Random Car and Station from DB and his related Customer details
+	 * For simulate NFC sensor action.
+	 * @return
+	 */
 	private Response FastFuel()
 	{
 		ResultSet rs = null;

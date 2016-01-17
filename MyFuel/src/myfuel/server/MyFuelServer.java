@@ -21,7 +21,13 @@ import myfuel.response.Response;
 import myfuel.response.CustomerLoginResponse;
 import myfuel.response.WorkerLoginResponse;
 
-
+/**
+ * Server side of the application, using OCSF Framework.
+ * Using Observe/Observable pattern for managing the messages received from client 
+ * and notify all DB Controllers for execute the query needed.
+ * @author Maor
+ *
+ */
 public class MyFuelServer extends ObservableServer{
 	
 	/**
@@ -173,6 +179,11 @@ public class MyFuelServer extends ObservableServer{
 	
 }
 
+ /**
+  * Main method for the server side of the application, 
+  * opens the Server User interface that initialize MySQL server and start listening.
+  * @param args - Execute parameters (not used).
+  */
 public static void main(String [] args){
 	
 	 SwingUtilities.invokeLater ( new Runnable ()
@@ -181,6 +192,7 @@ public static void main(String [] args){
          {
         	 // Set java look and feel.
          	WebLookAndFeel.install ();
+         	//Open server gui.
          	JFrame serverFrame = new ServerGUI(null);
         	serverFrame.setVisible(true);
         	
