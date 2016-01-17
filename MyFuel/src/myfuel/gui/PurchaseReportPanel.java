@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -80,32 +81,32 @@ public class PurchaseReportPanel extends JPanel {
 		 fuelType = new JComboBox<String>();
 		 fuelType.addActionListener(new comboHandler());
 		fuelType.setModel(new DefaultComboBoxModel<String>(new String[] {"All","95", "Diesel", "Scooter"}));
-		fuelType.setBounds(255, 27, 128, 20);
+		fuelType.setBounds(255, 11, 128, 36);
 		add(fuelType);
 		
 		JLabel lblTotalBill = new JLabel("Total Bill :");
-		lblTotalBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTotalBill.setBounds(70, 276, 90, 23);
+		lblTotalBill.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTotalBill.setBounds(10, 276, 90, 23);
 		add(lblTotalBill);
 		
 		billLabel = new JLabel("0");
-		billLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		billLabel.setBounds(150, 282, 95, 14);
+		billLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		billLabel.setBounds(90, 282, 95, 14);
 		add(billLabel);
 		
 		JLabel lblTotalQuantity = new JLabel("Total Quantity:");
-		lblTotalQuantity.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTotalQuantity.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblTotalQuantity.setBounds(279, 279, 115, 17);
 		add(lblTotalQuantity);
 		
 		qtyLabel = new JLabel("0");
-		qtyLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		qtyLabel.setBounds(404, 282, 90, 14);
+		qtyLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		qtyLabel.setBounds(381, 282, 90, 14);
 		add(qtyLabel);
 		
 		lblChooseFuelType = new JLabel("Choose Fuel Type:");
 		lblChooseFuelType.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblChooseFuelType.setBounds(95, 27, 167, 20);
+		lblChooseFuelType.setBounds(90, 17, 167, 20);
 		add(lblChooseFuelType);
 	}
 	
@@ -138,7 +139,10 @@ public class PurchaseReportPanel extends JPanel {
 						}
 				}
 				
-				billLabel.setText(""+bill); qtyLabel.setText(""+qty);
+				String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
+				 billLabel.setText(""+msg);
+				 msg = qty+"(LITER)";
+				 qtyLabel.setText(""+msg);
 			}
 			
 		}
@@ -163,7 +167,10 @@ public class PurchaseReportPanel extends JPanel {
 			bill += p.getBill();
 			model.insertRow(model.getRowCount(), new Object[]{p.getCustomerid(),p.getBill(),p.getQty()});
 		}
-		billLabel.setText(""+bill); qtyLabel.setText(""+qty);
+		String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
+		 billLabel.setText(""+msg);
+		 msg = qty+"(LITER)";
+		 qtyLabel.setText(""+msg);
 	}
 	/***
 	 * This method Clears the JTable and The Labels

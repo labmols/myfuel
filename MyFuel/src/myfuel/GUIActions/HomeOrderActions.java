@@ -8,7 +8,7 @@ import java.util.Observable;
 
 import javax.swing.JOptionPane;
 
-import myfuel.client.CalcPrice;
+import myfuel.Tools.CalcPrice;
 import myfuel.client.Fuel;
 import myfuel.client.FuelQty;
 import myfuel.client.HomeOrder;

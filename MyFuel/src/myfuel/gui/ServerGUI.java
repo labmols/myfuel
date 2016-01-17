@@ -1,4 +1,4 @@
-package myfuel.server;
+package myfuel.gui;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -7,7 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 
 import myfuel.GUIActions.GUIActions;
-import myfuel.gui.SuperGUI;
+import myfuel.server.MyFuelServer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

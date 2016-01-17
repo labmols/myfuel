@@ -25,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import myfuel.GUIActions.CarFuelActions;
+import myfuel.Tools.CarFuelProgress;
 import myfuel.client.Rate;
 
 import java.awt.Font;

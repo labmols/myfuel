@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -42,29 +43,32 @@ public class CPurchasePanel extends PurchaseReportPanel
 	 * CPurchasePanel Constructor
 	 */
 	public CPurchasePanel() {
-		fuelType.setLocation(227, 29);
-		lblChooseFuelType.setLocation(66, 27);
+		billLabel.setBounds(80, 282, 128, 14);
+		fuelType.setSize(128, 29);
+		lblChooseFuelType.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		fuelType.setLocation(366, 5);
+		lblChooseFuelType.setLocation(253, 4);
 		
 		JLabel lblPickStation = new JLabel("Pick Station:");
-		lblPickStation.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPickStation.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblPickStation.setBounds(29, 0, 116, 29);
 		add(lblPickStation);
 		
 		stations = new JComboBox<String>();
 		stations.addActionListener(new comboBoxHandler());
-		stations.setBounds(119, 6, 127, 20);
+		stations.setBounds(103, 1, 127, 29);
 		stations.setModel(comboModel);
 		add(stations);
 		
 		JLabel lblQuarter = new JLabel("Quarter:");
-		lblQuarter.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblQuarter.setBounds(302, -5, 107, 38);
+		lblQuarter.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblQuarter.setBounds(231, 22, 107, 38);
 		add(lblQuarter);
 		
 		quarter = new JComboBox<String>();
 		quarter.addActionListener(new comboBoxHandler());
 		quarter.setModel(new DefaultComboBoxModel<String>(new String[] {"Q1", "Q2", "Q3", "Q4"}));
-		quarter.setBounds(381, 6, 78, 20);
+		quarter.setBounds(299, 30, 39, 25);
 		add(quarter);
 		
 	
@@ -107,8 +111,10 @@ public class CPurchasePanel extends PurchaseReportPanel
 						}
 					}
 				}
-				 billLabel.setText(""+bill);
-				 qtyLabel.setText(""+quantity);
+				String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
+				 billLabel.setText(""+msg);
+				 msg = quantity+"(LITER)";
+				 qtyLabel.setText(""+msg);
 			}
 			
 		}
@@ -142,8 +148,10 @@ public class CPurchasePanel extends PurchaseReportPanel
 						}
 				}
 			}
-			 billLabel.setText(""+bill);
-			 qtyLabel.setText(""+quantity);
+			String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
+			 billLabel.setText(""+msg);
+			 msg = quantity+"(LITER)";
+			 qtyLabel.setText(""+msg);
 		}
 		
 	}
@@ -168,8 +176,10 @@ public class CPurchasePanel extends PurchaseReportPanel
 				}
 			}
 		}
-		 billLabel.setText(""+bill);
-		 qtyLabel.setText(""+quantity);
+		String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
+		 billLabel.setText(""+msg);
+		 msg = quantity+"(LITER)";
+		 qtyLabel.setText(""+msg);
 	}
 	
 	/***
@@ -193,5 +203,4 @@ public class CPurchasePanel extends PurchaseReportPanel
 		for(String str : stations_names)
 			comboModel.addElement(str);
 	}
-
 }

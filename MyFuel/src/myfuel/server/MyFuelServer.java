@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 import com.alee.laf.WebLookAndFeel;
 
 import myfuel.gui.ConnectDialog;
+import myfuel.gui.ServerGUI;
 import myfuel.ocsf.server.AbstractServer;
 import myfuel.ocsf.server.ConnectionToClient;
 import myfuel.ocsf.server.ObservableServer;

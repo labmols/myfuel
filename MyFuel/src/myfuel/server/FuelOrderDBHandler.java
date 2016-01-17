@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.Tools.MailThread;
 import myfuel.client.*;
 import myfuel.request.FuelOrderRequest;
 import myfuel.request.RequestEnum;

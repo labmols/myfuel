@@ -2,6 +2,9 @@ package myfuel.server;
 
 import java.sql.*;
 
+/**
+ *
+ */
 public class BackgroundCheck {
 	public BackgroundCheck(Connection con)
 	{
@@ -63,6 +66,8 @@ public class BackgroundCheck {
 				Statement st = null;
 				
 				try {
+					java.util.Date currDate = new java.util.Date();
+					
 					st = con.createStatement();
 					st.executeUpdate("update ");
 					st.close();

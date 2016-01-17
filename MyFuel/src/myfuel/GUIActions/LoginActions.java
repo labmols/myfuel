@@ -65,6 +65,7 @@ public class LoginActions extends GUIActions {
 	 */
 	public void verifyDetails(int type, String userid, String pass)
 	{
+		gui.setButton(false);
 		boolean error = false;
 		String msg ="";
 		int id=0;
@@ -104,6 +105,7 @@ public class LoginActions extends GUIActions {
 		}
 		else
 		{
+		gui.setButton(true);
 		booleanResponse res = (booleanResponse) response;
 		 gui.showErrorMessage(res.getMsg());
 		

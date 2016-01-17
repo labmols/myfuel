@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
-import myfuel.client.AnalysticSystem;
+import myfuel.Tools.AnalysticSystem;
 import myfuel.client.AnalyzeDetails;
 import myfuel.request.AnalysticRequest;
 import myfuel.request.RequestEnum;

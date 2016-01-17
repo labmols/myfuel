@@ -1,4 +1,8 @@
-package myfuel.client;
+package myfuel.Tools;
+
+import myfuel.client.NetworkRates;
+import myfuel.client.Promotion;
+import myfuel.client.Rate;
 
 
 /**

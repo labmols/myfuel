@@ -1,5 +1,6 @@
 package myfuel.gui;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -67,23 +68,23 @@ public class IncomesReportPanel extends JPanel
 		table.setModel(model);
 		
 		JLabel lblTotalBills = new JLabel("Total Bills:");
-		lblTotalBills.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTotalBills.setBounds(63, 31, 93, 22);
+		lblTotalBills.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTotalBills.setBounds(62, 31, 93, 22);
 		add(lblTotalBills);
 		
 		JLabel lblNewLabel = new JLabel("Total Quantity:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblNewLabel.setBounds(260, 34, 121, 16);
 		add(lblNewLabel);
 		
 		qtyLabel = new JLabel("0");
-		qtyLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		qtyLabel.setBounds(379, 36, 66, 14);
+		qtyLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		qtyLabel.setBounds(367, 33, 88, 14);
 		add(qtyLabel);
 		
 		billLabel = new JLabel("0");
-		billLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		billLabel.setBounds(145, 36, 75, 14);
+		billLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		billLabel.setBounds(134, 32, 105, 19);
 		add(billLabel);
 		
 	}
@@ -116,7 +117,10 @@ public class IncomesReportPanel extends JPanel
 			bill += p.getBill();
 			model.insertRow(model.getRowCount(), new Object[]{p.getCustomerid(),p.getBill(),p.getQty()});
 		}
-		billLabel.setText(""+bill); qtyLabel.setText(""+qty);
+		String msg = new DecimalFormat("##.##").format(bill) + "(NIS)";
+		 billLabel.setText(""+msg);
+		 msg = qty+"(LITER)";
+		 qtyLabel.setText(""+msg);
 	}
 	
 
