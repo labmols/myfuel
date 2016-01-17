@@ -6,7 +6,7 @@ import java.util.Observable;
 import myfuel.client.FuelQty;
 import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
-import myfuel.gui.CMGUI;
+import myfuel.gui.NetworkMGUI;
 import myfuel.request.LoginRequest;
 
 /***
@@ -18,7 +18,7 @@ public class CMActions extends GUIActions {
 	/***
 	 * This class will be a controller for this GUI
 	 */
-	private CMGUI gui ;
+	private NetworkMGUI gui ;
 	/****
 	 * This arrayList will contain any messages left for this manager
 	 */
@@ -36,7 +36,7 @@ public class CMActions extends GUIActions {
 		super(client,lr);
 		this.msg = msg;
 		this.nid = nid;
-		gui = new CMGUI(this,msg);
+		gui = new NetworkMGUI(this,msg);
 		gui.setVisible(true);
 	}
 

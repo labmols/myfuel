@@ -20,13 +20,15 @@ import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 
+import com.alee.managers.notification.NotificationManager;
+
 /***
- * Company Manager User Interface 
+ * Network Manager User Interface 
  * @author karmo
  *
  */
 @SuppressWarnings("serial")
-public class CMGUI extends SuperGUI{
+public class NetworkMGUI extends SuperGUI{
 	/***
 	 * Controller for this GUI
 	 */
@@ -43,52 +45,40 @@ public class CMGUI extends SuperGUI{
 	 * Messages for this user
 	 */
 	private ArrayList<MessageForManager> msg;
-	private JTextArea msgBox;
 	/***
-	 * CMGUI Constructor
+	 * NMGUI Constructor
 	 * @param actions - Controller for this GUI
 	 */
-	public CMGUI(CMActions actions,ArrayList<MessageForManager> msg) {
+	public NetworkMGUI(CMActions actions,ArrayList<MessageForManager> msg) {
 		super(actions);
 		lblTitle.setBounds(192, 0, 220, 25);
 		lblTitle.setText("Network Manager Menu");
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		btnConfirmNewRates = new JButton("Confirm New Rates");
 		btnConfirmNewRates.addActionListener(new btnHandler() );
-		btnConfirmNewRates.setBounds(165, 163, 213, 48);
+		btnConfirmNewRates.setBounds(165, 126, 213, 64);
 		panel.add(btnConfirmNewRates);
 		
 		btnShowCompanyReports = new JButton("Show Company Reports");
 		btnShowCompanyReports.addActionListener(new btnHandler());
-		btnShowCompanyReports.setBounds(165, 228, 213, 48);
+		btnShowCompanyReports.setBounds(165, 228, 213, 64);
 		panel.add(btnShowCompanyReports);
 		
-		JPanel p = new JPanel();
-		p.setOpaque(false);
-		p.setBounds(96, 56, 349, 96);
-		panel.add(p);
-		p.setLayout(null);
-		
-		JLabel lblNotifications = new JLabel("Notifications");
-		lblNotifications.setBounds(129, 5, 94, 14);
-		p.add(lblNotifications);
-		
-		msgBox = new JTextArea();
-		msgBox.setCaretColor(Color.LIGHT_GRAY);
-		msgBox.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		msgBox.setBounds(59, 27, 224, 58);
-		
-		if(!msg.isEmpty())
+		if(msg.isEmpty())
 		{
-			for(MessageForManager str : msg )
-				msgBox.append(str.getMsg()+"\n");
+			NotificationManager.setLocation(2);
+			NotificationManager.showNotification (this,"No new Messages for you" );
 		}
-		
 		else
-			msgBox.append("No new messages");
-		
-		msgBox.setEditable(false);
-		p.add(msgBox);
+		{
+
+			
+			for(MessageForManager m : msg)
+			{
+				NotificationManager.setLocation(2);
+				NotificationManager.showNotification (this,m.getMsg() );
+			}
+		}
 		this.setContentPane(contentPane);
 		this.actions = actions;
 	}

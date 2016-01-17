@@ -247,7 +247,7 @@ public class SetNewRatesGUI extends SuperGUI {
 		
 		netName = new JComboBox<String>();
 		netName.setModel(networkModel);
-		netName.setBounds(260, 69, 125, 20);
+		netName.setBounds(260, 59, 125, 30);
 		netName.addActionListener(new Handler());
 		panel.add(netName);
 		

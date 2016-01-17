@@ -44,7 +44,7 @@ public class HourRatingPanel extends JPanel
 	{
 		setOpaque(false);
 		setLayout(null);
-		String[] names = {"Sale Model" , "Sale Model Name","Hours" , "Rating"};
+		String[] names = {"Model ID" , "Sale Model Name","Hours" , "Rating"};
 		
 		model = new MyTableModel(4,-1);
 		for(String str : names)

@@ -18,6 +18,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -93,7 +94,7 @@ public class PromtionRPanel extends JPanel{
 		scrollPane.setBounds(10, 120, 540, 188);
 		add(scrollPane);
 		model = new MyTableModel(5,-1);
-		String[] names = {"ID" ,"Name","Quantity","Customer Type","Date","Bill"};
+		String[] names = {"ID" ,"Name","Quantity","Type","Date","Bill"};
 		
 		for(String s : names)
 			model.addColumn(s);
@@ -115,7 +116,7 @@ public class PromtionRPanel extends JPanel{
 		add(lblBuyers);
 		
 		JLabel lblNewLabel = new JLabel("Total Incomes:");
-		lblNewLabel.setBounds(213, 62, 94, 14);
+		lblNewLabel.setBounds(135, 62, 94, 14);
 		add(lblNewLabel);
 		
 		 buyers = new JLabel("0");
@@ -126,7 +127,7 @@ public class PromtionRPanel extends JPanel{
 		
 		 incomes = new JLabel("0");
 		incomes.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		incomes.setBounds(301, 62, 46, 14);
+		incomes.setBounds(227, 62, 104, 14);
 		add(incomes);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
@@ -203,7 +204,7 @@ public class PromtionRPanel extends JPanel{
 				}
 			}
 			
-			incomes.setText(""+amount);
+			incomes.setText(new DecimalFormat("##.##").format(amount) + "(NIS)");
 			buyers.setText(""+buy);
 			
 			
