@@ -18,7 +18,7 @@ import myfuel.response.CustomerLoginResponse;
 import myfuel.response.WorkerLoginResponse;
 
 /**
- * 
+ * Log In GUI Controller, responsible for all related login queries.
  * @author Maor
  *
  */

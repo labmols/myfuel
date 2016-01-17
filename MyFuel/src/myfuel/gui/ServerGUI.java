@@ -33,20 +33,60 @@ import javax.swing.ImageIcon;
 
 import java.awt.Font;
 
+/**
+ * Server User interface class, used for opens new server with specific port and SQL server details.
+ * In addition , showing all the server commands printed to the textPane.
+ * @author Maor
+ *
+ */
+@SuppressWarnings("serial")
 public class ServerGUI extends SuperGUI{
+	/**
+	 * Port JTextField
+	 */
 	private JTextField portTxt;
+	/**
+	 * Start server button(Initialize server and start listening).
+	 */
 	private JButton btnStartServer;
+	/**
+	 * Stop server button.
+	 */
 	private JButton btnStopServer;
+	/**
+	 * Server messages TextArea (print all the commands executed in server).
+	 */
 	private JTextArea textArea;
+	/**
+	 * MyFuelServer object- opens new server connection.
+	 */
 	MyFuelServer server;
+	/**
+	 * SQL Address JTextField.
+	 */
 	private JTextField sqlAdd;
+	/**
+	 * SQL UserName JTextField.
+	 */
 	private JTextField user;
+	/**
+	 * SQL Password JTextField.
+	 */
 	private JTextField pass;
+	/**
+	 * Server status label(Connected/Disconnected)
+	 */
 	private JLabel serverStatus;
+	/**
+	 * SQL Server status label(Connected/Disconnected)
+	 */
 	private JLabel sqlStatus;
 	
 	
-	
+	/**
+	 * 
+	 * @param actions
+	 */
 	public ServerGUI(GUIActions actions){
 		super(actions);
 		lblTitle.setBounds(228, 6, 163, 22);
@@ -148,6 +188,10 @@ public class ServerGUI extends SuperGUI{
 		
 	}
 	
+	/**
+	 * Create new MyFuelServer object and start the Initialize SQL server and listening Thread.
+	 * @param port - The port value.
+	 */
 	public void startServer(int port)
 	{
 		server = new MyFuelServer(port,this);
@@ -155,6 +199,11 @@ public class ServerGUI extends SuperGUI{
 		process.start();	    
 	}
 	
+	/**
+	 * Start Server Thread , start listening to clients and create new connection to MySQL Server. 
+	 * @author Maor
+	 *
+	 */
 	private class StartServer extends Thread {
 		private int port;
 			public StartServer(int port)
@@ -193,6 +242,9 @@ public class ServerGUI extends SuperGUI{
 		  }
 	}
 	
+	/**
+	 * Stop listening to clients, and close MySQL Server connection.
+	 */
 	public void stopServer()
 	{
 		 server.closeDBConnection();
@@ -235,6 +287,9 @@ public class ServerGUI extends SuperGUI{
 		}
 	}
 	
+	/**
+	 * Disable all textFields input.
+	 */
 	public void disableAll()
 	{
 		sqlAdd.setEditable(false);
@@ -243,6 +298,9 @@ public class ServerGUI extends SuperGUI{
 		portTxt.setEditable(false);
 	}
 	
+	/**
+	 * Enable all textFields input.
+	 */
 	public void enableAll()
 	{
 		sqlAdd.setEditable(true);
@@ -252,6 +310,10 @@ public class ServerGUI extends SuperGUI{
 		 
 	}
 	
+	/**
+	 * Print every Request/Response message to the TextPane.
+	 * @param msg
+	 */
 	public void printMsg(String msg)
 	{
 		textArea.append(msg +"\n");

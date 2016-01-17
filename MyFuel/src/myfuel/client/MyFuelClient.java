@@ -11,6 +11,12 @@ import com.alee.laf.WebLookAndFeel;
 import myfuel.gui.ConnectDialog;
 import myfuel.ocsf.client.ObservableClient;
 
+/**
+ * Client side implement Using the OCSF Framework.
+ *  Using Observe/Observable pattern for manage all messages received from server and notify
+ *  all the controllers needed these messages.
+ *
+ */
 public class MyFuelClient extends ObservableClient {
 	
 	/**
@@ -31,8 +37,8 @@ public class MyFuelClient extends ObservableClient {
 	}
 	
 	/**
-	 * 
-	 * @param msg
+	 * This method received the Request object from the GUI Controller and sent it to the server.
+	 * @param msg - The Request details object.
 	 */
 	public void handleMessageFromGUI(Object msg) {
 		try {
@@ -60,14 +66,19 @@ public class MyFuelClient extends ObservableClient {
 	}
 	
 	
-	
+	/**
+	 * Main method for client side, opens new connection dialog.
+	 * @param args - Execute parameters(not used).
+	 */
 	public static void main(String[] args)  {
 	
 		 SwingUtilities.invokeLater ( new Runnable ()
 	        {
 	            public void run ()
 	            {
+	            	//Install Java Look and feel
 	            	WebLookAndFeel.install ();
+	            	//Open connection dialog
 	        		ConnectDialog dialog = new ConnectDialog();
 	        		dialog.setVisible(true);
 	            }
