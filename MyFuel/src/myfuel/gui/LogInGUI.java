@@ -160,7 +160,7 @@ public class LogInGUI extends SuperGUI {
 	public void getInput(ActionEvent e){
 	if(e.getSource()==loginButton){
 	String pass =new String(passwordField.getPassword());
-	
+	setButton(false);
 	actions.verifyDetails(comboBox.getSelectedIndex(),useridField.getText(), pass);
 	
 	}

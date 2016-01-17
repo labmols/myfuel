@@ -65,7 +65,7 @@ public class LoginActions extends GUIActions {
 	 */
 	public void verifyDetails(int type, String userid, String pass)
 	{
-		gui.setButton(false);
+		
 		boolean error = false;
 		String msg ="";
 		int id=0;
@@ -82,7 +82,11 @@ public class LoginActions extends GUIActions {
 			msg += "Password field is empty!\n";
 		}
 		if(!error) sendRequest(type,id,pass);
-		else gui.showErrorMessage(msg);
+		else 
+		{
+			gui.showErrorMessage(msg);
+			gui.setButton(true);
+		}
 		
 	}
 	
@@ -105,7 +109,7 @@ public class LoginActions extends GUIActions {
 		}
 		else
 		{
-	
+		
 		booleanResponse res = (booleanResponse) response;
 		 gui.showErrorMessage(res.getMsg());
 		
@@ -186,10 +190,17 @@ public class LoginActions extends GUIActions {
 	public void update(Observable o, Object arg) {
 		if(arg instanceof CustomerLoginResponse || arg instanceof WorkerLoginResponse || arg instanceof booleanResponse) {
 		// TODO Auto-generated method stub
-			gui.setButton(true);
 			gui.setWaitProgress();
-				if(lr.getType() ==0) customerResponse(arg);
-				else workerResponse(arg);	
+				if(lr.getType() ==0)
+				{
+					customerResponse(arg);
+					gui.setButton(true);
+				}
+				else
+				{
+					workerResponse(arg);
+					gui.setButton(true);
+				}
 		}
 	}
 
