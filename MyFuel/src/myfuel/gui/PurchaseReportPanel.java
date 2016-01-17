@@ -174,7 +174,7 @@ public class PurchaseReportPanel extends JPanel {
 	/***
 	 * This method Clears the JTable and The Labels
 	 */
-	protected void  clearTable()
+	public void  clearTable()
 	{
 		billLabel.setText("0"); qtyLabel.setText("0");
 		while(model.getRowCount() > 0)

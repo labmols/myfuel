@@ -87,5 +87,14 @@ public class InventoryReportPanel extends JPanel
 		}
 	}
 	
+	/***
+	 * Delete all table content
+	 */
+	public void deleteTable()
+	{
+			while(model.getRowCount()!=0)
+				model.removeRow(0);
+	}
+	
 	
 }

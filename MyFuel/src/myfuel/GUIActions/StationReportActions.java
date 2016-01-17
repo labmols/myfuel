@@ -12,6 +12,7 @@ import myfuel.client.MyFuelClient;
 import myfuel.client.ReportEnum;
 import myfuel.gui.StationReportGUI;
 import myfuel.request.LoginRequest;
+import myfuel.request.RequestEnum;
 import myfuel.request.SReportRequest;
 import myfuel.response.SReportResponse;
 import myfuel.response.booleanResponse;
@@ -64,27 +65,23 @@ public class StationReportActions extends GUIActions {
 			{
 				SReportResponse response = (SReportResponse)arg1;
 				gui.setWaitProgress();
-				if(response.getReport_type() == ReportEnum.InventoryReport)
-				{
-					gui.setInventoryPanel(response.getInventory());
-				}
 				
-				else if(response.getReport_type() == ReportEnum.PurchaseReport)
-				{
-					gui.setPurchasePanel(response.getP());
-				}
-				
-				else if(response.getReport_type() == ReportEnum.IncomesReport)
-				{
+					gui.setInventoryPanel(response.getInventory());			
+					gui.setPurchasePanel(response.getP());	
 					gui.setIncomesPanel(response.getIncomes());
-				}
+				
 			}
 			
 			else if(arg1 instanceof booleanResponse)
 			{
 				gui.setWaitProgress();
 				booleanResponse a = (booleanResponse)arg1;
-				gui.showErrorMessage(a.getMsg());
+				
+				if(a.getSuccess())
+					gui.showOKMessage("Reports has been saved");
+				else
+					gui.showErrorMessage(a.getMsg());
+				
 				backToMenu();
 			}
 
@@ -106,16 +103,38 @@ public class StationReportActions extends GUIActions {
 	 * @param q - Quarter
 	 * @param r - Report Type
 	 */
-	public void getReport(int q, ReportEnum r) 
+	public void setReport(int q) 
 	{
 		
 		
-		SReportRequest request = new SReportRequest(q,r,sid,nid);
-		gui.createWaitDialog("Saving Report Details...");
-		if(checkQuarter(q))
+		if(this.checkQuarter(q))
+		{
+			SReportRequest request = new SReportRequest(q,RequestEnum.Insert,sid,nid);
+			gui.createWaitDialog("Saving Reports Details...");
 			client.handleMessageFromGUI(request);
+		}
 		else
 			gui.showErrorMessage("You can not send a report for this quarter!");
+		
+	}
+	
+	/***
+	 * This method will get all reports details for this quarter to this station
+	 * @param q - quarter selected
+	 */
+	public void showReport(int q)
+	{
+		if(this.getQuarter() >= q )
+		{
+		SReportRequest request = new SReportRequest(q,RequestEnum.Select,sid,nid);
+		gui.createWaitDialog("Getting Reports Details...");
+		client.handleMessageFromGUI(request);
+		}
+		
+		else
+		{
+			gui.showErrorMessage("You can not check this quarter");
+		}
 		
 	}
 	
@@ -165,7 +184,48 @@ public class StationReportActions extends GUIActions {
 			 
 			 
 	}
-
+	
+	/***
+	 * This method calculate the current Quarter
+	 * @return the current quarter
+	 */
+	private int getQuarter()
+	{
+		Date s = null;
+		Date f = null;
+		Calendar c = Calendar.getInstance();
+		
+		c.set(c.get(Calendar.YEAR),Calendar.JANUARY,1);
+ 		s = new Date( c.getTime().getTime());
+ 		c.set(c.get(Calendar.YEAR),Calendar.MARCH,31);
+ 		f =  new Date( c.getTime().getTime());
+		if(new TimeIgnoringComparator().compare(new java.util.Date(), s) >= 0 && new TimeIgnoringComparator().compare(new java.util.Date(), f) <=0 )
+			return 1 ;
+		
+		c.set(c.get(Calendar.YEAR),Calendar.APRIL,1);
+ 		s = new Date( c.getTime().getTime());
+ 		c.set(c.get(Calendar.YEAR),Calendar.JUNE,31);
+ 		f =  new Date( c.getTime().getTime());
+ 		
+		if(new TimeIgnoringComparator().compare(new java.util.Date(), s) >= 0 && new TimeIgnoringComparator().compare(new java.util.Date(), f) <=0)
+		return 2;
+		
+		c.set(c.get(Calendar.YEAR),Calendar.JULY,1);
+ 		s = new Date( c.getTime().getTime());
+ 		c.set(c.get(Calendar.YEAR),Calendar.SEPTEMBER,31);
+ 		f =  new Date( c.getTime().getTime());
+ 		
+		if(new TimeIgnoringComparator().compare(new java.util.Date(), s) >= 0 && new TimeIgnoringComparator().compare(new java.util.Date(), f) <=0)
+			return 3;
+		
+		else
+			return 4;
+	
+	
+	}
+	
+	
+	
 	@Override
 	public void LogOut() {
 		// TODO Auto-generated method stub

@@ -91,7 +91,7 @@ public class IncomesReportPanel extends JPanel
 	/***
 	 * Clears the table
 	 */
-	protected void  clearTable()
+	public void  clearTable()
 	{
 		billLabel.setText("0"); qtyLabel.setText("0");
 		while(model.getRowCount() > 0)
@@ -121,6 +121,8 @@ public class IncomesReportPanel extends JPanel
 		 billLabel.setText(new DecimalFormat("##.##").format(bill) + "(NIS)");
 		 qtyLabel.setText(new DecimalFormat("##.##").format(qty) + "(L)");
 	}
+	
+	
 	
 
 }

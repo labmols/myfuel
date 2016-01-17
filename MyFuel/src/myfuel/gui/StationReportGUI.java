@@ -37,12 +37,32 @@ public class StationReportGUI extends SuperGUI{
 	 */
 	private JButton create;
 	
+	/***
+	 * Panel for Inventory report
+	 */
 	private InventoryReportPanel inventoryR = null;
+	/***
+	 * Panel for Incomes report
+	 */
 	private IncomesReportPanel incomesR = null;
 	
+	/***
+	 * JComboBox for showing the quarters
+	 */
 	private JComboBox<String> dates;
+	/***
+	 * JComboBox for showing the report types
+	 */
 	private JComboBox<String> reportType;
+	/***
+	 * Load report button
+	 */
+	private JButton load;
 	
+	/***
+	 * StationReportGUI Constructor
+	 * @param actions - controller for this GUI
+	 */
 	public StationReportGUI(StationReportActions actions)
 	{
 		super(actions);
@@ -53,17 +73,18 @@ public class StationReportGUI extends SuperGUI{
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		 dates = new JComboBox<String>();
 		dates.setModel(new DefaultComboBoxModel<String>(new String[] {"Q1", "Q2", "Q3", "Q4"}));
-		dates.setBounds(254, 64, 62, 35);
+		dates.setBounds(243, 64, 62, 35);
 		panel.add(dates);
 		
 		 reportType = new JComboBox<String>();
 		reportType.setModel(new DefaultComboBoxModel<String>(new String[] {"Inventory Report", "Purchases Report", "Incomes Report"}));
+		reportType.addActionListener(new Handler());
 		reportType.setBounds(42, 64, 162, 35);
 		panel.add(reportType);
 		
-		 create = new JButton("Create");
-		 create.addActionListener(new btnHandler() );
-		create.setBounds(369, 64, 138, 37);
+		 create = new JButton("Save");
+		 create.addActionListener(new Handler() );
+		create.setBounds(443, 63, 99, 37);
 		panel.add(create);
 		
 		inventoryR = new InventoryReportPanel();
@@ -83,6 +104,11 @@ public class StationReportGUI extends SuperGUI{
 		incomesR.setOpaque(false);
 		incomesR.setBounds(42, 114, 517, 310);
 		panel.add(incomesR);
+		
+		load = new JButton("Load");
+		load.addActionListener(new Handler());
+		load.setBounds(344, 63, 89, 36);
+		panel.add(load);
 		incomesR.setVisible(false);
 		
 		this.actions = actions;
@@ -96,37 +122,54 @@ public class StationReportGUI extends SuperGUI{
 		if(e.getSource() == create)
 		{
 			int q =  dates.getSelectedIndex();
-			int report = reportType.getSelectedIndex();
-			ReportEnum r = null;
+			actions.setReport(q+1);
+		}
+		
+		else if(e.getSource() == load)
+		{
+			int q =  dates.getSelectedIndex();
+			actions.showReport(q + 1);
+		}
+		
+		else if(e.getSource() == reportType)
+		{
+
+			int type = reportType.getSelectedIndex();
 			
-			switch(report)
+			if(type == 0)
 			{
-			case 0:
-					r = ReportEnum.InventoryReport;
-					
-					break;
-			case 1:
-					r = ReportEnum.PurchaseReport;
-					break;
-			case 2:
-					r = ReportEnum.IncomesReport;
-					break;
-				
+				inventoryR.setVisible(true);
+				incomesR.setVisible(false);
+				purchaseR.setVisible(false);
 			}
-			actions.getReport(q+1,r);
+			
+			else if(type == 1 )
+			{
+				inventoryR.setVisible(false);
+				incomesR.setVisible(false);
+				purchaseR.setVisible(true);
+			}
+			
+			else if(type == 2 )
+			{
+				incomesR.setVisible(true);
+				inventoryR.setVisible(false);
+				purchaseR.setVisible(false);
+			}
 		}
 		
 	}
+	
 	/***
 	 * This method will set the Inventory report panel with its details
 	 * @param inventory - The fuels with it's quantities for specific station
 	 */
 	public void setInventoryPanel(ArrayList<FuelQty> inventory)
 	{
+		this.inventoryR.deleteTable();
 		this.inventoryR.setTable(inventory);
 		inventoryR.setVisible(true);
-		incomesR.setVisible(false);
-		purchaseR.setVisible(false);
+		
 	}
 	
 	/***
@@ -134,7 +177,7 @@ public class StationReportGUI extends SuperGUI{
 	 * @author karmo
 	 *
 	 */
-	private class btnHandler implements ActionListener
+	private class Handler implements ActionListener
 	{
 
 		@Override
@@ -153,10 +196,9 @@ public class StationReportGUI extends SuperGUI{
 	 */
 	public void setPurchasePanel(ArrayList<Purchase> p) 
 	{
+		purchaseR.clearTable();
 		purchaseR.setTable(p);
-		inventoryR.setVisible(false);
-		incomesR.setVisible(false);
-		purchaseR.setVisible(true);
+		
 	}
 	
 	/***
@@ -165,9 +207,8 @@ public class StationReportGUI extends SuperGUI{
 	 */
 	public void setIncomesPanel(ArrayList<Purchase> incomes)
 	{
+		this.incomesR.clearTable();
 		incomesR.setTable(incomes);
-		incomesR.setVisible(true);
-		inventoryR.setVisible(false);
-		purchaseR.setVisible(false);
+		
 	}
 }
