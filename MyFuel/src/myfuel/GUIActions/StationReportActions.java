@@ -123,8 +123,8 @@ public class StationReportActions extends GUIActions {
 	 * @param q - quarter selected
 	 */
 	public void showReport(int q)
-	{
-		if(this.getQuarter() >= q )
+	{//this.getQuarter() >= q 
+		if(true)
 		{
 		SReportRequest request = new SReportRequest(q,RequestEnum.Select,sid,nid);
 		gui.createWaitDialog("Getting Reports Details...");

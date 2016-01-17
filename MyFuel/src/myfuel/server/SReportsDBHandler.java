@@ -88,7 +88,7 @@ public class SReportsDBHandler extends DBHandler{
 		 
 		 try{
 			 
-			// check if there is a report for this quarter
+		
 		if(q == this.getQuarter())
 		{
 			 
@@ -106,7 +106,7 @@ public class SReportsDBHandler extends DBHandler{
 		
 		else
 		{
-			 ps = con.prepareStatement("select * from inventory_report where sid = ? and qid = ? and year = ?");
+			 ps = con.prepareStatement("select fuelid,qty from inventory_report where sid = ? and qid = ? and year = ?");
 			 ps.setInt(1, sid);
 			 ps.setInt(2, q);
 			 ps.setInt(3,cal.getTime().getYear() + 1900 );
@@ -114,7 +114,7 @@ public class SReportsDBHandler extends DBHandler{
 			 
 			 while(rs.next())
 			 {
-				inventory.add(new FuelQty(rs.getInt(1),rs.getFloat(2),rs.getFloat(3)));
+				inventory.add(new FuelQty(rs.getInt(1),rs.getFloat(2),-1));
 			 }
 		}
  
