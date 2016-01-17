@@ -47,16 +47,23 @@ public class SMGUI extends SuperGUI{
 	 * Messages For This User
 	 */
 	private ArrayList<MessageForManager> msg;
+	
+	/***
+	 * Station Name
+	 */
+	private String sname;
 	/***
 	 * SMGUI Constructor
-	 * @param actions - Controller for this GUI
+	 * @param actions - controller for this class
+	 * @param msg - messages for this manager
+	 * @param sname - station name
 	 */
-	public SMGUI(SMActions actions, ArrayList<MessageForManager> msg) {
+	public SMGUI(SMActions actions, ArrayList<MessageForManager> msg,String sname) {
 		super(actions);
 		this.msg = msg;
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setBounds(179, 6, 231, 25);
-		lblTitle.setText("Station Manager Menu");
+		lblTitle.setText(sname +" "+"Manager Menu");
 		
 		 createReports = new JButton("Create Station Reports");
 		 createReports.addActionListener(new btnHandler());

@@ -42,20 +42,25 @@ public class CheckInventoryActions extends GUIActions{
 	 * Network ID
 	 */
 	private int nid;
-	
+	/***
+	 * Station Name
+	 */
+	private String StationName;
 	/***
 	 * CheckInventoryActions Constructor
 	 * @param client - MyFuelClient
 	 * @param sid - Station ID
 	 * @param msg - Message
 	 * @param nid - Network ID
+	 * @param StationName - Station name
 	 */
-	public CheckInventoryActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg , int nid,LoginRequest lr) {
+	public CheckInventoryActions(MyFuelClient client,int sid,ArrayList<MessageForManager> msg , int nid,LoginRequest lr,String StationName) {
 		super(client,lr);
 		this.sid = sid;
 		this.msg = msg;
 		this.nid = nid;
-		 gui = new CheckInventoryGUI(this) ;
+		this.StationName = StationName;
+		 gui = new CheckInventoryGUI(this,StationName) ;
 		 request=new CheckInventoryRequest(0,this.sid);
 		 gui.createWaitDialog("Getting Details... ");
 		 client.handleMessageFromGUI(request);
@@ -112,7 +117,7 @@ public class CheckInventoryActions extends GUIActions{
 	public void backToMenu() {
 
 		this.changeFrame(gui,this);
-		new SMActions(client,sid,msg,nid,lr);
+		new SMActions(client,sid,msg,nid,lr,StationName);
 		
 	}
 

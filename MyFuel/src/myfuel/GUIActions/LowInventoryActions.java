@@ -45,21 +45,25 @@ public class LowInventoryActions extends GUIActions {
 	private int nid ; 
 	
 	/***
+	 * Station Name
+	 */
+	private String StationName;
+	/***
 	 * LowInventoryActions Constructor
 	 * @param client - MyFuelClient
 	 * @param sid - Station ID
 	 * @param msg - Messages for the manager
 	 * @param nid  - Network ID
 	 */
-	public LowInventoryActions(MyFuelClient client, int sid,ArrayList<MessageForManager>msg, int nid,LoginRequest lr) {
+	public LowInventoryActions(MyFuelClient client, int sid,ArrayList<MessageForManager>msg, int nid,LoginRequest lr,String StationName) {
 		
 		super(client,lr);
 		this.msg = msg;
 		this.sid = sid;
 		this.nid = nid;
-		
+		this.StationName = StationName;
 		LowInventoryRequest r = new LowInventoryRequest(sid,null);
-		gui = new LowInventoryGUI(this);
+		gui = new LowInventoryGUI(this,StationName);
 		gui.createWaitDialog("Getting Details...");
 		client.handleMessageFromGUI(r);
 		
@@ -147,7 +151,7 @@ public class LowInventoryActions extends GUIActions {
 	public void backToMenu() {
 
 		changeFrame(gui,this);
-		new SMActions(client,this.sid,msg,nid,lr);
+		new SMActions(client,this.sid,msg,nid,lr,StationName);
 		
 
 	}

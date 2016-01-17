@@ -39,7 +39,10 @@ public class WorkerLoginResponse extends Response{
 	 * Messages for the user
 	 */
 	private ArrayList<MessageForManager> msg;
-	
+	/****
+	 * Name of the station that this worker belongs to
+	 */
+	private String StationName;
 	/** new Worker login response
 	 * role 1 - Station Worker
 	 * role 2- Station Manager
@@ -51,7 +54,7 @@ public class WorkerLoginResponse extends Response{
 	 * @param role
 	 * @param msg
 	 */
-	public WorkerLoginResponse(int roleid,int wid,int nid,int sid,ArrayList<MessageForManager> msg){
+	public WorkerLoginResponse(int roleid,int wid,int nid,int sid,ArrayList<MessageForManager> msg,String StationName){
 		this.wid=wid;
 		this.sid = sid;
 		switch(roleid){
@@ -71,7 +74,7 @@ public class WorkerLoginResponse extends Response{
 		this.setMsg(msg);
 		this.setNid(nid);
 		
-		
+		this.setStationName(StationName);
 		
 	}
 	
@@ -117,6 +120,16 @@ public class WorkerLoginResponse extends Response{
 
 	public void setNid(int nid) {
 		this.nid = nid;
+	}
+
+
+	public String getStationName() {
+		return StationName;
+	}
+
+
+	public void setStationName(String stationName) {
+		StationName = stationName;
 	}
 
 

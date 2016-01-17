@@ -139,7 +139,7 @@ public class LoginActions extends GUIActions {
 				changeFrame(gui,this);
 				break;
 			case StationManager:
-				new SMActions(client,((WorkerLoginResponse) response).getSid(),res.getMsg(),res.getNid(),lr);
+				new SMActions(client,((WorkerLoginResponse) response).getSid(),res.getMsg(),res.getNid(),lr,res.getStationName());
 				changeFrame(gui,this);
 				break;
 			case StationWorker:

@@ -42,18 +42,22 @@ public class StationReportActions extends GUIActions {
 	 */
 	private int nid;
 	/***
+	 * Station Name
+	 */
+	private String StationName;
+	/***
 	 * StationReportActions Constructor
 	 * @param client - MyFuelClient
 	 * @param sid - Station ID
 	 * @param msg - Messages
 	 */
-	public StationReportActions(MyFuelClient client,int sid , ArrayList<MessageForManager> msg,int nid,LoginRequest lr) {
+	public StationReportActions(MyFuelClient client,int sid , ArrayList<MessageForManager> msg,int nid,LoginRequest lr,String StationName) {
 		super(client,lr);
 		this.sid  = sid;
 		this.msg = msg;
 		this.nid = nid;
-		
-		gui = new StationReportGUI(this);
+		this.StationName = StationName;
+		gui = new StationReportGUI(this,StationName);
 		gui.setVisible(true);
 		
 	}
@@ -92,7 +96,7 @@ public class StationReportActions extends GUIActions {
 		
 		
 			changeFrame(gui,this);
-			new SMActions(client,sid,msg,nid,lr);
+			new SMActions(client,sid,msg,nid,lr,StationName);
 			
 	}
 

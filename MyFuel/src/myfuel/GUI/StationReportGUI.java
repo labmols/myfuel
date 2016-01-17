@@ -63,11 +63,11 @@ public class StationReportGUI extends SuperGUI{
 	 * StationReportGUI Constructor
 	 * @param actions - controller for this GUI
 	 */
-	public StationReportGUI(StationReportActions actions)
+	public StationReportGUI(StationReportActions actions,String StationName)
 	{
 		super(actions);
 		lblTitle.setBounds(218, 6, 183, 25);
-		lblTitle.setText("Station Reports");
+		lblTitle.setText("Reports for"+" "+StationName);
 		
 		
 		this.mainMenu.addActionListener(new BackMainMenu(actions));

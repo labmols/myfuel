@@ -69,14 +69,14 @@ public class LowInventoryGUI extends SuperGUI{
 	 * LowInventoryGUI Constructor
 	 * @param actions - controller for this GUI
 	 */
-	public LowInventoryGUI(LowInventoryActions actions)
+	public LowInventoryGUI(LowInventoryActions actions,String StationName)
 	{
 		super(actions);
-		lblTitle.setBounds(203, 0, 234, 30);
+		lblTitle.setBounds(203, 0, 364, 30);
 		panel.setLocation(0, 0);
 		this.actions = actions;
 		this.setContentPane(contentPane);
-		lblTitle.setText("Set Low Inventory Level");
+		lblTitle.setText("Set Low Inventory Level for"+" "+StationName);
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		
 		LowFuel95 = new JTextField();

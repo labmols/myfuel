@@ -43,17 +43,18 @@ public class CheckInventoryGUI extends SuperGUI{
 	 * Confirmation Button
 	 */
 	private JButton Confirm ;
+	
 	/***
 	 * CheckInventoryGUI Constructor
 	 * @param actions - Controller for this GUI
 	 */
-	public CheckInventoryGUI(CheckInventoryActions actions) {
+	public CheckInventoryGUI(CheckInventoryActions actions,String StationName) {
 		super(actions);
 		this.actions = actions;
 		this.setContentPane(contentPane);
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		lblTitle.setBounds(168, 0, 360, 25);
-		lblTitle.setText("Inventory Orders");
+		lblTitle.setText("Inventory Orders for"+" "+StationName);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(57, 72, 501, 156);
