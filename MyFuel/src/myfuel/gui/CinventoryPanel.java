@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import myfuel.client.QuarterStationInventory;
+import myfuel.Entity.QuarterStationInventory;
 
 /****
  * Company Inventory Report Panel

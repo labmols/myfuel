@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-import myfuel.client.QuarterStationPurchase;
-import myfuel.client.QuarterStationIncome;
+import myfuel.Entity.QuarterStationIncome;
+import myfuel.Entity.QuarterStationPurchase;
 
 /***
  * User Interface For showing the Purchase Report

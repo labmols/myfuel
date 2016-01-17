@@ -14,7 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import myfuel.client.Purchase;
+import myfuel.Entity.Purchase;
 
 import javax.swing.JLabel;
 

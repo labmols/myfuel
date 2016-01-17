@@ -2,8 +2,8 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
-import myfuel.client.Promotion;
-import myfuel.client.PromotionTemplate;
+import myfuel.Entity.Promotion;
+import myfuel.Entity.PromotionTemplate;
 
 /***
  * This class contains the details about the Promotion Templates That listed in the DB

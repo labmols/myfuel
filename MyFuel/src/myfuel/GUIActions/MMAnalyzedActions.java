@@ -3,13 +3,13 @@ package myfuel.GUIActions;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.DBHandler.AnalysticDBHandler;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.MMAnalyzedGUI;
 import myfuel.request.AnalysticRequest;
 import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;
 import myfuel.response.AnalysticResponse;
-import myfuel.server.AnalysticDBHandler;
 /***
  * This class is a controller for MMAnalyzedGUI
  * @author karmo

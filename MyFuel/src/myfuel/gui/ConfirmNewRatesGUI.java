@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import myfuel.Entity.Rate;
 import myfuel.GUIActions.ConfirmNewRatesActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.Rate;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;

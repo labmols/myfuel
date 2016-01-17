@@ -7,6 +7,8 @@ import java.util.Observable;
 
 
 
+
+import myfuel.Entity.PromotionTemplate;
 import myfuel.Tools.DateIgnoreComparator;
 import myfuel.client.*;
 import myfuel.gui.*;

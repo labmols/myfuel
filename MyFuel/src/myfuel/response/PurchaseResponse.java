@@ -3,7 +3,7 @@ package myfuel.response;
 import java.util.ArrayList;
 import java.util.Date;
 
-import myfuel.client.Purchase;
+import myfuel.Entity.Purchase;
 
 /**
  *This class contain the response details from DB for a specific customer purchases list.

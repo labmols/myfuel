@@ -24,10 +24,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import myfuel.Entity.Rate;
 import myfuel.GUIActions.CarFuelActions;
 import myfuel.Tools.CalcPrice;
 import myfuel.Tools.CarFuelProgress;
-import myfuel.client.Rate;
 
 import java.awt.Font;
 

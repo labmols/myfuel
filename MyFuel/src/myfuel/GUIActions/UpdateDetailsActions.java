@@ -5,11 +5,11 @@ import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import myfuel.client.Car;
-import myfuel.client.Customer;
+import myfuel.Entity.Car;
+import myfuel.Entity.Customer;
+import myfuel.Entity.Network;
+import myfuel.Entity.Station;
 import myfuel.client.MyFuelClient;
-import myfuel.client.Network;
-import myfuel.client.Station;
 import myfuel.gui.LogInGUI;
 import myfuel.gui.UpdateCustomerDetailsGUI;
 import myfuel.request.LoginRequest;

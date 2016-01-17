@@ -4,10 +4,10 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import myfuel.client.Fuel;
+import myfuel.Entity.Fuel;
+import myfuel.Entity.NetworkRates;
+import myfuel.Entity.Rate;
 import myfuel.client.MyFuelClient;
-import myfuel.client.NetworkRates;
-import myfuel.client.Rate;
 import myfuel.gui.SetNewRatesGUI;
 import myfuel.request.LoginRequest;
 import myfuel.request.SetNewRatesRequest;

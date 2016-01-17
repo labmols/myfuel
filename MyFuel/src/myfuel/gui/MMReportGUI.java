@@ -4,17 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import myfuel.Entity.CustomerReport;
+import myfuel.Entity.Promotion;
+import myfuel.Entity.PromotionReport;
+import myfuel.Entity.Station;
 import myfuel.GUIActions.MMReportsActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.CustomerReport;
-import myfuel.client.Promotion;
-import myfuel.client.PromotionReport;
-import myfuel.client.Station;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 
 /***

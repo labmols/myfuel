@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.Entity.Purchase;
 import myfuel.client.MyFuelClient;
-import myfuel.client.Purchase;
 import myfuel.gui.CustomerOptionsGUI;
 import myfuel.gui.CustomerPurchaseGUI;
 import myfuel.request.LoginRequest;

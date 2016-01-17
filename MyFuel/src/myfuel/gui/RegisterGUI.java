@@ -15,7 +15,8 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
 import myfuel.GUIActions.RegisterActions;
-import myfuel.client.BackMainMenu;
+import myfuel.Tools.BackMainMenu;
+
 import java.awt.Font;
 
 /**

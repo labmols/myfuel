@@ -8,11 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import myfuel.Entity.Promotion;
+import myfuel.Entity.PromotionTemplate;
 import myfuel.GUIActions.CPromotionTemplateActions;
 import myfuel.GUIActions.MDActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.Promotion;
-import myfuel.client.PromotionTemplate;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -33,6 +33,7 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JTextPane;
 import javax.swing.JSpinner;
+
 import java.awt.Dimension;
 
 /***

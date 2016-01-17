@@ -3,7 +3,7 @@ package myfuel.request;
 
 import java.util.Date;
 
-import myfuel.client.Promotion;
+import myfuel.Entity.Promotion;
 
 
 /***

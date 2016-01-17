@@ -2,10 +2,10 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
-import myfuel.client.Fuel;
-import myfuel.client.Network;
-import myfuel.client.NetworkRates;
-import myfuel.client.Rate;
+import myfuel.Entity.Fuel;
+import myfuel.Entity.Network;
+import myfuel.Entity.NetworkRates;
+import myfuel.Entity.Rate;
 
 /***
  * Response from the server with the Old Rates and Networks Details

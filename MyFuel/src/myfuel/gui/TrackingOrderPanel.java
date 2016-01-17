@@ -12,11 +12,11 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import myfuel.Entity.HomeOrder;
+import myfuel.Entity.Promotion;
+import myfuel.Entity.PromotionReport;
+import myfuel.Entity.Purchase;
 import myfuel.Tools.TimeIgnoringComparator;
-import myfuel.client.HomeOrder;
-import myfuel.client.Promotion;
-import myfuel.client.PromotionReport;
-import myfuel.client.Purchase;
 
 import java.awt.Font;
 import java.awt.Color;

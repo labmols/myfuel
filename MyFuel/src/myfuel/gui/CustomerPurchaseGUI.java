@@ -18,11 +18,11 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import myfuel.Entity.HomeOrder;
+import myfuel.Entity.Purchase;
 import myfuel.GUIActions.GUIActions;
 import myfuel.GUIActions.PurchaseActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.HomeOrder;
-import myfuel.client.Purchase;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JLabel;
 

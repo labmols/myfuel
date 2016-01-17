@@ -3,8 +3,8 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import myfuel.client.Fuel;
-import myfuel.client.MessageForManager;
+import myfuel.Entity.Fuel;
+import myfuel.Entity.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.LowInventoryGUI;
 import myfuel.request.LoginRequest;

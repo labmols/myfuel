@@ -4,11 +4,13 @@ package myfuel.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+
 import myfuel.GUIActions.ChangePassActions;
-import myfuel.client.BackMainMenu;
+import myfuel.Tools.BackMainMenu;
 
 
 /**

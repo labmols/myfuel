@@ -1,8 +1,8 @@
 package myfuel.Tools;
 
-import myfuel.client.NetworkRates;
-import myfuel.client.Promotion;
-import myfuel.client.Rate;
+import myfuel.Entity.NetworkRates;
+import myfuel.Entity.Promotion;
+import myfuel.Entity.Rate;
 
 
 /**

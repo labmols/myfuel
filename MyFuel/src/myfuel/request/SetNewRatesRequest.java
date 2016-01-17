@@ -2,7 +2,8 @@ package myfuel.request;
 
 
 import java.util.ArrayList;
-import myfuel.client.NetworkRates;
+
+import myfuel.Entity.NetworkRates;
 
 
 /***

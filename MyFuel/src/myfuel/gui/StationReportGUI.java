@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import myfuel.Entity.FuelQty;
+import myfuel.Entity.Purchase;
 import myfuel.GUIActions.StationReportActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.FuelQty;
-import myfuel.client.Purchase;
-import myfuel.client.ReportEnum;
+import myfuel.Tools.BackMainMenu;
+import myfuel.Tools.ReportEnum;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;

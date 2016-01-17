@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import myfuel.client.AnalyzeDetails;
+import myfuel.Entity.AnalyzeDetails;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;

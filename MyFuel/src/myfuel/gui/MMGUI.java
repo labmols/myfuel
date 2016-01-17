@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
 import myfuel.GUIActions.MMActions;
-import myfuel.client.BackMainMenu;
+import myfuel.Tools.BackMainMenu;
 
 /***
  * User interface for the Marketing Manager

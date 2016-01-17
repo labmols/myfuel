@@ -1,8 +1,8 @@
 package myfuel.request;
 
 
-import myfuel.client.HomeOrder;
-import myfuel.client.Purchase;
+import myfuel.Entity.HomeOrder;
+import myfuel.Entity.Purchase;
 
 @SuppressWarnings("serial")
 /**

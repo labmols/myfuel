@@ -8,13 +8,13 @@ import java.util.Observable;
 
 import javax.swing.JOptionPane;
 
+import myfuel.Entity.Fuel;
+import myfuel.Entity.FuelQty;
+import myfuel.Entity.HomeOrder;
+import myfuel.Entity.Purchase;
+import myfuel.Entity.StationInventory;
 import myfuel.Tools.CalcPrice;
-import myfuel.client.Fuel;
-import myfuel.client.FuelQty;
-import myfuel.client.HomeOrder;
 import myfuel.client.MyFuelClient;
-import myfuel.client.Purchase;
-import myfuel.client.StationInventory;
 import myfuel.gui.HomeFuelGUI;
 import myfuel.request.FuelOrderRequest;
 import myfuel.request.LoginRequest;

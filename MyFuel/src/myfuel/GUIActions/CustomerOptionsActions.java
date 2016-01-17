@@ -5,9 +5,9 @@ import java.util.Observable;
 
 import com.alee.managers.notification.NotificationManager;
 
-import myfuel.client.Customer;
+import myfuel.Entity.Customer;
+import myfuel.Entity.Station;
 import myfuel.client.MyFuelClient;
-import myfuel.client.Station;
 import myfuel.gui.ChangePasswordGUI;
 import myfuel.gui.UpdateCustomerDetailsGUI;
 import myfuel.gui.CustomerOptionsGUI;

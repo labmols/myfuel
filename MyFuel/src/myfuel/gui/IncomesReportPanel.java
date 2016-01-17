@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import myfuel.client.Purchase;
+import myfuel.Entity.Purchase;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;

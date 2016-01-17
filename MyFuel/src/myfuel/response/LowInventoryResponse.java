@@ -2,7 +2,7 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
-import myfuel.client.FuelQty;
+import myfuel.Entity.FuelQty;
 
 /***
  * This class will contain the details about the inventory for a specific station

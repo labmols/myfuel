@@ -10,7 +10,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import myfuel.client.AnalyzeDetails;
+import myfuel.Entity.AnalyzeDetails;
 
 /***
  * User Interface for showing the Ratings for each fuel type

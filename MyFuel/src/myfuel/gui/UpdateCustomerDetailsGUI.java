@@ -11,12 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import myfuel.Entity.Car;
+import myfuel.Entity.Customer;
+import myfuel.Entity.Network;
+import myfuel.Entity.Station;
 import myfuel.GUIActions.UpdateDetailsActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.Car;
-import myfuel.client.Customer;
-import myfuel.client.Network;
-import myfuel.client.Station;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;

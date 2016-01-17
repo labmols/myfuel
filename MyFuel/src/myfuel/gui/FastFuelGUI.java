@@ -1,10 +1,10 @@
 package myfuel.gui;
 
+import myfuel.Entity.NetworkRates;
+import myfuel.Entity.Promotion;
+import myfuel.Entity.Station;
 import myfuel.GUIActions.CarFuelActions;
 import myfuel.GUIActions.FastFuelActions;
-import myfuel.client.NetworkRates;
-import myfuel.client.Promotion;
-import myfuel.client.Station;
 
 import javax.swing.JLabel;
 

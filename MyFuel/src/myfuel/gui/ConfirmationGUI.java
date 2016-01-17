@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import myfuel.Entity.Customer;
 import myfuel.GUIActions.ConfirmationActions;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

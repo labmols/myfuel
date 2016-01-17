@@ -2,9 +2,9 @@ package myfuel.gui;
 
 import java.awt.event.ActionEvent;
 
+import myfuel.Entity.FuelQty;
 import myfuel.GUIActions.LowInventoryActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.FuelQty;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;

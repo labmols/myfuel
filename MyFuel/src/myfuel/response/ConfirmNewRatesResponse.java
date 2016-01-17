@@ -2,7 +2,7 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
-import myfuel.client.Rate;
+import myfuel.Entity.Rate;
 
 
 /***

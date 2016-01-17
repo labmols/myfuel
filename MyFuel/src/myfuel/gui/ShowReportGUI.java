@@ -3,12 +3,12 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import myfuel.Entity.QuarterStationIncome;
+import myfuel.Entity.QuarterStationInventory;
+import myfuel.Entity.QuarterStationPurchase;
 import myfuel.GUIActions.StationReportActions;
 import myfuel.GUIActions.showReportsActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.QuarterStationPurchase;
-import myfuel.client.QuarterStationIncome;
-import myfuel.client.QuarterStationInventory;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;

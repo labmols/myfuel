@@ -1,6 +1,6 @@
 package myfuel.response;
 
-import myfuel.client.InventoryOrder;
+import myfuel.Entity.InventoryOrder;
 
 /***
  * This class contains the details of inventory Order as retrieved from the DB

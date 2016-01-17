@@ -13,12 +13,17 @@ import java.awt.event.ActionEvent;
 
 
 
+
+
+
+
+
+import myfuel.Entity.Fuel;
+import myfuel.Entity.Network;
+import myfuel.Entity.NetworkRates;
+import myfuel.Entity.Rate;
 import myfuel.GUIActions.SetNewRatesActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.Fuel;
-import myfuel.client.Network;
-import myfuel.client.NetworkRates;
-import myfuel.client.Rate;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;

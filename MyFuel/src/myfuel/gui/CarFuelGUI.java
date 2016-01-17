@@ -13,7 +13,12 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import myfuel.Entity.Fuel;
+import myfuel.Entity.NetworkRates;
+import myfuel.Entity.Promotion;
+import myfuel.Entity.Station;
 import myfuel.GUIActions.CarFuelActions;
+import myfuel.Tools.BackMainMenu;
 import myfuel.client.*;
 import myfuel.response.FuelOrderResponse;
 

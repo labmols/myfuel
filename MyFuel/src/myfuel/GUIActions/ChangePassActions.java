@@ -2,7 +2,7 @@ package myfuel.GUIActions;
 
 import java.util.Observable;
 
-import myfuel.client.Customer;
+import myfuel.Entity.Customer;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.ChangePasswordGUI;
 import myfuel.request.ChangePassRequest;

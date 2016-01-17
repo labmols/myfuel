@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
+import myfuel.Entity.Promotion;
+import myfuel.Entity.PromotionTemplate;
 import myfuel.GUIActions.MakeAPromotionActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.Promotion;
-import myfuel.client.PromotionTemplate;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;

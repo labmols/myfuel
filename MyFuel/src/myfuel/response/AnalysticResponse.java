@@ -3,7 +3,7 @@ package myfuel.response;
 import java.util.ArrayList;
 import java.util.Date;
 
-import myfuel.client.AnalyzeDetails;
+import myfuel.Entity.AnalyzeDetails;
 
 /***
  * This class will has the response from the server to the AnalysticDBHandler 

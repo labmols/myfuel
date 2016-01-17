@@ -12,8 +12,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import myfuel.client.CustomerReport;
-import myfuel.client.Station;
+import myfuel.Entity.CustomerReport;
+import myfuel.Entity.Station;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;

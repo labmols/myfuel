@@ -2,7 +2,7 @@ package myfuel.gui;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import myfuel.client.QuarterStationIncome;
+import myfuel.Entity.QuarterStationIncome;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;

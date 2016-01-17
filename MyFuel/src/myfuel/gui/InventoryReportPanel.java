@@ -9,7 +9,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import myfuel.client.FuelQty;
+import myfuel.Entity.FuelQty;
 
 /***
  * Inventory Report User Interface

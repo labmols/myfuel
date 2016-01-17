@@ -2,10 +2,10 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
-import myfuel.client.CustomerReport;
-import myfuel.client.Promotion;
-import myfuel.client.PromotionReport;
-import myfuel.client.Station;
+import myfuel.Entity.CustomerReport;
+import myfuel.Entity.Promotion;
+import myfuel.Entity.PromotionReport;
+import myfuel.Entity.Station;
 
 /***
  * 

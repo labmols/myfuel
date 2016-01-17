@@ -6,10 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Observable;
 
+import myfuel.Entity.MessageForManager;
+import myfuel.Tools.ReportEnum;
 import myfuel.Tools.TimeIgnoringComparator;
-import myfuel.client.MessageForManager;
 import myfuel.client.MyFuelClient;
-import myfuel.client.ReportEnum;
 import myfuel.gui.StationReportGUI;
 import myfuel.request.LoginRequest;
 import myfuel.request.RequestEnum;

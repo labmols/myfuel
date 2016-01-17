@@ -1,7 +1,7 @@
 package myfuel.request;
 
 
-import myfuel.client.ReportEnum;
+import myfuel.Tools.ReportEnum;
 
 @SuppressWarnings("serial")
 /***

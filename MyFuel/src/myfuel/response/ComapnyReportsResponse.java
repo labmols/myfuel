@@ -2,9 +2,9 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
-import myfuel.client.QuarterStationPurchase;
-import myfuel.client.QuarterStationIncome;
-import myfuel.client.QuarterStationInventory;
+import myfuel.Entity.QuarterStationIncome;
+import myfuel.Entity.QuarterStationInventory;
+import myfuel.Entity.QuarterStationPurchase;
 
 /***
  * Will has the response from the DB and has each report's details organized in ArrayLists

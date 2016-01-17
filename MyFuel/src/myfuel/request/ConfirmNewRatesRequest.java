@@ -3,7 +3,7 @@ package myfuel.request;
 
 import java.util.ArrayList;
 
-import myfuel.client.Rate;
+import myfuel.Entity.Rate;
 
 /***
  * Request object for getting any rates suggestion and setting the rates by the Network Manager Decision

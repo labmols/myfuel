@@ -3,7 +3,7 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import myfuel.client.MessageForManager;
+import myfuel.Entity.MessageForManager;
 import myfuel.client.MyFuelClient;
 import myfuel.gui.*;
 import myfuel.request.NetworkReportRequest;

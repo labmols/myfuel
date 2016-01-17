@@ -3,9 +3,9 @@ package myfuel.GUIActions;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import myfuel.client.MessageForManager;
+import myfuel.Entity.MessageForManager;
+import myfuel.Entity.Rate;
 import myfuel.client.MyFuelClient;
-import myfuel.client.Rate;
 import myfuel.gui.ConfirmNewRatesGUI;
 import myfuel.request.ConfirmNewRatesRequest;
 import myfuel.request.LoginRequest;

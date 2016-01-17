@@ -3,10 +3,10 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import myfuel.Entity.FuelQty;
+import myfuel.Entity.InventoryOrder;
 import myfuel.GUIActions.SWActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.FuelQty;
-import myfuel.client.InventoryOrder;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

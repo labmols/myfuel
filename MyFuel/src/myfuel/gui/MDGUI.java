@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import myfuel.GUIActions.CPromotionTemplateActions;
 import myfuel.GUIActions.MDActions;
-import myfuel.client.BackMainMenu;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JButton;
 

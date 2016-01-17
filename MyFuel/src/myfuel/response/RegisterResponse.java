@@ -2,8 +2,8 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
-import myfuel.client.Network;
-import myfuel.client.Station;
+import myfuel.Entity.Network;
+import myfuel.Entity.Station;
 
 /**
  * RegisterResponse class, contains all the register response details from the server.

@@ -2,14 +2,14 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
-import myfuel.client.Fuel;
-import myfuel.client.FuelQty;
-import myfuel.client.HomeOrder;
-import myfuel.client.NetworkRates;
-import myfuel.client.Promotion;
-import myfuel.client.Rate;
-import myfuel.client.Station;
-import myfuel.client.StationInventory;
+import myfuel.Entity.Fuel;
+import myfuel.Entity.FuelQty;
+import myfuel.Entity.HomeOrder;
+import myfuel.Entity.NetworkRates;
+import myfuel.Entity.Promotion;
+import myfuel.Entity.Rate;
+import myfuel.Entity.Station;
+import myfuel.Entity.StationInventory;
 
 /**
  * CarFuelResponse class , contains all the needed details from the server response.

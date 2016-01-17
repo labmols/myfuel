@@ -1,6 +1,6 @@
 package myfuel.response;
 
-import myfuel.client.FuelQty;
+import myfuel.Entity.FuelQty;
 
 /***
  * This class contains details about the home fuel quantity and orders as retreived from the DB

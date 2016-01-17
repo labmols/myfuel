@@ -2,8 +2,8 @@ package myfuel.request;
 
 import java.io.Serializable;
 
-import myfuel.client.Promotion;
-import myfuel.client.PromotionTemplate;
+import myfuel.Entity.Promotion;
+import myfuel.Entity.PromotionTemplate;
 @SuppressWarnings("serial")
 
 /***

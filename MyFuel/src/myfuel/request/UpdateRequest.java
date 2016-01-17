@@ -2,7 +2,7 @@ package myfuel.request;
 
 
 
-import myfuel.client.Customer;
+import myfuel.Entity.Customer;
 
 /**
  * UpdateRequest Class, used for contains all update details request that will be send to the server.

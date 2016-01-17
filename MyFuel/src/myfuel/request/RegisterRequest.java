@@ -2,7 +2,7 @@ package myfuel.request;
 
 
 
-import myfuel.client.Customer;
+import myfuel.Entity.Customer;
 
 /**
  * registerRequest class, contains all the request details that will be send to the server.

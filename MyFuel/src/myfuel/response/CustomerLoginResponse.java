@@ -3,12 +3,12 @@ package myfuel.response;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import myfuel.client.Car;
-import myfuel.client.Customer;
-import myfuel.client.Fuel;
-import myfuel.client.Network;
-import myfuel.client.Station;
-import myfuel.client.StationInventory;
+import myfuel.Entity.Car;
+import myfuel.Entity.Customer;
+import myfuel.Entity.Fuel;
+import myfuel.Entity.Network;
+import myfuel.Entity.Station;
+import myfuel.Entity.StationInventory;
 
 /***
  * This class will contain the details of a customer as retrieved from the DB

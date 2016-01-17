@@ -9,9 +9,9 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import myfuel.Entity.Promotion;
+import myfuel.Entity.PromotionReport;
 import myfuel.Tools.TimeIgnoringComparator;
-import myfuel.client.Promotion;
-import myfuel.client.PromotionReport;
 
 import java.awt.Font;
 import java.awt.Color;

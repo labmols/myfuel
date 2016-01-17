@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 
 import com.alee.laf.WebLookAndFeel;
 
+import myfuel.DBHandler.*;
 import myfuel.gui.ConnectDialog;
 import myfuel.gui.ServerGUI;
 import myfuel.ocsf.server.AbstractServer;

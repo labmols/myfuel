@@ -1,7 +1,7 @@
 package myfuel.request;
 
 
-import myfuel.client.FuelQty;
+import myfuel.Entity.FuelQty;
 
 /***
  * This class will be used as a request object for managing home fuel quantity and inventory level.

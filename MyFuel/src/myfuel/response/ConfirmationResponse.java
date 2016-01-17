@@ -1,6 +1,7 @@
 package myfuel.response;
 import java.util.ArrayList;
 
+import myfuel.Entity.Customer;
 import myfuel.client.*;
 
 

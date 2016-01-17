@@ -3,11 +3,11 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import myfuel.Entity.Customer;
+import myfuel.Entity.FuelQty;
 import myfuel.GUIActions.CheckInventoryActions;
 import myfuel.GUIActions.ConfirmationActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.Customer;
-import myfuel.client.FuelQty;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JLabel;
 

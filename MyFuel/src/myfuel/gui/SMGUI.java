@@ -3,9 +3,9 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import myfuel.Entity.MessageForManager;
 import myfuel.GUIActions.SMActions;
-import myfuel.client.BackMainMenu;
-import myfuel.client.MessageForManager;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

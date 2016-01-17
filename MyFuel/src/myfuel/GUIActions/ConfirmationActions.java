@@ -6,6 +6,7 @@ import java.util.Observable;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import myfuel.Entity.Customer;
 import myfuel.Tools.MailThread;
 import myfuel.client.*;
 import myfuel.gui.ConfirmationGUI;

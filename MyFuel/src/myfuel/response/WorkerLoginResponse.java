@@ -3,10 +3,10 @@ package myfuel.response;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import myfuel.client.Customer;
-import myfuel.client.FuelQty;
-import myfuel.client.MessageForManager;
-import myfuel.client.RoleEnum;
+import myfuel.Entity.Customer;
+import myfuel.Entity.FuelQty;
+import myfuel.Entity.MessageForManager;
+import myfuel.Tools.RoleEnum;
 
 /***
  * This class contains all the details of the Worker that Logged in to the System

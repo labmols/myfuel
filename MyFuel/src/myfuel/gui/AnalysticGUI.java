@@ -3,9 +3,9 @@ package myfuel.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import myfuel.Entity.AnalyzeDetails;
 import myfuel.GUIActions.AnalysticActions;
-import myfuel.client.AnalyzeDetails;
-import myfuel.client.BackMainMenu;
+import myfuel.Tools.BackMainMenu;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;

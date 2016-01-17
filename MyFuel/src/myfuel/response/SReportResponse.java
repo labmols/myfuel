@@ -2,8 +2,8 @@ package myfuel.response;
 
 import java.util.ArrayList;
 
-import myfuel.client.FuelQty;
-import myfuel.client.Purchase;
+import myfuel.Entity.FuelQty;
+import myfuel.Entity.Purchase;
 
 
 /***
