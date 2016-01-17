@@ -17,14 +17,14 @@ public class LowInventoryRequest extends Request{
 	/***
 	 * New Low Inventory Level
 	 */
-	private ArrayList<Integer> NewLowInventory ;
+	private ArrayList<Float> NewLowInventory ;
 	
 	/***
 	 * LowInventoryRequest Constructor
 	 * @param sid - Station ID
 	 * @param NewLowInventory - New Low Inventory Level
 	 */
-	public LowInventoryRequest(int sid,ArrayList<Integer> NewLowInventory)
+	public LowInventoryRequest(int sid,ArrayList<Float> NewLowInventory)
 	{
 		setSid(sid);
 		setNewLowInventory(NewLowInventory);
@@ -37,13 +37,16 @@ public class LowInventoryRequest extends Request{
 	public void setSid(int sid) {
 		this.sid = sid;
 	}
-	public ArrayList<Integer> getNewLowInventory()
-	{
-		return this.NewLowInventory;
+
+
+	public ArrayList<Float> getNewLowInventory() {
+		return NewLowInventory;
 	}
-	public void setNewLowInventory(ArrayList<Integer> NewLowInventory)
-	{
-		this.NewLowInventory=NewLowInventory;
+
+
+	public void setNewLowInventory(ArrayList<Float> newLowInventory) {
+		NewLowInventory = newLowInventory;
 	}
+
 
 }

@@ -34,7 +34,7 @@ public class LowInventoryActions extends GUIActions {
 	/***
 	 * Contains the new low inventory Level as set by the manager
 	 */
-	private ArrayList<Integer> NewLowInventory ;
+	private ArrayList<Float> NewLowInventory ;
 	/***
 	 * Messages for the manager
 	 */
@@ -65,7 +65,7 @@ public class LowInventoryActions extends GUIActions {
 		
 		
 		gui.setVisible(true);
-		NewLowInventory=new  ArrayList<Integer>();
+		NewLowInventory=new  ArrayList<Float>();
 	}
 
 	/***
@@ -76,7 +76,7 @@ public class LowInventoryActions extends GUIActions {
 	 */
 	public void verifyDetails(String LowFuel95,String LowFuelDiesel,String LowFuelScooter)
 	{
-		int nLowFuel95=0,nLowFuelDiesel=0,nLowFuelScooter=0;
+		float nLowFuel95=0,nLowFuelDiesel=0,nLowFuelScooter=0;
 		boolean success = true;
 		String error="";
 		error += "Input Errors \n\n";
@@ -88,9 +88,9 @@ public class LowInventoryActions extends GUIActions {
 		else 
 		{
 			try{
-			nLowFuel95=Integer.parseInt(LowFuel95);
-			nLowFuelDiesel=Integer.parseInt(LowFuelDiesel);
-			nLowFuelScooter=Integer.parseInt(LowFuelScooter);
+			nLowFuel95=Float.parseFloat(LowFuel95);
+			nLowFuelDiesel=Float.parseFloat(LowFuelDiesel);
+			nLowFuelScooter=Float.parseFloat(LowFuelScooter);
 			} catch(Exception e)
 			{
 				success = false;

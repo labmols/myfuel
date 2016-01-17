@@ -205,7 +205,7 @@ public class LowInventoryGUI extends SuperGUI{
 	 * This method will the current low level with the new low level after the change.
 	 * @param newLowInventory - New low inventory levels.
 	 */
-	public void updateNew(ArrayList<Integer> newLowInventory) 
+	public void updateNew(ArrayList<Float> newLowInventory) 
 	{
 		min95.setText(newLowInventory.get(0)+"");
 		minDiesel.setText(newLowInventory.get(1)+"");
