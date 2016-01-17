@@ -170,6 +170,8 @@ public class CarFuelGUI extends SuperGUI {
 	 * Create new Car Fuel user interface.
 	 * @param actions - Car Fuel GUI Controller.
 	 */
+	
+	protected int accessType;
 	public CarFuelGUI(CarFuelActions actions) {
 		super(actions);
 		this.actions=actions;
@@ -481,7 +483,7 @@ public class CarFuelGUI extends SuperGUI {
  * @param customerModel - Customer model number.
  * @param infoRes - The response from the server, that contains all the informaion required for the fueling.
  */
-	public void Initialize(int customerModel,FuelOrderResponse infoRes)
+	public void Initialize(int customerModel,int accessType,FuelOrderResponse infoRes)
 	{
 				if(stationCombo.getSelectedIndex()>= 0)
 				nid = IDHolder.get(stationCombo.getSelectedIndex());
@@ -493,6 +495,7 @@ public class CarFuelGUI extends SuperGUI {
 				this.res= infoRes;
 				rb95.getRadioButton().setSelected(true);
 				fuelSelected=1;
+				this.accessType = accessType;
 				setDetails(fuelSelected,nid);
 				
 	}
@@ -538,7 +541,7 @@ public class CarFuelGUI extends SuperGUI {
 		else max = qty;
 		origPrice = actions.getTotalPrice(fuelSelected, nid, max);
 		float origQty = max;
-		FuelDialog dialog = new FuelDialog(this.actions,this,max,currentPrice,origQty,origPrice,discount,borigPrice);
+		FuelDialog dialog = new FuelDialog(this.actions,this,accessType,max,currentPrice,origQty,origPrice,discount,borigPrice);
 		dialog.setVisible(true);
 	}
 

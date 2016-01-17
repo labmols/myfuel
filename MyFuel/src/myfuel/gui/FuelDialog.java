@@ -139,6 +139,7 @@ public class FuelDialog extends JDialog {
 	private JLabel PayMethodlbl;
 	private JTextArea FullyMonthlyPane;
 	private JLabel lblFew;
+	private int accessType;
 	
 	/**
 	 * Create new Fuel Dialog(indicates the fuel progress and make new purchase).
@@ -151,7 +152,7 @@ public class FuelDialog extends JDialog {
 	 * @param discount - Total Discount.
 	 * @param totalPriceN - Total order price(before discount).
 	 */
-	public FuelDialog(CarFuelActions actions,CarFuelGUI gui, float qty, float p,float origQty, float origPrice,float discount,float totalPriceN) 
+	public FuelDialog(CarFuelActions actions,CarFuelGUI gui,int accessType, float qty, float p,float origQty, float origPrice,float discount,float totalPriceN) 
 	{
 		
 		this.actions = actions;
@@ -160,6 +161,7 @@ public class FuelDialog extends JDialog {
 		this.origQty = origQty;
 		this.discount = discount;
 		this.totalPriceN = totalPriceN;
+		this.accessType = accessType;
 		customerModel = actions.getCustomerModel();
 		setTitle("Fueling...");
 		setBounds(100, 100, 451, 327);
@@ -297,10 +299,10 @@ public class FuelDialog extends JDialog {
 		payPanel.add(FullyMonthlyPane);
 		
 		lblFew = new JLabel("You have been charged for Few networks fee of 2%");
-		lblFew.setVisible(false);
 		lblFew.setForeground(Color.RED);
 		lblFew.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblFew.setBounds(56, 0, 311, 16);
+		lblFew.setVisible(false);
 		payPanel.add(lblFew);
 		
 		payPanel.setVisible(false);
@@ -428,7 +430,8 @@ public class FuelDialog extends JDialog {
 
 	private void setView() {
 		// TODO Auto-generated method stub
-		lblFew.setVisible(true);
+		if(accessType == 1)
+			lblFew.setVisible(true);
 		this.lblDisc.setText(new DecimalFormat("##.##").format((discount))+"%");
 		this.lblTotal.setText(new DecimalFormat("##.##").format((origPrice))+"NIS");
 		payPanel.setVisible(true);

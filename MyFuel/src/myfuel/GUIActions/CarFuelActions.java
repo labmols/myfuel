@@ -259,8 +259,9 @@ public class CarFuelActions extends GUIActions {
 			FuelOrderResponse res = (FuelOrderResponse) arg;
 			this.infoRes = res;
 			int modelid = customerRes.getUser().getSmodel();
+			int accessType = customerRes.getUser().getAtype();
 			insertInfo();
-			gui.Initialize(modelid,infoRes);
+			gui.Initialize(modelid,accessType, infoRes);
 			
 			gui.setWaitProgress();
 		}

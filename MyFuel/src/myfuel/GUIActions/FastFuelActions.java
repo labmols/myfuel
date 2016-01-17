@@ -100,7 +100,7 @@ public class FastFuelActions extends CarFuelActions {
 					insertInfo();
 					modelid = customerRes.getUser().getSmodel();
 					guiF.setNFC(customerRes.getFastFuelCar().getcid(), customerRes.getFastStation());
-					gui.Initialize(modelid,infoRes);
+					gui.Initialize(modelid,customerRes.getUser().getAtype(),infoRes);
 					gui.checkType(customerRes.getUser().getToc());
 					gui.setWaitProgress();
 					}
