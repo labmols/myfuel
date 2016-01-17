@@ -103,17 +103,17 @@ public class AnalysticDBHandler extends DBHandler{
 			}
 			
 			ps = con.prepareStatement("SELECT c.smodel ,s.desc,(CASE " + " "+
-										"WHEN (HOUR( pdate ) >= 0 and  HOUR( pdate ) <= 4 )" + " "+
+										"WHEN (HOUR( pdate ) >= 0 and  HOUR( pdate ) < 4 )" + " "+
 										"THEN  '00:00 to 04:00'" + " "+
-										"WHEN (HOUR( pdate ) > 4 and  HOUR( pdate ) <= 8 )" + " "+
+										"WHEN (HOUR( pdate ) >= 4 and  HOUR( pdate ) < 8 )" + " "+
 										"THEN  '04:00 to 08:00'" + " "+
-										"WHEN (HOUR( pdate ) > 8 and  HOUR( pdate ) <=12)" + " "+
+										"WHEN (HOUR( pdate ) >= 8 and  HOUR( pdate ) < 12)" + " "+
 										"THEN  '08:00 to 12:00'" + " "+
-										"WHEN (HOUR( pdate ) >12 and  HOUR( pdate ) <=16)" + " "+
+										"WHEN (HOUR( pdate ) >= 12 and  HOUR( pdate ) < 16)" + " "+
 										"THEN  '12:00 to 16:00'" + " "+ 
-										"WHEN (HOUR( pdate ) >16 and  HOUR( pdate ) <= 20)" + " "+
+										"WHEN (HOUR( pdate ) >= 16 and  HOUR( pdate ) < 20)" + " "+
 										"THEN  '16:00 to 20:00'" + " "+
-										"WHEN( HOUR( pdate ) > 20 and  HOUR( pdate ) <= 23 )" + " "+
+										"WHEN( HOUR( pdate ) >= 20 and  HOUR( pdate ) <= 23 )" + " "+
 										"THEN  '20:00 to 00:00'" + " "+
 										"END) AS hour,count(*) as ctr" + " "+ 
 										"from purchase as p , customer_purchase as cp , customer as c ,sale_model as s" + " "+
