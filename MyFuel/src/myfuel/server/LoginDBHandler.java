@@ -30,6 +30,7 @@ import myfuel.response.booleanResponse;
  */
 public class LoginDBHandler extends DBHandler {
 	
+	
 	public LoginDBHandler(MyFuelServer server,Connection con){
 		super(server,con);	
 	}

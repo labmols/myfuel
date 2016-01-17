@@ -91,7 +91,18 @@ public class Purchase implements Serializable {
 		this.setCustomerCarID(customerCarID);
 		this.setPaid(paid);
 	}
-	
+	/***
+	 * Create new Purchase object with the following parameters.
+	 * @param customerid - customer ID
+	 * @param pid - Purchase ID.
+	 * @param cid - Car ID.
+	 * @param sname - Station Name
+	 * @param fname - First Name of the driver.
+	 * @param pdate - Purchase Date.
+	 * @param qty - Quantity.
+	 * @param bill - Purchase total bill.
+	 * @param paid - Is the order has been paid or not.
+	 */
 	public Purchase (int customerid, int pid, int cid, String sname, String fname, Date pdate,  float qty,  float bill,boolean paid)
 	{
 		this.setCustomerid(customerid);

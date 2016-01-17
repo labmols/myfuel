@@ -24,6 +24,9 @@ import myfuel.response.booleanResponse;
  */
 public class FuelOrderDBHandler extends DBHandler{
 	
+	/***
+	 * The factor for inventory order
+	 */
 	private static final float factor = 5;
 	/**
 	 * Contains the customer purchase id.

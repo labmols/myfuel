@@ -117,7 +117,9 @@ public class CustomerOptionsActions extends GUIActions {
 	this.LogOutRequest(gui, lr);	
 		
 	}
-
+	/**
+	 * Open the Purchase History Screen.
+	 */
 	public void PurchaseHistory() {
 		// TODO Auto-generated method stub
 

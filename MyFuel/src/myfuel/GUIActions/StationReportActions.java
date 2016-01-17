@@ -186,7 +186,7 @@ public class StationReportActions extends GUIActions {
 	}
 	
 	/***
-	 * This method calculate the current Quarter
+	 * This method calculate the current Quarter number
 	 * @return the current quarter
 	 */
 	private int getQuarter()

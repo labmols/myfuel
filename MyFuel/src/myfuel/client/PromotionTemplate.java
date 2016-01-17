@@ -77,115 +77,68 @@ public class PromotionTemplate implements Serializable{
 		this.setNameOfFuel(nameOfFuel);
 	}
 
-/***
- * set template id
- * @param tid2
- */
+
 	public void setTid(int tid2) {
 		this.tid = tid2;
 		
 	}
-	/***
-	 * 
-	 * @return tid
-	 */
+	
 	public int getTid() {
 		return this.tid;
 		
 	}
 	
-	/***
-	 * 
-	 * @return name
-	 */
-
+	
 	public String getName() {
 		return name;
 	}
 
-	/***
-	 * set name of the promotion
-	 * @param name
-	 */
+	
 	public void setName(String name) {
 		this.name = name;
 	}
-/***
- * 
- * @return discount amount
- */
 
 	public float getDiscount() {
 		return discount;
 	}
 
-/***
- *  set discount amount
- * @param discount
- */
+
 	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
 
-/***
- *  return start time
- * @return
- */
+
 	public Time getStartTime() {
 		return startTime;
 	}
-/***
- * 
- * @param startTime
- */
 
 	public void setStartTime(Time startTime) {
 		this.startTime = startTime;
 	}
-/***
- * 
- * @return endTime
- */
 
 	public Time getEndTime() {
 		return endTime;
 	}
-/***
- * 
- * @param endTime
- */
+
 
 	public void setEndTime(Time endTime) {
 		this.endTime = endTime;
 	}
 
-/***
- * 
- * @return type of customer
- */
+
 	public int getTypeOfCustomer() {
 		return typeOfCustomer;
 	}
-/***
- * set type of customer
- * @param typeOfCustomer
- */
+
 
 	public void setTypeOfCustomer(int typeOfCustomer) {
 		this.typeOfCustomer = typeOfCustomer;
 	}
-/***
- * 
- * @return type of fuel
- */
+
 
 	public int getTypeOfFuel() {
 		return typeOfFuel;
 	}
-/***
- * set type of fuel
- * @param typeOfFuel
- */
 
 	public void setTypeOfFuel(int typeOfFuel) {
 		this.typeOfFuel = typeOfFuel;
