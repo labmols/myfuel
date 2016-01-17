@@ -231,14 +231,14 @@ public class FuelDialog extends JDialog {
 		
 		lblCreditCardNo = new JLabel("Credit Card no: ");
 		lblCreditCardNo.setFont(new Font("Arial", Font.BOLD, 13));
-		lblCreditCardNo.setBounds(73, 75, 112, 16);
+		lblCreditCardNo.setBounds(99, 79, 112, 16);
 		payPanel.add(lblCreditCardNo);
 		
 		ccLabel = new JLabel("");
 		ccLabel.setForeground(Color.WHITE);
 		ccLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		ccLabel.setText(actions.getCustomerCC());
-		ccLabel.setBounds(170, 75, 158, 16);
+		ccLabel.setBounds(196, 79, 158, 16);
 		payPanel.add(ccLabel);
 		
 		btnPay = new JButton("Confirm");
@@ -308,7 +308,7 @@ public class FuelDialog extends JDialog {
 		payPanel.setVisible(false);
 		{
 			JLabel label = new JLabel("");
-			label.setBounds(0, 0, 450, 305);
+			label.setBounds(0, -14, 450, 319);
 			contentPanel.add(label);
 			 java.net.URL url = getClass().getResource("/dialogBG.png");
 			label.setIcon(new ImageIcon(url));

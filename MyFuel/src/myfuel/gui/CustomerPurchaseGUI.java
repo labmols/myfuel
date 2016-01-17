@@ -51,6 +51,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 	private JComboBox<String> dateCombo;
 	private DefaultComboBoxModel<String> comboModel;
 	private ArrayList<Purchase> pList;
+	private JLabel totalLabel;
 	
 	/**
 	 * Create new Customer Purchase User interface.
@@ -104,6 +105,16 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		lblShowOnlyFor.setBounds(190, 58, 101, 16);
 		panel.add(lblShowOnlyFor);
 		
+		JLabel lblTotalChargeFor = new JLabel("Total charge for this month: ");
+		lblTotalChargeFor.setFont(new Font("Arial", Font.BOLD, 14));
+		lblTotalChargeFor.setBounds(62, 385, 210, 16);
+		panel.add(lblTotalChargeFor);
+		
+		totalLabel = new JLabel("");
+		totalLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		totalLabel.setBounds(267, 385, 162, 16);
+		panel.add(totalLabel);
+		
 	}
 	@Override
 	public void getInput(ActionEvent e) {
@@ -149,6 +160,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		clearTable();
 		String sdate="";
 		String paid = "";
+		float total= 0;
 		if(pList != null)
 		{
 			for(Purchase p: pList)
@@ -158,12 +170,21 @@ public class CustomerPurchaseGUI extends SuperGUI {
 			Date date = p.getPdate();
 			if(date.getYear() == d.getYear() && date.getMonth()==d.getMonth())
 			{
+			total += p.getBill();
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy HH:mm");
 			sdate = format.format(date);
 			tableModel.insertRow(tableModel.getRowCount(),new Object[]{p.getPid(),p.getCustomerCarID(),p.getSname(),p.getFuelName(),sdate,new DecimalFormat("##.##").format(p.getQty())+"(L)",new DecimalFormat("##.##").format(p.getBill())+" NIS",paid});
 			}
 			}
+		totalLabel.setText(new DecimalFormat("##.##").format(total) +" NIS");
+			
 		}
+		else
+		{
+			this.showOKMessage("You don't have any purchase history recorded!");
+			actions.backToMenu();
+		}
+			
 		
 	}
 	

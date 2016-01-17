@@ -112,6 +112,7 @@ public void updateTable(ArrayList <HomeOrder> horders)
 	else
 	{
 		JOptionPane.showMessageDialog(this, "You don't have any Home Order that have been recorded!","Message",JOptionPane.INFORMATION_MESSAGE);	
+		
 
 	}
 }

@@ -1,6 +1,7 @@
 package myfuel.server;
 
 import java.sql.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -32,7 +33,7 @@ public class BackgroundCheck {
 				st.executeUpdate("update home_order SET status=1 where datediff(curdate(),sdate) > 0 or (datediff(curdate(),sdate)=0 and TIMESTAMPDIFF(HOUR,sdate,NOW()) >=6)");
 				st.close();
 				try {
-					Thread.sleep(1000*60);
+					TimeUnit.HOURS.sleep(1);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -72,7 +73,7 @@ public class BackgroundCheck {
 					st.executeUpdate("update ");
 					st.close();
 					try {
-						Thread.sleep(1000*60*60);
+						TimeUnit.DAYS.sleep(1);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
