@@ -132,7 +132,7 @@ public class RegisterGUI extends SuperGUI {
 		
 		idTextField = new JTextField();
 		idTextField.setFont(new Font("Arial", Font.PLAIN, 13));
-		idTextField.setBounds(92, 22, 110, 26);
+		idTextField.setBounds(92, 22, 120, 26);
 		panel2.add(idTextField);
 		idTextField.setColumns(10);
 		
@@ -144,7 +144,7 @@ public class RegisterGUI extends SuperGUI {
 		fnameTextField = new JTextField();
 		fnameTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		fnameTextField.setColumns(10);
-		fnameTextField.setBounds(92, 55, 110, 26);
+		fnameTextField.setBounds(92, 55, 120, 26);
 		panel2.add(fnameTextField);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
@@ -155,7 +155,7 @@ public class RegisterGUI extends SuperGUI {
 		lnameTextField = new JTextField();
 		lnameTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		lnameTextField.setColumns(10);
-		lnameTextField.setBounds(92, 93, 110, 26);
+		lnameTextField.setBounds(92, 93, 120, 26);
 		panel2.add(lnameTextField);
 		
 		JLabel label_3 = new JLabel("E-mail:");
@@ -165,14 +165,14 @@ public class RegisterGUI extends SuperGUI {
 		
 		emailTextField = new JTextField();
 		emailTextField.setFont(new Font("Arial", Font.PLAIN, 13));
-		emailTextField.setBounds(92, 126, 110, 26);
+		emailTextField.setBounds(92, 126, 120, 26);
 		panel2.add(emailTextField);
 		emailTextField.setColumns(10);
 		
 		addressTextField = new JTextField();
 		addressTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		addressTextField.setColumns(10);
-		addressTextField.setBounds(92, 159, 110, 26);
+		addressTextField.setBounds(92, 159, 120, 26);
 		panel2.add(addressTextField);
 		
 		JLabel lblAddress = new JLabel("Address:");
@@ -204,7 +204,7 @@ public class RegisterGUI extends SuperGUI {
 		CCTextField = new JTextField();
 		CCTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		CCTextField.setColumns(10);
-		CCTextField.setBounds(114, 90, 94, 26);
+		CCTextField.setBounds(114, 90, 109, 26);
 		panel3.add(CCTextField);
 		
 		JLabel lblSaleModel = new JLabel("Sale Model:");
@@ -221,12 +221,12 @@ public class RegisterGUI extends SuperGUI {
 		
 		passTextField = new JPasswordField();
 		passTextField.setFont(new Font("Arial", Font.PLAIN, 13));
-		passTextField.setBounds(114, 19, 94, 26);
+		passTextField.setBounds(114, 19, 109, 26);
 		panel3.add(passTextField);
 		
 		rePassTextField = new JPasswordField();
 		rePassTextField.setFont(new Font("Arial", Font.PLAIN, 13));
-		rePassTextField.setBounds(114, 52, 94, 26);
+		rePassTextField.setBounds(114, 52, 109, 26);
 		panel3.add(rePassTextField);
 		
 		JLabel lblType = new JLabel("Type: ");

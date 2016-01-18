@@ -80,6 +80,7 @@ public class UpdateDetailsActions extends GUIActions {
 		Customer user = res.getUser();
 		if(arg instanceof booleanResponse)
 		{
+			gui.setWaitProgress();
 			booleanResponse res2= (booleanResponse) arg;
 			if(!res2.getSuccess()) {
 				gui.showErrorMessage(res2.getMsg());
@@ -289,6 +290,7 @@ public class UpdateDetailsActions extends GUIActions {
 			user.setAtype(atype);
 			user.setSmodel(smodel);
 			UpdateRequest request = new UpdateRequest(user);
+			gui.createWaitDialog("Updating your details...");
 			client.handleMessageFromGUI(request);
 		}
 

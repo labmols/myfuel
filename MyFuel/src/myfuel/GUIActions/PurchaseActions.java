@@ -48,6 +48,7 @@ public class PurchaseActions extends GUIActions {
 	 */
 	private void getPurchases()
 	{
+		gui.createWaitDialog("Loading Purchase history...");
 		PurchaseRequest req = new PurchaseRequest(res.getUser().getUserid());
 		client.handleMessageFromGUI(req);
 	}
@@ -63,6 +64,7 @@ public class PurchaseActions extends GUIActions {
 			ArrayList<Purchase> pList = new ArrayList<Purchase>(res.getCustomerPurchases());
 			gui.Init(pList);
 			gui.addDates(res.getDateList());
+			gui.setWaitProgress();
 		}
 		
 		else if(arg instanceof booleanResponse)

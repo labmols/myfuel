@@ -141,27 +141,27 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		panel2.setLayout(null);
 		
 		fnameText = new JTextField();
-		fnameText.setBounds(111, 22, 141, 26);
+		fnameText.setBounds(111, 22, 160, 26);
 		panel2.add(fnameText);
 		fnameText.setColumns(10);
 		
 		lnameText = new JTextField();
-		lnameText.setBounds(111, 57, 141, 26);
+		lnameText.setBounds(111, 57, 160, 26);
 		panel2.add(lnameText);
 		lnameText.setColumns(10);
 		
 		addText = new JTextField();
-		addText.setBounds(111, 95, 141, 26);
+		addText.setBounds(111, 95, 160, 26);
 		panel2.add(addText);
 		addText.setColumns(10);
 		
 		emailText = new JTextField();
-		emailText.setBounds(111, 171, 141, 26);
+		emailText.setBounds(111, 171, 160, 26);
 		panel2.add(emailText);
 		emailText.setColumns(10);
 		
 		CCText = new JTextField();
-		CCText.setBounds(111, 133, 141, 26);
+		CCText.setBounds(111, 133, 160, 26);
 		panel2.add(CCText);
 		CCText.setColumns(10);
 		
@@ -196,55 +196,55 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		panel2.add(accessCB);
 		
 		JLabel lblSaleModel = new JLabel("Sale Model:");
-		lblSaleModel.setBounds(29, 213, 91, 16);
+		lblSaleModel.setBounds(16, 213, 91, 16);
 		panel2.add(lblSaleModel);
 		
 		saleCB = new JComboBox<String>();
 		saleCB.setModel(new DefaultComboBoxModel<String>(new String[] {"Occasional", "Monthly- One Car", "Monthly - Few Cars", "Fully Monthly - One Car"}));
-		saleCB.setBounds(103, 209, 149, 27);
+		saleCB.setBounds(111, 209, 181, 27);
 		panel2.add(saleCB);
 		
 		JLabel lblNewLabel = new JLabel("Add/Remove Station:");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 14));
-		lblNewLabel.setBounds(264, 6, 169, 26);
+		lblNewLabel.setBounds(274, 6, 169, 26);
 		panel2.add(lblNewLabel);
 		
 		JLabel lblCars = new JLabel("Cars: ");
-		lblCars.setBounds(303, 254, 48, 16);
+		lblCars.setBounds(20, 253, 48, 16);
 		panel2.add(lblCars);
 		
 		carsCB = new JComboBox<Integer>();
 		carModel= new DefaultComboBoxModel<Integer>();
 		carsCB.setModel(carModel);
-		carsCB.setBounds(346, 250, 132, 27);
+		carsCB.setBounds(94, 249, 132, 27);
 		panel2.add(carsCB);
 		
 		JLabel lblYourCars = new JLabel("Add/Remove Car:");
 		lblYourCars.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 14));
-		lblYourCars.setBounds(269, 154, 137, 21);
+		lblYourCars.setBounds(283, 167, 137, 21);
 		panel2.add(lblYourCars);
 		
 		JLabel lblFuelType = new JLabel("Fuel Type:");
-		lblFuelType.setBounds(269, 213, 86, 16);
+		lblFuelType.setBounds(306, 231, 86, 16);
 		panel2.add(lblFuelType);
 		
 		fuelCB = new JComboBox<String>();
 		fuelCB.setModel(new DefaultComboBoxModel<String>(new String[] {"95\t", "Diesel", "Scooter"}));
-		fuelCB.setBounds(346, 209, 132, 27);
+		fuelCB.setBounds(376, 227, 132, 27);
 		panel2.add(fuelCB);
 		
 		btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new eventListener());
 		btnRemove.setToolTipText("Remove this Car");
-		btnRemove.setBounds(481, 249, 91, 29);
+		btnRemove.setBounds(236, 248, 91, 29);
 		panel2.add(btnRemove);
 		
 		JLabel lblCarId = new JLabel("Car ID:");
-		lblCarId.setBounds(294, 181, 57, 16);
+		lblCarId.setBounds(329, 194, 63, 16);
 		panel2.add(lblCarId);
 		
 		cidText = new JTextField();
-		cidText.setBounds(351, 175, 127, 26);
+		cidText.setBounds(376, 189, 127, 26);
 		panel2.add(cidText);
 		cidText.setColumns(10);
 		stationModel= new DefaultComboBoxModel<String>();
@@ -253,7 +253,7 @@ public class UpdateCustomerDetailsGUI extends SuperGUI {
 		carAdd = new JButton("Add");
 		carAdd.setToolTipText("Add New Car");
 		carAdd.addActionListener(new eventListener());
-		carAdd.setBounds(481, 208, 91, 29);
+		carAdd.setBounds(417, 258, 91, 29);
 		panel2.add(carAdd);
 		
 		sAdd = new JButton("Add");
