@@ -34,7 +34,7 @@ public class FuelOrderRequest extends Request{
 	/**
 	 * Used for Home Order purchase.
 	 */
-	private int customerID;
+	private int customerID=0;
 	/**
 	 * Create new Fuel Request 
 	 * @param type - the Query type.
@@ -109,7 +109,18 @@ public class FuelOrderRequest extends Request{
 	public void setCustomerID(int customerID) {
 		this.customerID = customerID;
 	}
-
+	
+	 @Override
+	 public boolean equals(Object obj)
+	 {
+		 FuelOrderRequest req2 =  (FuelOrderRequest) obj;
+		 return req2.getCustomerID() == this.customerID 
+				 && req2.getFuelID() == this.FuelID 
+				 && req2.getHOrder().equals(this.order)
+				 && req2.getPur().equals(this.pur)
+				 && req2.getType() == this.type;
+	 }
+	 
 
 	
 }

@@ -30,6 +30,12 @@ public class FuelOrderResponse extends Response {
 	private ArrayList <Fuel> fuels;
 	
 	/**
+	 * Home fuel price
+	 */
+	private Fuel homeFuelPrice;
+	
+	
+	/**
 	 * Promotion object if exist(if not it will be null).
 	 */
 	private ArrayList<Promotion> promList;
@@ -59,17 +65,28 @@ public class FuelOrderResponse extends Response {
 	 * @param si - the stations inventory list.
 	 * @param fuels - the fuels details list.
 	 */
-	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels,  ArrayList<Promotion> promList , ArrayList <HomeOrder> horders,ArrayList<NetworkRates> rates, ArrayList<Station> stations ,FuelQty homeInventory)
+	public FuelOrderResponse(ArrayList <StationInventory> si, ArrayList <Fuel> fuels,  ArrayList<Promotion> promList ,ArrayList<NetworkRates> rates, ArrayList<Station> stations )
 	{
 		this.si = new ArrayList<StationInventory>(si);
 		this.fuels = new ArrayList<Fuel>(fuels);
 		this.setPromList(new ArrayList<Promotion>(promList));
-		this.setHorders(horders);
+		this.setHorders(null);
 		this.setRates(new ArrayList<NetworkRates>(rates));
 		this.setStations(stations);
+		this.setHomeInventory(null);
+	}
+	
+	public FuelOrderResponse(Fuel home, ArrayList<Promotion> promList, ArrayList <HomeOrder> horders, FuelQty homeInventory )
+	{
+		this.si = null;
+		this.fuels = null;
+		this.setRates(null);
+		this.setStations(null);
+		this.setHomeFuelPrice(home);
+		this.setPromList(promList);
+		this.setHorders(horders);
 		this.setHomeInventory(homeInventory);
 	}
-
 
 	public ArrayList <StationInventory> getSi() {
 		return this.si;
@@ -157,6 +174,14 @@ public class FuelOrderResponse extends Response {
 
 	public void setHomeInventory(FuelQty homeInventory) {
 		this.homeInventory = homeInventory;
+	}
+
+	public Fuel getHomeFuelPrice() {
+		return homeFuelPrice;
+	}
+
+	public void setHomeFuelPrice(Fuel homeFuelPrice) {
+		this.homeFuelPrice = homeFuelPrice;
 	}
 	
 

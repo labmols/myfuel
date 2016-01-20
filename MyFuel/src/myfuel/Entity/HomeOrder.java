@@ -3,6 +3,8 @@ package myfuel.Entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import myfuel.Tools.TimeIgnoringComparator;
+
 /**
  * This class contains all Home Order details.
  *
@@ -109,6 +111,15 @@ public class HomeOrder implements Serializable {
 		this.homeP = homeP;
 	}
 
+	@Override
+	 public boolean equals(Object obj)
+	 {
+	  HomeOrder h2 = (HomeOrder)obj;
+	  
+	  return (this.getStatus() == h2.getStatus() && this.getAddress().equals(h2.getAddress()) && this.getCustomerid() == h2.getCustomerid()
+	    && this.getHomeP().equals(h2.getHomeP()) && this.getOrderid() == h2.getOrderid() && this.isUrgent() == h2.isUrgent() 
+	      && (new TimeIgnoringComparator().compare(this.getShipDate(), h2.getShipDate()) == 0 ));
+	 }
 
 	
 }

@@ -3,6 +3,8 @@ package myfuel.Entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import myfuel.Tools.TimeIgnoringComparator;
+
 /**
  * This class contains all Product Purchase details.
  * @author Maor
@@ -232,7 +234,22 @@ public class Purchase implements Serializable {
 		this.paid = paid;
 	}
 
-	
+	@Override
+	public boolean equals(Object obj)
+	{
+		Purchase p2 = (Purchase) obj;
+		TimeIgnoringComparator compare = new TimeIgnoringComparator(); 
+		return this.paid == p2.isPaid() && this.customerCarID == p2.getCustomerCarID()
+				&& this.customerid == p2.getCustomerid()
+				&& this.fuelid == p2.getFuelid()
+				&& this.bill == p2.getBill()
+				&& (compare.compare(this.pdate, p2.getPdate()) == 0 )
+				&& this.promid == p2.getPromid()
+				&& this.qty == p2.getQty() 
+				&& this.sid == p2.getSid();
+			
+				
+	}
 	
 	
 	

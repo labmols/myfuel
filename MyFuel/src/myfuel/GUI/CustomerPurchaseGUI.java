@@ -67,6 +67,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 	 * Total charges for month label
 	 */
 	private JLabel totalLabel;
+	private JLabel paidlbl;
 	
 	/**
 	 * Create new Customer Purchase User interface.
@@ -123,13 +124,23 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		
 		JLabel lblTotalChargeFor = new JLabel("Total charge for this month: ");
 		lblTotalChargeFor.setFont(new Font("Arial", Font.BOLD, 14));
-		lblTotalChargeFor.setBounds(62, 385, 210, 16);
+		lblTotalChargeFor.setBounds(62, 392, 210, 16);
 		panel.add(lblTotalChargeFor);
 		
 		totalLabel = new JLabel("");
 		totalLabel.setFont(new Font("Arial", Font.BOLD, 14));
-		totalLabel.setBounds(267, 385, 162, 16);
+		totalLabel.setBounds(267, 392, 162, 16);
 		panel.add(totalLabel);
+		
+		JLabel lblTotalPaidFor = new JLabel("Total paid for this month: ");
+		lblTotalPaidFor.setFont(new Font("Arial", Font.BOLD, 14));
+		lblTotalPaidFor.setBounds(62, 364, 188, 16);
+		panel.add(lblTotalPaidFor);
+		
+		paidlbl = new JLabel("");
+		paidlbl.setFont(new Font("Arial", Font.BOLD, 14));
+		paidlbl.setBounds(267, 364, 162, 16);
+		panel.add(paidlbl);
 		
 	}
 	@Override
@@ -177,6 +188,7 @@ public class CustomerPurchaseGUI extends SuperGUI {
 		String sdate="";
 		String paid = "";
 		float total= 0;
+		float paidC = 0;
 		if(pList != null && pList.size() > 0)
 		{
 			for(Purchase p: pList)
@@ -186,14 +198,16 @@ public class CustomerPurchaseGUI extends SuperGUI {
 			Date date = p.getPdate();
 			if(date.getYear() == d.getYear() && date.getMonth()==d.getMonth())
 			{
-			total += p.getBill();
+			if(!p.isPaid())
+				total += p.getBill();
+			else paidC += p.getBill();
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy HH:mm");
 			sdate = format.format(date);
 			tableModel.insertRow(tableModel.getRowCount(),new Object[]{p.getPid(),p.getCustomerCarID(),p.getSname(),p.getFuelName(),sdate,new DecimalFormat("##.##").format(p.getQty())+"(L)",new DecimalFormat("##.##").format(p.getBill())+" NIS",paid});
 			}
 			}
 		totalLabel.setText(new DecimalFormat("##.##").format(total) +" NIS");
-			
+		paidlbl.setText(new DecimalFormat("##.##").format(paidC) +" NIS");
 		}
 		else
 		{

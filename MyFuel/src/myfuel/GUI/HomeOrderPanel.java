@@ -50,17 +50,19 @@ public class HomeOrderPanel extends JPanel{
 	 */
 	private JLabel lblUrgent ;
 	
-	 WebDateField dateField;
+	private  WebDateField dateField;
+	 
+	 private HomeFuelGUI gui;
 	
 	/**
 	 * Create new Home Order Panel(part of Home Fuel GUI).
 	 * @param actions - Home Order GUI Controller.
 	 */
-	public HomeOrderPanel(HomeOrderActions actions)
+	public HomeOrderPanel(HomeOrderActions actions, HomeFuelGUI gui)
 	{
 		setOpaque(false);
 		this.actions = actions;
-
+		this.gui = gui;
 		setBounds(6, 46, 584, 384);
 		setLayout(null);
 		
@@ -166,7 +168,13 @@ public class HomeOrderPanel extends JPanel{
 			}
 			else if(e.getSource() == btnMakeOrder)
 			{
-				actions.verifyDetails(dateField.getDate(), qtyText.getText(), shipAddrText.getText(), urgentCB.isSelected());
+				if(!actions.verifyDetails(dateField.getDate(), qtyText.getText(), shipAddrText.getText(), urgentCB.isSelected()))
+					gui.showErrorMessage(actions.getErrorMsg());
+				else
+				{
+					actions.MakeHomeFuelRequest(dateField.getDate(), new Date(), Float.parseFloat(qtyText.getText()), shipAddrText.getText(), urgentCB.isSelected());
+				}
+				
 			}
 		}
 		}

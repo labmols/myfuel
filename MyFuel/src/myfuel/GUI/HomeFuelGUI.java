@@ -69,7 +69,7 @@ public class HomeFuelGUI extends SuperGUI {
 		this.mainMenu.addActionListener(new BackMainMenu(actions));
 		setContentPane(contentPane);
 		
-		orderPanel = new HomeOrderPanel(actions);
+		orderPanel = new HomeOrderPanel(actions,this);
 		orderPanel.setBounds(6, 90, 584, 351);
 		panel.add(orderPanel);
 		

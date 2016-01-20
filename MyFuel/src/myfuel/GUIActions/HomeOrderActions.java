@@ -50,6 +50,20 @@ public class HomeOrderActions extends GUIActions {
 	private FuelOrderResponse response; 
 	
 	/**
+	 * The request that will send to server.
+	 */
+	private FuelOrderRequest request;
+	
+	private String errorMsg ;
+	
+	public HomeOrderActions(CustomerLoginResponse res) {
+		super();
+		this.LoginRes = res;
+		this.request = null;
+		// TODO Auto-generated constructor stub
+	}
+	
+	/**
 	 * Create new Home Fuel GUI Controller.
 	 * @param client - MyFuelClient object.
 	 * @param customer - Customer details object.
@@ -59,10 +73,40 @@ public class HomeOrderActions extends GUIActions {
 		super(client,lr);
 		this.gui = new HomeFuelGUI(this);
 		this.LoginRes= res;
+		this.request = null;
 		gui.setVisible(true);
 		getInfo();
         gui.getOrderPanel().setAddress(res.getUser().getAddress());
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * Create new home fuel order request
+	 * @param shipDate - Chosen Shipping date.
+	 * @param qty - Order Quantity(Liters).
+	 * @param addr - Customer address.
+	 * @param urgent - Is the order urgent or not.
+	 * @param totalPrice - total order price
+	 * @return
+	 */
+	public FuelOrderRequest createOrder(Date shipDate,Date pdate, float qty, String addr, boolean urgent,float totalPrice)
+	{
+		int pid ;
+		
+		if(checkInventory(qty))
+		{
+		if(response.getPromotion(Fuel.HomeFuelID) != null)
+			pid = response.getPromotion(Fuel.HomeFuelID).getPid();
+		else pid = -1;
+		if(urgent) 
+			shipDate = pdate;
+		
+		Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, -1, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null,-1,true);
+		order = new HomeOrder(LoginRes.getUser().getUserid(), 0, addr, shipDate, false, urgent,p);
+		FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
+		return req;
+		}
+		else return null;
 	}
 	
 	/**
@@ -72,35 +116,20 @@ public class HomeOrderActions extends GUIActions {
 	 * @param addr - Customer address.
 	 * @param urgent - Is the order urgent or not.
 	 */
-	private void MakeHomeFuelRequest(Date shipDate, float qty, String addr, boolean urgent)
+	public void MakeHomeFuelRequest(Date shipDate,Date pdate, float qty, String addr, boolean urgent)
 	{
-		
-		if(checkInventory(qty))
-		{
-			float totalPrice = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getFuels().get(3).getMaxPrice(), response.getPromotion(Fuel.HomeFuelID));
+		float totalPrice = CalcPrice.calcTotalHomeOrder(urgent, qty,response.getHomeFuelPrice().getMaxPrice(), response.getPromotion(Fuel.HomeFuelID));
+		FuelOrderRequest req = createOrder(shipDate,pdate,qty,addr,urgent,totalPrice); 
+			
+			if(req!=null)
+			{
 			if(showConfirmOrder(qty, urgent,totalPrice))
 			{
-				Date pdate = new Date();
-				int pid ;
-				if(response.getPromotion(Fuel.HomeFuelID) != null)
-					pid = response.getPromotion(Fuel.HomeFuelID).getPid();
-				else pid = -1;
-				if(urgent) 
-					shipDate = pdate;
-				
-				Purchase p = new Purchase (LoginRes.getUser().getUserid(),0, -1, Fuel.HomeFuelID, pid ,pdate , totalPrice, qty,null,-1,true);
-				order = new HomeOrder(LoginRes.getUser().getUserid(), 0, addr, shipDate, false, urgent,p);
 				gui.createWaitDialog("Sending your order...");
-				FuelOrderRequest req = new FuelOrderRequest (RequestEnum.Insert,p,order);
 				client.handleMessageFromGUI(req);
-			
-		  }
-		
-		}
-		else
-		{
-			gui.showErrorMessage("Not enough fuel quantity!");
-		}
+			}
+			}
+			else gui.showErrorMessage("Not enough fuel quantity!");	
 	}
 	
 	/**
@@ -208,10 +237,10 @@ public class HomeOrderActions extends GUIActions {
 	 * @param addr - Customer address.
 	 * @param urgent - Is this order urgent or not.
 	 */
-	public void verifyDetails(Date shipDate, String qty, String addr, boolean urgent)
+	public boolean verifyDetails(Date shipDate, String qty, String addr, boolean urgent)
 	{
 		boolean success = true;
-		String msg = "";
+		this.setErrorMsg("");
 		Date date = new Date(); //Current date
 		float qtyF = 0;
 		try {
@@ -219,36 +248,36 @@ public class HomeOrderActions extends GUIActions {
 			if(qtyF<0)
 			{
 				success = false;
-				msg += "Illegal Amount value!\n";
+				setErrorMsg(getErrorMsg() + "Illegal Amount value!\n");
 			}
 		}
 		catch(NumberFormatException e)
 		{
 			success = false;
-			msg += "Illegal Amount value!\n";
+			setErrorMsg(getErrorMsg() + "Illegal Amount value!\n");
 		}
 		
 		if(addr.equals(""))
 		{
 			success = false;
-			msg += "Address field is Empty!\n";
+			setErrorMsg(getErrorMsg() + "Address field is Empty!\n");
 		}
 		if(shipDate == null && !urgent )
 		{
 			success = false;
-			msg += "You have to pick ship date!\n";
+			setErrorMsg(getErrorMsg() + "You have to pick ship date!\n");
 		}
 		else if(!urgent && shipDate.before(date))
 		{
 			success = false;
-			 msg += "Illegal Date!\n";
+			 setErrorMsg(getErrorMsg() + "Illegal Date!\n");
 		}
 		
-		if(!success) gui.showErrorMessage(msg);
-		else if(response != null){ // new request
-
-		    	MakeHomeFuelRequest(shipDate, qtyF, addr, urgent);
-		}
+		if(!success) 
+			return false;
+		else return true;
+				
+	
 			
 	}
 
@@ -257,6 +286,27 @@ public class HomeOrderActions extends GUIActions {
 		// TODO Auto-generated method stub
 		this.LogOutRequest(gui, lr);
 		
+	}
+	
+	public void setResponse(FuelOrderResponse response)
+	{
+		this.response = response;
+	}
+
+	public FuelOrderRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(FuelOrderRequest request) {
+		this.request = request;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 	

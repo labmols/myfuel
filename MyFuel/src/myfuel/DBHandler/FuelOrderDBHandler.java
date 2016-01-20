@@ -665,6 +665,7 @@ public class FuelOrderDBHandler extends DBHandler{
 			FuelOrderRequest req = (FuelOrderRequest) arg;
 			if(req.getType() == RequestEnum.Select)
 			{
+				FuelOrderResponse res ;
 				ArrayList <Fuel> fuels = getFuels();
 				ArrayList <StationInventory> si = getInventory();
 				ArrayList <NetworkRates> networkRates = getRates();
@@ -678,10 +679,14 @@ public class FuelOrderDBHandler extends DBHandler{
 				 horders = getHomeOrders(req.getCustomerID());
 				 stations = null;
 				 homeInventory = getHomeInventory();
+				 res= new FuelOrderResponse(fuels.get(Fuel.HomeFuelID-1), promList, horders, homeInventory);
 				}
 				
-				else stations = getStations();
-				FuelOrderResponse res = new FuelOrderResponse (si,fuels, promList ,horders,networkRates,stations,homeInventory);
+				else 
+				{
+				stations = getStations();
+				res = new FuelOrderResponse (si,fuels, promList,networkRates,stations);
+				}
 				server.setResponse(res);
 			}
 			
