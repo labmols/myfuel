@@ -1,0 +1,352 @@
+<html><head><title>Suite CarFuel.fit run at: Thu Jan 21 21:28:38 IST 2016</title>
+	<link rel="stylesheet" type="text/css" href="css/fitnesse.css" media="screen"/>
+ 	<link rel="stylesheet" type="text/css" href="css/fitnesse.css" media="print"/>
+<script language="JavaScript" type="text/javascript">
+var collapsableOpenCss = "collapsable"
+var collapsableClosedCss = "hidden"
+var collapsableOpenImg = "images/collapsableOpen.gif"
+var collapsableClosedImg = "images/collapsableClosed.gif"
+function toggleCollapsable(id){
+var div = document.getElementById(id);
+var img = document.getElementById("img" + id);
+if(div.className.indexOf(collapsableClosedCss) != -1) {
+div.className = collapsableOpenCss;
+img.src = collapsableOpenImg;
+} else {
+div.className = collapsableClosedCss;
+img.src = collapsableClosedImg;
+} }
+</script>
+
+</head>
+<body>
+<div> Suite is: /Users/Maor/git/myfuel/MyFuel/AcceptenceTests/FitTests/CarFuel.fit</div><div class="test_output_name">Name: CarFuel.fit</div><div> Suite executed at: Thu Jan 21 21:28:38 IST 2016 Elapsed time: 517 millseconds  </div><table><tr><td></td><td><a href="#-25672166:15265a8f6ce:-8000">CarFuel.fit</a></td><td class="pass">8 right, 0 wrong, 0 ignored, 0 exceptions</td></tr></table><div class="test_output_name"><a name="-25672166:15265a8f6ce:-8000"/><p>Test file: CarFuel.fit</p></div><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Add Recipe FIT Test</title>
+		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+		<style type="text/css">
+<!--{cke_protected}{C}%3C!%2D%2D.style1%20%7Bfont-family%3A%20Arial%2C%20Helvetica%2C%20sans-serif%7D%2D%2D%3E-->		</style>
+	</head>
+	<body>
+		<p class="style1" style="color: rgb(102, 153, 51);">
+			<span style="color:#000;"><span style="font-size:16px;"><u><em><strong>Car Fueling Acceptence Test</strong></em></u></span></span></p>
+		<p class="style1">
+			<span style="color:#f00;">Acceptence test for fuel selling.</span></p>
+		<p class="style1">
+			<span style="color:#f00;">*limit 0 -Limit &nbsp;By Amount &nbsp; &nbsp;&nbsp;</span></p>
+		<p class="style1">
+			<span style="color:#f00;">*limit 1- Limit By Price</span></p>
+		<p class="style1">
+			<span style="color:#f00;">* Fuel ID 1 -95, Fuel ID 2- Diesel, Fuel ID 3- Scooter.</span></p>
+		<span _fck_bookmark="1" style="display: none;">&nbsp;</span>
+		<table border="1" cellpadding="5" cellspacing="0" width="765">
+			<tbody>
+				<tr>
+					<td class="style1" colspan="3">
+						fit.ActionFixture</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						start</td>
+					<td class="style1">
+						Fixtures.MyFuel.CarFuel</td>
+					<td class="style1">
+						&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">press</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">start fuel</span></td>
+					<td class="style1">
+						&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set car id</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">8617553</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set station&nbsp;</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">Paz1</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set fuel type</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">1</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter&nbsp;</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set limit</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">0</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set amount</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">40</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">check</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">verify details</span></td>
+					<td class="style1" class="pass">
+						<span style="background-color:#ffff00;">true</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">press</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">send order</span></td>
+					<td class="style1">
+						&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">check</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">inventory update check</span></td>
+					<td class="style1" class="pass">
+						<span style="background-color:#ffff00;">true</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set car id</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">2317875</span><span _fck_bookmark="1" style="display: none;">&nbsp;</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set station</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">Delek1</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set fuel type</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">2</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set limit</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">1</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set amount</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">50</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">check</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">verify details</span></td>
+					<td class="style1" class="pass">
+						<span style="background-color:#ffff00;">false</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set car id</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">2317875</span><span _fck_bookmark="1" style="display: none;">&nbsp;</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set station</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">Paz2</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set fuel type</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">2</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set limit</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">1</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#00ff00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">set amount</span></td>
+					<td class="style1">
+						<span style="background-color:#00ff00;">50</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">check</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">verify details</span></td>
+					<td class="style1" class="pass">
+						<span style="background-color:#ffff00;">true</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">press</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">send order</span></td>
+					<td class="style1">
+						&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">check</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">inventory update check</span></td>
+					<td class="style1" class="pass">
+						<span style="background-color:#ffff00;">true</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">check</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">inventory order check</span></td>
+					<td class="style1" class="pass">
+						<span style="background-color:#ffff00;">false</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set car id</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">8617553</span><span _fck_bookmark="1" style="display: none;">&nbsp;</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set station</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">Paz2</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set fuel type</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">2</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set limit</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">1</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set amount</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">50</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">check</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">verify details</span></td>
+					<td class="style1" class="pass">
+						<span style="background-color:#ffff00;">false</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set car id</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">8617553</span><span _fck_bookmark="1" style="display: none;">&nbsp;</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set station</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">Paz2</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set fuel type</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">2</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set limit</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">0</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#f00;">enter</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">set amount</span></td>
+					<td class="style1">
+						<span style="background-color:#f00;">-50</span></td>
+				</tr>
+				<tr>
+					<td class="style1">
+						<span style="background-color:#ffff00;">check</span></td>
+					<td class="style1">
+						<span style="background-color:#ffff00;">verify details</span></td>
+					<td class="style1" class="pass">
+						<span style="background-color:#ffff00;">false</span></td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="style1" style="color: rgb(0, 0, 205);">
+			MyFuel FIT Test &copy; 2016&nbsp;</p>
+	</body>
+</html>
+
+</body></html>
