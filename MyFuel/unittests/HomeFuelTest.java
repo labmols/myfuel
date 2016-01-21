@@ -27,7 +27,7 @@ import myfuel.Tools.CalcPrice;
 import org.junit.Test;
 
 
-public class HomeFuelOrderTest extends TestCase{
+public class HomeFuelTest extends TestCase{
 
 	/**
 	 * Create Home Order GUI Controller 
@@ -80,7 +80,7 @@ public class HomeFuelOrderTest extends TestCase{
 	 */
 	private ArrayList<HomeOrder> horders;
 	
-	public HomeFuelOrderTest(String name) {
+	public HomeFuelTest(String name) {
 		super(name);
 	}
 	
