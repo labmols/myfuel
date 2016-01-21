@@ -187,5 +187,7 @@ public class HomeOrderPanel extends JPanel{
 	{
 		shipAddrText.setText(address);
 	}
+	
+	
 	}
 

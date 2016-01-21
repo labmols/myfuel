@@ -111,6 +111,11 @@ public void updateTable(ArrayList <HomeOrder> horders)
 	}
 	
 }
+
+public DefaultTableModel getModel()
+{
+	return this.model;
+}
 	
 	/***
 	 * Clears the table

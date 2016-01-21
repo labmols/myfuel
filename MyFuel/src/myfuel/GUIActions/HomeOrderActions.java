@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import myfuel.Client.MyFuelClient;
 import myfuel.Entity.Fuel;
@@ -56,10 +58,14 @@ public class HomeOrderActions extends GUIActions {
 	
 	private String errorMsg ;
 	
-	public HomeOrderActions(CustomerLoginResponse res) {
+	public HomeOrderActions(CustomerLoginResponse res,FuelOrderResponse response) {
 		super();
 		this.LoginRes = res;
 		this.request = null;
+		this.response = response;
+		this.gui = new HomeFuelGUI(this);
+		gui.setVisible(false);
+		gui.getTrackingPanel().updateTable(response.getHorders());
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -288,10 +294,6 @@ public class HomeOrderActions extends GUIActions {
 		
 	}
 	
-	public void setResponse(FuelOrderResponse response)
-	{
-		this.response = response;
-	}
 
 	public FuelOrderRequest getRequest() {
 		return request;
@@ -308,7 +310,13 @@ public class HomeOrderActions extends GUIActions {
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
+	
+	public DefaultTableModel getTrackingTable()
+	{
+		return gui.getTrackingPanel().getModel();
+	}
 
+	
 	
 
 
