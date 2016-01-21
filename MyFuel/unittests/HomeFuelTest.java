@@ -24,7 +24,6 @@ import myfuel.Response.CustomerLoginResponse;
 import myfuel.Response.FuelOrderResponse;
 import myfuel.Tools.CalcPrice;
 
-import org.junit.Test;
 
 
 public class HomeFuelTest extends TestCase{

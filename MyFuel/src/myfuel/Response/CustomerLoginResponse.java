@@ -74,6 +74,10 @@ public class CustomerLoginResponse extends Response {
 		this.setFastStation(s);
 	}
 
+	public CustomerLoginResponse() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Customer getUser() {
 		return user;
 	}

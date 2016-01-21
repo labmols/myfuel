@@ -88,6 +88,10 @@ public class FuelOrderResponse extends Response {
 		this.setHomeInventory(homeInventory);
 	}
 
+	public FuelOrderResponse() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public ArrayList <StationInventory> getSi() {
 		return this.si;
 	}
@@ -147,6 +151,16 @@ public class FuelOrderResponse extends Response {
 		{
 			if(n.getNid() == nid)
 				return n;
+		}
+		return null;
+	}
+	
+	public StationInventory getStationInventory(int sid)
+	{
+		for(StationInventory s: this.getSi())
+		{
+			if(s.getS().getsid() == sid)
+				return s;
 		}
 		return null;
 	}

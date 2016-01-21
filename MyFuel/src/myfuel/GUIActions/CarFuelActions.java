@@ -58,6 +58,15 @@ public class CarFuelActions extends GUIActions {
 		super(client,lr);
 	}
 	
+	public CarFuelActions(MyFuelClient client) {
+		super(client,null);
+		this.customerRes =null;
+		this.infoRes = null;
+		fuelPurchase = null;
+		
+		// TODO Auto-generated constructor stub
+	}
+	
 	/**
 	 * Create new Car Fuel GUI Controller and getting all the required information for creating an order.
 	 * @param client -MyFuel client object (for communication to server).
@@ -108,17 +117,8 @@ public class CarFuelActions extends GUIActions {
  */
 	public void createPurchase()
 	{
-		try{
-			FuelOrderRequest req = new FuelOrderRequest(RequestEnum.Insert,fuelPurchase,null);
-			gui.createWaitDialog("Create your purchase...");
-			client.handleMessageFromGUI(req);
-		}
-		catch(NullPointerException e)
-		{
-			e.printStackTrace();
-			gui.showErrorMessage("Error!");
-		}
-	
+		FuelOrderRequest req = new FuelOrderRequest(RequestEnum.Insert,fuelPurchase,null);
+		client.handleMessageFromGUI(req);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class CarFuelActions extends GUIActions {
 		}
 		catch(NumberFormatException e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 			errors += "illegal amount value.\n";
 			check = false;
 		}
@@ -218,7 +218,7 @@ public class CarFuelActions extends GUIActions {
 		}
 		
 		if(!check)
-			gui.showErrorMessage(errors);
+			return false;
 		else
 		{
 			boolean paid = true;
@@ -391,6 +391,27 @@ public class CarFuelActions extends GUIActions {
 		// TODO Auto-generated method stub
 		return customerRes.getUser().getSmodel();
 	}
+	
+	public void setInfoRes(FuelOrderResponse res)
+	{
+		this.infoRes = res;
+	}
+	
+	public FuelOrderResponse getInfoRes()
+	{
+		return this.infoRes;
+	}
+	
+	public CustomerLoginResponse getCustomerRes()
+	{
+		return this.customerRes;
+	}
+	
+	public void setCustomerRes(CustomerLoginResponse res)
+	{
+		this.customerRes = res;
+	}
+
 
 
 	

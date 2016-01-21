@@ -139,8 +139,8 @@ public class LoginDBHandler extends DBHandler {
 			if(rs.next()){
 				status = rs.getInt(11);
 				approved = rs.getInt(12);
-				if(status == 1) return new booleanResponse(false, "This Customer is already logged in!");
-				else if(approved == 0) return new booleanResponse(false, "You are not approved yet!");
+				//if(status == 1) return new booleanResponse(false, "This Customer is already logged in!");
+				 if(approved == 0) return new booleanResponse(false, "You are not approved yet!");
 			}
 			else
 			{

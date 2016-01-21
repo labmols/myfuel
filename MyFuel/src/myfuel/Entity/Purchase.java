@@ -69,6 +69,11 @@ public class Purchase implements Serializable {
 	 * Is the order has been paid or not.
 	 */
 	private boolean paid;
+	
+	public Purchase()
+	{
+		
+	}
 	/**
 	 * Create new Purchase object with the following parameters.
 	 * @param pid - Purchase ID.
