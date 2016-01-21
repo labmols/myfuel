@@ -1,0 +1,159 @@
+<html><head><title>Suite CarFuel.fit run at: Thu Jan 21 15:36:30 IST 2016</title>
+	<link rel="stylesheet" type="text/css" href="css/fitnesse.css" media="screen"/>
+ 	<link rel="stylesheet" type="text/css" href="css/fitnesse.css" media="print"/>
+<script language="JavaScript" type="text/javascript">
+var collapsableOpenCss = "collapsable"
+var collapsableClosedCss = "hidden"
+var collapsableOpenImg = "images/collapsableOpen.gif"
+var collapsableClosedImg = "images/collapsableClosed.gif"
+function toggleCollapsable(id){
+var div = document.getElementById(id);
+var img = document.getElementById("img" + id);
+if(div.className.indexOf(collapsableClosedCss) != -1) {
+div.className = collapsableOpenCss;
+img.src = collapsableOpenImg;
+} else {
+div.className = collapsableClosedCss;
+img.src = collapsableClosedImg;
+} }
+</script>
+
+</head>
+<body>
+<div> Suite is: /Users/Maor/git/myfuel/MyFuel/AcceptenceTests/FitTests/CarFuel.fit</div><div class="test_output_name">Name: CarFuel.fit</div><div> Suite executed at: Thu Jan 21 15:36:30 IST 2016 Elapsed time: 292 millseconds  </div><table><tr><td></td><td><a href="#7e48d68a:15264669369:-8000">CarFuel.fit</a></td><td class="error">0 right, 0 wrong, 0 ignored, 1 exceptions</td></tr></table><div class="test_output_name"><a name="7e48d68a:15264669369:-8000"/><p>Test file: CarFuel.fit</p></div><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Add Recipe FIT Test</title>
+		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+		<style type="text/css">
+<!--{cke_protected}{C}%3C!%2D%2D.style1%20%7Bfont-family%3A%20Arial%2C%20Helvetica%2C%20sans-serif%7D%2D%2D%3E-->		</style>
+	</head>
+	<body>
+		<p class="style1">
+			Car Fueling Acceptence Test</p>
+		<p class="style1">
+			Acceptence test for selling fuel.</p>
+		<p class="style1">
+			*limit 0 -Limit &nbsp;By Amount</p>
+		<p class="style1">
+			*limit 1- Limit By Price</p>
+		<table border="1" cellpadding="5" cellspacing="0" width="765">
+			<tbody>
+				<tr>
+					<td class="style1" colspan="3">
+						fit.ActionFixture</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						start</td>
+					<td class="style1">
+						Fixtures.MyFuel.CarFuel</td>
+					<td class="style1">
+						&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						press</td>
+					<td class="style1">
+						start fuel</td>
+					<td class="style1">
+						&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						enter</td>
+					<td class="style1">
+						set car id</td>
+					<td class="style1">
+						8617553</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						enter</td>
+					<td class="style1">
+						set station name</td>
+					<td class="style1">
+						Paz1</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						enter</td>
+					<td class="style1">
+						set fuel type</td>
+					<td class="style1">
+						1</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						enter&nbsp;</td>
+					<td class="style1">
+						set limit</td>
+					<td class="style1">
+						0</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						enter</td>
+					<td class="style1">
+						set amount</td>
+					<td class="style1">
+						40</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						check</td>
+					<td class="style1">
+						verify details</td>
+					<td class="style1" class="error">
+						true<hr><pre><div class="fit_stacktrace">java.lang.NullPointerException
+	at myfuel.GUIActions.CarFuelActions.verifyDetails(CarFuelActions.java:155)
+	at Fixtures.MyFuel.CarFuel.verifyDetails(CarFuel.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at fit.TypeAdapter.invoke(Unknown Source)
+	at fit.TypeAdapter.get(Unknown Source)
+	at fit.Fixture$CellComparator.compareCellToResult(Unknown Source)
+	at fit.Fixture$CellComparator.access$100(Unknown Source)
+	at fit.Fixture.compareCellToResult(Unknown Source)
+	at fit.Fixture.check(Unknown Source)
+	at fit.ActionFixture.check(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at fit.ActionFixture.doCells(Unknown Source)
+	at fit.Fixture.doRow(Unknown Source)
+	at fit.Fixture.doRows(Unknown Source)
+	at fit.Fixture.doTable(Unknown Source)
+	at fit.Fixture.interpretTables(Unknown Source)
+	at fit.Fixture.doTables(Unknown Source)
+	at fitlibrary.suite.IndependentSuiteRunner.runEachStorytest(IndependentSuiteRunner.java:53)
+	at fitlibrary.suite.IndependentSuiteRunner.runFirstStorytest(IndependentSuiteRunner.java:28)
+	at fitlibrary.suite.BatchFitLibrary.doTables(BatchFitLibrary.java:39)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at com.luxoft.fitpro.adapters.fit.FitLibraryFitProvider.doTables(FitLibraryFitProvider.java:168)
+	at com.luxoft.fitpro.adapters.fit.FitLibraryFitProvider.generateParseResult(FitLibraryFitProvider.java:96)
+	at com.luxoft.fitpro.adapters.fit.FitLibraryFitProvider.runSingleFITTest(FitLibraryFitProvider.java:78)
+	at com.luxoft.fitpro.adapters.fit.FitLibraryFitProvider.runValidTestFile(FitLibraryFitProvider.java:58)
+	at com.luxoft.fitpro.adapters.fit.FitLibraryFitProvider.runFIT(FitLibraryFitProvider.java:39)
+	at com.luxoft.fitpro.core.testcase.SequentialRunnerStrategy.run(SequentialRunnerStrategy.java:18)
+	at com.luxoft.fitpro.core.tester.RunnerVisitor.runTest(RunnerVisitor.java:59)
+	at com.luxoft.fitpro.core.tester.RunnerVisitor.visit(RunnerVisitor.java:51)
+	at com.luxoft.fitpro.core.testcase.TestFile.accept(TestFile.java:51)
+	at com.luxoft.fitpro.runner.TestCaseRunner.run(TestCaseRunner.java:100)
+	at com.luxoft.fitpro.runner.TestCaseRunner.main(TestCaseRunner.java:55)
+</div></pre></td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="style1" style="color: rgb(0, 0, 205);">
+			MyFuel FIT Test &copy; 2016 Dr. Maor, Phd Oron Karmona</p>
+	</body>
+</html>
+
+</body></html>

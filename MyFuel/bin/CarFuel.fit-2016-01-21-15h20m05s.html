@@ -1,0 +1,109 @@
+<html><head><title>Suite CarFuel.fit run at: Thu Jan 21 15:20:06 IST 2016</title>
+	<link rel="stylesheet" type="text/css" href="css/fitnesse.css" media="screen"/>
+ 	<link rel="stylesheet" type="text/css" href="css/fitnesse.css" media="print"/>
+<script language="JavaScript" type="text/javascript">
+var collapsableOpenCss = "collapsable"
+var collapsableClosedCss = "hidden"
+var collapsableOpenImg = "images/collapsableOpen.gif"
+var collapsableClosedImg = "images/collapsableClosed.gif"
+function toggleCollapsable(id){
+var div = document.getElementById(id);
+var img = document.getElementById("img" + id);
+if(div.className.indexOf(collapsableClosedCss) != -1) {
+div.className = collapsableOpenCss;
+img.src = collapsableOpenImg;
+} else {
+div.className = collapsableClosedCss;
+img.src = collapsableClosedImg;
+} }
+</script>
+
+</head>
+<body>
+<div> Suite is: /Users/Maor/git/myfuel/MyFuel/AcceptenceTests/FitTests/CarFuel.fit</div><div class="test_output_name">Name: CarFuel.fit</div><div> Suite executed at: Thu Jan 21 15:20:06 IST 2016 Elapsed time: 363 millseconds  </div><table><tr><td></td><td><a href="#-35112868:1526457907f:-8000">CarFuel.fit</a></td><td class="error">0 right, 0 wrong, 0 ignored, 1 exceptions</td></tr></table><div class="test_output_name"><a name="-35112868:1526457907f:-8000"/><p>Test file: CarFuel.fit</p></div><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Add Recipe FIT Test</title>
+		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+		<style type="text/css">
+<!--{cke_protected}{C}%3C!%2D%2D.style1%20%7Bfont-family%3A%20Arial%2C%20Helvetica%2C%20sans-serif%7D%2D%2D%3E-->		</style>
+	</head>
+	<body>
+		<p class="style1">
+			Car Fueling Acceptence Test</p>
+		<p class="style1">
+			Acceptence test for selling fuel.</p>
+		<p class="style1">
+			*limit 0 -Limit &nbsp;By Amount</p>
+		<p class="style1">
+			*limit 1- Limit By Price</p>
+		<table border="1" cellpadding="5" cellspacing="0" width="765">
+			<tbody>
+				<tr>
+					<td class="style1" colspan="3">
+						fit.ActionFixture</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						start</td>
+					<td class="style1">
+						Fixtures.MyFuel.CarFuel</td>
+					<td class="style1">
+						&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						press</td>
+					<td class="style1">
+						start fuel</td>
+					<td class="style1">
+						&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						enter</td>
+					<td class="style1">
+						set station id</td>
+					<td class="style1">
+						1</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						enter</td>
+					<td class="style1">
+						set fuel type</td>
+					<td class="style1">
+						1</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						enter&nbsp;</td>
+					<td class="style1">
+						set limit</td>
+					<td class="style1">
+						0</td>
+				</tr>
+				<tr>
+					<td class="style1" class="error">
+						enter<hr/> <span class="fit_label">Could not find method: setAmount.</span></td>
+					<td class="style1">
+						set amount</td>
+					<td class="style1">
+						40</td>
+				</tr>
+				<tr>
+					<td class="style1">
+						check</td>
+					<td class="style1">
+						check t</td>
+					<td class="style1">
+						&nbsp; <span class="fit_grey">true</span></td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="style1" style="color: rgb(0, 0, 205);">
+			MyFuel FIT Test &copy; 2016 Dr. Maor, Phd Oron Karmona</p>
+	</body>
+</html>
+
+</body></html>
